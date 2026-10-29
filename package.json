@@ -9,6 +9,9 @@
     "test:ci": "nx run-many --target=test --all --configuration=ci",
     "test:coverage": "nx run-many --target=test --all --configuration=ci --coverage && open -a \"Google Chrome\" coverage/cv/index.html",
     "lint": "nx run-many --target=lint --all",
+    "lint:fix": "nx run-many --target=lint --all --fix",
+    "prettier": "nx format:check",
+    "prettier:fix": "nx format:write",
     "nx:show-projects": "nx show projects",
     "nx:graph": "nx graph",
     "prepare": "husky"
