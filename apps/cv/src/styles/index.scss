@@ -1,0 +1,13 @@
+/**
+Only import barrel files from ITCSS layers
+*/
+
+@forward './1.settings';
+@forward './2.tools';
+@forward './3.vendors';
+@forward './4.elements';
+@forward './5.objects';
+@forward './6.components';
+@forward './7.patterns';
+@forward './8.scopes';
+@forward './9.utilities';

@@ -1,9 +1,11 @@
 import nx from '@nx/eslint-plugin';
+import { sharedConfig } from './tools/eslint/shared-config.mjs';
 
 export default [
   ...nx.configs['flat/base'],
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
+  ...sharedConfig,
   {
     ignores: ['**/dist'],
   },

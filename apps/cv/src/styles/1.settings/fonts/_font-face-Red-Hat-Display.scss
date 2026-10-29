@@ -1,0 +1,21 @@
+@font-face {
+  font-display: swap;
+  font-family: Red-Hat-Display;
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('/assets/fonts/Red-Hat-Display/Red-Hat-Display.woff2') format('woff2'),
+    url('/assets/fonts/Red-Hat-Display/Red-Hat-Display.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Syncopate;
+  font-style: italic;
+  font-weight: 400;
+  src:
+    url('/assets/fonts/Red-Hat-Display/Red-Hat-Display-italic.woff2')
+      format('woff2'),
+    url('/assets/fonts/Red-Hat-Display/Red-Hat-Display-italic.woff')
+      format('woff');
+}

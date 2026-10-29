@@ -4,6 +4,7 @@
     "angular.ng-template",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "ms-playwright.playwright"
+    "ms-playwright.playwright",
+    "stylelint.vscode-stylelint"
   ]
 }

@@ -1,0 +1,14 @@
+/**
+Settings are generally a collection of variables that do not generate CSS, bus are applied to classes
+
+Examples: Base, Colour, Typography, Animation
+*/
+
+@forward './font';
+@forward './icomoon/style';
+@forward './breakpoints';
+@forward './spaces';
+@forward './typography';
+@forward './spacing';
+@forward './border';
+@forward './width';

@@ -1,0 +1,11 @@
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin wrap {
+  overflow: visible;
+  overflow-wrap: break-word;
+  white-space: normal;
+}

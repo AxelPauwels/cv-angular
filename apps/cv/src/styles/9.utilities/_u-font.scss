@@ -1,0 +1,7 @@
+@use '../2.tools' as tools;
+
+.u-font {
+  &-ellipsis {
+    @include tools.ellipsis;
+  }
+}

@@ -1,0 +1,19 @@
+@font-face {
+  font-display: swap;
+  font-family: Goldman;
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('/assets/fonts/Goldman/Goldman-Regular.woff2') format('woff2'),
+    url('/assets/fonts/Goldman/Goldman-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Goldman;
+  font-style: normal;
+  font-weight: 700;
+  src:
+    url('/assets/fonts/Goldman/Goldman-Bold.woff2') format('woff2'),
+    url('/assets/fonts/Goldman/Goldman-Bold.woff') format('woff');
+}

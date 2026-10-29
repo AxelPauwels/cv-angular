@@ -1,0 +1,19 @@
+@font-face {
+  font-display: swap;
+  font-family: Syncopate;
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('/assets/fonts/Syncopate/Syncopate-regular.woff2') format('woff2'),
+    url('/assets/fonts/Syncopate/Syncopate-regular.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Syncopate;
+  font-style: normal;
+  font-weight: 700;
+  src:
+    url('/assets/fonts/Syncopate/Syncopate-bold.woff2') format('woff2'),
+    url('/assets/fonts/Syncopate/Syncopate-bold.woff') format('woff');
+}

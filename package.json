@@ -13,6 +13,8 @@
     "e2e:report": "npx playwright show-report dist/.playwright/apps/cv-e2e/playwright-report",
     "lint": "nx run-many --target=lint --all",
     "lint:fix": "nx run-many --target=lint --all --fix",
+    "stylelint": "stylelint \"{apps,packages}/**/*.scss\"",
+    "stylelint:fix": "stylelint \"{apps,packages}/**/*.scss\" --fix",
     "prettier": "nx format:check",
     "prettier:fix": "nx format:write",
     "nx:show-projects": "nx show projects",
@@ -20,7 +22,11 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*": "prettier --write --ignore-unknown"
+    "*.{css,scss}": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "!(*.{css,scss})": "prettier --write --ignore-unknown"
   },
   "private": true,
   "dependencies": {
@@ -72,6 +78,9 @@
     "nx": "24.0.2",
     "playwright": "^1.64.1",
     "prettier": "^3.8.1",
+    "stylelint": "^17.16.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-order": "^8.1.2",
     "tslib": "^2.3.0",
     "tsx": "^4.20.5",
     "typescript": "6.0.3",

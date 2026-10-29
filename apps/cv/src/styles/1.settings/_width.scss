@@ -1,0 +1,19 @@
+$container-width-xs: 40rem; // 640px
+$container-width-sm: 43rem; // 688px
+$container-width-md: 47rem; // 752px
+$container-width-lg: 50rem; // 800px
+
+$timeline-padding: 0.625rem; // 10px
+$timeline-width-xs: 8rem; // 128px
+$timeline-width-sm: 8.75rem; // 140px
+$timeline-width-md: 9.5rem; // 152px
+$timeline-width-lg: 11rem; // 176px
+
+$container-and-timeline-width-xs: $container-width-xs + $timeline-width-xs +
+  $timeline-padding;
+$container-and-timeline-width-sm: $container-width-sm + $timeline-width-sm +
+  $timeline-padding;
+$container-and-timeline-width-md: $container-width-md + $timeline-width-md +
+  $timeline-padding;
+$container-and-timeline-width-lg: $container-width-lg + $timeline-width-lg +
+  $timeline-padding;

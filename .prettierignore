@@ -5,4 +5,5 @@
 /.nx/workspace-data
 .angular
 
-.nx/self-healing/package-lock.json
+.nx/self-healing
+/package-lock.json

@@ -1,0 +1,23 @@
+// xs-legacy Extra small:   mobile portrait legacy phone
+// xs   Extra small:        mobile portrait modern phone
+// sm   Small:              mobile landscape / small tablets
+// md   Medium:             tablets
+// lg   Large:              small desktops / large tablets
+// xl   Extra large:        standard desktops
+// xxl  Extra extra large   large desktops / wide screens,,,
+$xs-legacy: 'xs-legacy';
+$xs: 'xs';
+$sm: 'sm';
+$md: 'md';
+$lg: 'lg';
+$xl: 'xl';
+$xxl: 'xxl';
+$all-breakpoints: (
+  xs-legacy: 320px,
+  xs: 375px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);

@@ -20,7 +20,7 @@
             "input": "apps/cv/public"
           }
         ],
-        "styles": ["apps/cv/src/styles.css"]
+        "styles": ["apps/cv/src/styles.scss"]
       },
       "configurations": {
         "production": {
