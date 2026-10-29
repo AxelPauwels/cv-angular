@@ -4,15 +4,11 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/cv/src",
-  "tags": [
-    "scope:cv"
-  ],
+  "tags": ["scope:cv"],
   "targets": {
     "build": {
       "executor": "@angular/build:application",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/cv",
@@ -24,9 +20,7 @@
             "input": "apps/cv/public"
           }
         ],
-        "styles": [
-          "apps/cv/src/styles.css"
-        ]
+        "styles": ["apps/cv/src/styles.css"]
       },
       "configurations": {
         "production": {
@@ -72,9 +66,7 @@
       "readyWhen": {
         "signal": true
       },
-      "dependsOn": [
-        "build"
-      ],
+      "dependsOn": ["build"],
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "cv:build",
@@ -88,16 +80,12 @@
       "options": {
         "buildTarget": "cv:build:development",
         "tsConfig": "apps/cv/tsconfig.spec.json",
-        "browsers": [
-          "Chromium"
-        ]
+        "browsers": ["Chromium"]
       },
       "configurations": {
         "ci": {
           "watch": false,
-          "browsers": [
-            "ChromiumHeadless"
-          ]
+          "browsers": ["ChromiumHeadless"]
         }
       }
     }
