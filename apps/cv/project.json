@@ -1,0 +1,105 @@
+{
+  "name": "cv",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/cv/src",
+  "tags": [
+    "scope:cv"
+  ],
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/cv",
+        "browser": "apps/cv/src/main.ts",
+        "tsConfig": "apps/cv/tsconfig.app.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/cv/public"
+          }
+        ],
+        "styles": [
+          "apps/cv/src/styles.css"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      }
+    },
+    "serve": {
+      "continuous": true,
+      "readyWhen": {
+        "signal": true
+      },
+      "executor": "@angular/build:dev-server",
+      "defaultConfiguration": "development",
+      "configurations": {
+        "production": {
+          "buildTarget": "cv:build:production"
+        },
+        "development": {
+          "buildTarget": "cv:build:development"
+        }
+      }
+    },
+    "serve-static": {
+      "continuous": true,
+      "readyWhen": {
+        "signal": true
+      },
+      "dependsOn": [
+        "build"
+      ],
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "cv:build",
+        "port": 4200,
+        "staticFilePath": "dist/apps/cv/browser",
+        "spa": true
+      }
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "buildTarget": "cv:build:development",
+        "tsConfig": "apps/cv/tsconfig.spec.json",
+        "browsers": [
+          "Chromium"
+        ]
+      },
+      "configurations": {
+        "ci": {
+          "watch": false,
+          "browsers": [
+            "ChromiumHeadless"
+          ]
+        }
+      }
+    }
+  }
+}
