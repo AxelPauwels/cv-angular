@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start:cv": "nx serve cv --port=4444",
+    "start:cv": "nx serve cv --port=4200",
     "test": "nx run-many --target=test --all",
     "test:watch": "nx run-many --target=test --all --watch=true",
     "test:ci": "nx run-many --target=test --all --configuration=ci",
@@ -19,7 +19,15 @@
     "prettier:fix": "nx format:write",
     "nx:show-projects": "nx show projects",
     "nx:graph": "nx graph",
-    "prepare": "husky"
+    "postinstall": "patch-package",
+    "prepare": "husky",
+    "build:production": "sh scripts/build-production.sh",
+    "firebase:login": "npx firebase login",
+    "firebase:link-project": "npx firebase use --add",
+    "firebase:deploy": "npx firebase deploy --only hosting",
+    "firebase:deploy-preview": "npx firebase hosting:channel:deploy preview",
+    "firebase:emulate": "firebase emulators:start",
+    "firebase:link-github": "npx firebase init hosting:github"
   },
   "lint-staged": {
     "*.{css,scss}": [
@@ -30,6 +38,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "~22.2.0",
     "@angular/cdk": "~22.2.5",
     "@angular/common": "~22.2.0",
     "@angular/compiler": "~22.2.0",
@@ -39,9 +48,12 @@
     "@angular/platform-browser": "~22.2.0",
     "@angular/router": "~22.2.0",
     "@ngrx/signals": "^22.0.1",
+    "@softarc/native-federation-node": "^2.0.10",
+    "es-module-shims": "^1.5.12",
     "rxjs": "~7.8.0"
   },
   "devDependencies": {
+    "@angular-architects/native-federation": "^22.2.4",
     "@angular-devkit/core": "~22.2.0",
     "@angular-devkit/schematics": "~22.2.0",
     "@angular/build": "~22.2.0",
@@ -62,6 +74,7 @@
     "@nx/workspace": "24.0.2",
     "@playwright/test": "^1.64.1",
     "@schematics/angular": "~22.2.0",
+    "@softarc/native-federation-orchestrator": "^4.8.0",
     "@swc-node/register": "1.11.1",
     "@swc/core": "1.15.8",
     "@swc/helpers": "0.5.18",
@@ -74,11 +87,14 @@
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-playwright": "^1.6.2",
+    "firebase-tools": "^15.34.2",
     "husky": "^9.1.7",
     "jiti": "2.4.2",
+    "jsdom": "^27.1.0",
     "jsonc-eslint-parser": "^2.1.0",
     "lint-staged": "^17.6.0",
     "nx": "24.0.2",
+    "patch-package": "^8.0.1",
     "playwright": "^1.64.1",
     "prettier": "^3.8.1",
     "stylelint": "^17.16.0",

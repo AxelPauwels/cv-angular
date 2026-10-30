@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "cv-angular": "cv-angular-axel",
+    "default": "cv-angular-axel"
+  },
+  "targets": {},
+  "etags": {}
+}

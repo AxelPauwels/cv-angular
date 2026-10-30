@@ -34,3 +34,8 @@ More info:
 
 - commitlint docs: https://commitlint.js.org/
 - Conventional Commits spec: https://www.conventionalcommits.org/en/v1.0.0-beta.4/
+
+## Micro Frontends
+
+npx nx g @nx/angular:application apps/cv-mfe1
+npx nx g @angular-architects/native-federation:init --project=cv-mfe1 --port=4201 --type=remote

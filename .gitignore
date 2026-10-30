@@ -53,3 +53,7 @@ Thumbs.db
 .claude/settings.local.json
 .claude/worktrees
 .playwright-mcp
+
+.angular
+
+__screenshots__/

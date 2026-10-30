@@ -7,58 +7,26 @@
   "tags": ["scope:cv"],
   "targets": {
     "build": {
-      "executor": "@angular/build:application",
-      "outputs": ["{options.outputPath}"],
+      "executor": "@angular-architects/native-federation:build",
       "defaultConfiguration": "production",
-      "options": {
-        "outputPath": "dist/apps/cv",
-        "browser": "apps/cv/src/main.ts",
-        "tsConfig": "apps/cv/tsconfig.app.json",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/cv/public"
-          }
-        ],
-        "styles": ["apps/cv/src/styles.scss"]
-      },
+      "options": {},
       "configurations": {
         "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
-            },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "4kb",
-              "maximumError": "8kb"
-            }
-          ],
-          "outputHashing": "all"
+          "target": "cv:esbuild:production"
         },
         "development": {
-          "optimization": false,
-          "extractLicenses": false,
-          "sourceMap": true
+          "target": "cv:esbuild:development",
+          "dev": true
         }
       }
     },
     "serve": {
-      "continuous": true,
-      "readyWhen": {
-        "signal": true
-      },
-      "executor": "@angular/build:dev-server",
-      "defaultConfiguration": "development",
-      "configurations": {
-        "production": {
-          "buildTarget": "cv:build:production"
-        },
-        "development": {
-          "buildTarget": "cv:build:development"
-        }
+      "executor": "@angular-architects/native-federation:build",
+      "options": {
+        "target": "cv:serve-original:development",
+        "rebuildDelay": 0,
+        "dev": true,
+        "port": 0
       }
     },
     "serve-static": {
@@ -86,6 +54,70 @@
         "ci": {
           "watch": false,
           "browsers": ["ChromiumHeadless"]
+        }
+      }
+    },
+    "esbuild": {
+      "executor": "@angular/build:application",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/cv",
+        "browser": "apps/cv/src/main.ts",
+        "tsConfig": "apps/cv/tsconfig.app.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/cv/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/cv/src/assets",
+            "output": "assets"
+          }
+        ],
+        "styles": ["apps/cv/src/styles.scss"],
+        "polyfills": ["es-module-shims"]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      }
+    },
+    "serve-original": {
+      "continuous": true,
+      "readyWhen": {
+        "signal": true
+      },
+      "executor": "@angular/build:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4201
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "cv:esbuild:production"
+        },
+        "development": {
+          "buildTarget": "cv:esbuild:development"
         }
       }
     }
