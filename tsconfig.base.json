@@ -12,7 +12,9 @@
     "lib": ["es2022", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "paths": {}
+    "paths": {
+      "@axel-pauwels/mac-window": ["./packages/mac-window/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

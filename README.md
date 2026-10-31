@@ -39,3 +39,30 @@ More info:
 
 npx nx g @nx/angular:application apps/cv-mfe1
 npx nx g @angular-architects/native-federation:init --project=cv-mfe1 --port=4201 --type=remote
+
+## Publish npm packages
+
+before building the package add this to package.json for public packages:
+
+```json
+{
+  "publishConfig": {
+    "access": "public"
+  }
+}
+```
+
+1. log in (one time; opens the browser for npm auth/2FA)
+   npm login
+   npm whoami
+
+2. check the built package.json
+   cat dist/packages/<your-lib>/package.json # or wherever your dist output is
+
+3. dry run: shows exactly which files will be uploaded
+   cd dist/packages/<your-lib>
+   npm publish --dry-run
+
+4. publish
+   npm publish
+   (or 'npm publish --access public' if public is needed, but not set in package.json)

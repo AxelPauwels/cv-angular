@@ -1,0 +1,35 @@
+.mw {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 60%);
+  margin: 2rem auto;
+  overflow: hidden;
+  width: 100%;
+
+  &__controls {
+    background: #1a1a1a;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  &__btn {
+    border-radius: 50%;
+    box-shadow: inset 0 0 1px rgb(0 0 0 / 20%);
+    display: inline-block;
+    height: 0.75rem;
+    width: 0.75rem;
+
+    &--red {
+      background-color: #ff5f57;
+    }
+
+    &--yellow {
+      background-color: #ffbd2e;
+    }
+
+    &--green {
+      background-color: #28c840;
+    }
+  }
+}
