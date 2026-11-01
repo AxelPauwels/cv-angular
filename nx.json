@@ -83,7 +83,7 @@
       "projectChangelogs": true
     },
     "version": {
-      "preVersionCommand": "npx nx run-many -t build --projects=packages/*"
+      "preVersionCommand": "npm whoami --registry=https://registry.npmjs.org/ && npx nx run-many -t build --projects=packages/*"
     }
   }
 }
