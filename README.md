@@ -66,3 +66,5 @@ before building the package add this to package.json for public packages:
 4. publish
    npm publish
    (or 'npm publish --access public' if public is needed, but not set in package.json)
+
+To install later you can just `npm install @axel-pauwels/mac-window`

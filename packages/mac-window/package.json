@@ -2,9 +2,18 @@
   "name": "@axel-pauwels/mac-window",
   "version": "1.0.0",
   "peerDependencies": {
-    "@angular/core": "^22.2.0"
+    "@angular/core": "^22.2.0",
+    "@angular/elements": "^22.2.0",
+    "@angular/platform-browser": "^22.2.0"
   },
-  "sideEffects": false,
+  "peerDependenciesMeta": {
+    "@angular/elements": {
+      "optional": true
+    }
+  },
+  "sideEffects": [
+    "./fesm2022/axel-pauwels-mac-window-element.mjs"
+  ],
   "publishConfig": {
     "access": "public"
   }

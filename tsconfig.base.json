@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "paths": {
-      "@axel-pauwels/mac-window": ["./packages/mac-window/src/index.ts"]
+      "@axel-pauwels/mac-window": ["./packages/mac-window/src/public-api.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
