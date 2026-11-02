@@ -5,7 +5,7 @@
   "scripts": {
     "start:cv": "nx serve cv --port=4200",
     "test": "nx run-many --target=test --all",
-    "test:watch": "nx run-many --target=test --all --watch=true",
+    "test:watch": "nx run-many --target=test --all --configuration=watch",
     "test:ci": "nx run-many --target=test --all --configuration=ci",
     "test:coverage": "nx run-many --target=test --all --configuration=ci --coverage && open -a \"Google Chrome\" coverage/cv/index.html",
     "e2e": "nx run-many --target=e2e --all",
@@ -28,8 +28,10 @@
     "firebase:deploy-preview": "npx firebase hosting:channel:deploy preview",
     "firebase:emulate": "firebase emulators:start",
     "firebase:link-github": "npx firebase init hosting:github",
-    "package:build:mac-window": "nx build mac-window --prod",
-    "package:publish:mac-window": "npm publish dist/packages/mac-window"
+    "package:login": "npm login",
+    "package:release": "npx nx release --skip-publish",
+    "package:publish:mac-window": "npm publish dist/packages/mac-window",
+    "package:push-tags": "git push --follow-tags"
   },
   "lint-staged": {
     "*.{css,scss}": [

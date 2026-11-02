@@ -36,7 +36,13 @@
     "test": {
       "executor": "@nx/angular:unit-test",
       "options": {
-        "watch": false
+        "watch": false,
+        "include": ["**/*.spec.ts", "../element/**/*.spec.ts"]
+      },
+      "configurations": {
+        "watch": {
+          "watch": true
+        }
       }
     }
   }

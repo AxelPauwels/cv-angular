@@ -52,12 +52,17 @@
       "options": {
         "buildTarget": "cv:build:development",
         "tsConfig": "apps/cv/tsconfig.spec.json",
-        "browsers": ["Chromium"]
+        "watch": false,
+        "browsers": ["ChromiumHeadless"]
       },
       "configurations": {
         "ci": {
           "watch": false,
           "browsers": ["ChromiumHeadless"]
+        },
+        "watch": {
+          "watch": true,
+          "browsers": ["Chromium"]
         }
       }
     },

@@ -42,7 +42,7 @@ npx nx g @angular-architects/native-federation:init --project=cv-mfe1 --port=420
 
 ## Publish npm packages
 
-before building the package add this to package.json for public packages:
+Before building the package add this to package.json for public packages:
 
 ```json
 {
@@ -52,19 +52,8 @@ before building the package add this to package.json for public packages:
 }
 ```
 
-1. log in (one time; opens the browser for npm auth/2FA)
-   npm login
-   npm whoami
+See package.json scripts:
+Make sure you are logged in to npm with `npm login` before publishing.
+release (wich versions the package), publish it to npmjs.com and push the release commit and tag to github.
 
-2. check the built package.json
-   cat dist/packages/<your-lib>/package.json # or wherever your dist output is
-
-3. dry run: shows exactly which files will be uploaded
-   cd dist/packages/<your-lib>
-   npm publish --dry-run
-
-4. publish
-   npm publish
-   (or 'npm publish --access public' if public is needed, but not set in package.json)
-
-To install later you can just `npm install @axel-pauwels/mac-window`
+Usage in this or other projects: Just install with `npm install @axel-pauwels/mac-window`
