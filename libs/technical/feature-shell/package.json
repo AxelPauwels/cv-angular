@@ -1,0 +1,12 @@
+{
+  "name": "@cv/technical-feature-shell",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/core": "^22.2.0",
+    "@angular/router": "~22.2.0",
+    "@cv/shared/ui-design-system": "0.0.1",
+    "@cv/shared/util-routing": "0.0.1"
+  },
+  "sideEffects": false,
+  "private": true
+}

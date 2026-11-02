@@ -3,6 +3,6 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/cv-api/src",
   "projectType": "library",
-  "tags": ["scope:cv", "type:api"],
+  "tags": ["scope:cv", "domain:shared", "type:api"],
   "targets": {}
 }

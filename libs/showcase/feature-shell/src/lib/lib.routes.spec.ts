@@ -1,0 +1,21 @@
+import { TestBed } from '@angular/core/testing';
+import { provideRouter, Router } from '@angular/router';
+import { RouterTestingHarness } from '@angular/router/testing';
+import { showcaseFeatureShellRoutes } from './lib.routes';
+
+describe('showcaseFeatureShellRoutes', () => {
+  it('opens the first sub item and lists all sub items', async () => {
+    TestBed.configureTestingModule({
+      providers: [provideRouter(showcaseFeatureShellRoutes)],
+    });
+    const harness = await RouterTestingHarness.create('/');
+    const element: HTMLElement = harness.fixture.nativeElement;
+
+    expect(TestBed.inject(Router).url).toBe('/graphql-docs');
+    expect(
+      Array.from(element.querySelectorAll('lib-sub-navbar a')).map((link) =>
+        link.textContent?.trim()
+      )
+    ).toEqual(['GraphQL docs', 'Code coverage', 'End-to-end tests']);
+  });
+});

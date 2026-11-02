@@ -1,0 +1,41 @@
+@use '../../styles/2.tools/mixins/media-mixins' as media;
+
+// Mobile: everything stacked, main before aside.
+// From md: the aside becomes a column left of main.
+:host {
+  display: grid;
+  grid-template:
+    'header' auto
+    'main' 1fr
+    'aside' auto
+    'footer' auto / 1fr;
+  min-height: 100dvh;
+
+  @include media.screen(md) {
+    grid-template:
+      'header header' auto
+      'footer footer' auto / 15rem 1fr;
+  }
+}
+
+.shell-header {
+  grid-area: header;
+}
+
+.shell-main {
+  grid-area: main;
+  min-width: 0;
+}
+
+// .shell-aside {
+//  background-color: var(--mat-sys-surface-container-low);
+//  grid-area: aside;
+// }
+
+.shell-footer {
+  background-color: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface-variant);
+  font: var(--mat-sys-body-small);
+  grid-area: footer;
+  padding: 1rem;
+}

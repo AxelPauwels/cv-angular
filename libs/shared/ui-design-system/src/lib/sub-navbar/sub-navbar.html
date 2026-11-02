@@ -1,0 +1,21 @@
+<nav
+  mat-tab-nav-bar
+  class="sub-navbar"
+  mat-stretch-tabs="false"
+  [tabPanel]="panel"
+  [attr.aria-label]="label()">
+  @for (item of items(); track item.path) {
+  <a
+    mat-tab-link
+    [routerLink]="item.path"
+    routerLinkActive
+    #link="routerLinkActive"
+    [active]="link.isActive">
+    {{ item.label }}
+  </a>
+  }
+</nav>
+
+<mat-tab-nav-panel #panel>
+  <ng-content />
+</mat-tab-nav-panel>

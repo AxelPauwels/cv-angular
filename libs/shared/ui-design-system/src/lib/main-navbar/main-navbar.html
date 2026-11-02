@@ -1,0 +1,12 @@
+<mat-toolbar class="main-navbar">
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel()" aria-label="Main navigation">
+    @for (item of items(); track item.path) {
+    <a
+      mat-tab-link
+      [routerLink]="'/' + item.path"
+      [active]="item === activeItem()">
+      {{ item.label }}
+    </a>
+    }
+  </nav>
+</mat-toolbar>

@@ -14,7 +14,23 @@
     "skipDefaultLibCheck": true,
     "paths": {
       "@axel-pauwels/mac-window": ["./packages/mac-window/src/public-api.ts"],
-      "@axel-pauwels/cv-api": ["./libs/cv-api/src/index.ts"]
+      "@axel-pauwels/cv-api": ["./libs/cv-api/src/index.ts"],
+      "@cv/cv/feature-shell": ["./libs/cv/feature-shell/src/index.ts"],
+      "@cv/cv/feature-experience": [
+        "./libs/cv/feature-experience/src/index.ts"
+      ],
+      "@cv/showcase/feature-shell": [
+        "./libs/showcase/feature-shell/src/index.ts"
+      ],
+      "@cv/technical/feature-shell": [
+        "./libs/technical/feature-shell/src/index.ts"
+      ],
+      "@cv/shared/ui-design-system": [
+        "./libs/shared/ui-design-system/src/index.ts"
+      ],
+      "@cv/shared/ui-federation": ["./libs/shared/ui-federation/src/index.ts"],
+      "@cv/shared/data-access": ["./libs/shared/data-access/src/index.ts"],
+      "@cv/shared/util-routing": ["./libs/shared/util-routing/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

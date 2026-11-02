@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+
+.main-navbar {
+  @include mat.toolbar-overrides(
+    (
+      container-background-color: var(--mat-sys-primary),
+      container-text-color: var(--mat-sys-on-primary),
+    )
+  );
+  @include mat.tabs-overrides(
+    (
+      active-indicator-color: var(--mat-sys-on-primary),
+      active-focus-indicator-color: var(--mat-sys-on-primary),
+      active-hover-indicator-color: var(--mat-sys-on-primary),
+      active-label-text-color: var(--mat-sys-on-primary),
+      active-focus-label-text-color: var(--mat-sys-on-primary),
+      active-hover-label-text-color: var(--mat-sys-on-primary),
+      inactive-label-text-color: var(--mat-sys-on-primary),
+      inactive-focus-label-text-color: var(--mat-sys-on-primary),
+      inactive-hover-label-text-color: var(--mat-sys-on-primary),
+      divider-height: 0,
+    )
+  );
+
+  align-items: flex-end;
+}
