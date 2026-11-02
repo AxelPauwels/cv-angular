@@ -26,7 +26,12 @@ const baseURL = process.env['BASE_URL'] || getReadyUrl(localURL);
  * (.ts/.js/.mts/.mjs/.cts/.cjs).
  */
 export default defineConfig({
-  ...nxE2EPreset(import.meta.dirname, { testDir: './src' }),
+  // 'never': on failure Playwright would otherwise serve the report and wait
+  // for Ctrl+C. `npm run e2e` opens the report itself once the run is done.
+  ...nxE2EPreset(import.meta.dirname, {
+    testDir: './src',
+    openHtmlReport: 'never',
+  }),
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL,

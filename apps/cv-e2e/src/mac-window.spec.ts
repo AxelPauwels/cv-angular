@@ -12,7 +12,7 @@ async function boxOf(locator: Locator) {
 
 test.describe('mac-window', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/example');
   });
 
   test('shows the app title in a window', async ({ page }) => {
@@ -21,11 +21,9 @@ test.describe('mac-window', () => {
     await expect(appWindow.getByRole('heading', { level: 1 })).toHaveText('cv');
   });
 
-  test('shows the home page content in a window', async ({ page }) => {
-    await expect(page).toHaveURL(/\/home$/);
-    await expect(
-      windows(page).filter({ hasText: 'Hello from inside the window' })
-    ).toBeVisible();
+  test('shows the example page content', async ({ page }) => {
+    await expect(page).toHaveURL(/\/example$/);
+    await expect(page.getByLabel('Person')).toHaveValue('1');
   });
 
   test('draws the title bar with the red, yellow and green buttons', async ({
