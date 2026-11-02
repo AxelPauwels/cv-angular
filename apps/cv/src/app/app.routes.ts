@@ -12,6 +12,11 @@ export const appRoutes: Routes = [
     component: Home,
   },
   {
+    path: 'example',
+    loadComponent: () =>
+      import('./domains/example/example').then((m) => m.Example),
+  },
+  {
     path: 'cv-mfe',
     component: Wrapper,
     data: {

@@ -53,9 +53,11 @@
     "@angular/platform-browser": "~22.2.0",
     "@angular/router": "~22.2.0",
     "@axel-pauwels/mac-window": "^1.0.0",
+    "@graphql-tools/schema": "^11.0.8",
     "@ngrx/signals": "^22.0.1",
     "@softarc/native-federation-node": "^2.0.10",
     "es-module-shims": "^1.5.12",
+    "graphql": "^16.14.2",
     "rxjs": "~7.8.0"
   },
   "devDependencies": {
