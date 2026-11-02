@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MacWindow } from '@axel-pauwels/mac-window';
 
 @Component({
-  imports: [RouterOutlet, MacWindow],
+  imports: [RouterOutlet],
   selector: 'app-root',
   templateUrl: './app.html',
 })
-export class App {
-  protected title = 'cv';
-}
+export class App {}

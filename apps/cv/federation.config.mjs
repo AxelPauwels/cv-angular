@@ -34,6 +34,9 @@ export default withNativeFederation({
     // Node-only schematics and test harnesses that can't be bundled for the browser
     /^@angular\/[^/]+\/schematics(\/|$)/,
     /^@angular\/[^/]+(\/.*)?\/testing(\/|$)/,
+    // In-browser GraphQL API: bundled into the app, not shared
+    'graphql',
+    /^@graphql-tools\//,
   ],
 
   // Please read our FAQ about sharing libs:
