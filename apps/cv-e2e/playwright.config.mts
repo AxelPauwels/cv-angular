@@ -3,9 +3,11 @@ import { nxE2EPreset } from '@nx/playwright/preset';
 import { getReadyUrl, workspaceRoot } from '@nx/devkit';
 
 const isCI = !!process.env['CI'];
+// cv:serve (dev) listens on 4201, cv:serve-static (CI) on 4200.
+const localURL = isCI ? 'http://localhost:4200' : 'http://localhost:4201';
 // For CI, you may want to set BASE_URL to the deployed application.
 // getReadyUrl moves the address to the port the dev server task reported.
-const baseURL = process.env['BASE_URL'] || getReadyUrl('http://localhost:4200');
+const baseURL = process.env['BASE_URL'] || getReadyUrl(localURL);
 
 /**
  * Read environment variables from file.
@@ -33,7 +35,7 @@ export default defineConfig({
   },
   webServer: {
     command: isCI ? 'npx nx run cv:serve-static' : 'npx nx run cv:serve',
-    url: getReadyUrl('http://localhost:4200'),
+    url: getReadyUrl(localURL),
     reuseExistingServer: true,
     cwd: workspaceRoot,
   },
