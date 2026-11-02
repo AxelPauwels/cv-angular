@@ -5,5 +5,7 @@ Examples: reset.css, normalise.css, bootstrap, bootstrap-overrides
 */
 
 // dependencies
+@use '@angular/material' as mat;
 
 // forwards
+@forward './material-theme-override';
