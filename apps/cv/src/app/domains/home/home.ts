@@ -5,10 +5,11 @@ import {
   Wrapper,
   WrapperConfig,
 } from '../shared/ui-federation/wrapper';
+import { MacWindow } from '@axel-pauwels/mac-window';
 
 @Component({
   selector: 'app-home',
-  imports: [MatSlideToggle, Wrapper],
+  imports: [MatSlideToggle, Wrapper, MacWindow],
   templateUrl: './home.html',
 })
 export class Home {

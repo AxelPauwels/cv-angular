@@ -39,3 +39,21 @@ More info:
 
 npx nx g @nx/angular:application apps/cv-mfe1
 npx nx g @angular-architects/native-federation:init --project=cv-mfe1 --port=4201 --type=remote
+
+## Publish npm packages
+
+Before building the package add this to package.json for public packages:
+
+```json
+{
+  "publishConfig": {
+    "access": "public"
+  }
+}
+```
+
+See package.json scripts:
+Make sure you are logged in to npm with `npm login` before publishing.
+release (wich versions the package), publish it to npmjs.com and push the release commit and tag to github.
+
+Usage in this or other projects: Just install with `npm install @axel-pauwels/mac-window`

@@ -5,7 +5,7 @@
   "scripts": {
     "start:cv": "nx serve cv --port=4200",
     "test": "nx run-many --target=test --all",
-    "test:watch": "nx run-many --target=test --all --watch=true",
+    "test:watch": "nx run-many --target=test --all --configuration=watch",
     "test:ci": "nx run-many --target=test --all --configuration=ci",
     "test:coverage": "nx run-many --target=test --all --configuration=ci --coverage && open -a \"Google Chrome\" coverage/cv/index.html",
     "e2e": "nx run-many --target=e2e --all",
@@ -27,7 +27,11 @@
     "firebase:deploy": "npx firebase deploy --only hosting",
     "firebase:deploy-preview": "npx firebase hosting:channel:deploy preview",
     "firebase:emulate": "firebase emulators:start",
-    "firebase:link-github": "npx firebase init hosting:github"
+    "firebase:link-github": "npx firebase init hosting:github",
+    "package:login": "npm login",
+    "package:release": "npx nx release --skip-publish",
+    "package:publish:mac-window": "npm publish dist/packages/mac-window",
+    "package:push-tags": "git push --follow-tags"
   },
   "lint-staged": {
     "*.{css,scss}": [
@@ -43,10 +47,12 @@
     "@angular/common": "~22.2.0",
     "@angular/compiler": "~22.2.0",
     "@angular/core": "~22.2.0",
+    "@angular/elements": "~22.2.0",
     "@angular/forms": "~22.2.0",
     "@angular/material": "~22.2.5",
     "@angular/platform-browser": "~22.2.0",
     "@angular/router": "~22.2.0",
+    "@axel-pauwels/mac-window": "^1.0.0",
     "@ngrx/signals": "^22.0.1",
     "@softarc/native-federation-node": "^2.0.10",
     "es-module-shims": "^1.5.12",
@@ -84,6 +90,7 @@
     "@vitest/coverage-v8": "~4.1.0",
     "@vitest/ui": "~4.1.0",
     "angular-eslint": "22.6.0",
+    "autoprefixer": "^10.4.0",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-playwright": "^1.6.2",
@@ -93,9 +100,11 @@
     "jsdom": "^27.1.0",
     "jsonc-eslint-parser": "^2.1.0",
     "lint-staged": "^17.6.0",
+    "ng-packagr": "~22.2.0",
     "nx": "24.0.2",
     "patch-package": "^8.0.1",
     "playwright": "^1.64.1",
+    "postcss": "^8.4.5",
     "prettier": "^3.8.1",
     "stylelint": "^17.16.0",
     "stylelint-config-standard-scss": "^17.0.0",
@@ -104,7 +113,11 @@
     "tsx": "^4.20.5",
     "typescript": "6.0.3",
     "typescript-eslint": "^8.40.0",
+    "verdaccio": "^6.3.2",
     "vitest": "~4.1.0"
   },
-  "packageManager": "npm@11.12.1"
+  "packageManager": "npm@11.12.1",
+  "nx": {
+    "includedScripts": []
+  }
 }

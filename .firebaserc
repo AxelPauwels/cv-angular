@@ -1,7 +1,7 @@
 {
   "projects": {
-    "cv-angular": "cv-angular-axel",
-    "default": "cv-angular-axel"
+    "axel-pauwels": "axel-pauwels",
+    "default": "axel-pauwels"
   },
   "targets": {},
   "etags": {}

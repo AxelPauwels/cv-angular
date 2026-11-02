@@ -17,5 +17,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CV_ANGULAR_AXEL }}
-          projectId: cv-angular-axel
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AXEL_PAUWELS }}
+          projectId: axel-pauwels
