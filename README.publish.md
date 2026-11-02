@@ -14,7 +14,7 @@ npm login
 npx nx release --specifier=minor --skip-publish
 
 # 3. Publish from the build output (approve with your passkey in the browser)
-cd dist/packages/mac-window && npm publish && cd -
+npm publish dist/packages/mac-window
 
 # 4. Push the release commit and tag
 git push --follow-tags
