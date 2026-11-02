@@ -83,6 +83,16 @@
             "glob": "**/*",
             "input": "apps/cv/src/assets",
             "output": "assets"
+          },
+          {
+            "glob": "**/*",
+            "input": "dist/.playwright/apps/cv-e2e/playwright-report",
+            "output": "e2e-report"
+          },
+          {
+            "glob": "**/*",
+            "input": "coverage/cv",
+            "output": "coverage"
           }
         ],
         "styles": ["apps/cv/src/styles.scss"],
@@ -108,22 +118,7 @@
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true,
-          "assets": [
-            {
-              "glob": "**/*",
-              "input": "apps/cv/public"
-            },
-            {
-              "glob": "**/*",
-              "input": "apps/cv/src/assets",
-              "output": "assets"
-            },
-            {
-              "glob": "**/*",
-              "input": "dist/.playwright/apps/cv-e2e/playwright-report",
-              "output": "e2e-report"
-            }
-          ]
+          "assets": []
         }
       }
     },

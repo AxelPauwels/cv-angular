@@ -2,11 +2,12 @@
   <h1>{{ title }}</h1>
 </lib-mac-window>
 
-@if (isDevMode) {
 <a mat-flat-button href="/e2e-report/index.html" target="_blank" rel="noopener">
   End to end test report
 </a>
-}
+<a mat-flat-button href="/coverage/index.html" target="_blank" rel="noopener">
+  Code coverage report
+</a>
 
 <mat-slide-toggle>Toggle me!</mat-slide-toggle>
 

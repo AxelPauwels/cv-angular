@@ -1,4 +1,4 @@
-import { Component, isDevMode, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import type { Person } from '@axel-pauwels/cv-api';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
@@ -37,9 +37,6 @@ const PERSON_QUERY = /* GraphQL */ `
 })
 export class Example {
   protected readonly title = 'cv';
-
-  /** The e2e report is only served by the dev server (see project.json). */
-  protected readonly isDevMode = isDevMode();
 
   protected readonly cvMfe: WrapperConfig = cvMfeWrapperConfig;
 
