@@ -107,7 +107,23 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "assets": [
+            {
+              "glob": "**/*",
+              "input": "apps/cv/public"
+            },
+            {
+              "glob": "**/*",
+              "input": "apps/cv/src/assets",
+              "output": "assets"
+            },
+            {
+              "glob": "**/*",
+              "input": "dist/.playwright/apps/cv-e2e/playwright-report",
+              "output": "e2e-report"
+            }
+          ]
         }
       }
     },
