@@ -4,7 +4,7 @@
   "sourceRoot": "libs/showcase/feature-shell/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["scope:cv", "domain:showcase", "type:feature"],
+  "tags": ["domain:showcase", "type:feature"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",

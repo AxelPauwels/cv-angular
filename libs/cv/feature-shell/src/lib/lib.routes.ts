@@ -3,8 +3,6 @@ import { Route } from '@angular/router';
 import { UnderConstruction } from '@cv/shared/ui-design-system';
 import { CvFeatureShell } from './internal/cv-feature-shell/cv-feature-shell';
 import { ROUTES } from '@cv/shared/util-routing';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { Example } from '../../../example/example';
 
 export const cvFeatureShellRoutes: Route[] = [
   {
@@ -13,8 +11,11 @@ export const cvFeatureShellRoutes: Route[] = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: ROUTES.CV.PERSONAL },
       {
-        path: 'example',
-        component: Example,
+        path: ROUTES.CV.EXAMPLE,
+        loadComponent: () =>
+          import('@cv/cv/feature-example').then(
+            (mod: { Example: Type<unknown> }) => mod.Example
+          ),
       },
       {
         path: ROUTES.CV.PERSONAL,

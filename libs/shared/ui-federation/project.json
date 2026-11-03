@@ -4,7 +4,7 @@
   "sourceRoot": "libs/shared/ui-federation/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["scope:shared", "domain:shared", "type:ui"],
+  "tags": ["domain:shared", "type:ui"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",

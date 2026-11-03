@@ -4,7 +4,7 @@
   "sourceRoot": "libs/cv/feature-shell/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["scope:cv", "domain:cv", "type:feature"],
+  "tags": ["domain:cv", "type:feature"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",

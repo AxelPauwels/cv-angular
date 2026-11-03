@@ -1,19 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   cvMfeWrapperConfig,
   Wrapper,
   WrapperConfig,
 } from '@cv/shared/ui-federation';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import { Person } from '@axel-pauwels/cv-api';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import { ExperienceList } from '@cv/cv/feature-experience';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import { MacWindow } from '@axel-pauwels/mac-window';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import { graphqlResource } from '@cv/shared/data-access';
 
 const PEOPLE_QUERY = /* GraphQL */ `
@@ -36,7 +31,7 @@ const PERSON_QUERY = /* GraphQL */ `
 `;
 
 @Component({
-  selector: 'app-example',
+  selector: 'lib-example',
   imports: [MatButton, MatSlideToggle, Wrapper, MacWindow, ExperienceList],
   templateUrl: './example.html',
 })

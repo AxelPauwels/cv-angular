@@ -4,7 +4,7 @@
   "sourceRoot": "libs/technical/feature-shell/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["scope:cv", "domain:technical", "type:feature"],
+  "tags": ["domain:technical", "type:feature"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",

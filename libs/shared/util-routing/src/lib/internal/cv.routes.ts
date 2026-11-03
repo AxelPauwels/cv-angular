@@ -12,4 +12,6 @@ export const CV = {
   SKILLS_ROUTER_LINK: '/skills',
   REFERENCES: 'references',
   REFERENCES_ROUTER_LINK: '/references',
+  EXAMPLE: 'example',
+  EXAMPLE_ROUTER_LINK: '/example',
 } as const;

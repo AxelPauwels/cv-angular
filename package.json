@@ -31,7 +31,9 @@
     "package:login": "npm login",
     "package:release": "npx nx release --skip-publish",
     "package:publish:mac-window": "npm publish dist/packages/mac-window",
-    "package:push-tags": "git push --follow-tags"
+    "package:push-tags": "git push --follow-tags",
+    "sheriff:list": "npx sheriff list apps/cv/src/main.ts",
+    "sheriff:verify": "npx sheriff verify"
   },
   "lint-staged": {
     "*.{css,scss}": [

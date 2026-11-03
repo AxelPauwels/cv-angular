@@ -12,7 +12,7 @@ async function boxOf(locator: Locator) {
 
 test.describe('mac-window', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/technical/demo1');
+    await page.goto('/example');
   });
 
   test('shows the app title in a window', async ({ page }) => {
@@ -22,7 +22,7 @@ test.describe('mac-window', () => {
   });
 
   test('shows the example page content', async ({ page }) => {
-    await expect(page).toHaveURL(/\/technical\/demo1$/);
+    await expect(page).toHaveURL(/\/example$/);
     await expect(page.getByLabel('Person')).toHaveValue('1');
   });
 
