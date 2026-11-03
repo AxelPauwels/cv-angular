@@ -1,0 +1,22 @@
+{
+  "scopes": [
+    "libs/cv",
+    "libs/cv-api",
+    "libs/shared",
+    "libs/showcase",
+    "libs/technical",
+    "apps/cv",
+    "packages/mac-window"
+  ],
+  "groups": ["apps", "libs", "packages"],
+  "entries": [],
+  "filter": {
+    "files": [],
+    "logs": []
+  },
+  "aliases": {},
+  "teams": {
+    "example-team-a": ["John Doe", "Jane Doe"],
+    "example-team-b": ["Max Muster", "Susi Sorglos"]
+  }
+}
