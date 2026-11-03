@@ -13,6 +13,12 @@ async function boxOf(locator: Locator) {
 test.describe('mac-window', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/example');
+    // The page is lazy-loaded; against the unminified dev server with parallel
+    // workers that can take several seconds. Wait for it once, so the
+    // assertions below keep the default timeout.
+    await expect(windows(page).first().locator('.mw__controls')).toBeVisible({
+      timeout: 20_000,
+    });
   });
 
   test('shows the app title in a window', async ({ page }) => {

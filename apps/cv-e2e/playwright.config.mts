@@ -32,6 +32,9 @@ export default defineConfig({
     testDir: './src',
     openHtmlReport: 'never',
   }),
+  // Locally the tests hit the unminified dev server; Playwright's default (half
+  // the CPU cores) overloads it and pages time out. CI keeps the preset's 1.
+  workers: isCI ? 1 : 3,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL,
