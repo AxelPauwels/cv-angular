@@ -31,7 +31,7 @@ const PERSON_QUERY = /* GraphQL */ `
 `;
 
 @Component({
-  selector: 'lib-example',
+  selector: 'cv-example',
   imports: [MatButton, MatSlideToggle, Wrapper, MacWindow, ExperienceList],
   templateUrl: './example.html',
 })

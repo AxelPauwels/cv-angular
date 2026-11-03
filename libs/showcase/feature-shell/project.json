@@ -2,7 +2,7 @@
   "name": "showcase-feature-shell",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/showcase/feature-shell/src",
-  "prefix": "lib",
+  "prefix": "showcase",
   "projectType": "library",
   "tags": ["domain:showcase", "type:feature"],
   "targets": {

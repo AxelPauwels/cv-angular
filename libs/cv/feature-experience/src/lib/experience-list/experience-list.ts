@@ -33,7 +33,7 @@ const CV_QUERY = /* GraphQL */ `
 `;
 
 @Component({
-  selector: 'lib-experience-list',
+  selector: 'cv-experience-list',
   templateUrl: './experience-list.html',
 })
 export class ExperienceList {

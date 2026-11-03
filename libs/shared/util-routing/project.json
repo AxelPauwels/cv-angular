@@ -2,7 +2,7 @@
   "name": "shared-util-routing",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/util-routing/src",
-  "prefix": "lib",
+  "prefix": "shared",
   "projectType": "library",
   "tags": ["domain:shared", "type:util"],
   "targets": {

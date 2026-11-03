@@ -2,7 +2,7 @@
   "name": "shared-ui-federation",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/ui-federation/src",
-  "prefix": "lib",
+  "prefix": "shared",
   "projectType": "library",
   "tags": ["domain:shared", "type:ui"],
   "targets": {

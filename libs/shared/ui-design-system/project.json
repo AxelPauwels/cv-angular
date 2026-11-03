@@ -2,7 +2,7 @@
   "name": "shared-ui-design-system",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/ui-design-system/src",
-  "prefix": "lib",
+  "prefix": "ds",
   "projectType": "library",
   "tags": ["domain:shared", "type:ui"],
   "targets": {

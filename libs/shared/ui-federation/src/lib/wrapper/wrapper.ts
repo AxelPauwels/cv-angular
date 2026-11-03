@@ -21,7 +21,7 @@ export const cvMfeWrapperConfig: WrapperConfig = {
 };
 
 @Component({
-  selector: 'lib-wrapper',
+  selector: 'shared-wrapper',
   imports: [CommonModule],
   templateUrl: './wrapper.html',
   styleUrls: ['./wrapper.css'],

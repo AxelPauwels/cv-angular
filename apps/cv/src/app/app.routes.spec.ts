@@ -28,11 +28,11 @@ describe('appRoutes', () => {
       );
     return {
       url: TestBed.inject(Router).url,
-      main: linkLabels('lib-main-navbar > mat-toolbar'),
+      main: linkLabels('ds-main-navbar > mat-toolbar'),
       activeMain: element
-        .querySelector('lib-main-navbar > mat-toolbar .mdc-tab--active')
+        .querySelector('ds-main-navbar > mat-toolbar .mdc-tab--active')
         ?.textContent?.trim(),
-      sub: linkLabels('lib-sub-navbar'),
+      sub: linkLabels('ds-sub-navbar'),
     };
   }
 

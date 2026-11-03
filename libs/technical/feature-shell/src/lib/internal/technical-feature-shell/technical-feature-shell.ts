@@ -5,7 +5,7 @@ import { ROUTES } from '@cv/shared-util-routing';
 
 /** Layout of the Technical domain: its sub navbar above the active page */
 @Component({
-  selector: 'lib-technical-feature-shell',
+  selector: 'technical-feature-shell',
   imports: [RouterOutlet, SubNavbar],
   templateUrl: './technical-feature-shell.html',
   styleUrl: './technical-feature-shell.scss',

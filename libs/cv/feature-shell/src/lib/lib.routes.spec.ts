@@ -13,7 +13,7 @@ describe('cvFeatureShellRoutes', () => {
 
     expect(TestBed.inject(Router).url).toBe('/personal');
     expect(
-      Array.from(element.querySelectorAll('lib-sub-navbar a')).map((link) =>
+      Array.from(element.querySelectorAll('ds-sub-navbar a')).map((link) =>
         link.textContent?.trim()
       )
     ).toEqual(['Personal', 'Education', 'Experience', 'Skills', 'References']);

@@ -13,7 +13,7 @@ describe('showcaseFeatureShellRoutes', () => {
 
     expect(TestBed.inject(Router).url).toBe('/graphql-docs');
     expect(
-      Array.from(element.querySelectorAll('lib-sub-navbar a')).map((link) =>
+      Array.from(element.querySelectorAll('ds-sub-navbar a')).map((link) =>
         link.textContent?.trim()
       )
     ).toEqual(['GraphQL docs', 'Code coverage', 'End-to-end tests']);

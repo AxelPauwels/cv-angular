@@ -11,7 +11,7 @@ import { NavItem } from '../nav-item';
  * the `mat-tab-nav-panel` around its routed content as `tabPanel`.
  */
 @Component({
-  selector: 'lib-main-navbar',
+  selector: 'ds-main-navbar',
   imports: [RouterLink, MatToolbar, MatTabNav, MatTabLink],
   templateUrl: './main-navbar.html',
   styleUrl: './main-navbar.scss',

@@ -5,7 +5,7 @@ import { ROUTES } from '@cv/shared-util-routing';
 
 /** Layout of the Showcase domain: its sub navbar above the active page */
 @Component({
-  selector: 'lib-showcase-feature-shell',
+  selector: 'showcase-feature-shell',
   imports: [RouterOutlet, SubNavbar],
   templateUrl: './showcase-feature-shell.html',
   styleUrl: './showcase-feature-shell.scss',

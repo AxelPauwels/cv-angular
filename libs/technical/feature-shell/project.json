@@ -2,7 +2,7 @@
   "name": "technical-feature-shell",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/technical/feature-shell/src",
-  "prefix": "lib",
+  "prefix": "technical",
   "projectType": "library",
   "tags": ["domain:technical", "type:feature"],
   "targets": {

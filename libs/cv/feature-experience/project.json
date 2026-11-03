@@ -2,7 +2,7 @@
   "name": "cv-feature-experience",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/cv/feature-experience/src",
-  "prefix": "lib",
+  "prefix": "cv",
   "projectType": "library",
   "tags": ["domain:cv", "type:feature"],
   "targets": {

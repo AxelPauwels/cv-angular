@@ -12,7 +12,7 @@ class Page {}
 @Component({
   imports: [MainNavbar, MatTabNavPanel],
   template: `
-    <lib-main-navbar [items]="items()" [tabPanel]="panel" />
+    <ds-main-navbar [items]="items()" [tabPanel]="panel" />
     <mat-tab-nav-panel #panel />
   `,
 })

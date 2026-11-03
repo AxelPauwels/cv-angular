@@ -6,7 +6,7 @@ import { SubNavbar } from './sub-navbar';
 
 @Component({
   imports: [SubNavbar],
-  template: `<lib-sub-navbar
+  template: `<ds-sub-navbar
     [items]="[
       { label: 'One', path: 'one' },
       { label: 'Two', path: 'two' },

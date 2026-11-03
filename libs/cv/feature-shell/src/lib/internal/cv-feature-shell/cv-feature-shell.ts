@@ -5,7 +5,7 @@ import { ROUTES } from '@cv/shared-util-routing';
 
 /** Layout of the CV domain: its sub navbar above the active page */
 @Component({
-  selector: 'lib-cv-feature-shell',
+  selector: 'cv-feature-shell',
   imports: [RouterOutlet, SubNavbar],
   templateUrl: './cv-feature-shell.html',
   styleUrl: './cv-feature-shell.scss',

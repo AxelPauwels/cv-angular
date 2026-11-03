@@ -8,7 +8,7 @@ import { NavItem } from '../nav-item';
  * the projected content is the tab panel it controls
  */
 @Component({
-  selector: 'lib-sub-navbar',
+  selector: 'ds-sub-navbar',
   imports: [
     RouterLink,
     RouterLinkActive,
