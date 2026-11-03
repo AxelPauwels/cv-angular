@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavItem, SubNavbar } from '@cv/shared/ui-design-system';
-import { ROUTES } from '@cv/shared/util-routing';
+import { NavItem, SubNavbar } from '@cv/shared-ui-design-system';
+import { ROUTES } from '@cv/shared-util-routing';
 
 /** Layout of the CV domain: its sub navbar above the active page */
 @Component({

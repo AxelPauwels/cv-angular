@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { UnderConstruction } from '@cv/shared/ui-design-system';
-import { ROUTES } from '@cv/shared/util-routing';
+import { UnderConstruction } from '@cv/shared-ui-design-system';
+import { ROUTES } from '@cv/shared-util-routing';
 import { ShowcaseFeatureShell } from './internal/showcase-feature-shell/showcase-feature-shell';
 
 export const showcaseFeatureShellRoutes: Route[] = [

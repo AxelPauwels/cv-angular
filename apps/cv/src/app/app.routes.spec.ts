@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { inBrowserGraphqlInterceptor } from '@cv/shared/data-access';
+import { inBrowserGraphqlInterceptor } from '@cv/shared-data-access';
 import { appRoutes } from './app.routes';
 import { App } from './app';
 

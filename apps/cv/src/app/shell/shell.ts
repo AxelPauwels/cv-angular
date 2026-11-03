@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatTabNavPanel } from '@angular/material/tabs';
-import { MainNavbar, NavItem } from '@cv/shared/ui-design-system';
-import { ROUTES } from '@cv/shared/util-routing';
+import { MainNavbar, NavItem } from '@cv/shared-ui-design-system';
+import { ROUTES } from '@cv/shared-util-routing';
 
 @Component({
   selector: 'app-shell',

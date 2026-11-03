@@ -12,7 +12,7 @@ Function without changing the Angular app:
 
 ```ts
 import { ApolloServer } from '@apollo/server';
-import { typeDefs, resolvers } from '@axel-pauwels/cv-api';
+import { typeDefs, resolvers } from '@cv/cv-api';
 
 const server = new ApolloServer({ typeDefs, resolvers });
 ```

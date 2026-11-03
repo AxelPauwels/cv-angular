@@ -1,5 +1,5 @@
 {
-  "name": "@cv/shared/util-routing",
+  "name": "@cv/shared-util-routing",
   "version": "0.0.1",
   "peerDependencies": {},
   "sideEffects": false,

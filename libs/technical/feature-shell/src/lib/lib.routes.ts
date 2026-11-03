@@ -1,7 +1,7 @@
 import { Type } from '@angular/core';
 import { Route } from '@angular/router';
-import { UnderConstruction } from '@cv/shared/ui-design-system';
-import { ROUTES } from '@cv/shared/util-routing';
+import { UnderConstruction } from '@cv/shared-ui-design-system';
+import { ROUTES } from '@cv/shared-util-routing';
 import { TechnicalFeatureShell } from './internal/technical-feature-shell/technical-feature-shell';
 
 export const technicalFeatureShellRoutes: Route[] = [

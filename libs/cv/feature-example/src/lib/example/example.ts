@@ -5,11 +5,11 @@ import {
   cvMfeWrapperConfig,
   Wrapper,
   WrapperConfig,
-} from '@cv/shared/ui-federation';
-import { Person } from '@axel-pauwels/cv-api';
-import { ExperienceList } from '@cv/cv/feature-experience';
+} from '@cv/shared-ui-federation';
+import { Person } from '@cv/cv-api';
+import { ExperienceList } from '@cv/cv-feature-experience';
 import { MacWindow } from '@axel-pauwels/mac-window';
-import { graphqlResource } from '@cv/shared/data-access';
+import { graphqlResource } from '@cv/shared-data-access';
 
 const PEOPLE_QUERY = /* GraphQL */ `
   query People {

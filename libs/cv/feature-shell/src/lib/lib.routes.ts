@@ -1,8 +1,8 @@
 import { Type } from '@angular/core';
 import { Route } from '@angular/router';
-import { UnderConstruction } from '@cv/shared/ui-design-system';
+import { UnderConstruction } from '@cv/shared-ui-design-system';
 import { CvFeatureShell } from './internal/cv-feature-shell/cv-feature-shell';
-import { ROUTES } from '@cv/shared/util-routing';
+import { ROUTES } from '@cv/shared-util-routing';
 
 export const cvFeatureShellRoutes: Route[] = [
   {
@@ -13,7 +13,7 @@ export const cvFeatureShellRoutes: Route[] = [
       {
         path: ROUTES.CV.EXAMPLE,
         loadComponent: () =>
-          import('@cv/cv/feature-example').then(
+          import('@cv/cv-feature-example').then(
             (mod: { Example: Type<unknown> }) => mod.Example
           ),
       },
@@ -30,7 +30,7 @@ export const cvFeatureShellRoutes: Route[] = [
       {
         path: ROUTES.CV.EXPERIENCE,
         loadComponent: () =>
-          import('@cv/cv/feature-experience').then(
+          import('@cv/cv-feature-experience').then(
             (mod: { ExperienceList: Type<unknown> }) => mod.ExperienceList
           ),
       },

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import type { Experience, Profile, Skill } from '@axel-pauwels/cv-api';
-import { graphqlResource } from '@cv/shared/data-access';
+import type { Experience, Profile, Skill } from '@cv/cv-api';
+import { graphqlResource } from '@cv/shared-data-access';
 
 type ExperienceView = Omit<Experience, 'skillIds'> & {
   skills: Pick<Skill, 'id' | 'name'>[];

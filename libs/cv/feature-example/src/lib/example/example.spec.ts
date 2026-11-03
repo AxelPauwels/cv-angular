@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { inBrowserGraphqlInterceptor } from '@cv/shared/data-access';
+import { inBrowserGraphqlInterceptor } from '@cv/shared-data-access';
 import { Example } from './example';
 
 describe('Example', () => {

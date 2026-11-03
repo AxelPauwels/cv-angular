@@ -1,5 +1,5 @@
 {
-  "name": "@cv/shared/data-access",
+  "name": "@cv/shared-data-access",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^22.2.0",

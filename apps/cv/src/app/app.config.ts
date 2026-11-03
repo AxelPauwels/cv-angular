@@ -5,7 +5,7 @@ import {
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { appRoutes } from './app.routes';
-import { inBrowserGraphqlInterceptor } from '@cv/shared/data-access';
+import { inBrowserGraphqlInterceptor } from '@cv/shared-data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
