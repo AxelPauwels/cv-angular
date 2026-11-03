@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideI18nTesting } from '@cv/shared-data-access-i18n';
 import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { inBrowserGraphqlInterceptor } from '@cv/shared-data-access';
@@ -11,6 +12,7 @@ describe('appRoutes', () => {
     TestBed.configureTestingModule({
       providers: [
         provideRouter(appRoutes),
+        provideI18nTesting(),
         provideHttpClient(withInterceptors([inBrowserGraphqlInterceptor])),
       ],
     });

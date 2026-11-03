@@ -1,0 +1,44 @@
+{
+  "t": {
+    "nav": {
+      "cv": "CV",
+      "showcase": "Showcase",
+      "technical": "Technisch",
+      "personal": "Persoonlijk",
+      "education": "Opleiding",
+      "experience": "Ervaring",
+      "skills": "Vaardigheden",
+      "references": "Referenties",
+      "graphql-docs": "GraphQL-documentatie",
+      "code-coverage": "Codedekking",
+      "end-to-end-tests": "End-to-endtests",
+      "versions": "Versies",
+      "demo1": "Demo1",
+      "main-navigation": "Hoofdnavigatie",
+      "cv-navigation": "CV-navigatie",
+      "showcase-navigation": "Showcase-navigatie",
+      "technical-navigation": "Technische navigatie"
+    },
+    "heading": {
+      "personal": "Persoonlijk",
+      "education": "Opleiding",
+      "experience": "Ervaring",
+      "skills": "Vaardigheden",
+      "references": "Referenties",
+      "graphql-docs": "GraphQL-documentatie",
+      "code-coverage": "Codedekking",
+      "end-to-end-tests": "End-to-endtests",
+      "versions": "Versies"
+    },
+    "language": {
+      "english": "Engels",
+      "dutch": "Nederlands",
+      "french": "Frans",
+      "spanish": "Spaans",
+      "switch": "Taal"
+    },
+    "common": {
+      "under-construction": "in aanbouw"
+    }
+  }
+}

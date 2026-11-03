@@ -1,0 +1,44 @@
+{
+  "t": {
+    "nav": {
+      "cv": "CV",
+      "showcase": "Vitrine",
+      "technical": "Technique",
+      "personal": "Personnel",
+      "education": "Formation",
+      "experience": "Expérience",
+      "skills": "Compétences",
+      "references": "Références",
+      "graphql-docs": "Documentation GraphQL",
+      "code-coverage": "Couverture de code",
+      "end-to-end-tests": "Tests de bout en bout",
+      "versions": "Versions",
+      "demo1": "Démo1",
+      "main-navigation": "Navigation principale",
+      "cv-navigation": "Navigation du CV",
+      "showcase-navigation": "Navigation de la vitrine",
+      "technical-navigation": "Navigation technique"
+    },
+    "heading": {
+      "personal": "Personnel",
+      "education": "Formation",
+      "experience": "Expérience",
+      "skills": "Compétences",
+      "references": "Références",
+      "graphql-docs": "Documentation GraphQL",
+      "code-coverage": "Couverture de code",
+      "end-to-end-tests": "Tests de bout en bout",
+      "versions": "Versions"
+    },
+    "language": {
+      "english": "Anglais",
+      "dutch": "Néerlandais",
+      "french": "Français",
+      "spanish": "Espagnol",
+      "switch": "Langue"
+    },
+    "common": {
+      "under-construction": "en construction"
+    }
+  }
+}

@@ -12,7 +12,7 @@ import { ROUTES } from '@cv/shared-util-routing';
 })
 export class TechnicalFeatureShell {
   protected readonly navItems: NavItem[] = [
-    { label: 'Versions', path: ROUTES.TECHNICAL.VERSIONS },
-    { label: 'Demo1', path: ROUTES.TECHNICAL.DEMO1 },
+    { labelKey: 't.nav.versions', path: ROUTES.TECHNICAL.VERSIONS },
+    { labelKey: 't.nav.demo1', path: ROUTES.TECHNICAL.DEMO1 },
   ];
 }

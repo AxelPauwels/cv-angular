@@ -1,10 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { provideI18nTesting } from '@cv/shared-data-access-i18n';
 import { provideRouter } from '@angular/router';
 import { Shell } from './shell';
 
 describe('Shell', () => {
   it('lays out header, main and footer with the domain navigation', async () => {
-    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+    TestBed.configureTestingModule({
+      providers: [provideRouter([]), provideI18nTesting()],
+    });
     const fixture = TestBed.createComponent(Shell);
     await fixture.whenStable();
     const element: HTMLElement = fixture.nativeElement;

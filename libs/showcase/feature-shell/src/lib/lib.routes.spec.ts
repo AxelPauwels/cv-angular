@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideI18nTesting } from '@cv/shared-data-access-i18n';
 import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { showcaseFeatureShellRoutes } from './lib.routes';
@@ -6,7 +7,10 @@ import { showcaseFeatureShellRoutes } from './lib.routes';
 describe('showcaseFeatureShellRoutes', () => {
   it('opens the first sub item and lists all sub items', async () => {
     TestBed.configureTestingModule({
-      providers: [provideRouter(showcaseFeatureShellRoutes)],
+      providers: [
+        provideRouter(showcaseFeatureShellRoutes),
+        provideI18nTesting(),
+      ],
     });
     const harness = await RouterTestingHarness.create('/');
     const element: HTMLElement = harness.fixture.nativeElement;

@@ -12,17 +12,17 @@ export const showcaseFeatureShellRoutes: Route[] = [
       {
         path: ROUTES.SHOWCASE.GRAPHQL_DOCS,
         component: UnderConstruction,
-        data: { title: 'GraphQL docs' },
+        data: { title: 't.heading.graphql-docs' },
       },
       {
         path: ROUTES.SHOWCASE.CODE_COVERAGE,
         component: UnderConstruction,
-        data: { title: 'Code coverage' },
+        data: { title: 't.heading.code-coverage' },
       },
       {
         path: ROUTES.SHOWCASE.END_TO_END_TESTS,
         component: UnderConstruction,
-        data: { title: 'End-to-end tests' },
+        data: { title: 't.heading.end-to-end-tests' },
       },
       {
         path: '**',

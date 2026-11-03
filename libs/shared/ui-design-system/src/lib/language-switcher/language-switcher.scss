@@ -1,0 +1,34 @@
+@use '@angular/material' as mat;
+
+// Sits on the primary-colored toolbar
+.language-switcher {
+  @include mat.button-overrides(
+    (
+      text-label-text-color: var(--mat-sys-on-primary),
+    )
+  );
+}
+
+// Every item reserves the check's space; unchosen ones hint at it on hover or focus
+.language-switcher-check {
+  opacity: 0;
+  transition: opacity 150ms ease;
+
+  [aria-checked='true'] > & {
+    opacity: 1;
+  }
+
+  .language-switcher-option:is(
+      :hover,
+      .cdk-keyboard-focused
+    )[aria-checked='false']
+    > & {
+    opacity: 0.38;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .language-switcher-check {
+    transition: none;
+  }
+}

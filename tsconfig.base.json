@@ -5,6 +5,7 @@
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es2022",
@@ -31,7 +32,11 @@
       "@cv/shared-ui-federation": ["./libs/shared/ui-federation/src/index.ts"],
       "@cv/shared-data-access": ["./libs/shared/data-access/src/index.ts"],
       "@cv/shared-util-routing": ["./libs/shared/util-routing/src/index.ts"],
-      "@cv/cv-feature-example": ["./libs/cv/feature-example/src/index.ts"]
+      "@cv/cv-feature-example": ["./libs/cv/feature-example/src/index.ts"],
+      "@cv/shared-data-access-i18n": [
+        "./libs/shared/data-access-i18n/src/index.ts"
+      ],
+      "@cv/shared-util-i18n": ["./libs/shared/util-i18n/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

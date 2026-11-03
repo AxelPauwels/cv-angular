@@ -12,8 +12,11 @@ import { ROUTES } from '@cv/shared-util-routing';
 })
 export class ShowcaseFeatureShell {
   protected readonly navItems: NavItem[] = [
-    { label: 'GraphQL docs', path: ROUTES.SHOWCASE.GRAPHQL_DOCS },
-    { label: 'Code coverage', path: ROUTES.SHOWCASE.CODE_COVERAGE },
-    { label: 'End-to-end tests', path: ROUTES.SHOWCASE.END_TO_END_TESTS },
+    { labelKey: 't.nav.graphql-docs', path: ROUTES.SHOWCASE.GRAPHQL_DOCS },
+    { labelKey: 't.nav.code-coverage', path: ROUTES.SHOWCASE.CODE_COVERAGE },
+    {
+      labelKey: 't.nav.end-to-end-tests',
+      path: ROUTES.SHOWCASE.END_TO_END_TESTS,
+    },
   ];
 }

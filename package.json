@@ -34,7 +34,12 @@
     "package:push-tags": "git push --follow-tags",
     "sheriff:list": "npx sheriff list apps/cv/src/main.ts",
     "sheriff:verify": "npx sheriff verify",
-    "detective": "npx detective"
+    "i18n:login": "tolgee login",
+    "i18n:pull": "tolgee pull",
+    "i18n:push": "tolgee push",
+    "detective": "npx detective",
+    "translations:pull": "tolgee pull",
+    "i18n:extract-missing-keys": "tolgee pull && node ./scripts/tolgee-missing-keys-extractor.js"
   },
   "lint-staged": {
     "*.{css,scss}": [
@@ -60,6 +65,7 @@
     "@ngrx/signals": "^22.0.1",
     "@softarc/detective": "^2.1.2",
     "@softarc/native-federation-node": "^2.0.10",
+    "@tolgee/ngx": "^7.3.0",
     "es-module-shims": "^1.5.12",
     "graphql": "^16.14.2",
     "rxjs": "~7.8.0"
@@ -92,6 +98,7 @@
     "@swc-node/register": "1.11.1",
     "@swc/core": "1.15.8",
     "@swc/helpers": "0.5.18",
+    "@tolgee/cli": "^2.21.0",
     "@types/node": "^24.0.0",
     "@typescript-eslint/utils": "^8.40.0",
     "@vitest/browser-playwright": "~4.1.0",

@@ -1,5 +1,10 @@
 <header class="shell-header">
-  <ds-main-navbar [items]="navItems" [tabPanel]="panel" />
+  <ds-main-navbar [items]="navItems" [tabPanel]="panel">
+    <ds-language-switcher
+      [languages]="languageService.languages"
+      [language]="languageService.language()"
+      (languageChange)="changeLanguage($event)" />
+  </ds-main-navbar>
 </header>
 
 <mat-tab-nav-panel #panel class="shell-main">

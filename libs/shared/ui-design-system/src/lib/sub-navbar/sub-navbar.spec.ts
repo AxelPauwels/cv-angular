@@ -2,15 +2,17 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
+import { provideTolgee, Tolgee } from '@tolgee/ngx';
 import { SubNavbar } from './sub-navbar';
 
 @Component({
   imports: [SubNavbar],
   template: `<ds-sub-navbar
     [items]="[
-      { label: 'One', path: 'one' },
-      { label: 'Two', path: 'two' },
-    ]" />`,
+      { labelKey: 'One', path: 'one' },
+      { labelKey: 'Two', path: 'two' },
+    ]"
+    labelKey="Domain navigation" />`,
 })
 class Shell {}
 
@@ -21,6 +23,8 @@ describe('SubNavbar', () => {
   it('links relative to the shell route and marks the current page active', async () => {
     TestBed.configureTestingModule({
       providers: [
+        // no translations: keys render as-is
+        provideTolgee(() => Tolgee().init({ language: 'en' })),
         provideRouter([
           {
             path: 'domain',

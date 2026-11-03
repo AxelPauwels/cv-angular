@@ -13,7 +13,7 @@ export const technicalFeatureShellRoutes: Route[] = [
       {
         path: ROUTES.TECHNICAL.VERSIONS,
         component: UnderConstruction,
-        data: { title: 'Versions' },
+        data: { title: 't.heading.versions' },
       },
       {
         path: '**',

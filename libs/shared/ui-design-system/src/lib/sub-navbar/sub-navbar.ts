@@ -1,6 +1,7 @@
 import { Component, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatTabLink, MatTabNav, MatTabNavPanel } from '@angular/material/tabs';
+import { TranslatePipe } from '@tolgee/ngx';
 import { NavItem } from '../nav-item';
 
 /**
@@ -15,11 +16,13 @@ import { NavItem } from '../nav-item';
     MatTabNav,
     MatTabLink,
     MatTabNavPanel,
+    TranslatePipe,
   ],
   templateUrl: './sub-navbar.html',
   styleUrl: './sub-navbar.scss',
 })
 export class SubNavbar {
   readonly items = input.required<NavItem[]>();
-  readonly label = input('Sub navigation');
+  /** Translation key of the navigation's accessible name */
+  readonly labelKey = input.required<string>();
 }

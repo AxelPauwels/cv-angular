@@ -1,0 +1,30 @@
+<button
+  matButton
+  class="language-switcher"
+  [matMenuTriggerFor]="menu"
+  [attr.aria-label]="'t.language.switch' | translate">
+  {{ language() | uppercase }}
+  <mat-icon iconPositionEnd fontSet="material-symbols-outlined">
+    arrow_drop_down
+  </mat-icon>
+</button>
+
+<mat-menu #menu xPosition="before">
+  @for (option of languages(); track option.code) {
+  <button
+    mat-menu-item
+    class="language-switcher-option"
+    role="menuitemradio"
+    [attr.aria-checked]="option.code === language()"
+    [attr.lang]="option.code"
+    (click)="languageChange.emit(option.code)">
+    <!-- On every item, so the labels line up; only the active one shows it -->
+    <mat-icon
+      class="language-switcher-check"
+      fontSet="material-symbols-outlined">
+      check
+    </mat-icon>
+    <span>{{ option.labelKey | translate }}</span>
+  </button>
+  }
+</mat-menu>

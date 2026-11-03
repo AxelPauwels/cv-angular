@@ -12,10 +12,10 @@ import { ROUTES } from '@cv/shared-util-routing';
 })
 export class CvFeatureShell {
   protected readonly navItems: NavItem[] = [
-    { label: 'Personal', path: ROUTES.CV.PERSONAL },
-    { label: 'Education', path: ROUTES.CV.EDUCATION },
-    { label: 'Experience', path: ROUTES.CV.EXPERIENCE },
-    { label: 'Skills', path: ROUTES.CV.SKILLS },
-    { label: 'References', path: ROUTES.CV.REFERENCES },
+    { labelKey: 't.nav.personal', path: ROUTES.CV.PERSONAL },
+    { labelKey: 't.nav.education', path: ROUTES.CV.EDUCATION },
+    { labelKey: 't.nav.experience', path: ROUTES.CV.EXPERIENCE },
+    { labelKey: 't.nav.skills', path: ROUTES.CV.SKILLS },
+    { labelKey: 't.nav.references', path: ROUTES.CV.REFERENCES },
   ];
 }

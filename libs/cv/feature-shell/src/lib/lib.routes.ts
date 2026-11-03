@@ -20,12 +20,12 @@ export const cvFeatureShellRoutes: Route[] = [
       {
         path: ROUTES.CV.PERSONAL,
         component: UnderConstruction,
-        data: { title: 'Personal' },
+        data: { title: 't.heading.personal' },
       },
       {
         path: ROUTES.CV.EDUCATION,
         component: UnderConstruction,
-        data: { title: 'Education' },
+        data: { title: 't.heading.education' },
       },
       {
         path: ROUTES.CV.EXPERIENCE,
@@ -37,12 +37,12 @@ export const cvFeatureShellRoutes: Route[] = [
       {
         path: ROUTES.CV.SKILLS,
         component: UnderConstruction,
-        data: { title: 'Skills' },
+        data: { title: 't.heading.skills' },
       },
       {
         path: ROUTES.CV.REFERENCES,
         component: UnderConstruction,
-        data: { title: 'References' },
+        data: { title: 't.heading.references' },
       },
     ],
   },

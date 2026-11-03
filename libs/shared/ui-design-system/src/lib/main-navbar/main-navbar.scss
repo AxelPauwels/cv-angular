@@ -1,5 +1,9 @@
 @use '@angular/material' as mat;
 
+:host {
+  display: block;
+}
+
 .main-navbar {
   @include mat.toolbar-overrides(
     (
@@ -23,4 +27,24 @@
   );
 
   align-items: flex-end;
+}
+
+.main-navbar-tabs {
+  // shrink next to the actions; Material then scrolls the tabs on small screens
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// Phones: tighter tabs so all domains fit next to the actions
+@media (width < 600px) {
+  .main-navbar-tab {
+    min-width: 0;
+    padding-inline: 12px;
+  }
+}
+
+.main-navbar-actions {
+  align-self: center;
+  flex: none;
+  margin-left: 0.5rem;
 }

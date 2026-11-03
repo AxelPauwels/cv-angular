@@ -4,6 +4,7 @@ import { NavItem } from '../nav-item';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
+import { provideTolgee, Tolgee } from '@tolgee/ngx';
 import { MainNavbar } from './main-navbar';
 
 @Component({ template: '' })
@@ -24,6 +25,8 @@ describe('MainNavbar', () => {
   async function activeLabelAt(url: string) {
     TestBed.configureTestingModule({
       providers: [
+        // no translations: keys render as-is
+        provideTolgee(() => Tolgee().init({ language: 'en' })),
         provideRouter([
           { path: '', component: Page },
           { path: 'about', component: Page },
@@ -35,8 +38,8 @@ describe('MainNavbar', () => {
     await harness.navigateByUrl(url);
     const fixture = TestBed.createComponent(Host);
     fixture.componentRef.setInput('items', [
-      { label: 'CV', path: '' },
-      { label: 'Showcase', path: 'showcase' },
+      { labelKey: 'CV', path: '' },
+      { labelKey: 'Showcase', path: 'showcase' },
     ]);
     await fixture.whenStable();
     const element: HTMLElement = fixture.nativeElement;
