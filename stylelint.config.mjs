@@ -10,6 +10,11 @@ export default {
     'scss/operator-no-unspaced': null,
     // Allow blank lines to group related variables
     'scss/dollar-variable-empty-line-before': null,
+    // Angular's view-encapsulation escape hatch, needed for overlay content like mat-menu panels
+    'selector-pseudo-element-no-unknown': [
+      true,
+      { ignorePseudoElements: ['ng-deep'] },
+    ],
   },
   ignoreFiles: [
     'dist/**',

@@ -37,9 +37,9 @@
     "i18n:login": "tolgee login",
     "i18n:pull": "tolgee pull",
     "i18n:push": "tolgee push",
+    "i18n:extract-missing-keys": "tolgee pull && node ./scripts/tolgee-missing-keys-extractor.js",
     "detective": "npx detective",
-    "translations:pull": "tolgee pull",
-    "i18n:extract-missing-keys": "tolgee pull && node ./scripts/tolgee-missing-keys-extractor.js"
+    "translations:pull": "tolgee pull"
   },
   "lint-staged": {
     "*.{css,scss}": [

@@ -1,44 +1,199 @@
 {
   "t": {
-    "nav": {
-      "cv": "CV",
-      "showcase": "Showcase",
-      "technical": "Technical",
-      "personal": "Personal",
-      "education": "Education",
-      "experience": "Experience",
-      "skills": "Skills",
-      "references": "References",
-      "graphql-docs": "GraphQL docs",
-      "code-coverage": "Code coverage",
-      "end-to-end-tests": "End-to-end tests",
-      "versions": "Versions",
-      "demo1": "Demo1",
-      "main-navigation": "Main navigation",
-      "cv-navigation": "CV navigation",
-      "showcase-navigation": "Showcase navigation",
-      "technical-navigation": "Technical navigation"
+    "at": "at",
+    "city": {
+      "paris": "Paris"
+    },
+    "country": {
+      "belgium": "Belgium"
+    },
+    "daughter": "daughter",
+    "education": {
+      "bellouet-conseil": {
+        "degree": "Diploma of pulled sugar | Diploma of poured & blown sugar",
+        "specialization": "Pulled sugar, poured sugar, blown sugar"
+      },
+      "level": {
+        "extra": "Additional lessons",
+        "high-school": "High School",
+        "secondary": "Secondary School"
+      },
+      "school": {
+        "ter-duinen": {
+          "degree": "Diploma of Secondary Education"
+        }
+      },
+      "sint-jozef": {
+        "specialization": "Hotel TSO"
+      },
+      "ter-duinen": {
+        "specialization": "Hotel TSO"
+      },
+      "thomas-more": {
+        "degree": "Professional Bachelor in Applied Computer Science",
+        "specialization": "IT Factory Applications"
+      }
+    },
+    "experience": {
+      "job-description": {
+        "innomedio": {
+          "projects": "Projects: Worked on Dobit, Lalys-astene, Allodium, Goetstouwers, Dego and other projects.",
+          "technologies": "Technology: Maintaining and expanding the in-house developed CMS system in Symfony with Scss. Providing telephone support for customers with issues or expansions, and managing the support ticket system in Teamleader. Also GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ..."
+        },
+        "phpro": {
+          "projects": "Projects: Worked on Pizzahut, Hopper, Euroshop, Vinetiq, VAR and other projects.",
+          "technologies": "Technology: Primarily worked with Magento 2 (PHP/Less), with some React and Sulu. Also delved into SEM&BIO's front-end Inverted Triangle CSS (ITCSS) in Sass. Also used GrumPhp, Vagrant, SequelPro, Git, Figma, BitBucket, Jira, Confluence, Jenkins, and more."
+        },
+        "ravago": {
+          "projects": "Projects: Collaborated on a Warehouse Management System. A custom web-based software system for desktop (office) combined with a mobile system for handheld scanners in warehouses. This allows for the complete management of orders, inventory, production, sales, and much more. Furthermore, this WMS is fully configurable, with features and plugins, available in multiple languages, for users with different permissions, and communicates with other systems.",
+          "technologies": "Technology: Angular (Typescript/Scss) with Nx and the UI framework Kendo. Furthermore, Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise..."
+        }
+      },
+      "work-position": {
+        "3-it": "Frontend developer intern",
+        "bergerie": "Cold kitchen chef / Pastry Chef",
+        "bergerie-stage": "Kitchen intern",
+        "bruneau": "Chef de part / Pastry Chef",
+        "cardijn": "Sous chef",
+        "domaine-des-hautes-fagnes": "kitchen intern",
+        "farmasie": "Sous Chef / Pastry chef",
+        "innomedio": "PHP / Support Developer",
+        "koekoek": "Sous Chef / Chef",
+        "koekoek-2": "Chef",
+        "nieuwen-buiten": "kitchen intern",
+        "phpro": "PHP / Frontend Developer",
+        "ravago": "Consultant Frontend Developer",
+        "residentie": "service intern",
+        "zilte": "Chef de part / Pastry chef"
+      }
     },
     "heading": {
-      "personal": "Personal",
+      "code-coverage": "code coverage",
+      "education": "Education",
+      "experience": "experience",
+      "graphql-docs": "graphql docs",
+      "personal": "personal",
+      "references": "references",
+      "skills": "skills"
+    },
+    "internship": "Internship",
+    "language": {
+      "dutch": "Dutch",
+      "english": "English",
+      "french": "French",
+      "native-language": "native language",
+      "proficiency": {
+        "basic": "Basic",
+        "excellent": "Excellent",
+        "fair": "Fair",
+        "good": "Good",
+        "very-good": "Very good"
+      },
+      "spanish": "Spanish"
+    },
+    "nav": {
+      "architecture": "Architecture",
+      "code-coverage": "code coverage",
+      "cv": "CV",
+      "dark": "Dark",
+      "dark-mode": "dark mode",
       "education": "Education",
       "experience": "Experience",
-      "skills": "Skills",
+      "graphql-docs": "graphql docs",
+      "home": "Home",
+      "light": "Light",
+      "light-mode": "light mode",
+      "personal": "Personal",
       "references": "References",
-      "graphql-docs": "GraphQL docs",
-      "code-coverage": "Code coverage",
-      "end-to-end-tests": "End-to-end tests",
+      "showcase": "Showcase",
+      "skills": "Skills",
+      "technical": "Technical",
+      "temp": {
+        "more": "More..."
+      }
+    },
+    "personal": {
+      "about-me": {
+        "card": {
+          "description": {
+            "driver-license": {
+              "B": "B"
+            },
+            "marital-status": {
+              "married": "Married"
+            },
+            "nationality": {
+              "BE": "BE"
+            },
+            "personality-type": {
+              "INTJ": "INTJ"
+            }
+          },
+          "title": {
+            "children": "Children",
+            "date-of-birth": "Date of Birth",
+            "driver-license": "Driver license",
+            "marital-status": "Marital status",
+            "nationality": "Nationality",
+            "personality-type": "Personality type"
+          }
+        }
+      },
+      "hobby": {
+        "binge-watching": "Binche watching",
+        "board-games": "Board games",
+        "comment": {
+          "vlaamse-schietsport-koepel": "Vlaamse SchietsportKoepel",
+          "world-cube-association": "World Cube Association"
+        },
+        "member-of-vsk": "Member of VSK",
+        "member-of-wca": "Member of WCA",
+        "mtg": "Magic The Gathering (TCG)",
+        "rubik-s-cube-competitions": "Rubik’s Cube competitions"
+      }
+    },
+    "present": "present",
+    "son": "son",
+    "spoken": "Speaking",
+    "subheading": {
+      "education": {
+        "additional-learnings": "additional-learnings",
+        "certificates": "certificates"
+      },
+      "frameworks": "frameworks",
+      "horeca": "Hospitality",
+      "it": "IT",
+      "libraries": "libraries",
+      "operating-systems": "operating systems",
+      "personal": {
+        "about-me": "About me",
+        "about-me.description": "The human behind the code",
+        "about-me.prefix": "Identity",
+        "connect": "Let's talk",
+        "connect.description": "Ready to create something extraordinary?",
+        "connect.prefix": "Connect",
+        "hobbies-and-interests": "Hobbies & Interests",
+        "hobbies-and-interests.description": "Life beyond the terminal",
+        "hobbies-and-interests.prefix": "Passions",
+        "languages": "Languages",
+        "languages.description": "Building bridges across cultures",
+        "languages.prefix": "Communication"
+      },
+      "programming-languages": "programming languages",
+      "version-control": "version control"
+    },
+    "temp": {
+      "under-construction": {
+        "content-1": "Welcome on my CV website!",
+        "content-2": "At the moment all basic information is deployed... but the real fun stuff is still missing.\n",
+        "content-3": "I am working on 'Architecture' section which contains all info about this website: the technology, structure, approaches, versions, backend, and more... everything what makes a developer happy.",
+        "content-4": "Beside that also interacting features, like a light-dark mode switch, color-switch, more languages, a simulated crud page where you can toggle some features on and off, and more.",
+        "content-5": "Finally some modern UI showcase since I've choosen to develop this website as an old vintage feeling.",
+        "title": "Under Construction"
+      },
       "versions": "Versions"
     },
-    "language": {
-      "english": "English",
-      "dutch": "Dutch",
-      "french": "French",
-      "spanish": "Spanish",
-      "switch": "Language"
-    },
-    "common": {
-      "under-construction": "under construction"
-    }
+    "website": "website",
+    "written": "Writing"
   }
 }

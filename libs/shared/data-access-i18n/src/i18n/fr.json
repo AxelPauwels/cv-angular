@@ -1,44 +1,199 @@
 {
   "t": {
-    "nav": {
-      "cv": "CV",
-      "showcase": "Vitrine",
-      "technical": "Technique",
-      "personal": "Personnel",
-      "education": "Formation",
-      "experience": "Expérience",
-      "skills": "Compétences",
-      "references": "Références",
-      "graphql-docs": "Documentation GraphQL",
-      "code-coverage": "Couverture de code",
-      "end-to-end-tests": "Tests de bout en bout",
-      "versions": "Versions",
-      "demo1": "Démo1",
-      "main-navigation": "Navigation principale",
-      "cv-navigation": "Navigation du CV",
-      "showcase-navigation": "Navigation de la vitrine",
-      "technical-navigation": "Navigation technique"
+    "at": "à",
+    "city": {
+      "paris": "Paris"
+    },
+    "country": {
+      "belgium": "Belgique"
+    },
+    "daughter": "fille",
+    "education": {
+      "bellouet-conseil": {
+        "degree": "Diplôme de Sucre tiré | Diplôme de sucre coulé & sucre soufflé",
+        "specialization": "Sucre tiré, coulé, soufflé"
+      },
+      "level": {
+        "extra": "Cours supplémentaires",
+        "high-school": "Enseignement supérieur",
+        "secondary": "Enseignement secondaire"
+      },
+      "school": {
+        "ter-duinen": {
+          "degree": "Diplôme d’Enseignement Secondaire Supérieur"
+        }
+      },
+      "sint-jozef": {
+        "specialization": "Hôtellerie TSO"
+      },
+      "ter-duinen": {
+        "specialization": "Hôtellerie TSO"
+      },
+      "thomas-more": {
+        "degree": "Bachelier professionnalisant en Informatique appliquée",
+        "specialization": "IT Factory Applications"
+      }
+    },
+    "experience": {
+      "job-description": {
+        "innomedio": {
+          "projects": "Projets : A travaillé sur Dobit, Lalys-astene, Allodium, Goetstouwers, Dego et d'autres projets.",
+          "technologies": "Technologie : Maintenance et développement du système de gestion de contenu (CMS) interne développé en Symfony avec SCSS. Assistance téléphonique aux clients rencontrant des problèmes ou souhaitant apporter des modifications, et gestion du système de tickets d’assistance dans Teamleader. Également GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ..."
+        },
+        "phpro": {
+          "projects": "Projets: A travaillé sur Pizzahut, Hopper, Euroshop, Vinetiq, VAR et d'autres projets.",
+          "technologies": "Technologies : J’ai principalement travaillé avec Magento 2 (PHP/Less), ainsi qu’avec React et Sulu. J’ai également exploré le CSS en triangle inversé (ITCSS) de SEM&BIO en Sass. J’ai aussi utilisé GrumPHP, Vagrant, SequelPro, Git, Figma, Bitbucket, Jira, Confluence, Jenkins, et d’autres outils."
+        },
+        "ravago": {
+          "projects": "Projets: J'ai participé au développement d'un système de gestion d'entrepôt (WMS). Il s'agit d'un logiciel web personnalisé pour postes de travail (bureau) associé à une application mobile pour les scanners portables utilisés en entrepôt. Ce système permet une gestion complète des commandes, des stocks, de la production, des ventes et bien plus encore. Entièrement configurable, il propose des fonctionnalités et des extensions, est disponible en plusieurs langues, s'adapte aux différents niveaux d'accès des utilisateurs et communique avec d'autres systèmes.",
+          "technologies": "Technologies utilisées : Angular (TypeScript/SCSS) avec Nx et le framework d’interface utilisateur Kendo. Par ailleurs, Prettier, ESLint, Stylelint, Jest, Codegen, GraphQL, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise…"
+        }
+      },
+      "work-position": {
+        "3-it": "Stagiaire développeur frontend",
+        "bergerie": "Garde manger / Pâtissier",
+        "bergerie-stage": "Stagiaire en cuisine",
+        "bruneau": "Chef de partie / Pâtissier",
+        "cardijn": "Sous-chef",
+        "domaine-des-hautes-fagnes": "Stagiaire en cuisine",
+        "farmasie": "Sous-chef / Pâtissier",
+        "innomedio": "Développeur PHP / Support",
+        "koekoek": "Sous-chef / Chef",
+        "koekoek-2": "Chef",
+        "nieuwen-buiten": "Stagiaire en cuisine",
+        "phpro": "Développeur PHP / Frontend",
+        "ravago": "Consultant Développeur Frontend",
+        "residentie": "Stagiaire en salle",
+        "zilte": "Chef de partie / Pâtissier"
+      }
     },
     "heading": {
-      "personal": "Personnel",
+      "code-coverage": "couverture du code",
       "education": "Formation",
       "experience": "Expérience",
-      "skills": "Compétences",
+      "graphql-docs": "graphql docs",
+      "personal": "personnel",
+      "references": "références",
+      "skills": "Compétences"
+    },
+    "internship": "Stage",
+    "language": {
+      "dutch": "Néerlandais",
+      "english": "Anglais",
+      "french": "Français",
+      "native-language": "langue maternelle",
+      "proficiency": {
+        "basic": "bases",
+        "excellent": "Excellent",
+        "fair": "Moyen",
+        "good": "Bon",
+        "very-good": "Très bon"
+      },
+      "spanish": "Espagnol"
+    },
+    "nav": {
+      "architecture": "Architecture",
+      "code-coverage": "couverture du code",
+      "cv": "CV",
+      "dark": "Sombre",
+      "dark-mode": "mode sombre ",
+      "education": "Formation",
+      "experience": "Expérience",
+      "graphql-docs": "graphql docs",
+      "home": "Maison",
+      "light": "Clair",
+      "light-mode": "mode clair",
+      "personal": "Personnelles",
       "references": "Références",
-      "graphql-docs": "Documentation GraphQL",
-      "code-coverage": "Couverture de code",
-      "end-to-end-tests": "Tests de bout en bout",
+      "showcase": "Vitrine",
+      "skills": "Compétences",
+      "technical": "Technique",
+      "temp": {
+        "more": "Plus..."
+      }
+    },
+    "personal": {
+      "about-me": {
+        "card": {
+          "description": {
+            "driver-license": {
+              "B": "B"
+            },
+            "marital-status": {
+              "married": "Marié"
+            },
+            "nationality": {
+              "BE": "BE"
+            },
+            "personality-type": {
+              "INTJ": "INTJ"
+            }
+          },
+          "title": {
+            "children": "Enfants",
+            "date-of-birth": "Date de naissance",
+            "driver-license": "Permis de conduire",
+            "marital-status": "État civil",
+            "nationality": "Nationalité",
+            "personality-type": "Type de personnalité"
+          }
+        }
+      },
+      "hobby": {
+        "binge-watching": "Binche Watching",
+        "board-games": "Jeux de société",
+        "comment": {
+          "vlaamse-schietsport-koepel": "Vlaamse SchietsportKoepel",
+          "world-cube-association": "World Cube Association"
+        },
+        "member-of-vsk": "Membre de VSK",
+        "member-of-wca": "Membre de WCA",
+        "mtg": "Magic The Gathering (TCG)",
+        "rubik-s-cube-competitions": "Rubik’s Cube Compétitions"
+      }
+    },
+    "present": "présent",
+    "son": "Fils",
+    "spoken": "Oral",
+    "subheading": {
+      "education": {
+        "additional-learnings": "Formations complémentaires",
+        "certificates": "Certificats"
+      },
+      "frameworks": "cadres",
+      "horeca": "Hospitalité",
+      "it": "TI",
+      "libraries": "bibliothèques",
+      "operating-systems": "systèmes d'exploitation",
+      "personal": {
+        "about-me": "À propos de moi",
+        "about-me.description": "L'humain derrière le code",
+        "about-me.prefix": "Identité",
+        "connect": "Parlons-en",
+        "connect.description": "Prêt à créer quelque chose d'extraordinaire",
+        "connect.prefix": "Entrer en contact",
+        "hobbies-and-interests": "Loisirs & centres d'intérêt",
+        "hobbies-and-interests.description": "La vie au-delà du code",
+        "hobbies-and-interests.prefix": "Passions",
+        "languages": "Langues",
+        "languages.description": "Créer des ponts entre les cultures",
+        "languages.prefix": "Communication"
+      },
+      "programming-languages": "langages de programmation",
+      "version-control": "contrôle des versions"
+    },
+    "temp": {
+      "under-construction": {
+        "content-1": "Bienvenue sur mon site CV !",
+        "content-2": "Pour le moment, toutes les informations de base sont disponibles, mais les choses les plus intéressantes sont encore en cours de développement.",
+        "content-3": "Je travaille actuellement sur la section « Architecture », qui regroupera toutes les informations concernant ce site web : les technologies utilisées, la structure, les approches de développement, les versions, le backend, et bien plus encore... tout ce qui fait le bonheur d’un développeur.",
+        "content-4": "En parallèle, je développe également des fonctionnalités interactives, telles qu’un sélecteur de thème clair/sombre, un changement de couleur, davantage de langues, une page CRUD simulée permettant d’activer ou de désactiver certaines fonctionnalités, et bien d’autres surprises.",
+        "content-5": "Enfin, je prévois également une démonstration d’interfaces modernes, même si j’ai choisi de donner à ce site une ambiance vintage et rétro.",
+        "title": "En construction"
+      },
       "versions": "Versions"
     },
-    "language": {
-      "english": "Anglais",
-      "dutch": "Néerlandais",
-      "french": "Français",
-      "spanish": "Espagnol",
-      "switch": "Langue"
-    },
-    "common": {
-      "under-construction": "en construction"
-    }
+    "website": "site web",
+    "written": "Écrit"
   }
 }

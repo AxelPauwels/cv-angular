@@ -1,44 +1,199 @@
 {
   "t": {
-    "nav": {
-      "cv": "CV",
-      "showcase": "Showcase",
-      "technical": "Technisch",
-      "personal": "Persoonlijk",
-      "education": "Opleiding",
-      "experience": "Ervaring",
-      "skills": "Vaardigheden",
-      "references": "Referenties",
-      "graphql-docs": "GraphQL-documentatie",
-      "code-coverage": "Codedekking",
-      "end-to-end-tests": "End-to-endtests",
-      "versions": "Versies",
-      "demo1": "Demo1",
-      "main-navigation": "Hoofdnavigatie",
-      "cv-navigation": "CV-navigatie",
-      "showcase-navigation": "Showcase-navigatie",
-      "technical-navigation": "Technische navigatie"
+    "at": "aan",
+    "city": {
+      "paris": "Parijs"
+    },
+    "country": {
+      "belgium": "België"
+    },
+    "daughter": "dochter",
+    "education": {
+      "bellouet-conseil": {
+        "degree": "Diploma van getrokken suiker | Diploma van gegoten en geblazen suiker",
+        "specialization": "Getrokken suiker, gegoten suiker, geblazen suiker"
+      },
+      "level": {
+        "extra": "Aanvullende lessen",
+        "high-school": "Hoger onderwijs",
+        "secondary": "Secundair onderwijs"
+      },
+      "school": {
+        "ter-duinen": {
+          "degree": "Diploma van Secundair Onderwijs"
+        }
+      },
+      "sint-jozef": {
+        "specialization": "Hotel TSO"
+      },
+      "ter-duinen": {
+        "specialization": "Hotel TSO"
+      },
+      "thomas-more": {
+        "degree": "Professionele bachelor in Toegepaste Informatica",
+        "specialization": "IT Factory Applicaties"
+      }
+    },
+    "experience": {
+      "job-description": {
+        "innomedio": {
+          "projects": "Projecten: Meegewerkt aan Dobit, Lalys-astene, Allodium, Goetstouwers, Dego en andere projecten.",
+          "technologies": "Technologie: Het eigen ontwikkeld CMS systeem in Symfony met Scss onderhouden en uitbreiden. Telefonische ondersteuning voor klanten met problemen of uitbreidingen, en het beheren van het support ticketsysteem in Teamleader. Verder ook GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ..."
+        },
+        "phpro": {
+          "projects": "Projecten: Meegewerkt aan Pizzahut, Hopper, Euroshop, Vinetiq, VAR en andere projecten.",
+          "technologies": "Technologie: Voornamelijk gewerkt met Magento 2 (PHP/Less), en soms een beetje React en Sulu. Ook verdiept in front-end Inverted Triagle CSS (ITCSS) van SEM&BIO in Sass. Verder GrumPhp, Vagrant, SequelPro, Git, Figma, BitBucket, Jira, Confluence, Jenkins, ..."
+        },
+        "ravago": {
+          "projects": "Projecten:\nMeegewerkt aan Warehouse Management System. Een custom web-gebaseerd software systeem voor desktop (office) in combinatie met een mobile systeem voor handscanners in magazijnen. Dit voor het volledig beheren van orders, stock, productie, verkoop en veel meer. Verder is dit WMS volledig configureerbaar, met features en plugins, beschikbaar in verschillende talen, voor gebruikers met verschillende rechten, dat communiceert met andere systemen.",
+          "technologies": "Technologie: Angular (Typescript/Scss) met Nx en het UI framework Kendo. Verder Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise ..."
+        }
+      },
+      "work-position": {
+        "3-it": "Stagiair Frontend Developer",
+        "bergerie": "Koude keuken chef / Pâtissier",
+        "bergerie-stage": "Stagiair keuken",
+        "bruneau": "Chef de partie / Pâtissier",
+        "cardijn": "Sous-chef",
+        "domaine-des-hautes-fagnes": "Stagiair keuken",
+        "farmasie": "Sous-chef / Pâtissier",
+        "innomedio": "PHP / Support Developer",
+        "koekoek": "Sous-chef / Chef",
+        "koekoek-2": "Chef",
+        "nieuwen-buiten": "Stagiair keuken",
+        "phpro": "PHP / Frontend Developer",
+        "ravago": "Consultant Frontend Developer",
+        "residentie": "Stagiair zaal",
+        "zilte": "Chef de partie / Pâtissier"
+      }
     },
     "heading": {
-      "personal": "Persoonlijk",
+      "code-coverage": "code coverage",
+      "education": "Opleiding",
+      "experience": "ervaring",
+      "graphql-docs": "graphql docs",
+      "personal": "persoonlijk",
+      "references": "referenties",
+      "skills": "Vaardigheden"
+    },
+    "internship": "Stage",
+    "language": {
+      "dutch": "Nederlands",
+      "english": "Engels",
+      "french": "Frans",
+      "native-language": "moedertaal",
+      "proficiency": {
+        "basic": "basis",
+        "excellent": "Uitstekend",
+        "fair": "Redelijk",
+        "good": "Goed",
+        "very-good": "Zeer goed"
+      },
+      "spanish": "Spaans"
+    },
+    "nav": {
+      "architecture": "Architectuur",
+      "code-coverage": "code coverage",
+      "cv": "CV",
+      "dark": "Donker",
+      "dark-mode": "donkere modus",
       "education": "Opleiding",
       "experience": "Ervaring",
-      "skills": "Vaardigheden",
+      "graphql-docs": "graphql docs",
+      "home": "Home",
+      "light": "Licht",
+      "light-mode": "lichte modus",
+      "personal": "Persoonlijk",
       "references": "Referenties",
-      "graphql-docs": "GraphQL-documentatie",
-      "code-coverage": "Codedekking",
-      "end-to-end-tests": "End-to-endtests",
+      "showcase": "Showcase",
+      "skills": "Vaardigheden",
+      "technical": "Technisch",
+      "temp": {
+        "more": "Meer..."
+      }
+    },
+    "personal": {
+      "about-me": {
+        "card": {
+          "description": {
+            "driver-license": {
+              "B": "B"
+            },
+            "marital-status": {
+              "married": "Getrouwd"
+            },
+            "nationality": {
+              "BE": "BE"
+            },
+            "personality-type": {
+              "INTJ": "INTJ"
+            }
+          },
+          "title": {
+            "children": "Kinderen",
+            "date-of-birth": "Geboortedatum",
+            "driver-license": "Rijbewijs",
+            "marital-status": "Burgerlijke staat",
+            "nationality": "Nationaliteit",
+            "personality-type": "Persoonlijkheidstype"
+          }
+        }
+      },
+      "hobby": {
+        "binge-watching": "Binche Watching",
+        "board-games": "Bordspellen",
+        "comment": {
+          "vlaamse-schietsport-koepel": "Vlaamse SchietsportKoepel",
+          "world-cube-association": "World Cube Association"
+        },
+        "member-of-vsk": "Lid van VSK",
+        "member-of-wca": "Lid van WCA",
+        "mtg": "Magic The Gathering (TCG)",
+        "rubik-s-cube-competitions": "Rubik’s Cube competities"
+      }
+    },
+    "present": "heden",
+    "son": "Zoon",
+    "spoken": "Mondeling",
+    "subheading": {
+      "education": {
+        "additional-learnings": "Aanvullende opleidingen",
+        "certificates": "Certificaten"
+      },
+      "frameworks": "frameworks",
+      "horeca": "Horeca",
+      "it": "IT",
+      "libraries": "libraries",
+      "operating-systems": "besturingssystemen",
+      "personal": {
+        "about-me": "Over mij",
+        "about-me.description": "De mens achter de code",
+        "about-me.prefix": "Identiteit",
+        "connect": "Laten we praten",
+        "connect.description": "Klaar om iets buitengewoons te creëren",
+        "connect.prefix": "Connecteer",
+        "hobbies-and-interests": "Hobby's & interesses",
+        "hobbies-and-interests.description": "Het leven buiten de code",
+        "hobbies-and-interests.prefix": "Passies",
+        "languages": "Talen",
+        "languages.description": "Bruggen bouwen tussen culturen",
+        "languages.prefix": "Communicatie"
+      },
+      "programming-languages": "programmeertalen",
+      "version-control": "versiebeheer"
+    },
+    "temp": {
+      "under-construction": {
+        "content-1": "Welkom op mijn cv-website!",
+        "content-2": "Op dit moment is alle basisinformatie beschikbaar, maar de echt leuke onderdelen ontbreken nog.",
+        "content-3": "Ik werk momenteel aan de sectie 'Architectuur', waarin alle informatie over deze website wordt verzameld: de gebruikte technologieën, structuur, ontwikkeling aanpak, standaarden, versies, backend en meer... alles waar een ontwikkelaar blij van wordt.",
+        "content-4": "Daarnaast werk ik ook aan interactieve functies, zoals een schakelaar voor licht- en donkermodus, kleurthema's, extra talen, een gesimuleerde CRUD-pagina waarop je bepaalde functies kunt in- en uitschakelen, en nog veel meer.",
+        "content-5": "Tot slot komt er ook een showcase van moderne UI-componenten",
+        "title": "In ontwikkeling"
+      },
       "versions": "Versies"
     },
-    "language": {
-      "english": "Engels",
-      "dutch": "Nederlands",
-      "french": "Frans",
-      "spanish": "Spaans",
-      "switch": "Taal"
-    },
-    "common": {
-      "under-construction": "in aanbouw"
-    }
+    "website": "website",
+    "written": "Schriftelijk"
   }
 }

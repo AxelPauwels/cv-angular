@@ -57,3 +57,5 @@ Thumbs.db
 .angular
 
 __screenshots__/
+/apps/cv/src/tokens/environment.tokens.ts
+/.tolgeerc.json

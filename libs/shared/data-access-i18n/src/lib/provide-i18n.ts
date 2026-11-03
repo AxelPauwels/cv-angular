@@ -22,13 +22,19 @@ const TRANSLATIONS: Record<LanguageCode, () => Promise<TreeTranslationsData>> =
     es: () => import('../i18n/es.json').then((m) => m.default),
   };
 
+/** Tolgee credentials for in-context editing; only used in dev builds */
+export interface I18nDevOptions {
+  apiUrl: string;
+  apiKey: string;
+}
+
 /**
  * Tolgee for the app: the saved language, else the browser language, else
  * English. In dev builds, DevTools enable in-context editing (Alt + click a
- * text) once the Tolgee browser extension provides an API key; no key is
- * ever part of the app.
+ * text) with the given credentials or the Tolgee browser extension's key.
+ * Production never gets a key: its translations are pulled at build time.
  */
-export function provideI18n(): EnvironmentProviders {
+export function provideI18n(devOptions?: I18nDevOptions): EnvironmentProviders {
   return provideTolgee(() => {
     const tolgee = Tolgee()
       .use(FormatSimple())
@@ -44,6 +50,10 @@ export function provideI18n(): EnvironmentProviders {
       defaultLanguage: DEFAULT_LANGUAGE,
       fallbackLanguage: DEFAULT_LANGUAGE,
       staticData: TRANSLATIONS,
+      // with a key, dev builds load translations from Tolgee instead of the files
+      ...(isDevMode() && devOptions?.apiKey
+        ? { apiUrl: devOptions.apiUrl, apiKey: devOptions.apiKey }
+        : {}),
     });
   });
 }
