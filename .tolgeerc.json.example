@@ -1,5 +1,6 @@
 {
   "$schema": "https://docs.tolgee.io/cli-schema.json",
+  "apiKey": "",
   "apiUrl": "https://app.tolgee.io",
   "projectId": 23075,
   "format": "JSON_TOLGEE",
