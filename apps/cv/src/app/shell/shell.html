@@ -1,5 +1,12 @@
 <header class="shell-header">
   <ds-main-navbar [items]="navItems" [tabPanel]="panel">
+    <ds-theme-switcher
+      [themes]="themeService.themes"
+      [theme]="themeService.theme()"
+      (themeChange)="changeTheme($event)" />
+    <ds-color-scheme-switcher
+      [colorScheme]="themeService.colorScheme()"
+      (colorSchemeChange)="changeColorScheme($event)" />
     <ds-language-switcher
       [languages]="languageService.languages"
       [language]="languageService.language()"

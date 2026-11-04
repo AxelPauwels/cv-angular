@@ -200,6 +200,26 @@
       },
       "versions": "Versions"
     },
+    "theme": {
+      "azure": "Azure",
+      "copper": "Copper",
+      "crimson": "Crimson",
+      "dark-mode": "Dark mode",
+      "forest": "Forest",
+      "gold": "Gold",
+      "lavender": "Lavender",
+      "ocean": "Ocean",
+      "plum": "Plum",
+      "rose": "Rose",
+      "sage": "Sage",
+      "sand": "Sand",
+      "slate": "Slate",
+      "switch": "Color theme",
+      "switch-to-dark": "Switch to dark mode",
+      "switch-to-light": "Switch to light mode",
+      "teal": "Teal",
+      "violet": "Violet"
+    },
     "website": "website",
     "written": "Writing"
   }

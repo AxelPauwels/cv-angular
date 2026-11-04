@@ -22,6 +22,6 @@ info:
 
 servers:
   # the app's own /graphql: posted by the app, answered in the browser for now
-  - url: https://axel-pauwels-cv.web.app/graphql
+  - url: https://axel-pauwels.web.app/graphql
     description: Answered in the browser by the cv app (no network request)
     production: true

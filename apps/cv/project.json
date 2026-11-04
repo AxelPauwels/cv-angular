@@ -50,7 +50,7 @@
     "test": {
       "executor": "@angular/build:unit-test",
       "options": {
-        "buildTarget": "cv:build:development",
+        "buildTarget": "cv:esbuild:development",
         "tsConfig": "apps/cv/tsconfig.spec.json",
         "watch": false,
         "browsers": ["ChromiumHeadless"]
@@ -111,6 +111,9 @@
           }
         ],
         "styles": ["apps/cv/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["apps/cv/src/styles"]
+        },
         "polyfills": ["es-module-shims"]
       },
       "configurations": {

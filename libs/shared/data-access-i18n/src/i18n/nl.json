@@ -200,6 +200,26 @@
       },
       "versions": "Versies"
     },
+    "theme": {
+      "azure": "Azuur",
+      "copper": "Koper",
+      "crimson": "Karmijn",
+      "dark-mode": "Donkere modus",
+      "forest": "Woud",
+      "gold": "Goud",
+      "lavender": "Lavendel",
+      "ocean": "Oceaan",
+      "plum": "Pruim",
+      "rose": "Roze",
+      "sage": "Salie",
+      "sand": "Zand",
+      "slate": "Leisteen",
+      "switch": "Kleurthema",
+      "switch-to-dark": "Naar donkere modus",
+      "switch-to-light": "Naar lichte modus",
+      "teal": "Petrol",
+      "violet": "Violet"
+    },
     "website": "website",
     "written": "Schriftelijk"
   }

@@ -200,6 +200,26 @@
       },
       "versions": "t.temp.versions"
     },
+    "theme": {
+      "azure": "Azur",
+      "copper": "Cobre",
+      "crimson": "Carmesí",
+      "dark-mode": "Modo oscuro",
+      "forest": "Bosque",
+      "gold": "Oro",
+      "lavender": "Lavanda",
+      "ocean": "Océano",
+      "plum": "Ciruela",
+      "rose": "Rosa",
+      "sage": "Salvia",
+      "sand": "Arena",
+      "slate": "Pizarra",
+      "switch": "Tema de color",
+      "switch-to-dark": "Cambiar a modo oscuro",
+      "switch-to-light": "Cambiar a modo claro",
+      "teal": "Verde azulado",
+      "violet": "Violeta"
+    },
     "website": "sitio web",
     "written": "Escrito"
   }

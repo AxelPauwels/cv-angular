@@ -200,6 +200,26 @@
       },
       "versions": "Versions"
     },
+    "theme": {
+      "azure": "Azur",
+      "copper": "Cuivre",
+      "crimson": "Cramoisi",
+      "dark-mode": "Mode sombre",
+      "forest": "Forêt",
+      "gold": "Or",
+      "lavender": "Lavande",
+      "ocean": "Océan",
+      "plum": "Prune",
+      "rose": "Rose",
+      "sage": "Sauge",
+      "sand": "Sable",
+      "slate": "Ardoise",
+      "switch": "Thème de couleur",
+      "switch-to-dark": "Passer en mode sombre",
+      "switch-to-light": "Passer en mode clair",
+      "teal": "Sarcelle",
+      "violet": "Violet"
+    },
     "website": "site web",
     "written": "Écrit"
   }
