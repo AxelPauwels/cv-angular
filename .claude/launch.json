@@ -16,7 +16,7 @@
         "http.server",
         "4310",
         "--directory",
-        "dist/apps/cv/browser"
+        "dist/preview/cv/browser"
       ],
       "port": 4310
     }
