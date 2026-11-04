@@ -1,8 +1,0 @@
-{
-  "name": "cv-api",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/cv-api/src",
-  "projectType": "library",
-  "tags": ["domain:shared", "type:api"],
-  "targets": {}
-}
