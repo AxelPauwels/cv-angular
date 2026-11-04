@@ -1,7 +1,8 @@
 # cv-feature-experience
 
-This library was generated with [Nx](https://nx.dev).
+The CV's experience page: every job with its position, company, period and
+descriptions, loaded through `ExperienceStore` from
+`@cv/cv-data-access-experience`.
 
-## Running unit tests
-
-Run `nx test cv-feature-experience` to execute the unit tests.
+The barrel default-exports `ExperienceList`, so the cv shell lazy-loads it with
+`loadComponent: () => import('@cv/cv-feature-experience')`.

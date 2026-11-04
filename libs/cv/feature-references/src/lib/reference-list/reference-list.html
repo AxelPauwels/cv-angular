@@ -1,0 +1,22 @@
+@if (store.isLoading()) {
+<p>Loading…</p>
+} @else if (store.error()) {
+<p>Could not load references: {{ store.error()?.message }}</p>
+} @else { @for (group of groups(); track group.category) {
+<section>
+  <h2>{{ categoryKeys[group.category] | translate }}</h2>
+  <ul>
+    @for (reference of group.references; track reference.name) {
+    <li>
+      <strong>{{ reference.name }}</strong> · {{ reference.function }} {{ 't.at'
+      | translate }} {{ reference.work }} ({{ reference.workCategoryPeriod.start
+      | date: 'yyyy' }} – {{ reference.workCategoryPeriod.end ?
+      (reference.workCategoryPeriod.end | date: 'yyyy') : ('t.present' |
+      translate) }})
+      <br />
+      {{ reference.phoneNumber }}
+    </li>
+    }
+  </ul>
+</section>
+} }

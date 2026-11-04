@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { inBrowserGraphqlInterceptor } from '@cv/shared-data-access';
+import { provideI18nTesting } from '@cv/shared-data-access-i18n';
 import { Example } from './example';
 
 describe('Example', () => {
@@ -12,6 +13,7 @@ describe('Example', () => {
       imports: [Example],
       providers: [
         provideHttpClient(withInterceptors([inBrowserGraphqlInterceptor])),
+        provideI18nTesting(),
       ],
     }).compileComponents();
 

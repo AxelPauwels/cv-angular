@@ -1,0 +1,17 @@
+@if (store.isLoading()) {
+<p>Loading…</p>
+} @else if (store.error()) {
+<p>Could not load skills: {{ store.error()?.message }}</p>
+} @else { @for (skill of store.skills(); track skill.category) {
+<section>
+  <h2>{{ categoryKeys[skill.category] | translate }}</h2>
+  <ul>
+    @for (entry of skill.entries; track entry.name) {
+    <li>
+      <span>{{ entry.name }}</span>
+      <meter min="0" max="10" [value]="entry.level">{{ entry.level }}/10</meter>
+    </li>
+    }
+  </ul>
+</section>
+} }

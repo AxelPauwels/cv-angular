@@ -1,6 +1,5 @@
 import { Type } from '@angular/core';
 import { Route } from '@angular/router';
-import { UnderConstruction } from '@cv/shared-ui-design-system';
 import { CvFeatureShell } from './internal/cv-feature-shell/cv-feature-shell';
 import { ROUTES } from '@cv/shared-util-routing';
 
@@ -19,30 +18,23 @@ export const cvFeatureShellRoutes: Route[] = [
       },
       {
         path: ROUTES.CV.PERSONAL,
-        component: UnderConstruction,
-        data: { title: 't.heading.personal' },
+        loadComponent: () => import('@cv/cv-feature-personal'),
       },
       {
         path: ROUTES.CV.EDUCATION,
-        component: UnderConstruction,
-        data: { title: 't.heading.education' },
+        loadComponent: () => import('@cv/cv-feature-education'),
       },
       {
         path: ROUTES.CV.EXPERIENCE,
-        loadComponent: () =>
-          import('@cv/cv-feature-experience').then(
-            (mod: { ExperienceList: Type<unknown> }) => mod.ExperienceList
-          ),
+        loadComponent: () => import('@cv/cv-feature-experience'),
       },
       {
         path: ROUTES.CV.SKILLS,
-        component: UnderConstruction,
-        data: { title: 't.heading.skills' },
+        loadComponent: () => import('@cv/cv-feature-skills'),
       },
       {
         path: ROUTES.CV.REFERENCES,
-        component: UnderConstruction,
-        data: { title: 't.heading.references' },
+        loadComponent: () => import('@cv/cv-feature-references'),
       },
     ],
   },

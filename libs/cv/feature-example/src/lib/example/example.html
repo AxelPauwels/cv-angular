@@ -13,27 +13,6 @@
 
 <shared-wrapper [config]="cvMfe" />
 
-<section>
-  <label for="person-select">Person</label>
-  <select
-    id="person-select"
-    [value]="selectedPersonId()"
-    (change)="selectedPersonId.set($any($event.target).value)">
-    @for (option of people.value()?.people ?? []; track option.id) {
-    <option [value]="option.id">{{ option.name }}</option>
-    }
-  </select>
-
-  @let selected = person.value()?.person; @if (person.isLoading()) {
-  <p>Loading…</p>
-  } @else if (selected) {
-  <p>
-    {{ selected.name }} is {{ selected.age }} years old (id {{ selected.id }})
-  </p>
-  } @else {
-  <p>No person found.</p>
-  }
-</section>
 <lib-mac-window>
   <cv-experience-list />
 </lib-mac-window>

@@ -1,0 +1,92 @@
+@if (store.isLoading()) {
+<p>Loading…</p>
+} @else if (store.error()) {
+<p>Could not load personal details: {{ store.error()?.message }}</p>
+} @else if (store.person(); as person) {
+<section>
+  <h2>{{ 't.subheading.personal.about-me' | translate }}</h2>
+  <p>
+    <strong>{{ person.firstName }} {{ person.lastName }}</strong> · {{
+    person.functionTitle }}
+  </p>
+  <dl>
+    <dt>{{ titleKeys.dateOfBirth | translate }}</dt>
+    <dd>{{ person.personal.dateOfBirth | date: 'longDate' }}</dd>
+
+    <dt>{{ titleKeys.nationality | translate }}</dt>
+    <dd>{{ nationalityKey(person.personal.nationality) | translate }}</dd>
+
+    <dt>{{ titleKeys.maritalStatus | translate }}</dt>
+    <dd>{{ maritalStatusKey(person.personal.maritalStatus) | translate }}</dd>
+
+    <dt>{{ titleKeys.children | translate }}</dt>
+    <dd>
+      @for (child of person.personal.children; track child.name) {
+      <span>
+        {{ child.name }} @if (childKeys[child.gender]; as key) { ({{ key |
+        translate }}) }
+      </span>
+      } @empty { – }
+    </dd>
+
+    <dt>{{ titleKeys.personalityType | translate }}</dt>
+    <dd>
+      {{ personalityTypeKey(person.personal.personalityType) | translate }}
+    </dd>
+
+    <dt>{{ titleKeys.driverLicense | translate }}</dt>
+    <dd>{{ driverLicenseKey(person.personal.driverLicense) | translate }}</dd>
+  </dl>
+</section>
+
+<section>
+  <h2>{{ 't.subheading.personal.connect' | translate }}</h2>
+  <address>
+    {{ person.contact.address.street }} {{ person.contact.address.number }}, {{
+    person.contact.address.postalCode }} {{ person.contact.address.city }}, {{
+    't.country.' + person.contact.address.country | translate }}
+    <br />
+    <a [href]="'tel:' + person.contact.phone">{{ person.contact.phone }}</a>
+    <br />
+    <a [href]="'mailto:' + person.contact.email">{{ person.contact.email }}</a>
+    @if (person.contact.website; as website) {
+    <br />
+    <a [href]="website" target="_blank" rel="noopener">
+      {{ 't.website' | translate }}
+    </a>
+    } @if (person.contact.linkedIn; as linkedIn) {
+    <br />
+    <a [href]="linkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    }
+  </address>
+</section>
+
+<section>
+  <h2>{{ 't.subheading.personal.hobbies-and-interests' | translate }}</h2>
+  <ul>
+    @for (hobby of person.hobbies; track hobby.name) {
+    <li>
+      {{ hobby.name | translate }} @if (hobby.comment) { ({{ hobby.comment |
+      translate }}) }
+    </li>
+    }
+  </ul>
+</section>
+
+<section>
+  <h2>{{ 't.subheading.personal.languages' | translate }}</h2>
+  <ul>
+    @for (skill of person.languages; track skill.language.isoCode) {
+    <li>
+      <strong>{{ languageKeys[skill.language.isoCode] | translate }}</strong>
+      @if (skill.isNativeLanguage) { ({{ 't.language.native-language' |
+      translate }}) }
+      <br />
+      {{ 't.spoken' | translate }}: {{ proficiencyKey(skill.spoken) | translate
+      }} · {{ 't.written' | translate }}: {{ proficiencyKey(skill.written) |
+      translate }}
+    </li>
+    }
+  </ul>
+</section>
+}

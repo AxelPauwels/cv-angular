@@ -1,0 +1,54 @@
+@if (store.isLoading()) {
+<p>Loading…</p>
+} @else if (store.error()) {
+<p>Could not load education: {{ store.error()?.message }}</p>
+} @else {
+<section>
+  <h2>{{ 't.heading.education' | translate }}</h2>
+  <ul>
+    @for (education of store.educations(); track education) {
+    <li>
+      <strong>{{ education.specialization | translate }}</strong>
+      · {{ levelKeys[education.level] | translate }}
+      <br />
+      {{ education.school.name }}, {{ education.school.location | translate }}
+      <!-- prettier-ignore -->
+      <span>({{ education.period.start | date: 'yyyy' }}@if (education.period.end) { – {{ education.period.end | date: 'yyyy' }}})</span>
+      @if (education.degree) {
+      <p>{{ education.degree | translate }}</p>
+      }
+    </li>
+    }
+  </ul>
+</section>
+
+<section>
+  <h2>{{ 't.subheading.education.certificates' | translate }}</h2>
+  <ul>
+    @for (certificate of store.certificates(); track certificate.name) {
+    <li>
+      @if (isLink(certificate.url)) {
+      <a [href]="certificate.url" target="_blank" rel="noopener">
+        {{ certificate.name }}
+      </a>
+      } @else { {{ certificate.name }} ({{ certificate.url }}) }
+    </li>
+    }
+  </ul>
+</section>
+
+<section>
+  <h2>{{ 't.subheading.education.additional-learnings' | translate }}</h2>
+  <ul>
+    @for (learning of store.additionalLearnings(); track learning.name) {
+    <li>
+      @if (isLink(learning.url)) {
+      <a [href]="learning.url" target="_blank" rel="noopener">
+        {{ learning.name }}
+      </a>
+      } @else { {{ learning.name }} ({{ learning.url }}) }
+    </li>
+    }
+  </ul>
+</section>
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@cv/cv-feature-references",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^22.2.0",
+    "@angular/core": "^22.2.0",
+    "@tolgee/ngx": "^7.3.0",
+    "@cv/cv-data-access-experience": "0.0.1",
+    "@cv/cv-data-access-references": "0.0.1"
+  },
+  "sideEffects": false,
+  "private": true
+}
