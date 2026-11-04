@@ -1,0 +1,11 @@
+fragment ReferenceFields on Reference {
+  name
+  work
+  workCategory
+  workCategoryPeriod {
+    start
+    end
+  }
+  function
+  phoneNumber
+}

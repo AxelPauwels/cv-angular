@@ -1,0 +1,47 @@
+{
+  "name": "cv-data-access-references",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/cv/data-access-references/src",
+  "prefix": "cv",
+  "projectType": "library",
+  "tags": ["domain:cv", "type:data-access"],
+  "implicitDependencies": ["api"],
+  "targets": {
+    "codegen": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/codegen.ts",
+        "{workspaceRoot}/tools/graphql/client-codegen.ts",
+        "{projectRoot}/src/lib/internal/operations/**/*.graphql",
+        "{workspaceRoot}/libs/api/src/lib/schema/type-defs.graphql"
+      ],
+      "outputs": ["{projectRoot}/src/lib/internal/generated"],
+      "options": {
+        "command": "graphql-codegen --config {projectRoot}/codegen.ts"
+      }
+    },
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "project": "libs/cv/data-access-references/ng-package.json",
+        "tsConfig": "libs/cv/data-access-references/tsconfig.lib.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/cv/data-access-references/tsconfig.lib.prod.json"
+        },
+        "development": {}
+      }
+    },
+    "test": {
+      "executor": "@nx/angular:unit-test",
+      "options": {
+        "watch": false,
+        "browsers": ["ChromiumHeadless"]
+      }
+    }
+  }
+}

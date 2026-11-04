@@ -1,0 +1,13 @@
+fragment EducationFields on Education {
+  level
+  period {
+    start
+    end
+  }
+  school {
+    name
+    location
+  }
+  degree
+  specialization
+}
