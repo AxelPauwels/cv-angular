@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { Route } from '@angular/router';
 import { CvFeatureShell } from './internal/cv-feature-shell/cv-feature-shell';
 import { ROUTES } from '@cv/shared-util-routing';
@@ -9,13 +8,6 @@ export const cvFeatureShellRoutes: Route[] = [
     component: CvFeatureShell,
     children: [
       { path: '', pathMatch: 'full', redirectTo: ROUTES.CV.PERSONAL },
-      {
-        path: ROUTES.CV.EXAMPLE,
-        loadComponent: () =>
-          import('@cv/cv-feature-example').then(
-            (mod: { Example: Type<unknown> }) => mod.Example
-          ),
-      },
       {
         path: ROUTES.CV.PERSONAL,
         loadComponent: () => import('@cv/cv-feature-personal'),

@@ -6,8 +6,7 @@
     "@angular/router": "~22.2.0",
     "@cv/shared-ui-design-system": "0.0.1",
     "@cv/cv-feature-experience": "0.0.1",
-    "@cv/shared-util-routing": "0.0.1",
-    "@cv/cv-feature-example": "0.0.1"
+    "@cv/shared-util-routing": "0.0.1"
   },
   "sideEffects": false,
   "private": true

@@ -27,7 +27,6 @@
       "@cv/shared-ui-federation": ["./libs/shared/ui-federation/src/index.ts"],
       "@cv/shared-data-access": ["./libs/shared/data-access/src/index.ts"],
       "@cv/shared-util-routing": ["./libs/shared/util-routing/src/index.ts"],
-      "@cv/cv-feature-example": ["./libs/cv/feature-example/src/index.ts"],
       "@cv/shared-data-access-i18n": [
         "./libs/shared/data-access-i18n/src/index.ts"
       ],
