@@ -20,6 +20,11 @@ describe('showcaseFeatureShellRoutes', () => {
       Array.from(element.querySelectorAll('ds-sub-navbar > nav a')).map(
         (link) => link.textContent?.trim()
       )
-    ).toEqual(['graphql docs', 'code coverage', 'End-to-end tests']);
+    ).toEqual([
+      'graphql docs',
+      'code coverage',
+      'End-to-end tests',
+      'Micro-frontends',
+    ]);
   });
 });

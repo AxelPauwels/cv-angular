@@ -18,5 +18,9 @@ export class ShowcaseFeatureShell {
       labelKey: 't.nav.end-to-end-tests',
       path: ROUTES.SHOWCASE.END_TO_END_TESTS,
     },
+    {
+      labelKey: 't.nav.micro-frontends',
+      path: ROUTES.SHOWCASE.MICRO_FRONTENDS,
+    },
   ];
 }

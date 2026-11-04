@@ -15,11 +15,11 @@ describe('technicalFeatureShellRoutes', () => {
     const harness = await RouterTestingHarness.create('/');
     const element: HTMLElement = harness.fixture.nativeElement;
 
-    expect(TestBed.inject(Router).url).toBe('/versions');
+    expect(TestBed.inject(Router).url).toBe('/architecture');
     expect(
       Array.from(element.querySelectorAll('ds-sub-navbar > nav a')).map(
         (link) => link.textContent?.trim()
       )
-    ).toEqual(['Versions']);
+    ).toEqual(['Architecture', 'Project graph', 'Versions']);
   });
 });

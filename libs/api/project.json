@@ -20,6 +20,18 @@
       "options": {
         "command": "graphql-codegen --config {projectRoot}/codegen.ts"
       }
+    },
+    "graphql-docs": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/spectaql.yml",
+        "{projectRoot}/src/lib/schema/type-defs.graphql"
+      ],
+      "outputs": ["{workspaceRoot}/dist/.graphql-docs/api"],
+      "options": {
+        "command": "spectaql --quiet {projectRoot}/spectaql.yml"
+      }
     }
   }
 }

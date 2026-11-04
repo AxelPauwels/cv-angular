@@ -14,8 +14,17 @@
 }
 
 .shell-main {
+  display: flex;
+  flex-direction: column;
   grid-area: main;
   min-width: 0;
+
+  // a flex column down to the routed page, so it can fill the main area
+  > main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
 }
 
 .shell-footer {

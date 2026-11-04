@@ -1,4 +1,17 @@
+// Stretches to the footer, so an embedded report fills the remaining height
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+ds-sub-navbar {
+  flex: 1;
+}
+
 .showcase-feature-shell-content {
-  display: block;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   padding: 1rem;
 }

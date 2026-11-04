@@ -19,7 +19,7 @@ describe('Shell', () => {
       Array.from(element.querySelectorAll('header a')).map((link) =>
         link.textContent?.trim()
       )
-    ).toEqual(['CV', 'Showcase', 'Technical']);
+    ).toEqual(['CV', 'SHOWCASE', 'TECHNICAL']);
     expect(element.querySelector('main router-outlet')).toBeTruthy();
   });
 });

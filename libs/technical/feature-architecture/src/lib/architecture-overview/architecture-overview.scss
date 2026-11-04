@@ -1,0 +1,47 @@
+:host {
+  display: block;
+  max-width: 72rem;
+}
+
+section + section {
+  margin-top: 2rem;
+}
+
+.architecture-scroll {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 1px solid var(--mat-sys-outline-variant);
+    padding: 0.5rem 0.75rem;
+    text-align: start;
+    vertical-align: top;
+  }
+
+  thead th {
+    background-color: var(--mat-sys-surface-container);
+    font: var(--mat-sys-label-large);
+  }
+}
+
+.architecture-project {
+  display: block;
+  white-space: nowrap;
+}
+
+.architecture-flow li + li {
+  margin-top: 0.5rem;
+}
+
+details {
+  margin-block: 0.5rem;
+}
+
+summary {
+  cursor: pointer;
+  font: var(--mat-sys-title-small);
+}

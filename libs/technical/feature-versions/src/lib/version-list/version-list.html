@@ -1,0 +1,43 @@
+@if (store.isLoading()) {
+<p>Loading…</p>
+} @else if (store.error()) {
+<p>
+  The versions are generated at build time and are not available here. Run
+  <code>npx nx run technical-data-access-build-info:build-info</code>.
+</p>
+} @else {
+<p>
+  Read from the installed packages when the app is built, so this list is always
+  what the deployed version actually runs on.
+</p>
+<table class="version-list">
+  <thead>
+    <tr>
+      <th scope="col">Package</th>
+      <th scope="col">Installed</th>
+      <th scope="col">package.json</th>
+    </tr>
+  </thead>
+  @for (group of groups(); track group.category) {
+  <tbody>
+    <tr>
+      <th scope="rowgroup" colspan="3" class="version-list-category">
+        {{ group.category }}
+      </th>
+    </tr>
+    @for (entry of group.packages; track entry.name) {
+    <tr>
+      <td>
+        @if (npmUrl(entry); as url) {
+        <a [href]="url" target="_blank" rel="noopener">{{ entry.label }}</a>
+        } @else { {{ entry.label }} }
+        <code class="version-list-name">{{ entry.name }}</code>
+      </td>
+      <td><code>{{ entry.version }}</code></td>
+      <td><code>{{ entry.range ?? '–' }}</code></td>
+    </tr>
+    }
+  </tbody>
+  }
+</table>
+}

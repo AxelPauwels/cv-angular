@@ -3,15 +3,23 @@
 //   cp apps/cv/src/tokens/environment.tokens.example.ts apps/cv/src/tokens/environment.tokens.ts
 // CI copies it as is, so builds and tests compile without the real file.
 
-const TOLGEE = {
-  API_URL: 'https://app.tolgee.io',
-  API_KEY: '',
-  CDN_PREFIX: '',
-};
-
-export const TOKENS = {
-  TOLGEE: TOLGEE,
-};
+// import { TolgeeConfig } from '../environments/environment.interface';
+//
+// type TolgeeConst = {
+//   API_URL: TolgeeConfig['apiUrl'];
+//   API_KEY: TolgeeConfig['apiKey'];
+//   CDN_PREFIX: TolgeeConfig['cdnPrefix'];
+// };
+//
+// const TOLGEE: TolgeeConst = {
+//   API_URL: 'https://app.tolgee.io',
+//   API_KEY: '',
+//   CDN_PREFIX: '',
+// } satisfies TolgeeConst;
+//
+// export const TOKENS = {
+//   TOLGEE: TOLGEE,
+// };
 
 // Note:
 // API_KEY can be found:

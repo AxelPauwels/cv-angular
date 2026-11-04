@@ -58,7 +58,19 @@
       ],
       "@cv/cv-feature-education": ["./libs/cv/feature-education/src/index.ts"],
       "@cv/cv-feature-personal": ["./libs/cv/feature-personal/src/index.ts"],
-      "@cv/api": ["./libs/api/src/index.ts"]
+      "@cv/api": ["./libs/api/src/index.ts"],
+      "@cv/showcase-feature-micro-frontends": [
+        "./libs/showcase/feature-micro-frontends/src/index.ts"
+      ],
+      "@cv/technical-data-access-build-info": [
+        "./libs/technical/data-access-build-info/src/index.ts"
+      ],
+      "@cv/technical-feature-versions": [
+        "./libs/technical/feature-versions/src/index.ts"
+      ],
+      "@cv/technical-feature-architecture": [
+        "./libs/technical/feature-architecture/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

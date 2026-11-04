@@ -1,0 +1,14 @@
+// Two columns side by side, stacked on narrow screens
+:host {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+}
+
+.micro-frontends-column {
+  min-width: 0;
+}
+
+.micro-frontends-demo {
+  margin-block: 1rem;
+}

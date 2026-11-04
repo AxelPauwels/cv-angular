@@ -40,7 +40,7 @@
     "i18n:push": "tolgee push",
     "i18n:extract-missing-keys": "tolgee pull && node ./scripts/tolgee-missing-keys-extractor.js",
     "detective": "npx detective",
-    "translations:pull": "tolgee pull"
+    "build-info": "npx nx run technical-data-access-build-info:build-info"
   },
   "lint-staged": {
     "*.{css,scss}": [
@@ -130,6 +130,7 @@
     "playwright": "^1.64.1",
     "postcss": "^8.4.5",
     "prettier": "^3.8.1",
+    "spectaql": "^3.0.9",
     "stylelint": "^17.16.0",
     "stylelint-config-standard-scss": "^17.0.0",
     "stylelint-order": "^8.1.2",

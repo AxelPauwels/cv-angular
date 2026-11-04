@@ -1,4 +1,4 @@
-import { sameTag, SheriffConfig } from '@softarc/sheriff-core';
+import { sameTag, type SheriffConfig } from '@softarc/sheriff-core';
 
 /**
  * The single source of truth for dependency rules between domains and types

@@ -1,4 +1,18 @@
+// Stretches to the footer, so an embedded page (the project graph) fills the
+// remaining height
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+ds-sub-navbar {
+  flex: 1;
+}
+
 .technical-feature-shell-content {
-  display: block;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   padding: 1rem;
 }

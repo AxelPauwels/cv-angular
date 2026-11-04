@@ -1,0 +1,52 @@
+<section class="micro-frontends-column">
+  <h2>Micro-frontend: <code>&lt;cv-mfe&gt;</code></h2>
+  <div class="micro-frontends-demo">
+    <shared-wrapper [config]="cvMfe" />
+  </div>
+  <p>
+    A separate Angular app with its own repository and deployment, at
+    <a [href]="remoteUrl" target="_blank" rel="noopener">{{ remoteUrl }}</a>.
+    This app does not contain its code: it is loaded in the browser, when this
+    page opens.
+  </p>
+  <ol>
+    <li>
+      At startup, <code>initFederation()</code> reads
+      <code>federation.manifest.json</code>, which maps the name
+      <code>cv-mfe</code> to the remote's <code>remoteEntry.json</code>.
+    </li>
+    <li>
+      Here, <code>Wrapper</code> (<code>&#64;cv/shared-ui-federation</code>)
+      calls <code>loadRemoteModule('cv-mfe', './web-components')</code>.
+    </li>
+    <li>
+      That module registers the custom element <code>&lt;cv-mfe&gt;</code>
+      (Angular Elements), and the wrapper adds it to the page.
+    </li>
+    <li>
+      Angular and RxJS are shared with this app as singletons (Native
+      Federation), so they are downloaded once.
+    </li>
+  </ol>
+</section>
+
+<section class="micro-frontends-column">
+  <h2>Component library: <code>&lt;lib-mac-window&gt;</code></h2>
+  <div class="micro-frontends-demo">
+    <lib-mac-window>
+      <p>Anything placed here is projected into the window.</p>
+    </lib-mac-window>
+  </div>
+  <p>
+    The opposite approach, for comparison: <code>MacWindow</code> lives in this
+    repository (<code>packages/mac-window</code>) and is published to npm as
+    <code>&#64;axel-pauwels/mac-window</code>.
+  </p>
+  <ul>
+    <li>Bundled into this app at build time, not loaded at runtime.</li>
+    <li>
+      Also ships as the web component <code>&lt;mac-window&gt;</code>
+      (<code>&#64;axel-pauwels/mac-window/element</code>), for any framework.
+    </li>
+  </ul>
+</section>

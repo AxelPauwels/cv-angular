@@ -42,7 +42,7 @@ describe('appRoutes', () => {
   it('defaults to the cv personal page', async () => {
     const page = await navigate('/');
     expect(page.url).toBe('/personal');
-    expect(page.main).toEqual(['CV', 'Showcase', 'Technical']);
+    expect(page.main).toEqual(['CV', 'SHOWCASE', 'TECHNICAL']);
     expect(page.activeMain).toBe('CV');
     expect(page.sub).toEqual([
       'Personal',
@@ -56,19 +56,20 @@ describe('appRoutes', () => {
   it('shows the showcase sub items', async () => {
     const page = await navigate('/showcase');
     expect(page.url).toBe('/showcase/graphql-docs');
-    expect(page.activeMain).toBe('Showcase');
+    expect(page.activeMain).toBe('SHOWCASE');
     expect(page.sub).toEqual([
       'graphql docs',
       'code coverage',
       'End-to-end tests',
+      'Micro-frontends',
     ]);
   });
 
   it('shows the technical sub items', async () => {
     const page = await navigate('/technical');
-    expect(page.url).toBe('/technical/versions');
-    expect(page.activeMain).toBe('Technical');
-    expect(page.sub).toEqual(['Versions']);
+    expect(page.url).toBe('/technical/architecture');
+    expect(page.activeMain).toBe('TECHNICAL');
+    expect(page.sub).toEqual(['Architecture', 'Project graph', 'Versions']);
   });
 
   it('redirects unknown urls to the cv domain', async () => {
@@ -84,6 +85,6 @@ describe('appRoutes', () => {
     expect(router.url).toBe('/showcase/graphql-docs');
 
     await harness.navigateByUrl('/technical');
-    expect(router.url).toBe('/technical/versions');
+    expect(router.url).toBe('/technical/architecture');
   });
 });

@@ -1,0 +1,153 @@
+@if (store.isLoading()) {
+<p>Loading…</p>
+} @else if (store.error()) {
+<p>
+  The architecture is generated at build time and is not available here. Run
+  <code>npx nx run technical-data-access-build-info:build-info</code>.
+</p>
+} @else {
+<section>
+  <h2>Domains × layers</h2>
+  <p>
+    The workspace is sliced vertically: every <strong>domain</strong> (a part of
+    the app) owns its libraries, split into <strong>layers</strong> by what they
+    do. Folders follow
+    <code>libs/&lt;domain&gt;/&lt;layer&gt;-&lt;name&gt;</code>;
+    <code>libs/shared</code> holds what several domains use. {{ libs().length }}
+    libraries, generated from the Nx project graph.
+  </p>
+  <div class="architecture-scroll">
+    <table class="architecture-matrix">
+      <thead>
+        <tr>
+          <th scope="col">Domain</th>
+          @for (layer of layers(); track layer) {
+          <th scope="col">{{ layer }}</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (domain of domains(); track domain) {
+        <tr>
+          <th scope="row">{{ domain }}</th>
+          @for (layer of layers(); track layer) {
+          <td>
+            @for (project of cell(domain, layer); track project.name) {
+            <code class="architecture-project" [title]="project.root">
+              {{ project.name }}
+            </code>
+            }
+          </td>
+          }
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Apps on top: @for (app of apps(); track app.name; let last = $last) {
+    <code [title]="app.root">{{ app.name }}</code> ({{ app.kind }}){{ last ? ''
+    : ', ' }} }
+  </p>
+</section>
+
+<section>
+  <h2>Dependency rules</h2>
+  <p>
+    <a
+      href="https://github.com/softarc-consulting/sheriff"
+      target="_blank"
+      rel="noopener"
+      >Sheriff</a
+    >
+    checks every import against these rules, in ESLint and with
+    <code>sheriff verify</code>. A module needs clearance on both its tags: its
+    domain and its layer. Read from <code>sheriff.config.ts</code>.
+  </p>
+  <table class="architecture-rules">
+    <thead>
+      <tr>
+        <th scope="col">Modules tagged</th>
+        <th scope="col">may import</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (rule of store.rules(); track rule.from) {
+      <tr>
+        <th scope="row"><code>{{ rule.from }}</code></th>
+        <td>
+          @if (rule.to.length) { {{ describeTargets(rule.to) }} } @else {
+          <em>nothing: it depends on no other module</em>
+          }
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Public API: barrels and <code>internal/</code></h2>
+  <ul>
+    <li>
+      Every library has one entry point, <code>src/index.ts</code>, imported as
+      <code>&#64;cv/&lt;project&gt;</code>. Deep imports into a library are not
+      allowed.
+    </li>
+    <li>
+      What the barrel does not export lives in <code>src/lib/internal/</code>. A
+      lint rule stops a barrel from exporting anything from there.
+    </li>
+    <li>
+      Feature libraries default-export their page, so a route lazy-loads it with
+      <code>loadComponent: () =&gt; import('&#64;cv/…')</code>.
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>Layers inside a domain</h2>
+  <ol class="architecture-flow">
+    <li>
+      <strong>feature</strong>: a routed page. Injects a store and renders its
+      signals.
+    </li>
+    <li>
+      <strong>data-access</strong>: a root signal store (NgRx Signals) that
+      loads once and is shared app-wide. Internally a service runs a typed
+      GraphQL query and a mapper turns the generated API types into hand-written
+      frontend types.
+    </li>
+    <li>
+      <strong>api</strong>: the GraphQL schema and resolvers
+      (<code>&#64;cv/api</code>), answered in the browser for now.
+    </li>
+    <li>
+      <strong>ui</strong> and <strong>util</strong>: presentational components
+      and plain functions or types, shared without knowing about data.
+    </li>
+  </ol>
+</section>
+
+<section>
+  <h2>Dependencies per project</h2>
+  @for (group of projectsByDomain(); track group.domain) {
+  <details>
+    <summary>
+      {{ group.domain }} ({{ group.projects.length }} libraries)
+    </summary>
+    <ul>
+      @for (project of group.projects; track project.name) {
+      <li>
+        <code>{{ project.name }}</code>
+        @if (project.dependencies.length) { imports @for (dependency of
+        project.dependencies; track dependency; let last = $last) {
+        <code>{{ dependency }}</code>{{ last ? '' : ', ' }} } } @else { imports
+        no other project }
+      </li>
+      }
+    </ul>
+  </details>
+  }
+</section>
+}

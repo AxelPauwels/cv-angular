@@ -1,0 +1,11 @@
+{
+  "name": "@cv/technical-data-access-build-info",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^22.2.0",
+    "@angular/core": "^22.2.0",
+    "@ngrx/signals": "^22.0.1"
+  },
+  "sideEffects": false,
+  "private": true
+}
