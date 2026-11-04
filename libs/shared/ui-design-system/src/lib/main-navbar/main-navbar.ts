@@ -1,4 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
+import { UpperCasePipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter, map } from 'rxjs';
@@ -14,7 +15,14 @@ import { NavItem } from '../nav-item';
  */
 @Component({
   selector: 'ds-main-navbar',
-  imports: [RouterLink, MatToolbar, MatTabNav, MatTabLink, TranslatePipe],
+  imports: [
+    RouterLink,
+    MatToolbar,
+    MatTabNav,
+    MatTabLink,
+    TranslatePipe,
+    UpperCasePipe,
+  ],
   templateUrl: './main-navbar.html',
   styleUrl: './main-navbar.scss',
 })

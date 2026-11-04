@@ -5,10 +5,13 @@
 }
 
 .main-navbar {
+  // as high as its content (the tabs) instead of Material's fixed row height
   @include mat.toolbar-overrides(
     (
       container-background-color: var(--mat-sys-primary),
       container-text-color: var(--mat-sys-on-primary),
+      standard-height: auto,
+      mobile-height: auto,
     )
   );
   @include mat.tabs-overrides(

@@ -47,7 +47,8 @@ describe('MainNavbar', () => {
   }
 
   it('marks the item matching the first url segment active', async () => {
-    expect(await activeLabelAt('/showcase/demo')).toBe('Showcase');
+    // labels are uppercased in the template
+    expect(await activeLabelAt('/showcase/demo')).toBe('SHOWCASE');
   });
 
   it('falls back to the root item for urls no other item claims', async () => {

@@ -1,3 +1,27 @@
+@use '@angular/material' as mat;
+
 .sub-navbar {
+  // the active tab's underline in the bar's text color, like the main navbar
+  @include mat.tabs-overrides(
+    (
+      active-indicator-color: var(--mat-sys-on-surface),
+      active-focus-indicator-color: var(--mat-sys-on-surface),
+      active-hover-indicator-color: var(--mat-sys-on-surface),
+    )
+  );
+
   background-color: var(--mat-sys-surface-container);
+}
+
+// A flex column down to the page, so a page can fill the remaining height
+// (e.g. an embedded report); other pages just flow from the top
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-navbar-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }

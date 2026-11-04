@@ -10,7 +10,7 @@
       class="main-navbar-tab"
       [routerLink]="'/' + item.path"
       [active]="item === activeItem()">
-      {{ item.labelKey | translate }}
+      {{ item.labelKey | translate | uppercase }}
     </a>
     }
   </nav>
