@@ -1,13 +1,10 @@
 <button
-  matButton
+  matIconButton
   class="language-switcher"
   [matMenuTriggerFor]="menu"
+  [matTooltip]="'t.language.switch' | translate"
   [attr.aria-label]="'t.language.switch' | translate">
   <mat-icon fontSet="material-symbols-outlined">language</mat-icon>
-  {{ language() | uppercase }}
-  <mat-icon iconPositionEnd fontSet="material-symbols-outlined">
-    arrow_drop_down
-  </mat-icon>
 </button>
 
 <mat-menu #menu class="language-switcher-menu" xPosition="before">

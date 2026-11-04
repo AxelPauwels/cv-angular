@@ -1,0 +1,13 @@
+<button
+  matIconButton
+  class="color-scheme-switcher"
+  [attr.aria-pressed]="isDark()"
+  [attr.aria-label]="'t.theme.dark-mode' | translate"
+  [matTooltip]="
+    (isDark() ? 't.theme.switch-to-light' : 't.theme.switch-to-dark') | translate
+  "
+  (click)="toggle()">
+  <mat-icon fontSet="material-symbols-outlined">
+    {{ isDark() ? 'light_mode' : 'dark_mode' }}
+  </mat-icon>
+</button>

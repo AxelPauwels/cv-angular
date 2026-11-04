@@ -1,0 +1,19 @@
+@use '3.vendors/mat';
+
+// Sits on the primary-colored toolbar
+.theme-switcher {
+  @include mat.icon-button-overrides(
+    (
+      icon-color: var(--mat-sys-on-primary),
+    )
+  );
+}
+
+// The radio's own `data-theme` makes --mat-sys-primary the option's color
+.theme-switcher-option .theme-switcher-radio {
+  color: var(--mat-sys-primary);
+}
+
+::ng-deep .theme-switcher-menu .mat-mdc-menu-content {
+  padding: 0;
+}

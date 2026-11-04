@@ -1,4 +1,15 @@
 @use '@angular/material' as mat;
+@use './palettes/copper' as copper-palette;
+@use './palettes/ocean' as ocean-palette;
+@use './palettes/teal' as teal-palette;
+@use './palettes/sage' as sage-palette;
+@use './palettes/forest' as forest-palette;
+@use './palettes/gold' as gold-palette;
+@use './palettes/crimson' as crimson-palette;
+@use './palettes/plum' as plum-palette;
+@use './palettes/lavender' as lavender-palette;
+@use './palettes/slate' as slate-palette;
+@use './palettes/sand' as sand-palette;
 
 // Angular Material theming with `mat.theme()`: defines the CSS variables used to style
 // Material components according to the Material 3 design spec.
@@ -6,14 +17,101 @@
 html {
   @include mat.theme(
     (
-      color: (
-        primary: mat.$violet-palette,
-        tertiary: mat.$blue-palette,
-      ),
       typography: Red-Hat-Display,
       density: 0,
     )
   );
+
+  // Follow the system until the user picks a mode (`data-color-scheme` on <html>).
+  // Material's color variables use `light-dark()`, so this switches every color.
+  color-scheme: light dark;
+
+  &[data-color-scheme='light'] {
+    color-scheme: light;
+  }
+
+  &[data-color-scheme='dark'] {
+    color-scheme: dark;
+  }
+}
+
+// Color themes: three of Material's palettes, then our own generated ones in
+// ./palettes (`nx g @angular/material:theme-color`). Chosen with `data-theme` on <html> (violet when unset). The bare
+// attribute selector also lets any element preview a theme, e.g. a menu swatch.
+// Keep the ids in sync with THEMES in @cv/shared-data-access.
+$themes: (
+  'violet': (
+    primary: mat.$violet-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  'azure': (
+    primary: mat.$azure-palette,
+    tertiary: mat.$cyan-palette,
+  ),
+  'rose': (
+    primary: mat.$rose-palette,
+    tertiary: mat.$orange-palette,
+  ),
+  'copper': (
+    primary: copper-palette.$primary-palette,
+    tertiary: copper-palette.$tertiary-palette,
+  ),
+  'ocean': (
+    primary: ocean-palette.$primary-palette,
+    tertiary: ocean-palette.$tertiary-palette,
+  ),
+  'teal': (
+    primary: teal-palette.$primary-palette,
+    tertiary: teal-palette.$tertiary-palette,
+  ),
+  'sage': (
+    primary: sage-palette.$primary-palette,
+    tertiary: sage-palette.$tertiary-palette,
+  ),
+  'forest': (
+    primary: forest-palette.$primary-palette,
+    tertiary: forest-palette.$tertiary-palette,
+  ),
+  'gold': (
+    primary: gold-palette.$primary-palette,
+    tertiary: gold-palette.$tertiary-palette,
+  ),
+  'crimson': (
+    primary: crimson-palette.$primary-palette,
+    tertiary: crimson-palette.$tertiary-palette,
+  ),
+  'plum': (
+    primary: plum-palette.$primary-palette,
+    tertiary: plum-palette.$tertiary-palette,
+  ),
+  'lavender': (
+    primary: lavender-palette.$primary-palette,
+    tertiary: lavender-palette.$tertiary-palette,
+  ),
+  'slate': (
+    primary: slate-palette.$primary-palette,
+    tertiary: slate-palette.$tertiary-palette,
+  ),
+  'sand': (
+    primary: sand-palette.$primary-palette,
+    tertiary: sand-palette.$tertiary-palette,
+  ),
+);
+
+@each $id, $color in $themes {
+  $selector: "[data-theme='#{$id}']";
+
+  @if $id == 'violet' {
+    $selector: 'html, #{$selector}';
+  }
+
+  #{$selector} {
+    @include mat.theme(
+      (
+        color: $color,
+      )
+    );
+  }
 }
 
 body {
@@ -21,9 +119,5 @@ body {
   // See https://material.angular.dev/guide/system-variables
   background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
-
-  // Default to a light color theme. Use `dark` for the dark theme, or `light dark`
-  // to follow the user's system settings.
-  color-scheme: light;
   font: var(--mat-sys-body-medium);
 }

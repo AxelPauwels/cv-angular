@@ -1,0 +1,28 @@
+<button
+  matIconButton
+  class="theme-switcher"
+  [matMenuTriggerFor]="menu"
+  [matTooltip]="'t.theme.switch' | translate"
+  [attr.aria-label]="'t.theme.switch' | translate">
+  <mat-icon fontSet="material-symbols-outlined">palette</mat-icon>
+</button>
+
+<mat-menu #menu class="theme-switcher-menu" xPosition="before">
+  @for (option of themes(); track option.id) {
+  <button
+    mat-menu-item
+    class="theme-switcher-option"
+    role="menuitemradio"
+    [attr.aria-checked]="option.id === theme()"
+    (click)="themeChange.emit(option.id)">
+    <mat-icon
+      class="theme-switcher-radio"
+      fontSet="material-symbols-outlined"
+      [attr.data-theme]="option.id">
+      {{ option.id === theme() ? 'radio_button_checked' :
+      'radio_button_unchecked' }}
+    </mat-icon>
+    <span>{{ option.labelKey | translate }}</span>
+  </button>
+  }
+</mat-menu>

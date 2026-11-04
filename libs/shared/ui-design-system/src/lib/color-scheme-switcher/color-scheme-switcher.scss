@@ -1,0 +1,9 @@
+@use '3.vendors/mat';
+
+.color-scheme-switcher {
+  @include mat.icon-button-overrides(
+    (
+      icon-color: var(--mat-sys-on-primary),
+    )
+  );
+}

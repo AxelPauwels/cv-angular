@@ -1,10 +1,10 @@
-@use '@angular/material' as mat;
+@use '3.vendors/mat';
 
 // Sits on the primary-colored toolbar
 .language-switcher {
-  @include mat.button-overrides(
+  @include mat.icon-button-overrides(
     (
-      text-label-text-color: var(--mat-sys-on-primary),
+      icon-color: var(--mat-sys-on-primary),
     )
   );
 }

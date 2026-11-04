@@ -1,8 +1,8 @@
 import { Component, input, output } from '@angular/core';
-import { UpperCasePipe } from '@angular/common';
-import { MatButton } from '@angular/material/button';
+import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { MatTooltip } from '@angular/material/tooltip';
 import { TranslatePipe } from '@tolgee/ngx';
 
 export interface LanguageOption {
@@ -11,17 +11,17 @@ export interface LanguageOption {
   labelKey: string;
 }
 
-/** Compact menu button with the active language code; the menu lists the full names */
+/** Globe icon button; the menu lists the full language names and checks the active one */
 @Component({
   selector: 'ds-language-switcher',
   imports: [
-    MatButton,
+    MatIconButton,
     MatIcon,
     MatMenu,
     MatMenuItem,
     MatMenuTrigger,
+    MatTooltip,
     TranslatePipe,
-    UpperCasePipe,
   ],
   templateUrl: './language-switcher.html',
   styleUrl: './language-switcher.scss',

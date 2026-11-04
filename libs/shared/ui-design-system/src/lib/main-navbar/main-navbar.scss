@@ -1,4 +1,4 @@
-@use '@angular/material' as mat;
+@use '3.vendors/mat';
 
 :host {
   display: block;
@@ -33,7 +33,8 @@
 }
 
 .main-navbar-tabs {
-  // shrink next to the actions; Material then scrolls the tabs on small screens
+  // tabs as wide as their label (mat-stretch-tabs="false"); the bar fills the
+  // space up to the actions and shrinks on small screens, where Material scrolls
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -47,7 +48,10 @@
 }
 
 .main-navbar-actions {
+  align-items: center;
   align-self: center;
+  display: flex;
   flex: none;
+  gap: 0.25rem;
   margin-left: 0.5rem;
 }

@@ -48,11 +48,11 @@ describe('LanguageSwitcher', () => {
     );
   }
 
-  it('shows the active language code on a labelled menu button', async () => {
+  it('is a labelled icon menu button without the language code', async () => {
     const { trigger } = await render('nl');
 
-    expect(trigger.textContent).toContain('NL');
     expect(trigger.getAttribute('aria-label')).toBe('Language');
+    expect(trigger.textContent).not.toContain('NL');
   });
 
   it('lists the full language names and checks the active one', async () => {

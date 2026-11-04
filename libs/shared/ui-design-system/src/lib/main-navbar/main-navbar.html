@@ -2,6 +2,7 @@
   <nav
     mat-tab-nav-bar
     class="main-navbar-tabs"
+    mat-stretch-tabs="false"
     [tabPanel]="tabPanel()"
     [attr.aria-label]="labelKey() | translate">
     @for (item of items(); track item.path) {
