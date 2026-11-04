@@ -9,8 +9,8 @@ import { SubNavbar } from './sub-navbar';
   imports: [SubNavbar],
   template: `<ds-sub-navbar
     [items]="[
-      { labelKey: 'One', path: 'one' },
-      { labelKey: 'Two', path: 'two' },
+      { labelKey: 't.nav.One', path: 'one' },
+      { labelKey: 't.nav.Two', path: 'two' },
     ]"
     labelKey="Domain navigation" />`,
 })
@@ -47,7 +47,7 @@ describe('SubNavbar', () => {
     );
     expect(hrefs).toEqual(['/domain/one', '/domain/two']);
     expect(element.querySelector('.mdc-tab--active')?.textContent?.trim()).toBe(
-      'Two'
+      't.nav.Two'
     );
   });
 });

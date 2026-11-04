@@ -20,6 +20,6 @@ describe('technicalFeatureShellRoutes', () => {
       Array.from(element.querySelectorAll('ds-sub-navbar a')).map((link) =>
         link.textContent?.trim()
       )
-    ).toEqual(['Versions', 'Demo1']);
+    ).toEqual(['Versions']);
   });
 });

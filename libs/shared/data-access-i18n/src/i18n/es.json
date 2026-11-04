@@ -98,16 +98,21 @@
       "dark": "Oscuro",
       "dark-mode": "modo oscuro",
       "education": "Formación",
+      "end-to-end-tests": "Pruebas de extremo a extremo",
       "experience": "Experiencia",
       "graphql-docs": "graphql docs",
       "home": "Hogar",
       "light": "Claro",
       "light-mode": "modo claro",
+      "main-navigation": "Navegación principal",
       "personal": "Personal",
       "references": "Referencias",
       "showcase": "Escaparate",
+      "showcase-navigation": "Navegación del escaparate",
       "skills": "Habilidades",
       "technical": "Técnico",
+      "technical-navigation": "Navegación técnica",
+      "versions": "Versiones",
       "temp": {
         "more": "Más"
       }

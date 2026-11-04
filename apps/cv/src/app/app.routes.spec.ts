@@ -57,8 +57,8 @@ describe('appRoutes', () => {
     expect(page.url).toBe('/showcase/graphql-docs');
     expect(page.activeMain).toBe('Showcase');
     expect(page.sub).toEqual([
-      'GraphQL docs',
-      'Code coverage',
+      'graphql docs',
+      'code coverage',
       'End-to-end tests',
     ]);
   });
@@ -67,7 +67,7 @@ describe('appRoutes', () => {
     const page = await navigate('/technical');
     expect(page.url).toBe('/technical/versions');
     expect(page.activeMain).toBe('Technical');
-    expect(page.sub).toEqual(['Versions', 'Demo1']);
+    expect(page.sub).toEqual(['Versions']);
   });
 
   it('redirects unknown urls to the cv domain', async () => {

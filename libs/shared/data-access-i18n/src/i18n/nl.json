@@ -98,16 +98,21 @@
       "dark": "Donker",
       "dark-mode": "donkere modus",
       "education": "Opleiding",
+      "end-to-end-tests": "End-to-end tests",
       "experience": "Ervaring",
       "graphql-docs": "graphql docs",
       "home": "Home",
       "light": "Licht",
       "light-mode": "lichte modus",
+      "main-navigation": "Hoofdnavigatie",
       "personal": "Persoonlijk",
       "references": "Referenties",
       "showcase": "Showcase",
+      "showcase-navigation": "Showcase-navigatie",
       "skills": "Vaardigheden",
       "technical": "Technisch",
+      "technical-navigation": "Technische navigatie",
+      "versions": "Versies",
       "temp": {
         "more": "Meer..."
       }

@@ -98,16 +98,21 @@
       "dark": "Sombre",
       "dark-mode": "mode sombre ",
       "education": "Formation",
+      "end-to-end-tests": "Tests de bout en bout",
       "experience": "Expérience",
       "graphql-docs": "graphql docs",
       "home": "Maison",
       "light": "Clair",
       "light-mode": "mode clair",
+      "main-navigation": "Navigation principale",
       "personal": "Personnelles",
       "references": "Références",
       "showcase": "Vitrine",
+      "showcase-navigation": "Navigation de la vitrine",
       "skills": "Compétences",
       "technical": "Technique",
+      "technical-navigation": "Navigation technique",
+      "versions": "Versions",
       "temp": {
         "more": "Plus..."
       }
