@@ -15,6 +15,13 @@ export default withNativeFederation({
     .patch(['@angular/*'], { includeSecondaries: { keepAll: true } })
     .get(),
 
+  // Workspace libs (@cv/*) are bundled into the app, not shared: no remote
+  // uses them. Sharing them gave @cv/shared-ui-federation its own copy of the
+  // federation runtime, whose loadRemoteModule never resolved (initFederation
+  // only initializes the app's copy), so /cv-mfe stayed empty.
+  sharedMappings: [],
+
+  // To share workspace libs with a remote in this workspace later:
   // sharedMappings: mappingsFromWorkspace({ singleton: true })
   //   .filter(['@mfe/*'])
   //   .get(),
