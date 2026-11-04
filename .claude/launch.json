@@ -6,6 +6,19 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["nx", "serve", "cv"],
       "port": 4201
+    },
+    {
+      "name": "cv-dist",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-I",
+        "-m",
+        "http.server",
+        "4310",
+        "--directory",
+        "dist/apps/cv/browser"
+      ],
+      "port": 4310
     }
   ]
 }

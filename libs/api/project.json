@@ -1,0 +1,25 @@
+{
+  "name": "api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/src",
+  "projectType": "library",
+  "tags": ["domain:shared", "type:api"],
+  "targets": {
+    "codegen": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/codegen.ts",
+        "{projectRoot}/codegen-type-defs-plugin.cjs",
+        "{projectRoot}/src/lib/schema/type-defs.graphql"
+      ],
+      "outputs": [
+        "{projectRoot}/src/lib/generated",
+        "{projectRoot}/src/lib/internal/generated"
+      ],
+      "options": {
+        "command": "graphql-codegen --config {projectRoot}/codegen.ts"
+      }
+    }
+  }
+}

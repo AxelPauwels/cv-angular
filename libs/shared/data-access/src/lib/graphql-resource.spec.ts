@@ -1,6 +1,7 @@
 import { ApplicationRef, Injector, runInInjectionContext } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import type { DocumentTypeDecoration } from '@graphql-typed-document-node/core';
 import { inBrowserGraphqlInterceptor } from './in-browser-graphql.interceptor';
 import { graphqlResource } from './graphql-resource';
 
@@ -13,16 +14,32 @@ describe('graphqlResource', () => {
     });
   });
 
+  // shared code can't use a domain's generated documents: type a plain string instead
   function query<T>(source: string) {
+    const document = source as DocumentTypeDecoration<T, Record<string, never>>;
     return runInInjectionContext(TestBed.inject(Injector), () =>
-      graphqlResource<T>(source)
+      graphqlResource(document)
     );
   }
 
   it('answers queries in the browser', async () => {
-    const people = query<{ people: { id: string }[] }>('{ people { id } }');
+    const person = query<{ person: { firstName: string } }>(
+      '{ person { firstName } }'
+    );
     await TestBed.inject(ApplicationRef).whenStable();
-    expect(people.value()?.people.length).toBeGreaterThan(0);
+    expect(person.value()?.person.firstName).toBeTruthy();
+  });
+
+  it('maps the result to the frontend model', async () => {
+    const document = '{ person { firstName } }' as DocumentTypeDecoration<
+      { person: { firstName: string } },
+      Record<string, never>
+    >;
+    const name = runInInjectionContext(TestBed.inject(Injector), () =>
+      graphqlResource(document, { map: ({ person }) => person.firstName })
+    );
+    await TestBed.inject(ApplicationRef).whenStable();
+    expect(name.value()).toEqual(expect.any(String));
   });
 
   it('turns GraphQL errors into a resource error', async () => {

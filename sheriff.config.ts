@@ -15,8 +15,8 @@ export const config: SheriffConfig = {
   },
   // Tags sit on each lib's src folder: its src/index.ts barrel is the module
   modules: {
-    // before libs/<domain>, which would otherwise match cv-api as a domain
-    'libs/cv-api/src': ['domain:shared', 'type:api'],
+    // before libs/<domain>, which would otherwise match api as a domain
+    'libs/api/src': ['domain:shared', 'type:api'],
     'libs/<domain>': {
       'feature-<name>/src': ['domain:<domain>', 'type:feature'],
       'ui-<name>/src': ['domain:<domain>', 'type:ui'],

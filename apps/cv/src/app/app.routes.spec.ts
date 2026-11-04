@@ -34,7 +34,8 @@ describe('appRoutes', () => {
       activeMain: element
         .querySelector('ds-main-navbar > mat-toolbar .mdc-tab--active')
         ?.textContent?.trim(),
-      sub: linkLabels('ds-sub-navbar'),
+      // only the tab links: page content inside the sub navbar has links too
+      sub: linkLabels('ds-sub-navbar > nav'),
     };
   }
 

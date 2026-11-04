@@ -17,8 +17,8 @@ describe('technicalFeatureShellRoutes', () => {
 
     expect(TestBed.inject(Router).url).toBe('/versions');
     expect(
-      Array.from(element.querySelectorAll('ds-sub-navbar a')).map((link) =>
-        link.textContent?.trim()
+      Array.from(element.querySelectorAll('ds-sub-navbar > nav a')).map(
+        (link) => link.textContent?.trim()
       )
     ).toEqual(['Versions']);
   });

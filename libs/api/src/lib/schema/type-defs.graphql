@@ -1,0 +1,291 @@
+"""
+ISO 8601 date-time string, e.g. 2020-01-01T00:00:00.000Z (graphql-scalars DateTime)
+"""
+scalar DateTime
+
+enum EducationLevel {
+  SECONDARY_EDUCATION
+  HIGH_SCHOOL
+  CUSTOM_COURSE
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+"""
+ISO 639-1 two-letter language codes.
+Can include all official languages used worldwide.
+"""
+enum LanguageIsoCode {
+  NL # Dutch
+  FR # French
+  DE # German
+  EN # English
+  ES # Spanish
+  IT # Italian
+  #   ...
+}
+
+"""
+Locale codes combining two-letter language codes (iso codes) and region (BCP 47 standard).
+"""
+enum Locale {
+  NL_BE # Belgian Dutch (Flemish)
+  NL_NL # Netherlands Dutch
+  FR_BE # Belgian French (Walloon)
+  FR_FR # France French
+  DE_BE # Belgian German (Eupen region)
+  EN_GB # UK English
+  EN_US # US English
+  #   ...
+}
+
+"""
+In order of proficiency
+"""
+enum LanguageProficiency {
+  EXCELLENT
+  VERY_GOOD
+  GOOD
+  FAIR
+  BASIC
+}
+
+"""
+ISO 3166-1 alpha-2 country codes representing nationality.
+"""
+enum NationalityIsoCode {
+  BE # Belgian
+  NL # Dutch
+  FR # French
+  DE # German
+  LU # Luxembourgish
+  GB # British
+  IT # Italian
+  ES # Spanish
+  PT # Portuguese
+  US # American
+  CA # Canadian
+  #   ...
+}
+
+"""
+Belgian driving license categories
+Based on the official classification by the Belgian Federal Public Service Mobility and Transport.
+"""
+enum DriverLicenseCategory {
+  # Mopeds and scooters
+  AM # Mopeds and speedpedelecs (≤ 45 km/h)
+  #  Motorcycles
+  A1 # Motorcycles ≤ 125 cc and ≤ 11 kW
+  A2 # Motorcycles ≤ 35 kW
+  A # All motorcycles (no limit)
+  # Cars and light vehicles
+  B # Cars ≤ 3.5 tons, up to 8 passengers + driver
+  BE # Car with trailer > 750 kg (max 3.5 tons combined)
+  # Trucks and heavy goods vehicles
+  C1 # Trucks between 3.5 t and 7.5 t
+  C1E # C1 vehicle with trailer > 750 kg
+  C # Trucks > 3.5 tons
+  CE # Truck with trailer > 750 kg
+  # Buses and coaches
+  D1 # Small bus (max 16 passengers)
+  D1E # Small bus with trailer > 750 kg
+  D # Large bus
+  DE # Large bus with trailer > 750 kg
+  # Agricultural and special vehicles
+  G # Agricultural or forestry vehicles (e.g. tractors)
+}
+
+"""
+Personality types based on the Myers–Briggs Type Indicator (MBTI).
+Each type consists of four preferences:
+- (E) Extraversion / (I) Introversion
+- (S) Sensing / (N) Intuition
+- (T) Thinking / (F) Feeling
+- (J) Judging / (P) Perceiving
+"""
+enum PersonalityType {
+  # Analysts
+  INTJ # The Architect
+  INTP # The Logician
+  ENTJ # The Commander
+  ENTP # The Debater
+  # Diplomats
+  INFJ # The Advocate
+  INFP # The Mediator
+  ENFJ # The Protagonist
+  ENFP # The Campaigner
+  # Sentinels
+  ISTJ # The Logistician
+  ISFJ # The Defender
+  ESTJ # The Executive
+  ESFJ # The Consul
+  # Explorers
+  ISTP # The Virtuoso
+  ISFP # The Adventurer
+  ESTP # The Entrepreneur
+  ESFP # The Entertainer
+}
+
+"""
+Marital status of a person according to EU official categories.
+"""
+enum MaritalStatus {
+  SINGLE # Not married
+  MARRIED # Legally married
+  DIVORCED # Legally divorced
+  WIDOWED # Lost spouse by death
+  SEPARATED # Legally separated (but not divorced)
+  REGISTERED_PARTNERSHIP # Legal cohabitation / civil partnership
+  UNKNOWN # Unknown or not declared
+}
+
+enum SkillCategory {
+  PROGRAMMING_LANGUAGES
+  FRAMEWORKS
+  LIBRARIES
+  OPERATING_SYSTEMS
+  VERSION_CONTROL
+}
+
+enum ExperienceCategory {
+  HORECA
+  IT
+}
+
+type Language {
+  isoCode: LanguageIsoCode!
+  locale: Locale!
+}
+
+type Period {
+  start: DateTime!
+  end: DateTime
+}
+
+type School {
+  name: String!
+  location: String!
+}
+
+type Education {
+  level: EducationLevel!
+  specialization: String!
+  school: School!
+  period: Period!
+  degree: String
+}
+
+type Address {
+  street: String!
+  number: String!
+  postalCode: String!
+  city: String!
+  country: String!
+}
+
+type ContactInfo {
+  address: Address!
+  phone: String!
+  email: String!
+  website: String
+  linkedIn: String
+}
+
+type LanguageSkill {
+  isNativeLanguage: Boolean!
+  language: Language!
+  spoken: LanguageProficiency!
+  written: LanguageProficiency!
+}
+
+type Hobby {
+  name: String!
+  comment: String
+  icon: String!
+}
+
+type PersonalInfo {
+  dateOfBirth: DateTime!
+  nationality: NationalityIsoCode!
+  maritalStatus: MaritalStatus!
+  children: [Child!]!
+  personalityType: PersonalityType!
+  driverLicense: DriverLicenseCategory!
+}
+
+type Child {
+  name: String!
+  gender: Gender!
+}
+
+type Person {
+  firstName: String!
+  lastName: String!
+  functionTitle: String!
+  contact: ContactInfo!
+  personal: PersonalInfo!
+  hobbies: [Hobby!]!
+  languages: [LanguageSkill!]!
+}
+
+type SkillEntry {
+  name: String!
+  "0–10 scale"
+  level: Int!
+  icon: String!
+}
+
+type Skill {
+  category: SkillCategory!
+  icon: String!
+  entries: [SkillEntry!]!
+}
+
+type AdditionalLearning {
+  name: String!
+  url: String!
+}
+
+type Certificate {
+  name: String!
+  url: String!
+}
+
+type Work {
+  name: String!
+  location: String!
+  position: String!
+}
+
+type Experience {
+  category: ExperienceCategory!
+  work: Work!
+  period: Period!
+  isInternship: Boolean!
+  jobDescriptions: [String!]
+}
+
+type Reference {
+  name: String!
+  work: String!
+  workCategory: ExperienceCategory!
+  "When the reference worked in the given work category"
+  workCategoryPeriod: Period!
+  function: String!
+  phoneNumber: String!
+}
+
+type Query {
+  educations: [Education!]!
+  additionalLearnings: [AdditionalLearning!]!
+  certificates: [Certificate!]!
+  person: Person!
+  skills: [Skill!]!
+  experiences: [Experience!]!
+  references: [Reference!]!
+}

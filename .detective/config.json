@@ -1,7 +1,7 @@
 {
   "scopes": [
     "libs/cv",
-    "libs/cv-api",
+    "libs/api",
     "libs/shared",
     "libs/showcase",
     "libs/technical",

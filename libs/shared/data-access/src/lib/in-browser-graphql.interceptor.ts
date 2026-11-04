@@ -1,5 +1,5 @@
 import { HttpInterceptorFn, HttpResponse } from '@angular/common/http';
-import type { GraphqlRequest } from '@cv/cv-api';
+import type { GraphqlRequest } from '@cv/api';
 import { from, map } from 'rxjs';
 import { GRAPHQL_ENDPOINT } from './graphql-resource';
 
@@ -15,7 +15,7 @@ export const inBrowserGraphqlInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   return from(
-    import('@cv/cv-api').then(({ executeOperation }) =>
+    import('@cv/api').then(({ executeOperation }) =>
       executeOperation(req.body as GraphqlRequest)
     )
   ).pipe(map((body) => new HttpResponse({ status: 200, url: req.url, body })));
