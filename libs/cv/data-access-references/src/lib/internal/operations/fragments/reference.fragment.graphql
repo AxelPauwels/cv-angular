@@ -1,11 +1,11 @@
 fragment ReferenceFields on Reference {
   name
   work
+  client
   workCategory
   workCategoryPeriod {
     start
     end
   }
   function
-  phoneNumber
 }

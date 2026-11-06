@@ -6,9 +6,9 @@ export function toReference(dto: ReferenceFieldsFragment): Reference {
   return {
     name: dto.name,
     work: dto.work,
+    client: dto.client ?? undefined,
     workCategory: dto.workCategory,
     workCategoryPeriod: toPeriod(dto.workCategoryPeriod),
     function: dto.function,
-    phoneNumber: dto.phoneNumber,
   };
 }

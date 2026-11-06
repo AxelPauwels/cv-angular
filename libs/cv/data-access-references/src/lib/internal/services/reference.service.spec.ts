@@ -24,13 +24,22 @@ describe('ReferenceService', () => {
   const stable = () => TestBed.inject(ApplicationRef).whenStable();
 
   it('maps references to the frontend model', async () => {
+    // Arrange & Act
     const references = load((service) => service.references());
     await stable();
 
+    // Assert
     expect(references.error()).toBeUndefined();
     expect(references.value()?.length).toBeGreaterThan(0);
     for (const reference of references.value() ?? []) {
       expect(reference.workCategoryPeriod.start).toBeInstanceOf(Date);
+      // no client is undefined, never null
+      expect(reference.client).not.toBeNull();
     }
+    // references at a client keep their employer as the work
+    expect(
+      references.value()?.find((reference) => reference.client === 'Ravago')
+        ?.work
+    ).toBe('Sopra Steria');
   });
 });

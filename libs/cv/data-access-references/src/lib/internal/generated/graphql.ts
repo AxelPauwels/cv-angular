@@ -12,9 +12,9 @@ export type ExperienceCategory = 'HORECA' | 'IT';
 export type ReferenceFieldsFragment = {
   name: string;
   work: string;
+  client: string | null;
   workCategory: ExperienceCategory;
   function: string;
-  phoneNumber: string;
   workCategoryPeriod: { start: string; end: string | null };
 };
 
@@ -24,9 +24,9 @@ export type ReferencesQuery = {
   references: Array<{
     name: string;
     work: string;
+    client: string | null;
     workCategory: ExperienceCategory;
     function: string;
-    phoneNumber: string;
     workCategoryPeriod: { start: string; end: string | null };
   }>;
 };
@@ -56,13 +56,13 @@ export const ReferenceFieldsFragmentDoc = new TypedDocumentString(
     fragment ReferenceFields on Reference {
   name
   work
+  client
   workCategory
   workCategoryPeriod {
     start
     end
   }
   function
-  phoneNumber
 }
     `,
   { fragmentName: 'ReferenceFields' }
@@ -76,13 +76,13 @@ export const ReferencesDocument = new TypedDocumentString(`
     fragment ReferenceFields on Reference {
   name
   work
+  client
   workCategory
   workCategoryPeriod {
     start
     end
   }
   function
-  phoneNumber
 }`) as unknown as TypedDocumentString<
   ReferencesQuery,
   ReferencesQueryVariables

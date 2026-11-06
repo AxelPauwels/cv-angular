@@ -14,17 +14,21 @@ describe('ReferenceStore', () => {
   });
 
   it('exposes the references', async () => {
+    // Arrange & Act
     const store = TestBed.inject(ReferenceStore);
     await TestBed.inject(ApplicationRef).whenStable();
 
+    // Assert
     expect(store.error()).toBeUndefined();
     expect(store.references().length).toBeGreaterThan(0);
   });
 
   it('keeps the result for the next consumer', async () => {
+    // Arrange & Act
     TestBed.inject(ReferenceStore);
     await TestBed.inject(ApplicationRef).whenStable();
 
+    // Assert
     // a page opened later gets the same store, already loaded
     expect(TestBed.inject(ReferenceStore).isLoading()).toBe(false);
   });

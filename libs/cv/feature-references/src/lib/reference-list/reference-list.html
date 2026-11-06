@@ -1,22 +1,88 @@
-@if (store.isLoading()) {
-<p>Loading…</p>
-} @else if (store.error()) {
-<p>Could not load references: {{ store.error()?.message }}</p>
-} @else { @for (group of groups(); track group.category) {
-<section>
-  <h2>{{ categoryKeys[group.category] | translate }}</h2>
-  <ul>
-    @for (reference of group.references; track reference.name) {
-    <li>
-      <strong>{{ reference.name }}</strong> · {{ reference.function }} {{ 't.at'
-      | translate }} {{ reference.work }} ({{ reference.workCategoryPeriod.start
-      | date: 'yyyy' }} – {{ reference.workCategoryPeriod.end ?
-      (reference.workCategoryPeriod.end | date: 'yyyy') : ('t.present' |
-      translate) }})
-      <br />
-      {{ reference.phoneNumber }}
-    </li>
+<ds-page-layout width="narrow">
+  <ds-page-title title="t.heading.references" />
+
+  @if (loading.pending()) { @if (loading.spinner()) {
+  <ds-loading-spinner />
+  } } @else if (store.error()) {
+  <p>Could not load references: {{ store.error()?.message }}</p>
+  } @else {
+  <ds-timeline [label]="'t.heading.references' | translate">
+    @for (group of groups(); track group.work; let g = $index) {
+    <ds-timeline-item
+      [start]="group.start"
+      [end]="group.end"
+      [endLabel]="'t.present' | translate"
+      badge="end"
+      [title]="group.work"
+      contentOnly>
+      <!--
+      Two equal columns: the employer's references, then its clients'. Without
+      clients the second stays empty, so every step's cards are equally wide.
+      The columns are only labelled when there's a client to tell apart.
+    -->
+      <div class="reference-list__columns">
+        @if (group.employer.references.length) {
+        <ng-container
+          [ngTemplateOutlet]="column"
+          [ngTemplateOutletContext]="{
+          $implicit: group.employer,
+          id: 'reference-list-' + g + '-employer',
+          labelled: group.clients.length > 0
+        }" />
+        } @if (group.clients.length) {
+        <div class="reference-list__column">
+          @for (client of group.clients; track client.name; let c = $index) {
+          <ng-container
+            [ngTemplateOutlet]="column"
+            [ngTemplateOutletContext]="{
+            $implicit: client,
+            id: 'reference-list-' + g + '-client-' + c,
+            labelled: true,
+            client: true
+          }" />
+          }
+        </div>
+        }
+      </div>
+    </ds-timeline-item>
     }
-  </ul>
-</section>
-} }
+  </ds-timeline>
+  }
+
+  <ng-template
+    #column
+    let-column
+    let-id="id"
+    let-labelled="labelled"
+    let-client="client">
+    <div class="reference-list__column">
+      @if (labelled) {
+      <p class="reference-list__column-label" [id]="id">
+        <mat-icon
+          class="reference-list__detail-icon"
+          fontSet="material-symbols-outlined"
+          aria-hidden="true">
+          apartment
+        </mat-icon>
+        @if (client) { {{ 't.client' | translate }} – {{ column.name }} } @else
+        { {{ column.name }} }
+      </p>
+      }
+      <ul
+        class="reference-list__cards"
+        [attr.aria-labelledby]="labelled ? id : null">
+        @for (reference of column.references; track reference.name) {
+        <li class="reference-list__item">
+          <ds-card
+            class="reference-list__card"
+            [headingLevel]="3"
+            [initials]="initials(reference.name)"
+            [title]="reference.name">
+            <p class="reference-list__function">{{ reference.function }}</p>
+          </ds-card>
+        </li>
+        }
+      </ul>
+    </div>
+  </ng-template>
+</ds-page-layout>
