@@ -14,4 +14,6 @@ export interface Experience {
   period: Period;
   isInternship: boolean;
   jobDescriptions: string[];
+  /** Technologies and tools used */
+  stack: string[];
 }

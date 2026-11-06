@@ -11,4 +11,5 @@ fragment ExperienceFields on Experience {
   }
   isInternship
   jobDescriptions
+  stack
 }

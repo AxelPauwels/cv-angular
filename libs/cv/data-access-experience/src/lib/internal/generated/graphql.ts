@@ -13,6 +13,7 @@ export type ExperienceFieldsFragment = {
   category: ExperienceCategory;
   isInternship: boolean;
   jobDescriptions: Array<string> | null;
+  stack: Array<string>;
   work: { name: string; location: string; position: string };
   period: { start: string; end: string | null };
 };
@@ -24,6 +25,7 @@ export type ExperiencesQuery = {
     category: ExperienceCategory;
     isInternship: boolean;
     jobDescriptions: Array<string> | null;
+    stack: Array<string>;
     work: { name: string; location: string; position: string };
     period: { start: string; end: string | null };
   }>;
@@ -64,6 +66,7 @@ export const ExperienceFieldsFragmentDoc = new TypedDocumentString(
   }
   isInternship
   jobDescriptions
+  stack
 }
     `,
   { fragmentName: 'ExperienceFields' }
@@ -87,6 +90,7 @@ export const ExperiencesDocument = new TypedDocumentString(`
   }
   isInternship
   jobDescriptions
+  stack
 }`) as unknown as TypedDocumentString<
   ExperiencesQuery,
   ExperiencesQueryVariables

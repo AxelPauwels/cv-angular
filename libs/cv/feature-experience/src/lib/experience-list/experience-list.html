@@ -31,10 +31,22 @@
       [title]="experience.work.position | translate"
       [subtitle]="experience.work.name + ' · ' + experience.work.location"
       [tag]="experience.isInternship ? ('t.internship' | translate) : undefined"
-      [icon]="experience.jobDescriptions.length ? 'work' : undefined"
+      [icon]="experience.duties.length ? 'trending_up' : undefined"
       [expandable]="!experience.isInternship && group.category !== 'HORECA'">
-      @for (description of experience.jobDescriptions; track description) {
+      @for (description of experience.duties; track description) {
       <p class="experience-list__description">{{ description | translate }}</p>
+      } @for (project of experience.projects; track project) {
+      <ds-timeline-detail icon="folder_open">
+        <p class="experience-list__description">{{ project | translate }}</p>
+      </ds-timeline-detail>
+      } @if (experience.stack.length) {
+      <ds-timeline-detail>
+        <ul class="experience-list__stack">
+          @for (technology of experience.stack; track technology) {
+          <li class="experience-list__technology">{{ technology }}</li>
+          }
+        </ul>
+      </ds-timeline-detail>
       }
     </ds-timeline-item>
     }

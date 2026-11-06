@@ -9,6 +9,7 @@ import { TranslatePipe } from '@tolgee/ngx';
 import { byEndNewestFirst } from '@cv/shared-util-types';
 import {
   Timeline,
+  TimelineDetail,
   TimelineDivider,
   TimelineItem,
 } from '@cv/shared-ui-timeline';
@@ -19,6 +20,9 @@ import {
 } from '@cv/cv-data-access-experience';
 import { SubheadingTranslationKey } from '@cv/shared-util-i18n';
 
+/** Job descriptions with these keys list projects and get a row of their own */
+const isProjects = (key: string) => key.endsWith('.projects');
+
 const CATEGORY_ORDER: readonly ExperienceCategory[] = ['IT', 'HORECA'];
 
 @Component({
@@ -28,6 +32,7 @@ const CATEGORY_ORDER: readonly ExperienceCategory[] = ['IT', 'HORECA'];
     LoadingSpinner,
     PageTitle,
     Timeline,
+    TimelineDetail,
     TimelineDivider,
     TimelineItem,
     TranslatePipe,
@@ -52,7 +57,15 @@ export class ExperienceList {
 
     return CATEGORY_ORDER.map((category) => ({
       category,
-      experiences: experiences.filter((e) => e.category === category),
+      experiences: experiences
+        .filter((e) => e.category === category)
+        .map((experience) => ({
+          ...experience,
+          // what the job was about, next to the growth icon
+          duties: experience.jobDescriptions.filter((key) => !isProjects(key)),
+          // the projects worked on, in a row with their own icon
+          projects: experience.jobDescriptions.filter(isProjects),
+        })),
     })).filter((group) => group.experiences.length > 0);
   });
 

@@ -84,13 +84,13 @@ describe('ExperienceList', () => {
     }
   });
 
-  it('only shows the work icon next to descriptions', async () => {
+  it('only shows the growth icon next to descriptions', async () => {
     // Arrange & Act
     const { element } = await render();
     const details = Array.from(
       element.querySelectorAll('.timeline-item__detail')
     ).filter(
-      (d) => d.querySelector('mat-icon')?.textContent?.trim() === 'work'
+      (d) => d.querySelector('mat-icon')?.textContent?.trim() === 'trending_up'
     );
 
     // Assert
@@ -146,5 +146,61 @@ describe('ExperienceList', () => {
     // Assert
     expect(headers[0].getAttribute('aria-expanded')).toBe('false');
     expect(headers[1].getAttribute('aria-expanded')).toBe('true');
+  });
+
+  it('lists the stack of a job as tags, in a row without icon or heading', async () => {
+    // Arrange & Act
+    const { element } = await render();
+    const stacks = Array.from(
+      element.querySelectorAll<HTMLElement>('.experience-list__stack')
+    );
+
+    // Assert
+    expect(stacks.length).toBeGreaterThan(0);
+    for (const stack of stacks) {
+      expect(stack.tagName).toBe('UL');
+      expect(stack.previousElementSibling).toBeNull();
+      const row = stack.closest('ds-timeline-detail');
+      expect(row?.querySelector('mat-icon')?.textContent?.trim()).toBe('');
+      expect(stack.querySelectorAll('li').length).toBeGreaterThan(0);
+    }
+    const technologies = stacks.flatMap((stack) =>
+      Array.from(stack.querySelectorAll('li')).map((li) =>
+        li.textContent?.trim()
+      )
+    );
+    expect(technologies).toContain('Angular');
+  });
+
+  it('shows projects in a row with their own icon, apart from the duties', async () => {
+    // Arrange & Act
+    const { element } = await render();
+    const rows = Array.from(
+      element.querySelectorAll<HTMLElement>('ds-timeline-detail')
+    );
+    const iconOf = (row: HTMLElement) =>
+      row.querySelector('mat-icon')?.textContent?.trim();
+    const projectRows = rows.filter((row) => iconOf(row) === 'folder_open');
+
+    // Assert
+    expect(projectRows.length).toBeGreaterThan(0);
+    const projectTexts = projectRows.map((row) =>
+      row.querySelector('.timeline-detail__content')?.textContent?.trim()
+    );
+    expect(projectTexts.every((text) => text && !text.startsWith('t.'))).toBe(
+      true
+    );
+    for (const row of rows) {
+      expect(row.querySelector('mat-icon')?.getAttribute('aria-hidden')).toBe(
+        'true'
+      );
+    }
+    // projects no longer sit with the duties next to the growth icon
+    const duties = Array.from(
+      element.querySelectorAll('.timeline-item__details p')
+    ).map((p) => p.textContent?.trim());
+    for (const text of projectTexts) {
+      expect(duties).not.toContain(text);
+    }
   });
 });

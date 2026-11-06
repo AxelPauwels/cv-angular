@@ -1,7 +1,22 @@
+@use '2.tools' as tools;
+
 :host {
   display: block;
 }
 
 .experience-list__description {
   margin: 0;
+}
+
+.experience-list__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.experience-list__technology {
+  @include tools.tag;
 }

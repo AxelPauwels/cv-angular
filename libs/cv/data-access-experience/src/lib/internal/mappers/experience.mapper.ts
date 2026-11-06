@@ -9,5 +9,6 @@ export function toExperience(dto: ExperienceFieldsFragment): Experience {
     period: toPeriod(dto.period),
     isInternship: dto.isInternship,
     jobDescriptions: dto.jobDescriptions ?? [],
+    stack: [...dto.stack],
   };
 }
