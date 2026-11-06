@@ -1,9 +1,10 @@
 import type { Experience } from '../generated/resolvers-types';
-import { fromYear } from '../utils/date';
+import { fromDate, fromYear } from '../utils/date';
 
 const horecaExperiences: Experience[] = [
   {
     category: 'HORECA',
+    stack: [],
     isInternship: false,
     period: {
       start: fromYear('2014'),
@@ -18,6 +19,7 @@ const horecaExperiences: Experience[] = [
   },
   {
     category: 'HORECA',
+    stack: [],
     isInternship: false,
     period: {
       start: fromYear('2013'),
@@ -32,6 +34,7 @@ const horecaExperiences: Experience[] = [
   },
   {
     category: 'HORECA',
+    stack: [],
     isInternship: false,
     period: {
       start: fromYear('2010'),
@@ -46,6 +49,7 @@ const horecaExperiences: Experience[] = [
   },
   {
     category: 'HORECA',
+    stack: [],
     isInternship: false,
     period: {
       start: fromYear('2008'),
@@ -60,6 +64,7 @@ const horecaExperiences: Experience[] = [
   },
   {
     category: 'HORECA',
+    stack: [],
     isInternship: false,
     period: {
       start: fromYear('2006'),
@@ -74,6 +79,7 @@ const horecaExperiences: Experience[] = [
   },
   {
     category: 'HORECA',
+    stack: [],
     isInternship: false,
     period: {
       start: fromYear('2005'),
@@ -88,6 +94,7 @@ const horecaExperiences: Experience[] = [
   },
   {
     category: 'HORECA',
+    stack: [],
     isInternship: false,
     period: {
       start: fromYear('2004'),
@@ -102,6 +109,7 @@ const horecaExperiences: Experience[] = [
   },
   {
     category: 'HORECA',
+    stack: [],
     isInternship: true,
     period: {
       start: fromYear('2004'),
@@ -115,6 +123,7 @@ const horecaExperiences: Experience[] = [
   },
   {
     category: 'HORECA',
+    stack: [],
     isInternship: true,
     period: {
       start: fromYear('2003'),
@@ -128,6 +137,7 @@ const horecaExperiences: Experience[] = [
   },
   {
     category: 'HORECA',
+    stack: [],
     isInternship: true,
     period: {
       start: fromYear('2002'),
@@ -141,6 +151,7 @@ const horecaExperiences: Experience[] = [
   },
   {
     category: 'HORECA',
+    stack: [],
     isInternship: true,
     period: {
       start: fromYear('2001'),
@@ -159,70 +170,133 @@ const itExperiences: Experience[] = [
     category: 'IT',
     isInternship: false,
     period: {
-      start: fromYear('2021'),
+      start: fromDate('2022-01-01'),
+      end: fromDate('2026-10-01'),
     },
     work: {
       location: 'Arendonk',
-      name: 'Sopra Steria: Ravago',
-      // position: 'Consultant Frontend Developer',
+      name: 'Sopra Steria > Ravago',
+      // position: 'Senior Angular Developer',
       position: 't.experience.work-position.ravago',
     },
-    // jobDescriptions: [
-    //   'Technologie: Angular met NX en het UI framework Kendo',
-    //   'Projecten: Meegewerkt aan Warehouse Management System. Een custom web-gebaseerd. Een custom web-gebaseerd software systeem voor desktop (office) in combinatie met een mobile systeem (magazijn). Dit voor het volledig beheren van stock en productie, zowel voor het verwerken van orders in office, als magazijniers met een scanner.',
-    // ],
+    // project: 'Warehouse Management System',
+    project: 't.experience.project.ravago',
     jobDescriptions: [
-      't.experience.job-description.ravago.technologies',
+      't.experience.job-description.ravago.wms',
+      't.experience.job-description.ravago.platform',
+      't.experience.job-description.ravago.workflows',
       't.experience.job-description.ravago.projects',
+    ],
+    stack: [
+      'Angular',
+      'TypeScript',
+      'Nx',
+      'RxJS',
+      'Signals',
+      'GraphQL',
+      'Apollo',
+      'Kendo UI',
+      'Scss',
+      'Git',
+      'Copilot',
+      'Cursor',
+      'Claude Code',
     ],
   },
   {
     category: 'IT',
     isInternship: false,
     period: {
-      start: fromYear('2020'),
-      end: fromYear('2021'),
+      start: fromDate('2021-09-01'),
+      end: fromDate('2021-12-01'),
+    },
+    work: {
+      location: 'Mechelen',
+      name: 'Sopra Steria (Ordina)',
+      // position: 'Front-End Developer',
+      position: 't.experience.work-position.ordina',
+    },
+    // project: 'Professional Programme',
+    project: 't.experience.project.ordina',
+    jobDescriptions: [
+      't.experience.job-description.ordina.programme',
+      't.experience.job-description.ordina.projects',
+    ],
+    stack: [
+      'Angular',
+      'TypeScript',
+      'Nx',
+      'RxJS',
+      'NestJS',
+      'Material Design',
+      'Scss',
+      'Git',
+      'Jira',
+    ],
+  },
+  {
+    category: 'IT',
+    isInternship: false,
+    period: {
+      start: fromDate('2020-07-01'),
+      end: fromDate('2021-08-01'),
     },
     work: {
       location: 'Malle',
       name: 'Innomedio',
-      // position: 'PHP / Support Developer',
+      // position: 'PHP Support / Front-End Developer',
       position: 't.experience.work-position.innomedio',
     },
-    // jobDescriptions: [
-    //   'Technologie: Custom ontwikkelde CMS systemen onderhouden en uitbreiden. Telefonie voor support en het beheren van het ticketsysteem.',
-    //   'Projecten: Meegewerkt aan Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...',
-    // ],
     jobDescriptions: [
-      't.experience.job-description.innomedio.technologies',
+      't.experience.job-description.innomedio.websites',
+      't.experience.job-description.innomedio.support',
       't.experience.job-description.innomedio.projects',
+    ],
+    stack: [
+      'PHP',
+      'Symfony',
+      'Sulu',
+      'Sass',
+      'Vagrant',
+      'MySQL',
+      'Git',
+      'Capistrano',
     ],
   },
   {
     category: 'IT',
     isInternship: false,
     period: {
-      start: fromYear('2018'),
-      end: fromYear('2020'),
+      start: fromDate('2018-11-01'),
+      end: fromDate('2020-06-01'),
     },
     work: {
       location: 'Kontich',
       name: 'PHPro',
-      // position: 'PHP / Frontend Developer',
+      // position: 'PHP Front-End Developer',
       position: 't.experience.work-position.phpro',
     },
-    // jobDescriptions: [
-    //   'Technologie: Voornamelijk Magento 2. Een beetje React en Sulu. Verdiept in front-end ITCSS van SEM&BIO in Sass.',
-    //   'Projecten: Meegewerkt aan Pizzahut, Hopper, Euroshop, Vinetiq, VAR, ...',
-    // ],
     jobDescriptions: [
-      't.experience.job-description.phpro.technologies',
+      't.experience.job-description.phpro.magento',
+      't.experience.job-description.phpro.front-end',
+      't.experience.job-description.phpro.agile',
       't.experience.job-description.phpro.projects',
+    ],
+    stack: [
+      'Magento 2',
+      'PHP',
+      'Sass',
+      'React',
+      'Sulu',
+      'MySQL',
+      'Bitbucket',
+      'SEM & BIO',
     ],
   },
   {
     category: 'IT',
     isInternship: true,
+    stack: [],
     period: {
       start: fromYear('2018'),
     },
