@@ -12,7 +12,7 @@ export type EducationLevel =
 
 export type AdditionalLearningFieldsFragment = { name: string; url: string };
 
-export type CertificateFieldsFragment = { name: string; url: string };
+export type CertificateFieldsFragment = { name: string; url: string | null };
 
 export type EducationFieldsFragment = {
   level: EducationLevel;
@@ -31,7 +31,7 @@ export type AdditionalLearningsQuery = {
 export type CertificatesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type CertificatesQuery = {
-  certificates: Array<{ name: string; url: string }>;
+  certificates: Array<{ name: string; url: string | null }>;
 };
 
 export type EducationsQueryVariables = Exact<{ [key: string]: never }>;

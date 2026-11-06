@@ -18,7 +18,7 @@ export interface Education {
 
 export interface Certificate {
   name: string;
-  url: string;
+  url?: string;
 }
 
 export interface AdditionalLearning {

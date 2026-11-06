@@ -2,10 +2,15 @@
   "name": "@cv/cv-feature-education",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^22.2.0",
     "@angular/core": "^22.2.0",
     "@tolgee/ngx": "^7.3.0",
-    "@cv/cv-data-access-education": "0.0.1"
+    "@cv/cv-data-access-education": "0.0.1",
+    "@angular/material": "^22.2.5",
+    "@cv/shared-ui-timeline": "0.0.1",
+    "@cv/shared-ui-card": "0.0.1",
+    "@cv/shared-ui-design-system": "0.0.1",
+    "@cv/shared-util-types": "0.0.1",
+    "@cv/shared-util-i18n": "0.0.1"
   },
   "sideEffects": false,
   "private": true

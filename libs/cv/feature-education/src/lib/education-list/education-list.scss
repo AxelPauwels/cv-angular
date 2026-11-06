@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+
+.education-list {
+  &__degree {
+    margin: 0;
+  }
+
+  &__extras {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    margin-top: 2.5rem;
+  }
+
+  &__extra {
+    --ds-card-icon-background: var(--mat-sys-secondary-container);
+    --ds-card-icon-color: var(--mat-sys-on-secondary-container);
+    --mat-card-outlined-container-shape: var(--mat-sys-corner-large);
+  }
+
+  &__links {
+    display: grid;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+  }
+
+  &__link {
+    align-items: center;
+    color: var(--mat-sys-primary);
+    display: inline-flex;
+    gap: 0.25rem;
+  }
+
+  &__link-icon {
+    font-size: 1rem;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  &__note {
+    color: var(--mat-sys-on-surface-variant);
+    margin-left: 0.25rem;
+  }
+}

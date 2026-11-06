@@ -12,10 +12,6 @@ import type {
   Education,
 } from './types/education.types';
 
-/**
- * Loads once on first use and keeps the result for the whole app, so
- * navigating back to a page shows it without loading again.
- */
 export const EducationStore = signalStore(
   { providedIn: 'root' },
   withProps(() => {

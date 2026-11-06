@@ -24,9 +24,11 @@ describe('EducationService', () => {
   const stable = () => TestBed.inject(ApplicationRef).whenStable();
 
   it('maps educations to the frontend model', async () => {
+    // Arrange & Act
     const educations = load((service) => service.educations());
     await stable();
 
+    // Assert
     expect(educations.error()).toBeUndefined();
     expect(educations.value()?.length).toBeGreaterThan(0);
     for (const education of educations.value() ?? []) {
@@ -36,10 +38,12 @@ describe('EducationService', () => {
   });
 
   it('loads certificates and additional learnings', async () => {
+    // Arrange & Act
     const certificates = load((service) => service.certificates());
     const learnings = load((service) => service.additionalLearnings());
     await stable();
 
+    // Assert
     expect(certificates.error()).toBeUndefined();
     expect(learnings.error()).toBeUndefined();
     expect(certificates.value()).toEqual(expect.any(Array));

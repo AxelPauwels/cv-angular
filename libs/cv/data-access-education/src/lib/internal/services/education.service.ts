@@ -17,7 +17,6 @@ import type {
   Education,
 } from '../../types/education.types';
 
-/** Call each method in an injection context, e.g. a component field initializer */
 @Service()
 export class EducationService {
   educations(): HttpResourceRef<Education[] | undefined> {

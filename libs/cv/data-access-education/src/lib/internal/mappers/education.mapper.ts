@@ -23,8 +23,11 @@ export function toEducation({
   };
 }
 
-export function toCertificate(dto: CertificateFieldsFragment): Certificate {
-  return { name: dto.name, url: dto.url };
+export function toCertificate({
+  name,
+  url,
+}: CertificateFieldsFragment): Certificate {
+  return { name, ...(url ? { url } : {}) };
 }
 
 export function toAdditionalLearning(
