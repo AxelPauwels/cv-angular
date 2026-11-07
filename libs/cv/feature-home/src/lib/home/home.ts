@@ -12,7 +12,6 @@ import { FeatureToggleService, TourService } from '@cv/shared-data-access';
   imports: [RouterLink, MatButton, MatIcon, TranslatePipe],
   templateUrl: './home.html',
   styleUrl: './home.scss',
-  host: { class: 'o-container-bleed' },
 })
 export class Home {
   protected readonly store = inject(PersonStore);
@@ -25,4 +24,9 @@ export class Home {
     const person = this.store.person();
     return person ? `${person.firstName} ${person.lastName}` : '';
   });
+
+  // split on spaces so hyphenated words (e.g. "Front-End") can be kept on one line
+  protected readonly titleWords = computed(
+    () => this.store.person()?.functionTitle.split(/\s+/).filter(Boolean) ?? []
+  );
 }

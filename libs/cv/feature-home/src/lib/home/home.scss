@@ -138,6 +138,11 @@
     }
   }
 
+  // a word never wraps internally, so "Front-End" stays on one line
+  &__title-word {
+    white-space: nowrap;
+  }
+
   &__actions {
     display: flex;
     flex-wrap: wrap;

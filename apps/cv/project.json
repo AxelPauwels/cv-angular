@@ -80,9 +80,9 @@
             "input": "apps/cv/public"
           },
           {
-            "glob": "**/*",
-            "input": "apps/cv/src/assets",
-            "output": "assets"
+            "glob": "*.json",
+            "input": "libs/shared/ui-lordicon/src/assets",
+            "output": "assets/lordicon"
           },
           {
             "glob": "**/*",
@@ -133,6 +133,7 @@
           "outputHashing": "all"
         },
         "development": {
+          "outputPath": "dist/dev/apps/cv",
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true,

@@ -30,7 +30,7 @@ describe('appRoutes', () => {
       );
     return {
       url: TestBed.inject(Router).url,
-      main: linkLabels('ds-main-navbar > mat-toolbar'),
+      main: linkLabels('ds-main-navbar > mat-toolbar > nav'),
       activeMain: element
         .querySelector('ds-main-navbar > mat-toolbar .mdc-tab--active')
         ?.textContent?.trim(),
@@ -39,12 +39,16 @@ describe('appRoutes', () => {
     };
   }
 
-  it('defaults to the cv personal page', async () => {
+  it('defaults to the cv home page', async () => {
+    // Arrange & Act
     const page = await navigate('/');
-    expect(page.url).toBe('/personal');
-    expect(page.main).toEqual(['CV', 'SHOWCASE', 'TECHNICAL']);
+
+    // Assert
+    expect(page.url).toBe('/home');
+    expect(page.main).toEqual(['CV', 'TECHNICAL', 'SHOWCASE']);
     expect(page.activeMain).toBe('CV');
     expect(page.sub).toEqual([
+      'Home',
       'Personal',
       'Education',
       'Experience',
@@ -54,37 +58,63 @@ describe('appRoutes', () => {
   });
 
   it('shows the showcase sub items', async () => {
+    // Arrange & Act
     const page = await navigate('/showcase');
-    expect(page.url).toBe('/showcase/graphql-docs');
+
+    // Assert
+    expect(page.url).toBe('/showcase/micro-frontends');
     expect(page.activeMain).toBe('SHOWCASE');
-    expect(page.sub).toEqual([
-      'graphql docs',
-      'code coverage',
-      'End-to-end tests',
-      'Micro-frontends',
-    ]);
+    expect(page.sub).toEqual(['Micro-frontends', 'Admin']);
+  });
+
+  it('sends the old admin url to the admin page in the showcase', async () => {
+    // Arrange & Act
+    const page = await navigate('/admin');
+
+    // Assert
+    expect(page.url).toBe('/showcase/admin');
   });
 
   it('shows the technical sub items', async () => {
+    // Arrange & Act
     const page = await navigate('/technical');
+
+    // Assert
     expect(page.url).toBe('/technical/architecture');
     expect(page.activeMain).toBe('TECHNICAL');
-    expect(page.sub).toEqual(['Architecture', 'Project graph', 'Versions']);
+    expect(page.sub).toEqual([
+      'Architecture',
+      'Project graph',
+      'graphql docs',
+      'code coverage',
+      'End-to-end tests',
+      'Versions',
+    ]);
   });
 
   it('redirects unknown urls to the cv domain', async () => {
+    // Arrange & Act
     const page = await navigate('/does-not-exist');
-    expect(page.url).toBe('/personal');
+
+    // Assert
+    expect(page.url).toBe('/home');
   });
 
   it('navigates from the cv domain to the other domains', async () => {
+    // Arrange
     const harness = await RouterTestingHarness.create('/personal');
     const router = TestBed.inject(Router);
 
+    // Act
     await harness.navigateByUrl('/showcase');
-    expect(router.url).toBe('/showcase/graphql-docs');
 
+    // Assert
+    expect(router.url).toBe('/showcase/micro-frontends');
+
+    // Act
     await harness.navigateByUrl('/technical');
+
+    // Assert
     expect(router.url).toBe('/technical/architecture');
   });
 });

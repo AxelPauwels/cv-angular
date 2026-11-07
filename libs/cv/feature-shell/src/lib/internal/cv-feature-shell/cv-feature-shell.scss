@@ -1,4 +1,25 @@
-.cv-feature-shell-content {
-  display: block;
-  padding: 1rem;
+// A flex column down to the page, so a page can fill the remaining height
+// (e.g. the home hero); other pages just flow from the top. The shell adds no
+// padding or width: each page brings its own frame (`ds-page-layout`), so the
+// home hero can run edge to edge.
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  // lets the sub-navbar's panel shrink to the space left and scroll
+  min-height: 0;
+}
+
+.cv-feature-shell {
+  &__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  &__nav {
+    flex: 1;
+    min-height: 0;
+  }
 }

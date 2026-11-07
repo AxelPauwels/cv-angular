@@ -61,7 +61,11 @@
       <span class="home-hero__first-name">{{ person.firstName }}</span>
       {{ person.lastName }} }
     </h1>
-    <p class="home-hero__title">{{ store.person()?.functionTitle }}</p>
+    <p class="home-hero__title">
+      @for (word of titleWords(); track $index) {
+      <span class="home-hero__title-word">{{ word }}</span>{{ $last ? '' : ' '
+      }} }
+    </p>
 
     <div class="home-hero__actions">
       <a matButton="filled" [routerLink]="routes.PERSONAL_ROUTER_LINK">

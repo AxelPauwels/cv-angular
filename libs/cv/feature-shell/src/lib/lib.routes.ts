@@ -7,7 +7,11 @@ export const cvFeatureShellRoutes: Route[] = [
     path: '',
     component: CvFeatureShell,
     children: [
-      { path: '', pathMatch: 'full', redirectTo: ROUTES.CV.PERSONAL },
+      { path: '', pathMatch: 'full', redirectTo: ROUTES.CV.HOME },
+      {
+        path: ROUTES.CV.HOME,
+        loadComponent: () => import('@cv/cv-feature-home'),
+      },
       {
         path: ROUTES.CV.PERSONAL,
         loadComponent: () => import('@cv/cv-feature-personal'),

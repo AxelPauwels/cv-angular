@@ -1,7 +1,7 @@
 <ds-page-layout width="narrow">
   <ds-page-title title="t.heading.references" />
 
-  @if (loading.pending()) { @if (loading.spinner()) {
+  @if (loading.pending()) { @if (loading.indicator()) {
   <ds-loading-spinner />
   } } @else if (store.error()) {
   <p>Could not load references: {{ store.error()?.message }}</p>

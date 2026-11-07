@@ -15,6 +15,11 @@ export const appRoutes: Routes = [
     path: ROUTES.TECHNICAL.ROOT,
     loadChildren: () => import('@cv/technical-feature-shell'),
   },
+  // the admin page moved into the showcase; old links still find it
+  {
+    path: 'admin',
+    redirectTo: ROUTES.SHOWCASE.ADMIN_ROUTER_LINK,
+  },
   {
     path: ROUTES.MF.CV_MFE,
     component: Wrapper,

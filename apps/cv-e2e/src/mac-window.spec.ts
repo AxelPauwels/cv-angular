@@ -26,6 +26,7 @@ test.describe('mac-window', () => {
   test('is showcased in its own tab, as a component library', async ({
     page,
   }) => {
+    // Act & Assert
     await expect(page).toHaveURL(/\/showcase\/micro-frontends$/);
     await expect(
       page.getByRole('heading', { name: 'Component library: <lib-mac-window>' })
@@ -33,6 +34,7 @@ test.describe('mac-window', () => {
   });
 
   test('projects its content into the window body', async ({ page }) => {
+    // Act & Assert
     await expect(macWindow(page).locator('.mw__content')).toHaveText(
       'Anything placed here is projected into the window.'
     );
@@ -41,9 +43,11 @@ test.describe('mac-window', () => {
   test('draws the title bar with the red, yellow and green buttons', async ({
     page,
   }) => {
+    // Arrange & Act
     const controls = macWindow(page).locator('.mw__controls');
     const buttons = controls.locator('.mw__btn');
 
+    // Assert
     await expect(controls).toHaveCSS('background-color', 'rgb(43, 43, 43)');
     await expect(buttons).toHaveCount(3);
     await expect(buttons.nth(0)).toHaveCSS(
@@ -61,15 +65,19 @@ test.describe('mac-window', () => {
   });
 
   test('places the title bar above the content', async ({ page }) => {
+    // Arrange & Act
     const controls = await boxOf(macWindow(page).locator('.mw__controls'));
     const content = await boxOf(macWindow(page).locator('.mw__content'));
 
+    // Assert
     expect(controls.y + controls.height).toBeLessThanOrEqual(content.y + 1);
   });
 
   test('has rounded corners and a shadow', async ({ page }) => {
+    // Arrange & Act
     const frame = macWindow(page).locator('.mw');
 
+    // Assert
     await expect(frame).toHaveCSS('border-radius', '20px');
     await expect(frame).not.toHaveCSS('box-shadow', 'none');
   });
