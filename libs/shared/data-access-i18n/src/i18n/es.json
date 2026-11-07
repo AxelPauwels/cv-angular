@@ -1,8 +1,67 @@
 {
   "t": {
+    "accessibility": {
+      "close": "Cerrar",
+      "high-contrast": "Mayor contraste",
+      "reduce-motion": "Reducir el movimiento",
+      "reset": "Restablecer valores predeterminados",
+      "switch": "Ajustes de accesibilidad",
+      "text-size": "Tamaño del texto",
+      "text-spacing": "Espaciado de texto más amplio",
+      "title": "Accesibilidad"
+    },
+    "admin": {
+      "count": "{on} de {total} activados",
+      "hidden-notice": "La página Admin ya no aparece en el menú. Puedes abrirla en /showcase/admin haciendo clic en «Axel Pauwels» en el pie de página.",
+      "linked": {
+        "off": "{item} también desactivado.",
+        "on": "{item} también activado."
+      },
+      "reset": "Restablecer valores predeterminados",
+      "section": {
+        "general": {
+          "title": "General"
+        },
+        "main-menu": {
+          "title": "Menú principal"
+        },
+        "navbar": {
+          "title": "Iconos de la barra de navegación"
+        },
+        "submenu": {
+          "title": "Submenú"
+        }
+      },
+      "title": "Administración",
+      "toggle": {
+        "color-scheme-switcher": {
+          "label": "Modo claro y oscuro"
+        },
+        "tour-button": {
+          "label": "Botón del recorrido en la página de inicio"
+        }
+      }
+    },
     "at": "en",
+    "carousel": {
+      "next": "Siguiente",
+      "previous": "Anterior"
+    },
     "city": {
       "paris": "París"
+    },
+    "client": "Cliente",
+    "color-scheme": {
+      "dark": "Modo oscuro",
+      "light": "Modo claro y oscuro"
+    },
+    "common": {
+      "download-cv": "Descargar CV",
+      "email": "Correo electrónico",
+      "ok": "OK",
+      "pdf": "PDF",
+      "reset": "Restablecer el valor predeterminado",
+      "under-construction": "Esta página está en construcción. ¡Vuelve pronto!"
     },
     "country": {
       "belgium": "Bélgica"
@@ -32,20 +91,30 @@
       "thomas-more": {
         "degree": "Grado profesional en Informática aplicada",
         "specialization": "IT Factory Aplicaciones"
+      },
+      "training": {
+        "status": {
+          "COMPLETED": "completado",
+          "ONGOING": "en curso",
+          "RECURRING": "cada año"
+        }
       }
     },
     "experience": {
       "job-description": {
         "innomedio": {
-          "projects": "Proyectos: Trabajó en Dobit, Lalys-astene, Allodium, Goetstouwers, Dego y otros proyectos.",
+          "projects": "Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...",
           "technologies": "Tecnología: Mantenimiento y expansión del sistema CMS desarrollado internamente en Symfony con SCSS. Asistencia telefónica a clientes con problemas o expansiones, y gestión del sistema de tickets de soporte en Teamleader. También GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ..."
         },
+        "ordina": {
+          "projects": "Aplicación de aprendizaje electrónico"
+        },
         "phpro": {
-          "projects": "Proyectos: Trabajó en Pizzahut, Hopper, Euroshop, Vinetiq, VAR y otros proyectos.",
+          "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,...",
           "technologies": "Tecnología: Trabajé principalmente con Magento 2 (PHP/Less), con algo de React y Sulu. También me adentré en el CSS de Triángulo Invertido (ITCSS) frontend de SEM&BIO en Sass. También usé GrumPhp, Vagrant, SequelPro, Git, Figma, BitBucket, Jira, Confluence, Jenkins y más."
         },
         "ravago": {
-          "projects": "Proyectos: Colaboración en un Sistema de Gestión de Almacenes. Un sistema de software web personalizado para escritorio (oficina) combinado con un sistema móvil para escáneres portátiles en almacenes. Esto permite la gestión completa de pedidos, inventario, producción, ventas y mucho más. Además, este WMS es totalmente configurable, con funciones y plugins, disponible en varios idiomas para usuarios con diferentes permisos y se comunica con otros sistemas.",
+          "projects": "Sistema de gestión de almacenes (WMS), posteriormente WMS2. Disponible tanto como aplicación de escritorio para oficina como aplicación móvil para escáneres portátiles en almacenes.",
           "technologies": "Tecnología: Angular (Typescript/Scss) con Nx y el framework de interfaz de usuario Kendo. Además, Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise..."
         }
       },
@@ -55,33 +124,48 @@
         "bergerie-stage": "Becario de cocina",
         "bruneau": "Chef de part / Pastelero",
         "cardijn": "Sous chef",
-        "domaine-des-hautes-fagnes": "becario de cocina",
+        "domaine-des-hautes-fagnes": "Becario de cocina",
         "farmasie": "Sous Chef / Pastelero",
-        "innomedio": "Desarrollador PHP / Soporte",
+        "innomedio": "Desarrollador de soporte PHP / Front-End",
         "koekoek": "Sous Chef / Chef",
         "koekoek-2": "Chef",
-        "nieuwen-buiten": "becario de cocina",
-        "phpro": "PHP / Desarrollador Frontend",
-        "ravago": "Consultor Desarrollador Frontend",
-        "residentie": "becario de servicio",
+        "nieuwen-buiten": "Becario de cocina",
+        "ordina": "Desarrollador front-end",
+        "phpro": "Desarrollador front-end de PHP",
+        "ravago": "Desarrollador angular senior",
+        "residentie": "Becario de servicio",
         "zilte": "Chef de part / Pastelero"
       }
     },
+    "font": {
+      "switch": "Fuente"
+    },
     "heading": {
+      "administrator": "Administrador",
+      "architecture": "Arquitectura",
       "code-coverage": "cobertura de código",
       "education": "Formación",
+      "end-to-end-tests": "Pruebas de extremo a extremo",
       "experience": "Experiencia",
       "graphql-docs": "graphql docs",
       "personal": "personal",
+      "project-graph": "Grafo de proyectos",
       "references": "referencias",
-      "skills": "Habilidades"
+      "skills": "Habilidades",
+      "versions": "versiones"
+    },
+    "home": {
+      "about-me": "Más sobre mí",
+      "experience": "Mi experiencia",
+      "portrait": "Retrato de {name}"
     },
     "internship": "Pasantía",
     "language": {
       "dutch": "Holandés",
       "english": "Inglés",
       "french": "Francés",
-      "native-language": "lengua materna",
+      "german": "Alemán",
+      "italian": "Italiano",
       "proficiency": {
         "basic": "básicos",
         "excellent": "Excelente",
@@ -89,12 +173,15 @@
         "good": "Bueno",
         "very-good": "Muy bueno"
       },
-      "spanish": "Español"
+      "spanish": "Español",
+      "switch": "Selecciona un idioma"
     },
     "nav": {
+      "admin": "Admin",
       "architecture": "Arquitectura",
       "code-coverage": "cobertura de código",
       "cv": "CV",
+      "cv-navigation": "Navegación del CV",
       "dark": "Oscuro",
       "dark-mode": "modo oscuro",
       "education": "Formación",
@@ -114,10 +201,10 @@
       "skills": "Habilidades",
       "technical": "Técnico",
       "technical-navigation": "Navegación técnica",
-      "versions": "Versiones",
       "temp": {
         "more": "Más"
-      }
+      },
+      "versions": "Versiones"
     },
     "personal": {
       "about-me": {
@@ -163,15 +250,15 @@
     "son": "Hijo",
     "spoken": "Hablado",
     "subheading": {
+      "administrator": "Un gran poder conlleva una gran configuración",
       "education": {
-        "additional-learnings": "Formación complementaria",
-        "certificates": "Certificados"
+        "certificates": "Certificados",
+        "certificates.description": "Preuve de curiosité et de dévouement",
+        "training-and-conferences": "Formación & conferencias",
+        "training-and-conferences.description": "Siempre aprendiendo, siempre curioso"
       },
-      "frameworks": "marcos",
       "horeca": "Hospitalidad",
       "it": "TI",
-      "libraries": "bibliotecas",
-      "operating-systems": "sistemas operativos",
       "personal": {
         "about-me": "Sobre mí",
         "about-me.description": "La persona detrás del código",
@@ -186,8 +273,26 @@
         "languages.description": "Tendiendo puentes entre culturas",
         "languages.prefix": "Comunicación"
       },
-      "programming-languages": "lenguajes de programación",
-      "version-control": "control de versiones"
+      "skills": {
+        "core-stack": "stack frontend principal",
+        "engineering-practices": "prácticas de ingeniería",
+        "testing-and-quality": "pruebas & calidad",
+        "ai": "IA & desarrollo agéntico",
+        "development-tools": "herramientas de desarrollo",
+        "additional-technologies": "tecnologías adicionales"
+      },
+      "technical": {
+        "dependencies": "Dependencias por proyecto",
+        "dependencies.description": "Directamente del grafo de proyectos",
+        "dependency-rules": "Reglas de dependencia",
+        "dependency-rules.description": "Comprobadas en cada import",
+        "domains-and-layers": "Dominios × capas",
+        "domains-and-layers.description": "Cortes verticales, capas horizontales",
+        "layers": "Capas dentro de un dominio",
+        "layers.description": "Quién hace qué",
+        "public-api": "API pública",
+        "public-api.description": "Barrels y carpetas internas"
+      }
     },
     "temp": {
       "under-construction": {
@@ -201,24 +306,73 @@
       "versions": "t.temp.versions"
     },
     "theme": {
-      "azure": "Azur",
-      "copper": "Cobre",
-      "crimson": "Carmesí",
-      "dark-mode": "Modo oscuro",
-      "forest": "Bosque",
+      "blackberry": "Pizarra",
+      "earth": "Bosque",
       "gold": "Oro",
-      "lavender": "Lavanda",
-      "ocean": "Océano",
-      "plum": "Ciruela",
-      "rose": "Rosa",
-      "sage": "Salvia",
-      "sand": "Arena",
-      "slate": "Pizarra",
-      "switch": "Tema de color",
-      "switch-to-dark": "Cambiar a modo oscuro",
-      "switch-to-light": "Cambiar a modo claro",
-      "teal": "Verde azulado",
-      "violet": "Violeta"
+      "grape": "Lavanda",
+      "honey": "Carmesí",
+      "peach": "Rosa",
+      "silver": "Ciruela",
+      "switch": "Selecciona un tema",
+      "tangerine": "Arena",
+      "water": "Océano"
+    },
+    "tour": {
+      "back": "Atrás",
+      "counter": "{current} / {total}",
+      "exit": "Salir del recorrido",
+      "finish": "Terminar",
+      "loading": "Cargando el recorrido…",
+      "next": "Siguiente",
+      "start": "Iniciar el recorrido",
+      "step": {
+        "architecture": {
+          "label": "Arquitectura",
+          "text": "¿Te preguntas cómo está hecha esta web? La sección técnica explica la arquitectura, el grafo del proyecto y las versiones utilizadas.",
+          "title": "Arquitectura"
+        },
+        "color-scheme": {
+          "label": "Modo oscuro",
+          "text": "Cambia entre un aspecto claro y uno oscuro. Por defecto, la web sigue la configuración de tu dispositivo.",
+          "title": "Modo claro y oscuro"
+        },
+        "cv": {
+          "label": "CV",
+          "text": "Aquí encontrarás todo sobre mí: datos personales, formación, experiencia, habilidades y referencias.",
+          "title": "Mi CV"
+        },
+        "finish": {
+          "label": "Terminar",
+          "text": "Gracias por hacer el recorrido. Disfruta explorando, puedes volver a iniciar el recorrido desde la página de inicio cuando quieras.",
+          "title": "¡Eso es todo!"
+        },
+        "fonts": {
+          "label": "Fuentes",
+          "text": "¿Prefieres otro estilo? Cambia aquí la fuente de toda la web.",
+          "title": "Fuentes"
+        },
+        "languages": {
+          "label": "Idiomas",
+          "text": "La web está disponible en inglés, neerlandés, francés y español. Elige tu idioma aquí.",
+          "title": "Idiomas"
+        },
+        "showcase": {
+          "label": "Escaparate",
+          "text": "El escaparate muestra técnicas en la práctica, como micro-frontends, documentación GraphQL, cobertura de código y pruebas de extremo a extremo.",
+          "title": "Escaparate"
+        },
+        "themes": {
+          "label": "Temas",
+          "text": "Elige aquí uno de los temas de color. Cada tema aplica colores a juego en toda la web.",
+          "title": "Temas de color"
+        },
+        "welcome": {
+          "label": "Bienvenida",
+          "text": "Déjame enseñarte el sitio. Este breve recorrido te muestra la web y sus funciones. Usa los botones de abajo o las flechas del teclado, y pulsa Escape para salir en cualquier momento.",
+          "title": "¡Bienvenido!"
+        }
+      },
+      "step-of": "Paso {current} de {total}"
     },
     "website": "sitio web",
     "written": "Escrito"

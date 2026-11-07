@@ -1,8 +1,89 @@
 {
   "t": {
+    "accessibility": {
+      "close": "Sluiten",
+      "high-contrast": "Hoger contrast",
+      "reduce-motion": "Minder beweging",
+      "reset": "Standaardinstellingen herstellen",
+      "switch": "Toegankelijkheid",
+      "text-size": "Tekstgrootte",
+      "text-spacing": "Ruimere tekstafstand",
+      "title": "Toegankelijkheid"
+    },
+    "admin": {
+      "count": "{on} van {total} aan",
+      "hidden-notice": "De Admin-pagina staat niet meer in het menu. Je kunt ze nog altijd openen via /showcase/admin door in de footer op “Axel Pauwels” te klikken.",
+      "linked": {
+        "off": "{item} ook uitgezet.",
+        "on": "{item} ook aangezet."
+      },
+      "reset": "Standaardwaarden herstellen",
+      "section": {
+        "general": {
+          "title": "Algemeen"
+        },
+        "main-menu": {
+          "title": "Hoofdmenu"
+        },
+        "navbar": {
+          "title": "Iconen in de navigatiebalk"
+        },
+        "submenu": {
+          "title": "Submenu"
+        }
+      },
+      "title": "Beheer",
+      "toggle": {
+        "color-scheme-switcher": {
+          "label": "Lichte en donkere modus"
+        },
+        "tour-button": {
+          "label": "Tour knop op de homepagina"
+        }
+      }
+    },
     "at": "aan",
+    "carousel": {
+      "next": "Volgende",
+      "previous": "Vorige"
+    },
     "city": {
       "paris": "Parijs"
+    },
+    "client": "Klant",
+    "color-scheme": {
+      "dark": "Donkere modus",
+      "light": "Lichte modus"
+    },
+    "common": {
+      "download-cv": "Download cv",
+      "email": "E-mail",
+      "ok": "OK",
+      "pdf": "pdf",
+      "reset": "Reset",
+      "under-construction": "Aan deze pagina wordt nog gewerkt. Kom snel terug!"
+    },
+    "competence": {
+      "ai-assisted-development": {
+        "description": "GitHub Copilot en Cursor voor snellere oplevering en hogere kwaliteit. Momenteel ook spec-driven development aan het leren.",
+        "title": "Modern & AI-ondersteund ontwikkelen"
+      },
+      "angular-enterprise": {
+        "description": "Grootschalige applicaties voor complexe bedrijfsprocessen.",
+        "title": "Angular enterprise development"
+      },
+      "clean-code": {
+        "description": "Duidelijke richtlijnen, herbruikbaar ontwerp en code die blijft staan.",
+        "title": "Clean & onderhoudbare code"
+      },
+      "collaboration": {
+        "description": "Kennisdeling en continue verbetering in multidisciplinaire teams.",
+        "title": "Samenwerking"
+      },
+      "front-end-architecture": {
+        "description": "Nx-monorepos, herbruikbare libraries en schaalbare state met RxJS & Signals.",
+        "title": "Front-end architectuur"
+      }
     },
     "country": {
       "belgium": "België"
@@ -32,22 +113,45 @@
       "thomas-more": {
         "degree": "Professionele bachelor in Toegepaste Informatica",
         "specialization": "IT Factory Applicaties"
+      },
+      "training": {
+        "status": {
+          "COMPLETED": "afgerond",
+          "ONGOING": "lopend",
+          "RECURRING": "jaarlijks"
+        }
       }
     },
     "experience": {
       "job-description": {
         "innomedio": {
-          "projects": "Projecten: Meegewerkt aan Dobit, Lalys-astene, Allodium, Goetstouwers, Dego en andere projecten.",
-          "technologies": "Technologie: Het eigen ontwikkeld CMS systeem in Symfony met Scss onderhouden en uitbreiden. Telefonische ondersteuning voor klanten met problemen of uitbreidingen, en het beheren van het support ticketsysteem in Teamleader. Verder ook GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ..."
+          "projects": "Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...",
+          "support": "Bugfixing, telefonische support en beheer van het ticketsysteem, met zelfstandige planning.",
+          "technologies": "Technologie: Het eigen ontwikkeld CMS systeem in Symfony met Scss onderhouden en uitbreiden. Telefonische ondersteuning voor klanten met problemen of uitbreidingen, en het beheren van het support ticketsysteem in Teamleader. Verder ook GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ...",
+          "websites": "Nieuwe websites en webshops gebouwd en custom CMS-platformen uitgebreid"
+        },
+        "ordina": {
+          "programme": "Intensief traject gegeven door senior consultants, dat theorie en praktijk combineert in front-end, back-end en cloud – o.a. Angular, React, RxJS, NestJS, TDD, testing, DevOps & CI, UX/UI, design systems, Git, Agile en meer.",
+          "projects": "Course and eLearning applicatie"
         },
         "phpro": {
-          "projects": "Projecten: Meegewerkt aan Pizzahut, Hopper, Euroshop, Vinetiq, VAR en andere projecten.",
+          "agile": "Oplevering binnen Agile/Scrum-teams, in nauw contact met de klant.",
+          "front-end": "Herbruikbare, schaalbare front-end oplossingen voor webshops met een ITCSS-architectuur in Sass, aangevuld met React en Sulu.",
+          "magento": "Ontwikkeling en maatwerk van Magento 2 e-commerceplatformen (B2C/B2B)",
+          "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,...",
           "technologies": "Technologie: Voornamelijk gewerkt met Magento 2 (PHP/Less), en soms een beetje React en Sulu. Ook verdiept in front-end Inverted Triagle CSS (ITCSS) van SEM&BIO in Sass. Verder GrumPhp, Vagrant, SequelPro, Git, Figma, BitBucket, Jira, Confluence, Jenkins, ..."
         },
         "ravago": {
-          "projects": "Projecten:\nMeegewerkt aan Warehouse Management System. Een custom web-gebaseerd software systeem voor desktop (office) in combinatie met een mobile systeem voor handscanners in magazijnen. Dit voor het volledig beheren van orders, stock, productie, verkoop en veel meer. Verder is dit WMS volledig configureerbaar, met features en plugins, beschikbaar in verschillende talen, voor gebruikers met verschillende rechten, dat communiceert met andere systemen.",
-          "technologies": "Technologie: Angular (Typescript/Scss) met Nx en het UI framework Kendo. Verder Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise ..."
+          "platform": "Verdere uitbouw van het front-end platform met Angular, Nx-monorepos, GraphQL/Apollo en Kendo UI, met betere onderhoudbaarheid, schaalbaarheid en ontwikkelproductiviteit als resultaat.",
+          "projects": "Warehouse Management System (WMS), later WMS2. Beide als desktop app voor in office en mobile app voor handscanners in magazijn.",
+          "technologies": "Technologie: Angular (Typescript/Scss) met Nx en het UI framework Kendo. Verder Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise ...",
+          "wms": "Ontwerpen, bouwen en uitbreiden van het WMS: een bedrijfskritische applicatie voor stock-, productie- en orderbeheer – desktop voor kantoor, mobiel voor magazijniers met scanners.",
+          "workflows": "Complexe workflows vereenvoudigd en repetitieve taken geautomatiseerd; AI-ondersteund ontwikkelen geïntroduceerd en gepromoot binnen het team."
         }
+      },
+      "project": {
+        "ordina": "Professional-programma",
+        "ravago": "Warehouse Management System"
       },
       "work-position": {
         "3-it": "Stagiair Frontend Developer",
@@ -57,31 +161,47 @@
         "cardijn": "Sous-chef",
         "domaine-des-hautes-fagnes": "Stagiair keuken",
         "farmasie": "Sous-chef / Pâtissier",
-        "innomedio": "PHP / Support Developer",
+        "innomedio": "PHP Support / Front-End Developer",
         "koekoek": "Sous-chef / Chef",
         "koekoek-2": "Chef",
         "nieuwen-buiten": "Stagiair keuken",
-        "phpro": "PHP / Frontend Developer",
-        "ravago": "Consultant Frontend Developer",
+        "ordina": "Front-End Developer",
+        "phpro": "PHP Front-End Developer",
+        "ravago": "Senior Angular Developer",
         "residentie": "Stagiair zaal",
         "zilte": "Chef de partie / Pâtissier"
       }
     },
+    "font": {
+      "switch": "Lettertype"
+    },
     "heading": {
+      "administrator": "Beheerder",
+      "architecture": "Architectuur",
       "code-coverage": "code coverage",
       "education": "Opleiding",
+      "end-to-end-tests": "End-to-end tests",
       "experience": "ervaring",
       "graphql-docs": "graphql docs",
       "personal": "persoonlijk",
-      "references": "referenties",
-      "skills": "Vaardigheden"
+      "project-graph": "Projectgraaf",
+      "references": "Referenties",
+      "skills": "Vaardigheden",
+      "versions": "versies"
+    },
+    "home": {
+      "about-me": "Meer over mij",
+      "experience": "Mijn ervaring",
+      "portrait": "Portret van {name}"
     },
     "internship": "Stage",
     "language": {
       "dutch": "Nederlands",
       "english": "Engels",
       "french": "Frans",
-      "native-language": "moedertaal",
+      "german": "Duits",
+      "italian": "Italiaans",
+      "native": "Moedertaal",
       "proficiency": {
         "basic": "basis",
         "excellent": "Uitstekend",
@@ -89,12 +209,15 @@
         "good": "Goed",
         "very-good": "Zeer goed"
       },
-      "spanish": "Spaans"
+      "spanish": "Spaans",
+      "switch": "Taal"
     },
     "nav": {
+      "admin": "Admin",
       "architecture": "Architectuur",
       "code-coverage": "code coverage",
       "cv": "CV",
+      "cv-navigation": "CV-navigatie",
       "dark": "Donker",
       "dark-mode": "donkere modus",
       "education": "Opleiding",
@@ -114,10 +237,10 @@
       "skills": "Vaardigheden",
       "technical": "Technisch",
       "technical-navigation": "Technische navigatie",
-      "versions": "Versies",
       "temp": {
         "more": "Meer..."
-      }
+      },
+      "versions": "Versies"
     },
     "personal": {
       "about-me": {
@@ -140,6 +263,7 @@
             "children": "Kinderen",
             "date-of-birth": "Geboortedatum",
             "driver-license": "Rijbewijs",
+            "location": "Locatie",
             "marital-status": "Burgerlijke staat",
             "nationality": "Nationaliteit",
             "personality-type": "Persoonlijkheidstype"
@@ -157,21 +281,22 @@
         "member-of-wca": "Lid van WCA",
         "mtg": "Magic The Gathering (TCG)",
         "rubik-s-cube-competitions": "Rubik’s Cube competities"
-      }
+      },
+      "profile": "Senior front-end developer met 8 jaar ervaring in enterprise webapplicaties, waarvan ruim 5 jaar volledig gespecialiseerd in Angular. Ik ontwerp en bouw bedrijfskritische applicaties met een sterke focus op onderhoudbare architectuur, clean code en schaalbaarheid op lange termijn. Pragmatisch, kwaliteitsgericht en een echte teamspeler binnen Agile-teams. Ik zet moderne werkwijzen en AI-ondersteunde tooling doelgericht in om sneller op te leveren zonder in te boeten aan kwaliteit."
     },
     "present": "heden",
     "son": "Zoon",
     "spoken": "Mondeling",
     "subheading": {
+      "administrator": "Met grote macht komt grote configuratie",
       "education": {
-        "additional-learnings": "Aanvullende opleidingen",
-        "certificates": "Certificaten"
+        "certificates": "Certificaten",
+        "certificates.description": "Blijk van nieuwsgierigheid en toewijding",
+        "training-and-conferences": "Training & conferenties",
+        "training-and-conferences.description": "Altijd lerend, nog steeds nieuwsgierig"
       },
-      "frameworks": "frameworks",
       "horeca": "Horeca",
       "it": "IT",
-      "libraries": "libraries",
-      "operating-systems": "besturingssystemen",
       "personal": {
         "about-me": "Over mij",
         "about-me.description": "De mens achter de code",
@@ -186,8 +311,26 @@
         "languages.description": "Bruggen bouwen tussen culturen",
         "languages.prefix": "Communicatie"
       },
-      "programming-languages": "programmeertalen",
-      "version-control": "versiebeheer"
+      "skills": {
+        "core-stack": "core frontend stack",
+        "engineering-practices": "engineering practices",
+        "testing-and-quality": "testen & kwaliteit",
+        "ai": "AI & agentic development",
+        "development-tools": "ontwikkeltools",
+        "additional-technologies": "andere technologieën"
+      },
+      "technical": {
+        "dependencies": "Afhankelijkheden per project",
+        "dependencies.description": "Rechtstreeks uit de projectgraaf",
+        "dependency-rules": "Afhankelijkheidsregels",
+        "dependency-rules.description": "Gecontroleerd bij elke import",
+        "domains-and-layers": "Domeinen × lagen",
+        "domains-and-layers.description": "Verticale slices, horizontale lagen",
+        "layers": "Lagen binnen een domein",
+        "layers.description": "Wie doet wat",
+        "public-api": "Publieke API",
+        "public-api.description": "Barrels en interne mappen"
+      }
     },
     "temp": {
       "under-construction": {
@@ -201,24 +344,77 @@
       "versions": "Versies"
     },
     "theme": {
-      "azure": "Azuur",
-      "copper": "Koper",
-      "crimson": "Karmijn",
-      "dark-mode": "Donkere modus",
-      "forest": "Woud",
+      "blackberry": "Braambes",
+      "bronze": "Brons",
+      "earth": "Aarde",
+      "fire": "Vuur",
       "gold": "Goud",
-      "lavender": "Lavendel",
-      "ocean": "Oceaan",
-      "plum": "Pruim",
-      "rose": "Roze",
-      "sage": "Salie",
-      "sand": "Zand",
-      "slate": "Leisteen",
-      "switch": "Kleurthema",
-      "switch-to-dark": "Naar donkere modus",
-      "switch-to-light": "Naar lichte modus",
-      "teal": "Petrol",
-      "violet": "Violet"
+      "grape": "Druif",
+      "honey": "Honing",
+      "kiwi": "Kiwi",
+      "peach": "Perzik",
+      "silver": "Zilver",
+      "switch": "Thema",
+      "tangerine": "Mandarijn",
+      "water": "Water",
+      "wind": "Wind"
+    },
+    "tour": {
+      "back": "Terug",
+      "counter": "{current} / {total}",
+      "exit": "Rondleiding stoppen",
+      "finish": "Afronden",
+      "loading": "De rondleiding wordt geladen…",
+      "next": "Volgende",
+      "start": "Start de rondleiding",
+      "step": {
+        "architecture": {
+          "label": "Architectuur",
+          "text": "Benieuwd hoe deze website gebouwd is? Het technische gedeelte legt de architectuur, de projectgraaf en de gebruikte versies uit.",
+          "title": "Architectuur"
+        },
+        "color-scheme": {
+          "label": "Donkere modus",
+          "text": "Wissel tussen een lichte en een donkere weergave. Standaard volgt de website de instelling van je toestel.",
+          "title": "Lichte en donkere modus"
+        },
+        "cv": {
+          "label": "CV",
+          "text": "Hier vind je alles over mij: persoonlijke gegevens, opleiding, ervaring, vaardigheden en referenties.",
+          "title": "Mijn CV"
+        },
+        "finish": {
+          "label": "Afronden",
+          "text": "Bedankt voor het volgen van de rondleiding. Veel plezier met rondkijken, je kunt de rondleiding altijd opnieuw starten vanaf de startpagina.",
+          "title": "Dat was het!"
+        },
+        "fonts": {
+          "label": "Lettertypes",
+          "text": "Liever een andere stijl? Wijzig hier het lettertype van de hele website.",
+          "title": "Lettertypes"
+        },
+        "languages": {
+          "label": "Talen",
+          "text": "De website is beschikbaar in het Engels, Nederlands, Frans en Spaans. Kies hier je taal.",
+          "title": "Talen"
+        },
+        "showcase": {
+          "label": "Showcase",
+          "text": "De showcase toont technieken in de praktijk, zoals micro-frontends, GraphQL-documentatie, code coverage en end-to-end tests.",
+          "title": "Showcase"
+        },
+        "themes": {
+          "label": "Thema's",
+          "text": "Kies hier een van de kleurthema's. Elk thema geeft de hele website bijpassende kleuren.",
+          "title": "Kleurthema's"
+        },
+        "welcome": {
+          "label": "Welkom",
+          "text": "Ik leid je graag even rond. Deze korte rondleiding toont je de website en zijn functies. Gebruik de knoppen hieronder of de pijltjestoetsen, en druk op Escape om op elk moment te stoppen.",
+          "title": "Welkom!"
+        }
+      },
+      "step-of": "Stap {current} van {total}"
     },
     "website": "website",
     "written": "Schriftelijk"

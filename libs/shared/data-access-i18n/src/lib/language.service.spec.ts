@@ -18,7 +18,10 @@ describe('LanguageService', () => {
   }
 
   it('offers en, nl, fr and es', async () => {
+    // Arrange & Act
     const { service } = await start();
+
+    // Assert
     expect(service.languages.map((language) => language.code)).toEqual([
       'en',
       'nl',
@@ -28,11 +31,14 @@ describe('LanguageService', () => {
   });
 
   it('loads a language lazily, switches to it and updates <html lang>', async () => {
+    // Arrange
     const { service, translate } = await start();
 
+    // Act
     await service.changeLanguage('nl');
     TestBed.tick();
 
+    // Assert
     expect(service.language()).toBe('nl');
     expect(TestBed.inject(DOCUMENT).documentElement.lang).toBe('nl');
     expect(
@@ -44,9 +50,28 @@ describe('LanguageService', () => {
   });
 
   it('remembers the chosen language for the next visit', async () => {
+    // Arrange & Act
     const { service } = await start();
     await service.changeLanguage('fr');
 
+    // Assert
     expect(Object.values({ ...localStorage })).toContain('fr');
+  });
+
+  it('resets to the browser language and forgets the choice', async () => {
+    // Arrange
+    const { service } = await start();
+    const browser = navigator.language.split('-')[0];
+    const expected = service.languages.some((l) => l.code === browser)
+      ? browser
+      : 'en';
+    await service.changeLanguage(expected === 'fr' ? 'nl' : 'fr');
+
+    // Act
+    await service.resetLanguage();
+
+    // Assert
+    expect(service.language()).toBe(expected);
+    expect(localStorage.getItem('__tolgee_currentLanguage')).toBeNull();
   });
 });
