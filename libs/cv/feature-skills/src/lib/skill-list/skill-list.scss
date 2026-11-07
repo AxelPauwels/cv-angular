@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.skill-list {
+  // Masonry: cards of different heights flow into columns. The cards' shadows need
+  // room, so the gaps are as wide as they reach. No padding: the cards line up with
+  // the page layout's edges like on the other pages (the columns don't clip the shadows).
+  &__grid {
+    column-gap: 2rem;
+    columns: 18rem;
+  }
+
+  // no header icon, and an even padding around the title
+  &__card {
+    --ds-card-header-padding: 16px;
+
+    break-inside: avoid;
+    margin-bottom: 2rem;
+  }
+}

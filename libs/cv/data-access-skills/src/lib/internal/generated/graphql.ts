@@ -7,12 +7,20 @@ export type Incremental<T> =
       [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
     };
 import type { DocumentTypeDecoration } from '@graphql-typed-document-node/core';
+/** Sections of the skills page, in the order they are shown */
 export type SkillCategory =
-  | 'FRAMEWORKS'
-  | 'LIBRARIES'
-  | 'OPERATING_SYSTEMS'
-  | 'PROGRAMMING_LANGUAGES'
-  | 'VERSION_CONTROL';
+  /** Additional technologies outside the core stack, e.g. back-end and CMS */
+  | 'ADDITIONAL_TECHNOLOGIES'
+  /** AI & agentic development */
+  | 'AI'
+  /** Core frontend stack: languages, framework and libraries used every day */
+  | 'CORE_STACK'
+  /** Development tools: version control, IDEs and collaboration */
+  | 'DEVELOPMENT_TOOLS'
+  /** Engineering practices: architecture, patterns and ways of working */
+  | 'ENGINEERING_PRACTICES'
+  /** Testing, accessibility and code quality */
+  | 'TESTING_AND_QUALITY';
 
 export type SkillFieldsFragment = {
   category: SkillCategory;

@@ -8,10 +8,6 @@ import {
 import { SkillService } from './internal/services/skill.service';
 import type { Skill } from './types/skill.types';
 
-/**
- * Loads once on first use and keeps the result for the whole app, so
- * navigating back to a page shows it without loading again.
- */
 export const SkillStore = signalStore(
   { providedIn: 'root' },
   withProps(() => ({

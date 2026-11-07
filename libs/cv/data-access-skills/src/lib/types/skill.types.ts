@@ -1,13 +1,15 @@
+/** A section of the skills page, in the order they are shown */
 export type SkillCategory =
-  | 'PROGRAMMING_LANGUAGES'
-  | 'FRAMEWORKS'
-  | 'LIBRARIES'
-  | 'OPERATING_SYSTEMS'
-  | 'VERSION_CONTROL';
+  | 'CORE_STACK'
+  | 'ENGINEERING_PRACTICES'
+  | 'TESTING_AND_QUALITY'
+  | 'AI'
+  | 'DEVELOPMENT_TOOLS'
+  | 'ADDITIONAL_TECHNOLOGIES';
 
 export interface SkillEntry {
   name: string;
-  /** 0–10 scale */
+  /** 0–5 scale */
   level: number;
   icon: string;
 }

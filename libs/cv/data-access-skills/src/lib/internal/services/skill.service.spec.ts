@@ -24,9 +24,11 @@ describe('SkillService', () => {
   const stable = () => TestBed.inject(ApplicationRef).whenStable();
 
   it('maps skills to the frontend model', async () => {
+    // Arrange & Act
     const skills = load((service) => service.skills());
     await stable();
 
+    // Assert
     expect(skills.error()).toBeUndefined();
     expect(skills.value()?.length).toBeGreaterThan(0);
     expect(skills.value()?.[0].entries.length).toBeGreaterThan(0);

@@ -1,0 +1,10 @@
+<span
+  class="ui-skill__icon cv-icon"
+  [class]="'cv-icon-' + icon()"
+  aria-hidden="true"></span>
+<span class="ui-skill__name">{{ name() }}</span>
+<ds-progress-dots
+  class="ui-skill__dots"
+  [value]="level()"
+  [label]="name()"
+  [index]="index()" />
