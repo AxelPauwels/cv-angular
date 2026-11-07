@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/core": "^22.2.0",
-    "@cv/technical-data-access-build-info": "0.0.1"
+    "@cv/technical-data-access-build-info": "0.0.1",
+    "@angular/material": "^22.2.5",
+    "@cv/shared-ui-design-system": "0.0.1"
   },
   "sideEffects": false,
   "private": true

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavItem, SubNavbar } from '@cv/shared-ui-design-system';
-import { ROUTES } from '@cv/shared-util-routing';
+import { FeatureToggleService } from '@cv/shared-data-access';
+import { TECHNICAL_NAV_ITEMS } from '../technical-nav-items';
 
 /** Layout of the Technical domain: its sub navbar above the active page */
 @Component({
@@ -11,12 +12,11 @@ import { ROUTES } from '@cv/shared-util-routing';
   styleUrl: './technical-feature-shell.scss',
 })
 export class TechnicalFeatureShell {
-  protected readonly navItems: NavItem[] = [
-    { labelKey: 't.nav.architecture', path: ROUTES.TECHNICAL.ARCHITECTURE },
-    {
-      labelKey: 't.nav.project-graph',
-      path: ROUTES.TECHNICAL.PROJECT_GRAPH,
-    },
-    { labelKey: 't.nav.versions', path: ROUTES.TECHNICAL.VERSIONS },
-  ];
+  private readonly toggles = inject(FeatureToggleService).states;
+
+  /** The items switched off on the admin page are left out */
+  protected readonly navItems = computed<NavItem[]>(() => {
+    const toggles = this.toggles();
+    return TECHNICAL_NAV_ITEMS.filter(({ toggle }) => toggles[toggle]);
+  });
 }

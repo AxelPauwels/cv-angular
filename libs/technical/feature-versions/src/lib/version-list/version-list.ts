@@ -1,17 +1,22 @@
 import { Component, computed, inject } from '@angular/core';
+import { PageTitle } from '@cv/shared-ui-design-system';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatTableModule } from '@angular/material/table';
+import { Card } from '@cv/shared-ui-card';
 import {
   PackageVersion,
   VersionStore,
 } from '@cv/technical-data-access-build-info';
 
-/** The frameworks and tools this app is built with, grouped by category */
 @Component({
   selector: 'technical-version-list',
+  imports: [PageTitle, Card, MatProgressBar, MatTableModule],
   templateUrl: './version-list.html',
   styleUrl: './version-list.scss',
 })
 export class VersionList {
   protected readonly store = inject(VersionStore);
+  protected readonly columns = ['package', 'version', 'range'];
 
   /** One group per category, in the order the generator lists them */
   protected readonly groups = computed(() => {

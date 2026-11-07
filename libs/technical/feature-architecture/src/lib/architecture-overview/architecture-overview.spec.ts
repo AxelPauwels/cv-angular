@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideI18nTesting } from '@cv/shared-data-access-i18n';
 import { provideHttpClient } from '@angular/common/http';
 import {
   HttpTestingController,
@@ -9,7 +10,11 @@ import { ArchitectureOverview, describeTag } from './architecture-overview';
 describe('ArchitectureOverview', () => {
   async function render(answer: (http: HttpTestingController) => void) {
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideI18nTesting(),
+      ],
     });
     const fixture = TestBed.createComponent(ArchitectureOverview);
     fixture.detectChanges();
@@ -20,6 +25,7 @@ describe('ArchitectureOverview', () => {
   }
 
   it('puts every library in its domain and layer, and lists the rules', async () => {
+    // Arrange & Act
     const element = await render((http) =>
       http.expectOne('/build-info/architecture.json').flush({
         projects: [
@@ -56,7 +62,10 @@ describe('ArchitectureOverview', () => {
       })
     );
 
-    const matrix = element.querySelector('.architecture-matrix') as HTMLElement;
+    // Assert
+    const matrix = element.querySelector(
+      '.architecture-overview__matrix'
+    ) as HTMLElement;
     expect(
       Array.from(matrix.querySelectorAll('thead th')).map((th) =>
         th.textContent?.trim()
@@ -70,18 +79,22 @@ describe('ArchitectureOverview', () => {
     expect(matrix.textContent).toContain('cv-feature-skills');
     expect(matrix.textContent).not.toContain('cv-e2e');
 
-    const rules = element.querySelector('.architecture-rules') as HTMLElement;
+    const rules = element.querySelector(
+      '.architecture-overview__rules'
+    ) as HTMLElement;
     expect(rules.textContent).toContain('same domain, shared');
     expect(rules.textContent).toContain('nothing');
   });
 
   it('explains how to generate the data when it is missing', async () => {
+    // Arrange & Act
     const element = await render((http) =>
       http
         .expectOne('/build-info/architecture.json')
         .flush('', { status: 404, statusText: 'Not Found' })
     );
 
+    // Assert
     expect(element.querySelector('table')).toBeNull();
     expect(element.textContent).toContain('build-info:build-info');
   });
@@ -89,6 +102,7 @@ describe('ArchitectureOverview', () => {
 
 describe('describeTag', () => {
   it('reads sheriff tags as words', () => {
+    // Act & Assert
     expect(describeTag('type:data-access')).toBe('data-access');
     expect(describeTag('domain:*')).toBe('every domain');
     expect(describeTag('*')).toBe('everything');

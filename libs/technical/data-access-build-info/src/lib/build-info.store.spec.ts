@@ -17,6 +17,7 @@ describe('build info stores', () => {
   const settle = () => TestBed.inject(ApplicationRef).whenStable();
 
   it('loads the installed versions', async () => {
+    // Arrange & Act
     const store = TestBed.inject(VersionStore);
     TestBed.tick();
     TestBed.inject(HttpTestingController)
@@ -33,11 +34,13 @@ describe('build info stores', () => {
       });
     await settle();
 
+    // Assert
     expect(store.packages().map((entry) => entry.label)).toEqual(['Angular']);
     expect(store.error()).toBeUndefined();
   });
 
   it('loads the projects and rules', async () => {
+    // Arrange & Act
     const store = TestBed.inject(ArchitectureStore);
     TestBed.tick();
     TestBed.inject(HttpTestingController)
@@ -57,11 +60,13 @@ describe('build info stores', () => {
       });
     await settle();
 
+    // Assert
     expect(store.projects()[0].name).toBe('api');
     expect(store.rules()[0].from).toBe('type:api');
   });
 
   it('reports missing build info as an error, with empty data', async () => {
+    // Arrange & Act
     const store = TestBed.inject(VersionStore);
     TestBed.tick();
     TestBed.inject(HttpTestingController)
@@ -69,6 +74,7 @@ describe('build info stores', () => {
       .flush('', { status: 404, statusText: 'Not Found' });
     await settle();
 
+    // Assert
     expect(store.error()).toBeTruthy();
     expect(store.packages()).toEqual([]);
   });

@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideI18nTesting } from '@cv/shared-data-access-i18n';
 import { provideHttpClient } from '@angular/common/http';
 import {
   HttpTestingController,
@@ -9,7 +10,11 @@ import { VersionList } from './version-list';
 describe('VersionList', () => {
   async function render(answer: (http: HttpTestingController) => void) {
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideI18nTesting(),
+      ],
     });
     const fixture = TestBed.createComponent(VersionList);
     fixture.detectChanges();
@@ -20,6 +25,7 @@ describe('VersionList', () => {
   }
 
   it('lists the versions per category', async () => {
+    // Arrange & Act
     const element = await render((http) =>
       http.expectOne('/build-info/versions.json').flush({
         packages: [
@@ -47,10 +53,11 @@ describe('VersionList', () => {
       })
     );
 
+    // Assert
     expect(
-      Array.from(element.querySelectorAll('.version-list-category')).map((th) =>
-        th.textContent?.trim()
-      )
+      Array.from(
+        element.querySelectorAll('.version-list__card .card__title')
+      ).map((th) => th.textContent?.trim())
     ).toEqual(['Runtime', 'Framework']);
     const angular = Array.from(element.querySelectorAll('tbody tr')).find(
       (row) => row.textContent?.includes('Angular')
@@ -62,12 +69,14 @@ describe('VersionList', () => {
   });
 
   it('explains how to generate the versions when they are missing', async () => {
+    // Arrange & Act
     const element = await render((http) =>
       http
         .expectOne('/build-info/versions.json')
         .flush('', { status: 404, statusText: 'Not Found' })
     );
 
+    // Assert
     expect(element.querySelector('table')).toBeNull();
     expect(element.textContent).toContain('build-info:build-info');
   });

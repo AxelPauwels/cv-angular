@@ -1,4 +1,21 @@
-import { Component, computed, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
+import { PageTitle, SectionHeading } from '@cv/shared-ui-design-system';
+import { MatChip, MatChipAvatar, MatChipSet } from '@angular/material/chips';
+import {
+  MatAccordion,
+  MatExpansionPanel,
+  MatExpansionPanelDescription,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle,
+} from '@angular/material/expansion';
+import { MatIcon } from '@angular/material/icon';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatTableModule } from '@angular/material/table';
 import {
   ArchitectureStore,
   ProjectInfo,
@@ -32,12 +49,29 @@ export function describeTargets(tags: string[]): string {
  */
 @Component({
   selector: 'technical-architecture-overview',
+  imports: [
+    PageTitle,
+    SectionHeading,
+    MatAccordion,
+    MatChip,
+    MatChipAvatar,
+    MatChipSet,
+    MatExpansionPanel,
+    MatExpansionPanelDescription,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    MatIcon,
+    MatProgressBar,
+    MatTableModule,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './architecture-overview.html',
   styleUrl: './architecture-overview.scss',
 })
 export class ArchitectureOverview {
   protected readonly store = inject(ArchitectureStore);
   protected readonly describeTargets = describeTargets;
+  protected readonly ruleColumns = ['from', 'to'];
 
   protected readonly libs = computed(() =>
     this.store.projects().filter((project) => project.kind === 'lib')
@@ -59,6 +93,12 @@ export class ArchitectureOverview {
     )
   );
 
+  /** The matrix columns: the row header, then one per layer */
+  protected readonly matrixColumns = computed(() => [
+    'domain',
+    ...this.layers(),
+  ]);
+
   /** domain -> layer -> projects, for the matrix */
   protected readonly matrix = computed(() => {
     const cells = new Map<string, ProjectInfo[]>();
@@ -78,6 +118,14 @@ export class ArchitectureOverview {
       ),
     }))
   );
+
+  /** The numbers on top of the page */
+  protected readonly stats = computed(() => [
+    { icon: 'category', label: 'Domains', value: this.domains().length },
+    { icon: 'layers', label: 'Layers', value: this.layers().length },
+    { icon: 'deployed_code', label: 'Libraries', value: this.libs().length },
+    { icon: 'web', label: 'Apps', value: this.apps().length },
+  ]);
 
   protected cell(domain: string, layer: string): ProjectInfo[] {
     return this.matrix().get(`${domain}|${layer}`) ?? [];

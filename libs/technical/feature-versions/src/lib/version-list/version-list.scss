@@ -1,28 +1,44 @@
-.version-list {
-  border-collapse: collapse;
-  max-width: 48rem;
-  width: 100%;
+@use '3.vendors/mat';
 
-  th,
-  td {
-    padding: 0.375rem 0.75rem;
+:host {
+  display: block;
+  max-width: 80rem;
+}
+
+.version-list {
+  &__intro {
+    margin-block: 0 1rem;
+  }
+
+  // Masonry: cards of different heights flow into columns (two on wide screens, one
+  // on phones) instead of leaving rows with empty space. The cards' shadows need
+  // room, so the gaps and the padding are as wide as they reach.
+  &__grid {
+    column-gap: 2rem;
+    columns: 2 26rem;
+    padding: 1rem;
+  }
+
+  &__card {
+    @include mat.table-overrides(
+      (
+        background-color: transparent,
+      )
+    );
+
+    break-inside: avoid;
+    margin-bottom: 2rem;
+  }
+
+  // A body cell that is a row header (a plain <th>, Material only styles <td>)
+  &__package {
+    font-weight: normal;
     text-align: start;
   }
 
-  thead th {
-    border-bottom: 1px solid var(--mat-sys-outline-variant);
+  &__name {
     color: var(--mat-sys-on-surface-variant);
-    font: var(--mat-sys-label-large);
+    display: block;
+    font-size: 0.85em;
   }
-}
-
-.version-list-category {
-  color: var(--mat-sys-primary);
-  font: var(--mat-sys-title-small);
-  padding-top: 1.25rem;
-}
-
-.version-list-name {
-  color: var(--mat-sys-on-surface-variant);
-  margin-inline-start: 0.5rem;
 }
