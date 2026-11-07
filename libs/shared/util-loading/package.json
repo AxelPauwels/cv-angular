@@ -1,0 +1,7 @@
+{
+  "name": "@cv/shared-util-loading",
+  "version": "0.0.1",
+  "peerDependencies": {},
+  "sideEffects": false,
+  "private": true
+}
