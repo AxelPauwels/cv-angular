@@ -1,0 +1,6 @@
+fragment TrainingFields on Training {
+  name
+  provider
+  year
+  status
+}

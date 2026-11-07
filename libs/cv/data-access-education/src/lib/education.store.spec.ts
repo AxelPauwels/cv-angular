@@ -13,7 +13,7 @@ describe('EducationStore', () => {
     });
   });
 
-  it('exposes educations, certificates and additional learnings', async () => {
+  it('exposes educations, certificates, additional learnings and trainings', async () => {
     // Arrange & Act
     const store = TestBed.inject(EducationStore);
     await TestBed.inject(ApplicationRef).whenStable();
@@ -23,6 +23,7 @@ describe('EducationStore', () => {
     expect(store.educations().length).toBeGreaterThan(0);
     expect(store.certificates()).toEqual(expect.any(Array));
     expect(store.additionalLearnings()).toEqual(expect.any(Array));
+    expect(store.trainings().length).toBeGreaterThan(0);
   });
 
   it('keeps the result for the next consumer', async () => {

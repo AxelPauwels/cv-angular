@@ -3,11 +3,13 @@ import type {
   AdditionalLearningFieldsFragment,
   CertificateFieldsFragment,
   EducationFieldsFragment,
+  TrainingFieldsFragment,
 } from '../generated/graphql';
 import type {
   AdditionalLearning,
   Certificate,
   Education,
+  Training,
 } from '../../types/education.types';
 
 export function toEducation({
@@ -26,8 +28,24 @@ export function toEducation({
 export function toCertificate({
   name,
   url,
+  issuer,
+  year,
 }: CertificateFieldsFragment): Certificate {
-  return { name, ...(url ? { url } : {}) };
+  return { name, issuer, year, ...(url ? { url } : {}) };
+}
+
+export function toTraining({
+  name,
+  provider,
+  year,
+  status,
+}: TrainingFieldsFragment): Training {
+  return {
+    name,
+    status,
+    ...(provider ? { provider } : {}),
+    ...(year ? { year } : {}),
+  };
 }
 
 export function toAdditionalLearning(

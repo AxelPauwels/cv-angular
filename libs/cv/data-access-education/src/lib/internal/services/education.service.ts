@@ -5,16 +5,19 @@ import {
   AdditionalLearningsDocument,
   CertificatesDocument,
   EducationsDocument,
+  TrainingsDocument,
 } from '../generated/graphql';
 import {
   toAdditionalLearning,
   toCertificate,
   toEducation,
+  toTraining,
 } from '../mappers/education.mapper';
 import type {
   AdditionalLearning,
   Certificate,
   Education,
+  Training,
 } from '../../types/education.types';
 
 @Service()
@@ -35,6 +38,12 @@ export class EducationService {
     return graphqlResource(AdditionalLearningsDocument, {
       map: ({ additionalLearnings }) =>
         additionalLearnings.map(toAdditionalLearning),
+    });
+  }
+
+  trainings(): HttpResourceRef<Training[] | undefined> {
+    return graphqlResource(TrainingsDocument, {
+      map: ({ trainings }) => trainings.map(toTraining),
     });
   }
 }

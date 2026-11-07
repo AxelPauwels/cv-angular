@@ -1,4 +1,6 @@
 fragment CertificateFields on Certificate {
   name
   url
+  issuer
+  year
 }

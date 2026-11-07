@@ -3,6 +3,7 @@ import {
   delayedLoading,
   LoadingSpinner,
   PageTitle,
+  SectionHeading,
   PageLayout,
 } from '@cv/shared-ui-design-system';
 import { MatIcon } from '@angular/material/icon';
@@ -14,6 +15,7 @@ import {
   Education,
   EducationLevel,
   EducationStore,
+  TrainingStatus,
 } from '@cv/cv-data-access-education';
 import { TranslationKey } from '@cv/shared-util-i18n';
 
@@ -23,6 +25,7 @@ import { TranslationKey } from '@cv/shared-util-i18n';
     PageLayout,
     LoadingSpinner,
     PageTitle,
+    SectionHeading,
     Card,
     MatIcon,
     Timeline,
@@ -52,8 +55,18 @@ export class EducationList {
     CUSTOM_COURSE: 't.education.level.extra',
   };
 
-  /** Some entries carry a note instead of a link, e.g. a retired certificate */
+  /** Shown instead of a year when a training has none */
+  protected readonly statusKeys: Record<TrainingStatus, TranslationKey> = {
+    COMPLETED: 't.education.training.status.COMPLETED',
+    ONGOING: 't.education.training.status.ONGOING',
+    RECURRING: 't.education.training.status.RECURRING',
+  };
+
+  /**
+   * Some entries carry a note instead of a link, e.g. a retired certificate.
+   * Links are external http(s) URLs or files served by the app (`/assets/...`).
+   */
   protected isLink(url: string | undefined): boolean {
-    return !!url && /^https?:\/\//.test(url);
+    return !!url && /^(https?:\/\/|\/assets\/)/.test(url);
   }
 }

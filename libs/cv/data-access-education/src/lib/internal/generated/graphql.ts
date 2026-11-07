@@ -10,9 +10,20 @@ import type { DocumentTypeDecoration } from '@graphql-typed-document-node/core';
 export type EducationLevel =
   'CUSTOM_COURSE' | 'HIGH_SCHOOL' | 'SECONDARY_EDUCATION';
 
+export type TrainingStatus =
+  | 'COMPLETED'
+  | 'ONGOING'
+  /** Attended every year, e.g. a conference */
+  | 'RECURRING';
+
 export type AdditionalLearningFieldsFragment = { name: string; url: string };
 
-export type CertificateFieldsFragment = { name: string; url: string | null };
+export type CertificateFieldsFragment = {
+  name: string;
+  url: string | null;
+  issuer: string;
+  year: number;
+};
 
 export type EducationFieldsFragment = {
   level: EducationLevel;
@@ -20,6 +31,13 @@ export type EducationFieldsFragment = {
   specialization: string;
   period: { start: string; end: string | null };
   school: { name: string; location: string };
+};
+
+export type TrainingFieldsFragment = {
+  name: string;
+  provider: string | null;
+  year: number | null;
+  status: TrainingStatus;
 };
 
 export type AdditionalLearningsQueryVariables = Exact<{ [key: string]: never }>;
@@ -31,7 +49,12 @@ export type AdditionalLearningsQuery = {
 export type CertificatesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type CertificatesQuery = {
-  certificates: Array<{ name: string; url: string | null }>;
+  certificates: Array<{
+    name: string;
+    url: string | null;
+    issuer: string;
+    year: number;
+  }>;
 };
 
 export type EducationsQueryVariables = Exact<{ [key: string]: never }>;
@@ -43,6 +66,17 @@ export type EducationsQuery = {
     specialization: string;
     period: { start: string; end: string | null };
     school: { name: string; location: string };
+  }>;
+};
+
+export type TrainingsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TrainingsQuery = {
+  trainings: Array<{
+    name: string;
+    provider: string | null;
+    year: number | null;
+    status: TrainingStatus;
   }>;
 };
 
@@ -80,6 +114,8 @@ export const CertificateFieldsFragmentDoc = new TypedDocumentString(
     fragment CertificateFields on Certificate {
   name
   url
+  issuer
+  year
 }
     `,
   { fragmentName: 'CertificateFields' }
@@ -102,6 +138,17 @@ export const EducationFieldsFragmentDoc = new TypedDocumentString(
     `,
   { fragmentName: 'EducationFields' }
 ) as unknown as TypedDocumentString<EducationFieldsFragment, unknown>;
+export const TrainingFieldsFragmentDoc = new TypedDocumentString(
+  `
+    fragment TrainingFields on Training {
+  name
+  provider
+  year
+  status
+}
+    `,
+  { fragmentName: 'TrainingFields' }
+) as unknown as TypedDocumentString<TrainingFieldsFragment, unknown>;
 export const AdditionalLearningsDocument = new TypedDocumentString(`
     query AdditionalLearnings {
   additionalLearnings {
@@ -124,6 +171,8 @@ export const CertificatesDocument = new TypedDocumentString(`
     fragment CertificateFields on Certificate {
   name
   url
+  issuer
+  year
 }`) as unknown as TypedDocumentString<
   CertificatesQuery,
   CertificatesQueryVariables
@@ -150,3 +199,15 @@ export const EducationsDocument = new TypedDocumentString(`
   EducationsQuery,
   EducationsQueryVariables
 >;
+export const TrainingsDocument = new TypedDocumentString(`
+    query Trainings {
+  trainings {
+    ...TrainingFields
+  }
+}
+    fragment TrainingFields on Training {
+  name
+  provider
+  year
+  status
+}`) as unknown as TypedDocumentString<TrainingsQuery, TrainingsQueryVariables>;

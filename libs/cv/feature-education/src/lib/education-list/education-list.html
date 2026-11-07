@@ -1,7 +1,7 @@
 <ds-page-layout width="narrow">
   <ds-page-title title="t.heading.education" />
 
-  @if (loading.pending()) { @if (loading.spinner()) {
+  @if (loading.pending()) { @if (loading.indicator()) {
   <ds-loading-spinner />
   } } @else if (store.error()) {
   <p>Could not load education: {{ store.error()?.message }}</p>
@@ -29,66 +29,96 @@
   </ds-timeline>
 
   <div class="education-list__extras">
-    <ds-card
+    <section
       class="education-list__extra"
-      icon="verified"
-      iconFont="material"
-      [title]="'t.subheading.education.certificates' | translate">
-      <ul class="education-list__links">
-        @for (certificate of store.certificates(); track certificate.name) {
-        <li>
-          @if (isLink(certificate.url)) {
-          <a
-            class="education-list__link"
-            [href]="certificate.url"
-            target="_blank"
-            rel="noopener">
-            {{ certificate.name }}
-            <mat-icon
-              class="education-list__link-icon"
-              fontSet="material-symbols-outlined"
-              >open_in_new</mat-icon
-            >
-          </a>
-          } @else {
-          <span>{{ certificate.name }}</span>
-          @if (certificate.url) {
-          <span class="education-list__note">({{ certificate.url }})</span>
-          } }
-        </li>
-        }
-      </ul>
-    </ds-card>
+      aria-labelledby="education-training-title">
+      <ds-section-heading
+        headingId="education-training-title"
+        title="t.subheading.education.training-and-conferences"
+        tagline="t.subheading.education.training-and-conferences.description" />
 
-    <ds-card
-      class="education-list__extra"
-      icon="school"
-      iconFont="material"
-      [title]="'t.subheading.education.additional-learnings' | translate">
-      <ul class="education-list__links">
-        @for (learning of store.additionalLearnings(); track learning.name) {
-        <li>
-          @if (isLink(learning.url)) {
-          <a
-            class="education-list__link"
-            [href]="learning.url"
-            target="_blank"
-            rel="noopener">
-            {{ learning.name }}
-            <mat-icon
-              class="education-list__link-icon"
-              fontSet="material-symbols-outlined"
-              >open_in_new</mat-icon
+      <ds-card class="education-list__card">
+        <ul class="education-list__links">
+          @for (training of store.trainings(); track training.name) {
+          <li class="education-list__item">
+            <span class="education-list__title">{{ training.name }}</span>
+            @if (training.provider) {
+            <span class="education-list__meta">{{ training.provider }}</span>
+            }
+            <span class="education-list__year"
+              >{{ training.year ?? (statusKeys[training.status] | translate)
+              }}</span
             >
-          </a>
-          } @else {
-          <span>{{ learning.name }}</span>
-          <span class="education-list__note">({{ learning.url }})</span>
+          </li>
+          } @for (learning of store.additionalLearnings(); track learning.name)
+          {
+          <li class="education-list__item">
+            @if (isLink(learning.url)) {
+            <a
+              class="education-list__title education-list__link"
+              [href]="learning.url"
+              target="_blank"
+              rel="noopener">
+              {{ learning.name }}
+              <mat-icon
+                class="education-list__link-icon"
+                fontSet="material-symbols-outlined"
+                >open_in_new</mat-icon
+              >
+            </a>
+            } @else {
+            <span class="education-list__title"
+              >{{ learning.name }}
+              <span class="education-list__note"
+                >({{ learning.url }})</span
+              ></span
+            >
+            }
+          </li>
           }
-        </li>
-        }
-      </ul>
-    </ds-card>
+        </ul>
+      </ds-card>
+    </section>
+    <section
+      class="education-list__extra"
+      aria-labelledby="education-certificates-title">
+      <ds-section-heading
+        headingId="education-certificates-title"
+        title="t.subheading.education.certificates"
+        tagline="t.subheading.education.certificates.description" />
+
+      <ds-card class="education-list__card">
+        <ul class="education-list__links">
+          @for (certificate of store.certificates(); track certificate.name) {
+          <li class="education-list__item">
+            @if (isLink(certificate.url)) {
+            <a
+              class="education-list__title education-list__link"
+              [href]="certificate.url"
+              target="_blank"
+              rel="noopener">
+              {{ certificate.name }}
+              <mat-icon
+                class="education-list__link-icon"
+                fontSet="material-symbols-outlined"
+                >open_in_new</mat-icon
+              >
+            </a>
+            } @else {
+            <span class="education-list__title"
+              >{{ certificate.name }} @if (certificate.url) {
+              <span class="education-list__note">({{ certificate.url }})</span>
+              }</span
+            >
+            }
+            <span class="education-list__meta"
+              >{{ certificate.issuer }} · {{ certificate.year }}</span
+            >
+          </li>
+          }
+        </ul>
+      </ds-card>
+    </section>
   </div>
   }
 </ds-page-layout>

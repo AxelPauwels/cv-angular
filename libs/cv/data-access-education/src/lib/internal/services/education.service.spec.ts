@@ -49,4 +49,40 @@ describe('EducationService', () => {
     expect(certificates.value()).toEqual(expect.any(Array));
     expect(learnings.value()).toEqual(expect.any(Array));
   });
+
+  it('maps certificates with their issuer and year', async () => {
+    // Arrange & Act
+    const certificates = load((service) => service.certificates());
+    await stable();
+
+    // Assert
+    expect(certificates.value()).toContainEqual(
+      expect.objectContaining({
+        name: 'Linux Essentials',
+        issuer: 'Linux Professional Institute',
+        year: 2016,
+      })
+    );
+  });
+
+  it('maps trainings without nulls for the optional fields', async () => {
+    // Arrange & Act
+    const trainings = load((service) => service.trainings());
+    await stable();
+
+    // Assert
+    expect(trainings.error()).toBeUndefined();
+    const ongoing = trainings
+      .value()
+      ?.find((training) => training.name === 'Modern Angular v22');
+    expect(ongoing).toEqual({
+      name: 'Modern Angular v22',
+      provider: 'Angular Architects GDE Manfred Steyer',
+      status: 'ONGOING',
+    });
+    for (const training of trainings.value() ?? []) {
+      expect(training.provider).not.toBeNull();
+      expect(training.year).not.toBeNull();
+    }
+  });
 });
