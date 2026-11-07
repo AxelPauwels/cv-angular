@@ -19,7 +19,7 @@ describe('EmbeddedPage', () => {
     });
     const fixture = TestBed.createComponent(EmbeddedPage);
     fixture.componentRef.setInput('src', '/coverage/index.html');
-    fixture.componentRef.setInput('title', 't.nav.code-coverage');
+    fixture.componentRef.setInput('title', 't.heading.code-coverage');
     fixture.detectChanges();
     TestBed.tick();
 
@@ -29,13 +29,20 @@ describe('EmbeddedPage', () => {
   }
 
   it('shows an existing page in an iframe', async () => {
+    // Arrange & Act
     const element = await render((http) =>
       http.expectOne('/coverage/index.html').flush('<html>coverage</html>')
     );
 
+    // Assert
+    // the same page title as every content page, no card around the report
+    expect(element.querySelector('ds-page-title h1')?.textContent?.trim()).toBe(
+      't.heading.code-coverage'
+    );
+    expect(element.querySelector('mat-card')).toBeNull();
     const frame = element.querySelector('iframe');
     expect(frame?.getAttribute('src')).toBe('/coverage/index.html');
-    expect(frame?.title).toBe('t.nav.code-coverage');
+    expect(frame?.title).toBe('t.heading.code-coverage');
     // a button opens the same page in a new browser tab
     const open = element.querySelector('a[matButton]');
     expect(open?.getAttribute('href')).toBe('/coverage/index.html');
@@ -46,23 +53,27 @@ describe('EmbeddedPage', () => {
   });
 
   it('shows a message instead of the app nested in itself', async () => {
+    // Arrange & Act
     const element = await render((http) =>
       http
         .expectOne('/coverage/index.html')
         .flush('<html><body><app-root></app-root></body></html>')
     );
 
+    // Assert
     expect(element.querySelector('iframe')).toBeNull();
     expect(element.textContent).toContain('not available');
   });
 
   it('shows a message when the page is missing', async () => {
+    // Arrange & Act
     const element = await render((http) =>
       http
         .expectOne('/coverage/index.html')
         .flush('', { status: 404, statusText: 'Not Found' })
     );
 
+    // Assert
     expect(element.querySelector('iframe')).toBeNull();
     expect(element.textContent).toContain('not available');
   });

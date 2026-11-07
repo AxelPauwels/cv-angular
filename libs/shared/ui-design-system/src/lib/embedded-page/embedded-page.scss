@@ -4,19 +4,28 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 0.5rem;
   min-height: 0;
+  position: relative;
 }
 
-.open-link {
-  align-self: flex-end;
-}
+.embedded-page {
+  // the "open" link sits at the end, right above the report
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-block-end: 1rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+  }
 
-iframe {
-  border: none;
-  flex: 1;
+  &__frame {
+    border: none;
+    flex: 1;
+    margin: 0 0 -1rem -1rem;
 
-  // on very short screens the page scrolls rather than squash the report
-  min-height: 20rem;
-  width: 100%;
+    // on very short screens the page scrolls rather than squash the report
+    min-height: 20rem;
+    width: calc(100% + 2rem);
+  }
 }
