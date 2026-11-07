@@ -35,6 +35,10 @@ More info:
 - commitlint docs: https://commitlint.js.org/
 - Conventional Commits spec: https://www.conventionalcommits.org/en/v1.0.0-beta.4/
 
+## Translations
+
+Tolgee, the `i18n:*` commands and how translation keys are used: see [README.translations.md](README.translations.md).
+
 ## Micro Frontends
 
 npx nx g @nx/angular:application apps/cv-mfe1

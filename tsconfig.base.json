@@ -69,6 +69,22 @@
       ],
       "@cv/technical-feature-architecture": [
         "./libs/technical/feature-architecture/src/index.ts"
+      ],
+      "@cv/cv-feature-home": ["./libs/cv/feature-home/src/index.ts"],
+      "@cv/shared-feature-tour": ["./libs/shared/feature-tour/src/index.ts"],
+      "@cv/shared-ui-timeline": ["./libs/shared/ui-timeline/src/index.ts"],
+      "@cv/shared-ui-card": ["./libs/shared/ui-card/src/index.ts"],
+      "@cv/cv-feature-contact": ["./libs/cv/feature-contact/src/index.ts"],
+      "@cv/shared-ui-progress-bar": [
+        "./libs/shared/ui-progress-bar/src/index.ts"
+      ],
+      "@cv/shared-ui-lordicon": ["./libs/shared/ui-lordicon/src/index.ts"],
+      "@cv/shared-util-loading": ["./libs/shared/util-loading/src/index.ts"],
+      "@cv/showcase-feature-admin": [
+        "./libs/showcase/feature-admin/src/index.ts"
+      ],
+      "@cv/shared-ui-progress-dots": [
+        "./libs/shared/ui-progress-dots/src/index.ts"
       ]
     }
   },

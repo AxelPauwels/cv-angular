@@ -132,14 +132,37 @@ export const isUntranslated = (key, value) =>
   String(value).trim() === '' ||
   value === key;
 
-/** Sets 't.a.b' in a nested object; sorts the object the key lands in */
+/**
+ * Sets 't.a.b' in a nested object; sorts the object the key lands in.
+ *
+ * A key can be both a value and the start of others ('t.x' and 't.x.description'):
+ * those stay side by side as dotted keys ({ "x": "…", "x.description": "…" }), the
+ * way the language files hold them, instead of one replacing the other.
+ */
 export function setNested(object, key, value) {
   const parts = key.split('.');
-  const leaf = parts.pop();
   let node = object;
-  for (const part of parts) {
-    if (!node[part] || typeof node[part] !== 'object') node[part] = {};
-    node = node[part];
+  while (parts.length > 1) {
+    const next = node[parts[0]];
+    if (typeof next === 'string') break; // the rest stays one dotted key
+    if (next === undefined) node[parts[0]] = {};
+    node = node[parts.shift()];
+  }
+  const leaf = parts.join('.');
+  const existing = node[leaf];
+  if (existing && typeof existing === 'object' && typeof value === 'string') {
+    // 't.x.description' came first: keep what is under 't.x' as dotted keys
+    delete node[leaf];
+    const flatten = (group, prefix) => {
+      for (const [child, childValue] of Object.entries(group)) {
+        if (childValue && typeof childValue === 'object') {
+          flatten(childValue, `${prefix}.${child}`);
+        } else {
+          node[`${prefix}.${child}`] = childValue;
+        }
+      }
+    };
+    flatten(existing, leaf);
   }
   node[leaf] = value;
   const sorted = Object.entries(node).sort(([a], [b]) => a.localeCompare(b));

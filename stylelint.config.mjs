@@ -12,6 +12,14 @@ export default {
     'scss/operator-no-unspaced': null,
     // Allow blank lines to group related variables
     'scss/dollar-variable-empty-line-before': null,
+    // BEM: block, optional __element, optional --modifier, each in kebab-case
+    'selector-class-pattern': [
+      '^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$',
+      {
+        message:
+          'Expected class "%s" to be BEM in kebab-case (block__element--modifier)',
+      },
+    ],
     // Angular's view-encapsulation escape hatch, needed for overlay content like mat-menu panels
     'selector-pseudo-element-no-unknown': [
       true,
