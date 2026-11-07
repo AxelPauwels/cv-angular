@@ -72,10 +72,18 @@ const horecaReferences: Reference[] = [
 
 const itReferences: Reference[] = [
   {
-    function: 'Front-end Lead',
-    name: 'Roel Frison',
-    phoneNumber: '0496 / 98 76 86',
-    work: 'Ravago',
+    function: 'People Manager & Lead Front-End Developer',
+    name: 'Kevin Jannis',
+    work: 'Sopra Steria',
+    workCategory: 'IT',
+    workCategoryPeriod: {
+      start: fromYear('2021'),
+    },
+  },
+  {
+    function: 'Digital Factory Lead',
+    name: 'Marijke Boye',
+    work: 'Sopra Steria',
     workCategory: 'IT',
     workCategoryPeriod: {
       start: fromYear('2021'),
@@ -84,7 +92,6 @@ const itReferences: Reference[] = [
   {
     function: 'Business Unit Manager',
     name: 'Bart Headens',
-    phoneNumber: 'N/A yet',
     work: 'Sopra Steria',
     workCategory: 'IT',
     workCategoryPeriod: {
@@ -92,18 +99,42 @@ const itReferences: Reference[] = [
     },
   },
   {
-    function: 'People Manager',
-    name: 'Marijke Boye',
-    phoneNumber: 'N/A yet',
+    function: 'Lead Front-End Developer',
+    name: 'Roel Frison',
+    phoneNumber: '0496 / 98 76 86',
     work: 'Sopra Steria',
+    client: 'Ravago',
     workCategory: 'IT',
     workCategoryPeriod: {
-      start: fromYear('2021'),
+      start: fromYear('2022'),
+      end: fromYear('2026'),
     },
   },
   {
-    function: 'Lead Developer',
-    name: 'Ewald Van der veken',
+    function: 'Lead Back-End Developer',
+    name: 'Lowie Cuypers',
+    work: 'Sopra Steria',
+    client: 'Ravago',
+    workCategory: 'IT',
+    workCategoryPeriod: {
+      start: fromYear('2022'),
+      end: fromYear('2026'),
+    },
+  },
+  {
+    function: 'QA Lead',
+    name: 'Bettina Verheyen',
+    work: 'Sopra Steria',
+    client: 'Ravago',
+    workCategory: 'IT',
+    workCategoryPeriod: {
+      start: fromYear('2022'),
+      end: fromYear('2026'),
+    },
+  },
+  {
+    function: 'Lead Full-Stack Developer',
+    name: 'Ewald Van Der Veken',
     phoneNumber: '0471 / 10 38 21',
     work: 'Innomedio',
     workCategory: 'IT',
@@ -113,9 +144,29 @@ const itReferences: Reference[] = [
     },
   },
   {
-    function: 'Front-end Lead Developer',
+    function: 'Operations & Project Manager',
+    name: 'Karen Vermeire',
+    work: 'Innomedio',
+    workCategory: 'IT',
+    workCategoryPeriod: {
+      start: fromYear('2020'),
+      end: fromYear('2021'),
+    },
+  },
+  {
+    function: 'Lead Full-Stack Developer',
     name: 'Tom Bevers',
     phoneNumber: '0473 / 74 20 06',
+    work: 'PHPro',
+    workCategory: 'IT',
+    workCategoryPeriod: {
+      start: fromYear('2018'),
+      end: fromYear('2020'),
+    },
+  },
+  {
+    function: 'Team Lead & Lead Front-End Developer',
+    name: 'Stef Liekens',
     work: 'PHPro',
     workCategory: 'IT',
     workCategoryPeriod: {

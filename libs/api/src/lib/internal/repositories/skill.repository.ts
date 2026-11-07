@@ -1,161 +1,104 @@
 import type { Skill } from '../generated/resolvers-types';
 
-const programmingLanguagesSkill: Skill = {
-  category: 'PROGRAMMING_LANGUAGES',
+/*
+ * Levels are on a 0–5 scale, shown as five dots (one dot per level).
+ * Sections go from what I do every day to broader experience; entries within a
+ * section are ordered by level, then by relevance.
+ */
+
+const coreStackSkill: Skill = {
+  category: 'CORE_STACK',
   icon: 'code',
   entries: [
-    {
-      level: 8,
-      name: 'HTML5',
-      icon: 'html5',
-    },
-    {
-      level: 9,
-      name: 'CSS3',
-      icon: 'css3',
-    },
-    {
-      level: 9,
-      name: 'SCSS',
-      icon: 'scss',
-    },
-    {
-      level: 5,
-      name: 'C#',
-      icon: 'csharp',
-    },
-    {
-      level: 7,
-      name: 'PHP',
-      icon: 'php',
-    },
-    {
-      level: 6,
-      name: 'JAVA',
-      icon: 'java',
-    },
-    {
-      level: 6,
-      name: 'jQuery',
-      icon: 'jquery',
-    },
-    {
-      level: 8,
-      name: 'Typescript',
-      icon: 'typescript',
-    },
+    { level: 5, name: 'Angular', icon: 'angular' },
+    { level: 5, name: 'TypeScript', icon: 'typescript' },
+    { level: 4, name: 'RxJS', icon: 'rxjs' },
+    { level: 4, name: 'Signals · NgRx Signal Store', icon: 'ngrx' },
+    { level: 4, name: 'Nx monorepos', icon: 'nx' },
+    { level: 5, name: 'GraphQL · Apollo', icon: 'graphql' },
+    { level: 4, name: 'Kendo UI', icon: 'telerik' },
+    { level: 2, name: 'Angular Material', icon: 'angular-material' },
+    { level: 5, name: 'Sass (SCSS)', icon: 'scss' },
+    { level: 5, name: 'HTML5', icon: 'html5' },
+    { level: 5, name: 'CSS3', icon: 'css3' },
   ],
 };
 
-const frameworksSkill: Skill = {
-  category: 'FRAMEWORKS',
+const engineeringPracticesSkill: Skill = {
+  category: 'ENGINEERING_PRACTICES',
   icon: 'layers',
   entries: [
-    {
-      level: 6,
-      name: 'React',
-      icon: 'react',
-    },
-    {
-      level: 8,
-      name: 'Angular',
-      icon: 'angular',
-    },
-    {
-      level: 5,
-      name: 'Laravel',
-      icon: 'laravel',
-    },
-    {
-      level: 7,
-      name: 'Magento2',
-      icon: 'magento',
-    },
-    {
-      level: 3,
-      name: 'Sulu',
-      icon: 'sulu',
-    },
-    {
-      level: 8,
-      name: 'Kendo UI',
-      icon: 'telerik',
-    },
+    { level: 5, name: 'Component-driven architecture', icon: 'layers' },
+    { level: 5, name: 'Scrum · Agile', icon: 'scrum' },
+    { level: 4, name: 'Reactive programming', icon: 'rxjs' },
+    { level: 4, name: 'Design patterns', icon: 'code' },
+    { level: 4, name: 'GraphQL Codegen', icon: 'graphql' },
+    { level: 3, name: 'CI/CD', icon: 'git-branch' },
   ],
 };
 
-const librariesSkill: Skill = {
-  category: 'LIBRARIES',
-  icon: 'book-marked',
+const testingAndQualitySkill: Skill = {
+  category: 'TESTING_AND_QUALITY',
+  icon: 'award',
   entries: [
-    {
-      level: 8,
-      name: 'Graphql',
-      icon: 'graphql',
-    },
-    {
-      level: 8,
-      name: 'RxJs',
-      icon: 'rxjs',
-    },
+    { level: 4, name: 'Unit testing · Vitest/Jest', icon: 'code' },
+    { level: 3, name: 'Accessibility (a11y)', icon: 'accessibility' },
+    { level: 4, name: 'Code reviews', icon: 'github' },
+    { level: 5, name: 'ESLint · Prettier · Stylelint', icon: 'wrench' },
+    { level: 4, name: 'Integration testing', icon: 'layers' },
+    { level: 4, name: 'E2E testing · Playwright', icon: 'terminal' },
   ],
 };
 
-const operatingSystemsSkill: Skill = {
-  category: 'OPERATING_SYSTEMS',
+const aiSkill: Skill = {
+  category: 'AI',
+  icon: 'brain',
+  entries: [
+    { level: 4, name: 'Claude Code', icon: 'claude' },
+    { level: 4, name: 'GitHub Copilot', icon: 'github' },
+    { level: 3, name: 'Cursor', icon: 'cursor' },
+    { level: 3, name: 'Agent & Skills Development', icon: 'ai' },
+  ],
+};
+
+const developmentToolsSkill: Skill = {
+  category: 'DEVELOPMENT_TOOLS',
+  icon: 'wrench',
+  entries: [
+    { level: 5, name: 'Git (CLI) · GitHub', icon: 'git' },
+    { level: 5, name: 'Jira · Confluence', icon: 'jira' },
+    { level: 4, name: 'JetBrains · IntelliJ', icon: 'jetbrains' },
+    { level: 4, name: 'Postman', icon: 'postman' },
+    { level: 3, name: 'GitLab · Bitbucket', icon: 'gitlab' },
+  ],
+};
+
+const additionalTechnologiesSkill: Skill = {
+  category: 'ADDITIONAL_TECHNOLOGIES',
   icon: 'terminal',
   entries: [
-    {
-      level: 6,
-      name: 'Windows',
-      icon: 'windows',
-    },
-    {
-      level: 6,
-      name: 'linux',
-      icon: 'linux',
-    },
-    {
-      level: 8,
-      name: 'OsX/Unix',
-      icon: 'mac',
-    },
-  ],
-};
-
-const versionControlSkill: Skill = {
-  category: 'VERSION_CONTROL',
-  icon: 'git-branch',
-  entries: [
-    {
-      level: 8,
-      name: 'Git (CLI)',
-      icon: 'git',
-    },
-    {
-      level: 8,
-      name: 'GitHub',
-      icon: 'github',
-    },
-    {
-      level: 6,
-      name: 'GitLab',
-      icon: 'gitlab',
-    },
-    {
-      level: 6,
-      name: 'Bitbucket',
-      icon: 'bitbucket',
-    },
+    { level: 4, name: 'REST APIs', icon: 'rest-api' },
+    { level: 4, name: 'PHP', icon: 'php' },
+    { level: 4, name: 'Magento 2', icon: 'magento' },
+    { level: 3, name: 'Node.js', icon: 'nodejs' },
+    { level: 3, name: 'NestJs', icon: 'nestjs' },
+    { level: 3, name: 'React', icon: 'react' },
+    { level: 3, name: 'Java', icon: 'java' },
+    { level: 3, name: 'Symfony', icon: 'symfony' },
+    { level: 2, name: 'Sulu', icon: 'sulu' },
+    { level: 3, name: 'Laravel', icon: 'laravel' },
+    { level: 2, name: 'C#', icon: 'csharp' },
+    { level: 3, name: 'SQL · MySQL', icon: 'mysql' },
   ],
 };
 
 export const skillRepository = {
   findAll: (): Skill[] => [
-    programmingLanguagesSkill,
-    frameworksSkill,
-    librariesSkill,
-    operatingSystemsSkill,
-    versionControlSkill,
+    coreStackSkill,
+    engineeringPracticesSkill,
+    testingAndQualitySkill,
+    aiSkill,
+    developmentToolsSkill,
+    additionalTechnologiesSkill,
   ],
 };

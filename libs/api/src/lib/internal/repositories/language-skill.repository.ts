@@ -13,12 +13,14 @@ const languageSkills: LanguageSkill[] = [
     language: languageRepository.findByIsoCode('EN'),
     spoken: 'VERY_GOOD',
     written: 'GOOD',
+    cefrLevel: 'B2',
   },
   {
     isNativeLanguage: false,
     language: languageRepository.findByIsoCode('FR'),
-    spoken: 'GOOD',
-    written: 'GOOD',
+    spoken: 'BASIC',
+    written: 'BASIC',
+    cefrLevel: 'A1',
   },
 ];
 

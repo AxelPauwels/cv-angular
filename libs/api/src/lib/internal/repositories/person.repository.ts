@@ -6,7 +6,8 @@ import { languageSkillRepository } from './language-skill.repository';
 const person: Person = {
   firstName: 'Axel',
   lastName: 'Pauwels',
-  functionTitle: 'WEB DEVELOPER',
+  functionTitle: 'Senior Angular Front-End Developer',
+  profile: 't.personal.profile',
   contact: {
     address: {
       city: 'Geel',
@@ -16,16 +17,17 @@ const person: Person = {
       street: 'Sint-Gerardusstraat',
     },
     email: 'axelpauwels.be@gmail.com',
+    github: 'https://github.com/AxelPauwels',
     linkedIn: 'https://www.linkedin.com/in/axelpauwels/',
-    phone: '0477/968800',
+    phone: '+32 477 96 88 00',
     website: 'https://axel-pauwels-cv.web.app/personal',
   },
   hobbies: hobbyRepository.findAll(),
   languages: languageSkillRepository.findAll(),
   personal: {
+    partnerName: 'Stefanie',
     children: [{ name: 'Jade', gender: 'FEMALE' }],
     dateOfBirth: fromDate('1986-01-02'),
-    driverLicense: 'B',
     maritalStatus: 'MARRIED',
     nationality: 'BE',
     personalityType: 'INTJ',

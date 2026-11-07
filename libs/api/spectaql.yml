@@ -1,5 +1,5 @@
 # GraphQL API reference, generated from the schema by SpectaQL.
-# Run with `nx run api:graphql-docs`; the cv app embeds it in Showcase > graphql docs.
+# Run with `nx run api:graphql-docs`; the cv app embeds it in Technical > graphql docs.
 spectaql:
   targetDir: dist/.graphql-docs/api
   oneFile: true

@@ -31,10 +31,17 @@ export type Address = {
   street: Scalars['String']['output'];
 };
 
+/** Common European Framework of Reference for Languages (CEFR) levels, from beginner to mastery. */
+export type CefrLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
+
 export type Certificate = {
   __typename?: 'Certificate';
+  /** Who issued the certificate, e.g. Linux Professional Institute */
+  issuer: Scalars['String']['output'];
   name: Scalars['String']['output'];
-  url: Scalars['String']['output'];
+  /** Verification link, or a note when there is none online */
+  url?: Maybe<Scalars['String']['output']>;
+  year: Scalars['Int']['output'];
 };
 
 export type Child = {
@@ -43,35 +50,25 @@ export type Child = {
   name: Scalars['String']['output'];
 };
 
+/** Core competence as shown on the CV */
+export type Competence = {
+  __typename?: 'Competence';
+  /** Translation key */
+  description: Scalars['String']['output'];
+  /** Translation key */
+  title: Scalars['String']['output'];
+};
+
 export type ContactInfo = {
   __typename?: 'ContactInfo';
   address: Address;
   email: Scalars['String']['output'];
+  /** Profile URL */
+  github?: Maybe<Scalars['String']['output']>;
   linkedIn?: Maybe<Scalars['String']['output']>;
   phone: Scalars['String']['output'];
   website?: Maybe<Scalars['String']['output']>;
 };
-
-/**
- * Belgian driving license categories
- * Based on the official classification by the Belgian Federal Public Service Mobility and Transport.
- */
-export type DriverLicenseCategory =
-  | 'A'
-  | 'A1'
-  | 'A2'
-  | 'AM'
-  | 'B'
-  | 'BE'
-  | 'C'
-  | 'C1'
-  | 'C1E'
-  | 'CE'
-  | 'D'
-  | 'D1'
-  | 'D1E'
-  | 'DE'
-  | 'G';
 
 export type Education = {
   __typename?: 'Education';
@@ -89,8 +86,13 @@ export type Experience = {
   __typename?: 'Experience';
   category: ExperienceCategory;
   isInternship: Scalars['Boolean']['output'];
+  /** Translation keys */
   jobDescriptions?: Maybe<Array<Scalars['String']['output']>>;
   period: Period;
+  /** Project or programme (translation key) */
+  project?: Maybe<Scalars['String']['output']>;
+  /** Technologies and tools used */
+  stack: Array<Scalars['String']['output']>;
   work: Work;
 };
 
@@ -123,6 +125,8 @@ export type LanguageProficiency =
 
 export type LanguageSkill = {
   __typename?: 'LanguageSkill';
+  /** CEFR level; null for a native language */
+  cefrLevel?: Maybe<CefrLevel>;
   isNativeLanguage: Scalars['Boolean']['output'];
   language: Language;
   spoken: LanguageProficiency;
@@ -162,15 +166,18 @@ export type Person = {
   languages: Array<LanguageSkill>;
   lastName: Scalars['String']['output'];
   personal: PersonalInfo;
+  /** Profile summary (translation key) */
+  profile: Scalars['String']['output'];
 };
 
 export type PersonalInfo = {
   __typename?: 'PersonalInfo';
   children: Array<Child>;
   dateOfBirth: Scalars['DateTime']['output'];
-  driverLicense: DriverLicenseCategory;
   maritalStatus: MaritalStatus;
   nationality: NationalityIsoCode;
+  /** First name of the spouse or partner, if any */
+  partnerName?: Maybe<Scalars['String']['output']>;
   personalityType: PersonalityType;
 };
 
@@ -204,18 +211,31 @@ export type Query = {
   __typename?: 'Query';
   additionalLearnings: Array<AdditionalLearning>;
   certificates: Array<Certificate>;
+  competences: Array<Competence>;
   educations: Array<Education>;
   experiences: Array<Experience>;
+  /**
+   * Other technologies, listed without a level.
+   * A name, or a translation key (starting with t.) for a translatable label.
+   */
+  otherSkills: Array<Scalars['String']['output']>;
   person: Person;
   references: Array<Reference>;
   skills: Array<Skill>;
+  trainings: Array<Training>;
 };
 
 export type Reference = {
   __typename?: 'Reference';
+  /**
+   * The employer's client where the reference worked with me, e.g. Ravago for
+   * Sopra Steria; empty when the reference worked at the employer itself
+   */
+  client?: Maybe<Scalars['String']['output']>;
   function: Scalars['String']['output'];
   name: Scalars['String']['output'];
-  phoneNumber: Scalars['String']['output'];
+  phoneNumber?: Maybe<Scalars['String']['output']>;
+  /** The employer the reference worked at */
   work: Scalars['String']['output'];
   workCategory: ExperienceCategory;
   /** When the reference worked in the given work category */
@@ -235,20 +255,45 @@ export type Skill = {
   icon: Scalars['String']['output'];
 };
 
+/** Sections of the skills page, in the order they are shown */
 export type SkillCategory =
-  | 'FRAMEWORKS'
-  | 'LIBRARIES'
-  | 'OPERATING_SYSTEMS'
-  | 'PROGRAMMING_LANGUAGES'
-  | 'VERSION_CONTROL';
+  /** Additional technologies outside the core stack, e.g. back-end and CMS */
+  | 'ADDITIONAL_TECHNOLOGIES'
+  /** AI & agentic development */
+  | 'AI'
+  /** Core frontend stack: languages, framework and libraries used every day */
+  | 'CORE_STACK'
+  /** Development tools: version control, IDEs and collaboration */
+  | 'DEVELOPMENT_TOOLS'
+  /** Engineering practices: architecture, patterns and ways of working */
+  | 'ENGINEERING_PRACTICES'
+  /** Testing, accessibility and code quality */
+  | 'TESTING_AND_QUALITY';
 
 export type SkillEntry = {
   __typename?: 'SkillEntry';
   icon: Scalars['String']['output'];
-  /** 0–10 scale */
+  /** 0–5 scale */
   level: Scalars['Int']['output'];
   name: Scalars['String']['output'];
 };
+
+/** A course, training or conference */
+export type Training = {
+  __typename?: 'Training';
+  name: Scalars['String']['output'];
+  /** Who organised or taught it */
+  provider?: Maybe<Scalars['String']['output']>;
+  status: TrainingStatus;
+  /** Year it took place; null while ongoing or for a recurring event */
+  year?: Maybe<Scalars['Int']['output']>;
+};
+
+export type TrainingStatus =
+  | 'COMPLETED'
+  | 'ONGOING'
+  /** Attended every year, e.g. a conference */
+  | 'RECURRING';
 
 export type Work = {
   __typename?: 'Work';
@@ -379,11 +424,12 @@ export type ResolversTypes = {
   AdditionalLearning: ResolverTypeWrapper<AdditionalLearning>;
   Address: ResolverTypeWrapper<Address>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  CefrLevel: CefrLevel;
   Certificate: ResolverTypeWrapper<Certificate>;
   Child: ResolverTypeWrapper<Child>;
+  Competence: ResolverTypeWrapper<Competence>;
   ContactInfo: ResolverTypeWrapper<ContactInfo>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
-  DriverLicenseCategory: DriverLicenseCategory;
   Education: ResolverTypeWrapper<Education>;
   EducationLevel: EducationLevel;
   Experience: ResolverTypeWrapper<Experience>;
@@ -409,6 +455,8 @@ export type ResolversTypes = {
   SkillCategory: SkillCategory;
   SkillEntry: ResolverTypeWrapper<SkillEntry>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
+  Training: ResolverTypeWrapper<Training>;
+  TrainingStatus: TrainingStatus;
   Work: ResolverTypeWrapper<Work>;
 };
 
@@ -419,6 +467,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   Certificate: Certificate;
   Child: Child;
+  Competence: Competence;
   ContactInfo: ContactInfo;
   DateTime: Scalars['DateTime']['output'];
   Education: Education;
@@ -436,6 +485,7 @@ export type ResolversParentTypes = {
   Skill: Skill;
   SkillEntry: SkillEntry;
   String: Scalars['String']['output'];
+  Training: Training;
   Work: Work;
 };
 
@@ -465,8 +515,10 @@ export type CertificateResolvers<
   ParentType extends ResolversParentTypes['Certificate'] =
     ResolversParentTypes['Certificate'],
 > = {
+  issuer?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  year?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
 };
 
 export type ChildResolvers<
@@ -478,6 +530,15 @@ export type ChildResolvers<
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 };
 
+export type CompetenceResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Competence'] =
+    ResolversParentTypes['Competence'],
+> = {
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+};
+
 export type ContactInfoResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['ContactInfo'] =
@@ -485,6 +546,7 @@ export type ContactInfoResolvers<
 > = {
   address?: Resolver<ResolversTypes['Address'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  github?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   linkedIn?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   phone?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -526,6 +588,8 @@ export type ExperienceResolvers<
     ContextType
   >;
   period?: Resolver<ResolversTypes['Period'], ParentType, ContextType>;
+  project?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  stack?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   work?: Resolver<ResolversTypes['Work'], ParentType, ContextType>;
 };
 
@@ -557,6 +621,11 @@ export type LanguageSkillResolvers<
   ParentType extends ResolversParentTypes['LanguageSkill'] =
     ResolversParentTypes['LanguageSkill'],
 > = {
+  cefrLevel?: Resolver<
+    Maybe<ResolversTypes['CefrLevel']>,
+    ParentType,
+    ContextType
+  >;
   isNativeLanguage?: Resolver<
     ResolversTypes['Boolean'],
     ParentType,
@@ -600,6 +669,7 @@ export type PersonResolvers<
   >;
   lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   personal?: Resolver<ResolversTypes['PersonalInfo'], ParentType, ContextType>;
+  profile?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 };
 
 export type PersonalInfoResolvers<
@@ -609,11 +679,6 @@ export type PersonalInfoResolvers<
 > = {
   children?: Resolver<Array<ResolversTypes['Child']>, ParentType, ContextType>;
   dateOfBirth?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  driverLicense?: Resolver<
-    ResolversTypes['DriverLicenseCategory'],
-    ParentType,
-    ContextType
-  >;
   maritalStatus?: Resolver<
     ResolversTypes['MaritalStatus'],
     ParentType,
@@ -621,6 +686,11 @@ export type PersonalInfoResolvers<
   >;
   nationality?: Resolver<
     ResolversTypes['NationalityIsoCode'],
+    ParentType,
+    ContextType
+  >;
+  partnerName?: Resolver<
+    Maybe<ResolversTypes['String']>,
     ParentType,
     ContextType
   >;
@@ -646,6 +716,11 @@ export type QueryResolvers<
     ParentType,
     ContextType
   >;
+  competences?: Resolver<
+    Array<ResolversTypes['Competence']>,
+    ParentType,
+    ContextType
+  >;
   educations?: Resolver<
     Array<ResolversTypes['Education']>,
     ParentType,
@@ -656,6 +731,11 @@ export type QueryResolvers<
     ParentType,
     ContextType
   >;
+  otherSkills?: Resolver<
+    Array<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   person?: Resolver<ResolversTypes['Person'], ParentType, ContextType>;
   references?: Resolver<
     Array<ResolversTypes['Reference']>,
@@ -663,6 +743,11 @@ export type QueryResolvers<
     ContextType
   >;
   skills?: Resolver<Array<ResolversTypes['Skill']>, ParentType, ContextType>;
+  trainings?: Resolver<
+    Array<ResolversTypes['Training']>,
+    ParentType,
+    ContextType
+  >;
 };
 
 export type ReferenceResolvers<
@@ -670,9 +755,14 @@ export type ReferenceResolvers<
   ParentType extends ResolversParentTypes['Reference'] =
     ResolversParentTypes['Reference'],
 > = {
+  client?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   function?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  phoneNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  phoneNumber?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   work?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   workCategory?: Resolver<
     ResolversTypes['ExperienceCategory'],
@@ -719,6 +809,17 @@ export type SkillEntryResolvers<
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 };
 
+export type TrainingResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Training'] =
+    ResolversParentTypes['Training'],
+> = {
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  provider?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['TrainingStatus'], ParentType, ContextType>;
+  year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+};
+
 export type WorkResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Work'] =
@@ -734,6 +835,7 @@ export type Resolvers<ContextType = any> = {
   Address?: AddressResolvers<ContextType>;
   Certificate?: CertificateResolvers<ContextType>;
   Child?: ChildResolvers<ContextType>;
+  Competence?: CompetenceResolvers<ContextType>;
   ContactInfo?: ContactInfoResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   Education?: EducationResolvers<ContextType>;
@@ -749,5 +851,6 @@ export type Resolvers<ContextType = any> = {
   School?: SchoolResolvers<ContextType>;
   Skill?: SkillResolvers<ContextType>;
   SkillEntry?: SkillEntryResolvers<ContextType>;
+  Training?: TrainingResolvers<ContextType>;
   Work?: WorkResolvers<ContextType>;
 };

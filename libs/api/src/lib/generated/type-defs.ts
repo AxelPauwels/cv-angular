@@ -13,9 +13,30 @@ export const typeDefs = /* GraphQL */ `
     street: String!
   }
 
+  """
+  Common European Framework of Reference for Languages (CEFR) levels, from beginner to mastery.
+  """
+  enum CefrLevel {
+    A1
+    A2
+    B1
+    B2
+    C1
+    C2
+  }
+
   type Certificate {
+    """
+    Who issued the certificate, e.g. Linux Professional Institute
+    """
+    issuer: String!
     name: String!
-    url: String!
+
+    """
+    Verification link, or a note when there is none online
+    """
+    url: String
+    year: Int!
   }
 
   type Child {
@@ -23,9 +44,29 @@ export const typeDefs = /* GraphQL */ `
     name: String!
   }
 
+  """
+  Core competence as shown on the CV
+  """
+  type Competence {
+    """
+    Translation key
+    """
+    description: String!
+
+    """
+    Translation key
+    """
+    title: String!
+  }
+
   type ContactInfo {
     address: Address!
     email: String!
+
+    """
+    Profile URL
+    """
+    github: String
     linkedIn: String
     phone: String!
     website: String
@@ -35,28 +76,6 @@ export const typeDefs = /* GraphQL */ `
   ISO 8601 date-time string, e.g. 2020-01-01T00:00:00.000Z (graphql-scalars DateTime)
   """
   scalar DateTime
-
-  """
-  Belgian driving license categories
-  Based on the official classification by the Belgian Federal Public Service Mobility and Transport.
-  """
-  enum DriverLicenseCategory {
-    A
-    A1
-    A2
-    AM
-    B
-    BE
-    C
-    C1
-    C1E
-    CE
-    D
-    D1
-    D1E
-    DE
-    G
-  }
 
   type Education {
     degree: String
@@ -75,8 +94,22 @@ export const typeDefs = /* GraphQL */ `
   type Experience {
     category: ExperienceCategory!
     isInternship: Boolean!
+
+    """
+    Translation keys
+    """
     jobDescriptions: [String!]
     period: Period!
+
+    """
+    Project or programme (translation key)
+    """
+    project: String
+
+    """
+    Technologies and tools used
+    """
+    stack: [String!]!
     work: Work!
   }
 
@@ -127,6 +160,10 @@ export const typeDefs = /* GraphQL */ `
   }
 
   type LanguageSkill {
+    """
+    CEFR level; null for a native language
+    """
+    cefrLevel: CefrLevel
     isNativeLanguage: Boolean!
     language: Language!
     spoken: LanguageProficiency!
@@ -189,14 +226,23 @@ export const typeDefs = /* GraphQL */ `
     languages: [LanguageSkill!]!
     lastName: String!
     personal: PersonalInfo!
+
+    """
+    Profile summary (translation key)
+    """
+    profile: String!
   }
 
   type PersonalInfo {
     children: [Child!]!
     dateOfBirth: DateTime!
-    driverLicense: DriverLicenseCategory!
     maritalStatus: MaritalStatus!
     nationality: NationalityIsoCode!
+
+    """
+    First name of the spouse or partner, if any
+    """
+    partnerName: String
     personalityType: PersonalityType!
   }
 
@@ -230,17 +276,34 @@ export const typeDefs = /* GraphQL */ `
   type Query {
     additionalLearnings: [AdditionalLearning!]!
     certificates: [Certificate!]!
+    competences: [Competence!]!
     educations: [Education!]!
     experiences: [Experience!]!
+
+    """
+    Other technologies, listed without a level.
+    A name, or a translation key (starting with t.) for a translatable label.
+    """
+    otherSkills: [String!]!
     person: Person!
     references: [Reference!]!
     skills: [Skill!]!
+    trainings: [Training!]!
   }
 
   type Reference {
+    """
+    The employer's client where the reference worked with me, e.g. Ravago for
+    Sopra Steria; empty when the reference worked at the employer itself
+    """
+    client: String
     function: String!
     name: String!
-    phoneNumber: String!
+    phoneNumber: String
+
+    """
+    The employer the reference worked at
+    """
     work: String!
     workCategory: ExperienceCategory!
 
@@ -261,22 +324,77 @@ export const typeDefs = /* GraphQL */ `
     icon: String!
   }
 
+  """
+  Sections of the skills page, in the order they are shown
+  """
   enum SkillCategory {
-    FRAMEWORKS
-    LIBRARIES
-    OPERATING_SYSTEMS
-    PROGRAMMING_LANGUAGES
-    VERSION_CONTROL
+    """
+    Additional technologies outside the core stack, e.g. back-end and CMS
+    """
+    ADDITIONAL_TECHNOLOGIES
+
+    """
+    AI & agentic development
+    """
+    AI
+
+    """
+    Core frontend stack: languages, framework and libraries used every day
+    """
+    CORE_STACK
+
+    """
+    Development tools: version control, IDEs and collaboration
+    """
+    DEVELOPMENT_TOOLS
+
+    """
+    Engineering practices: architecture, patterns and ways of working
+    """
+    ENGINEERING_PRACTICES
+
+    """
+    Testing, accessibility and code quality
+    """
+    TESTING_AND_QUALITY
   }
 
   type SkillEntry {
     icon: String!
 
     """
-    0–10 scale
+    0–5 scale
     """
     level: Int!
     name: String!
+  }
+
+  """
+  A course, training or conference
+  """
+  type Training {
+    name: String!
+
+    """
+    Who organised or taught it
+    """
+    provider: String
+    status: TrainingStatus!
+
+    """
+    Year it took place; null while ongoing or for a recurring event
+    """
+    year: Int
+  }
+
+  enum TrainingStatus {
+    COMPLETED
+    ONGOING
+
+    """
+    Attended every year, e.g. a conference
+    """
+    RECURRING
   }
 
   type Work {

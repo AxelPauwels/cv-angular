@@ -55,6 +55,18 @@ enum LanguageProficiency {
 }
 
 """
+Common European Framework of Reference for Languages (CEFR) levels, from beginner to mastery.
+"""
+enum CefrLevel {
+  A1
+  A2
+  B1
+  B2
+  C1
+  C2
+}
+
+"""
 ISO 3166-1 alpha-2 country codes representing nationality.
 """
 enum NationalityIsoCode {
@@ -70,34 +82,6 @@ enum NationalityIsoCode {
   US # American
   CA # Canadian
   #   ...
-}
-
-"""
-Belgian driving license categories
-Based on the official classification by the Belgian Federal Public Service Mobility and Transport.
-"""
-enum DriverLicenseCategory {
-  # Mopeds and scooters
-  AM # Mopeds and speedpedelecs (≤ 45 km/h)
-  #  Motorcycles
-  A1 # Motorcycles ≤ 125 cc and ≤ 11 kW
-  A2 # Motorcycles ≤ 35 kW
-  A # All motorcycles (no limit)
-  # Cars and light vehicles
-  B # Cars ≤ 3.5 tons, up to 8 passengers + driver
-  BE # Car with trailer > 750 kg (max 3.5 tons combined)
-  # Trucks and heavy goods vehicles
-  C1 # Trucks between 3.5 t and 7.5 t
-  C1E # C1 vehicle with trailer > 750 kg
-  C # Trucks > 3.5 tons
-  CE # Truck with trailer > 750 kg
-  # Buses and coaches
-  D1 # Small bus (max 16 passengers)
-  D1E # Small bus with trailer > 750 kg
-  D # Large bus
-  DE # Large bus with trailer > 750 kg
-  # Agricultural and special vehicles
-  G # Agricultural or forestry vehicles (e.g. tractors)
 }
 
 """
@@ -144,12 +128,27 @@ enum MaritalStatus {
   UNKNOWN # Unknown or not declared
 }
 
+"Sections of the skills page, in the order they are shown"
 enum SkillCategory {
-  PROGRAMMING_LANGUAGES
-  FRAMEWORKS
-  LIBRARIES
-  OPERATING_SYSTEMS
-  VERSION_CONTROL
+  "Core frontend stack: languages, framework and libraries used every day"
+  CORE_STACK
+  "Engineering practices: architecture, patterns and ways of working"
+  ENGINEERING_PRACTICES
+  "Testing, accessibility and code quality"
+  TESTING_AND_QUALITY
+  "AI & agentic development"
+  AI
+  "Development tools: version control, IDEs and collaboration"
+  DEVELOPMENT_TOOLS
+  "Additional technologies outside the core stack, e.g. back-end and CMS"
+  ADDITIONAL_TECHNOLOGIES
+}
+
+enum TrainingStatus {
+  COMPLETED
+  ONGOING
+  "Attended every year, e.g. a conference"
+  RECURRING
 }
 
 enum ExperienceCategory {
@@ -194,6 +193,8 @@ type ContactInfo {
   email: String!
   website: String
   linkedIn: String
+  "Profile URL"
+  github: String
 }
 
 type LanguageSkill {
@@ -201,6 +202,8 @@ type LanguageSkill {
   language: Language!
   spoken: LanguageProficiency!
   written: LanguageProficiency!
+  "CEFR level; null for a native language"
+  cefrLevel: CefrLevel
 }
 
 type Hobby {
@@ -213,9 +216,10 @@ type PersonalInfo {
   dateOfBirth: DateTime!
   nationality: NationalityIsoCode!
   maritalStatus: MaritalStatus!
+  "First name of the spouse or partner, if any"
+  partnerName: String
   children: [Child!]!
   personalityType: PersonalityType!
-  driverLicense: DriverLicenseCategory!
 }
 
 type Child {
@@ -227,6 +231,8 @@ type Person {
   firstName: String!
   lastName: String!
   functionTitle: String!
+  "Profile summary (translation key)"
+  profile: String!
   contact: ContactInfo!
   personal: PersonalInfo!
   hobbies: [Hobby!]!
@@ -235,7 +241,7 @@ type Person {
 
 type SkillEntry {
   name: String!
-  "0–10 scale"
+  "0–5 scale"
   level: Int!
   icon: String!
 }
@@ -253,7 +259,29 @@ type AdditionalLearning {
 
 type Certificate {
   name: String!
-  url: String!
+  "Verification link, or a note when there is none online"
+  url: String
+  "Who issued the certificate, e.g. Linux Professional Institute"
+  issuer: String!
+  year: Int!
+}
+
+"Core competence as shown on the CV"
+type Competence {
+  "Translation key"
+  title: String!
+  "Translation key"
+  description: String!
+}
+
+"A course, training or conference"
+type Training {
+  name: String!
+  "Who organised or taught it"
+  provider: String
+  "Year it took place; null while ongoing or for a recurring event"
+  year: Int
+  status: TrainingStatus!
 }
 
 type Work {
@@ -267,17 +295,28 @@ type Experience {
   work: Work!
   period: Period!
   isInternship: Boolean!
+  "Project or programme (translation key)"
+  project: String
+  "Translation keys"
   jobDescriptions: [String!]
+  "Technologies and tools used"
+  stack: [String!]!
 }
 
 type Reference {
   name: String!
+  "The employer the reference worked at"
   work: String!
+  """
+  The employer's client where the reference worked with me, e.g. Ravago for
+  Sopra Steria; empty when the reference worked at the employer itself
+  """
+  client: String
   workCategory: ExperienceCategory!
   "When the reference worked in the given work category"
   workCategoryPeriod: Period!
   function: String!
-  phoneNumber: String!
+  phoneNumber: String
 }
 
 type Query {
@@ -288,4 +327,11 @@ type Query {
   skills: [Skill!]!
   experiences: [Experience!]!
   references: [Reference!]!
+  competences: [Competence!]!
+  trainings: [Training!]!
+  """
+  Other technologies, listed without a level.
+  A name, or a translation key (starting with t.) for a translatable label.
+  """
+  otherSkills: [String!]!
 }
