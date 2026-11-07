@@ -1,4 +1,12 @@
-import { DOCUMENT, effect, inject, Service, signal } from '@angular/core';
+import {
+  computed,
+  DestroyRef,
+  DOCUMENT,
+  effect,
+  inject,
+  Service,
+  signal,
+} from '@angular/core';
 import {
   ColorScheme,
   DEFAULT_THEME,
@@ -12,8 +20,10 @@ const COLOR_SCHEME_KEY = 'cv-color-scheme';
 
 /**
  * The active color theme and light/dark mode as signals. Keeps `data-theme` and
- * `data-color-scheme` on <html> in sync and remembers the choice for the next visit.
- * Without a saved mode it starts from the system preference.
+ * `data-color-scheme` on <html> in sync and remembers the choice for the next visit
+ * (the inline script in the app's index.html applies it before the first paint).
+ * Until the user picks a mode, or after a reset, the mode follows the system, also
+ * when the system changes.
  */
 @Service()
 export class ThemeService {
@@ -25,16 +35,39 @@ export class ThemeService {
   private readonly _theme = signal<ThemeId>(this.savedTheme());
   readonly theme = this._theme.asReadonly();
 
-  private readonly _colorScheme = signal<ColorScheme>(
-    this.savedColorScheme() ?? this.systemColorScheme()
+  private readonly systemColorScheme = signal<ColorScheme>(
+    this.prefersDark()?.matches ? 'dark' : 'light'
   );
-  readonly colorScheme = this._colorScheme.asReadonly();
+  private readonly chosenColorScheme = signal<ColorScheme | undefined>(
+    this.savedColorScheme()
+  );
+  readonly colorScheme = computed<ColorScheme>(
+    () => this.chosenColorScheme() ?? this.systemColorScheme()
+  );
+  /** No mode picked: the mode is the system's */
+  readonly followsSystemColorScheme = computed(
+    () => this.chosenColorScheme() === undefined
+  );
 
   constructor() {
+    const prefersDark = this.prefersDark();
+    const onSystemChange = (event: MediaQueryListEvent) =>
+      this.systemColorScheme.set(event.matches ? 'dark' : 'light');
+    prefersDark?.addEventListener?.('change', onSystemChange);
+    inject(DestroyRef).onDestroy(() =>
+      prefersDark?.removeEventListener?.('change', onSystemChange)
+    );
+
     effect(() => {
       const root = this.document.documentElement;
       root.dataset['theme'] = this.theme();
-      root.dataset['colorScheme'] = this.colorScheme();
+      // without the attribute, the styles follow the system (`color-scheme: light dark`)
+      const chosen = this.chosenColorScheme();
+      if (chosen) {
+        root.dataset['colorScheme'] = chosen;
+      } else {
+        delete root.dataset['colorScheme'];
+      }
     });
   }
 
@@ -43,9 +76,21 @@ export class ThemeService {
     this.save(THEME_KEY, id);
   }
 
+  /** Back to the default theme, and forgets the choice */
+  resetTheme(): void {
+    this._theme.set(DEFAULT_THEME);
+    this.remove(THEME_KEY);
+  }
+
   changeColorScheme(scheme: ColorScheme): void {
-    this._colorScheme.set(scheme);
+    this.chosenColorScheme.set(scheme);
     this.save(COLOR_SCHEME_KEY, scheme);
+  }
+
+  /** Follows the system again, and forgets the choice */
+  resetColorScheme(): void {
+    this.chosenColorScheme.set(undefined);
+    this.remove(COLOR_SCHEME_KEY);
   }
 
   toggleColorScheme(): void {
@@ -62,10 +107,8 @@ export class ThemeService {
     return saved === 'light' || saved === 'dark' ? saved : undefined;
   }
 
-  private systemColorScheme(): ColorScheme {
-    return this.window?.matchMedia?.('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
+  private prefersDark(): MediaQueryList | undefined {
+    return this.window?.matchMedia?.('(prefers-color-scheme: dark)');
   }
 
   private load(key: string): string | null {
@@ -73,6 +116,14 @@ export class ThemeService {
       return this.window?.localStorage.getItem(key) ?? null;
     } catch {
       return null;
+    }
+  }
+
+  private remove(key: string): void {
+    try {
+      this.window?.localStorage.removeItem(key);
+    } catch {
+      // storage unavailable: nothing was saved
     }
   }
 

@@ -23,14 +23,18 @@ describe('graphqlResource', () => {
   }
 
   it('answers queries in the browser', async () => {
+    // Arrange & Act
     const person = query<{ person: { firstName: string } }>(
       '{ person { firstName } }'
     );
     await TestBed.inject(ApplicationRef).whenStable();
+
+    // Assert
     expect(person.value()?.person.firstName).toBeTruthy();
   });
 
   it('maps the result to the frontend model', async () => {
+    // Arrange & Act
     const document = '{ person { firstName } }' as DocumentTypeDecoration<
       { person: { firstName: string } },
       Record<string, never>
@@ -39,12 +43,17 @@ describe('graphqlResource', () => {
       graphqlResource(document, { map: ({ person }) => person.firstName })
     );
     await TestBed.inject(ApplicationRef).whenStable();
+
+    // Assert
     expect(name.value()).toEqual(expect.any(String));
   });
 
   it('turns GraphQL errors into a resource error', async () => {
+    // Arrange & Act
     const broken = query('{ doesNotExist }');
     await TestBed.inject(ApplicationRef).whenStable();
+
+    // Assert
     expect(broken.error()).toBeTruthy();
   });
 });

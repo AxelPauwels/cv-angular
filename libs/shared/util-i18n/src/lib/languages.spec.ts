@@ -8,6 +8,7 @@ import type {
 
 describe('translation keys', () => {
   it('accepts keys of their own group', () => {
+    // Act & Assert
     expectTypeOf<'t.nav.cv'>().toExtend<NavTranslationKey>();
     expectTypeOf<'t.language.dutch'>().toExtend<LanguageTranslationKey>();
     expectTypeOf<'t.heading.experience'>().toExtend<HeadingTranslationKey>();
@@ -15,11 +16,13 @@ describe('translation keys', () => {
   });
 
   it('rejects keys of another group', () => {
+    // Act & Assert
     expectTypeOf<'t.heading.experience'>().not.toExtend<NavTranslationKey>();
     expectTypeOf<'t.nav.cv'>().not.toExtend<LanguageTranslationKey>();
   });
 
   it('makes every group a translation key', () => {
+    // Act & Assert
     expectTypeOf<NavTranslationKey>().toExtend<TranslationKey>();
     expectTypeOf<LanguageTranslationKey>().toExtend<TranslationKey>();
     expectTypeOf<HeadingTranslationKey>().toExtend<TranslationKey>();
@@ -27,6 +30,7 @@ describe('translation keys', () => {
   });
 
   it('requires the t. root', () => {
+    // Act & Assert
     expectTypeOf<'nav.cv'>().not.toExtend<TranslationKey>();
   });
 });

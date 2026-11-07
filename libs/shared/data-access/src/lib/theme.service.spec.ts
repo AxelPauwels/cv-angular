@@ -16,58 +16,107 @@ describe('ThemeService', () => {
     return { service, root: TestBed.inject(DOCUMENT).documentElement };
   }
 
-  it('offers 3 Material and 11 custom themes, starting with violet', () => {
+  it('offers the custom themes, starting with gold', () => {
+    // Arrange & Act
     const { service, root } = start();
 
+    // Assert
     expect(service.themes.map((theme) => theme.id)).toEqual([
-      'violet',
-      'azure',
-      'rose',
-      'copper',
-      'ocean',
-      'teal',
-      'sage',
-      'forest',
+      'peach',
+      'tangerine',
+      'honey',
+      'kiwi',
+      'grape',
+      'blackberry',
+      'water',
+      'earth',
+      'fire',
+      'wind',
       'gold',
-      'crimson',
-      'plum',
-      'lavender',
-      'slate',
-      'sand',
+      'silver',
+      'bronze',
     ]);
-    expect(root.dataset['theme']).toBe('violet');
+    expect(root.dataset['theme']).toBe('gold');
   });
 
   it('switches the theme on <html> and remembers it', () => {
+    // Arrange
     const { service, root } = start();
 
-    service.changeTheme('copper');
+    // Act
+    service.changeTheme('tangerine');
     TestBed.tick();
 
-    expect(root.dataset['theme']).toBe('copper');
-    expect(Object.values({ ...localStorage })).toContain('copper');
+    // Assert
+    expect(root.dataset['theme']).toBe('tangerine');
+    expect(Object.values({ ...localStorage })).toContain('tangerine');
   });
 
   it('toggles between light and dark and remembers it', () => {
+    // Arrange
     const { service, root } = start();
     const initial = service.colorScheme();
     const toggled = initial === 'dark' ? 'light' : 'dark';
 
+    // Act
     service.toggleColorScheme();
     TestBed.tick();
 
+    // Assert
     expect(service.colorScheme()).toBe(toggled);
     expect(root.dataset['colorScheme']).toBe(toggled);
     expect(Object.values({ ...localStorage })).toContain(toggled);
   });
 
   it('restores a saved choice', () => {
-    localStorage.setItem('cv-theme', 'rose');
+    // Arrange
+    localStorage.setItem('cv-theme', 'blackberry');
     localStorage.setItem('cv-color-scheme', 'dark');
 
+    // Act
     const { service } = start();
 
-    expect(service.theme()).toBe('rose');
+    // Assert
+    expect(service.theme()).toBe('blackberry');
     expect(service.colorScheme()).toBe('dark');
+  });
+
+  it('resets the theme to gold and forgets it', () => {
+    // Arrange
+    const { service, root } = start();
+    service.changeTheme('earth');
+    TestBed.tick();
+
+    // Act
+    service.resetTheme();
+    TestBed.tick();
+
+    // Assert
+    expect(service.theme()).toBe('gold');
+    expect(root.dataset['theme']).toBe('gold');
+    expect(localStorage.getItem('cv-theme')).toBeNull();
+  });
+
+  it('follows the system again after a color scheme reset', () => {
+    // Arrange & Act
+    const { service, root } = start();
+    service.changeColorScheme('dark');
+    TestBed.tick();
+
+    // Assert
+    expect(service.followsSystemColorScheme()).toBe(false);
+
+    // Act
+    service.resetColorScheme();
+    TestBed.tick();
+
+    // Assert
+    expect(service.followsSystemColorScheme()).toBe(true);
+    // without the attribute the styles follow the system
+    expect(root.dataset['colorScheme']).toBeUndefined();
+    expect(localStorage.getItem('cv-color-scheme')).toBeNull();
+    expect(service.colorScheme()).toBe(
+      matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    );
   });
 });
