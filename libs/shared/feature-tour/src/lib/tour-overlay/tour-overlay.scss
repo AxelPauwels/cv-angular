@@ -1,0 +1,250 @@
+// Above the page and Material's overlays (tooltips, menus: z-index 1000)
+:host {
+  inset: 0;
+  position: fixed;
+  z-index: 1100;
+}
+
+.tour {
+  animation: tour-fade-in 250ms ease-out;
+  inset: 0;
+  position: absolute;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    transition: none;
+  }
+
+  // The scrim is the spotlight's shadow; moving the box moves the hole smoothly
+  &__spotlight {
+    border-radius: var(--mat-sys-corner-large);
+    box-shadow: 0 0 0 200vmax
+      color-mix(in srgb, var(--mat-sys-scrim) 72%, transparent);
+    pointer-events: none;
+    position: absolute;
+    transition-duration: 400ms;
+    transition-property: top, left, width, height, outline-color;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      transition: none;
+    }
+
+    &--active {
+      animation: tour-pulse 2s ease-in-out infinite;
+      outline: 3px solid var(--mat-sys-primary);
+      outline-offset: 2px;
+
+      // The shadow scrim disappears in forced colors: outline the target instead
+      @media (forced-colors: active) {
+        outline-color: Highlight;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        transition: none;
+      }
+    }
+  }
+
+  // An arrow next to the spotlight; under it by default, above it with --down
+  &__pointer {
+    color: var(--mat-sys-primary-fixed);
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: translate(-50%, 0.75rem);
+    transition-duration: 400ms;
+    transition-property: top, left, opacity;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      transition: none;
+    }
+
+    &--visible {
+      opacity: 1;
+    }
+
+    &--down {
+      transform: translate(-50%, calc(-100% - 0.75rem)) rotate(180deg);
+    }
+  }
+
+  &__pointer-icon {
+    animation: tour-bounce 1.2s ease-in-out infinite;
+    font-size: 2.5rem;
+    height: 2.5rem;
+    width: 2.5rem;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      transition: none;
+    }
+  }
+
+  &__loading {
+    left: 50%;
+    position: absolute;
+    top: 1.5rem;
+    transform: translateX(-50%);
+  }
+
+  &__card {
+    background-color: var(--mat-sys-surface-container-high);
+    border-radius: var(--mat-sys-corner-extra-large);
+    box-shadow: var(--mat-sys-level3);
+    box-sizing: border-box;
+    color: var(--mat-sys-on-surface);
+    left: 50%;
+    max-height: calc(100dvh - 16rem);
+    overflow: auto;
+    padding: 1.5rem 2rem;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(32rem, 100% - 2rem);
+
+    @media (width < 600px) {
+      padding: 1.25rem;
+    }
+
+    @media (forced-colors: active) {
+      border: 1px solid CanvasText;
+    }
+  }
+
+  &__card-content {
+    &--enter {
+      animation: tour-card-enter 300ms cubic-bezier(0.2, 0, 0, 1);
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        transition: none;
+      }
+    }
+  }
+
+  &__title {
+    color: var(--mat-sys-primary);
+    font: var(--mat-sys-headline-small);
+    margin: 0 0 0.75rem;
+  }
+
+  &__text {
+    font: var(--mat-sys-body-large);
+    margin: 0;
+    white-space: pre-line;
+  }
+
+  &__footer {
+    align-items: center;
+    bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+    width: min(40rem, 100% - 2rem);
+  }
+
+  &__counter {
+    background-color: var(--mat-sys-surface-container-high);
+    border-radius: var(--mat-sys-corner-full);
+    color: var(--mat-sys-on-surface);
+    font: var(--mat-sys-label-large);
+    margin: 0;
+    padding: 0.25rem 0.75rem;
+  }
+
+  &__actions {
+    align-items: center;
+    background-color: var(--mat-sys-surface-container-high);
+    border-radius: var(--mat-sys-corner-extra-large);
+    box-shadow: var(--mat-sys-level3);
+    box-sizing: border-box;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 1fr auto 1fr;
+    padding: 0.5rem;
+    width: 100%;
+
+    @media (width < 600px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (forced-colors: active) {
+      border: 1px solid CanvasText;
+    }
+  }
+
+  // Two lines: "Back" / "Next" and the name of that step
+  &__action {
+    height: auto;
+    min-height: 3.5rem;
+
+    &--back {
+      justify-self: start;
+    }
+
+    &--next {
+      justify-self: end;
+    }
+  }
+
+  &__action-text {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1.2;
+    text-align: start;
+
+    .tour__action--next & {
+      text-align: end;
+    }
+  }
+
+  &__action-caption {
+    font: var(--mat-sys-label-small);
+    opacity: 0.8;
+  }
+
+  &__action-step {
+    font: var(--mat-sys-label-large);
+  }
+
+  // Exit spans the row below back and next
+  &__exit {
+    @media (width < 600px) {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+  }
+}
+
+@keyframes tour-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes tour-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+@keyframes tour-bounce {
+  50% {
+    transform: translateY(-0.5rem);
+  }
+}
+
+@keyframes tour-pulse {
+  50% {
+    outline-color: transparent;
+  }
+}

@@ -1,0 +1,106 @@
+<div
+  class="tour"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="tour-title"
+  cdkTrapFocus
+  cdkTrapFocusAutoCapture>
+  <!-- The scrim is the spotlight's huge shadow, so it has a hole over the target -->
+  <div
+    class="tour__spotlight"
+    aria-hidden="true"
+    [class.tour__spotlight--active]="hasTarget()"
+    [style.top.px]="spotlight().top"
+    [style.left.px]="spotlight().left"
+    [style.width.px]="spotlight().width"
+    [style.height.px]="spotlight().height"></div>
+
+  <div
+    class="tour__pointer"
+    aria-hidden="true"
+    [class.tour__pointer--visible]="hasTarget()"
+    [class.tour__pointer--down]="pointer().direction === 'down'"
+    [style.top.px]="pointer().top"
+    [style.left.px]="pointer().left">
+    <mat-icon class="tour__pointer-icon" fontSet="material-symbols-outlined"
+      >arrow_upward</mat-icon
+    >
+  </div>
+
+  @if (loading()) {
+  <div class="tour__loading" role="status">
+    <span class="c-spinner" aria-hidden="true"></span>
+    <span class="cdk-visually-hidden">{{ 't.tour.loading' | translate }}</span>
+  </div>
+  }
+
+  <section class="tour__card" aria-live="polite">
+    @for (current of [step()]; track current.id) {
+    <div class="tour__card-content" animate.enter="tour__card-content--enter">
+      <h2 id="tour-title" class="tour__title">
+        {{ current.titleKey | translate }}
+      </h2>
+      <p class="tour__text">{{ current.textKey | translate }}</p>
+      <p class="cdk-visually-hidden">
+        {{ 't.tour.step-of' | translate: progress() }}
+      </p>
+    </div>
+    }
+  </section>
+
+  <div class="tour__footer">
+    <p class="tour__counter" aria-hidden="true">
+      {{ 't.tour.counter' | translate: progress() }}
+    </p>
+
+    <div class="tour__actions">
+      <!-- disabledInteractive keeps focus on the button on the first step -->
+      <button
+        matButton
+        class="tour__action tour__action--back"
+        disabledInteractive
+        [disabled]="!previous()"
+        (click)="goBack()">
+        <mat-icon fontSet="material-symbols-outlined">arrow_back</mat-icon>
+        <span class="tour__action-text">
+          <span class="tour__action-caption"
+            >{{ 't.tour.back' | translate }}</span
+          >
+          @if (previous(); as previousStep) {
+          <span class="tour__action-step">
+            {{ previousStep.labelKey | translate }}
+          </span>
+          }
+        </span>
+      </button>
+
+      <button matButton="outlined" class="tour__exit" (click)="exit()">
+        {{ 't.tour.exit' | translate }}
+      </button>
+
+      <button
+        matButton="filled"
+        class="tour__action tour__action--next"
+        cdkFocusInitial
+        (click)="goNext()">
+        <span class="tour__action-text">
+          @if (next(); as nextStep) {
+          <span class="tour__action-caption"
+            >{{ 't.tour.next' | translate }}</span
+          >
+          <span class="tour__action-step">
+            {{ nextStep.labelKey | translate }}
+          </span>
+          } @else {
+          <span class="tour__action-step"
+            >{{ 't.tour.finish' | translate }}</span
+          >
+          }
+        </span>
+        <mat-icon fontSet="material-symbols-outlined" iconPositionEnd>
+          {{ next() ? 'arrow_forward' : 'check' }}
+        </mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
