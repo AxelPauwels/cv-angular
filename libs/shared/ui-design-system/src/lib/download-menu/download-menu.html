@@ -1,0 +1,36 @@
+<!-- The accessible name includes the visible hint text (WCAG 2.5.3) -->
+<button
+  type="button"
+  class="download-menu__trigger"
+  [matMenuTriggerFor]="menu"
+  [matTooltip]="labelKey() | translate">
+  <mat-icon
+    class="download-menu__icon"
+    fontSet="material-symbols-outlined"
+    aria-hidden="true">
+    download
+  </mat-icon>
+  <span class="cdk-visually-hidden">{{ labelKey() | translate }}&nbsp;</span>
+  @if (hintKey(); as hint) {
+  <span class="download-menu__label">{{ hint | translate }}</span>
+  }
+</button>
+
+<mat-menu #menu class="download-menu__panel" xPosition="before">
+  @for (option of options(); track option.href) {
+  <a
+    mat-menu-item
+    class="download-menu__option"
+    [href]="option.href"
+    [attr.download]="option.fileName"
+    [attr.hreflang]="option.lang ?? null">
+    <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">
+      picture_as_pdf
+    </mat-icon>
+    <span>{{ option.labelKey | translate }}</span>
+    @if (hintKey(); as hint) {
+    <span class="download-menu__hint"> ({{ hint | translate }})</span>
+    }
+  </a>
+  }
+</mat-menu>

@@ -1,0 +1,59 @@
+.download-menu {
+  // A subtle tile on the primary-colored toolbar: the one action there that is not a
+  // setting, so it gets its own shape. The tint moves away from the text color, so the
+  // softer text keeps 5.7:1 or more in every theme palette (WCAG AA); on hover the
+  // text goes to full strength and a thin border appears.
+  &__trigger {
+    // the app's softer header text and subtle tint (`--ds-*`), set per theme
+    --download-menu-color: var(--ds-on-brand-soft, var(--mat-sys-on-primary));
+
+    align-items: center;
+    background-color: var(--ds-brand-tint, transparent);
+    border: 0;
+    border-radius: 0.75rem;
+    color: var(--download-menu-color);
+    cursor: pointer;
+    display: inline-flex;
+    font: var(--mat-sys-label-large);
+    gap: 0.375rem;
+    min-height: 2.5rem;
+    padding: 0.375rem 0.875rem 0.375rem 0.625rem;
+    transition:
+      background-color 150ms ease,
+      color 150ms ease,
+      box-shadow 150ms ease;
+
+    // full strength on hover and while the menu is open
+    &:hover,
+    &[aria-expanded='true'] {
+      --download-menu-color: var(--mat-sys-on-primary);
+
+      box-shadow: inset 0 0 0 1px var(--mat-sys-on-primary);
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--mat-sys-on-primary);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &__icon {
+    flex: none;
+  }
+
+  &__label {
+    letter-spacing: 0.05em;
+  }
+
+  &__hint {
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  ::ng-deep &__panel .mat-mdc-menu-content {
+    padding: 0;
+  }
+}
