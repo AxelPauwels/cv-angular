@@ -1,0 +1,13 @@
+// A small pill next to a title, e.g. "Freelance" on a timeline item or "Native"
+// on a language card; the same look everywhere, in the colors of the personal facts'
+// icons
+@mixin tag {
+  background-color: var(--mat-sys-primary-container);
+  border-radius: var(--mat-sys-corner-small);
+  color: var(--mat-sys-on-primary-container);
+  display: inline-block;
+  font: var(--mat-sys-label-medium);
+  letter-spacing: normal;
+  padding: 0.125rem 0.5rem;
+  text-transform: none;
+}

@@ -1,0 +1,26 @@
+@use '../2.tools' as tools;
+
+// Every scrollbar of the app gets the slim, macOS-like look (see the scrollbar
+// mixin). The thumb is the theme's text color, faded: at least 3:1 against the
+// page in both modes, darker on hover, and full text color with higher contrast.
+html {
+  --ds-scrollbar-thumb: color-mix(
+    in srgb,
+    var(--mat-sys-on-surface) 45%,
+    transparent
+  );
+  --ds-scrollbar-thumb-hover: color-mix(
+    in srgb,
+    var(--mat-sys-on-surface) 65%,
+    transparent
+  );
+
+  &[data-high-contrast] {
+    --ds-scrollbar-thumb: var(--mat-sys-on-surface);
+    --ds-scrollbar-thumb-hover: var(--mat-sys-on-surface);
+  }
+}
+
+* {
+  @include tools.scrollbar;
+}

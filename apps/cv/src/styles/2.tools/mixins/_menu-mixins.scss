@@ -1,0 +1,9 @@
+// The "Reset" action at the bottom of the toolbar menus and the accessibility panel:
+// text and icon in the primary color, so it reads as an action and not as one of the
+// options above it, without shouting
+@mixin menu-reset {
+  --mat-menu-item-label-text-color: var(--mat-sys-primary);
+  --mat-menu-item-icon-color: var(--mat-sys-primary);
+
+  color: var(--mat-sys-primary);
+}

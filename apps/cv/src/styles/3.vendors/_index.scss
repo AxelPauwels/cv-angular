@@ -7,3 +7,4 @@ Examples: reset.css, normalise.css, bootstrap, bootstrap-overrides
 // forwards
 // (mat is not forwarded: components @use it directly)
 @forward './material-theme-override';
+@forward './material-font-override';

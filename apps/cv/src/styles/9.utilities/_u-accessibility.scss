@@ -1,0 +1,30 @@
+// Accessibility settings that must win over every component style, set as attributes
+// on <html> by AccessibilityService in @cv/shared-data-access.
+
+// Reduce motion: animations and transitions end at once (still firing their end
+// events, which some components wait for), and scrolling jumps.
+html[data-reduce-motion] {
+  &,
+  *,
+  ::before,
+  ::after {
+    animation-delay: 0s !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// Wider text spacing: the WCAG 1.4.12 values. Icon fonts are left alone, because
+// letter spacing breaks their ligatures.
+html[data-wide-text-spacing] body :not(mat-icon, .mat-icon, [class^='icon-']) {
+  letter-spacing: 0.12em !important;
+  line-height: 1.5 !important;
+  word-spacing: 0.16em !important;
+}
+
+html[data-wide-text-spacing] p {
+  margin-block-end: 2em !important;
+}
