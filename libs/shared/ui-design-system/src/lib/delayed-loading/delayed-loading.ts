@@ -8,15 +8,11 @@ import {
   Signal,
   untracked,
 } from '@angular/core';
-
-/** Loads faster than this never show a spinner */
-export const SPINNER_DELAY_MS = 300;
-
-/** Once the spinner shows, it stays at least this long so it never flickers */
-export const SPINNER_MIN_DURATION_MS = 1000;
-
-/** Holds the spinner on screen this long on every visit, to preview its design; 0 turns it off */
-export const SPINNER_PREVIEW_MS = 0;
+import {
+  LOADING_DELAY_MS,
+  LOADING_MIN_DURATION_MS,
+  LOADING_PREVIEW_MS,
+} from '@cv/shared-util-loading';
 
 export interface DelayedLoadingOptions {
   delay?: number;
@@ -25,29 +21,30 @@ export interface DelayedLoadingOptions {
 }
 
 export interface DelayedLoading {
-  /** True while loading or while the spinner is held on screen: render no content yet */
+  /** True while loading or while the indicator is held on screen: render no content yet */
   readonly pending: Signal<boolean>;
-  /** True when the spinner should be rendered */
-  readonly spinner: Signal<boolean>;
+  /** True when the loading indicator (spinner, progress bar) should be rendered */
+  readonly indicator: Signal<boolean>;
 }
 
-type Phase = 'done' | 'waiting' | 'spinner';
+type Phase = 'done' | 'waiting' | 'indicator';
 
 /**
  * Turns a raw loading flag into a flicker-free loading state: nothing for the
- * first `delay` ms, then a spinner that stays at least `minDuration` ms.
+ * first `delay` ms, then an indicator (spinner, progress bar) that stays at least
+ * `minDuration` ms. The timing defaults come from `@cv/shared-util-loading`.
  * Call it in an injection context (a field initializer).
  *
  * While content is held back (`pending`), the app counts as not stable yet, so
  * `whenStable()` (tests, prerendering) waits until the content renders, also when
- * the data has arrived but the spinner is still held for its minimum.
+ * the data has arrived but the indicator is still held for its minimum.
  */
 export function delayedLoading(
   loading: () => boolean,
   {
-    delay = SPINNER_DELAY_MS,
-    minDuration = SPINNER_MIN_DURATION_MS,
-    preview = SPINNER_PREVIEW_MS,
+    delay = LOADING_DELAY_MS,
+    minDuration = LOADING_MIN_DURATION_MS,
+    preview = LOADING_PREVIEW_MS,
   }: DelayedLoadingOptions = {}
 ): DelayedLoading {
   const pendingTasks = inject(PendingTasks);
@@ -63,7 +60,7 @@ export function delayedLoading(
       releaseTask ??= pendingTasks.add();
     }
   };
-  if (preview > 0) setPhase('spinner');
+  if (preview > 0) setPhase('indicator');
 
   let holdUntil = preview > 0 ? Date.now() + preview : 0;
   let waitingSince = 0;
@@ -78,7 +75,7 @@ export function delayedLoading(
     const now = Date.now();
     const current = phase();
 
-    if (current === 'spinner') {
+    if (current === 'indicator') {
       if (!isLoading) {
         const remaining = holdUntil - now;
         if (remaining > 0) {
@@ -96,7 +93,7 @@ export function delayedLoading(
       if (remaining > 0) {
         later(remaining);
       } else {
-        setPhase('spinner');
+        setPhase('indicator');
         holdUntil = now + minDuration;
       }
     } else {
@@ -117,6 +114,6 @@ export function delayedLoading(
 
   return {
     pending: computed(() => phase() !== 'done'),
-    spinner: computed(() => phase() === 'spinner'),
+    indicator: computed(() => phase() === 'indicator'),
   };
 }

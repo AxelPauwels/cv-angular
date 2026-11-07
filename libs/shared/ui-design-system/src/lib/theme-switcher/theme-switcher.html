@@ -1,28 +1,40 @@
 <button
   matIconButton
-  class="theme-switcher"
+  class="theme-switcher__trigger"
   [matMenuTriggerFor]="menu"
   [matTooltip]="'t.theme.switch' | translate"
   [attr.aria-label]="'t.theme.switch' | translate">
   <mat-icon fontSet="material-symbols-outlined">palette</mat-icon>
 </button>
 
-<mat-menu #menu class="theme-switcher-menu" xPosition="before">
-  @for (option of themes(); track option.id) {
+<mat-menu #menu class="theme-switcher__menu" xPosition="before">
+  @for (option of themes(); track option.id; let i = $index) { @if (i > 0 &&
+  option.group !== themes()[i - 1].group) {
+  <mat-divider />
+  }
   <button
     mat-menu-item
-    class="theme-switcher-option"
+    class="theme-switcher__option"
     role="menuitemradio"
     [attr.aria-checked]="option.id === theme()"
     (click)="themeChange.emit(option.id)">
-    <mat-icon
-      class="theme-switcher-radio"
-      fontSet="material-symbols-outlined"
-      [attr.data-theme]="option.id">
-      {{ option.id === theme() ? 'radio_button_checked' :
-      'radio_button_unchecked' }}
-    </mat-icon>
-    <span>{{ option.labelKey | translate }}</span>
+    <!-- A dot in the option's own color (its data-theme sets the colors); the
+         active one gets a white center, like a checked radio -->
+    <span
+      matMenuItemIcon
+      class="theme-switcher__swatch"
+      aria-hidden="true"
+      [class.theme-switcher__swatch--checked]="option.id === theme()"
+      [attr.data-theme]="option.id"></span>
+    <span class="theme-switcher__label">{{ option.labelKey | translate }}</span>
   </button>
   }
+  <mat-divider />
+  <button
+    mat-menu-item
+    class="theme-switcher__reset"
+    (click)="themeReset.emit()">
+    <mat-icon fontSet="material-symbols-outlined">restart_alt</mat-icon>
+    <span>{{ 't.common.reset' | translate }}</span>
+  </button>
 </mat-menu>

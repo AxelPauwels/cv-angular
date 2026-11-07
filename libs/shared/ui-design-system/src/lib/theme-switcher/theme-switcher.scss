@@ -1,19 +1,66 @@
+@use '2.tools' as tools;
 @use '3.vendors/mat';
 
-// Sits on the primary-colored toolbar
 .theme-switcher {
-  @include mat.icon-button-overrides(
-    (
-      icon-color: var(--mat-sys-on-primary),
-    )
-  );
-}
+  // Sits on the primary-colored toolbar
+  &__trigger {
+    @include mat.icon-button-overrides(
+      (
+        icon-color: var(--mat-sys-on-primary),
+      )
+    );
+  }
 
-// The radio's own `data-theme` makes --mat-sys-primary the option's color
-.theme-switcher-option .theme-switcher-radio {
-  color: var(--mat-sys-primary);
-}
+  // A solid dot in the option's header color (`--ds-brand`). Its own `data-theme` redefines the
+  // colors, and `color-scheme: light` keeps the stronger light-mode shade in dark
+  // mode too, so the dots stay distinct and the white center stays visible.
+  &__swatch {
+    background-color: var(--ds-brand);
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 12%);
+    color-scheme: light;
+    flex: none;
+    height: 24px;
+    margin-right: 16px;
+    position: relative;
+    width: 24px;
 
-::ng-deep .theme-switcher-menu .mat-mdc-menu-content {
-  padding: 0;
+    // the white center of the active theme
+    &::after {
+      background-color: #fff;
+      border-radius: 50%;
+      content: '';
+      inset: 7px;
+      position: absolute;
+      transform: scale(0);
+      transition: transform 150ms ease;
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    &--checked::after {
+      transform: scale(1);
+    }
+
+    // Like the language switcher: unchosen options hint at the mark on hover or
+    // keyboard focus, here as a gray center
+    .theme-switcher__option:is(
+        :hover,
+        .cdk-keyboard-focused
+      )[aria-checked='false']
+      &::after {
+      background-color: #c4c4c4;
+      transform: scale(1);
+    }
+  }
+
+  &__reset {
+    @include tools.menu-reset;
+  }
+
+  ::ng-deep &__menu .mat-mdc-menu-content {
+    padding: 0;
+  }
 }

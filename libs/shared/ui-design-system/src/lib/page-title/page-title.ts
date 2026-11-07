@@ -1,10 +1,15 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { TranslatePipe } from '@tolgee/ngx';
-import { HeadingTranslationKey } from '@cv/shared-util-i18n';
+import {
+  HeadingTranslationKey,
+  SubheadingTranslationKey,
+} from '@cv/shared-util-i18n';
 
 /**
- * The one `<h1>` on top of a content page; pass the heading's translation key:
+ * The one `<h1>` on top of a content page; pass the heading's translation key,
+ * and optionally a subtitle shown underneath it (grouped with the heading):
  * `<ds-page-title title="t.heading.references" />`
+ * `<ds-page-title title="t.heading.administrator" subtitle="t.subheading.administrator" />`
  */
 @Component({
   selector: 'ds-page-title',
@@ -12,7 +17,18 @@ import { HeadingTranslationKey } from '@cv/shared-util-i18n';
   changeDetection: ChangeDetectionStrategy.OnPush,
   // the `title` input would also land on the host as a native tooltip showing the raw key
   host: { '[attr.title]': 'null' },
-  template: `<h1 class="ds-page-title">{{ title() | translate }}</h1>`,
+  template: `
+    @if (subtitle(); as subtitle) {
+      <hgroup class="ds-page-title__group">
+        <h1 class="ds-page-title ds-page-title--with-subtitle">
+          {{ title() | translate }}
+        </h1>
+        <p class="ds-page-title__subtitle">{{ subtitle | translate }}</p>
+      </hgroup>
+    } @else {
+      <h1 class="ds-page-title">{{ title() | translate }}</h1>
+    }
+  `,
   styles: `
     :host {
       display: block;
@@ -26,8 +42,25 @@ import { HeadingTranslationKey } from '@cv/shared-util-i18n';
       text-align: center;
       text-transform: uppercase;
     }
+
+    .ds-page-title--with-subtitle {
+      margin-block-end: 0.25rem;
+    }
+
+    .ds-page-title__group {
+      margin: 0 0 2rem;
+    }
+
+    .ds-page-title__subtitle {
+      color: var(--mat-sys-on-surface-variant);
+      font: var(--mat-sys-title-medium);
+      font-style: italic;
+      margin: 0;
+      text-align: center;
+    }
   `,
 })
 export class PageTitle {
   readonly title = input.required<HeadingTranslationKey>();
+  readonly subtitle = input<SubheadingTranslationKey>();
 }

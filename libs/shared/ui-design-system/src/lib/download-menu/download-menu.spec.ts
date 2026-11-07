@@ -24,13 +24,13 @@ describe('DownloadMenu', () => {
     const fixture = TestBed.createComponent(DownloadMenu);
     fixture.componentRef.setInput('options', [
       {
-        href: '/cv/cv-en.pdf',
+        href: '/assets/documents/cv-en.pdf',
         fileName: 'cv-en.pdf',
         labelKey: 't.language.english',
         lang: 'en',
       },
       {
-        href: '/cv/cv-nl.pdf',
+        href: '/assets/documents/cv-nl.pdf',
         fileName: 'cv-nl.pdf',
         labelKey: 't.language.dutch',
         lang: 'nl',
@@ -77,8 +77,8 @@ describe('DownloadMenu', () => {
       links.map((link) => link.textContent?.replace(/\s+/g, ' ').trim())
     ).toEqual(['picture_as_pdf English (PDF)', 'picture_as_pdf Dutch (PDF)']);
     expect(links.map((link) => link.getAttribute('href'))).toEqual([
-      '/cv/cv-en.pdf',
-      '/cv/cv-nl.pdf',
+      '/assets/documents/cv-en.pdf',
+      '/assets/documents/cv-nl.pdf',
     ]);
     expect(links.map((link) => link.getAttribute('download'))).toEqual([
       'cv-en.pdf',

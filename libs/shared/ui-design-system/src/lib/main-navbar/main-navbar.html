@@ -1,22 +1,26 @@
 <mat-toolbar class="main-navbar">
   <nav
     mat-tab-nav-bar
-    class="main-navbar-tabs"
+    class="main-navbar__tabs"
     mat-stretch-tabs="false"
     [tabPanel]="tabPanel()"
     [attr.aria-label]="labelKey() | translate">
     @for (item of items(); track item.path) {
     <a
       mat-tab-link
-      class="main-navbar-tab"
+      class="main-navbar__tab"
       [routerLink]="'/' + item.path"
       [active]="item === activeItem()">
-      {{ item.labelKey | translate | uppercase }}
+      <span
+        class="main-navbar__label"
+        [attr.data-label]="item.labelKey | translate | uppercase"
+        >{{ item.labelKey | translate | uppercase }}</span
+      >
     </a>
     }
   </nav>
 
-  <div class="main-navbar-actions">
+  <div class="main-navbar__actions">
     <ng-content />
   </div>
 </mat-toolbar>

@@ -1,27 +1,60 @@
+@use '2.tools' as tools;
 @use '3.vendors/mat';
-
-.sub-navbar {
-  // the active tab's underline in the bar's text color, like the main navbar
-  @include mat.tabs-overrides(
-    (
-      active-indicator-color: var(--mat-sys-on-surface),
-      active-focus-indicator-color: var(--mat-sys-on-surface),
-      active-hover-indicator-color: var(--mat-sys-on-surface),
-    )
-  );
-
-  background-color: var(--mat-sys-surface-container);
-}
 
 // A flex column down to the page, so a page can fill the remaining height
 // (e.g. an embedded report); other pages just flow from the top
 :host {
   display: flex;
   flex-direction: column;
+
+  // lets the panel shrink to the space left and scroll
+  min-height: 0;
 }
 
-.sub-navbar-panel {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+.sub-navbar {
+  &__tabs {
+    // The active tab stands out by more than color: a bold label in primary and a
+    // thicker rounded underline. Hover gives the label the active color (no underline)
+    // and makes it semi-bold.
+    @include mat.tabs-overrides(
+      (
+        active-indicator-color: var(--mat-sys-primary),
+        active-focus-indicator-color: var(--mat-sys-primary),
+        active-hover-indicator-color: var(--mat-sys-primary),
+        active-indicator-height: 3px,
+        active-indicator-shape: 3px 3px 0 0,
+        active-label-text-color: var(--mat-sys-primary),
+        active-focus-label-text-color: var(--mat-sys-primary),
+        active-hover-label-text-color: var(--mat-sys-primary),
+        inactive-hover-label-text-color: var(--mat-sys-primary),
+        // no background on hover, focus or press (the focus ring still shows)
+        active-ripple-color: transparent,
+        inactive-ripple-color: transparent,
+      )
+    );
+
+    background-color: var(--mat-sys-surface-container);
+  }
+
+  &__tab {
+    @include tools.nav-label('.sub-navbar__label');
+  }
+
+  // From md up the app shell is the screen high and the page scrolls here, below
+  // the tabs, so the scrollbar doesn't run along the header (like an embedded page)
+  &__panel {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+
+    @include tools.screen(md) {
+      overflow-y: auto;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--mat-sys-primary);
+      outline-offset: -2px;
+    }
+  }
 }

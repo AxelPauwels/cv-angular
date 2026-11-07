@@ -1,9 +1,18 @@
+@use '2.tools' as tools;
 @use '3.vendors/mat';
 
 :host {
+  // The header's colors from the theme (see `--ds-brand` in the app's 3.vendors);
+  // the switchers inside it read primary and on-primary
+  --mat-sys-primary: var(--ds-brand);
+  --mat-sys-on-primary: var(--ds-on-brand);
+
   display: block;
 }
 
+// Phones (< 600px): the actions keep the first row and the domain tabs get a
+// full-width row below, so they never scroll. Only the visual order changes: in the
+// DOM (and for keyboard and screen readers) the navigation still comes first.
 .main-navbar {
   // as high as its content (the tabs) instead of Material's fixed row height
   @include mat.toolbar-overrides(
@@ -25,33 +34,64 @@
       inactive-label-text-color: var(--mat-sys-on-primary),
       inactive-focus-label-text-color: var(--mat-sys-on-primary),
       inactive-hover-label-text-color: var(--mat-sys-on-primary),
+      active-indicator-height: 3px,
+      active-indicator-shape: 3px 3px 0 0,
+      // no background on hover, focus or press (the focus ring still shows)
+      active-ripple-color: transparent,
+      inactive-ripple-color: transparent,
       divider-height: 0,
     )
   );
 
   align-items: flex-end;
-}
+  padding-left: 0;
 
-.main-navbar-tabs {
-  // tabs as wide as their label (mat-stretch-tabs="false"); the bar fills the
-  // space up to the actions and shrinks on small screens, where Material scrolls
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-// Phones: tighter tabs so all domains fit next to the actions
-@media (width < 600px) {
-  .main-navbar-tab {
-    min-width: 0;
-    padding-inline: 12px;
+  @media (width < 600px) {
+    flex-wrap: wrap;
+    padding-inline: 0;
   }
-}
 
-.main-navbar-actions {
-  align-items: center;
-  align-self: center;
-  display: flex;
-  flex: none;
-  gap: 0.25rem;
-  margin-left: 0.5rem;
+  // The active domain gets a bold label on top of its thicker rounded underline;
+  // hover makes the label semi-bold
+  &__tab {
+    @include tools.nav-label('.main-navbar__label');
+
+    // equal widths; nested to outrank Material's `.mat-mdc-tab-link.mdc-tab`
+    @media (width < 600px) {
+      .main-navbar__tabs & {
+        flex: 1 1 0;
+        min-width: 0;
+        padding-inline: 8px;
+      }
+    }
+  }
+
+  &__tabs {
+    // tabs as wide as their label (mat-stretch-tabs="false"); the bar fills the
+    // space up to the actions and shrinks on small screens, where Material scrolls
+    flex: 1 1 auto;
+    min-width: 0;
+
+    @media (width < 600px) {
+      flex-basis: 100%;
+    }
+  }
+
+  &__actions {
+    align-items: center;
+    align-self: center;
+    display: flex;
+    flex: none;
+    gap: 0.25rem;
+    margin-left: 0.5rem;
+
+    @media (width < 600px) {
+      box-sizing: border-box;
+      justify-content: flex-end;
+      margin-left: 0;
+      order: -1;
+      padding: 0.25rem 0.5rem;
+      width: 100%;
+    }
+  }
 }

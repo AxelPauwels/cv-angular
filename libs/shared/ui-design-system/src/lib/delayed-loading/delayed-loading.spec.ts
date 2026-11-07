@@ -28,14 +28,14 @@ describe('delayedLoading', () => {
 
   afterEach(() => vi.useRealTimers());
 
-  it('shows no spinner for a fast load', () => {
+  it('shows no indicator for a fast load', () => {
     // Arrange & Act
     loading.set(true);
     const state = create();
 
     // Assert
     expect(state.pending()).toBe(true);
-    expect(state.spinner()).toBe(false);
+    expect(state.indicator()).toBe(false);
 
     // Act
     settle(200);
@@ -44,17 +44,17 @@ describe('delayedLoading', () => {
 
     // Assert
     expect(state.pending()).toBe(false);
-    expect(state.spinner()).toBe(false);
+    expect(state.indicator()).toBe(false);
   });
 
-  it('shows the spinner after the delay and holds it for the minimum', () => {
+  it('shows the indicator after the delay and holds it for the minimum', () => {
     // Arrange & Act
     loading.set(true);
     const state = create();
     settle(300);
 
     // Assert
-    expect(state.spinner()).toBe(true);
+    expect(state.indicator()).toBe(true);
 
     // Act
     settle(100);
@@ -62,7 +62,7 @@ describe('delayedLoading', () => {
     TestBed.tick();
 
     // Assert
-    expect(state.spinner()).toBe(true);
+    expect(state.indicator()).toBe(true);
 
     // Act
     settle(899);
@@ -90,7 +90,7 @@ describe('delayedLoading', () => {
     create();
     settle(300);
 
-    // Act: the data arrives, but the spinner is held for its minimum
+    // Act: the data arrives, but the indicator is held for its minimum
     loading.set(false);
     TestBed.tick();
     await flushScheduler();
@@ -107,23 +107,23 @@ describe('delayedLoading', () => {
     subscription.unsubscribe();
   });
 
-  it('holds the preview spinner even when nothing loads', () => {
+  it('holds the preview indicator even when nothing loads', () => {
     // Arrange & Act
     const state = create(3000);
 
     // Assert
-    expect(state.spinner()).toBe(true);
+    expect(state.indicator()).toBe(true);
 
     // Act
     settle(2999);
 
     // Assert
-    expect(state.spinner()).toBe(true);
+    expect(state.indicator()).toBe(true);
 
     // Act
     settle(1);
 
     // Assert
-    expect(state.spinner()).toBe(false);
+    expect(state.indicator()).toBe(false);
   });
 });

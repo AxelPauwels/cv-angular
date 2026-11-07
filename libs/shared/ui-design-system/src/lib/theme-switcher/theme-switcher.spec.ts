@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideTolgee, Tolgee } from '@tolgee/ngx';
+import { provideTolgee, Tolgee, TranslateService } from '@tolgee/ngx';
 import { ThemeSwitcher } from './theme-switcher';
 
 describe('ThemeSwitcher', () => {
@@ -14,8 +14,8 @@ describe('ThemeSwitcher', () => {
                 t: {
                   theme: {
                     switch: 'Color theme',
-                    violet: 'Violet',
-                    rose: 'Rose',
+                    gold: 'Gold',
+                    graphite: 'Graphite',
                   },
                 },
               },
@@ -26,8 +26,8 @@ describe('ThemeSwitcher', () => {
     });
     const fixture = TestBed.createComponent(ThemeSwitcher);
     fixture.componentRef.setInput('themes', [
-      { id: 'violet', labelKey: 't.theme.violet' },
-      { id: 'rose', labelKey: 't.theme.rose' },
+      { id: 'gold', labelKey: 't.theme.gold' },
+      { id: 'graphite', labelKey: 't.theme.graphite' },
     ]);
     fixture.componentRef.setInput('theme', theme);
     await fixture.whenStable();
@@ -49,43 +49,132 @@ describe('ThemeSwitcher', () => {
   }
 
   it('is a labelled menu button', async () => {
-    const { trigger } = await render('violet');
+    // Arrange & Act
+    const { trigger } = await render('gold');
 
+    // Assert
     expect(trigger.getAttribute('aria-label')).toBe('Color theme');
   });
 
-  it('lists the themes as radios in their own color and checks the active one', async () => {
-    const { fixture, trigger } = await render('rose');
+  it('lists the themes as color dots and marks the active one', async () => {
+    // Arrange & Act
+    const { fixture, trigger } = await render('graphite');
     const items = await openMenu(fixture, trigger);
-    const radios = items.map((item) =>
-      item.querySelector('.theme-switcher-radio')
+    const swatches = items.map((item) =>
+      item.querySelector('.theme-switcher__swatch')
     );
 
+    // Assert
     expect(
-      items.map((item) => item.querySelector('span')?.textContent?.trim())
-    ).toEqual(['Violet', 'Rose']);
-    expect(radios.map((radio) => radio?.getAttribute('data-theme'))).toEqual([
-      'violet',
-      'rose',
-    ]);
-    expect(radios.map((radio) => radio?.textContent?.trim())).toEqual([
-      'radio_button_unchecked',
-      'radio_button_checked',
-    ]);
+      items.map((item) =>
+        item.querySelector('.theme-switcher__label')?.textContent?.trim()
+      )
+    ).toEqual(['Gold', 'Graphite']);
+    expect(
+      swatches.map((swatch) => swatch?.getAttribute('data-theme'))
+    ).toEqual(['gold', 'graphite']);
+    expect(
+      swatches.map((swatch) =>
+        swatch?.classList.contains('theme-switcher__swatch--checked')
+      )
+    ).toEqual([false, true]);
     expect(items.map((item) => item.getAttribute('aria-checked'))).toEqual([
       'false',
       'true',
     ]);
   });
 
+  it('keeps the given order with a divider between groups, and translates again after a language change', async () => {
+    // Arrange
+    TestBed.configureTestingModule({
+      providers: [
+        provideTolgee(() =>
+          Tolgee().init({
+            language: 'en',
+            staticData: {
+              en: {
+                t: {
+                  theme: { gold: 'Gold', graphite: 'Graphite', ocean: 'Ocean' },
+                },
+              },
+              nl: {
+                t: {
+                  theme: { gold: 'Goud', graphite: 'Grafiet', ocean: 'Oceaan' },
+                },
+              },
+            },
+          })
+        ),
+      ],
+    });
+    const fixture = TestBed.createComponent(ThemeSwitcher);
+    fixture.componentRef.setInput('themes', [
+      { id: 'ocean', labelKey: 't.theme.ocean', group: 'color' },
+      { id: 'graphite', labelKey: 't.theme.graphite', group: 'color' },
+      { id: 'gold', labelKey: 't.theme.gold', group: 'metal' },
+    ]);
+    fixture.componentRef.setInput('theme', 'gold');
+    await fixture.whenStable();
+    const trigger: HTMLButtonElement =
+      fixture.nativeElement.querySelector('button');
+    const labels = (items: HTMLButtonElement[]) =>
+      items.map((item) =>
+        item.querySelector('.theme-switcher__label')?.textContent?.trim()
+      );
+
+    // Act
+    const items = await openMenu(fixture, trigger);
+
+    // Assert
+    expect(labels(items)).toEqual(['Ocean', 'Graphite', 'Gold']);
+    // One divider between the groups, one above "reset"
+    expect(items[2].previousElementSibling?.tagName).toBe('MAT-DIVIDER');
+    expect(items[1].previousElementSibling?.tagName).not.toBe('MAT-DIVIDER');
+    expect(
+      document.querySelectorAll('.theme-switcher__menu mat-divider')
+    ).toHaveLength(2);
+
+    // Act
+    await TestBed.inject(TranslateService).changeLanguage('nl');
+    await fixture.whenStable();
+
+    // Assert
+    expect(
+      labels(
+        Array.from(
+          document.querySelectorAll<HTMLButtonElement>('[role="menuitemradio"]')
+        )
+      )
+    ).toEqual(['Oceaan', 'Grafiet', 'Goud']);
+  });
+
   it('emits the chosen theme', async () => {
-    const { fixture, trigger } = await render('violet');
+    // Arrange
+    const { fixture, trigger } = await render('gold');
     const chosen: string[] = [];
     fixture.componentInstance.themeChange.subscribe((id) => chosen.push(id));
 
+    // Act
     const items = await openMenu(fixture, trigger);
     items[1].click();
 
-    expect(chosen).toEqual(['rose']);
+    // Assert
+    expect(chosen).toEqual(['graphite']);
+  });
+
+  it('emits a reset from the last menu item', async () => {
+    // Arrange
+    const { fixture, trigger } = await render('gold');
+    let resets = 0;
+    fixture.componentInstance.themeReset.subscribe(() => resets++);
+
+    // Act
+    await openMenu(fixture, trigger);
+    document
+      .querySelector<HTMLButtonElement>('.theme-switcher__reset')
+      ?.click();
+
+    // Assert
+    expect(resets).toBe(1);
   });
 });
