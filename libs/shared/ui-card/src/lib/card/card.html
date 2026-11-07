@@ -1,0 +1,55 @@
+<mat-card
+  appearance="outlined"
+  class="card"
+  [class.card--brand]="appearance() === 'brand'">
+  <!-- no title, no header: the card is only its content -->
+  @if (title(); as title) {
+  <mat-card-header class="card__header">
+    <!-- one root element per block, so Material projects it into the avatar slot -->
+    @if (icon() && iconFont() === 'material') {
+    <mat-icon
+      matCardAvatar
+      class="card__icon"
+      fontSet="material-symbols-outlined"
+      aria-hidden="true"
+      >{{ icon() }}</mat-icon
+    >
+    } @if (icon() && iconFont() === 'cv') {
+    <span
+      matCardAvatar
+      class="card__icon cv-icon"
+      [class]="'cv-icon-' + icon()"
+      aria-hidden="true"></span>
+    } @if (!icon() && initials()) {
+    <span
+      matCardAvatar
+      class="card__icon card__icon--initials"
+      aria-hidden="true"
+      >{{ initials() }}</span
+    >
+    } @if (headingLevel() === 3) {
+    <h3 matCardTitle class="card__title">
+      <span>{{ title }}</span>
+      @if (tag(); as tag) {
+      <!-- a kept space, so it's read as "Dutch Native", not "DutchNative" -->
+      &ngsp;<span class="card__tag">{{ tag }}</span>
+      }
+    </h3>
+    } @else {
+    <h2 matCardTitle class="card__title">
+      <span>{{ title }}</span>
+      @if (tag(); as tag) {
+      <!-- a kept space, so it's read as "Dutch Native", not "DutchNative" -->
+      &ngsp;<span class="card__tag">{{ tag }}</span>
+      }
+    </h2>
+    } @if (subtitle(); as subtitle) {
+    <p matCardSubtitle class="card__subtitle">{{ subtitle }}</p>
+    }
+  </mat-card-header>
+  }
+
+  <mat-card-content>
+    <ng-content />
+  </mat-card-content>
+</mat-card>
