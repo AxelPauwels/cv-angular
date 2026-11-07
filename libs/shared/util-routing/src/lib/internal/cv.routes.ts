@@ -2,6 +2,8 @@
 export const CV = {
   ROOT: '',
   ROOT_ROUTER_LINK: '/',
+  HOME: 'home',
+  HOME_ROUTER_LINK: '/home',
   PERSONAL: 'personal',
   PERSONAL_ROUTER_LINK: '/personal',
   EDUCATION: 'education',
