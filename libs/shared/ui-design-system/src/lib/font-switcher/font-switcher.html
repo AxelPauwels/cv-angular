@@ -1,0 +1,37 @@
+<button
+  matIconButton
+  class="font-switcher__trigger"
+  [matMenuTriggerFor]="menu"
+  [matTooltip]="'t.font.switch' | translate"
+  [attr.aria-label]="'t.font.switch' | translate">
+  <mat-icon fontSet="material-symbols-outlined">font_download</mat-icon>
+</button>
+
+<mat-menu #menu class="font-switcher__menu" xPosition="before">
+  @for (option of fonts(); track option.id) {
+  <button
+    mat-menu-item
+    class="font-switcher__option"
+    role="menuitemradio"
+    [attr.aria-checked]="option.id === font()"
+    (click)="fontChange.emit(option.id)">
+    <mat-icon
+      matMenuItemIcon
+      fontSet="material-symbols-outlined"
+      aria-hidden="true"
+      class="font-switcher__check"
+      [class.font-switcher__check--visible]="option.id === font()"
+      >check</mat-icon
+    >
+    <!-- Each label previews its own headline font (its data-font sets the type scale) -->
+    <span class="font-switcher__label" [attr.data-font]="option.id"
+      >{{ option.label }}</span
+    >
+  </button>
+  }
+  <mat-divider />
+  <button mat-menu-item class="font-switcher__reset" (click)="fontReset.emit()">
+    <mat-icon fontSet="material-symbols-outlined">restart_alt</mat-icon>
+    <span>{{ 't.common.reset' | translate }}</span>
+  </button>
+</mat-menu>

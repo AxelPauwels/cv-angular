@@ -49,16 +49,20 @@ describe('LanguageSwitcher', () => {
   }
 
   it('is a labelled icon menu button without the language code', async () => {
+    // Arrange & Act
     const { trigger } = await render('nl');
 
+    // Assert
     expect(trigger.getAttribute('aria-label')).toBe('Language');
     expect(trigger.textContent).not.toContain('NL');
   });
 
   it('lists the full language names and checks the active one', async () => {
+    // Arrange & Act
     const { fixture, trigger } = await render('nl');
     const items = await openMenu(fixture, trigger);
 
+    // Assert
     expect(
       items.map((item) => item.textContent?.replace('check', '').trim())
     ).toEqual(['English', 'Dutch']);
@@ -69,15 +73,34 @@ describe('LanguageSwitcher', () => {
   });
 
   it('emits the chosen language', async () => {
+    // Arrange
     const { fixture, trigger } = await render('en');
     const chosen: string[] = [];
     fixture.componentInstance.languageChange.subscribe((code) =>
       chosen.push(code)
     );
 
+    // Act
     const items = await openMenu(fixture, trigger);
     items[1].click();
 
+    // Assert
     expect(chosen).toEqual(['nl']);
+  });
+
+  it('emits a reset from the last menu item', async () => {
+    // Arrange
+    const { fixture, trigger } = await render('en');
+    let resets = 0;
+    fixture.componentInstance.languageReset.subscribe(() => resets++);
+
+    // Act
+    await openMenu(fixture, trigger);
+    document
+      .querySelector<HTMLButtonElement>('.language-switcher__reset')
+      ?.click();
+
+    // Assert
+    expect(resets).toBe(1);
   });
 });

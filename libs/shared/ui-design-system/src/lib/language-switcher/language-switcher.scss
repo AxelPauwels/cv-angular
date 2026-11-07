@@ -1,38 +1,43 @@
+@use '2.tools' as tools;
 @use '3.vendors/mat';
 
-// Sits on the primary-colored toolbar
 .language-switcher {
-  @include mat.icon-button-overrides(
-    (
-      icon-color: var(--mat-sys-on-primary),
-    )
-  );
-}
-
-// Every item reserves the check's space; unchosen ones hint at it on hover or focus
-.language-switcher-check {
-  opacity: 0;
-  transition: opacity 150ms ease;
-
-  [aria-checked='true'] > & {
-    opacity: 1;
+  // Sits on the primary-colored toolbar
+  &__trigger {
+    @include mat.icon-button-overrides(
+      (
+        icon-color: var(--mat-sys-on-primary),
+      )
+    );
   }
 
-  .language-switcher-option:is(
-      :hover,
-      .cdk-keyboard-focused
-    )[aria-checked='false']
-    > & {
-    opacity: 0.38;
-  }
-}
+  // Every item reserves the check's space; unchosen ones hint at it on hover or focus
+  &__check {
+    opacity: 0;
+    transition: opacity 150ms ease;
 
-@media (prefers-reduced-motion: reduce) {
-  .language-switcher-check {
-    transition: none;
-  }
-}
+    [aria-checked='true'] > & {
+      opacity: 1;
+    }
 
-::ng-deep .language-switcher-menu .mat-mdc-menu-content {
-  padding: 0;
+    .language-switcher__option:is(
+        :hover,
+        .cdk-keyboard-focused
+      )[aria-checked='false']
+      > & {
+      opacity: 0.38;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &__reset {
+    @include tools.menu-reset;
+  }
+
+  ::ng-deep &__menu .mat-mdc-menu-content {
+    padding: 0;
+  }
 }

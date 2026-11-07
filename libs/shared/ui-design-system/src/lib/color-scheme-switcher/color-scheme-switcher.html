@@ -1,13 +1,38 @@
 <button
   matIconButton
-  class="color-scheme-switcher"
-  [attr.aria-pressed]="isDark()"
-  [attr.aria-label]="'t.theme.dark-mode' | translate"
-  [matTooltip]="
-    (isDark() ? 't.theme.switch-to-light' : 't.theme.switch-to-dark') | translate
-  "
-  (click)="toggle()">
+  class="color-scheme-switcher__trigger"
+  [matMenuTriggerFor]="menu"
+  [matTooltip]="(colorScheme() === 'dark' ? 't.color-scheme.dark' : 't.color-scheme.light') | translate"
+  [attr.aria-label]="(colorScheme() === 'dark' ? 't.color-scheme.dark' : 't.color-scheme.light') | translate">
   <mat-icon fontSet="material-symbols-outlined">
-    {{ isDark() ? 'light_mode' : 'dark_mode' }}
+    {{ colorScheme() === 'dark' ? 'dark_mode' : 'light_mode' }}
   </mat-icon>
 </button>
+
+<mat-menu #menu class="color-scheme-switcher__menu" xPosition="before">
+  @for (option of options; track option.id) {
+  <button
+    mat-menu-item
+    class="color-scheme-switcher__option"
+    role="menuitemradio"
+    [attr.aria-checked]="option.id === colorScheme()"
+    (click)="colorSchemeChange.emit(option.id)">
+    <!-- On every item, so the labels line up; only the active one shows it -->
+    <mat-icon
+      class="color-scheme-switcher__check"
+      fontSet="material-symbols-outlined"
+      aria-hidden="true">
+      check
+    </mat-icon>
+    <span>{{ option.labelKey | translate }}</span>
+  </button>
+  }
+  <mat-divider />
+  <button
+    mat-menu-item
+    class="color-scheme-switcher__reset"
+    (click)="colorSchemeReset.emit()">
+    <mat-icon fontSet="material-symbols-outlined">restart_alt</mat-icon>
+    <span>{{ 't.common.reset' | translate }}</span>
+  </button>
+</mat-menu>
