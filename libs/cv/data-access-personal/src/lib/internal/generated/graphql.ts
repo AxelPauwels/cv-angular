@@ -7,27 +7,6 @@ export type Incremental<T> =
       [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
     };
 import type { DocumentTypeDecoration } from '@graphql-typed-document-node/core';
-/**
- * Belgian driving license categories
- * Based on the official classification by the Belgian Federal Public Service Mobility and Transport.
- */
-export type DriverLicenseCategory =
-  | 'A'
-  | 'A1'
-  | 'A2'
-  | 'AM'
-  | 'B'
-  | 'BE'
-  | 'C'
-  | 'C1'
-  | 'C1E'
-  | 'CE'
-  | 'D'
-  | 'D1'
-  | 'D1E'
-  | 'DE'
-  | 'G';
-
 export type Gender = 'FEMALE' | 'MALE' | 'OTHER';
 
 /**
@@ -89,24 +68,16 @@ export type PersonFieldsFragment = {
   lastName: string;
   functionTitle: string;
   contact: {
-    phone: string;
     email: string;
-    website: string | null;
     linkedIn: string | null;
-    address: {
-      street: string;
-      number: string;
-      postalCode: string;
-      city: string;
-      country: string;
-    };
+    github: string | null;
+    address: { city: string; country: string };
   };
   personal: {
     dateOfBirth: string;
     nationality: NationalityIsoCode;
     maritalStatus: MaritalStatus;
     personalityType: PersonalityType;
-    driverLicense: DriverLicenseCategory;
     children: Array<{ name: string; gender: Gender }>;
   };
   hobbies: Array<{ name: string; comment: string | null; icon: string }>;
@@ -126,24 +97,16 @@ export type PersonQuery = {
     lastName: string;
     functionTitle: string;
     contact: {
-      phone: string;
       email: string;
-      website: string | null;
       linkedIn: string | null;
-      address: {
-        street: string;
-        number: string;
-        postalCode: string;
-        city: string;
-        country: string;
-      };
+      github: string | null;
+      address: { city: string; country: string };
     };
     personal: {
       dateOfBirth: string;
       nationality: NationalityIsoCode;
       maritalStatus: MaritalStatus;
       personalityType: PersonalityType;
-      driverLicense: DriverLicenseCategory;
       children: Array<{ name: string; gender: Gender }>;
     };
     hobbies: Array<{ name: string; comment: string | null; icon: string }>;
@@ -184,16 +147,12 @@ export const PersonFieldsFragmentDoc = new TypedDocumentString(
   functionTitle
   contact {
     address {
-      street
-      number
-      postalCode
       city
       country
     }
-    phone
     email
-    website
     linkedIn
+    github
   }
   personal {
     dateOfBirth
@@ -204,7 +163,6 @@ export const PersonFieldsFragmentDoc = new TypedDocumentString(
       gender
     }
     personalityType
-    driverLicense
   }
   hobbies {
     name
@@ -236,16 +194,12 @@ export const PersonDocument = new TypedDocumentString(`
   functionTitle
   contact {
     address {
-      street
-      number
-      postalCode
       city
       country
     }
-    phone
     email
-    website
     linkedIn
+    github
   }
   personal {
     dateOfBirth
@@ -256,7 +210,6 @@ export const PersonDocument = new TypedDocumentString(`
       gender
     }
     personalityType
-    driverLicense
   }
   hobbies {
     name

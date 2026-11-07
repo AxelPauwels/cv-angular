@@ -24,13 +24,18 @@ describe('PersonService', () => {
   const stable = () => TestBed.inject(ApplicationRef).whenStable();
 
   it('maps the person to the frontend model', async () => {
+    // Arrange & Act
     const person = load((service) => service.person());
     await stable();
 
+    // Assert
     expect(person.error()).toBeUndefined();
     expect(person.value()?.firstName).toBe('Axel');
     expect(person.value()?.personal.dateOfBirth).toBeInstanceOf(Date);
-    expect(person.value()?.contact.website).not.toBeNull();
+    expect(person.value()?.contact.address.city).toBe('Geel');
+    expect(person.value()?.contact.github).toBe(
+      'https://github.com/AxelPauwels'
+    );
     expect(person.value()?.languages.length).toBeGreaterThan(0);
   });
 });

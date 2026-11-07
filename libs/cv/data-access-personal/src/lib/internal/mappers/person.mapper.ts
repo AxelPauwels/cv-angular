@@ -23,13 +23,12 @@ export function toPerson(dto: PersonFieldsFragment): Person {
   };
 }
 
-function toContactInfo({ website, linkedIn, ...dto }: ContactDto): ContactInfo {
+function toContactInfo({ linkedIn, github, ...dto }: ContactDto): ContactInfo {
   return {
     address: { ...dto.address },
-    phone: dto.phone,
     email: dto.email,
-    ...(website ? { website } : {}),
     ...(linkedIn ? { linkedIn } : {}),
+    ...(github ? { github } : {}),
   };
 }
 

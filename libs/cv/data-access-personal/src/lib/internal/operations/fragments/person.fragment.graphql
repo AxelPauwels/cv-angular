@@ -4,16 +4,12 @@ fragment PersonFields on Person {
   functionTitle
   contact {
     address {
-      street
-      number
-      postalCode
       city
       country
     }
-    phone
     email
-    website
     linkedIn
+    github
   }
   personal {
     dateOfBirth
@@ -24,7 +20,6 @@ fragment PersonFields on Person {
       gender
     }
     personalityType
-    driverLicense
   }
   hobbies {
     name

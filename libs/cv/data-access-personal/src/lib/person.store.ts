@@ -8,10 +8,6 @@ import {
 import { PersonService } from './internal/services/person.service';
 import type { Person } from './types/person.types';
 
-/**
- * Loads once on first use and keeps the result for the whole app, so
- * navigating back to a page shows it without loading again.
- */
 export const PersonStore = signalStore(
   { providedIn: 'root' },
   withProps(() => ({

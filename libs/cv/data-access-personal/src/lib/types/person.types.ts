@@ -31,24 +31,6 @@ export type PersonalityType =
   | 'ESTP'
   | 'ESFP';
 
-/** Belgian driving license categories */
-export type DriverLicenseCategory =
-  | 'AM'
-  | 'A1'
-  | 'A2'
-  | 'A'
-  | 'B'
-  | 'BE'
-  | 'C1'
-  | 'C1E'
-  | 'C'
-  | 'CE'
-  | 'D1'
-  | 'D1E'
-  | 'D'
-  | 'DE'
-  | 'G';
-
 export type Gender = 'MALE' | 'FEMALE' | 'OTHER';
 
 /** ISO 639-1 two-letter language codes */
@@ -62,20 +44,18 @@ export type Locale =
 export type LanguageProficiency =
   'EXCELLENT' | 'VERY_GOOD' | 'GOOD' | 'FAIR' | 'BASIC';
 
+/** Where the person lives; only the city, the street isn't shown */
 export interface Address {
-  street: string;
-  number: string;
-  postalCode: string;
   city: string;
+  /** translation key suffix, e.g. `belgium` for `t.country.belgium` */
   country: string;
 }
 
 export interface ContactInfo {
   address: Address;
-  phone: string;
   email: string;
-  website?: string;
   linkedIn?: string;
+  github?: string;
 }
 
 export interface Child {
@@ -89,7 +69,6 @@ export interface PersonalInfo {
   maritalStatus: MaritalStatus;
   children: Child[];
   personalityType: PersonalityType;
-  driverLicense: DriverLicenseCategory;
 }
 
 export interface Hobby {
