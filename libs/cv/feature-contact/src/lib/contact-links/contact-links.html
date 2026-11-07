@@ -1,0 +1,15 @@
+@if (links().length) {
+<ul
+  class="contact-links"
+  [attr.aria-label]="'t.subheading.personal.connect' | translate">
+  @for (link of links(); track link.href) {
+  <li>
+    <a class="contact-links__link" [href]="link.href">
+      <ds-lordicon class="contact-links__icon" [icon]="link.icon">
+        <span class="cv-icon" [class]="'cv-icon-' + link.icon"></span>
+      </ds-lordicon>
+    </a>
+  </li>
+  }
+</ul>
+}
