@@ -1,0 +1,59 @@
+:host {
+  // an empty dot: gray-ish on every palette, light and dark
+  --ds-progress-dots-empty: color-mix(
+    in srgb,
+    var(--mat-sys-on-surface) 10%,
+    transparent
+  );
+
+  align-items: center;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.progress-dots {
+  &__dot {
+    background-color: var(--ds-progress-dots-empty);
+    block-size: 0.625rem;
+    border-radius: var(--mat-sys-corner-full);
+    flex-shrink: 0;
+    inline-size: 0.625rem;
+
+    // the header's color (the app's `--ds-brand`, the theme's primary as a fallback);
+    // fills in one dot after the other, one row 60ms after the other in a list
+    &--filled {
+      animation: progress-dots-fill 400ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      animation-delay: calc(
+        var(--ds-progress-dots-index, 0) * 60ms +
+          var(--ds-progress-dots-position, 0) * 90ms + 150ms
+      );
+      background-color: var(--ds-brand, var(--mat-sys-primary));
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+
+      // the app's own reduce motion setting (on <html>)
+      :host-context(html[data-reduce-motion]) & {
+        animation: none;
+      }
+    }
+
+    // forced colors drop the background colors: outline the empty dots, fill the rest
+    @media (forced-colors: active) {
+      border: 1px solid CanvasText;
+
+      &--filled {
+        background-color: CanvasText;
+      }
+    }
+  }
+}
+
+// from an empty dot to its own color
+@keyframes progress-dots-fill {
+  from {
+    background-color: var(--ds-progress-dots-empty);
+    transform: scale(0.6);
+  }
+}
