@@ -1,0 +1,35 @@
+@use '2.tools' as tools;
+
+// The elements come from this component's templates, so these styles apply even
+// though the timeline renders them inside its steps.
+.timeline-item {
+  &__title,
+  &__subtitle {
+    display: block;
+  }
+
+  &__subtitle {
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-body-medium);
+  }
+
+  &__tag {
+    @include tools.tag;
+
+    margin-left: 0.5rem;
+    vertical-align: 0.125em;
+  }
+
+  // An icon with text next to it: the period, then the details
+  &__detail {
+    @include tools.detail-row;
+  }
+
+  &__detail-icon {
+    @include tools.detail-row-icon;
+  }
+
+  &__details {
+    @include tools.detail-row-content;
+  }
+}

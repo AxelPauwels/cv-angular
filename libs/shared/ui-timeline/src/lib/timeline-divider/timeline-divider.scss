@@ -1,0 +1,37 @@
+// Lines up with `ds-timeline`: its line runs through the middle of the year
+// pills, a header padding plus half a pill from the left
+$badge-width: 4rem;
+$header-padding: 24px;
+$line-gap: 8px;
+$line-length: 1.5rem;
+
+:host {
+  display: block;
+
+  // the timelines' headers already leave room around their pills; pull the
+  // line closer so it is as far from them as the timeline's own line
+  margin-block: -12px;
+}
+
+// A column as wide as a pill, centred on the line; a longer label overflows it
+// evenly on both sides, so it stays centred on the line too
+.timeline-divider {
+  align-items: center;
+  color: var(--mat-sys-on-surface-variant);
+  display: flex;
+  flex-direction: column;
+  font: var(--mat-sys-title-small);
+  gap: $line-gap;
+  letter-spacing: 0.08em;
+  margin: 0 0 0 $header-padding;
+  text-transform: uppercase;
+  white-space: nowrap;
+  width: $badge-width;
+
+  &::before,
+  &::after {
+    border-left: 1px solid var(--mat-sys-outline-variant);
+    content: '';
+    height: $line-length;
+  }
+}

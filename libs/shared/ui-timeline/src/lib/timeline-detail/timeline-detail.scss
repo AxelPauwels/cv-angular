@@ -1,0 +1,16 @@
+@use '2.tools' as tools;
+
+// The same row as the period and the item's own details
+:host {
+  @include tools.detail-row;
+}
+
+.timeline-detail {
+  &__icon {
+    @include tools.detail-row-icon;
+  }
+
+  &__content {
+    @include tools.detail-row-content;
+  }
+}
