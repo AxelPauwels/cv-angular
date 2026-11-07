@@ -1,0 +1,69 @@
+<ds-page-title title="t.heading.administrator" />
+
+<div class="feature-toggles">
+  <div class="feature-toggles__toolbar">
+    <button
+      matButton="tonal"
+      type="button"
+      class="feature-toggles__reset"
+      (click)="reset()">
+      <mat-icon fontSet="material-symbols-outlined">restart_alt</mat-icon>
+      {{ 't.admin.reset' | translate }}
+    </button>
+  </div>
+
+  <div class="feature-toggles__sections">
+    @for (card of cards(); track card.section.id) { @let section = card.section;
+    <mat-card
+      appearance="outlined"
+      class="feature-toggles__section"
+      [class.feature-toggles__section--new-row]="section.newRow"
+      role="region"
+      [attr.aria-labelledby]="'feature-toggles-' + section.id + '-title'">
+      <mat-card-header class="feature-toggles__section-header">
+        <h2
+          mat-card-title
+          [id]="'feature-toggles-' + section.id + '-title'"
+          class="feature-toggles__section-title">
+          @for (key of section.titleKeys; track key) { {{ key | translate }} }
+        </h2>
+        <mat-chip-set class="feature-toggles__count">
+          <mat-chip [highlighted]="card.allOn" [disableRipple]="true">
+            {{ 't.admin.count' | translate: card.count }}
+          </mat-chip>
+        </mat-chip-set>
+      </mat-card-header>
+
+      <mat-card-content class="feature-toggles__content">
+        <ul
+          class="feature-toggles__list"
+          [attr.aria-labelledby]="'feature-toggles-' + section.id + '-title'">
+          @for (toggle of section.toggles; track toggle.id) {
+          <li class="feature-toggles__item">
+            <mat-slide-toggle
+              class="feature-toggles__toggle"
+              labelPosition="before"
+              [attr.data-toggle]="toggle.id"
+              [checked]="service.states()[toggle.id]"
+              [aria-describedby]="describedBy(section, toggle)"
+              (change)="change(toggle.id, $event.checked)">
+              {{ toggle.labelKey | translate }}
+            </mat-slide-toggle>
+          </li>
+          }
+        </ul>
+      </mat-card-content>
+    </mat-card>
+    }
+  </div>
+
+  <!-- toggles switched along with another one, e.g. a main menu item -->
+  <p class="cdk-visually-hidden" role="status">
+    @for (linked of linkedChanges(); track linked.id) {
+    <span
+      >{{ linked.messageKey | translate: { item: (linked.labelKey | translate) }
+      }}</span
+    >
+    }
+  </p>
+</div>

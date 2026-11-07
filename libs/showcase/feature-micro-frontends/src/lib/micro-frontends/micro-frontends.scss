@@ -1,14 +1,55 @@
-// Two columns side by side, stacked on narrow screens
+// Two cards side by side, stacked on narrow screens
 :host {
+  align-items: start;
   display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  max-width: 80rem;
 }
 
-.micro-frontends-column {
-  min-width: 0;
-}
+.micro-frontends {
+  &__title {
+    grid-column: 1 / -1;
+  }
 
-.micro-frontends-demo {
-  margin-block: 1rem;
+  &__column {
+    min-width: 0;
+  }
+
+  &__card {
+    height: 100%;
+  }
+
+  &__avatar {
+    align-items: center;
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
+    display: flex;
+    justify-content: center;
+  }
+
+  // The live demo sits on a contrasting surface, edge to edge in the card
+  &__demo {
+    background-color: var(--mat-sys-surface-container);
+    margin-block: 1rem;
+    padding: 1rem;
+  }
+
+  // The window is always white, so its content keeps light-mode text colors, also in
+  // dark mode (Material's colors use `light-dark()`)
+  &__window {
+    color: var(--mat-sys-on-surface);
+    color-scheme: light;
+  }
+
+  &__step {
+    & + & {
+      margin-top: 0.5rem;
+    }
+  }
+
+  &__chips {
+    display: block;
+    margin-top: 1rem;
+  }
 }

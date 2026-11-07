@@ -1,5 +1,9 @@
-<ds-sub-navbar [items]="navItems" labelKey="t.nav.showcase-navigation">
-  <main class="showcase-feature-shell-content">
+<ds-sub-navbar
+  class="showcase-feature-shell__nav"
+  data-tour="showcase"
+  [items]="navItems()"
+  labelKey="t.nav.showcase-navigation">
+  <div class="showcase-feature-shell__content">
     <router-outlet />
-  </main>
+  </div>
 </ds-sub-navbar>
