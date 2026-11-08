@@ -12,7 +12,7 @@
     },
     "admin": {
       "count": "{on} of {total} on",
-      "hidden-notice": "The Admin page is hidden from the menu. You can still open it at /showcase/admin by clicking “Axel Pauwels” in the footer.",
+      "hidden-notice": "The Admin page is hidden from the menu. You can still open it at /showcase/feature-toggles by clicking “Axel Pauwels” in the footer.",
       "linked": {
         "off": "{item} switched off too.",
         "on": "{item} switched on too."
@@ -366,7 +366,7 @@
         "dependencies.description": "Straight from the project graph",
         "dependency-rules": "Dependency rules",
         "dependency-rules.description": "Checked on every import",
-        "domains-and-layers": "Domains × layers",
+        "domains-and-layers": "Domains & layers",
         "domains-and-layers.description": "Vertical slices, horizontal layers",
         "layers": "Layers inside a domain",
         "layers.description": "Who does what",

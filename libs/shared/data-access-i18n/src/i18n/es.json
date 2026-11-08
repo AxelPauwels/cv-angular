@@ -12,7 +12,7 @@
     },
     "admin": {
       "count": "{on} de {total} activados",
-      "hidden-notice": "La página Admin ya no aparece en el menú. Puedes abrirla en /showcase/admin haciendo clic en «Axel Pauwels» en el pie de página.",
+      "hidden-notice": "La página Admin ya no aparece en el menú. Puedes abrirla en /showcase/feature-toggles haciendo clic en «Axel Pauwels» en el pie de página.",
       "linked": {
         "off": "{item} también desactivado.",
         "on": "{item} también activado."
@@ -339,7 +339,7 @@
         "dependencies.description": "Directamente del grafo de proyectos",
         "dependency-rules": "Reglas de dependencia",
         "dependency-rules.description": "Comprobadas en cada import",
-        "domains-and-layers": "Dominios × capas",
+        "domains-and-layers": "Dominios & capas",
         "domains-and-layers.description": "Cortes verticales, capas horizontales",
         "layers": "Capas dentro de un dominio",
         "layers.description": "Quién hace qué",

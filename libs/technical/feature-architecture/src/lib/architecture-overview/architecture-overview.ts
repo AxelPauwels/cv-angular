@@ -4,8 +4,11 @@ import {
   computed,
   inject,
 } from '@angular/core';
-import { PageTitle, SectionHeading } from '@cv/shared-ui-design-system';
-import { MatChip, MatChipAvatar, MatChipSet } from '@angular/material/chips';
+import {
+  PageLayout,
+  PageTitle,
+  SectionHeading,
+} from '@cv/shared-ui-design-system';
 import {
   MatAccordion,
   MatExpansionPanel,
@@ -50,12 +53,10 @@ export function describeTargets(tags: string[]): string {
 @Component({
   selector: 'technical-architecture-overview',
   imports: [
+    PageLayout,
     PageTitle,
     SectionHeading,
     MatAccordion,
-    MatChip,
-    MatChipAvatar,
-    MatChipSet,
     MatExpansionPanel,
     MatExpansionPanelDescription,
     MatExpansionPanelHeader,
@@ -121,10 +122,10 @@ export class ArchitectureOverview {
 
   /** The numbers on top of the page */
   protected readonly stats = computed(() => [
+    { icon: 'web', label: 'Apps', value: this.apps().length },
     { icon: 'category', label: 'Domains', value: this.domains().length },
     { icon: 'layers', label: 'Layers', value: this.layers().length },
     { icon: 'deployed_code', label: 'Libraries', value: this.libs().length },
-    { icon: 'web', label: 'Apps', value: this.apps().length },
   ]);
 
   protected cell(domain: string, layer: string): ProjectInfo[] {

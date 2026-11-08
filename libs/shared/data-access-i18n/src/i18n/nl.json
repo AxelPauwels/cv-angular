@@ -12,7 +12,7 @@
     },
     "admin": {
       "count": "{on} van {total} aan",
-      "hidden-notice": "De Admin-pagina staat niet meer in het menu. Je kunt ze nog altijd openen via /showcase/admin door in de footer op “Axel Pauwels” te klikken.",
+      "hidden-notice": "De Admin-pagina staat niet meer in het menu. Je kunt ze nog altijd openen via /showcase/feature-toggles door in de footer op “Axel Pauwels” te klikken.",
       "linked": {
         "off": "{item} ook uitgezet.",
         "on": "{item} ook aangezet."
@@ -366,7 +366,7 @@
         "dependencies.description": "Rechtstreeks uit de projectgraaf",
         "dependency-rules": "Afhankelijkheidsregels",
         "dependency-rules.description": "Gecontroleerd bij elke import",
-        "domains-and-layers": "Domeinen × lagen",
+        "domains-and-layers": "Domeinen & lagen",
         "domains-and-layers.description": "Verticale slices, horizontale lagen",
         "layers": "Lagen binnen een domein",
         "layers.description": "Wie doet wat",
