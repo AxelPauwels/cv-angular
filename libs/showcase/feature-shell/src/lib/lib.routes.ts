@@ -16,12 +16,16 @@ export const showcaseFeatureShellRoutes: Route[] = [
       },
       {
         path: ROUTES.SHOWCASE.MICRO_FRONTENDS,
-        loadComponent: () => import('@cv/showcase-feature-micro-frontends'),
+        loadComponent: () =>
+          import('@cv/showcase-feature-micro-frontends').then(
+            (m) => m.MicroFrontends
+          ),
       },
       // always reachable, also when switched off: the footer links here
       {
         path: ROUTES.SHOWCASE.ADMIN,
-        loadComponent: () => import('@cv/showcase-feature-admin'),
+        loadComponent: () =>
+          import('@cv/showcase-feature-admin').then((m) => m.FeatureToggles),
       },
       {
         path: '**',
@@ -30,5 +34,3 @@ export const showcaseFeatureShellRoutes: Route[] = [
     ],
   },
 ];
-
-export default showcaseFeatureShellRoutes;

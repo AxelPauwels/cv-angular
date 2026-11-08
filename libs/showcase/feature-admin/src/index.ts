@@ -1,3 +1,1 @@
-import { FeatureToggles } from './lib/feature-toggles/feature-toggles';
-
-export default FeatureToggles;
+export { FeatureToggles } from './lib/feature-toggles/feature-toggles';

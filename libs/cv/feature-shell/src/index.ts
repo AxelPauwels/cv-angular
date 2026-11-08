@@ -1,3 +1,1 @@
-import cvFeatureShellRoutes from './lib/lib.routes';
-
-export default cvFeatureShellRoutes;
+export { cvFeatureShellRoutes } from './lib/lib.routes';

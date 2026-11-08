@@ -56,6 +56,7 @@
       "light": "Lichte modus"
     },
     "common": {
+      "cv": "CV",
       "download-cv": "Download cv",
       "email": "E-mail",
       "ok": "OK",
@@ -285,6 +286,11 @@
       "profile": "Senior front-end developer met 8 jaar ervaring in enterprise webapplicaties, waarvan ruim 5 jaar volledig gespecialiseerd in Angular. Ik ontwerp en bouw bedrijfskritische applicaties met een sterke focus op onderhoudbare architectuur, clean code en schaalbaarheid op lange termijn. Pragmatisch, kwaliteitsgericht en een echte teamspeler binnen Agile-teams. Ik zet moderne werkwijzen en AI-ondersteunde tooling doelgericht in om sneller op te leveren zonder in te boeten aan kwaliteit."
     },
     "present": "heden",
+    "skill": {
+      "other": {
+        "testing": "Unit-, integratie- & E2E-testen"
+      }
+    },
     "son": "Zoon",
     "spoken": "Mondeling",
     "subheading": {
@@ -295,8 +301,11 @@
         "training-and-conferences": "Training & conferenties",
         "training-and-conferences.description": "Altijd lerend, nog steeds nieuwsgierig"
       },
+      "frameworks": "frameworks",
       "horeca": "Horeca",
       "it": "IT",
+      "libraries": "libraries",
+      "operating-systems": "besturingssystemen",
       "personal": {
         "about-me": "Over mij",
         "about-me.description": "De mens achter de code",
@@ -311,13 +320,16 @@
         "languages.description": "Bruggen bouwen tussen culturen",
         "languages.prefix": "Communicatie"
       },
+      "programming-languages": "programmeertalen",
       "skills": {
-        "core-stack": "core frontend stack",
-        "engineering-practices": "engineering practices",
-        "testing-and-quality": "testen & kwaliteit",
+        "additional-technologies": "andere technologieën",
         "ai": "AI & agentic development",
+        "core-stack": "core frontend stack",
         "development-tools": "ontwikkeltools",
-        "additional-technologies": "andere technologieën"
+        "engineering-practices": "engineering practices",
+        "other": "andere vaardigheden",
+        "testing-and-quality": "testen & kwaliteit",
+        "tools-and-methods": "tools & methodes"
       },
       "technical": {
         "dependencies": "Afhankelijkheden per project",
@@ -330,7 +342,9 @@
         "layers.description": "Wie doet wat",
         "public-api": "Publieke API",
         "public-api.description": "Barrels en interne mappen"
-      }
+      },
+      "tools-and-methods": "tools & methodes",
+      "version-control": "versiebeheer"
     },
     "temp": {
       "under-construction": {
@@ -368,6 +382,16 @@
       "next": "Volgende",
       "start": "Start de rondleiding",
       "step": {
+        "architecture": {
+          "label": "Architectuur",
+          "text": "Benieuwd hoe deze website gebouwd is? Het technische gedeelte legt de architectuur, de projectgraaf en de gebruikte versies uit.",
+          "title": "Architectuur"
+        },
+        "color-scheme": {
+          "label": "Donkere modus",
+          "text": "Wissel tussen een lichte en een donkere weergave. Standaard volgt de website de instelling van je toestel.",
+          "title": "Lichte en donkere modus"
+        },
         "contact": {
           "label": "Contact",
           "text": "Wil je contact opnemen? Mail me of vind me op LinkedIn en GitHub via de iconen rechtsonder.",
@@ -388,6 +412,16 @@
           "text": "Bedankt voor het volgen van de rondleiding. Veel plezier met rondkijken, je kunt de rondleiding altijd opnieuw starten vanaf de startpagina.",
           "title": "Dat was het!"
         },
+        "fonts": {
+          "label": "Lettertypes",
+          "text": "Liever een andere stijl? Wijzig hier het lettertype van de hele website.",
+          "title": "Lettertypes"
+        },
+        "languages": {
+          "label": "Talen",
+          "text": "De website is beschikbaar in het Engels, Nederlands, Frans en Spaans. Kies hier je taal.",
+          "title": "Talen"
+        },
         "settings": {
           "label": "Jouw voorkeuren",
           "text": "Stel de website eerst in zoals jij hem wilt: het kleurthema, het lettertype, toegankelijkheidsinstellingen, lichte of donkere modus en de taal. Je keuzes worden onthouden op dit toestel.",
@@ -395,13 +429,23 @@
         },
         "showcase": {
           "label": "Showcase",
-          "text": "De showcase toont technieken in de praktijk, zoals micro-frontends en deze beheerpagina, waar je functies van de website aan- en uitzet.",
+          "text": "De showcase toont technieken in de praktijk, zoals micro-frontends, GraphQL-documentatie, code coverage en end-to-end tests.",
           "title": "Showcase"
         },
         "technical": {
           "label": "Technisch",
           "text": "Benieuwd hoe deze website gebouwd is? Het technische gedeelte toont de projectgraaf, de architectuur, de GraphQL-documentatie, code coverage, end-to-end tests en de gebruikte versies.",
           "title": "Onder de motorkap"
+        },
+        "themes": {
+          "label": "Thema's",
+          "text": "Kies hier een van de kleurthema's. Elk thema geeft de hele website bijpassende kleuren.",
+          "title": "Kleurthema's"
+        },
+        "welcome": {
+          "label": "Welkom",
+          "text": "Ik leid je graag even rond. Deze korte rondleiding toont je de website en zijn functies. Gebruik de knoppen hieronder of de pijltjestoetsen, en druk op Escape om op elk moment te stoppen.",
+          "title": "Welkom!"
         }
       },
       "step-of": "Stap {current} van {total}"

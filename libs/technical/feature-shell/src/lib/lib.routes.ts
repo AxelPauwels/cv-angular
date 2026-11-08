@@ -22,7 +22,10 @@ export const technicalFeatureShellRoutes: Route[] = [
       },
       {
         path: ROUTES.TECHNICAL.ARCHITECTURE,
-        loadComponent: () => import('@cv/technical-feature-architecture'),
+        loadComponent: () =>
+          import('@cv/technical-feature-architecture').then(
+            (m) => m.ArchitectureOverview
+          ),
       },
       {
         path: ROUTES.TECHNICAL.PROJECT_GRAPH,
@@ -62,7 +65,8 @@ export const technicalFeatureShellRoutes: Route[] = [
       },
       {
         path: ROUTES.TECHNICAL.VERSIONS,
-        loadComponent: () => import('@cv/technical-feature-versions'),
+        loadComponent: () =>
+          import('@cv/technical-feature-versions').then((m) => m.VersionList),
       },
       {
         path: '**',
@@ -71,5 +75,3 @@ export const technicalFeatureShellRoutes: Route[] = [
     ],
   },
 ];
-
-export default technicalFeatureShellRoutes;

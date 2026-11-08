@@ -1,3 +1,1 @@
-import { SkillList } from './lib/skill-list/skill-list';
-
-export default SkillList;
+export { SkillList } from './lib/skill-list/skill-list';

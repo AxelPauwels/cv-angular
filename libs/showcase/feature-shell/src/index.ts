@@ -1,3 +1,1 @@
-import showcaseFeatureShellRoutes from './lib/lib.routes';
-
-export default showcaseFeatureShellRoutes;
+export { showcaseFeatureShellRoutes } from './lib/lib.routes';

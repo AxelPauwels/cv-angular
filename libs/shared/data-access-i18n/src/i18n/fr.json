@@ -56,6 +56,7 @@
       "light": "Mode clair et sombre"
     },
     "common": {
+      "cv": "CV",
       "download-cv": "Télécharger le CV",
       "email": "E-mail",
       "ok": "OK",
@@ -257,8 +258,11 @@
         "training-and-conferences": "Formation & conférences",
         "training-and-conferences.description": "Toujours en apprentissage, toujours curieux"
       },
+      "frameworks": "cadres",
       "horeca": "Hospitalité",
       "it": "TI",
+      "libraries": "bibliothèques",
+      "operating-systems": "systèmes d'exploitation",
       "personal": {
         "about-me": "À propos de moi",
         "about-me.description": "L'humain derrière le code",
@@ -273,13 +277,16 @@
         "languages.description": "Créer des ponts entre les cultures",
         "languages.prefix": "Communication"
       },
+      "programming-languages": "langages de programmation",
       "skills": {
-        "core-stack": "stack frontend principale",
-        "engineering-practices": "pratiques d’ingénierie",
-        "testing-and-quality": "tests & qualité",
+        "additional-technologies": "technologies complémentaires",
         "ai": "IA & développement agentique",
+        "core-stack": "stack frontend principale",
         "development-tools": "outils de développement",
-        "additional-technologies": "technologies complémentaires"
+        "engineering-practices": "pratiques d’ingénierie",
+        "other": "autres compétences",
+        "testing-and-quality": "tests & qualité",
+        "tools-and-methods": "outils & méthodes"
       },
       "technical": {
         "dependencies": "Dépendances par projet",
@@ -292,7 +299,8 @@
         "layers.description": "Qui fait quoi",
         "public-api": "API publique",
         "public-api.description": "Barrels et dossiers internes"
-      }
+      },
+      "version-control": "contrôle des versions"
     },
     "temp": {
       "under-construction": {
@@ -326,6 +334,16 @@
       "next": "Suivant",
       "start": "Commencer la visite",
       "step": {
+        "architecture": {
+          "label": "Architecture",
+          "text": "Curieux de savoir comment ce site est construit ? La section technique explique l'architecture, le graphe du projet et les versions utilisées.",
+          "title": "Architecture"
+        },
+        "color-scheme": {
+          "label": "Mode sombre",
+          "text": "Basculez entre un affichage clair et sombre. Par défaut, le site suit le réglage de votre appareil.",
+          "title": "Mode clair et sombre"
+        },
         "contact": {
           "label": "Contact",
           "text": "Envie de me contacter ? Écrivez-moi ou retrouvez-moi sur LinkedIn et GitHub grâce aux icônes en bas à droite.",
@@ -346,6 +364,16 @@
           "text": "Merci d'avoir suivi la visite. Bonne découverte, vous pouvez relancer la visite depuis la page d'accueil à tout moment.",
           "title": "C'est tout !"
         },
+        "fonts": {
+          "label": "Polices",
+          "text": "Vous préférez un autre style ? Changez ici la police de tout le site.",
+          "title": "Polices"
+        },
+        "languages": {
+          "label": "Langues",
+          "text": "Le site est disponible en anglais, néerlandais, français et espagnol. Choisissez votre langue ici.",
+          "title": "Langues"
+        },
         "settings": {
           "label": "Vos préférences",
           "text": "Commencez par régler le site à votre goût : le thème de couleur, la police, les réglages d'accessibilité, le mode clair ou sombre et la langue. Vos choix sont mémorisés sur cet appareil.",
@@ -353,13 +381,23 @@
         },
         "showcase": {
           "label": "Vitrine",
-          "text": "La vitrine montre des techniques en pratique, comme les micro-frontends et cette page d'administration, où l'on active et désactive les fonctionnalités du site.",
+          "text": "La vitrine montre des techniques en pratique, comme les micro-frontends, la documentation GraphQL, la couverture de code et les tests de bout en bout.",
           "title": "Vitrine"
         },
         "technical": {
           "label": "Technique",
           "text": "Curieux de savoir comment ce site est construit ? La section technique présente le graphe du projet, l'architecture, la documentation GraphQL, la couverture de code, les tests de bout en bout et les versions utilisées.",
           "title": "Sous le capot"
+        },
+        "themes": {
+          "label": "Thèmes",
+          "text": "Choisissez ici l'un des thèmes de couleur. Chaque thème applique des couleurs assorties à tout le site.",
+          "title": "Thèmes de couleur"
+        },
+        "welcome": {
+          "label": "Bienvenue",
+          "text": "Laissez-moi vous faire visiter. Cette courte visite vous présente le site et ses fonctionnalités. Utilisez les boutons ci-dessous ou les touches fléchées, et appuyez sur Échap pour arrêter à tout moment.",
+          "title": "Bienvenue !"
         }
       },
       "step-of": "Étape {current} sur {total}"

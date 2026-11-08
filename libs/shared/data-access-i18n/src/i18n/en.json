@@ -56,6 +56,7 @@
       "light": "Light mode"
     },
     "common": {
+      "cv": "CV",
       "download-cv": "Download CV",
       "email": "Email",
       "ok": "OK",
@@ -285,6 +286,11 @@
       "profile": "Senior front-end developer with 8 years of experience building enterprise web applications, of which 5 years fully dedicated to Angular. I design and evolve business-critical applications with a strong focus on maintainable architecture, clean code and long-term scalability. Pragmatic, quality-driven and a natural team player in Agile teams. I actively use modern practices and AI-assisted tooling to deliver faster without compromising on quality."
     },
     "present": "present",
+    "skill": {
+      "other": {
+        "testing": "Unit, integration & E2E testing"
+      }
+    },
     "son": "son",
     "spoken": "Speaking",
     "subheading": {
@@ -295,8 +301,11 @@
         "training-and-conferences": "Training & Conferences",
         "training-and-conferences.description": "Always learning, still curious"
       },
+      "frameworks": "frameworks",
       "horeca": "Hospitality",
       "it": "IT",
+      "libraries": "libraries",
+      "operating-systems": "operating systems",
       "personal": {
         "about-me": "About me",
         "about-me.description": "The human behind the code",
@@ -311,13 +320,16 @@
         "languages.description": "Building bridges across cultures",
         "languages.prefix": "Communication"
       },
+      "programming-languages": "programming languages",
       "skills": {
-        "core-stack": "core frontend stack",
-        "engineering-practices": "engineering practices",
-        "testing-and-quality": "testing & quality",
+        "additional-technologies": "additional technologies",
         "ai": "AI & agentic development",
+        "core-stack": "core frontend stack",
         "development-tools": "development tools",
-        "additional-technologies": "additional technologies"
+        "engineering-practices": "engineering practices",
+        "other": "other skills",
+        "testing-and-quality": "testing & quality",
+        "tools-and-methods": "tools & methods"
       },
       "technical": {
         "dependencies": "Dependencies per project",
@@ -330,7 +342,9 @@
         "layers.description": "Who does what",
         "public-api": "Public API",
         "public-api.description": "Barrels and internal folders"
-      }
+      },
+      "tools-and-methods": "tools & methods",
+      "version-control": "version control"
     },
     "temp": {
       "under-construction": {
@@ -368,6 +382,16 @@
       "next": "Next",
       "start": "Start the tour",
       "step": {
+        "architecture": {
+          "label": "Architecture",
+          "text": "Curious how this website is built? The technical section explains the architecture, the project graph and the versions in use.",
+          "title": "Architecture"
+        },
+        "color-scheme": {
+          "label": "Dark mode",
+          "text": "Switch between a light and a dark look. By default the website follows the setting of your device.",
+          "title": "Light and dark mode"
+        },
         "contact": {
           "label": "Contact",
           "text": "Want to get in touch? Mail me or find me on LinkedIn and GitHub with the icons at the bottom right.",
@@ -388,6 +412,16 @@
           "text": "Thanks for taking the tour. Enjoy looking around, you can start the tour again from the home page at any time.",
           "title": "That's it!"
         },
+        "fonts": {
+          "label": "Fonts",
+          "text": "Prefer another style? Switch the font of the whole website here.",
+          "title": "Fonts"
+        },
+        "languages": {
+          "label": "Languages",
+          "text": "The website is available in English, Dutch, French and Spanish. Choose your language here.",
+          "title": "Languages"
+        },
         "settings": {
           "label": "Your preferences",
           "text": "First set up the website the way you like it: the color theme, the font, accessibility settings, light or dark mode and the language. Your choices are remembered on this device.",
@@ -395,13 +429,23 @@
         },
         "showcase": {
           "label": "Showcase",
-          "text": "The showcase demonstrates techniques in practice, like micro-frontends and this admin page, where features of the website can be switched on and off.",
+          "text": "The showcase demonstrates techniques in practice, like micro-frontends, GraphQL docs, code coverage and end-to-end tests.",
           "title": "Showcase"
         },
         "technical": {
           "label": "Technical",
           "text": "Curious how this website is built? The technical section shows the project graph, the architecture, the GraphQL docs, code coverage, end-to-end tests and the versions in use.",
           "title": "Under the hood"
+        },
+        "themes": {
+          "label": "Themes",
+          "text": "Pick one of the color themes here. Every theme comes with matching colors for the whole website.",
+          "title": "Color themes"
+        },
+        "welcome": {
+          "label": "Welcome",
+          "text": "Let me show you around. This short tour walks you through the website and its features. Use the buttons below or the arrow keys, and press Escape to stop at any time.",
+          "title": "Welcome!"
         }
       },
       "step-of": "Step {current} of {total}"

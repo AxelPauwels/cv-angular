@@ -56,6 +56,7 @@
       "light": "Modo claro y oscuro"
     },
     "common": {
+      "cv": "CV",
       "download-cv": "Descargar CV",
       "email": "Correo electrónico",
       "ok": "OK",
@@ -257,8 +258,11 @@
         "training-and-conferences": "Formación & conferencias",
         "training-and-conferences.description": "Siempre aprendiendo, siempre curioso"
       },
+      "frameworks": "marcos",
       "horeca": "Hospitalidad",
       "it": "TI",
+      "libraries": "bibliotecas",
+      "operating-systems": "sistemas operativos",
       "personal": {
         "about-me": "Sobre mí",
         "about-me.description": "La persona detrás del código",
@@ -273,13 +277,16 @@
         "languages.description": "Tendiendo puentes entre culturas",
         "languages.prefix": "Comunicación"
       },
+      "programming-languages": "lenguajes de programación",
       "skills": {
-        "core-stack": "stack frontend principal",
-        "engineering-practices": "prácticas de ingeniería",
-        "testing-and-quality": "pruebas & calidad",
+        "additional-technologies": "tecnologías adicionales",
         "ai": "IA & desarrollo agéntico",
+        "core-stack": "stack frontend principal",
         "development-tools": "herramientas de desarrollo",
-        "additional-technologies": "tecnologías adicionales"
+        "engineering-practices": "prácticas de ingeniería",
+        "other": "otras habilidades",
+        "testing-and-quality": "pruebas & calidad",
+        "tools-and-methods": "herramientas & métodos"
       },
       "technical": {
         "dependencies": "Dependencias por proyecto",
@@ -292,7 +299,8 @@
         "layers.description": "Quién hace qué",
         "public-api": "API pública",
         "public-api.description": "Barrels y carpetas internas"
-      }
+      },
+      "version-control": "control de versiones"
     },
     "temp": {
       "under-construction": {
@@ -326,6 +334,16 @@
       "next": "Siguiente",
       "start": "Iniciar el recorrido",
       "step": {
+        "architecture": {
+          "label": "Arquitectura",
+          "text": "¿Te preguntas cómo está hecha esta web? La sección técnica explica la arquitectura, el grafo del proyecto y las versiones utilizadas.",
+          "title": "Arquitectura"
+        },
+        "color-scheme": {
+          "label": "Modo oscuro",
+          "text": "Cambia entre un aspecto claro y uno oscuro. Por defecto, la web sigue la configuración de tu dispositivo.",
+          "title": "Modo claro y oscuro"
+        },
         "contact": {
           "label": "Contacto",
           "text": "¿Quieres contactar conmigo? Escríbeme o encuéntrame en LinkedIn y GitHub con los iconos de abajo a la derecha.",
@@ -346,6 +364,16 @@
           "text": "Gracias por hacer el recorrido. Disfruta explorando, puedes volver a iniciar el recorrido desde la página de inicio cuando quieras.",
           "title": "¡Eso es todo!"
         },
+        "fonts": {
+          "label": "Fuentes",
+          "text": "¿Prefieres otro estilo? Cambia aquí la fuente de toda la web.",
+          "title": "Fuentes"
+        },
+        "languages": {
+          "label": "Idiomas",
+          "text": "La web está disponible en inglés, neerlandés, francés y español. Elige tu idioma aquí.",
+          "title": "Idiomas"
+        },
         "settings": {
           "label": "Tus preferencias",
           "text": "Primero configura la web a tu gusto: el tema de color, la fuente, los ajustes de accesibilidad, el modo claro u oscuro y el idioma. Tus elecciones se guardan en este dispositivo.",
@@ -353,13 +381,23 @@
         },
         "showcase": {
           "label": "Escaparate",
-          "text": "El escaparate muestra técnicas en la práctica, como micro-frontends y esta página de administración, donde se activan y desactivan funciones de la web.",
+          "text": "El escaparate muestra técnicas en la práctica, como micro-frontends, documentación GraphQL, cobertura de código y pruebas de extremo a extremo.",
           "title": "Escaparate"
         },
         "technical": {
           "label": "Técnico",
           "text": "¿Te preguntas cómo está hecha esta web? La sección técnica muestra el grafo del proyecto, la arquitectura, la documentación GraphQL, la cobertura de código, las pruebas de extremo a extremo y las versiones utilizadas.",
           "title": "Bajo el capó"
+        },
+        "themes": {
+          "label": "Temas",
+          "text": "Elige aquí uno de los temas de color. Cada tema aplica colores a juego en toda la web.",
+          "title": "Temas de color"
+        },
+        "welcome": {
+          "label": "Bienvenida",
+          "text": "Déjame enseñarte el sitio. Este breve recorrido te muestra la web y sus funciones. Usa los botones de abajo o las flechas del teclado, y pulsa Escape para salir en cualquier momento.",
+          "title": "¡Bienvenido!"
         }
       },
       "step-of": "Paso {current} de {total}"

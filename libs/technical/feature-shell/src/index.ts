@@ -1,3 +1,1 @@
-import technicalFeatureShellRoutes from './lib/lib.routes';
-
-export default technicalFeatureShellRoutes;
+export { technicalFeatureShellRoutes } from './lib/lib.routes';
