@@ -21,6 +21,13 @@ export const showcaseFeatureShellRoutes: Route[] = [
             (m) => m.MicroFrontends
           ),
       },
+      {
+        path: ROUTES.SHOWCASE.LIGHTHOUSE,
+        loadComponent: () =>
+          import('@cv/showcase-feature-lighthouse').then(
+            (m) => m.LighthouseReport
+          ),
+      },
       // always reachable, also when switched off: the footer links here
       {
         path: ROUTES.SHOWCASE.ADMIN,

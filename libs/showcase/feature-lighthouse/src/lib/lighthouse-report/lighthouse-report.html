@@ -1,0 +1,82 @@
+<ds-page-title title="t.heading.lighthouse" />
+
+<div class="lighthouse-report">
+  <div class="lighthouse-report__intro">
+    <p class="lighthouse-report__run">
+      {{ 't.lighthouse.measured' | translate : { date: measuredOn(), version:
+      run.lighthouseVersion, url: run.url, } }}
+    </p>
+
+    <div class="lighthouse-report__legend">
+      <span class="lighthouse-report__legend-title"
+        >{{ 't.lighthouse.legend.title' | translate }}:</span
+      >
+      <ul class="lighthouse-report__legend-list">
+        @for (band of ['fail', 'average', 'pass']; track band) {
+        <li
+          class="lighthouse-report__legend-item"
+          [class]="'lighthouse-report__legend-item--' + band">
+          <span
+            class="lighthouse-report__legend-shape"
+            aria-hidden="true"></span>
+          {{ 't.lighthouse.legend.' + band | translate }}
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <ul class="lighthouse-report__tree">
+    @for (section of sections; track section.id) {
+    <li class="lighthouse-report__section">
+      <h2
+        class="lighthouse-report__section-title"
+        [id]="'lighthouse-' + section.id">
+        {{ section.labelKey | translate }}
+      </h2>
+
+      <div class="lighthouse-report__table-scroller">
+        <table
+          class="lighthouse-report__table"
+          [attr.aria-labelledby]="'lighthouse-' + section.id">
+          <thead>
+            <tr>
+              <th scope="col" class="lighthouse-report__page-header">
+                {{ 't.lighthouse.page' | translate }}
+              </th>
+              @for (category of categories; track category.id) {
+              <th scope="col" class="lighthouse-report__category">
+                {{ category.labelKey | translate }}
+              </th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (page of section.pages; track page.link) {
+            <tr class="lighthouse-report__row">
+              <th scope="row" class="lighthouse-report__page">
+                {{ page.labelKey | translate }}
+              </th>
+              @for (category of categories; track category.id) {
+              <td class="lighthouse-report__score">
+                @if (page.scores; as scores) {
+                <showcase-score-gauge [score]="scores[category.id]" />
+                } @else {
+                <span class="lighthouse-report__no-score">
+                  <span aria-hidden="true">–</span>
+                  <span class="cdk-visually-hidden">
+                    {{ 't.lighthouse.not-audited' | translate }}
+                  </span>
+                </span>
+                }
+              </td>
+              }
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </li>
+    }
+  </ul>
+</div>

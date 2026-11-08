@@ -101,13 +101,14 @@ describe('FeatureToggles', () => {
       'Submenu Showcase',
     ]);
     expect(element.querySelectorAll('mat-card')).toHaveLength(6);
-    expect(element.querySelectorAll('mat-slide-toggle')).toHaveLength(22);
+    expect(element.querySelectorAll('mat-slide-toggle')).toHaveLength(23);
   });
 
   it('switches the main menu item off with its last sub menu item, and says so', async () => {
     // Arrange
     const { harness, element, toggle } = await render();
     TestBed.inject(FeatureToggleService).change('showcase-admin', false);
+    TestBed.inject(FeatureToggleService).change('showcase-lighthouse', false);
     TestBed.inject(MatSnackBar).dismiss();
     await harness.fixture.whenStable();
 

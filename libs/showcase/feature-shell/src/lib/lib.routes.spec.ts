@@ -19,6 +19,7 @@ describe('showcaseFeatureShellRoutes', () => {
     });
     const toggles = TestBed.inject(FeatureToggleService);
     toggles.change('showcase-micro-frontends', true);
+    toggles.change('showcase-lighthouse', true);
     toggles.change('showcase-admin', true);
 
     // Act
@@ -31,7 +32,7 @@ describe('showcaseFeatureShellRoutes', () => {
       Array.from(element.querySelectorAll('ds-sub-navbar > nav a')).map(
         (link) => link.textContent?.trim()
       )
-    ).toEqual(['Micro-frontends', 'Admin']);
+    ).toEqual(['Micro-frontends', 'Lighthouse', 'Admin']);
   });
 
   it('keeps the admin page reachable when its menu item is switched off', async () => {
@@ -44,6 +45,7 @@ describe('showcaseFeatureShellRoutes', () => {
     });
     const toggles = TestBed.inject(FeatureToggleService);
     toggles.change('showcase-micro-frontends', true);
+    toggles.change('showcase-lighthouse', false);
     toggles.change('showcase-admin', false);
 
     // Act

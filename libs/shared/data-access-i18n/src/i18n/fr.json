@@ -149,6 +149,7 @@
       "end-to-end-tests": "Tests de bout en bout",
       "experience": "Expérience",
       "graphql-docs": "graphql docs",
+      "lighthouse": "Lighthouse",
       "personal": "personnel",
       "project-graph": "Graphe des projets",
       "references": "références",
@@ -177,6 +178,23 @@
       "spanish": "Espagnol",
       "switch": "Sélectionner une langue"
     },
+    "lighthouse": {
+      "category": {
+        "accessibility": "Accessibilité",
+        "best-practices": "Bonnes pratiques",
+        "performance": "Performances",
+        "seo": "SEO"
+      },
+      "legend": {
+        "average": "50–89",
+        "fail": "0–49",
+        "pass": "90–100",
+        "title": "Plages de score"
+      },
+      "measured": "Audité le {date} avec Lighthouse {version} (ordinateur, {url})",
+      "not-audited": "Pas encore audité",
+      "page": "Page"
+    },
     "nav": {
       "admin": "Admin",
       "architecture": "Architecture",
@@ -192,6 +210,7 @@
       "home": "Maison",
       "light": "Clair",
       "light-mode": "mode clair",
+      "lighthouse": "Lighthouse",
       "main-navigation": "Navigation principale",
       "micro-frontends": "Micro-frontends",
       "personal": "Personnelles",
@@ -262,6 +281,7 @@
       "horeca": "Hospitalité",
       "it": "TI",
       "libraries": "bibliothèques",
+      "lighthouse": "Chaque page, auditée sur ordinateur",
       "operating-systems": "systèmes d'exploitation",
       "personal": {
         "about-me": "À propos de moi",

@@ -106,6 +106,12 @@ export const FEATURE_TOGGLES = [
     't.nav.micro-frontends',
     'main-menu-showcase'
   ),
+  menuItem(
+    'showcase-lighthouse',
+    'showcase-menu',
+    't.nav.lighthouse',
+    'main-menu-showcase'
+  ),
   // switched off, only its menu item goes: the name in the footer still links to it
   menuItem(
     'showcase-admin',

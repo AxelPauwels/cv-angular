@@ -22,6 +22,7 @@ export const FEATURE_TOGGLE_DEFAULTS = {
   // Showcase
   'main-menu-showcase': true, // main
   'showcase-micro-frontends': false,
+  'showcase-lighthouse': true,
   'showcase-admin': false,
 
   // Technical

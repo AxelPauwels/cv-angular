@@ -35,6 +35,7 @@
     "package:push-tags": "git push --follow-tags",
     "sheriff:list": "npx sheriff list apps/cv/src/main.ts",
     "sheriff:verify": "npx sheriff verify",
+    "detective": "npx detective",
     "i18n:login": "tolgee login",
     "i18n:pull": "tolgee pull",
     "i18n:push": "tolgee push",
@@ -42,7 +43,7 @@
     "i18n:check:unused": "node ./scripts/tolgee/check.mjs --unused",
     "i18n:missing": "node ./scripts/tolgee/missing.mjs",
     "i18n:push-missing": "node ./scripts/tolgee/push-missing.mjs",
-    "detective": "npx detective",
+    "lighthouse:audit": "npx nx run showcase-feature-lighthouse:audit",
     "build-info": "npx nx run technical-data-access-build-info:build-info"
   },
   "lint-staged": {

@@ -184,6 +184,7 @@
       "end-to-end-tests": "End-to-end tests",
       "experience": "ervaring",
       "graphql-docs": "graphql docs",
+      "lighthouse": "Lighthouse",
       "personal": "persoonlijk",
       "project-graph": "Projectgraaf",
       "references": "Referenties",
@@ -213,6 +214,23 @@
       "spanish": "Spaans",
       "switch": "Taal"
     },
+    "lighthouse": {
+      "category": {
+        "accessibility": "Toegankelijkheid",
+        "best-practices": "Praktische tips",
+        "performance": "Prestaties",
+        "seo": "SEO"
+      },
+      "legend": {
+        "average": "50–89",
+        "fail": "0–49",
+        "pass": "90–100",
+        "title": "Scorebereiken"
+      },
+      "measured": "Getest op {date} met Lighthouse {version} (desktop, {url})",
+      "not-audited": "Nog niet getest",
+      "page": "Pagina"
+    },
     "nav": {
       "admin": "Admin",
       "architecture": "Architectuur",
@@ -228,6 +246,7 @@
       "home": "Home",
       "light": "Licht",
       "light-mode": "lichte modus",
+      "lighthouse": "Lighthouse",
       "main-navigation": "Hoofdnavigatie",
       "micro-frontends": "Micro-frontends",
       "personal": "Persoonlijk",
@@ -305,6 +324,7 @@
       "horeca": "Horeca",
       "it": "IT",
       "libraries": "libraries",
+      "lighthouse": "Elke pagina, getest op desktop",
       "operating-systems": "besturingssystemen",
       "personal": {
         "about-me": "Over mij",

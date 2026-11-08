@@ -78,6 +78,7 @@ describe('FeatureToggleService', () => {
     saveFeatureTogglesForTesting();
     const service = TestBed.inject(FeatureToggleService);
     service.change('showcase-admin', false);
+    service.change('showcase-lighthouse', false);
 
     // Act
     service.change('showcase-micro-frontends', false);
@@ -91,6 +92,7 @@ describe('FeatureToggleService', () => {
     saveFeatureTogglesForTesting();
     const service = TestBed.inject(FeatureToggleService);
     service.change('showcase-admin', false);
+    service.change('showcase-lighthouse', false);
     service.change('showcase-micro-frontends', false);
 
     // Act
@@ -125,6 +127,7 @@ describe('FeatureToggleService', () => {
     saveFeatureTogglesForTesting();
     const service = TestBed.inject(FeatureToggleService);
     service.change('showcase-micro-frontends', false);
+    service.change('showcase-lighthouse', false);
     service.change('showcase-admin', false);
 
     // Act
@@ -132,6 +135,7 @@ describe('FeatureToggleService', () => {
 
     // Assert
     expect(service.isEnabled('showcase-micro-frontends')()).toBe(true);
+    expect(service.isEnabled('showcase-lighthouse')()).toBe(true);
     expect(service.isEnabled('showcase-admin')()).toBe(true);
   });
 
@@ -156,6 +160,7 @@ describe('FeatureToggleService', () => {
       JSON.stringify({
         'main-menu-showcase': true,
         'showcase-micro-frontends': false,
+        'showcase-lighthouse': false,
         'showcase-admin': false,
       })
     );
