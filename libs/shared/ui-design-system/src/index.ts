@@ -14,3 +14,5 @@ export * from './lib/delayed-loading/delayed-loading';
 export * from './lib/page-title/page-title';
 export * from './lib/section-heading/section-heading';
 export * from './lib/page-layout/page-layout';
+export * from './lib/mobile-menu/mobile-menu';
+export * from './lib/nav-accordion/nav-accordion';

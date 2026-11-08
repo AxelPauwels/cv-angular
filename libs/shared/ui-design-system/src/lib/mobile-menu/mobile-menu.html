@@ -1,0 +1,19 @@
+<button
+  #button
+  matIconButton
+  type="button"
+  class="mobile-menu__trigger"
+  data-tour="menu"
+  [attr.aria-expanded]="open()"
+  [attr.aria-controls]="panelId"
+  [attr.aria-label]="labelKey() | translate"
+  [matTooltip]="labelKey() | translate"
+  (click)="toggle()">
+  <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">
+    {{ open() ? 'close' : 'menu' }}
+  </mat-icon>
+</button>
+
+<div #panel class="mobile-menu__panel" [id]="panelId" [hidden]="!open()">
+  <ng-content />
+</div>

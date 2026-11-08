@@ -6,6 +6,21 @@ import type { Reference } from '@cv/cv-data-access-references';
 import { groupByWork, initials, ReferenceList } from './reference-list';
 
 describe('ReferenceList', () => {
+  /** The test browser's window is narrow: pin the screen width per test */
+  function stubNarrowScreen(narrow: boolean) {
+    vi.stubGlobal(
+      'matchMedia',
+      vi.fn((query: string) => ({
+        matches: narrow && query === '(width < 600px)',
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      }))
+    );
+  }
+
+  beforeEach(() => stubNarrowScreen(false));
+  afterEach(() => vi.unstubAllGlobals());
+
   function create() {
     TestBed.configureTestingModule({
       providers: [
@@ -130,6 +145,27 @@ describe('ReferenceList', () => {
     expect(
       innomedio[0].querySelector('ul')?.hasAttribute('aria-labelledby')
     ).toBe(false);
+  });
+
+  it('puts the clients before the employer on a narrow screen', async () => {
+    // Arrange
+    stubNarrowScreen(true);
+
+    // Act
+    const { steps } = await render();
+    const [sopraSteria] = steps.map(columnsOf);
+
+    // Assert
+    expect(namesIn(sopraSteria[0])).toEqual([
+      'Roel Frison',
+      'Lowie Cuypers',
+      'Bettina Verheyen',
+    ]);
+    expect(namesIn(sopraSteria[1])).toEqual([
+      'Kevin Jannis',
+      'Marijke Boye',
+      'Bart Headens',
+    ]);
   });
 
   it('shows each reference as a card with name, initials and function', async () => {

@@ -1,8 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import { Card } from '@cv/shared-ui-card';
 import { PageTitle } from '@cv/shared-ui-design-system';
-import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,8 +17,9 @@ import {
 
 interface ToggleSection {
   readonly id: string;
-  /** The heading; several keys are joined, e.g. "Submenu" + "CV" */
-  readonly titleKeys: readonly string[];
+  /** The heading, after the optional prefix, e.g. "Submenu" + "CV" */
+  readonly titleKey: string;
+  readonly prefixKey?: string;
   /** Starts a new row of cards on larger screens */
   readonly newRow?: boolean;
   readonly toggles: readonly FeatureToggleInfo[];
@@ -39,24 +39,16 @@ function submenu(
 ): ToggleSection {
   return {
     id,
-    titleKeys: ['t.admin.section.submenu.title', titleKey],
+    prefixKey: 't.admin.section.submenu.title',
+    titleKey,
     toggles: featureTogglesInGroup(group),
   };
 }
 
-/** The admin page: switches every feature toggle on or off */
+/** The feature toggles page: switches every feature toggle on or off */
 @Component({
   selector: 'showcase-feature-toggles',
-  imports: [
-    MatButton,
-    MatCardModule,
-    MatChip,
-    MatChipSet,
-    MatIcon,
-    MatSlideToggle,
-    PageTitle,
-    TranslatePipe,
-  ],
+  imports: [Card, MatButton, MatIcon, MatSlideToggle, PageTitle, TranslatePipe],
   templateUrl: './feature-toggles.html',
   styleUrl: './feature-toggles.scss',
 })
@@ -69,17 +61,17 @@ export class FeatureToggles {
   protected readonly sections: readonly ToggleSection[] = [
     {
       id: 'navbar',
-      titleKeys: ['t.admin.section.navbar.title'],
+      titleKey: 't.admin.section.navbar.title',
       toggles: featureTogglesInGroup('navbar'),
     },
     {
       id: 'general',
-      titleKeys: ['t.admin.section.general.title'],
+      titleKey: 't.admin.section.general.title',
       toggles: featureTogglesInGroup('general'),
     },
     {
       id: 'main-menu',
-      titleKeys: ['t.admin.section.main-menu.title'],
+      titleKey: 't.admin.section.main-menu.title',
       newRow: true,
       toggles: featureTogglesInGroup('main-menu'),
     },
@@ -88,7 +80,7 @@ export class FeatureToggles {
     submenu('submenu-showcase', 'showcase-menu', 't.nav.showcase'),
   ];
 
-  /** The sections, with how many of their toggles are on for the chip */
+  /** The sections, with how many of their toggles are on for the card's tag */
   protected readonly cards = computed(() => {
     const states = this.service.states();
 
@@ -98,7 +90,6 @@ export class FeatureToggles {
 
       return {
         section,
-        allOn: on === toggles.length,
         // the translate pipe only takes string params
         count: { on: String(on), total: String(toggles.length) },
       };

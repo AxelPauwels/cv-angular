@@ -39,8 +39,8 @@ describe('PageTitle', () => {
 @Component({
   imports: [PageTitle],
   template: `<ds-page-title
-    title="t.heading.administrator"
-    subtitle="t.subheading.administrator" />`,
+    title="t.heading.feature-toggles"
+    subtitle="t.subheading.feature-toggles" />`,
 })
 class HostWithSubtitle {}
 
@@ -54,8 +54,8 @@ describe('PageTitle with a subtitle', () => {
             language: 'en',
             staticData: {
               en: {
-                't.heading.administrator': 'Administrator',
-                't.subheading.administrator':
+                't.heading.feature-toggles': 'Administrator',
+                't.subheading.feature-toggles':
                   'With great power comes great configuration',
               },
             },

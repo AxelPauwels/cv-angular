@@ -1,0 +1,92 @@
+{
+  "url": "https://axel-pauwels.web.app",
+  "fetchTime": "2026-11-08T10:59:19.357Z",
+  "lighthouseVersion": "13.6.0",
+  "formFactor": "desktop",
+  "pages": {
+    "/home": {
+      "performance": 90,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/personal": {
+      "performance": 95,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/education": {
+      "performance": 95,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/experience": {
+      "performance": 94,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/skills": {
+      "performance": 95,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/references": {
+      "performance": 94,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/technical/architecture": {
+      "performance": 95,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/technical/project-graph": {
+      "performance": 61,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/technical/graphql-docs": {
+      "performance": 95,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/technical/code-coverage": {
+      "performance": 93,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/technical/end-to-end-tests": {
+      "performance": 94,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/technical/versions": {
+      "performance": 95,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/showcase/micro-frontends": {
+      "performance": 95,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/showcase/feature-toggles": {
+      "performance": 95,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 63
+    }
+  }
+}

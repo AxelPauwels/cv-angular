@@ -19,6 +19,7 @@ describe('showcaseFeatureShellRoutes', () => {
     });
     const toggles = TestBed.inject(FeatureToggleService);
     toggles.change('showcase-micro-frontends', true);
+    toggles.change('showcase-lighthouse', true);
     toggles.change('showcase-admin', true);
 
     // Act
@@ -31,10 +32,10 @@ describe('showcaseFeatureShellRoutes', () => {
       Array.from(element.querySelectorAll('ds-sub-navbar > nav a')).map(
         (link) => link.textContent?.trim()
       )
-    ).toEqual(['Micro-frontends', 'Admin']);
+    ).toEqual(['Micro-frontends', 'Lighthouse', 'Feature toggles']);
   });
 
-  it('keeps the admin page reachable when its menu item is switched off', async () => {
+  it('keeps the feature toggles page reachable when its menu item is switched off', async () => {
     // Arrange
     TestBed.configureTestingModule({
       providers: [
@@ -44,14 +45,15 @@ describe('showcaseFeatureShellRoutes', () => {
     });
     const toggles = TestBed.inject(FeatureToggleService);
     toggles.change('showcase-micro-frontends', true);
+    toggles.change('showcase-lighthouse', false);
     toggles.change('showcase-admin', false);
 
     // Act
-    const harness = await RouterTestingHarness.create('/admin');
+    const harness = await RouterTestingHarness.create('/feature-toggles');
     const element: HTMLElement = harness.fixture.nativeElement;
 
     // Assert
-    expect(TestBed.inject(Router).url).toBe('/admin');
+    expect(TestBed.inject(Router).url).toBe('/feature-toggles');
     expect(
       Array.from(element.querySelectorAll('ds-sub-navbar > nav a')).map(
         (link) => link.textContent?.trim()

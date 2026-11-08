@@ -13,8 +13,13 @@ export const SHOWCASE_NAV_ITEMS: readonly (NavItem & {
     toggle: 'showcase-micro-frontends',
   },
   {
-    labelKey: 't.nav.admin',
-    path: ROUTES.SHOWCASE.ADMIN,
+    labelKey: 't.nav.lighthouse',
+    path: ROUTES.SHOWCASE.LIGHTHOUSE,
+    toggle: 'showcase-lighthouse',
+  },
+  {
+    labelKey: 't.nav.feature-toggles',
+    path: ROUTES.SHOWCASE.FEATURE_TOGGLES,
     toggle: 'showcase-admin',
   },
 ];

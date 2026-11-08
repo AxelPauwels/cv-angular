@@ -123,7 +123,7 @@ describe('Shell', () => {
 
     // Assert
     const link = element.querySelector<HTMLAnchorElement>('footer p a');
-    expect(link?.getAttribute('href')).toBe('/showcase/admin');
+    expect(link?.getAttribute('href')).toBe('/showcase/feature-toggles');
     expect(link?.textContent).toContain('Axel Pauwels');
     expect(getComputedStyle(link as Element).textDecorationLine).toBe(
       'underline'

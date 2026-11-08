@@ -21,7 +21,10 @@
   );
 
   // Material's own padding unless the card sets `--ds-card-header-padding`
+  // The title (and subtitle) centered next to the icon; without Material's margin
+  // under the icon, a card with a short title has no gap under its header
   &__header {
+    align-items: center;
     padding: var(--ds-card-header-padding, 16px 16px 0);
 
     // Material's wrapper around the title and subtitle fills the header, so a tag can
@@ -43,6 +46,7 @@
     display: flex;
     font-size: 1.25rem;
     justify-content: center;
+    margin-bottom: 0;
 
     // Initials: the primary color, like the skill icons, with on-primary text, the
     // pair Material keeps in contrast in every theme and color scheme

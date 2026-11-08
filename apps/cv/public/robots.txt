@@ -1,7 +1,7 @@
 # https://developers.google.com/search/docs/crawling-indexing/robots/intro
 User-agent: *
 # the admin page and the micro-frontend demo route are not content pages
-Disallow: /showcase/admin
+Disallow: /showcase/feature-toggles
 Disallow: /admin
 Disallow: /cv-mfe
 # generated reports, shown inside the technical pages

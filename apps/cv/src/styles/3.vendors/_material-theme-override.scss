@@ -56,6 +56,16 @@ html {
   &[data-color-scheme='dark'] {
     color-scheme: dark;
   }
+
+  // Score colors, the same as Google Lighthouse's report: the bright color draws the
+  // gauge, the `-text` color writes the score. Light mode uses Lighthouse's darker text
+  // colors, so the bold score reaches 3:1 on the gauge's tint (WCAG 1.4.3, large text).
+  --ds-score-pass: #0c6;
+  --ds-score-pass-text: light-dark(#080, #0c6);
+  --ds-score-average: #fa3;
+  --ds-score-average-text: light-dark(#c33300, #fa3);
+  --ds-score-fail: #f33;
+  --ds-score-fail-text: light-dark(#c00, #f33);
 }
 
 // Color themes, generated in ./palettes (`nx g @angular/material:theme-color`).

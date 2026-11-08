@@ -85,6 +85,9 @@
       ],
       "@cv/shared-ui-progress-dots": [
         "./libs/shared/ui-progress-dots/src/index.ts"
+      ],
+      "@cv/showcase-feature-lighthouse": [
+        "./libs/showcase/feature-lighthouse/src/index.ts"
       ]
     }
   },

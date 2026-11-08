@@ -1,0 +1,40 @@
+{
+  "name": "showcase-feature-lighthouse",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/showcase/feature-lighthouse/src",
+  "prefix": "showcase",
+  "projectType": "library",
+  "tags": ["domain:showcase", "type:feature"],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "project": "libs/showcase/feature-lighthouse/ng-package.json",
+        "tsConfig": "libs/showcase/feature-lighthouse/tsconfig.lib.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/showcase/feature-lighthouse/tsconfig.lib.prod.json"
+        },
+        "development": {}
+      }
+    },
+    "test": {
+      "executor": "@nx/angular:unit-test",
+      "options": {
+        "watch": false,
+        "browsers": ["ChromiumHeadless"]
+      }
+    },
+    "audit": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "options": {
+        "command": "node tools/lighthouse/audit.mjs",
+        "cwd": "{workspaceRoot}"
+      }
+    }
+  }
+}

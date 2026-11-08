@@ -1,4 +1,11 @@
-import { Component, computed, inject } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  DOCUMENT,
+  inject,
+  signal,
+} from '@angular/core';
 import {
   delayedLoading,
   LoadingSpinner,
@@ -84,12 +91,18 @@ export function groupByWork(
   return [...groups.values()].sort(byEndNewestFirst);
 }
 
+/** The width below which a step shows one column (keep in sync with the scss) */
+const NARROW_QUERY = '(width < 600px)';
+
 /**
  * The IT references as the same year timeline as the experiences: one step per
  * employer (newest first, the newest open), with its references as cards. When
  * references worked with me at a client of the employer, they get a second column
  * next to the employer's. The API also has the hospitality references; they're left
  * out here as less relevant.
+ *
+ * On a narrow screen the columns stack, the clients first: they're rendered in
+ * that order (not reordered with css), so screen readers follow what's shown.
  */
 @Component({
   selector: 'cv-reference-list',
@@ -111,6 +124,22 @@ export class ReferenceList {
   protected readonly store = inject(ReferenceStore);
   protected readonly loading = delayedLoading(() => this.store.isLoading());
   protected readonly initials = initials;
+
+  /** Whether the screen is too narrow for two columns, following resizes */
+  protected readonly narrow = signal(false);
+
+  constructor() {
+    const query = inject(DOCUMENT).defaultView?.matchMedia?.(NARROW_QUERY);
+    if (query) {
+      this.narrow.set(query.matches);
+      const update = (event: MediaQueryListEvent) =>
+        this.narrow.set(event.matches);
+      query.addEventListener('change', update);
+      inject(DestroyRef).onDestroy(() =>
+        query.removeEventListener('change', update)
+      );
+    }
+  }
 
   protected readonly groups = computed(() =>
     groupByWork(

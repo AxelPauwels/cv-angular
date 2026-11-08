@@ -12,7 +12,7 @@
     },
     "admin": {
       "count": "{on} van {total} aan",
-      "hidden-notice": "De Admin-pagina staat niet meer in het menu. Je kunt ze nog altijd openen via /showcase/admin door in de footer op “Axel Pauwels” te klikken.",
+      "hidden-notice": "De Admin-pagina staat niet meer in het menu. Je kunt ze nog altijd openen via /showcase/feature-toggles door in de footer op “Axel Pauwels” te klikken.",
       "linked": {
         "off": "{item} ook uitgezet.",
         "on": "{item} ook aangezet."
@@ -44,7 +44,9 @@
     },
     "at": "aan",
     "carousel": {
+      "carousel": "carrousel",
       "next": "Volgende",
+      "page": "Pagina {current} van {total}",
       "previous": "Vorige"
     },
     "city": {
@@ -59,6 +61,7 @@
       "cv": "CV",
       "download-cv": "Download cv",
       "email": "E-mail",
+      "loading": "Laden",
       "ok": "OK",
       "pdf": "pdf",
       "reset": "Reset",
@@ -183,7 +186,10 @@
       "education": "Opleiding",
       "end-to-end-tests": "End-to-end tests",
       "experience": "ervaring",
+      "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
+      "lighthouse": "Lighthouse",
+      "micro-frontends": "Micro-frontends",
       "personal": "persoonlijk",
       "project-graph": "Projectgraaf",
       "references": "Referenties",
@@ -213,6 +219,25 @@
       "spanish": "Spaans",
       "switch": "Taal"
     },
+    "lighthouse": {
+      "category": {
+        "accessibility": "Toegankelijkheid",
+        "best-practices": "Praktische tips",
+        "performance": "Prestaties",
+        "seo": "SEO"
+      },
+      "legend": {
+        "average": "Kan beter",
+        "fail": "Slecht",
+        "pass": "Goed",
+        "title": "Scorebereiken"
+      },
+      "not-audited": "Nog niet getest",
+      "page": "Pagina",
+      "audit": {
+        "message": "Getest op {date} met Lighthouse {version}"
+      }
+    },
     "nav": {
       "admin": "Admin",
       "architecture": "Architectuur",
@@ -224,11 +249,15 @@
       "education": "Opleiding",
       "end-to-end-tests": "End-to-end tests",
       "experience": "Ervaring",
+      "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
       "home": "Home",
       "light": "Licht",
+      "lighthouse": "Lighthouse",
       "light-mode": "lichte modus",
       "main-navigation": "Hoofdnavigatie",
+      "menu": "Menu",
+      "menu-loading": "Het menu wordt geladen…",
       "micro-frontends": "Micro-frontends",
       "personal": "Persoonlijk",
       "project-graph": "Projectgraaf",
@@ -301,6 +330,7 @@
         "training-and-conferences": "Training & conferenties",
         "training-and-conferences.description": "Altijd lerend, nog steeds nieuwsgierig"
       },
+      "feature-toggles": "Met grote macht komt grote configuratie",
       "frameworks": "frameworks",
       "horeca": "Horeca",
       "it": "IT",
@@ -336,7 +366,7 @@
         "dependencies.description": "Rechtstreeks uit de projectgraaf",
         "dependency-rules": "Afhankelijkheidsregels",
         "dependency-rules.description": "Gecontroleerd bij elke import",
-        "domains-and-layers": "Domeinen × lagen",
+        "domains-and-layers": "Domeinen & lagen",
         "domains-and-layers.description": "Verticale slices, horizontale lagen",
         "layers": "Lagen binnen een domein",
         "layers.description": "Wie doet wat",

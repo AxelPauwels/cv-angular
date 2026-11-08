@@ -10,9 +10,8 @@
   display: block;
 }
 
-// Phones (< 600px): the actions keep the first row and the domain tabs get a
-// full-width row below, so they never scroll. Only the visual order changes: in the
-// DOM (and for keyboard and screen readers) the navigation still comes first.
+// Phones (< 600px): the domain tabs make way for the projected start content (the
+// mobile menu's hamburger) on the left, the actions stay on the right.
 .main-navbar {
   // as high as its content (the tabs) instead of Material's fixed row height
   @include mat.toolbar-overrides(
@@ -47,22 +46,25 @@
   padding-left: 0;
 
   @media (width < 600px) {
-    flex-wrap: wrap;
-    padding-inline: 0;
+    align-items: center;
+    padding-inline: 0.25rem;
+
+    // the mobile menu's panel opens just below the toolbar
+    position: relative;
   }
 
   // The active domain gets a bold label on top of its thicker rounded underline;
   // hover makes the label semi-bold
   &__tab {
     @include tools.nav-label('.main-navbar__label');
+  }
 
-    // equal widths; nested to outrank Material's `.mat-mdc-tab-link.mdc-tab`
+  &__start {
+    display: none;
+
     @media (width < 600px) {
-      .main-navbar__tabs & {
-        flex: 1 1 0;
-        min-width: 0;
-        padding-inline: 8px;
-      }
+      align-items: center;
+      display: flex;
     }
   }
 
@@ -73,7 +75,7 @@
     min-width: 0;
 
     @media (width < 600px) {
-      flex-basis: 100%;
+      display: none;
     }
   }
 
@@ -86,12 +88,8 @@
     margin-left: 0.5rem;
 
     @media (width < 600px) {
-      box-sizing: border-box;
-      justify-content: flex-end;
-      margin-left: 0;
-      order: -1;
-      padding: 0.25rem 0.5rem;
-      width: 100%;
+      margin-left: auto;
+      padding-block: 0.25rem;
     }
   }
 }

@@ -4,6 +4,11 @@
   & ::ng-deep .timeline__content-inner {
     background: none !important;
     margin: 5px 24px 24px 1.5rem !important;
+
+    // phones: the cards take all the width the timeline leaves
+    @media (width < 600px) {
+      margin-inline: 1rem 0 !important;
+    }
   }
 }
 
@@ -19,6 +24,12 @@
     padding-block: 0.25rem 0.5rem; // room for the cards' shadows
 
     @container (width < 32rem) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    // phones: one full-width column, the clients first (see the component).
+    // Keep the width in sync with NARROW_QUERY.
+    @media (width < 600px) {
       grid-template-columns: minmax(0, 1fr);
     }
   }

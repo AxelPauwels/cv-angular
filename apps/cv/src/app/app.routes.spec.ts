@@ -78,10 +78,14 @@ describe('appRoutes', () => {
     // Assert
     expect(page.url).toBe('/showcase/micro-frontends');
     expect(page.activeMain).toBe('SHOWCASE');
-    expect(page.sub).toEqual(['Micro-frontends', 'Admin']);
+    expect(page.sub).toEqual([
+      'Micro-frontends',
+      'Lighthouse',
+      'Feature toggles',
+    ]);
   });
 
-  it('sends the old admin url to the admin page in the showcase', async () => {
+  it('sends the old admin url to the feature toggles page in the showcase', async () => {
     // Arrange
     const url = '/admin';
 
@@ -89,7 +93,7 @@ describe('appRoutes', () => {
     const page = await navigate(url);
 
     // Assert
-    expect(page.url).toBe('/showcase/admin');
+    expect(page.url).toBe('/showcase/feature-toggles');
   });
 
   it('shows the technical sub items', async () => {

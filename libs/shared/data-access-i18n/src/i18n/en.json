@@ -12,7 +12,7 @@
     },
     "admin": {
       "count": "{on} of {total} on",
-      "hidden-notice": "The Admin page is hidden from the menu. You can still open it at /showcase/admin by clicking “Axel Pauwels” in the footer.",
+      "hidden-notice": "The Admin page is hidden from the menu. You can still open it at /showcase/feature-toggles by clicking “Axel Pauwels” in the footer.",
       "linked": {
         "off": "{item} switched off too.",
         "on": "{item} switched on too."
@@ -44,7 +44,9 @@
     },
     "at": "at",
     "carousel": {
+      "carousel": "carousel",
       "next": "Next",
+      "page": "Page {current} of {total}",
       "previous": "Previous"
     },
     "city": {
@@ -59,6 +61,7 @@
       "cv": "CV",
       "download-cv": "Download CV",
       "email": "Email",
+      "loading": "Loading",
       "ok": "OK",
       "pdf": "PDF",
       "reset": "Reset",
@@ -183,7 +186,10 @@
       "education": "Education",
       "end-to-end-tests": "End-to-end tests",
       "experience": "experience",
+      "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
+      "lighthouse": "Lighthouse",
+      "micro-frontends": "Micro-frontends",
       "personal": "personal",
       "project-graph": "Project graph",
       "references": "References",
@@ -213,6 +219,25 @@
       "spanish": "Spanish",
       "switch": "Language"
     },
+    "lighthouse": {
+      "category": {
+        "accessibility": "Accessibility",
+        "best-practices": "Best Practices",
+        "performance": "Performance",
+        "seo": "SEO"
+      },
+      "legend": {
+        "average": "Needs improvement",
+        "fail": "Poor",
+        "pass": "Good",
+        "title": "Score ranges"
+      },
+      "not-audited": "Not audited yet",
+      "page": "Page",
+      "audit": {
+        "message": "Audited on {date} with Lighthouse {version}"
+      }
+    },
     "nav": {
       "admin": "Admin",
       "architecture": "Architecture",
@@ -224,11 +249,15 @@
       "education": "Education",
       "end-to-end-tests": "End-to-end tests",
       "experience": "Experience",
+      "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
       "home": "Home",
       "light": "Light",
+      "lighthouse": "Lighthouse",
       "light-mode": "light mode",
       "main-navigation": "Main navigation",
+      "menu": "Menu",
+      "menu-loading": "Loading the menu…",
       "micro-frontends": "Micro-frontends",
       "personal": "Personal",
       "project-graph": "Project graph",
@@ -301,6 +330,7 @@
         "training-and-conferences": "Training & Conferences",
         "training-and-conferences.description": "Always learning, still curious"
       },
+      "feature-toggles": "With great power comes great configuration",
       "frameworks": "frameworks",
       "horeca": "Hospitality",
       "it": "IT",
@@ -336,7 +366,7 @@
         "dependencies.description": "Straight from the project graph",
         "dependency-rules": "Dependency rules",
         "dependency-rules.description": "Checked on every import",
-        "domains-and-layers": "Domains × layers",
+        "domains-and-layers": "Domains & layers",
         "domains-and-layers.description": "Vertical slices, horizontal layers",
         "layers": "Layers inside a domain",
         "layers.description": "Who does what",

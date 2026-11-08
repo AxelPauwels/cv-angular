@@ -2,7 +2,7 @@ import { Route } from '@angular/router';
 import { EmbeddedPage } from '@cv/shared-ui-design-system';
 import { ROUTES } from '@cv/shared-util-routing';
 import { TechnicalFeatureShell } from './internal/technical-feature-shell/technical-feature-shell';
-import { firstVisibleTechnicalPage } from './internal/technical-nav-items';
+import { firstVisibleTechnicalPage } from './technical-nav-items';
 import {
   CODE_COVERAGE_STYLES,
   END_TO_END_TESTS_STYLES,

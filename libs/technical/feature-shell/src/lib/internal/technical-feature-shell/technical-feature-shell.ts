@@ -2,7 +2,7 @@ import { Component, computed, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavItem, SubNavbar } from '@cv/shared-ui-design-system';
 import { FeatureToggleService } from '@cv/shared-data-access';
-import { TECHNICAL_NAV_ITEMS } from '../technical-nav-items';
+import { TECHNICAL_NAV_ITEMS } from '../../technical-nav-items';
 
 /** Layout of the Technical domain: its sub navbar above the active page */
 @Component({

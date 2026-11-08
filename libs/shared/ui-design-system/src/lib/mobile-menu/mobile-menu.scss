@@ -1,0 +1,41 @@
+@use '3.vendors/mat';
+
+// Only on phones: wider screens show the main navbar's tabs instead
+:host {
+  display: none;
+
+  @media (width < 600px) {
+    display: block;
+  }
+}
+
+.mobile-menu {
+  // Sits on the primary-colored toolbar
+  &__trigger {
+    @include mat.icon-button-overrides(
+      (
+        icon-color: var(--mat-sys-on-primary),
+      )
+    );
+  }
+
+  // Drops down below the toolbar (the positioned ancestor), over the page
+  &__panel {
+    background-color: var(--mat-sys-surface-container);
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
+    box-shadow: var(--mat-sys-level2);
+    box-sizing: border-box;
+    color: var(--mat-sys-on-surface);
+    inset-inline: 0;
+    max-height: calc(100dvh - 4rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    position: absolute;
+    top: 100%;
+    z-index: 10;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+}

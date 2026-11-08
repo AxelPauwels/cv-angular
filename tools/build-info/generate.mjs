@@ -32,6 +32,7 @@ const PACKAGES = [
     '@angular-architects/native-federation',
     'Native Federation',
   ],
+  ['Micro-frontends', '@axel-pauwels/mac-window', 'Mac Window'],
   ['API', 'graphql', 'GraphQL'],
   ['API', '@graphql-tools/schema', 'GraphQL Tools'],
   ['API', '@graphql-codegen/cli', 'GraphQL Code Generator'],

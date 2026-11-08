@@ -1,0 +1,74 @@
+// Lighthouse's gauge: a tinted disc, a ring filled up to the score, the score inside
+:host {
+  --score-gauge-size: 3.5rem;
+  --score-gauge-color: var(--ds-score-fail);
+  --score-gauge-text: var(--ds-score-fail-text);
+
+  display: inline-grid;
+  height: var(--score-gauge-size);
+  place-items: center;
+  width: var(--score-gauge-size);
+
+  > * {
+    grid-area: 1 / 1;
+  }
+}
+
+:host(.score-gauge--average) {
+  --score-gauge-color: var(--ds-score-average);
+  --score-gauge-text: var(--ds-score-average-text);
+}
+
+:host(.score-gauge--pass) {
+  --score-gauge-color: var(--ds-score-pass);
+  --score-gauge-text: var(--ds-score-pass-text);
+}
+
+.score-gauge {
+  &__svg {
+    height: 100%;
+    overflow: visible;
+    width: 100%;
+  }
+
+  &__base,
+  &__arc {
+    fill: none;
+    stroke-width: 8;
+  }
+
+  &__base {
+    fill: color-mix(in srgb, var(--score-gauge-color) 10%, transparent);
+    stroke: color-mix(in srgb, var(--score-gauge-color) 10%, transparent);
+  }
+
+  // starts at 12 o'clock and runs clockwise, like Lighthouse's
+  &__arc {
+    stroke: var(--score-gauge-color);
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+
+  // bold and at least 18.66px, so large text for WCAG contrast
+  &__value {
+    color: var(--score-gauge-text);
+    font-family: var(--mat-sys-body-large-font), sans-serif;
+    font-size: max(1.25rem, 19px);
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    line-height: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .score-gauge__arc {
+    animation: score-gauge-fill 0.6s ease-out;
+  }
+}
+
+@keyframes score-gauge-fill {
+  from {
+    stroke-dasharray: 0 352;
+  }
+}

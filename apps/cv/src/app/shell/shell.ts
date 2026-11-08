@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { isActive, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatTabNavPanel } from '@angular/material/tabs';
 import {
@@ -11,6 +11,7 @@ import {
   FontSwitcher,
   LanguageSwitcher,
   MainNavbar,
+  MobileMenu,
   NavItem,
   ThemeSwitcher,
 } from '@cv/shared-ui-design-system';
@@ -30,6 +31,7 @@ import { ROUTES } from '@cv/shared-util-routing';
 import { TourOverlay } from '@cv/shared-feature-tour';
 import { ContactLinks } from '@cv/cv-feature-contact';
 import { TranslatePipe } from '@tolgee/ngx';
+import { MobileNav } from './mobile-nav/mobile-nav';
 
 @Component({
   selector: 'app-shell',
@@ -38,6 +40,7 @@ import { TranslatePipe } from '@tolgee/ngx';
     RouterLink,
     MatTabNavPanel,
     MainNavbar,
+    MobileMenu,
     DownloadMenu,
     LanguageSwitcher,
     ThemeSwitcher,
@@ -47,6 +50,7 @@ import { TranslatePipe } from '@tolgee/ngx';
     // only used in @defer blocks, so they get their own lazy chunks
     TourOverlay,
     ContactLinks,
+    MobileNav,
     TranslatePipe,
   ],
   templateUrl: './shell.html',
@@ -61,8 +65,11 @@ export class Shell {
   /** Which menu items and navbar icons show, switched on the admin page */
   protected readonly toggles = inject(FeatureToggleService).states;
 
+  /** The hamburger menu that replaces the domain tabs on phones */
+  protected readonly mobileMenuOpen = signal(false);
+
   /** The footer's name links to the admin page */
-  protected readonly adminLink = ROUTES.SHOWCASE.ADMIN_ROUTER_LINK;
+  protected readonly adminLink = ROUTES.SHOWCASE.FEATURE_TOGGLES_ROUTER_LINK;
 
   /** The home page fills the screen on its own: no footer there */
   protected readonly onHome = isActive(

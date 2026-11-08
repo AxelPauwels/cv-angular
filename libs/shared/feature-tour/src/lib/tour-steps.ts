@@ -35,6 +35,14 @@ function step(id: string, route: string, options: StepOptions = {}): TourStep {
   };
 }
 
+/**
+ * A domain's tab, or on phones (where the tabs are hidden) the hamburger menu:
+ * the spotlight skips the target that is not rendered
+ */
+function menuTarget(domain: string): string {
+  return `[data-tour="menu-${domain}"], [data-tour="menu"]`;
+}
+
 export const DEFAULT_TOUR_STEPS: readonly TourStep[] = [
   step('download-cv', ROUTES.CV.HOME_ROUTER_LINK, {
     target: '[data-tour="download-cv"] button',
@@ -52,16 +60,16 @@ export const DEFAULT_TOUR_STEPS: readonly TourStep[] = [
     ],
   }),
   step('cv', ROUTES.CV.PERSONAL_ROUTER_LINK, {
-    target: '[data-tour="menu-cv"]',
+    target: menuTarget('cv'),
     toggles: ['cv-personal'],
   }),
   step('technical', ROUTES.TECHNICAL.PROJECT_GRAPH_ROUTER_LINK, {
-    target: '[data-tour="menu-technical"]',
+    target: menuTarget('technical'),
     toggles: ['main-menu-technical', 'technical-project-graph'],
   }),
   // the admin page stays reachable when only its menu item is switched off
-  step('showcase', ROUTES.SHOWCASE.ADMIN_ROUTER_LINK, {
-    target: '[data-tour="menu-showcase"]',
+  step('showcase', ROUTES.SHOWCASE.FEATURE_TOGGLES_ROUTER_LINK, {
+    target: menuTarget('showcase'),
     toggles: ['main-menu-showcase'],
   }),
   step('contact', ROUTES.CV.PERSONAL_ROUTER_LINK, {
