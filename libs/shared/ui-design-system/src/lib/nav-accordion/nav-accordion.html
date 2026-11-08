@@ -1,0 +1,53 @@
+<nav class="nav-accordion" [attr.aria-label]="labelKey() | translate">
+  <ul class="nav-accordion__groups">
+    @for (item of items(); track item.path; let i = $index) {
+    <li class="nav-accordion__group">
+      <button
+        type="button"
+        class="nav-accordion__toggle"
+        [class.nav-accordion__toggle--current]="item === activeItem()"
+        [attr.aria-expanded]="item === expanded()"
+        [attr.aria-controls]="idPrefix + '-' + i"
+        (click)="toggle(item)">
+        <span class="nav-accordion__toggle-label"
+          >{{ item.labelKey | translate }}</span
+        >
+        <mat-icon
+          class="nav-accordion__chevron"
+          fontSet="material-symbols-outlined"
+          aria-hidden="true"
+          >expand_more</mat-icon
+        >
+      </button>
+      <ul
+        class="nav-accordion__links"
+        [id]="idPrefix + '-' + i"
+        [hidden]="item !== expanded()">
+        @for (child of item.children ?? []; track child.path) {
+        <li>
+          <a
+            class="nav-accordion__link"
+            [routerLink]="linkOf(item, child)"
+            routerLinkActive="nav-accordion__link--active"
+            ariaCurrentWhenActive="page">
+            @if (child.icon) {
+            <mat-icon
+              class="nav-accordion__icon"
+              fontSet="material-symbols-outlined"
+              aria-hidden="true"
+              >{{ child.icon }}</mat-icon
+            >
+            }
+            <span
+              class="nav-accordion__label"
+              [attr.data-label]="child.labelKey | translate"
+              >{{ child.labelKey | translate }}</span
+            >
+          </a>
+        </li>
+        }
+      </ul>
+    </li>
+    }
+  </ul>
+</nav>

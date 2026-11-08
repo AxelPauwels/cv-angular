@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { ROUTES } from '@cv/shared-util-routing';
 import { ShowcaseFeatureShell } from './internal/showcase-feature-shell/showcase-feature-shell';
-import { firstVisibleShowcasePage } from './internal/showcase-nav-items';
+import { firstVisibleShowcasePage } from './showcase-nav-items';
 
 export const showcaseFeatureShellRoutes: Route[] = [
   {
@@ -30,9 +30,14 @@ export const showcaseFeatureShellRoutes: Route[] = [
       },
       // always reachable, also when switched off: the footer links here
       {
-        path: ROUTES.SHOWCASE.ADMIN,
+        path: ROUTES.SHOWCASE.FEATURE_TOGGLES,
         loadComponent: () =>
           import('@cv/showcase-feature-admin').then((m) => m.FeatureToggles),
+      },
+      // the page's old url; links shared before the rename still find it
+      {
+        path: 'admin',
+        redirectTo: ROUTES.SHOWCASE.FEATURE_TOGGLES,
       },
       {
         path: '**',

@@ -1,4 +1,8 @@
 <mat-toolbar class="main-navbar">
+  <div class="main-navbar__start">
+    <ng-content select="[dsNavbarStart]" />
+  </div>
+
   <nav
     mat-tab-nav-bar
     class="main-navbar__tabs"

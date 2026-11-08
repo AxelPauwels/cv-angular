@@ -1,0 +1,111 @@
+@use '2.tools' as tools;
+
+:host {
+  display: block;
+}
+
+.nav-accordion {
+  padding-block: 0.25rem;
+
+  &__groups,
+  &__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__group + &__group {
+    border-top: 1px solid var(--mat-sys-outline-variant);
+  }
+
+  // A full-width row per domain, with a chevron that turns when it is open
+  &__toggle {
+    align-items: center;
+    background: none;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    font: var(--mat-sys-title-small);
+    justify-content: space-between;
+    letter-spacing: 0.05em;
+    min-height: 3rem;
+    padding: 0.5rem 1rem;
+    text-align: start;
+    text-transform: uppercase;
+    width: 100%;
+
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--mat-sys-on-surface) 8%,
+        transparent
+      );
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentcolor;
+      outline-offset: -2px;
+    }
+
+    // the domain of the current page
+    &--current {
+      font-weight: 700;
+    }
+  }
+
+  &__chevron {
+    transition: transform 200ms cubic-bezier(0.2, 0, 0, 1);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    [aria-expanded='true'] > & {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__links {
+    padding-bottom: 0.5rem;
+  }
+
+  // The current page gets a bold label and a bar at its start; hover goes bold
+  // too, without shifting the layout (see the nav-label mixin)
+  &__link {
+    @include tools.nav-label('.nav-accordion__label');
+
+    align-items: center;
+    border-inline-start: 3px solid transparent;
+    color: inherit;
+    display: flex;
+    font: var(--mat-sys-body-large);
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.25rem 1rem 0.25rem 2rem;
+    text-decoration: none;
+
+    &:focus-visible {
+      outline: 2px solid currentcolor;
+      outline-offset: -2px;
+    }
+
+    &--active {
+      border-inline-start-color: currentcolor;
+
+      .nav-accordion__label {
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__icon {
+    font-size: 1.25rem;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+}

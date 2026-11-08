@@ -116,7 +116,7 @@ export const FEATURE_TOGGLES = [
   menuItem(
     'showcase-admin',
     'showcase-menu',
-    't.nav.admin',
+    't.nav.feature-toggles',
     'main-menu-showcase'
   ),
 

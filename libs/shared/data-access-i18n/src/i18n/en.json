@@ -12,7 +12,7 @@
     },
     "admin": {
       "count": "{on} of {total} on",
-      "hidden-notice": "The Admin page is hidden from the menu. You can still open it at /showcase/admin by clicking “Axel Pauwels” in the footer.",
+      "hidden-notice": "The Feature toggles page is hidden from the menu. You can still open it at /showcase/feature-toggles by clicking “Axel Pauwels” in the footer.",
       "linked": {
         "off": "{item} switched off too.",
         "on": "{item} switched on too."
@@ -32,7 +32,7 @@
           "title": "Submenu"
         }
       },
-      "title": "Admin",
+      "title": "Feature toggles",
       "toggle": {
         "color-scheme-switcher": {
           "label": "Light and dark mode"
@@ -177,12 +177,12 @@
       "switch": "Font"
     },
     "heading": {
-      "administrator": "Administrator",
       "architecture": "Architecture",
       "code-coverage": "code coverage",
       "education": "Education",
       "end-to-end-tests": "End-to-end tests",
       "experience": "experience",
+      "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
       "personal": "personal",
@@ -232,7 +232,6 @@
       "page": "Page"
     },
     "nav": {
-      "admin": "Admin",
       "architecture": "Architecture",
       "code-coverage": "code coverage",
       "cv": "CV",
@@ -242,12 +241,15 @@
       "education": "Education",
       "end-to-end-tests": "End-to-end tests",
       "experience": "Experience",
+      "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
       "home": "Home",
       "light": "Light",
       "light-mode": "light mode",
       "lighthouse": "Lighthouse",
       "main-navigation": "Main navigation",
+      "menu": "Menu",
+      "menu-loading": "Loading the menu…",
       "micro-frontends": "Micro-frontends",
       "personal": "Personal",
       "project-graph": "Project graph",
@@ -313,13 +315,13 @@
     "son": "son",
     "spoken": "Speaking",
     "subheading": {
-      "administrator": "With great power comes great configuration",
       "education": {
         "certificates": "Certificates",
         "certificates.description": "Proof of curiosity and dedication",
         "training-and-conferences": "Training & Conferences",
         "training-and-conferences.description": "Always learning, still curious"
       },
+      "feature-toggles": "With great power comes great configuration",
       "frameworks": "frameworks",
       "horeca": "Hospitality",
       "it": "IT",

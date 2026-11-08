@@ -27,7 +27,7 @@ const PAGES = [
   '/technical/versions',
   '/showcase/micro-frontends',
   '/showcase/lighthouse',
-  '/showcase/admin',
+  '/showcase/feature-toggles',
 ];
 
 const urlArg = process.argv.find((arg) => arg.startsWith('--url='));

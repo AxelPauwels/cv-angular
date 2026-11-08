@@ -12,7 +12,7 @@
     },
     "admin": {
       "count": "{on} de {total} activados",
-      "hidden-notice": "La página Admin ya no aparece en el menú. Puedes abrirla en /showcase/admin haciendo clic en «Axel Pauwels» en el pie de página.",
+      "hidden-notice": "La página Feature toggles ya no aparece en el menú. Puedes abrirla en /showcase/feature-toggles haciendo clic en «Axel Pauwels» en el pie de página.",
       "linked": {
         "off": "{item} también desactivado.",
         "on": "{item} también activado."
@@ -32,7 +32,7 @@
           "title": "Submenú"
         }
       },
-      "title": "Administración",
+      "title": "Feature toggles",
       "toggle": {
         "color-scheme-switcher": {
           "label": "Modo claro y oscuro"
@@ -142,12 +142,12 @@
       "switch": "Fuente"
     },
     "heading": {
-      "administrator": "Administrador",
       "architecture": "Arquitectura",
       "code-coverage": "cobertura de código",
       "education": "Formación",
       "end-to-end-tests": "Pruebas de extremo a extremo",
       "experience": "Experiencia",
+      "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
       "personal": "personal",
@@ -196,7 +196,6 @@
       "page": "Página"
     },
     "nav": {
-      "admin": "Admin",
       "architecture": "Arquitectura",
       "code-coverage": "cobertura de código",
       "cv": "CV",
@@ -206,12 +205,15 @@
       "education": "Formación",
       "end-to-end-tests": "Pruebas de extremo a extremo",
       "experience": "Experiencia",
+      "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
       "home": "Hogar",
       "light": "Claro",
       "light-mode": "modo claro",
       "lighthouse": "Lighthouse",
       "main-navigation": "Navegación principal",
+      "menu": "Menú",
+      "menu-loading": "Cargando el menú…",
       "micro-frontends": "Microfrontends",
       "personal": "Personal",
       "project-graph": "Grafo de proyectos",
@@ -270,13 +272,13 @@
     "son": "Hijo",
     "spoken": "Hablado",
     "subheading": {
-      "administrator": "Un gran poder conlleva una gran configuración",
       "education": {
         "certificates": "Certificados",
         "certificates.description": "Preuve de curiosité et de dévouement",
         "training-and-conferences": "Formación & conferencias",
         "training-and-conferences.description": "Siempre aprendiendo, siempre curioso"
       },
+      "feature-toggles": "Un gran poder conlleva una gran configuración",
       "frameworks": "marcos",
       "horeca": "Hospitalidad",
       "it": "TI",

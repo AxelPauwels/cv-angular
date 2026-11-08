@@ -34,6 +34,11 @@
     );
 
     background-color: var(--mat-sys-surface-container);
+
+    // Phones (< 600px): the mobile menu in the main navbar lists every page
+    @media (width < 600px) {
+      display: none;
+    }
   }
 
   &__tab {

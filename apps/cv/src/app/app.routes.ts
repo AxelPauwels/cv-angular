@@ -22,10 +22,10 @@ export const appRoutes: Routes = [
         (m) => m.technicalFeatureShellRoutes
       ),
   },
-  // the admin page moved into the showcase; old links still find it
+  // the feature toggles page (formerly admin) moved into the showcase; old links still find it
   {
     path: 'admin',
-    redirectTo: ROUTES.SHOWCASE.ADMIN_ROUTER_LINK,
+    redirectTo: ROUTES.SHOWCASE.FEATURE_TOGGLES_ROUTER_LINK,
   },
   {
     path: ROUTES.MF.CV_MFE,

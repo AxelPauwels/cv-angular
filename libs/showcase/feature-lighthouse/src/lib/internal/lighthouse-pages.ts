@@ -91,7 +91,10 @@ export const LIGHTHOUSE_SECTIONS: readonly LighthouseSection[] = [
         ROUTES.SHOWCASE.MICRO_FRONTENDS_ROUTER_LINK
       ),
       page('t.nav.lighthouse', ROUTES.SHOWCASE.LIGHTHOUSE_ROUTER_LINK),
-      page('t.nav.admin', ROUTES.SHOWCASE.ADMIN_ROUTER_LINK),
+      page(
+        't.nav.feature-toggles',
+        ROUTES.SHOWCASE.FEATURE_TOGGLES_ROUTER_LINK
+      ),
     ],
   },
 ];

@@ -12,7 +12,7 @@
     },
     "admin": {
       "count": "{on} sur {total} activés",
-      "hidden-notice": "La page Admin n’apparaît plus dans le menu. Vous pouvez toujours l’ouvrir via /showcase/admin en cliquant sur « Axel Pauwels » dans le pied de page.",
+      "hidden-notice": "La page Feature toggles n’apparaît plus dans le menu. Vous pouvez toujours l’ouvrir via /showcase/feature-toggles en cliquant sur « Axel Pauwels » dans le pied de page.",
       "linked": {
         "off": "{item} également désactivé.",
         "on": "{item} également activé."
@@ -32,7 +32,7 @@
           "title": "Sous-menu"
         }
       },
-      "title": "Administration",
+      "title": "Feature toggles",
       "toggle": {
         "color-scheme-switcher": {
           "label": "Mode clair et sombre"
@@ -142,12 +142,12 @@
       "switch": "Police"
     },
     "heading": {
-      "administrator": "Administrateur",
       "architecture": "Architecture",
       "code-coverage": "couverture du code",
       "education": "Formation",
       "end-to-end-tests": "Tests de bout en bout",
       "experience": "Expérience",
+      "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
       "personal": "personnel",
@@ -196,7 +196,6 @@
       "page": "Page"
     },
     "nav": {
-      "admin": "Admin",
       "architecture": "Architecture",
       "code-coverage": "couverture du code",
       "cv": "CV",
@@ -206,12 +205,15 @@
       "education": "Formation",
       "end-to-end-tests": "Tests de bout en bout",
       "experience": "Expérience",
+      "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
       "home": "Maison",
       "light": "Clair",
       "light-mode": "mode clair",
       "lighthouse": "Lighthouse",
       "main-navigation": "Navigation principale",
+      "menu": "Menu",
+      "menu-loading": "Chargement du menu…",
       "micro-frontends": "Micro-frontends",
       "personal": "Personnelles",
       "project-graph": "Graphe des projets",
@@ -270,13 +272,13 @@
     "son": "Fils",
     "spoken": "Oral",
     "subheading": {
-      "administrator": "Un grand pouvoir implique une grande configuration",
       "education": {
         "certificates": "Certificats",
         "certificates.description": "Preuve de curiosité et de dévouement",
         "training-and-conferences": "Formation & conférences",
         "training-and-conferences.description": "Toujours en apprentissage, toujours curieux"
       },
+      "feature-toggles": "Un grand pouvoir implique une grande configuration",
       "frameworks": "cadres",
       "horeca": "Hospitalité",
       "it": "TI",

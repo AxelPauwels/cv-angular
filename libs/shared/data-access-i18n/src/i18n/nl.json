@@ -12,7 +12,7 @@
     },
     "admin": {
       "count": "{on} van {total} aan",
-      "hidden-notice": "De Admin-pagina staat niet meer in het menu. Je kunt ze nog altijd openen via /showcase/admin door in de footer op “Axel Pauwels” te klikken.",
+      "hidden-notice": "De Feature toggles-pagina staat niet meer in het menu. Je kunt ze nog altijd openen via /showcase/feature-toggles door in de footer op “Axel Pauwels” te klikken.",
       "linked": {
         "off": "{item} ook uitgezet.",
         "on": "{item} ook aangezet."
@@ -32,7 +32,7 @@
           "title": "Submenu"
         }
       },
-      "title": "Beheer",
+      "title": "Feature toggles",
       "toggle": {
         "color-scheme-switcher": {
           "label": "Lichte en donkere modus"
@@ -177,12 +177,12 @@
       "switch": "Lettertype"
     },
     "heading": {
-      "administrator": "Beheerder",
       "architecture": "Architectuur",
       "code-coverage": "code coverage",
       "education": "Opleiding",
       "end-to-end-tests": "End-to-end tests",
       "experience": "ervaring",
+      "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
       "personal": "persoonlijk",
@@ -232,7 +232,6 @@
       "page": "Pagina"
     },
     "nav": {
-      "admin": "Admin",
       "architecture": "Architectuur",
       "code-coverage": "code coverage",
       "cv": "CV",
@@ -242,12 +241,15 @@
       "education": "Opleiding",
       "end-to-end-tests": "End-to-end tests",
       "experience": "Ervaring",
+      "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
       "home": "Home",
       "light": "Licht",
       "light-mode": "lichte modus",
       "lighthouse": "Lighthouse",
       "main-navigation": "Hoofdnavigatie",
+      "menu": "Menu",
+      "menu-loading": "Het menu wordt geladen…",
       "micro-frontends": "Micro-frontends",
       "personal": "Persoonlijk",
       "project-graph": "Projectgraaf",
@@ -313,13 +315,13 @@
     "son": "Zoon",
     "spoken": "Mondeling",
     "subheading": {
-      "administrator": "Met grote macht komt grote configuratie",
       "education": {
         "certificates": "Certificaten",
         "certificates.description": "Blijk van nieuwsgierigheid en toewijding",
         "training-and-conferences": "Training & conferenties",
         "training-and-conferences.description": "Altijd lerend, nog steeds nieuwsgierig"
       },
+      "feature-toggles": "Met grote macht komt grote configuratie",
       "frameworks": "frameworks",
       "horeca": "Horeca",
       "it": "IT",

@@ -9,7 +9,7 @@ import {
  * The one `<h1>` on top of a content page; pass the heading's translation key,
  * and optionally a subtitle shown underneath it (grouped with the heading):
  * `<ds-page-title title="t.heading.references" />`
- * `<ds-page-title title="t.heading.administrator" subtitle="t.subheading.administrator" />`
+ * `<ds-page-title title="t.heading.feature-toggles" subtitle="t.subheading.feature-toggles" />`
  */
 @Component({
   selector: 'ds-page-title',
