@@ -5,6 +5,21 @@
   "projectType": "library",
   "tags": ["domain:shared", "type:api"],
   "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "project": "libs/api/ng-package.json",
+        "tsConfig": "libs/api/tsconfig.lib.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/api/tsconfig.lib.prod.json"
+        },
+        "development": {}
+      }
+    },
     "codegen": {
       "executor": "nx:run-commands",
       "cache": true,
