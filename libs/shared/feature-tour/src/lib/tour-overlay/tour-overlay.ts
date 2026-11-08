@@ -90,7 +90,7 @@ export class TourOverlay {
     } as const;
   });
 
-  private target: Element | null = null;
+  private targets: readonly Element[] = [];
   private readonly resizeObserver =
     typeof ResizeObserver === 'undefined'
       ? undefined
@@ -117,7 +117,10 @@ export class TourOverlay {
   private visibleSteps(): readonly TourStep[] {
     const toggles = inject(FeatureToggleService).states();
     return inject(TOUR_STEPS).filter(
-      (step) => !step.toggles?.some((toggle) => !toggles[toggle])
+      (step) =>
+        !step.toggles?.some((toggle) => !toggles[toggle]) &&
+        (!step.someToggles ||
+          step.someToggles.some((toggle) => toggles[toggle]))
     );
   }
 
@@ -169,12 +172,12 @@ export class TourOverlay {
       if (currentPath(this.router.url) !== step.route) {
         await this.router.navigateByUrl(step.route);
       }
-      const target = step.target ? await this.waitFor(step.target, run) : null;
+      const targets = step.target ? await this.waitFor(step.target, run) : [];
       if (run !== this.run) {
         return;
       }
-      this.observe(target);
-      target?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      this.observe(targets);
+      targets[0]?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       this.measure();
     } finally {
       clearTimeout(spinner);
@@ -184,16 +187,16 @@ export class TourOverlay {
     }
   }
 
-  /** Resolves with the element once it renders (lazy pages, data), or null */
-  private waitFor(selector: string, run: number): Promise<Element | null> {
+  /** Resolves with the elements once they render (lazy pages, data), or none */
+  private waitFor(selector: string, run: number): Promise<readonly Element[]> {
     const started = Date.now();
     return new Promise((resolve) => {
       const check = () => {
-        const element = this.document.querySelector(selector);
-        if (element || run !== this.run) {
-          resolve(element);
+        const elements = [...this.document.querySelectorAll(selector)];
+        if (elements.length || run !== this.run) {
+          resolve(elements);
         } else if (Date.now() - started > TARGET_TIMEOUT_MS || !this.window) {
-          resolve(null);
+          resolve([]);
         } else {
           this.window.requestAnimationFrame(check);
         }
@@ -202,29 +205,36 @@ export class TourOverlay {
     });
   }
 
-  private observe(target: Element | null): void {
-    if (this.target) {
-      this.resizeObserver?.unobserve(this.target);
+  private observe(targets: readonly Element[]): void {
+    for (const target of this.targets) {
+      this.resizeObserver?.unobserve(target);
     }
-    this.target = target;
-    if (target) {
+    this.targets = targets;
+    for (const target of targets) {
       this.resizeObserver?.observe(target);
     }
   }
 
+  /** One spotlight around every rendered target */
   private measure(): void {
-    const target = this.target?.isConnected ? this.target : null;
-    this.hasTarget.set(!!target);
-    if (!target) {
+    const rects = this.targets
+      .filter((target) => target.isConnected)
+      .map((target) => target.getBoundingClientRect())
+      .filter((rect) => rect.width || rect.height);
+    this.hasTarget.set(rects.length > 0);
+    if (!rects.length) {
       this.spotlight.set(this.centerBox());
       return;
     }
-    const rect = target.getBoundingClientRect();
+    const top = Math.min(...rects.map((rect) => rect.top));
+    const left = Math.min(...rects.map((rect) => rect.left));
+    const bottom = Math.max(...rects.map((rect) => rect.bottom));
+    const right = Math.max(...rects.map((rect) => rect.right));
     this.spotlight.set({
-      top: rect.top - SPOTLIGHT_PADDING,
-      left: rect.left - SPOTLIGHT_PADDING,
-      width: rect.width + SPOTLIGHT_PADDING * 2,
-      height: rect.height + SPOTLIGHT_PADDING * 2,
+      top: top - SPOTLIGHT_PADDING,
+      left: left - SPOTLIGHT_PADDING,
+      width: right - left + SPOTLIGHT_PADDING * 2,
+      height: bottom - top + SPOTLIGHT_PADDING * 2,
     });
   }
 

@@ -10,30 +10,28 @@ import type { FeatureToggleId } from './feature-toggles';
  */
 export const FEATURE_TOGGLE_DEFAULTS = {
   // General
-  'tour-button': false,
+  'tour-button': true,
 
-  // Main menu
-  'main-menu-technical': false,
-  'main-menu-showcase': true,
-
-  // Submenu CV
+  // CV
   'cv-personal': true,
   'cv-education': true,
   'cv-experience': true,
   'cv-skills': true,
   'cv-references': true,
 
-  // Submenu Showcase
+  // Showcase
+  'main-menu-showcase': true, // main
   'showcase-micro-frontends': false,
   'showcase-admin': false,
 
-  // Submenu Technical
-  'technical-architecture': true,
+  // Technical
+  'main-menu-technical': true, // main
+  'technical-architecture': false,
   'technical-project-graph': true,
   'technical-graphql-docs': true,
   'technical-code-coverage': true,
   'technical-end-to-end-tests': true,
-  'technical-versions': true,
+  'technical-versions': false,
 
   // Navbar icons
   'navbar-download-cv': true,

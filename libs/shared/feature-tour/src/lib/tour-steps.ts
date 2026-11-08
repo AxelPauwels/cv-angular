@@ -7,8 +7,9 @@ export interface TourStep {
   /** The page the step is shown on; the tour navigates there first */
   route: string;
   /**
-   * CSS selector of the element to highlight. Pages mark targets with a
-   * `data-tour` attribute. Without a target the step is centered.
+   * CSS selector of the element(s) to highlight. Pages mark targets with a
+   * `data-tour` attribute. When it matches several elements, the spotlight
+   * covers all of them. Without a target the step is centered.
    */
   target?: string;
   /** Short name, shown on the back/next buttons of the neighbouring steps */
@@ -17,19 +18,17 @@ export interface TourStep {
   textKey: string;
   /** The step is skipped when one of these is switched off on the admin page */
   toggles?: readonly FeatureToggleId[];
+  /** The step is skipped when all of these are switched off on the admin page */
+  someToggles?: readonly FeatureToggleId[];
 }
 
-function step(
-  id: string,
-  route: string,
-  target?: string,
-  toggles?: readonly FeatureToggleId[]
-): TourStep {
+type StepOptions = Pick<TourStep, 'target' | 'toggles' | 'someToggles'>;
+
+function step(id: string, route: string, options: StepOptions = {}): TourStep {
   return {
     id,
     route,
-    target,
-    toggles,
+    ...options,
     labelKey: `t.tour.step.${id}.label`,
     titleKey: `t.tour.step.${id}.title`,
     textKey: `t.tour.step.${id}.text`,
@@ -37,40 +36,37 @@ function step(
 }
 
 export const DEFAULT_TOUR_STEPS: readonly TourStep[] = [
-  step('welcome', ROUTES.CV.HOME_ROUTER_LINK),
-  step('themes', ROUTES.CV.HOME_ROUTER_LINK, '[data-tour="theme"] button', [
-    'navbar-theme-switcher',
-  ]),
-  step('fonts', ROUTES.CV.HOME_ROUTER_LINK, '[data-tour="font"] button', [
-    'navbar-font-switcher',
-  ]),
-  step(
-    'color-scheme',
-    ROUTES.CV.HOME_ROUTER_LINK,
-    '[data-tour="color-scheme"] button',
-    ['navbar-color-scheme-switcher']
-  ),
-  step(
-    'languages',
-    ROUTES.CV.HOME_ROUTER_LINK,
-    '[data-tour="language"] button',
-    ['navbar-language-switcher']
-  ),
-  step('cv', ROUTES.CV.PERSONAL_ROUTER_LINK, '[data-tour="cv"] nav', [
-    'cv-personal',
-  ]),
-  step(
-    'architecture',
-    ROUTES.TECHNICAL.ARCHITECTURE_ROUTER_LINK,
-    '[data-tour="technical"] nav',
-    ['main-menu-technical', 'technical-architecture']
-  ),
-  step(
-    'showcase',
-    ROUTES.SHOWCASE.MICRO_FRONTENDS_ROUTER_LINK,
-    '[data-tour="showcase"] nav',
-    ['main-menu-showcase', 'showcase-micro-frontends']
-  ),
+  step('download-cv', ROUTES.CV.HOME_ROUTER_LINK, {
+    target: '[data-tour="download-cv"] button',
+    toggles: ['navbar-download-cv'],
+  }),
+  // every navbar icon except the download: theme, font, accessibility, ...
+  step('settings', ROUTES.CV.HOME_ROUTER_LINK, {
+    target: '[data-tour="settings"] button',
+    someToggles: [
+      'navbar-theme-switcher',
+      'navbar-font-switcher',
+      'navbar-accessibility-switcher',
+      'navbar-color-scheme-switcher',
+      'navbar-language-switcher',
+    ],
+  }),
+  step('cv', ROUTES.CV.PERSONAL_ROUTER_LINK, {
+    target: '[data-tour="menu-cv"]',
+    toggles: ['cv-personal'],
+  }),
+  step('technical', ROUTES.TECHNICAL.PROJECT_GRAPH_ROUTER_LINK, {
+    target: '[data-tour="menu-technical"]',
+    toggles: ['main-menu-technical', 'technical-project-graph'],
+  }),
+  // the admin page stays reachable when only its menu item is switched off
+  step('showcase', ROUTES.SHOWCASE.ADMIN_ROUTER_LINK, {
+    target: '[data-tour="menu-showcase"]',
+    toggles: ['main-menu-showcase'],
+  }),
+  step('contact', ROUTES.CV.PERSONAL_ROUTER_LINK, {
+    target: '[data-tour="contact"] a',
+  }),
   step('finish', ROUTES.CV.HOME_ROUTER_LINK),
 ];
 

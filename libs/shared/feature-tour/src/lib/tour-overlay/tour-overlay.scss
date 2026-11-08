@@ -94,7 +94,7 @@
 
   &__card {
     background-color: var(--mat-sys-surface-container-high);
-    border-radius: var(--mat-sys-corner-extra-large);
+    border-radius: 5px;
     box-shadow: var(--mat-sys-level3);
     box-sizing: border-box;
     color: var(--mat-sys-on-surface);
@@ -163,7 +163,7 @@
   &__actions {
     align-items: center;
     background-color: var(--mat-sys-surface-container-high);
-    border-radius: var(--mat-sys-corner-extra-large);
+    border-radius: 50px;
     box-shadow: var(--mat-sys-level3);
     box-sizing: border-box;
     display: grid;
@@ -181,17 +181,20 @@
     }
   }
 
-  // Two lines: "Back" / "Next" and the name of that step
   &__action {
     height: auto;
     min-height: 3.5rem;
 
     &--back {
+      justify-content: start;
       justify-self: start;
+      width: 100%;
     }
 
     &--next {
+      justify-content: end;
       justify-self: end;
+      width: 100%;
     }
   }
 
@@ -217,6 +220,8 @@
 
   // Exit spans the row below back and next
   &__exit {
+    border: none;
+
     @media (width < 600px) {
       grid-column: 1 / -1;
       grid-row: 2;

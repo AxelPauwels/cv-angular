@@ -9,6 +9,7 @@
     <a
       mat-tab-link
       class="main-navbar__tab"
+      [attr.data-tour]="item.tourId"
       [routerLink]="'/' + item.path"
       [active]="item === activeItem()">
       <span

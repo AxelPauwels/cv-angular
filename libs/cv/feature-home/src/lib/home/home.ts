@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -19,6 +19,11 @@ export class Home {
   protected readonly tour = inject(TourService);
   protected readonly showTourButton =
     inject(FeatureToggleService).isEnabled('tour-button');
+  /**
+   * The glow repeats until the visitor reaches the button (hover, focus or
+   * click); then it stops for good, so it never needs a pause control (WCAG 2.2.2)
+   */
+  protected readonly glowStopped = signal(false);
 
   protected readonly fullName = computed(() => {
     const person = this.store.person();

@@ -368,50 +368,40 @@
       "next": "Volgende",
       "start": "Start de rondleiding",
       "step": {
-        "architecture": {
-          "label": "Architectuur",
-          "text": "Benieuwd hoe deze website gebouwd is? Het technische gedeelte legt de architectuur, de projectgraaf en de gebruikte versies uit.",
-          "title": "Architectuur"
-        },
-        "color-scheme": {
-          "label": "Donkere modus",
-          "text": "Wissel tussen een lichte en een donkere weergave. Standaard volgt de website de instelling van je toestel.",
-          "title": "Lichte en donkere modus"
+        "contact": {
+          "label": "Contact",
+          "text": "Wil je contact opnemen? Mail me of vind me op LinkedIn en GitHub via de iconen rechtsonder.",
+          "title": "Neem contact op"
         },
         "cv": {
           "label": "CV",
           "text": "Hier vind je alles over mij: persoonlijke gegevens, opleiding, ervaring, vaardigheden en referenties.",
           "title": "Mijn CV"
         },
+        "download-cv": {
+          "label": "CV downloaden",
+          "text": "Lees je liever offline? Download hier mijn CV als pdf.\nTip: gebruik de knoppen hieronder of de pijltjestoetsen, en druk op Escape om de rondleiding op elk moment te stoppen.",
+          "title": "Download mijn CV"
+        },
         "finish": {
           "label": "Afronden",
           "text": "Bedankt voor het volgen van de rondleiding. Veel plezier met rondkijken, je kunt de rondleiding altijd opnieuw starten vanaf de startpagina.",
           "title": "Dat was het!"
         },
-        "fonts": {
-          "label": "Lettertypes",
-          "text": "Liever een andere stijl? Wijzig hier het lettertype van de hele website.",
-          "title": "Lettertypes"
-        },
-        "languages": {
-          "label": "Talen",
-          "text": "De website is beschikbaar in het Engels, Nederlands, Frans en Spaans. Kies hier je taal.",
-          "title": "Talen"
+        "settings": {
+          "label": "Jouw voorkeuren",
+          "text": "Stel de website eerst in zoals jij hem wilt: het kleurthema, het lettertype, toegankelijkheidsinstellingen, lichte of donkere modus en de taal. Je keuzes worden onthouden op dit toestel.",
+          "title": "Maak het je eigen"
         },
         "showcase": {
           "label": "Showcase",
-          "text": "De showcase toont technieken in de praktijk, zoals micro-frontends, GraphQL-documentatie, code coverage en end-to-end tests.",
+          "text": "De showcase toont technieken in de praktijk, zoals micro-frontends en deze beheerpagina, waar je functies van de website aan- en uitzet.",
           "title": "Showcase"
         },
-        "themes": {
-          "label": "Thema's",
-          "text": "Kies hier een van de kleurthema's. Elk thema geeft de hele website bijpassende kleuren.",
-          "title": "Kleurthema's"
-        },
-        "welcome": {
-          "label": "Welkom",
-          "text": "Ik leid je graag even rond. Deze korte rondleiding toont je de website en zijn functies. Gebruik de knoppen hieronder of de pijltjestoetsen, en druk op Escape om op elk moment te stoppen.",
-          "title": "Welkom!"
+        "technical": {
+          "label": "Technisch",
+          "text": "Benieuwd hoe deze website gebouwd is? Het technische gedeelte toont de projectgraaf, de architectuur, de GraphQL-documentatie, code coverage, end-to-end tests en de gebruikte versies.",
+          "title": "Onder de motorkap"
         }
       },
       "step-of": "Stap {current} van {total}"

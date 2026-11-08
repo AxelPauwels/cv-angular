@@ -326,50 +326,40 @@
       "next": "Siguiente",
       "start": "Iniciar el recorrido",
       "step": {
-        "architecture": {
-          "label": "Arquitectura",
-          "text": "¿Te preguntas cómo está hecha esta web? La sección técnica explica la arquitectura, el grafo del proyecto y las versiones utilizadas.",
-          "title": "Arquitectura"
-        },
-        "color-scheme": {
-          "label": "Modo oscuro",
-          "text": "Cambia entre un aspecto claro y uno oscuro. Por defecto, la web sigue la configuración de tu dispositivo.",
-          "title": "Modo claro y oscuro"
+        "contact": {
+          "label": "Contacto",
+          "text": "¿Quieres contactar conmigo? Escríbeme o encuéntrame en LinkedIn y GitHub con los iconos de abajo a la derecha.",
+          "title": "Ponte en contacto"
         },
         "cv": {
           "label": "CV",
           "text": "Aquí encontrarás todo sobre mí: datos personales, formación, experiencia, habilidades y referencias.",
           "title": "Mi CV"
         },
+        "download-cv": {
+          "label": "Descargar CV",
+          "text": "¿Prefieres leerlo sin conexión? Descarga aquí mi CV en PDF.\nConsejo: usa los botones de abajo o las flechas del teclado, y pulsa Escape para salir del recorrido en cualquier momento.",
+          "title": "Descarga mi CV"
+        },
         "finish": {
           "label": "Terminar",
           "text": "Gracias por hacer el recorrido. Disfruta explorando, puedes volver a iniciar el recorrido desde la página de inicio cuando quieras.",
           "title": "¡Eso es todo!"
         },
-        "fonts": {
-          "label": "Fuentes",
-          "text": "¿Prefieres otro estilo? Cambia aquí la fuente de toda la web.",
-          "title": "Fuentes"
-        },
-        "languages": {
-          "label": "Idiomas",
-          "text": "La web está disponible en inglés, neerlandés, francés y español. Elige tu idioma aquí.",
-          "title": "Idiomas"
+        "settings": {
+          "label": "Tus preferencias",
+          "text": "Primero configura la web a tu gusto: el tema de color, la fuente, los ajustes de accesibilidad, el modo claro u oscuro y el idioma. Tus elecciones se guardan en este dispositivo.",
+          "title": "Hazlo a tu manera"
         },
         "showcase": {
           "label": "Escaparate",
-          "text": "El escaparate muestra técnicas en la práctica, como micro-frontends, documentación GraphQL, cobertura de código y pruebas de extremo a extremo.",
+          "text": "El escaparate muestra técnicas en la práctica, como micro-frontends y esta página de administración, donde se activan y desactivan funciones de la web.",
           "title": "Escaparate"
         },
-        "themes": {
-          "label": "Temas",
-          "text": "Elige aquí uno de los temas de color. Cada tema aplica colores a juego en toda la web.",
-          "title": "Temas de color"
-        },
-        "welcome": {
-          "label": "Bienvenida",
-          "text": "Déjame enseñarte el sitio. Este breve recorrido te muestra la web y sus funciones. Usa los botones de abajo o las flechas del teclado, y pulsa Escape para salir en cualquier momento.",
-          "title": "¡Bienvenido!"
+        "technical": {
+          "label": "Técnico",
+          "text": "¿Te preguntas cómo está hecha esta web? La sección técnica muestra el grafo del proyecto, la arquitectura, la documentación GraphQL, la cobertura de código, las pruebas de extremo a extremo y las versiones utilizadas.",
+          "title": "Bajo el capó"
         }
       },
       "step-of": "Paso {current} de {total}"

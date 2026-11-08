@@ -44,15 +44,22 @@
   </picture>
 
   @if (showTourButton()) {
-  <button
-    matButton="filled"
-    type="button"
-    class="home-hero__tour"
-    data-tour="start"
-    (click)="tour.start()">
-    <mat-icon fontSet="material-symbols-outlined">tour</mat-icon>
-    {{ 't.tour.start' | translate }}
-  </button>
+  <!-- the wrapper carries the glow, so it never fights Material's own layers -->
+  <span
+    class="home-hero__tour-glow"
+    [class.home-hero__tour-glow--stopped]="glowStopped()"
+    (pointerenter)="glowStopped.set(true)"
+    (focusin)="glowStopped.set(true)">
+    <button
+      matButton="filled"
+      type="button"
+      class="home-hero__tour"
+      data-tour="start"
+      (click)="tour.start()">
+      <mat-icon fontSet="material-symbols-outlined">tour</mat-icon>
+      {{ 't.tour.start' | translate }}
+    </button>
+  </span>
   }
 
   <div class="home-hero__text">

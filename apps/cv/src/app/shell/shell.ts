@@ -88,15 +88,17 @@ export class Shell {
   });
 
   private readonly allNavItems: (NavItem & { toggle?: FeatureToggleId })[] = [
-    { labelKey: 't.nav.cv', path: ROUTES.CV.ROOT },
+    { labelKey: 't.nav.cv', path: ROUTES.CV.ROOT, tourId: 'menu-cv' },
     {
       labelKey: 't.nav.technical',
       path: ROUTES.TECHNICAL.ROOT,
+      tourId: 'menu-technical',
       toggle: 'main-menu-technical',
     },
     {
       labelKey: 't.nav.showcase',
       path: ROUTES.SHOWCASE.ROOT,
+      tourId: 'menu-showcase',
       toggle: 'main-menu-showcase',
     },
   ];

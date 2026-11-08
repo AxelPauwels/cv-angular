@@ -88,6 +88,26 @@ describe('Home', () => {
     expect(TestBed.inject(TourService).active()).toBe(true);
   });
 
+  it.each(['pointerenter', 'focusin'])(
+    'stops the glow on the tour button for good after %s',
+    async (type) => {
+      // Arrange
+      saveFeatureTogglesForTesting({ 'tour-button': true });
+      configure();
+      const element = await render();
+      const glow = element.querySelector('.home-hero__tour-glow');
+      const stopped = 'home-hero__tour-glow--stopped';
+      expect(glow?.classList).not.toContain(stopped);
+
+      // Act
+      glow?.dispatchEvent(new Event(type, { bubbles: true }));
+      TestBed.tick();
+
+      // Assert
+      expect(glow?.classList).toContain(stopped);
+    }
+  );
+
   it('hides the tour button when its feature toggle is off', async () => {
     // Arrange
     saveFeatureTogglesForTesting({ 'tour-button': true });

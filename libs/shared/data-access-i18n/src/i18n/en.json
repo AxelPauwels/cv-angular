@@ -368,50 +368,40 @@
       "next": "Next",
       "start": "Start the tour",
       "step": {
-        "architecture": {
-          "label": "Architecture",
-          "text": "Curious how this website is built? The technical section explains the architecture, the project graph and the versions in use.",
-          "title": "Architecture"
-        },
-        "color-scheme": {
-          "label": "Dark mode",
-          "text": "Switch between a light and a dark look. By default the website follows the setting of your device.",
-          "title": "Light and dark mode"
+        "contact": {
+          "label": "Contact",
+          "text": "Want to get in touch? Mail me or find me on LinkedIn and GitHub with the icons at the bottom right.",
+          "title": "Get in touch"
         },
         "cv": {
           "label": "CV",
           "text": "Here you find everything about me: personal details, education, experience, skills and references.",
           "title": "My CV"
         },
+        "download-cv": {
+          "label": "Download CV",
+          "text": "Prefer to read it offline? Download my CV as a PDF here.\nTip: use the buttons below or the arrow keys, and press Escape to stop the tour at any time.",
+          "title": "Download my CV"
+        },
         "finish": {
           "label": "Finish",
           "text": "Thanks for taking the tour. Enjoy looking around, you can start the tour again from the home page at any time.",
           "title": "That's it!"
         },
-        "fonts": {
-          "label": "Fonts",
-          "text": "Prefer another style? Switch the font of the whole website here.",
-          "title": "Fonts"
-        },
-        "languages": {
-          "label": "Languages",
-          "text": "The website is available in English, Dutch, French and Spanish. Choose your language here.",
-          "title": "Languages"
+        "settings": {
+          "label": "Your preferences",
+          "text": "First set up the website the way you like it: the color theme, the font, accessibility settings, light or dark mode and the language. Your choices are remembered on this device.",
+          "title": "Make it your own"
         },
         "showcase": {
           "label": "Showcase",
-          "text": "The showcase demonstrates techniques in practice, like micro-frontends, GraphQL docs, code coverage and end-to-end tests.",
+          "text": "The showcase demonstrates techniques in practice, like micro-frontends and this admin page, where features of the website can be switched on and off.",
           "title": "Showcase"
         },
-        "themes": {
-          "label": "Themes",
-          "text": "Pick one of the color themes here. Every theme comes with matching colors for the whole website.",
-          "title": "Color themes"
-        },
-        "welcome": {
-          "label": "Welcome",
-          "text": "Let me show you around. This short tour walks you through the website and its features. Use the buttons below or the arrow keys, and press Escape to stop at any time.",
-          "title": "Welcome!"
+        "technical": {
+          "label": "Technical",
+          "text": "Curious how this website is built? The technical section shows the project graph, the architecture, the GraphQL docs, code coverage, end-to-end tests and the versions in use.",
+          "title": "Under the hood"
         }
       },
       "step-of": "Step {current} of {total}"

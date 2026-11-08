@@ -8,33 +8,34 @@
       hintKey="t.common.pdf" />
     } @if (toggles()['navbar-theme-switcher']) {
     <ds-theme-switcher
-      data-tour="theme"
+      data-tour="settings"
       [themes]="themeService.themes"
       [theme]="themeService.theme()"
       (themeChange)="changeTheme($event)"
       (themeReset)="themeService.resetTheme()" />
     } @if (toggles()['navbar-font-switcher']) {
     <ds-font-switcher
-      data-tour="font"
+      data-tour="settings"
       [fonts]="fontService.fonts"
       [font]="fontService.font()"
       (fontChange)="changeFont($event)"
       (fontReset)="fontService.resetFont()" />
     } @if (toggles()['navbar-accessibility-switcher']) {
     <ds-accessibility-switcher
+      data-tour="settings"
       [textSizes]="accessibilityService.textSizes"
       [settings]="accessibilityService.settings()"
       (settingsChange)="changeAccessibility($event)"
       (resetSettings)="accessibilityService.reset()" />
     } @if (toggles()['navbar-color-scheme-switcher']) {
     <ds-color-scheme-switcher
-      data-tour="color-scheme"
+      data-tour="settings"
       [colorScheme]="themeService.colorScheme()"
       (colorSchemeChange)="changeColorScheme($event)"
       (colorSchemeReset)="themeService.resetColorScheme()" />
     } @if (toggles()['navbar-language-switcher']) {
     <ds-language-switcher
-      data-tour="language"
+      data-tour="settings"
       [languages]="languageService.languages"
       [language]="languageService.language()"
       (languageChange)="changeLanguage($event)"
@@ -60,9 +61,10 @@
       ></a
     >
   </p>
-  <!-- the contact links load the cv api, so only once the footer is in view -->
-  @defer (on viewport) {
-  <cv-contact-links />
+  <!-- the contact links load the cv api, so only once the footer is in view
+       (or the tour points at them, also when the footer is scrolled away) -->
+  @defer (on viewport; when tour.active()) {
+  <cv-contact-links data-tour="contact" />
   } @placeholder {
   <span></span>
   }

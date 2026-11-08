@@ -81,11 +81,42 @@
     z-index: -1;
   }
 
-  &__tour {
+  // A soft glow ripples out of the tour button, then rests ~2s, over and over,
+  // to draw the eye. Only transform and opacity animate, on the compositor: no
+  // layout or paint per frame. It starts after the page has settled and stops
+  // for good once the visitor hovers or focuses the button (WCAG 2.2.2).
+  // Reduced motion (system or the site's own setting) switches it off.
+  &__tour-glow {
+    border-radius: var(--mat-sys-corner-full);
+    display: inline-flex;
     inset-block-start: 1rem;
     inset-inline-end: 1rem;
     position: absolute;
     z-index: 1;
+
+    &::before {
+      animation: home-tour-glow 3.6s ease-out 1.5s infinite;
+
+      // the light tone of the primary color in both light and dark mode
+      background-color: var(--mat-sys-primary-fixed);
+      border-radius: inherit;
+      content: '';
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      z-index: -1;
+
+      @media (prefers-reduced-motion: reduce), (forced-colors: active) {
+        animation: none;
+        display: none;
+      }
+    }
+
+    &--stopped::before {
+      animation: none;
+      display: none;
+    }
   }
 
   &__text {
@@ -152,5 +183,20 @@
     @media (width >= 900px) {
       justify-content: flex-start;
     }
+  }
+}
+
+// 1.6s pulse, then ~2s at rest: the pulse ends at 44% of the 3.6s cycle
+@keyframes home-tour-glow {
+  0% {
+    animation-timing-function: ease-out;
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  44%,
+  100% {
+    opacity: 0;
+    transform: scale(1.12, 1.45);
   }
 }

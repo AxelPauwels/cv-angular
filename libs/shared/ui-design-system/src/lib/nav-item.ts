@@ -8,4 +8,6 @@ export interface NavItem {
    * accessible name and its tooltip
    */
   icon?: string;
+  /** Rendered as `data-tour`, so the guided tour can point at the link */
+  tourId?: string;
 }

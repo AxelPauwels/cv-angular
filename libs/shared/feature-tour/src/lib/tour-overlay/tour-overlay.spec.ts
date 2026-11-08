@@ -9,7 +9,20 @@ import {
 import { TourStep, TOUR_STEPS } from '../tour-steps';
 import { TourOverlay } from './tour-overlay';
 
-@Component({ template: '<button data-tour="first">first</button>' })
+@Component({
+  template: `
+    <button
+      data-tour="first"
+      style="position: fixed; top: 10px; left: 10px; width: 40px; height: 20px">
+      a
+    </button>
+    <button
+      data-tour="first"
+      style="position: fixed; top: 10px; left: 110px; width: 40px; height: 20px">
+      b
+    </button>
+  `,
+})
 class FirstPage {}
 
 @Component({ template: '<button data-tour="second">second</button>' })
@@ -25,13 +38,15 @@ function step(
   id: string,
   route: string,
   target?: string,
-  toggles?: TourStep['toggles']
+  toggles?: TourStep['toggles'],
+  someToggles?: TourStep['someToggles']
 ): TourStep {
   return {
     id,
     route,
     target,
     toggles,
+    someToggles,
     labelKey: `t.tour.step.${id}.label`,
     titleKey: `t.tour.step.${id}.title`,
     textKey: `t.tour.step.${id}.text`,
@@ -39,10 +54,11 @@ function step(
 }
 
 const steps = [
-  step('themes', '/first', '[data-tour="first"]'),
-  step('architecture', '/second', '[data-tour="second"]', [
-    'main-menu-technical',
+  step('settings', '/first', '[data-tour="first"]', undefined, [
+    'navbar-theme-switcher',
+    'navbar-font-switcher',
   ]),
+  step('technical', '/second', '[data-tour="second"]', ['main-menu-technical']),
   step('finish', '/second'),
 ];
 
@@ -95,12 +111,12 @@ describe('TourOverlay', () => {
       )
     );
     expect(query('[role="dialog"]')?.getAttribute('aria-modal')).toBe('true');
-    expect(text('.tour__title')).toBe('Color themes');
+    expect(text('.tour__title')).toBe('Make it your own');
     expect(text('.tour__counter')).toBe('1 / 3');
     expect(query('.tour__action--back')?.getAttribute('aria-disabled')).toBe(
       'true'
     );
-    expect(text('.tour__action--next')).toContain('Next Architecture');
+    expect(text('.tour__action--next')).toContain('Next Technical');
   });
 
   it('skips the steps whose feature is switched off', async () => {
@@ -115,6 +131,49 @@ describe('TourOverlay', () => {
     expect(text('.tour__action--next')).toContain('Next Finish');
   });
 
+  it('spotlights all targets of a step at once', async () => {
+    // Arrange
+    const padding = 8;
+
+    // Act
+    const { query } = await render();
+
+    // Assert
+    const spotlight = await vi.waitFor(() => {
+      const element = query('.tour__spotlight--active');
+      expect(element).not.toBeNull();
+      return element as HTMLElement;
+    });
+    expect(spotlight.style.left).toBe(`${10 - padding}px`);
+    expect(spotlight.style.width).toBe(`${140 + padding * 2}px`);
+  });
+
+  it('keeps a step while one of its some-toggles is on', async () => {
+    // Arrange
+    saveFeatureTogglesForTesting({ 'navbar-theme-switcher': false });
+
+    // Act
+    const { text } = await render();
+
+    // Assert
+    expect(text('.tour__counter')).toBe('1 / 3');
+  });
+
+  it('skips a step when all of its some-toggles are off', async () => {
+    // Arrange
+    saveFeatureTogglesForTesting({
+      'navbar-theme-switcher': false,
+      'navbar-font-switcher': false,
+    });
+
+    // Act
+    const { text } = await render();
+
+    // Assert
+    expect(text('.tour__counter')).toBe('1 / 2');
+    expect(text('.tour__title')).toBe('Under the hood');
+  });
+
   it('navigates to the next step and names the previous one', async () => {
     // Arrange
     const { query, text, fixture } = await render();
@@ -125,9 +184,9 @@ describe('TourOverlay', () => {
 
     // Assert
     await vi.waitFor(() => expect(TestBed.inject(Router).url).toBe('/second'));
-    expect(text('.tour__title')).toBe('Architecture');
+    expect(text('.tour__title')).toBe('Under the hood');
     expect(text('.tour__counter')).toBe('2 / 3');
-    expect(text('.tour__action--back')).toContain('Back Themes');
+    expect(text('.tour__action--back')).toContain('Back Your preferences');
     expect(text('.tour__action--next')).toContain('Next Finish');
   });
 
