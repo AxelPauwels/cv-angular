@@ -12,7 +12,7 @@
     },
     "admin": {
       "count": "{on} de {total} activados",
-      "hidden-notice": "La página Feature toggles ya no aparece en el menú. Puedes abrirla en /showcase/feature-toggles haciendo clic en «Axel Pauwels» en el pie de página.",
+      "hidden-notice": "La página Admin ya no aparece en el menú. Puedes abrirla en /showcase/admin haciendo clic en «Axel Pauwels» en el pie de página.",
       "linked": {
         "off": "{item} también desactivado.",
         "on": "{item} también activado."
@@ -32,7 +32,7 @@
           "title": "Submenú"
         }
       },
-      "title": "Feature toggles",
+      "title": "Administración",
       "toggle": {
         "color-scheme-switcher": {
           "label": "Modo claro y oscuro"
@@ -44,7 +44,9 @@
     },
     "at": "en",
     "carousel": {
+      "carousel": "carrusel",
       "next": "Siguiente",
+      "page": "Página {current} de {total}",
       "previous": "Anterior"
     },
     "city": {
@@ -59,6 +61,7 @@
       "cv": "CV",
       "download-cv": "Descargar CV",
       "email": "Correo electrónico",
+      "loading": "Cargando",
       "ok": "OK",
       "pdf": "PDF",
       "reset": "Restablecer el valor predeterminado",
@@ -105,18 +108,27 @@
       "job-description": {
         "innomedio": {
           "projects": "Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...",
-          "technologies": "Tecnología: Mantenimiento y expansión del sistema CMS desarrollado internamente en Symfony con SCSS. Asistencia telefónica a clientes con problemas o expansiones, y gestión del sistema de tickets de soporte en Teamleader. También GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ..."
+          "support": "Corrección de errores, soporte telefónico y gestión del sistema de tickets, organizando mi propia planificación.",
+          "technologies": "Tecnología: Mantenimiento y expansión del sistema CMS desarrollado internamente en Symfony con SCSS. Asistencia telefónica a clientes con problemas o expansiones, y gestión del sistema de tickets de soporte en Teamleader. También GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ...",
+          "websites": "Creación de nuevos sitios web y tiendas online, y ampliación de plataformas CMS a medida"
         },
         "ordina": {
+          "programme": "Programa intensivo impartido por consultores sénior, que combina teoría y práctica en front-end, back-end y cloud – incluidos Angular, React, RxJS, NestJS, TDD, testing, DevOps y CI, UX/UI, design systems, Git, Agile y más.",
           "projects": "Aplicación de aprendizaje electrónico"
         },
         "phpro": {
+          "agile": "Entregas dentro de equipos Agile/Scrum, en estrecho contacto con los clientes.",
+          "front-end": "Desarrollo de soluciones front-end reutilizables y escalables para tiendas online con una arquitectura ITCSS en Sass, además de trabajo con React y Sulu.",
+          "magento": "Desarrollo y personalización de plataformas de e-commerce Magento 2 (B2C/B2B)",
           "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,...",
           "technologies": "Tecnología: Trabajé principalmente con Magento 2 (PHP/Less), con algo de React y Sulu. También me adentré en el CSS de Triángulo Invertido (ITCSS) frontend de SEM&BIO en Sass. También usé GrumPhp, Vagrant, SequelPro, Git, Figma, BitBucket, Jira, Confluence, Jenkins y más."
         },
         "ravago": {
+          "platform": "Impulsar la evolución de la plataforma front-end con Angular, monorepos Nx, GraphQL/Apollo y Kendo UI, mejorando la mantenibilidad, la escalabilidad y la productividad de los desarrolladores.",
           "projects": "Sistema de gestión de almacenes (WMS), posteriormente WMS2. Disponible tanto como aplicación de escritorio para oficina como aplicación móvil para escáneres portátiles en almacenes.",
-          "technologies": "Tecnología: Angular (Typescript/Scss) con Nx y el framework de interfaz de usuario Kendo. Además, Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise..."
+          "technologies": "Tecnología: Angular (Typescript/Scss) con Nx y el framework de interfaz de usuario Kendo. Además, Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise...",
+          "wms": "Diseñar, desarrollar y evolucionar el WMS: una aplicación crítica para el negocio que cubre stock, producción y gestión de pedidos – en escritorio para el personal de oficina y en móvil para los operarios de almacén con escáneres.",
+          "workflows": "Simplificar flujos de trabajo complejos y automatizar tareas repetitivas; introduje y promuevo un uso eficaz del desarrollo asistido por IA en el equipo."
         }
       },
       "work-position": {
@@ -136,12 +148,17 @@
         "ravago": "Desarrollador angular senior",
         "residentie": "Becario de servicio",
         "zilte": "Chef de part / Pastelero"
+      },
+      "project": {
+        "ordina": "Programa profesional",
+        "ravago": "Warehouse Management System"
       }
     },
     "font": {
       "switch": "Fuente"
     },
     "heading": {
+      "administrator": "Administrador",
       "architecture": "Arquitectura",
       "code-coverage": "cobertura de código",
       "education": "Formación",
@@ -150,6 +167,7 @@
       "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
+      "micro-frontends": "Micro-frontends",
       "personal": "personal",
       "project-graph": "Grafo de proyectos",
       "references": "referencias",
@@ -168,6 +186,7 @@
       "french": "Francés",
       "german": "Alemán",
       "italian": "Italiano",
+      "native": "Lengua materna",
       "proficiency": {
         "basic": "básicos",
         "excellent": "Excelente",
@@ -186,16 +205,19 @@
         "seo": "SEO"
       },
       "legend": {
-        "average": "50–89",
-        "fail": "0–49",
-        "pass": "90–100",
+        "average": "Necesita mejoras",
+        "fail": "Deficiente",
+        "pass": "Bueno",
         "title": "Rangos de puntuación"
       },
-      "measured": "Auditado el {date} con Lighthouse {version} (escritorio, {url})",
       "not-audited": "Aún no auditado",
-      "page": "Página"
+      "page": "Página",
+      "audit": {
+        "message": "Auditado el {date} con Lighthouse {version}"
+      }
     },
     "nav": {
+      "admin": "Admin",
       "architecture": "Arquitectura",
       "code-coverage": "cobertura de código",
       "cv": "CV",
@@ -209,8 +231,8 @@
       "graphql-docs": "graphql docs",
       "home": "Hogar",
       "light": "Claro",
-      "light-mode": "modo claro",
       "lighthouse": "Lighthouse",
+      "light-mode": "modo claro",
       "main-navigation": "Navegación principal",
       "menu": "Menú",
       "menu-loading": "Cargando el menú…",
@@ -249,6 +271,7 @@
             "children": "Hijos",
             "date-of-birth": "Fecha de nacimiento",
             "driver-license": "Permiso de conducir",
+            "location": "Ubicación",
             "marital-status": "Estado civil",
             "nationality": "Nacionalidad",
             "personality-type": "Tipo de personalidad"
@@ -266,12 +289,14 @@
         "member-of-wca": "Miembro de WCA",
         "mtg": "Magic The Gathering (TCG)",
         "rubik-s-cube-competitions": "Rubik’s Cubo Competiciones"
-      }
+      },
+      "profile": "Desarrollador front-end sénior con 8 años de experiencia creando aplicaciones web empresariales, de los cuales 5 años dedicados por completo a Angular. Diseño y evoluciono aplicaciones críticas para el negocio con un fuerte enfoque en una arquitectura mantenible, código limpio y escalabilidad a largo plazo. Pragmático, orientado a la calidad y con un marcado espíritu de equipo en entornos Agile. Utilizo activamente prácticas modernas y herramientas asistidas por IA para entregar más rápido sin comprometer la calidad."
     },
     "present": "presente",
     "son": "Hijo",
     "spoken": "Hablado",
     "subheading": {
+      "administrator": "Un gran poder conlleva una gran configuración",
       "education": {
         "certificates": "Certificados",
         "certificates.description": "Preuve de curiosité et de dévouement",
@@ -283,7 +308,6 @@
       "horeca": "Hospitalidad",
       "it": "TI",
       "libraries": "bibliotecas",
-      "lighthouse": "Cada página, auditada en escritorio",
       "operating-systems": "sistemas operativos",
       "personal": {
         "about-me": "Sobre mí",
@@ -322,6 +346,7 @@
         "public-api": "API pública",
         "public-api.description": "Barrels y carpetas internas"
       },
+      "tools-and-methods": "herramientas y métodos",
       "version-control": "control de versiones"
     },
     "temp": {
@@ -333,19 +358,23 @@
         "content-5": "Por último, también habrá una demostración de interfaces modernas, aunque he decidido desarrollar este sitio con una estética vintage y retro.",
         "title": "En construcción"
       },
-      "versions": "t.temp.versions"
+      "versions": "Versiones"
     },
     "theme": {
       "blackberry": "Pizarra",
+      "bronze": "Bronce",
       "earth": "Bosque",
+      "fire": "Fuego",
       "gold": "Oro",
       "grape": "Lavanda",
       "honey": "Carmesí",
+      "kiwi": "Kiwi",
       "peach": "Rosa",
       "silver": "Ciruela",
       "switch": "Selecciona un tema",
       "tangerine": "Arena",
-      "water": "Océano"
+      "water": "Océano",
+      "wind": "Viento"
     },
     "tour": {
       "back": "Atrás",
@@ -425,6 +454,33 @@
       "step-of": "Paso {current} de {total}"
     },
     "website": "sitio web",
-    "written": "Escrito"
+    "written": "Escrito",
+    "competence": {
+      "ai-assisted-development": {
+        "description": "GitHub Copilot y Cursor para entregar más rápido y con mayor calidad. Actualmente aprendiendo spec-driven development.",
+        "title": "Desarrollo moderno y asistido por IA"
+      },
+      "angular-enterprise": {
+        "description": "Aplicaciones a gran escala que soportan procesos de negocio complejos.",
+        "title": "Desarrollo Angular empresarial"
+      },
+      "clean-code": {
+        "description": "Estándares claros, diseño reutilizable y código que perdura.",
+        "title": "Código limpio y mantenible"
+      },
+      "collaboration": {
+        "description": "Intercambio de conocimientos y mejora continua en equipos multidisciplinares.",
+        "title": "Colaboración"
+      },
+      "front-end-architecture": {
+        "description": "Monorepos Nx, librerías reutilizables y estado escalable con RxJS y Signals.",
+        "title": "Arquitectura front-end"
+      }
+    },
+    "skill": {
+      "other": {
+        "testing": "Testing unitario, de integración y E2E"
+      }
+    }
   }
 }

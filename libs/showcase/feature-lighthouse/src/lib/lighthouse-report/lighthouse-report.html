@@ -3,8 +3,8 @@
 <div class="lighthouse-report">
   <div class="lighthouse-report__intro">
     <p class="lighthouse-report__run">
-      {{ 't.lighthouse.measured' | translate : { date: measuredOn(), version:
-      run.lighthouseVersion, url: run.url, } }}
+      {{ 't.lighthouse.audit.message' | translate : { date: measuredOn(),
+      version: run.lighthouseVersion } }}
     </p>
 
     <div class="lighthouse-report__legend">

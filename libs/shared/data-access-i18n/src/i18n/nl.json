@@ -12,7 +12,7 @@
     },
     "admin": {
       "count": "{on} van {total} aan",
-      "hidden-notice": "De Feature toggles-pagina staat niet meer in het menu. Je kunt ze nog altijd openen via /showcase/feature-toggles door in de footer op “Axel Pauwels” te klikken.",
+      "hidden-notice": "De Admin-pagina staat niet meer in het menu. Je kunt ze nog altijd openen via /showcase/admin door in de footer op “Axel Pauwels” te klikken.",
       "linked": {
         "off": "{item} ook uitgezet.",
         "on": "{item} ook aangezet."
@@ -32,7 +32,7 @@
           "title": "Submenu"
         }
       },
-      "title": "Feature toggles",
+      "title": "Beheer",
       "toggle": {
         "color-scheme-switcher": {
           "label": "Lichte en donkere modus"
@@ -44,7 +44,9 @@
     },
     "at": "aan",
     "carousel": {
+      "carousel": "carrousel",
       "next": "Volgende",
+      "page": "Pagina {current} van {total}",
       "previous": "Vorige"
     },
     "city": {
@@ -59,6 +61,7 @@
       "cv": "CV",
       "download-cv": "Download cv",
       "email": "E-mail",
+      "loading": "Laden",
       "ok": "OK",
       "pdf": "pdf",
       "reset": "Reset",
@@ -177,6 +180,7 @@
       "switch": "Lettertype"
     },
     "heading": {
+      "administrator": "Beheerder",
       "architecture": "Architectuur",
       "code-coverage": "code coverage",
       "education": "Opleiding",
@@ -185,6 +189,7 @@
       "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
+      "micro-frontends": "Micro-frontends",
       "personal": "persoonlijk",
       "project-graph": "Projectgraaf",
       "references": "Referenties",
@@ -222,16 +227,19 @@
         "seo": "SEO"
       },
       "legend": {
-        "average": "50–89",
-        "fail": "0–49",
-        "pass": "90–100",
+        "average": "Kan beter",
+        "fail": "Slecht",
+        "pass": "Goed",
         "title": "Scorebereiken"
       },
-      "measured": "Getest op {date} met Lighthouse {version} (desktop, {url})",
       "not-audited": "Nog niet getest",
-      "page": "Pagina"
+      "page": "Pagina",
+      "audit": {
+        "message": "Getest op {date} met Lighthouse {version}"
+      }
     },
     "nav": {
+      "admin": "Admin",
       "architecture": "Architectuur",
       "code-coverage": "code coverage",
       "cv": "CV",
@@ -245,8 +253,8 @@
       "graphql-docs": "graphql docs",
       "home": "Home",
       "light": "Licht",
-      "light-mode": "lichte modus",
       "lighthouse": "Lighthouse",
+      "light-mode": "lichte modus",
       "main-navigation": "Hoofdnavigatie",
       "menu": "Menu",
       "menu-loading": "Het menu wordt geladen…",
@@ -315,6 +323,7 @@
     "son": "Zoon",
     "spoken": "Mondeling",
     "subheading": {
+      "administrator": "Met grote macht komt grote configuratie",
       "education": {
         "certificates": "Certificaten",
         "certificates.description": "Blijk van nieuwsgierigheid en toewijding",
@@ -326,7 +335,6 @@
       "horeca": "Horeca",
       "it": "IT",
       "libraries": "libraries",
-      "lighthouse": "Elke pagina, getest op desktop",
       "operating-systems": "besturingssystemen",
       "personal": {
         "about-me": "Over mij",

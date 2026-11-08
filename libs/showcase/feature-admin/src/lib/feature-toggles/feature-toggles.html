@@ -21,8 +21,13 @@
       [class.feature-toggles__section--new-row]="section.newRow"
       role="region"
       [attr.aria-label]="title"
-      [title]="title"
-      [tag]="'t.admin.count' | translate: card.count">
+      [title]="title">
+      <!-- its own line under the title, at the right above the switches -->
+      <p class="feature-toggles__count">
+        <span class="feature-toggles__tag"
+          >{{ 't.admin.count' | translate: card.count }}</span
+        >
+      </p>
       <ul class="feature-toggles__list">
         @for (toggle of section.toggles; track toggle.id) {
         <li class="feature-toggles__item">

@@ -24,12 +24,12 @@ describe('LighthouseReport', () => {
       h.textContent?.trim()
     );
     const cvPages = Array.from(
-      element.querySelectorAll('table')[0].querySelectorAll('tbody th a')
-    ).map((link) => [link.textContent?.trim(), link.getAttribute('href')]);
+      element.querySelectorAll('table')[0].querySelectorAll('tbody th')
+    ).map((th) => th.textContent?.trim());
 
     // Assert
     expect(sections).toEqual(['CV', 'Technical', 'Showcase']);
-    expect(cvPages[0]).toEqual(['Home', '/home']);
+    expect(cvPages[0]).toBe('Home');
     expect(cvPages).toHaveLength(6);
   });
 

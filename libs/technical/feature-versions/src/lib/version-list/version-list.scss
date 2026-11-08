@@ -20,25 +20,96 @@
   }
 
   &__card {
+    // the card icons in the colors of the personal facts (CV > Personal)
+    --ds-card-icon-background: var(--mat-sys-secondary-container);
+    --ds-card-icon-color: var(--mat-sys-on-secondary-container);
+
     @include mat.table-overrides(
       (
         background-color: transparent,
+        row-item-outline-width: 0,
+        // condensed rows and a small header; one font size for every body cell
+        row-item-label-text-size: var(--mat-sys-body-medium-size),
+        row-item-container-height: 2.25rem,
+        header-container-height: 2rem,
+        header-headline-color: var(--mat-sys-on-surface-variant),
+        header-headline-font: var(--mat-sys-label-medium-font),
+        header-headline-size: 0.75rem,
+        header-headline-weight: 700,
       )
     );
+
+    // the card's own font, also for package names and versions
+    code {
+      font-family: inherit;
+    }
 
     break-inside: avoid;
     margin-bottom: 2rem;
   }
 
+  // Fixed layout, so the Installed column has the same width in every card
+  &__table {
+    margin-top: 0.5rem;
+    table-layout: fixed;
+    width: 100%;
+
+    // the only divider: a light line under the header, like the lighthouse page
+    th[mat-header-cell] {
+      border-bottom: 1px solid var(--mat-sys-outline-variant);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    // nothing is cut off: body cells wrap, long names break only where needed
+    .mat-mdc-header-cell,
+    .mat-mdc-cell {
+      overflow: visible;
+      overflow-wrap: break-word;
+      padding-block: 0.25rem;
+      text-overflow: clip;
+      white-space: normal;
+    }
+
+    // .mat-column-version is on the header cell too, which sets the fixed width
+    .mat-column-version {
+      text-align: end;
+      width: 7.5rem;
+    }
+
+    // On phones the columns size to their content, so a label like "TypeScript"
+    // does not have to break
+    @media (width < 36rem) {
+      table-layout: auto;
+
+      th,
+      td {
+        padding-inline: 0.5rem;
+      }
+
+      // as narrow as its "Installed" header, the same in every card
+      .mat-column-version {
+        width: 1%;
+      }
+    }
+  }
+
   // A body cell that is a row header (a plain <th>, Material only styles <td>)
+  // in the primary color like the row headers on the architecture page, links too
   &__package {
-    font-weight: normal;
+    color: var(--mat-sys-primary);
+    font-size: var(--mat-sys-body-medium-size);
+    font-weight: var(--mat-sys-title-small-weight);
     text-align: start;
+
+    a {
+      color: inherit;
+      text-underline-offset: 0.15em;
+    }
   }
 
   &__name {
     color: var(--mat-sys-on-surface-variant);
-    display: block;
-    font-size: 0.85em;
   }
 }

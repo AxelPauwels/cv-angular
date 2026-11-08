@@ -12,8 +12,12 @@
 } @else {
 <div class="version-list__grid">
   @for (group of groups(); track group.category) {
-  <ds-card class="version-list__card" [title]="group.category">
-    <table mat-table [dataSource]="group.packages">
+  <ds-card
+    class="version-list__card"
+    [title]="group.category"
+    [icon]="group.icon"
+    iconFont="material">
+    <table mat-table [dataSource]="group.packages" class="version-list__table">
       <caption class="cdk-visually-hidden">
         {{ group.category }}
       </caption>
@@ -26,19 +30,22 @@
           @if (npmUrl(entry); as url) {
           <a [href]="url" target="_blank" rel="noopener">{{ entry.label }}</a>
           } @else { {{ entry.label }} }
-          <code class="version-list__name">{{ entry.name }}</code>
         </th>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef scope="col">Name</th>
+        <td mat-cell *matCellDef="let entry" class="version-list__name">
+          <!-- a scoped name may break after its slash, not mid-word -->
+          <code
+            >@for (part of entry.name.split('/'); track $index; let last =
+            $last) {{{ part }}@if (!last) {/<wbr />}}</code
+          >
+        </td>
       </ng-container>
       <ng-container matColumnDef="version">
         <th mat-header-cell *matHeaderCellDef scope="col">Installed</th>
         <td mat-cell *matCellDef="let entry">
           <code>{{ entry.version }}</code>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="range">
-        <th mat-header-cell *matHeaderCellDef scope="col">package.json</th>
-        <td mat-cell *matCellDef="let entry">
-          <code>{{ entry.range ?? '–' }}</code>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="columns"></tr>

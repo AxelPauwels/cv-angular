@@ -8,6 +8,21 @@ import {
   VersionStore,
 } from '@cv/technical-data-access-build-info';
 
+/** A Material Symbol per category of tools/build-info/generate.mjs */
+const CATEGORY_ICONS: Record<string, string> = {
+  Runtime: 'terminal',
+  Framework: 'code',
+  UI: 'palette',
+  State: 'memory',
+  'Micro-frontends': 'view_quilt',
+  API: 'api',
+  i18n: 'translate',
+  Monorepo: 'inventory_2',
+  Architecture: 'architecture',
+  Testing: 'science',
+  'Code quality': 'verified',
+};
+
 @Component({
   selector: 'technical-version-list',
   imports: [PageTitle, Card, MatProgressBar, MatTableModule],
@@ -16,7 +31,7 @@ import {
 })
 export class VersionList {
   protected readonly store = inject(VersionStore);
-  protected readonly columns = ['package', 'version', 'range'];
+  protected readonly columns = ['package', 'name', 'version'];
 
   /** One group per category, in the order the generator lists them */
   protected readonly groups = computed(() => {
@@ -27,7 +42,11 @@ export class VersionList {
         entry,
       ]);
     }
-    return [...groups].map(([category, packages]) => ({ category, packages }));
+    return [...groups].map(([category, packages]) => ({
+      category,
+      icon: CATEGORY_ICONS[category] ?? 'deployed_code',
+      packages,
+    }));
   });
 
   protected npmUrl(entry: PackageVersion): string | undefined {

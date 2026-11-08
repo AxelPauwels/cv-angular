@@ -27,12 +27,12 @@ export const FEATURE_TOGGLE_DEFAULTS = {
 
   // Technical
   'main-menu-technical': true, // main
-  'technical-architecture': false,
+  'technical-architecture': true,
   'technical-project-graph': true,
   'technical-graphql-docs': true,
   'technical-code-coverage': true,
   'technical-end-to-end-tests': true,
-  'technical-versions': false,
+  'technical-versions': true,
 
   // Navbar icons
   'navbar-download-cv': true,

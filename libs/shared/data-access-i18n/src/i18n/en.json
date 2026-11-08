@@ -12,7 +12,7 @@
     },
     "admin": {
       "count": "{on} of {total} on",
-      "hidden-notice": "The Feature toggles page is hidden from the menu. You can still open it at /showcase/feature-toggles by clicking “Axel Pauwels” in the footer.",
+      "hidden-notice": "The Admin page is hidden from the menu. You can still open it at /showcase/admin by clicking “Axel Pauwels” in the footer.",
       "linked": {
         "off": "{item} switched off too.",
         "on": "{item} switched on too."
@@ -32,7 +32,7 @@
           "title": "Submenu"
         }
       },
-      "title": "Feature toggles",
+      "title": "Admin",
       "toggle": {
         "color-scheme-switcher": {
           "label": "Light and dark mode"
@@ -44,7 +44,9 @@
     },
     "at": "at",
     "carousel": {
+      "carousel": "carousel",
       "next": "Next",
+      "page": "Page {current} of {total}",
       "previous": "Previous"
     },
     "city": {
@@ -59,6 +61,7 @@
       "cv": "CV",
       "download-cv": "Download CV",
       "email": "Email",
+      "loading": "Loading",
       "ok": "OK",
       "pdf": "PDF",
       "reset": "Reset",
@@ -177,6 +180,7 @@
       "switch": "Font"
     },
     "heading": {
+      "administrator": "Administrator",
       "architecture": "Architecture",
       "code-coverage": "code coverage",
       "education": "Education",
@@ -185,6 +189,7 @@
       "feature-toggles": "Feature toggles",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
+      "micro-frontends": "Micro-frontends",
       "personal": "personal",
       "project-graph": "Project graph",
       "references": "References",
@@ -222,16 +227,19 @@
         "seo": "SEO"
       },
       "legend": {
-        "average": "50–89",
-        "fail": "0–49",
-        "pass": "90–100",
+        "average": "Needs improvement",
+        "fail": "Poor",
+        "pass": "Good",
         "title": "Score ranges"
       },
-      "measured": "Audited on {date} with Lighthouse {version} (desktop, {url})",
       "not-audited": "Not audited yet",
-      "page": "Page"
+      "page": "Page",
+      "audit": {
+        "message": "Audited on {date} with Lighthouse {version}"
+      }
     },
     "nav": {
+      "admin": "Admin",
       "architecture": "Architecture",
       "code-coverage": "code coverage",
       "cv": "CV",
@@ -245,8 +253,8 @@
       "graphql-docs": "graphql docs",
       "home": "Home",
       "light": "Light",
-      "light-mode": "light mode",
       "lighthouse": "Lighthouse",
+      "light-mode": "light mode",
       "main-navigation": "Main navigation",
       "menu": "Menu",
       "menu-loading": "Loading the menu…",
@@ -315,6 +323,7 @@
     "son": "son",
     "spoken": "Speaking",
     "subheading": {
+      "administrator": "With great power comes great configuration",
       "education": {
         "certificates": "Certificates",
         "certificates.description": "Proof of curiosity and dedication",
@@ -326,7 +335,6 @@
       "horeca": "Hospitality",
       "it": "IT",
       "libraries": "libraries",
-      "lighthouse": "Every page, audited on desktop",
       "operating-systems": "operating systems",
       "personal": {
         "about-me": "About me",

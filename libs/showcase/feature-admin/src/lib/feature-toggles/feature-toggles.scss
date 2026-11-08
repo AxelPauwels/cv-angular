@@ -1,3 +1,5 @@
+@use '2.tools' as tools;
+
 :host {
   // smaller switches; the 32px touch target stays above WCAG 2.2's 24px minimum
   --mat-slide-toggle-track-height: 24px;
@@ -64,7 +66,7 @@
   }
 
   &__section {
-    // a compact header; the title and count share one line
+    // a compact header: just the title
     --ds-card-header-padding: 0.75rem 1rem 0.25rem;
 
     min-width: 0;
@@ -74,6 +76,16 @@
         grid-column-start: 1;
       }
     }
+  }
+
+  // the count on its own line, at the right above the switches
+  &__count {
+    margin: 0 0 0.25rem;
+    text-align: end;
+  }
+
+  &__tag {
+    @include tools.tag;
   }
 
   &__list {
