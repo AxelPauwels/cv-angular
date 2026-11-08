@@ -24,8 +24,10 @@ describe('ExperienceService', () => {
   const stable = () => TestBed.inject(ApplicationRef).whenStable();
 
   it('maps experiences to the frontend model', async () => {
-    // Arrange & Act
+    // Arrange
     const experiences = load((service) => service.experiences());
+
+    // Act
     await stable();
 
     // Assert

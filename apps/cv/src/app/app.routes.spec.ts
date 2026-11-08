@@ -3,12 +3,18 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
 import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { inBrowserGraphqlInterceptor } from '@cv/shared-data-access';
+import {
+  inBrowserGraphqlInterceptor,
+  saveFeatureTogglesForTesting,
+} from '@cv/shared-data-access';
 import { appRoutes } from './app.routes';
 import { App } from './app';
 
 describe('appRoutes', () => {
   beforeEach(() => {
+    localStorage.clear();
+    // every menu item on, whatever the defaults
+    saveFeatureTogglesForTesting();
     TestBed.configureTestingModule({
       providers: [
         provideRouter(appRoutes),
@@ -26,7 +32,9 @@ describe('appRoutes', () => {
     const element: HTMLElement = fixture.nativeElement;
     const linkLabels = (selector: string) =>
       Array.from(element.querySelectorAll(`${selector} a`)).map(
-        (link) => link.textContent?.trim() ?? ''
+        // icon tabs are named by their aria-label
+        (link) =>
+          link.getAttribute('aria-label') ?? link.textContent?.trim() ?? ''
       );
     return {
       url: TestBed.inject(Router).url,
@@ -40,8 +48,11 @@ describe('appRoutes', () => {
   }
 
   it('defaults to the cv home page', async () => {
-    // Arrange & Act
-    const page = await navigate('/');
+    // Arrange
+    const url = '/';
+
+    // Act
+    const page = await navigate(url);
 
     // Assert
     expect(page.url).toBe('/home');
@@ -58,8 +69,11 @@ describe('appRoutes', () => {
   });
 
   it('shows the showcase sub items', async () => {
-    // Arrange & Act
-    const page = await navigate('/showcase');
+    // Arrange
+    const url = '/showcase';
+
+    // Act
+    const page = await navigate(url);
 
     // Assert
     expect(page.url).toBe('/showcase/micro-frontends');
@@ -68,16 +82,22 @@ describe('appRoutes', () => {
   });
 
   it('sends the old admin url to the admin page in the showcase', async () => {
-    // Arrange & Act
-    const page = await navigate('/admin');
+    // Arrange
+    const url = '/admin';
+
+    // Act
+    const page = await navigate(url);
 
     // Assert
     expect(page.url).toBe('/showcase/admin');
   });
 
   it('shows the technical sub items', async () => {
-    // Arrange & Act
-    const page = await navigate('/technical');
+    // Arrange
+    const url = '/technical';
+
+    // Act
+    const page = await navigate(url);
 
     // Assert
     expect(page.url).toBe('/technical/architecture');
@@ -93,14 +113,17 @@ describe('appRoutes', () => {
   });
 
   it('redirects unknown urls to the cv domain', async () => {
-    // Arrange & Act
-    const page = await navigate('/does-not-exist');
+    // Arrange
+    const url = '/does-not-exist';
+
+    // Act
+    const page = await navigate(url);
 
     // Assert
     expect(page.url).toBe('/home');
   });
 
-  it('navigates from the cv domain to the other domains', async () => {
+  it('navigates from the cv domain to the showcase domain', async () => {
     // Arrange
     const harness = await RouterTestingHarness.create('/personal');
     const router = TestBed.inject(Router);
@@ -110,6 +133,12 @@ describe('appRoutes', () => {
 
     // Assert
     expect(router.url).toBe('/showcase/micro-frontends');
+  });
+
+  it('navigates from the cv domain to the technical domain', async () => {
+    // Arrange
+    const harness = await RouterTestingHarness.create('/personal');
+    const router = TestBed.inject(Router);
 
     // Act
     await harness.navigateByUrl('/technical');

@@ -49,16 +49,21 @@ describe('ThemeSwitcher', () => {
   }
 
   it('is a labelled menu button', async () => {
-    // Arrange & Act
-    const { trigger } = await render('gold');
+    // Arrange
+    const theme = 'gold';
+
+    // Act
+    const { trigger } = await render(theme);
 
     // Assert
     expect(trigger.getAttribute('aria-label')).toBe('Color theme');
   });
 
   it('lists the themes as color dots and marks the active one', async () => {
-    // Arrange & Act
+    // Arrange
     const { fixture, trigger } = await render('graphite');
+
+    // Act
     const items = await openMenu(fixture, trigger);
     const swatches = items.map((item) =>
       item.querySelector('.theme-switcher__swatch')
@@ -84,8 +89,7 @@ describe('ThemeSwitcher', () => {
     ]);
   });
 
-  it('keeps the given order with a divider between groups, and translates again after a language change', async () => {
-    // Arrange
+  async function renderGrouped() {
     TestBed.configureTestingModule({
       providers: [
         provideTolgee(() =>
@@ -121,6 +125,12 @@ describe('ThemeSwitcher', () => {
       items.map((item) =>
         item.querySelector('.theme-switcher__label')?.textContent?.trim()
       );
+    return { fixture, trigger, labels };
+  }
+
+  it('keeps the given order with a divider between groups', async () => {
+    // Arrange
+    const { fixture, trigger, labels } = await renderGrouped();
 
     // Act
     const items = await openMenu(fixture, trigger);
@@ -133,6 +143,12 @@ describe('ThemeSwitcher', () => {
     expect(
       document.querySelectorAll('.theme-switcher__menu mat-divider')
     ).toHaveLength(2);
+  });
+
+  it('translates the themes again after a language change', async () => {
+    // Arrange
+    const { fixture, trigger, labels } = await renderGrouped();
+    await openMenu(fixture, trigger);
 
     // Act
     await TestBed.inject(TranslateService).changeLanguage('nl');

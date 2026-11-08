@@ -17,7 +17,6 @@ export interface FeatureToggleDefinition {
   readonly id: string;
   readonly group: FeatureToggleGroup;
   readonly labelKey: string;
-  readonly descriptionKey?: string;
   /**
    * The main menu item this sub menu item belongs to: switching off its last
    * sub menu item switches the main menu item off too
@@ -53,7 +52,6 @@ export const FEATURE_TOGGLES = [
     id: 'tour-button',
     group: 'general',
     labelKey: 't.admin.toggle.tour-button.label',
-    descriptionKey: 't.admin.toggle.tour-button.description',
   },
 
   menuItem('main-menu-technical', 'main-menu', 't.nav.technical'),

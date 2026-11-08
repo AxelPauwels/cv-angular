@@ -45,8 +45,11 @@ describe('ColorSchemeSwitcher', () => {
   }
 
   it('is a labelled menu button showing the current mode', async () => {
-    // Arrange & Act
-    const { trigger } = await render('dark');
+    // Arrange
+    const colorScheme = 'dark';
+
+    // Act
+    const { trigger } = await render(colorScheme);
 
     // Assert
     expect(trigger.getAttribute('aria-label')).toBe('Dark mode');
@@ -54,8 +57,11 @@ describe('ColorSchemeSwitcher', () => {
   });
 
   it('names the light mode when it is active', async () => {
-    // Arrange & Act
-    const { trigger } = await render('light');
+    // Arrange
+    const colorScheme = 'light';
+
+    // Act
+    const { trigger } = await render(colorScheme);
 
     // Assert
     expect(trigger.getAttribute('aria-label')).toBe('Light mode');
@@ -63,8 +69,10 @@ describe('ColorSchemeSwitcher', () => {
   });
 
   it('lists light and dark and marks the current mode', async () => {
-    // Arrange & Act
+    // Arrange
     const { fixture, trigger } = await render('dark');
+
+    // Act
     const items = await openMenu(fixture, trigger);
 
     // Assert

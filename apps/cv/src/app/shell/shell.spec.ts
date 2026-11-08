@@ -2,14 +2,26 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
 import { provideRouter, Router } from '@angular/router';
-import { FeatureToggleService } from '@cv/shared-data-access';
+import {
+  FeatureToggleService,
+  saveFeatureTogglesForTesting,
+} from '@cv/shared-data-access';
 import { Shell } from './shell';
 
 @Component({ template: '' })
 class Page {}
 
 describe('Shell', () => {
-  beforeEach(() => localStorage.clear());
+  beforeEach(() => {
+    localStorage.clear();
+    // every menu item and navbar icon on, whatever the defaults
+    saveFeatureTogglesForTesting();
+  });
+
+  const mainMenu = (element: HTMLElement) =>
+    Array.from(element.querySelectorAll('header nav a')).map((link) =>
+      link.textContent?.trim()
+    );
 
   it('hides the main menu items and navbar icons switched off on the admin page', async () => {
     // Arrange
@@ -27,38 +39,38 @@ describe('Shell', () => {
     await fixture.whenStable();
 
     // Assert
-    expect(
-      Array.from(element.querySelectorAll('header nav a')).map((link) =>
-        link.textContent?.trim()
-      )
-    ).toEqual(['CV', 'TECHNICAL']);
+    expect(mainMenu(element)).toEqual(['CV', 'TECHNICAL']);
     expect(element.querySelector('ds-download-menu')).toBeNull();
     expect(element.querySelector('ds-language-switcher')).toBeNull();
     expect(element.querySelector('ds-theme-switcher')).toBeTruthy();
+  });
 
-    // Act: switching off the last technical page hides technical too
-    for (const id of [
+  it('hides a main menu item once its last sub menu item is switched off', async () => {
+    // Arrange
+    TestBed.configureTestingModule({
+      providers: [provideRouter([]), provideI18nTesting()],
+    });
+    const fixture = TestBed.createComponent(Shell);
+    const element: HTMLElement = fixture.nativeElement;
+    const toggles = TestBed.inject(FeatureToggleService);
+    const technicalPages = [
       'technical-architecture',
       'technical-project-graph',
       'technical-graphql-docs',
       'technical-code-coverage',
       'technical-end-to-end-tests',
       'technical-versions',
-    ] as const) {
-      toggles.change(id, false);
-    }
+    ] as const;
+
+    // Act
+    technicalPages.forEach((id) => toggles.change(id, false));
     await fixture.whenStable();
 
     // Assert
-    expect(
-      Array.from(element.querySelectorAll('header nav a')).map((link) =>
-        link.textContent?.trim()
-      )
-    ).toEqual(['CV']);
+    expect(mainMenu(element)).toEqual(['CV', 'SHOWCASE']);
   });
 
-  it('has no footer on the home page, and one on every other page', async () => {
-    // Arrange
+  function configureWithPages() {
     TestBed.configureTestingModule({
       providers: [
         provideRouter([
@@ -68,19 +80,30 @@ describe('Shell', () => {
         provideI18nTesting(),
       ],
     });
+  }
+
+  it('has no footer on the home page', async () => {
+    // Arrange
+    configureWithPages();
     const fixture = TestBed.createComponent(Shell);
-    const router = TestBed.inject(Router);
     const element: HTMLElement = fixture.nativeElement;
 
     // Act
-    await router.navigateByUrl('/home');
+    await TestBed.inject(Router).navigateByUrl('/home');
     await fixture.whenStable();
 
     // Assert
     expect(element.querySelector('footer')).toBeNull();
+  });
+
+  it('has a footer on every other page', async () => {
+    // Arrange
+    configureWithPages();
+    const fixture = TestBed.createComponent(Shell);
+    const element: HTMLElement = fixture.nativeElement;
 
     // Act
-    await router.navigateByUrl('/experience');
+    await TestBed.inject(Router).navigateByUrl('/experience');
     await fixture.whenStable();
 
     // Assert
@@ -89,15 +112,10 @@ describe('Shell', () => {
 
   it('links the name in the footer to the admin page, also with its menu item off', async () => {
     // Arrange
-    TestBed.configureTestingModule({
-      providers: [
-        provideRouter([{ path: 'experience', component: Page }]),
-        provideI18nTesting(),
-      ],
-    });
+    saveFeatureTogglesForTesting({ 'showcase-admin': false });
+    configureWithPages();
     const fixture = TestBed.createComponent(Shell);
     const element: HTMLElement = fixture.nativeElement;
-    TestBed.inject(FeatureToggleService).change('showcase-admin', false);
 
     // Act
     await TestBed.inject(Router).navigateByUrl('/experience');
@@ -113,36 +131,37 @@ describe('Shell', () => {
   });
 
   it('lays out header, main and footer with the domain navigation', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.configureTestingModule({
       providers: [provideRouter([]), provideI18nTesting()],
     });
+
+    // Act
     const fixture = TestBed.createComponent(Shell);
     await fixture.whenStable();
-    const element: HTMLElement = fixture.nativeElement;
 
     // Assert
+    const element: HTMLElement = fixture.nativeElement;
     for (const landmark of ['header', 'main', 'footer']) {
       expect(element.querySelector(landmark)).toBeTruthy();
     }
-    expect(
-      Array.from(element.querySelectorAll('header nav a')).map((link) =>
-        link.textContent?.trim()
-      )
-    ).toEqual(['CV', 'TECHNICAL', 'SHOWCASE']);
+    expect(mainMenu(element)).toEqual(['CV', 'TECHNICAL', 'SHOWCASE']);
     expect(element.querySelector('main router-outlet')).toBeTruthy();
   });
 
   it('offers the english and dutch cv as pdf downloads in the header', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.configureTestingModule({
       providers: [provideRouter([]), provideI18nTesting()],
     });
     const fixture = TestBed.createComponent(Shell);
     await fixture.whenStable();
-    (fixture.nativeElement as HTMLElement)
-      .querySelector<HTMLButtonElement>('header ds-download-menu button')
-      ?.click();
+    const button = (
+      fixture.nativeElement as HTMLElement
+    ).querySelector<HTMLButtonElement>('header ds-download-menu button');
+
+    // Act
+    button?.click();
     await fixture.whenStable();
 
     // Assert

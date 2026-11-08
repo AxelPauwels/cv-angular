@@ -4,9 +4,11 @@ import { MicroFrontends } from './micro-frontends';
 
 describe('MicroFrontends', () => {
   it('shows the micro-frontend next to the mac window, with where it comes from', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.configureTestingModule({ providers: [provideI18nTesting()] });
     const fixture = TestBed.createComponent(MicroFrontends);
+
+    // Act
     await fixture.whenStable();
     const element: HTMLElement = fixture.nativeElement;
 

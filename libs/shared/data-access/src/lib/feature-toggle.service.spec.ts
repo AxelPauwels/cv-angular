@@ -1,44 +1,66 @@
 import { TestBed } from '@angular/core/testing';
+import { FEATURE_TOGGLE_DEFAULTS } from './feature-toggle-defaults';
 import { FeatureToggleService } from './feature-toggle.service';
+import { saveFeatureTogglesForTesting } from './feature-toggle-testing';
+import {
+  defaultFeatureToggleStates,
+  withConsistentMenuItems,
+} from './feature-toggles';
+
+const STORAGE_KEY = 'cv-feature-toggles';
+
+function savedToggles(): Record<string, boolean> {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
+}
 
 describe('FeatureToggleService', () => {
   beforeEach(() => localStorage.clear());
 
-  it('starts with every toggle at its default: everything on', () => {
-    // Arrange & Act
+  it('starts with every toggle at its default', () => {
+    // Arrange
+    const expected = withConsistentMenuItems(defaultFeatureToggleStates());
+
+    // Act
     const service = TestBed.inject(FeatureToggleService);
 
     // Assert
     expect(service.toggles.map((toggle) => toggle.id)).toContain('tour-button');
-    expect(Object.values(service.states()).every(Boolean)).toBe(true);
+    expect(service.states()).toEqual(expected);
   });
 
   it('switches a toggle and remembers only what differs from the default', () => {
     // Arrange
     const service = TestBed.inject(FeatureToggleService);
     const tourButton = service.isEnabled('tour-button');
+    const byDefault = FEATURE_TOGGLE_DEFAULTS['tour-button'];
 
     // Act
-    service.change('tour-button', false);
+    service.change('tour-button', !byDefault);
 
     // Assert
-    expect(tourButton()).toBe(false);
-    expect(
-      JSON.parse(localStorage.getItem('cv-feature-toggles') ?? '')
-    ).toEqual({ 'tour-button': false });
+    expect(tourButton()).toBe(!byDefault);
+    expect(savedToggles()).toHaveProperty('tour-button', !byDefault);
+  });
+
+  it('forgets a toggle switched back to its default', () => {
+    // Arrange
+    const service = TestBed.inject(FeatureToggleService);
+    const tourButton = service.isEnabled('tour-button');
+    const byDefault = FEATURE_TOGGLE_DEFAULTS['tour-button'];
+    service.change('tour-button', !byDefault);
 
     // Act
-    service.change('tour-button', true);
+    service.change('tour-button', byDefault);
 
     // Assert
-    expect(tourButton()).toBe(true);
-    expect(localStorage.getItem('cv-feature-toggles')).toBeNull();
+    expect(tourButton()).toBe(byDefault);
+    expect(savedToggles()).not.toHaveProperty('tour-button');
   });
 
   it('restores a saved choice and ignores unknown or invalid values', () => {
     // Arrange
     localStorage.setItem(
-      'cv-feature-toggles',
+      STORAGE_KEY,
       JSON.stringify({ 'tour-button': false, unknown: true, other: 'yes' })
     );
 
@@ -53,15 +75,25 @@ describe('FeatureToggleService', () => {
 
   it('switches a main menu item off with its last sub menu item', () => {
     // Arrange
+    saveFeatureTogglesForTesting();
     const service = TestBed.inject(FeatureToggleService);
+    service.change('showcase-admin', false);
 
     // Act
     service.change('showcase-micro-frontends', false);
 
     // Assert
     expect(service.isEnabled('main-menu-showcase')()).toBe(false);
+  });
 
-    // Act: the first sub menu item back on brings the main item back
+  it('switches a main menu item back on with its first sub menu item', () => {
+    // Arrange
+    saveFeatureTogglesForTesting();
+    const service = TestBed.inject(FeatureToggleService);
+    service.change('showcase-admin', false);
+    service.change('showcase-micro-frontends', false);
+
+    // Act
     service.change('showcase-micro-frontends', true);
 
     // Assert
@@ -70,8 +102,9 @@ describe('FeatureToggleService', () => {
 
   it('keeps a main menu item on while one of its sub menu items is on', () => {
     // Arrange
+    saveFeatureTogglesForTesting();
     const service = TestBed.inject(FeatureToggleService);
-    const technical = [
+    const allButVersions = [
       'technical-architecture',
       'technical-project-graph',
       'technical-graphql-docs',
@@ -80,32 +113,31 @@ describe('FeatureToggleService', () => {
     ] as const;
 
     // Act
-    technical.forEach((id) => service.change(id, false));
+    allButVersions.forEach((id) => service.change(id, false));
 
     // Assert
     expect(service.isEnabled('main-menu-technical')()).toBe(true);
-
-    // Act
-    service.change('technical-versions', false);
-
-    // Assert
-    expect(service.isEnabled('main-menu-technical')()).toBe(false);
+    expect(service.isEnabled('technical-versions')()).toBe(true);
   });
 
   it('switches every sub menu item on with a main item that had none', () => {
     // Arrange
+    saveFeatureTogglesForTesting();
     const service = TestBed.inject(FeatureToggleService);
     service.change('showcase-micro-frontends', false);
+    service.change('showcase-admin', false);
 
     // Act
     service.change('main-menu-showcase', true);
 
     // Assert
     expect(service.isEnabled('showcase-micro-frontends')()).toBe(true);
+    expect(service.isEnabled('showcase-admin')()).toBe(true);
   });
 
   it('leaves a main menu item switched off on purpose off', () => {
     // Arrange
+    saveFeatureTogglesForTesting();
     const service = TestBed.inject(FeatureToggleService);
     service.change('main-menu-technical', false);
 
@@ -120,8 +152,12 @@ describe('FeatureToggleService', () => {
   it('switches a saved main menu item without sub menu items off', () => {
     // Arrange
     localStorage.setItem(
-      'cv-feature-toggles',
-      JSON.stringify({ 'showcase-micro-frontends': false })
+      STORAGE_KEY,
+      JSON.stringify({
+        'main-menu-showcase': true,
+        'showcase-micro-frontends': false,
+        'showcase-admin': false,
+      })
     );
 
     // Act
@@ -133,25 +169,29 @@ describe('FeatureToggleService', () => {
 
   it('falls back to the defaults when the saved value is corrupt', () => {
     // Arrange
-    localStorage.setItem('cv-feature-toggles', '{not json');
+    localStorage.setItem(STORAGE_KEY, '{not json');
 
     // Act
     const service = TestBed.inject(FeatureToggleService);
 
     // Assert
-    expect(service.isEnabled('tour-button')()).toBe(true);
+    expect(service.states()).toEqual(
+      withConsistentMenuItems(defaultFeatureToggleStates())
+    );
   });
 
   it('resets every toggle and forgets the choices', () => {
     // Arrange
+    saveFeatureTogglesForTesting();
     const service = TestBed.inject(FeatureToggleService);
-    service.change('tour-button', false);
 
     // Act
     service.reset();
 
     // Assert
-    expect(service.isEnabled('tour-button')()).toBe(true);
-    expect(localStorage.getItem('cv-feature-toggles')).toBeNull();
+    expect(service.states()).toEqual(
+      withConsistentMenuItems(defaultFeatureToggleStates())
+    );
+    expect(localStorage.getItem(STORAGE_KEY)).toBeNull();
   });
 });

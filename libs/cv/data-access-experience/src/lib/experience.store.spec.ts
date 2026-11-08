@@ -14,8 +14,10 @@ describe('ExperienceStore', () => {
   });
 
   it('exposes the experiences', async () => {
-    // Arrange & Act
+    // Arrange
     const store = TestBed.inject(ExperienceStore);
+
+    // Act
     await TestBed.inject(ApplicationRef).whenStable();
 
     // Assert
@@ -24,8 +26,10 @@ describe('ExperienceStore', () => {
   });
 
   it('keeps the result for the next consumer', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.inject(ExperienceStore);
+
+    // Act
     await TestBed.inject(ApplicationRef).whenStable();
 
     // Assert

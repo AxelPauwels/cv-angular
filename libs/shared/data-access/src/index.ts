@@ -9,3 +9,4 @@ export * from './lib/accessibility.service';
 export * from './lib/tour.service';
 export * from './lib/feature-toggles';
 export * from './lib/feature-toggle.service';
+export * from './lib/feature-toggle-testing';

@@ -75,8 +75,11 @@ describe('Carousel', () => {
   }
 
   it('shows the title and the items as a list in a labelled carousel region', async () => {
-    // Arrange & Act
-    const { element, viewport } = await render();
+    // Arrange
+    const items = ['one', 'two', 'three', 'four', 'five'];
+
+    // Act
+    const { element, viewport } = await render(items);
 
     // Assert
     expect(element.querySelector('.ds-carousel__header h2')?.textContent).toBe(
@@ -91,8 +94,10 @@ describe('Carousel', () => {
   });
 
   it('shows whole items only, one per view in a narrow carousel', async () => {
-    // Arrange & Act
+    // Arrange
     const { viewport } = await render();
+
+    // Act
     const list = viewport?.querySelector<HTMLElement>('[role="list"]');
     const item = list?.querySelector<HTMLElement>('.item');
 
@@ -103,12 +108,15 @@ describe('Carousel', () => {
     );
   });
 
-  it('starts on the first page and steps forward with "next"', async () => {
-    // Arrange & Act
-    const { fixture, viewport, controls, dots } = await render();
-    const [previous, next] = controls();
+  it('starts on the first page', async () => {
+    // Arrange
+    const items = ['one', 'two', 'three', 'four', 'five'];
+
+    // Act
+    const { viewport, controls, dots } = await render(items);
 
     // Assert
+    const [previous, next] = controls();
     expect(previous.getAttribute('aria-label')).toBe('Previous');
     expect(previous.getAttribute('aria-controls')).toBe(viewport?.id);
     expect(previous.disabled).toBe(true);
@@ -116,6 +124,12 @@ describe('Carousel', () => {
     expect(dots().length).toBe(5);
     expect(dots()[0].getAttribute('aria-current')).toBe('true');
     expect(dots()[0].getAttribute('aria-label')).toBe('Page 1 of 5');
+  });
+
+  it('steps forward with "next"', async () => {
+    // Arrange
+    const { fixture, viewport, controls, dots } = await render();
+    const [, next] = controls();
 
     // Act
     next.click();
@@ -144,8 +158,11 @@ describe('Carousel', () => {
   });
 
   it('hides the buttons and dots when all items fit', async () => {
-    // Arrange & Act
-    const { controls, dots } = await render(['only one']);
+    // Arrange
+    const items = ['only one'];
+
+    // Act
+    const { controls, dots } = await render(items);
 
     // Assert
     expect(controls().length).toBe(0);

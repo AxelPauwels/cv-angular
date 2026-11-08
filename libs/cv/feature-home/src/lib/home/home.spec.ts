@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 import {
   FeatureToggleService,
   inBrowserGraphqlInterceptor,
+  saveFeatureTogglesForTesting,
   TourService,
 } from '@cv/shared-data-access';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
@@ -12,7 +13,7 @@ import { Home } from './home';
 describe('Home', () => {
   beforeEach(() => localStorage.clear());
 
-  async function render() {
+  function configure() {
     TestBed.configureTestingModule({
       providers: [
         provideRouter([]),
@@ -20,29 +21,41 @@ describe('Home', () => {
         provideI18nTesting(),
       ],
     });
+  }
+
+  async function render() {
     const fixture = TestBed.createComponent(Home);
     await fixture.whenStable();
     return fixture.nativeElement as HTMLElement;
   }
 
+  const text = (element: Element | null) =>
+    element?.textContent?.replace(/\s+/g, ' ').trim();
+
   it('shows the name and title from the cv api', async () => {
-    // Arrange & Act
+    // Arrange
+    configure();
+
+    // Act
     const element = await render();
 
     // Assert
     expect(element.querySelector('h1')?.textContent).toContain('Axel Pauwels');
-    expect(element.querySelector('.home-hero__title')?.textContent).toContain(
+    expect(text(element.querySelector('.home-hero__title'))).toBe(
       'Senior Angular Front-End Developer'
     );
   });
 
   it('loads the full-bleed hero photo with priority and links to the next pages', async () => {
-    // Arrange & Act
+    // Arrange
+    configure();
+
+    // Act
     const element = await render();
-    const image = element.querySelector('img');
-    const sources = Array.from(element.querySelectorAll('picture source'));
 
     // Assert
+    const image = element.querySelector('img');
+    const sources = Array.from(element.querySelectorAll('picture source'));
     expect(image?.getAttribute('fetchpriority')).toBe('high');
     expect(image?.getAttribute('alt')).toBe('Portrait of Axel Pauwels');
     expect(sources.map((source) => source.getAttribute('type'))).toEqual([
@@ -61,34 +74,42 @@ describe('Home', () => {
   });
 
   it('starts the tour from the button on the picture', async () => {
-    // Arrange & Act
+    // Arrange
+    saveFeatureTogglesForTesting({ 'tour-button': true });
+    configure();
     const element = await render();
     const button = element.querySelector<HTMLButtonElement>('.home-hero__tour');
-
-    // Assert
-    expect(button?.textContent).toContain('Start the tour');
 
     // Act
     button?.click();
 
     // Assert
+    expect(button?.textContent).toContain('Start the tour');
     expect(TestBed.inject(TourService).active()).toBe(true);
   });
 
   it('hides the tour button when its feature toggle is off', async () => {
     // Arrange
+    saveFeatureTogglesForTesting({ 'tour-button': true });
+    configure();
     const element = await render();
-    const toggles = TestBed.inject(FeatureToggleService);
 
     // Act
-    toggles.change('tour-button', false);
+    TestBed.inject(FeatureToggleService).change('tour-button', false);
     TestBed.tick();
 
     // Assert
     expect(element.querySelector('.home-hero__tour')).toBeNull();
+  });
+
+  it('shows the tour button when its feature toggle is on', async () => {
+    // Arrange
+    saveFeatureTogglesForTesting({ 'tour-button': false });
+    configure();
+    const element = await render();
 
     // Act
-    toggles.change('tour-button', true);
+    TestBed.inject(FeatureToggleService).change('tour-button', true);
     TestBed.tick();
 
     // Assert

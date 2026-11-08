@@ -24,8 +24,10 @@ describe('SkillService', () => {
   const stable = () => TestBed.inject(ApplicationRef).whenStable();
 
   it('maps skills to the frontend model', async () => {
-    // Arrange & Act
+    // Arrange
     const skills = load((service) => service.skills());
+
+    // Act
     await stable();
 
     // Assert

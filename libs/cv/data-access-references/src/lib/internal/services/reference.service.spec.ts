@@ -24,8 +24,10 @@ describe('ReferenceService', () => {
   const stable = () => TestBed.inject(ApplicationRef).whenStable();
 
   it('maps references to the frontend model', async () => {
-    // Arrange & Act
+    // Arrange
     const references = load((service) => service.references());
+
+    // Act
     await stable();
 
     // Assert

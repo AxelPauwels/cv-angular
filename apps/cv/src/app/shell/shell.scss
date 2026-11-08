@@ -68,7 +68,7 @@
   // Looks like the rest of the line, underlined to show it is a link
   &__admin-link {
     color: inherit;
-    text-decoration: none;
+    text-decoration: underline;
 
     &:hover {
       font-weight: 700;

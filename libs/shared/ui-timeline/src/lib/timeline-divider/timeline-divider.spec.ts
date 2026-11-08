@@ -13,8 +13,10 @@ class Host {}
 
 describe('TimelineDivider', () => {
   it('renders the label as a heading of the given level', async () => {
-    // Arrange & Act
+    // Arrange
     const fixture = TestBed.createComponent(Host);
+
+    // Act
     await fixture.whenStable();
     const element: HTMLElement = fixture.nativeElement;
 

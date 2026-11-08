@@ -26,25 +26,35 @@ test.describe('mac-window', () => {
   test('is showcased in its own tab, as a component library', async ({
     page,
   }) => {
-    // Act & Assert
+    // Arrange
+    const name = 'Component library: <lib-mac-window>';
+
+    // Act
+    const heading = page.getByRole('heading', { name });
+
+    // Assert
     await expect(page).toHaveURL(/\/showcase\/micro-frontends$/);
-    await expect(
-      page.getByRole('heading', { name: 'Component library: <lib-mac-window>' })
-    ).toBeVisible();
+    await expect(heading).toBeVisible();
   });
 
   test('projects its content into the window body', async ({ page }) => {
-    // Act & Assert
-    await expect(macWindow(page).locator('.mw__content')).toHaveText(
-      'Anything placed here is projected into the window.'
-    );
+    // Arrange
+    const projected = 'Anything placed here is projected into the window.';
+
+    // Act
+    const content = macWindow(page).locator('.mw__content');
+
+    // Assert
+    await expect(content).toHaveText(projected);
   });
 
   test('draws the title bar with the red, yellow and green buttons', async ({
     page,
   }) => {
-    // Arrange & Act
+    // Arrange
     const controls = macWindow(page).locator('.mw__controls');
+
+    // Act
     const buttons = controls.locator('.mw__btn');
 
     // Assert
@@ -65,17 +75,23 @@ test.describe('mac-window', () => {
   });
 
   test('places the title bar above the content', async ({ page }) => {
-    // Arrange & Act
-    const controls = await boxOf(macWindow(page).locator('.mw__controls'));
-    const content = await boxOf(macWindow(page).locator('.mw__content'));
+    // Arrange
+    const window = macWindow(page);
+
+    // Act
+    const controls = await boxOf(window.locator('.mw__controls'));
+    const content = await boxOf(window.locator('.mw__content'));
 
     // Assert
     expect(controls.y + controls.height).toBeLessThanOrEqual(content.y + 1);
   });
 
   test('has rounded corners and a shadow', async ({ page }) => {
-    // Arrange & Act
-    const frame = macWindow(page).locator('.mw');
+    // Arrange
+    const window = macWindow(page);
+
+    // Act
+    const frame = window.locator('.mw');
 
     // Assert
     await expect(frame).toHaveCSS('border-radius', '20px');

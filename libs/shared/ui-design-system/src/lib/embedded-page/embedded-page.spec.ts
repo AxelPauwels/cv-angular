@@ -29,10 +29,12 @@ describe('EmbeddedPage', () => {
   }
 
   it('shows an existing page in an iframe', async () => {
-    // Arrange & Act
-    const element = await render((http) =>
-      http.expectOne('/coverage/index.html').flush('<html>coverage</html>')
-    );
+    // Arrange
+    const answer = (http: HttpTestingController) =>
+      http.expectOne('/coverage/index.html').flush('<html>coverage</html>');
+
+    // Act
+    const element = await render(answer);
 
     // Assert
     // the same page title as every content page, no card around the report
@@ -53,12 +55,14 @@ describe('EmbeddedPage', () => {
   });
 
   it('shows a message instead of the app nested in itself', async () => {
-    // Arrange & Act
-    const element = await render((http) =>
+    // Arrange
+    const answer = (http: HttpTestingController) =>
       http
         .expectOne('/coverage/index.html')
-        .flush('<html><body><app-root></app-root></body></html>')
-    );
+        .flush('<html><body><app-root></app-root></body></html>');
+
+    // Act
+    const element = await render(answer);
 
     // Assert
     expect(element.querySelector('iframe')).toBeNull();
@@ -66,12 +70,14 @@ describe('EmbeddedPage', () => {
   });
 
   it('shows a message when the page is missing', async () => {
-    // Arrange & Act
-    const element = await render((http) =>
+    // Arrange
+    const answer = (http: HttpTestingController) =>
       http
         .expectOne('/coverage/index.html')
-        .flush('', { status: 404, statusText: 'Not Found' })
-    );
+        .flush('', { status: 404, statusText: 'Not Found' });
+
+    // Act
+    const element = await render(answer);
 
     // Assert
     expect(element.querySelector('iframe')).toBeNull();

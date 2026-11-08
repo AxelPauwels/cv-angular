@@ -6,7 +6,7 @@ import { PersonalDetails } from './personal-details';
 
 describe('PersonalDetails', () => {
   it('shows the person from the cv api as cards', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.configureTestingModule({
       providers: [
         provideHttpClient(withInterceptors([inBrowserGraphqlInterceptor])),
@@ -14,6 +14,8 @@ describe('PersonalDetails', () => {
       ],
     });
     const fixture = TestBed.createComponent(PersonalDetails);
+
+    // Act
     await fixture.whenStable();
     const element: HTMLElement = fixture.nativeElement;
 

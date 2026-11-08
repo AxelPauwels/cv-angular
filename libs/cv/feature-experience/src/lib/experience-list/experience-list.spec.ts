@@ -5,14 +5,17 @@ import { provideI18nTesting } from '@cv/shared-data-access-i18n';
 import { ExperienceList } from './experience-list';
 
 describe('ExperienceList', () => {
-  async function render() {
+  function create() {
     TestBed.configureTestingModule({
       providers: [
         provideHttpClient(withInterceptors([inBrowserGraphqlInterceptor])),
         provideI18nTesting(),
       ],
     });
-    const fixture = TestBed.createComponent(ExperienceList);
+    return TestBed.createComponent(ExperienceList);
+  }
+
+  async function render(fixture = create()) {
     await fixture.whenStable();
     const element: HTMLElement = fixture.nativeElement;
     const timelines = Array.from(
@@ -24,8 +27,11 @@ describe('ExperienceList', () => {
   }
 
   it('shows IT, then a hospitality divider and timeline, newest first, with end years as steps', async () => {
-    // Arrange & Act
-    const { element, timelines, headersOf } = await render();
+    // Arrange
+    const fixture = create();
+
+    // Act
+    const { element, timelines, headersOf } = await render(fixture);
 
     // Assert
     expect(timelines.map((t) => t.getAttribute('aria-label'))).toEqual([
@@ -72,8 +78,10 @@ describe('ExperienceList', () => {
   });
 
   it('marks internships in the step header and no longer shows the category', async () => {
-    // Arrange & Act
+    // Arrange
     const { element } = await render();
+
+    // Act
     const chips = Array.from(element.querySelectorAll('.timeline-item__tag'));
 
     // Assert
@@ -85,8 +93,10 @@ describe('ExperienceList', () => {
   });
 
   it('only shows the growth icon next to descriptions', async () => {
-    // Arrange & Act
+    // Arrange
     const { element } = await render();
+
+    // Act
     const details = Array.from(
       element.querySelectorAll('.timeline-item__detail')
     ).filter(
@@ -107,8 +117,11 @@ describe('ExperienceList', () => {
   });
 
   it('opens the newest IT job and makes internships and hospitality jobs not expandable', async () => {
-    // Arrange & Act
-    const { timelines, headersOf } = await render();
+    // Arrange
+    const fixture = create();
+
+    // Act
+    const { timelines, headersOf } = await render(fixture);
 
     // Assert
     expect(headersOf(timelines[0])[0].getAttribute('aria-expanded')).toBe(
@@ -130,14 +143,23 @@ describe('ExperienceList', () => {
     }
   });
 
-  it('expands the newest step and another one on click', async () => {
-    // Arrange & Act
-    const { fixture, timelines, headersOf } = await render();
-    const headers = headersOf(timelines[0]);
+  it('expands the newest step', async () => {
+    // Arrange
+    const fixture = create();
+
+    // Act
+    const { timelines, headersOf } = await render(fixture);
 
     // Assert
+    const headers = headersOf(timelines[0]);
     expect(headers[0].getAttribute('aria-expanded')).toBe('true');
     expect(headers[1].getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('expands another step on click', async () => {
+    // Arrange
+    const { fixture, timelines, headersOf } = await render();
+    const headers = headersOf(timelines[0]);
 
     // Act
     headers[1].click();
@@ -149,8 +171,10 @@ describe('ExperienceList', () => {
   });
 
   it('lists the stack of a job as tags, in a row without icon or heading', async () => {
-    // Arrange & Act
+    // Arrange
     const { element } = await render();
+
+    // Act
     const stacks = Array.from(
       element.querySelectorAll<HTMLElement>('.experience-list__stack')
     );
@@ -173,8 +197,10 @@ describe('ExperienceList', () => {
   });
 
   it('shows projects in a row with their own icon, apart from the duties', async () => {
-    // Arrange & Act
+    // Arrange
     const { element } = await render();
+
+    // Act
     const rows = Array.from(
       element.querySelectorAll<HTMLElement>('ds-timeline-detail')
     );

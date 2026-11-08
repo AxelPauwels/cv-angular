@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProgressBar } from './progress-bar';
 
 @Component({
@@ -12,8 +12,7 @@ import { ProgressBar } from './progress-bar';
 class Host {}
 
 describe('ProgressBar', () => {
-  async function render() {
-    const fixture = TestBed.createComponent(Host);
+  async function render(fixture: ComponentFixture<Host>) {
     await fixture.whenStable();
     const [labelled, decorative] = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
@@ -24,8 +23,11 @@ describe('ProgressBar', () => {
   }
 
   it('is a named progress bar with its value when it has a label', async () => {
-    // Arrange & Act
-    const { labelled } = await render();
+    // Arrange
+    const fixture = TestBed.createComponent(Host);
+
+    // Act
+    const { labelled } = await render(fixture);
 
     // Assert
     expect(labelled.getAttribute('role')).toBe('progressbar');
@@ -44,8 +46,11 @@ describe('ProgressBar', () => {
   });
 
   it('is hidden from screen readers without a label, and stays within 0 to 100', async () => {
-    // Arrange & Act
-    const { decorative } = await render();
+    // Arrange
+    const fixture = TestBed.createComponent(Host);
+
+    // Act
+    const { decorative } = await render(fixture);
 
     // Assert
     expect(decorative.getAttribute('aria-hidden')).toBe('true');

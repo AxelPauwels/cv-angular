@@ -6,14 +6,17 @@ import type { Reference } from '@cv/cv-data-access-references';
 import { groupByWork, initials, ReferenceList } from './reference-list';
 
 describe('ReferenceList', () => {
-  async function render() {
+  function create() {
     TestBed.configureTestingModule({
       providers: [
         provideHttpClient(withInterceptors([inBrowserGraphqlInterceptor])),
         provideI18nTesting(),
       ],
     });
-    const fixture = TestBed.createComponent(ReferenceList);
+    return TestBed.createComponent(ReferenceList);
+  }
+
+  async function render(fixture = create()) {
     await fixture.whenStable();
     const element: HTMLElement = fixture.nativeElement;
     const steps = Array.from(
@@ -37,8 +40,11 @@ describe('ReferenceList', () => {
     );
 
   it('shows one step per IT employer, newest first, with end years as steps', async () => {
-    // Arrange & Act
-    const { element, headers } = await render();
+    // Arrange
+    const fixture = create();
+
+    // Act
+    const { element, headers } = await render(fixture);
 
     // Assert
     expect(
@@ -57,9 +63,12 @@ describe('ReferenceList', () => {
     expect(element.textContent).not.toContain('t.');
   });
 
-  it('opens the newest employer and expands another one on click', async () => {
-    // Arrange & Act
-    const { fixture, headers } = await render();
+  it('opens the newest employer', async () => {
+    // Arrange
+    const fixture = create();
+
+    // Act
+    const { headers } = await render(fixture);
 
     // Assert
     expect(headers.map((h) => h.getAttribute('aria-expanded'))).toEqual([
@@ -67,6 +76,11 @@ describe('ReferenceList', () => {
       'false',
       'false',
     ]);
+  });
+
+  it('expands another employer on click', async () => {
+    // Arrange
+    const { fixture, headers } = await render();
 
     // Act
     headers[1].click();
@@ -78,8 +92,10 @@ describe('ReferenceList', () => {
   });
 
   it("puts the employer's references in the first column and its clients' in the second", async () => {
-    // Arrange & Act
+    // Arrange
     const { steps } = await render();
+
+    // Act
     const [sopraSteria, innomedio] = steps.map(columnsOf);
 
     // Assert
@@ -117,8 +133,10 @@ describe('ReferenceList', () => {
   });
 
   it('shows each reference as a card with name, initials and function', async () => {
-    // Arrange & Act
+    // Arrange
     const { element } = await render();
+
+    // Act
     const cards = Array.from(element.querySelectorAll('ds-card'));
 
     // Assert

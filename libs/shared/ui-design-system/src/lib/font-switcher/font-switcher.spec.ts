@@ -39,16 +39,21 @@ describe('FontSwitcher', () => {
   }
 
   it('is a labelled menu button', async () => {
-    // Arrange & Act
-    const { trigger } = await render('red-hat');
+    // Arrange
+    const font = 'red-hat';
+
+    // Act
+    const { trigger } = await render(font);
 
     // Assert
     expect(trigger.getAttribute('aria-label')).toBe('Font');
   });
 
   it('lists the fonts in their own face and marks the active one', async () => {
-    // Arrange & Act
+    // Arrange
     const { fixture, trigger } = await render('goldman');
+
+    // Act
     const labels = (await openMenu(fixture, trigger)).map((item) =>
       item.querySelector('.font-switcher__label')
     );

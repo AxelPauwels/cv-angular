@@ -8,29 +8,62 @@ import type {
 
 describe('translation keys', () => {
   it('accepts keys of their own group', () => {
-    // Act & Assert
-    expectTypeOf<'t.nav.cv'>().toExtend<NavTranslationKey>();
-    expectTypeOf<'t.language.dutch'>().toExtend<LanguageTranslationKey>();
-    expectTypeOf<'t.heading.experience'>().toExtend<HeadingTranslationKey>();
-    expectTypeOf<'t.subheading.skills'>().toExtend<SubheadingTranslationKey>();
+    // Arrange
+    type Nav = 't.nav.cv';
+    type Language = 't.language.dutch';
+    type Heading = 't.heading.experience';
+    type Subheading = 't.subheading.skills';
+
+    // Act
+    const nav = expectTypeOf<Nav>();
+    const language = expectTypeOf<Language>();
+    const heading = expectTypeOf<Heading>();
+    const subheading = expectTypeOf<Subheading>();
+
+    // Assert
+    nav.toExtend<NavTranslationKey>();
+    language.toExtend<LanguageTranslationKey>();
+    heading.toExtend<HeadingTranslationKey>();
+    subheading.toExtend<SubheadingTranslationKey>();
   });
 
   it('rejects keys of another group', () => {
-    // Act & Assert
-    expectTypeOf<'t.heading.experience'>().not.toExtend<NavTranslationKey>();
-    expectTypeOf<'t.nav.cv'>().not.toExtend<LanguageTranslationKey>();
+    // Arrange
+    type Heading = 't.heading.experience';
+    type Nav = 't.nav.cv';
+
+    // Act
+    const heading = expectTypeOf<Heading>();
+    const nav = expectTypeOf<Nav>();
+
+    // Assert
+    heading.not.toExtend<NavTranslationKey>();
+    nav.not.toExtend<LanguageTranslationKey>();
   });
 
   it('makes every group a translation key', () => {
-    // Act & Assert
-    expectTypeOf<NavTranslationKey>().toExtend<TranslationKey>();
-    expectTypeOf<LanguageTranslationKey>().toExtend<TranslationKey>();
-    expectTypeOf<HeadingTranslationKey>().toExtend<TranslationKey>();
-    expectTypeOf<SubheadingTranslationKey>().toExtend<TranslationKey>();
+    // Arrange
+    type Groups =
+      | NavTranslationKey
+      | LanguageTranslationKey
+      | HeadingTranslationKey
+      | SubheadingTranslationKey;
+
+    // Act
+    const groups = expectTypeOf<Groups>();
+
+    // Assert
+    groups.toExtend<TranslationKey>();
   });
 
   it('requires the t. root', () => {
-    // Act & Assert
-    expectTypeOf<'nav.cv'>().not.toExtend<TranslationKey>();
+    // Arrange
+    type WithoutRoot = 'nav.cv';
+
+    // Act
+    const key = expectTypeOf<WithoutRoot>();
+
+    // Assert
+    key.not.toExtend<TranslationKey>();
   });
 });

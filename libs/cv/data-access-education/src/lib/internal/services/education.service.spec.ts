@@ -24,8 +24,10 @@ describe('EducationService', () => {
   const stable = () => TestBed.inject(ApplicationRef).whenStable();
 
   it('maps educations to the frontend model', async () => {
-    // Arrange & Act
+    // Arrange
     const educations = load((service) => service.educations());
+
+    // Act
     await stable();
 
     // Assert
@@ -38,9 +40,11 @@ describe('EducationService', () => {
   });
 
   it('loads certificates and additional learnings', async () => {
-    // Arrange & Act
+    // Arrange
     const certificates = load((service) => service.certificates());
     const learnings = load((service) => service.additionalLearnings());
+
+    // Act
     await stable();
 
     // Assert
@@ -51,8 +55,10 @@ describe('EducationService', () => {
   });
 
   it('maps certificates with their issuer and year', async () => {
-    // Arrange & Act
+    // Arrange
     const certificates = load((service) => service.certificates());
+
+    // Act
     await stable();
 
     // Assert
@@ -66,20 +72,18 @@ describe('EducationService', () => {
   });
 
   it('maps trainings without nulls for the optional fields', async () => {
-    // Arrange & Act
+    // Arrange
     const trainings = load((service) => service.trainings());
+
+    // Act
     await stable();
 
     // Assert
     expect(trainings.error()).toBeUndefined();
-    const ongoing = trainings
+    const recurring = trainings
       .value()
-      ?.find((training) => training.name === 'Modern Angular v22');
-    expect(ongoing).toEqual({
-      name: 'Modern Angular v22',
-      provider: 'Angular Architects GDE Manfred Steyer',
-      status: 'ONGOING',
-    });
+      ?.find((training) => training.name === 'NG-BE');
+    expect(recurring).toEqual({ name: 'NG-BE', status: 'RECURRING' });
     for (const training of trainings.value() ?? []) {
       expect(training.provider).not.toBeNull();
       expect(training.year).not.toBeNull();

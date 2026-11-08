@@ -5,33 +5,61 @@ import { provideI18nTesting } from '@cv/shared-data-access-i18n';
 import { EducationList } from './education-list';
 
 describe('EducationList', () => {
-  it('shows the educations as a year timeline, then certificates and trainings', async () => {
-    // Arrange & Act
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         provideHttpClient(withInterceptors([inBrowserGraphqlInterceptor])),
         provideI18nTesting(),
       ],
     });
+  });
+
+  async function render(): Promise<HTMLElement> {
     const fixture = TestBed.createComponent(EducationList);
     await fixture.whenStable();
-    const element: HTMLElement = fixture.nativeElement;
+    return fixture.nativeElement;
+  }
+
+  /** The two cards: trainings first, then certificates */
+  function cards(element: HTMLElement) {
+    const [trainings, certificates] = Array.from(
+      element.querySelectorAll('ds-card')
+    );
+    return { trainings, certificates };
+  }
+
+  it('shows the educations as a year timeline, newest first', async () => {
+    // Arrange
+    const yearsOf = (element: HTMLElement) =>
+      Array.from(element.querySelectorAll('.timeline__year')).map((icon) =>
+        Number(icon.textContent?.trim())
+      );
+
+    // Act
+    const element = await render();
 
     // Assert
-    const years = Array.from(element.querySelectorAll('.timeline__year')).map(
-      (icon) => Number(icon.textContent?.trim())
-    );
+    const years = yearsOf(element);
     expect(years.length).toBeGreaterThan(1);
     expect(years).toEqual([...years].sort((a, b) => b - a));
     // the end year is on the line: the bachelor ran 2015 – 2018
     expect(years[0]).toBe(2018);
+    // specializations are translation keys, rendered in English
+    expect(element.textContent).not.toContain('t.');
+  });
 
-    const cards = element.querySelectorAll('ds-card');
-    expect(cards.length).toBe(2);
-    // each card sits in a section named by its own heading, with a tagline
-    const sections = element.querySelectorAll('section[aria-labelledby]');
-    expect(sections.length).toBe(2);
-    for (const section of Array.from(sections)) {
+  it('puts each card in a section named by its own heading, with a tagline', async () => {
+    // Arrange
+    const selector = 'section[aria-labelledby]';
+
+    // Act
+    const element = await render();
+
+    // Assert
+    const sections = Array.from(element.querySelectorAll(selector));
+    expect(element.querySelectorAll('ds-card')).toHaveLength(2);
+    expect(sections).toHaveLength(2);
+    for (const section of sections) {
       const id = section.getAttribute('aria-labelledby') ?? '';
       expect(
         section.querySelector(`h2#${id}`)?.textContent?.trim()
@@ -39,40 +67,51 @@ describe('EducationList', () => {
       expect(
         section.querySelector('ds-section-heading hgroup > p')
       ).not.toBeNull();
+      expect(section.querySelectorAll('li').length).toBeGreaterThan(0);
     }
-    for (const card of Array.from(cards)) {
-      expect(card.querySelectorAll('li').length).toBeGreaterThan(0);
-    }
-    // specializations are translation keys, rendered in English
-    expect(element.textContent).not.toContain('t.');
-    // certificates link to their file, opened in a new tab
-    const certificateLinks = Array.from(
-      cards[0].querySelectorAll<HTMLAnchorElement>('a')
+  });
+
+  it('links every certificate to its file in a new tab, with issuer and year', async () => {
+    // Arrange
+    const selector = 'a';
+
+    // Act
+    const element = await render();
+
+    // Assert
+    const { certificates } = cards(element);
+    const links = Array.from(
+      certificates.querySelectorAll<HTMLAnchorElement>(selector)
     );
-    expect(certificateLinks.length).toBe(5);
-    for (const link of certificateLinks) {
+    expect(links).toHaveLength(5);
+    for (const link of links) {
       expect(link.getAttribute('href')).toMatch(/^\/assets\/certificates\//);
       expect(link.target).toBe('_blank');
       expect(link.rel).toContain('noopener');
     }
-    // every certificate shows its issuer and year
-    expect(cards[0].textContent).toContain(
+    expect(certificates.textContent).toContain(
       'Linux Professional Institute · 2016'
     );
-    // trainings show their provider, with the year (or a status instead of a
-    // missing year) in its own column on the right
-    const trainings = Array.from(
-      cards[1].querySelectorAll('.education-list__item')
-    ).map((item) => ({
+  });
+
+  it('shows trainings with their provider and their year, or a status instead', async () => {
+    // Arrange
+    const toTraining = (item: Element) => ({
       provider: item
         .querySelector('.education-list__meta')
         ?.textContent?.trim(),
       year: item.querySelector('.education-list__year')?.textContent?.trim(),
-    }));
-    expect(trainings).toContainEqual({
-      provider: 'Sopra Steria',
-      year: '2024',
     });
-    expect(trainings).toContainEqual({ provider: undefined, year: 'yearly' });
+
+    // Act
+    const element = await render();
+
+    // Assert
+    const { trainings } = cards(element);
+    const items = Array.from(
+      trainings.querySelectorAll('.education-list__item')
+    ).map(toTraining);
+    expect(items).toContainEqual({ provider: 'Sopra Steria', year: '2024' });
+    expect(items).toContainEqual({ provider: undefined, year: 'yearly' });
   });
 });

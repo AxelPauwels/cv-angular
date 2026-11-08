@@ -25,8 +25,8 @@ describe('VersionList', () => {
   }
 
   it('lists the versions per category', async () => {
-    // Arrange & Act
-    const element = await render((http) =>
+    // Arrange
+    const answer = (http: HttpTestingController) =>
       http.expectOne('/build-info/versions.json').flush({
         packages: [
           {
@@ -50,8 +50,10 @@ describe('VersionList', () => {
             range: '~6.0.0',
           },
         ],
-      })
-    );
+      });
+
+    // Act
+    const element = await render(answer);
 
     // Assert
     expect(
@@ -69,12 +71,14 @@ describe('VersionList', () => {
   });
 
   it('explains how to generate the versions when they are missing', async () => {
-    // Arrange & Act
-    const element = await render((http) =>
+    // Arrange
+    const answer = (http: HttpTestingController) =>
       http
         .expectOne('/build-info/versions.json')
-        .flush('', { status: 404, statusText: 'Not Found' })
-    );
+        .flush('', { status: 404, statusText: 'Not Found' });
+
+    // Act
+    const element = await render(answer);
 
     // Assert
     expect(element.querySelector('table')).toBeNull();

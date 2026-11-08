@@ -45,7 +45,6 @@
               labelPosition="before"
               [attr.data-toggle]="toggle.id"
               [checked]="service.states()[toggle.id]"
-              [aria-describedby]="describedBy(section, toggle)"
               (change)="change(toggle.id, $event.checked)">
               {{ toggle.labelKey | translate }}
             </mat-slide-toggle>

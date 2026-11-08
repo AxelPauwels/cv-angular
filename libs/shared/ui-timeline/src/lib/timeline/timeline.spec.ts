@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Timeline } from './timeline';
 import { TimelineItem } from '../timeline-item/timeline-item';
 import { TimelineDetail } from '../timeline-detail/timeline-detail';
@@ -69,23 +69,36 @@ class StaticHost {
 }
 
 describe('Timeline', () => {
-  async function render(expandFirst = true) {
+  function create(expandFirst = true) {
     const fixture = TestBed.createComponent(Host);
     fixture.componentInstance.expandFirst = expandFirst;
-    await fixture.whenStable();
+    return fixture;
+  }
+
+  function parts(fixture: ComponentFixture<unknown>) {
     const element: HTMLElement = fixture.nativeElement;
     const headers = Array.from(
       element.querySelectorAll<HTMLElement>('.timeline__header')
     );
-    return { fixture, element, headers };
+    return { element, headers };
+  }
+
+  async function render(expandFirst = true) {
+    const fixture = create(expandFirst);
+    await fixture.whenStable();
+    return { fixture, ...parts(fixture) };
   }
 
   const text = (node: Element | null | undefined) =>
     node?.textContent?.replace(/\s+/g, ' ').trim();
 
   it('is a labelled list with a button per item and the start years as badges', async () => {
-    // Arrange & Act
-    const { element, headers } = await render();
+    // Arrange
+    const fixture = create();
+
+    // Act
+    await fixture.whenStable();
+    const { element, headers } = parts(fixture);
 
     // Assert
     expect(element.querySelector('.timeline')?.getAttribute('aria-label')).toBe(
@@ -128,8 +141,12 @@ describe('Timeline', () => {
   });
 
   it('is an ordered list with each header button inside a heading', async () => {
-    // Arrange & Act
-    const { element, headers } = await render();
+    // Arrange
+    const fixture = create();
+
+    // Act
+    await fixture.whenStable();
+    const { element, headers } = parts(fixture);
 
     // Assert
     const list = element.querySelector('.timeline');
@@ -158,8 +175,12 @@ describe('Timeline', () => {
   });
 
   it('shows title, tag and subtitle in the header', async () => {
-    // Arrange & Act
-    const { headers } = await render();
+    // Arrange
+    const fixture = create();
+
+    // Act
+    await fixture.whenStable();
+    const { headers } = parts(fixture);
 
     // Assert
     expect(text(headers[0].querySelector('.timeline-item__title'))).toBe(
@@ -175,8 +196,12 @@ describe('Timeline', () => {
   });
 
   it('shows the period and the projected details next to their icons', async () => {
-    // Arrange & Act
-    const { element } = await render();
+    // Arrange
+    const fixture = create();
+
+    // Act
+    await fixture.whenStable();
+    const { element } = parts(fixture);
     const details = Array.from(
       element.querySelectorAll('.timeline-item__detail')
     );
@@ -192,8 +217,12 @@ describe('Timeline', () => {
   });
 
   it('shows ds-timeline-detail rows with their own icon below the details', async () => {
-    // Arrange & Act
-    const { element } = await render();
+    // Arrange
+    const fixture = create();
+
+    // Act
+    await fixture.whenStable();
+    const { element } = parts(fixture);
     const row = element.querySelector('ds-timeline-detail');
 
     // Assert
@@ -222,16 +251,25 @@ describe('Timeline', () => {
     ).toBeTruthy();
   });
 
-  it('expands one step at a time', async () => {
-    // Arrange & Act
-    const { fixture, element, headers } = await render();
+  it('opens only the first item by default', async () => {
+    // Arrange
+    const fixture = create();
+
+    // Act
+    await fixture.whenStable();
 
     // Assert
+    const { headers } = parts(fixture);
     expect(headers.map((h) => h.getAttribute('aria-expanded'))).toEqual([
       'true',
       'false',
       'false',
     ]);
+  });
+
+  it('expands one step at a time', async () => {
+    // Arrange
+    const { fixture, element, headers } = await render();
 
     // Act
     headers[2].click();
@@ -267,8 +305,12 @@ describe('Timeline', () => {
   });
 
   it('can start with every item collapsed', async () => {
-    // Arrange & Act
-    const { headers } = await render(false);
+    // Arrange
+    const fixture = create(false);
+
+    // Act
+    await fixture.whenStable();
+    const { headers } = parts(fixture);
 
     // Assert
     expect(headers.map((h) => h.getAttribute('aria-expanded'))).toEqual([
@@ -279,15 +321,17 @@ describe('Timeline', () => {
   });
 
   it('renders a not expandable item as a plain header without content', async () => {
-    // Arrange & Act
+    // Arrange
     const fixture = TestBed.createComponent(StaticHost);
+
+    // Act
     await fixture.whenStable();
+
+    // Assert: not a button, no chevron, not opened by expandFirst
     const element: HTMLElement = fixture.nativeElement;
     const [first, second] = Array.from(
       element.querySelectorAll<HTMLElement>('.timeline__header')
     );
-
-    // Assert: not a button, no chevron, not opened by expandFirst
     expect(first.tagName).toBe('DIV');
     expect(first.classList).toContain('timeline__header--static');
     expect(first.hasAttribute('aria-expanded')).toBe(false);

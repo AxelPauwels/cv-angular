@@ -6,13 +6,25 @@ import {
 
 describe('loading timing', () => {
   it('keeps an indicator on screen longer than it waits to show it', () => {
+    // Arrange
+    const delay = LOADING_DELAY_MS;
+
+    // Act
+    const onScreenLonger = LOADING_MIN_DURATION_MS - delay;
+
     // Assert
-    expect(LOADING_DELAY_MS).toBeGreaterThan(0);
-    expect(LOADING_MIN_DURATION_MS).toBeGreaterThan(LOADING_DELAY_MS);
+    expect(delay).toBeGreaterThan(0);
+    expect(onScreenLonger).toBeGreaterThan(0);
   });
 
   it('ships without the design preview', () => {
+    // Arrange
+    const off = 0;
+
+    // Act
+    const preview = LOADING_PREVIEW_MS;
+
     // Assert
-    expect(LOADING_PREVIEW_MS).toBe(0);
+    expect(preview).toBe(off);
   });
 });

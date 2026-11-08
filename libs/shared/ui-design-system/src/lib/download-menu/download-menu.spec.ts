@@ -3,7 +3,7 @@ import { provideTolgee, Tolgee } from '@tolgee/ngx';
 import { DownloadMenu } from './download-menu';
 
 describe('DownloadMenu', () => {
-  async function render() {
+  async function render(labelKey = 't.common.download-cv') {
     TestBed.configureTestingModule({
       providers: [
         provideTolgee(() =>
@@ -36,7 +36,7 @@ describe('DownloadMenu', () => {
         lang: 'nl',
       },
     ]);
-    fixture.componentRef.setInput('labelKey', 't.common.download-cv');
+    fixture.componentRef.setInput('labelKey', labelKey);
     fixture.componentRef.setInput('hintKey', 't.common.pdf');
     await fixture.whenStable();
     const trigger: HTMLButtonElement =
@@ -45,8 +45,11 @@ describe('DownloadMenu', () => {
   }
 
   it('is a menu button named by its label and the visible hint', async () => {
-    // Arrange & Act
-    const { trigger } = await render();
+    // Arrange
+    const labelKey = 't.common.download-cv';
+
+    // Act
+    const { trigger } = await render(labelKey);
 
     // Assert
     // the icon is hidden, so the name is the label plus the visible "PDF"
@@ -63,9 +66,11 @@ describe('DownloadMenu', () => {
   });
 
   it('lists every version as a real download link', async () => {
-    // Arrange & Act
+    // Arrange
     const { fixture, trigger } = await render();
     trigger.click();
+
+    // Act
     await fixture.whenStable();
 
     // Assert

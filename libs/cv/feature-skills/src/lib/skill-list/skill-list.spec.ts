@@ -6,7 +6,7 @@ import { SkillList } from './skill-list';
 
 describe('SkillList', () => {
   it('lists the skills per category from the cv api', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.configureTestingModule({
       providers: [
         provideHttpClient(withInterceptors([inBrowserGraphqlInterceptor])),
@@ -14,6 +14,8 @@ describe('SkillList', () => {
       ],
     });
     const fixture = TestBed.createComponent(SkillList);
+
+    // Act
     await fixture.whenStable();
     const element: HTMLElement = fixture.nativeElement;
 

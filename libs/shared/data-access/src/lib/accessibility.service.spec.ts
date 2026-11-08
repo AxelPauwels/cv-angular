@@ -21,8 +21,11 @@ describe('AccessibilityService', () => {
   }
 
   it('starts at the browser text size and follows the system preferences', () => {
-    // Arrange & Act
-    const { service, root } = start();
+    // Arrange
+    const root = TestBed.inject(DOCUMENT).documentElement;
+
+    // Act
+    const { service } = start();
 
     // Assert
     expect(service.settings()).toEqual({

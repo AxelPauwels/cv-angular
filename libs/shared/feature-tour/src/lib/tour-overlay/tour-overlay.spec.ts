@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router, RouterOutlet } from '@angular/router';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
-import { FeatureToggleService, TourService } from '@cv/shared-data-access';
+import {
+  saveFeatureTogglesForTesting,
+  TourService,
+} from '@cv/shared-data-access';
 import { TourStep, TOUR_STEPS } from '../tour-steps';
 import { TourOverlay } from './tour-overlay';
 
@@ -44,9 +47,13 @@ const steps = [
 ];
 
 describe('TourOverlay', () => {
-  beforeEach(() => localStorage.clear());
+  beforeEach(() => {
+    localStorage.clear();
+    // every feature on, whatever the defaults
+    saveFeatureTogglesForTesting();
+  });
 
-  async function render(before?: () => void) {
+  async function render() {
     TestBed.configureTestingModule({
       providers: [
         provideRouter([
@@ -57,7 +64,6 @@ describe('TourOverlay', () => {
         { provide: TOUR_STEPS, useValue: steps },
       ],
     });
-    before?.();
     const tour = TestBed.inject(TourService);
     tour.start();
     const fixture = TestBed.createComponent(Host);
@@ -67,15 +73,22 @@ describe('TourOverlay', () => {
       element.querySelector<HTMLElement>(selector);
     const text = (selector: string) =>
       query(selector)?.textContent?.replace(/\s+/g, ' ').trim();
-    return { fixture, query, text, tour };
+    const press = async (key: string) => {
+      document.dispatchEvent(new KeyboardEvent('keydown', { key }));
+      await fixture.whenStable();
+    };
+    return { fixture, query, text, tour, press };
   }
 
   it('starts on the first page, highlighting its target', async () => {
-    // Arrange & Act
+    // Arrange
+    const firstPage = '/first';
+
+    // Act
     const { query, text } = await render();
 
     // Assert
-    await vi.waitFor(() => expect(TestBed.inject(Router).url).toBe('/first'));
+    await vi.waitFor(() => expect(TestBed.inject(Router).url).toBe(firstPage));
     await vi.waitFor(() =>
       expect(query('.tour__spotlight')?.classList).toContain(
         'tour__spotlight--active'
@@ -91,10 +104,11 @@ describe('TourOverlay', () => {
   });
 
   it('skips the steps whose feature is switched off', async () => {
-    // Arrange & Act
-    const { text } = await render(() =>
-      TestBed.inject(FeatureToggleService).change('main-menu-technical', false)
-    );
+    // Arrange
+    saveFeatureTogglesForTesting({ 'main-menu-technical': false });
+
+    // Act
+    const { text } = await render();
 
     // Assert
     expect(text('.tour__counter')).toBe('1 / 2');
@@ -117,13 +131,9 @@ describe('TourOverlay', () => {
     expect(text('.tour__action--next')).toContain('Next Finish');
   });
 
-  it('steps with the arrow keys, centers steps without a target and finishes', async () => {
+  it('steps forward with the right arrow and centers steps without a target', async () => {
     // Arrange
-    const { query, text, fixture, tour } = await render();
-    const press = async (key: string) => {
-      document.dispatchEvent(new KeyboardEvent('keydown', { key }));
-      await fixture.whenStable();
-    };
+    const { query, text, press } = await render();
 
     // Act
     await press('ArrowRight');
@@ -137,12 +147,24 @@ describe('TourOverlay', () => {
     );
     expect(text('.tour__counter')).toBe('3 / 3');
     expect(text('.tour__action--next')).toContain('Finish');
+  });
+
+  it('steps back with the left arrow', async () => {
+    // Arrange
+    const { text, press } = await render();
+    await press('ArrowRight');
+    await press('ArrowRight');
 
     // Act
     await press('ArrowLeft');
 
     // Assert
     expect(text('.tour__counter')).toBe('2 / 3');
+  });
+
+  it('ends the tour with Escape', async () => {
+    // Arrange
+    const { tour, press } = await render();
 
     // Act
     await press('Escape');
@@ -154,12 +176,12 @@ describe('TourOverlay', () => {
   it('ends the tour from the last step', async () => {
     // Arrange
     const { query, fixture, tour } = await render();
+    query('.tour__action--next')?.click();
+    await fixture.whenStable();
+    query('.tour__action--next')?.click();
+    await fixture.whenStable();
 
     // Act
-    query('.tour__action--next')?.click();
-    await fixture.whenStable();
-    query('.tour__action--next')?.click();
-    await fixture.whenStable();
     query('.tour__action--next')?.click();
 
     // Assert

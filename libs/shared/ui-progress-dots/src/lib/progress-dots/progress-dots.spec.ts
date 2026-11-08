@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProgressDots } from './progress-dots';
 
 @Component({
@@ -12,8 +12,7 @@ import { ProgressDots } from './progress-dots';
 class Host {}
 
 describe('ProgressDots', () => {
-  async function render() {
-    const fixture = TestBed.createComponent(Host);
+  async function render(fixture: ComponentFixture<Host>) {
     await fixture.whenStable();
     const [labelled, decorative] = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(
@@ -29,8 +28,11 @@ describe('ProgressDots', () => {
     );
 
   it('is a named meter with its value, rounded down, when it has a label', async () => {
-    // Arrange & Act
-    const { labelled } = await render();
+    // Arrange
+    const fixture = TestBed.createComponent(Host);
+
+    // Act
+    const { labelled } = await render(fixture);
 
     // Assert
     expect(labelled.getAttribute('role')).toBe('meter');
@@ -47,8 +49,11 @@ describe('ProgressDots', () => {
   });
 
   it('is hidden from screen readers without a label, and stays within max', async () => {
-    // Arrange & Act
-    const { decorative } = await render();
+    // Arrange
+    const fixture = TestBed.createComponent(Host);
+
+    // Act
+    const { decorative } = await render(fixture);
 
     // Assert
     expect(decorative.getAttribute('aria-hidden')).toBe('true');

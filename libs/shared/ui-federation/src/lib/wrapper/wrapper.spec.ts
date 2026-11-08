@@ -3,8 +3,10 @@ import { Wrapper } from './wrapper';
 
 describe('Wrapper', () => {
   it('renders nothing until it gets a remote config', async () => {
-    // Arrange & Act
+    // Arrange
     const fixture = TestBed.createComponent(Wrapper);
+
+    // Act
     await fixture.whenStable();
 
     // Assert

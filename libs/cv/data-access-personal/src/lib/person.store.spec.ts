@@ -13,12 +13,20 @@ describe('PersonStore', () => {
     });
   });
 
-  it('exposes the person', async () => {
-    // Arrange & Act
+  it('has no person before it has loaded', () => {
+    // Arrange
     const store = TestBed.inject(PersonStore);
 
+    // Act
+    const person = store.person();
+
     // Assert
-    expect(store.person()).toBeUndefined();
+    expect(person).toBeUndefined();
+  });
+
+  it('exposes the person', async () => {
+    // Arrange
+    const store = TestBed.inject(PersonStore);
 
     // Act
     await TestBed.inject(ApplicationRef).whenStable();
@@ -29,8 +37,10 @@ describe('PersonStore', () => {
   });
 
   it('keeps the result for the next consumer', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.inject(PersonStore);
+
+    // Act
     await TestBed.inject(ApplicationRef).whenStable();
 
     // Assert

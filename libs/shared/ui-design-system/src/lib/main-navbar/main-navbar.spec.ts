@@ -47,13 +47,25 @@ describe('MainNavbar', () => {
   }
 
   it('marks the item matching the first url segment active', async () => {
-    // Act & Assert
+    // Arrange
+    const url = '/showcase/demo';
+
+    // Act
+    const active = await activeLabelAt(url);
+
+    // Assert
     // labels are uppercased in the template
-    expect(await activeLabelAt('/showcase/demo')).toBe('SHOWCASE');
+    expect(active).toBe('SHOWCASE');
   });
 
   it('falls back to the root item for urls no other item claims', async () => {
-    // Act & Assert
-    expect(await activeLabelAt('/about')).toBe('CV');
+    // Arrange
+    const url = '/about';
+
+    // Act
+    const active = await activeLabelAt(url);
+
+    // Assert
+    expect(active).toBe('CV');
   });
 });

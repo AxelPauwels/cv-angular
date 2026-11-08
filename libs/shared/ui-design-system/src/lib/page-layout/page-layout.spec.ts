@@ -24,8 +24,11 @@ describe('PageLayout', () => {
   }
 
   it('projects the page with the same padding on every page', async () => {
-    // Arrange & Act
-    const layout = await render('wide');
+    // Arrange
+    const width = 'wide';
+
+    // Act
+    const layout = await render(width);
 
     // Assert
     expect(layout.querySelector('.content')?.textContent).toBe('Page');
@@ -37,16 +40,22 @@ describe('PageLayout', () => {
   });
 
   it('caps the content at 72rem by default', async () => {
-    // Arrange & Act
-    const layout = await render('wide');
+    // Arrange
+    const width = 'wide';
+
+    // Act
+    const layout = await render(width);
 
     // Assert: the max width plus the padding on both sides
     expect(getComputedStyle(layout).maxWidth).toBe(`${72 * 16 + 32}px`);
   });
 
   it('caps the content at 52rem when narrow', async () => {
-    // Arrange & Act
-    const layout = await render('narrow');
+    // Arrange
+    const width = 'narrow';
+
+    // Act
+    const layout = await render(width);
 
     // Assert
     expect(layout.classList).toContain('ds-page-layout--narrow');

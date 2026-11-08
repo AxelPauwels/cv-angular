@@ -17,8 +17,11 @@ describe('ThemeService', () => {
   }
 
   it('offers the custom themes, starting with gold', () => {
-    // Arrange & Act
-    const { service, root } = start();
+    // Arrange
+    const root = TestBed.inject(DOCUMENT).documentElement;
+
+    // Act
+    const { service } = start();
 
     // Assert
     expect(service.themes.map((theme) => theme.id)).toEqual([
@@ -97,14 +100,23 @@ describe('ThemeService', () => {
     expect(localStorage.getItem('cv-theme')).toBeNull();
   });
 
-  it('follows the system again after a color scheme reset', () => {
-    // Arrange & Act
-    const { service, root } = start();
+  it('stops following the system once a color scheme is chosen', () => {
+    // Arrange
+    const { service } = start();
+
+    // Act
     service.changeColorScheme('dark');
     TestBed.tick();
 
     // Assert
     expect(service.followsSystemColorScheme()).toBe(false);
+  });
+
+  it('follows the system again after a color scheme reset', () => {
+    // Arrange
+    const { service, root } = start();
+    service.changeColorScheme('dark');
+    TestBed.tick();
 
     // Act
     service.resetColorScheme();

@@ -6,13 +6,15 @@ import { ContactLinks } from './contact-links';
 
 describe('ContactLinks', () => {
   it('links to email, LinkedIn and GitHub from the cv api, in a named list', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.configureTestingModule({
       providers: [
         provideHttpClient(withInterceptors([inBrowserGraphqlInterceptor])),
         provideI18nTesting(),
       ],
     });
+
+    // Act
     const fixture = TestBed.createComponent(ContactLinks);
     await fixture.whenStable();
     const element: HTMLElement = fixture.nativeElement;
@@ -22,7 +24,8 @@ describe('ContactLinks', () => {
       "Let's talk"
     );
     const links = Array.from(element.querySelectorAll('a'));
-    expect(links.map((link) => link.textContent?.trim())).toEqual([
+    // icon-only links: the accessible name comes from aria-label
+    expect(links.map((link) => link.getAttribute('aria-label'))).toEqual([
       'Email',
       'LinkedIn',
       'GitHub',

@@ -20,9 +20,6 @@ interface ToggleSection {
   readonly id: string;
   /** The heading; several keys are joined, e.g. "Submenu" + "CV" */
   readonly titleKeys: readonly string[];
-  readonly descriptionKey?: string;
-  /** The section whose description describes the toggles without their own */
-  readonly describedBySection: string;
   /** Starts a new row of cards on larger screens */
   readonly newRow?: boolean;
   readonly toggles: readonly FeatureToggleInfo[];
@@ -38,14 +35,11 @@ interface LinkedChange {
 function submenu(
   id: string,
   group: FeatureToggleGroup,
-  titleKey: string,
-  descriptionKey?: string
+  titleKey: string
 ): ToggleSection {
   return {
     id,
     titleKeys: ['t.admin.section.submenu.title', titleKey],
-    descriptionKey,
-    describedBySection: 'submenu-cv',
     toggles: featureTogglesInGroup(group),
   };
 }
@@ -76,31 +70,20 @@ export class FeatureToggles {
     {
       id: 'navbar',
       titleKeys: ['t.admin.section.navbar.title'],
-      descriptionKey: 't.admin.section.navbar.description',
-      describedBySection: 'navbar',
       toggles: featureTogglesInGroup('navbar'),
     },
     {
       id: 'general',
       titleKeys: ['t.admin.section.general.title'],
-      describedBySection: 'general',
       toggles: featureTogglesInGroup('general'),
     },
     {
       id: 'main-menu',
       titleKeys: ['t.admin.section.main-menu.title'],
-      descriptionKey: 't.admin.section.main-menu.description',
-      describedBySection: 'main-menu',
       newRow: true,
       toggles: featureTogglesInGroup('main-menu'),
     },
-    // the submenu description is shown once, on the first submenu card
-    submenu(
-      'submenu-cv',
-      'cv-menu',
-      't.nav.cv',
-      't.admin.section.submenu.description'
-    ),
+    submenu('submenu-cv', 'cv-menu', 't.nav.cv'),
     submenu('submenu-technical', 'technical-menu', 't.nav.technical'),
     submenu('submenu-showcase', 'showcase-menu', 't.nav.showcase'),
   ];
@@ -158,15 +141,5 @@ export class FeatureToggles {
   protected reset(): void {
     this.service.reset();
     this.linkedChanges.set([]);
-  }
-
-  /** Each switch is described by its own text, else by its section's */
-  protected describedBy(
-    section: ToggleSection,
-    toggle: FeatureToggleInfo
-  ): string {
-    return toggle.descriptionKey
-      ? `feature-toggle-${toggle.id}-description`
-      : `feature-toggles-${section.describedBySection}-description`;
   }
 }

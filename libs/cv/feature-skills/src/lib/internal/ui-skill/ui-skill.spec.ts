@@ -14,8 +14,10 @@ class Host {}
 
 describe('UiSkill', () => {
   it('shows the icon, the name and a labelled dot per level', async () => {
-    // Arrange & Act
+    // Arrange
     const fixture = TestBed.createComponent(Host);
+
+    // Act
     await fixture.whenStable();
     const skill = (fixture.nativeElement as HTMLElement).querySelector(
       'cv-ui-skill'

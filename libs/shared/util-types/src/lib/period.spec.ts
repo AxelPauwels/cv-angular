@@ -2,23 +2,31 @@ import { byEndNewestFirst, toPeriod } from './period';
 
 describe('toPeriod', () => {
   it('parses ISO strings to dates', () => {
-    // Act & Assert
-    expect(
-      toPeriod({
-        start: '2020-01-01T00:00:00.000Z',
-        end: '2021-06-30T00:00:00.000Z',
-      })
-    ).toEqual({
+    // Arrange
+    const dto = {
+      start: '2020-01-01T00:00:00.000Z',
+      end: '2021-06-30T00:00:00.000Z',
+    };
+
+    // Act
+    const period = toPeriod(dto);
+
+    // Assert
+    expect(period).toEqual({
       start: new Date('2020-01-01T00:00:00.000Z'),
       end: new Date('2021-06-30T00:00:00.000Z'),
     });
   });
 
   it('leaves out the end of an ongoing period', () => {
-    // Act & Assert
-    expect(toPeriod({ start: '2020-01-01T00:00:00.000Z', end: null })).toEqual({
-      start: new Date('2020-01-01T00:00:00.000Z'),
-    });
+    // Arrange
+    const dto = { start: '2020-01-01T00:00:00.000Z', end: null };
+
+    // Act
+    const period = toPeriod(dto);
+
+    // Assert
+    expect(period).toEqual({ start: new Date('2020-01-01T00:00:00.000Z') });
   });
 });
 

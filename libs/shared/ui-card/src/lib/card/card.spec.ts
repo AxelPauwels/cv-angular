@@ -22,8 +22,10 @@ class Host {}
 
 describe('Card', () => {
   it('renders no header without a title, only the content', async () => {
-    // Arrange & Act
+    // Arrange
     const fixture = TestBed.createComponent(Host);
+
+    // Act
     await fixture.whenStable();
     const headerless = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll('ds-card')
@@ -40,8 +42,10 @@ describe('Card', () => {
   });
 
   it('shows the title as a heading, the icon and the projected content', async () => {
-    // Arrange & Act
+    // Arrange
     const fixture = TestBed.createComponent(Host);
+
+    // Act
     await fixture.whenStable();
     const [withIcon, withoutIcon, material, nested, brand] = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll('ds-card')
@@ -85,13 +89,15 @@ describe('Card', () => {
   });
 
   it('sizes the title with the title-medium type scale (1rem)', async () => {
-    // Arrange & Act
+    // Arrange
     const fixture = TestBed.createComponent(Host);
     // Material's theme isn't loaded in a unit test: set the variable the title uses
     (fixture.nativeElement as HTMLElement).style.setProperty(
       '--mat-sys-title-medium-size',
       '17px'
     );
+
+    // Act
     await fixture.whenStable();
     const title = (fixture.nativeElement as HTMLElement).querySelector(
       'h2'
@@ -113,8 +119,10 @@ class InitialsHost {}
 
 describe('Card initials', () => {
   it('shows the initials in the avatar, in front of the title, unless there is an icon', async () => {
-    // Arrange & Act
+    // Arrange
     const fixture = TestBed.createComponent(InitialsHost);
+
+    // Act
     await fixture.whenStable();
     const [person, both] = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll('ds-card')
@@ -133,8 +141,10 @@ describe('Card initials', () => {
   });
 
   it('shows a tag on the title line, inside the heading', async () => {
-    // Arrange & Act
+    // Arrange
     const fixture = TestBed.createComponent(Host);
+
+    // Act
     await fixture.whenStable();
     const cards = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll('ds-card')

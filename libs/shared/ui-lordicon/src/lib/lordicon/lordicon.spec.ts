@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Lordicon } from './lordicon';
 
 @Component({
@@ -14,8 +14,7 @@ import { Lordicon } from './lordicon';
 class Host {}
 
 describe('Lordicon', () => {
-  async function render() {
-    const fixture = TestBed.createComponent(Host);
+  async function render(fixture: ComponentFixture<Host>) {
     await fixture.whenStable();
     const host = (fixture.nativeElement as HTMLElement).querySelector(
       'ds-lordicon'
@@ -25,8 +24,11 @@ describe('Lordicon', () => {
   }
 
   it('plays only on hover or focus of the link around it, from a self-hosted file', async () => {
-    // Arrange & Act
-    const { icon } = await render();
+    // Arrange
+    const fixture = TestBed.createComponent(Host);
+
+    // Act
+    const { icon } = await render(fixture);
 
     // Assert
     expect(icon.getAttribute('trigger')).toBe('hover');
@@ -37,8 +39,11 @@ describe('Lordicon', () => {
   });
 
   it('is hidden from screen readers and keeps its placeholder until ready', async () => {
-    // Arrange & Act
-    const { host, icon } = await render();
+    // Arrange
+    const fixture = TestBed.createComponent(Host);
+
+    // Act
+    const { host, icon } = await render(fixture);
 
     // Assert
     expect(host.getAttribute('aria-hidden')).toBe('true');

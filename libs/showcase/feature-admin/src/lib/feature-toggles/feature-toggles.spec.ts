@@ -2,12 +2,20 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { FeatureToggleService } from '@cv/shared-data-access';
+import {
+  defaultFeatureToggleStates,
+  FeatureToggleService,
+  saveFeatureTogglesForTesting,
+} from '@cv/shared-data-access';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
 import { FeatureToggles } from './feature-toggles';
 
 describe('FeatureToggles', () => {
-  beforeEach(() => localStorage.clear());
+  beforeEach(() => {
+    localStorage.clear();
+    // every toggle on, whatever the defaults
+    saveFeatureTogglesForTesting();
+  });
   afterEach(() => TestBed.inject(MatSnackBar).dismiss());
 
   async function render() {
@@ -19,37 +27,33 @@ describe('FeatureToggles', () => {
     });
     const harness = await RouterTestingHarness.create('/');
     const element: HTMLElement = harness.fixture.nativeElement;
-    const toggle = () =>
+    const toggle = (id = 'tour-button') =>
       element.querySelector<HTMLButtonElement>(
-        'mat-slide-toggle[data-toggle="tour-button"] button'
+        `mat-slide-toggle[data-toggle="${id}"] button`
       );
     return { harness, element, toggle };
   }
 
-  it('lists the feature toggles with a described switch', async () => {
-    // Arrange & Act
-    const { element, toggle } = await render();
+  it('lists the feature toggles as switches', async () => {
+    // Arrange
+    const page = render;
+
+    // Act
+    const { element, toggle } = await page();
 
     // Assert
     expect(element.querySelector('h1')?.textContent).toContain('Administrator');
-    expect(element.querySelector('hgroup p')?.textContent).toContain(
-      'With great power comes great configuration'
-    );
     expect(toggle()?.closest('mat-slide-toggle')?.textContent).toContain(
       'Tour button'
     );
     expect(toggle()?.getAttribute('role')).toBe('switch');
     expect(toggle()?.getAttribute('aria-checked')).toBe('true');
-    const description = element.querySelector(
-      `#${toggle()?.getAttribute('aria-describedby')}`
-    );
-    expect(description?.textContent).toContain('home page');
     expect(element.textContent).not.toContain('t.');
   });
 
-  it('switches the tour button off and back on with the reset', async () => {
+  it('switches the tour button off', async () => {
     // Arrange
-    const { harness, element, toggle } = await render();
+    const { harness, toggle } = await render();
     const service = TestBed.inject(FeatureToggleService);
 
     // Act
@@ -59,19 +63,29 @@ describe('FeatureToggles', () => {
     // Assert
     expect(service.isEnabled('tour-button')()).toBe(false);
     expect(toggle()?.getAttribute('aria-checked')).toBe('false');
+  });
+
+  it('resets every toggle to its default', async () => {
+    // Arrange
+    const { harness, element, toggle } = await render();
+    const service = TestBed.inject(FeatureToggleService);
+    const byDefault = defaultFeatureToggleStates()['tour-button'];
 
     // Act
     element.querySelector<HTMLButtonElement>('button[matButton]')?.click();
     await harness.fixture.whenStable();
 
     // Assert
-    expect(service.isEnabled('tour-button')()).toBe(true);
-    expect(toggle()?.getAttribute('aria-checked')).toBe('true');
+    expect(service.isEnabled('tour-button')()).toBe(byDefault);
+    expect(toggle()?.getAttribute('aria-checked')).toBe(String(byDefault));
   });
 
   it('shows a card per section, with one per sub menu', async () => {
-    // Arrange & Act
-    const { element } = await render();
+    // Arrange
+    const page = render;
+
+    // Act
+    const { element } = await page();
 
     // Assert
     expect(
@@ -90,27 +104,12 @@ describe('FeatureToggles', () => {
     expect(element.querySelectorAll('mat-slide-toggle')).toHaveLength(22);
   });
 
-  it('describes the sub menu toggles by the shared submenu text', async () => {
-    // Arrange & Act
-    const { element } = await render();
-    const toggle = element.querySelector(
-      'mat-slide-toggle[data-toggle="technical-versions"] button'
-    );
-
-    // Assert
-    const description = element.querySelector(
-      `#${toggle?.getAttribute('aria-describedby')}`
-    );
-    expect(description?.textContent).toContain('submenu');
-  });
-
   it('switches the main menu item off with its last sub menu item, and says so', async () => {
     // Arrange
-    const { harness, element } = await render();
-    const toggle = (id: string) =>
-      element.querySelector<HTMLButtonElement>(
-        `mat-slide-toggle[data-toggle="${id}"] button`
-      );
+    const { harness, element, toggle } = await render();
+    TestBed.inject(FeatureToggleService).change('showcase-admin', false);
+    TestBed.inject(MatSnackBar).dismiss();
+    await harness.fixture.whenStable();
 
     // Act
     toggle('showcase-micro-frontends')?.click();
@@ -123,24 +122,14 @@ describe('FeatureToggles', () => {
     expect(element.querySelector('[role="status"]')?.textContent).toContain(
       'Showcase switched off too.'
     );
-    const description = element.querySelector(
-      `#${toggle('main-menu-showcase')?.getAttribute('aria-describedby')}`
-    );
-    expect(description?.textContent).toContain('submenu');
   });
 
   it('says how to get back here when its own menu item is switched off', async () => {
-    // Arrange: on, whatever the defaults
-    const { harness } = await render();
-    TestBed.inject(FeatureToggleService).change('showcase-admin', true);
-    await harness.fixture.whenStable();
-    const toggle = () =>
-      document.querySelector<HTMLButtonElement>(
-        'mat-slide-toggle[data-toggle="showcase-admin"] button'
-      );
+    // Arrange
+    const { harness, toggle } = await render();
 
     // Act
-    toggle()?.click();
+    toggle('showcase-admin')?.click();
     await harness.fixture.whenStable();
 
     // Assert
@@ -150,24 +139,31 @@ describe('FeatureToggles', () => {
     const snackBar = document.querySelector('mat-snack-bar-container');
     expect(snackBar?.textContent).toContain('Axel Pauwels');
     expect(snackBar?.textContent).toContain('/showcase/admin');
+  });
 
-    // Act: it stays until "OK" closes it
+  it('keeps that message until "OK" closes it', async () => {
+    // Arrange
+    const { harness, toggle } = await render();
+    toggle('showcase-admin')?.click();
+    await harness.fixture.whenStable();
     await new Promise((resolve) => setTimeout(resolve, 100));
-    const ok = snackBar?.querySelector<HTMLButtonElement>('button');
-    expect(ok?.textContent?.trim()).toBe('OK');
+    const ok = document.querySelector<HTMLButtonElement>(
+      'mat-snack-bar-container button'
+    );
+
+    // Act
     ok?.click();
     await harness.fixture.whenStable();
     await new Promise((resolve) => setTimeout(resolve, 300));
 
     // Assert
+    expect(ok?.textContent?.trim()).toBe('OK');
     expect(document.querySelector('mat-snack-bar-container')).toBeNull();
   });
 
   it('shows no message when switching another item off', async () => {
-    // Arrange: on, whatever the defaults
+    // Arrange
     const { harness, toggle } = await render();
-    TestBed.inject(FeatureToggleService).change('tour-button', true);
-    await harness.fixture.whenStable();
 
     // Act
     toggle()?.click();

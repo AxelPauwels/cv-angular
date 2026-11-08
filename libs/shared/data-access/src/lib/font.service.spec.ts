@@ -15,8 +15,11 @@ describe('FontService', () => {
   }
 
   it('offers the fonts, starting with Red Hat Display', () => {
-    // Arrange & Act
-    const { service, root } = start();
+    // Arrange
+    const root = TestBed.inject(DOCUMENT).documentElement;
+
+    // Act
+    const { service } = start();
 
     // Assert
     expect(service.fonts.map((font) => font.id)).toEqual([
@@ -42,19 +45,26 @@ describe('FontService', () => {
     expect(localStorage.getItem('cv-font')).toBe('goldman');
   });
 
-  it('restores a saved choice and ignores an unknown one', () => {
-    // Arrange & Act
+  it('restores a saved choice', () => {
+    // Arrange
     localStorage.setItem('cv-font', 'michroma');
 
-    // Assert
-    expect(start().service.font()).toBe('michroma');
-
     // Act
-    TestBed.resetTestingModule();
+    const { service } = start();
+
+    // Assert
+    expect(service.font()).toBe('michroma');
+  });
+
+  it('ignores an unknown saved choice', () => {
+    // Arrange
     localStorage.setItem('cv-font', 'comic-sans');
 
+    // Act
+    const { service } = start();
+
     // Assert
-    expect(start().service.font()).toBe('red-hat');
+    expect(service.font()).toBe('red-hat');
   });
 
   it('resets to Red Hat Display and forgets the choice', () => {

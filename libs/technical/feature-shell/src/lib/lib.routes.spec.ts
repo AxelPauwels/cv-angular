@@ -13,13 +13,15 @@ describe('technicalFeatureShellRoutes', () => {
   beforeEach(() => localStorage.clear());
 
   it('opens the first sub item and lists all sub items', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.configureTestingModule({
       providers: [
         provideRouter(technicalFeatureShellRoutes, withComponentInputBinding()),
         provideI18nTesting(),
       ],
     });
+
+    // Act
     const harness = await RouterTestingHarness.create('/');
     const element: HTMLElement = harness.fixture.nativeElement;
 

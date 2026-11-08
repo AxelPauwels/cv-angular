@@ -24,8 +24,10 @@ describe('PersonService', () => {
   const stable = () => TestBed.inject(ApplicationRef).whenStable();
 
   it('maps the person to the frontend model', async () => {
-    // Arrange & Act
+    // Arrange
     const person = load((service) => service.person());
+
+    // Act
     await stable();
 
     // Assert

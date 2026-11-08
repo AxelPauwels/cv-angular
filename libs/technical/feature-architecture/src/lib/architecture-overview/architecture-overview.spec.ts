@@ -25,8 +25,8 @@ describe('ArchitectureOverview', () => {
   }
 
   it('puts every library in its domain and layer, and lists the rules', async () => {
-    // Arrange & Act
-    const element = await render((http) =>
+    // Arrange
+    const answer = (http: HttpTestingController) =>
       http.expectOne('/build-info/architecture.json').flush({
         projects: [
           { name: 'cv', root: 'apps/cv', kind: 'app', dependencies: [] },
@@ -59,8 +59,10 @@ describe('ArchitectureOverview', () => {
           { from: 'domain:*', to: ['same domain', 'domain:shared'] },
           { from: 'type:api', to: [] },
         ],
-      })
-    );
+      });
+
+    // Act
+    const element = await render(answer);
 
     // Assert
     const matrix = element.querySelector(
@@ -87,12 +89,14 @@ describe('ArchitectureOverview', () => {
   });
 
   it('explains how to generate the data when it is missing', async () => {
-    // Arrange & Act
-    const element = await render((http) =>
+    // Arrange
+    const answer = (http: HttpTestingController) =>
       http
         .expectOne('/build-info/architecture.json')
-        .flush('', { status: 404, statusText: 'Not Found' })
-    );
+        .flush('', { status: 404, statusText: 'Not Found' });
+
+    // Act
+    const element = await render(answer);
 
     // Assert
     expect(element.querySelector('table')).toBeNull();
@@ -102,10 +106,18 @@ describe('ArchitectureOverview', () => {
 
 describe('describeTag', () => {
   it('reads sheriff tags as words', () => {
-    // Act & Assert
-    expect(describeTag('type:data-access')).toBe('data-access');
-    expect(describeTag('domain:*')).toBe('every domain');
-    expect(describeTag('*')).toBe('everything');
-    expect(describeTag('root')).toBe('the app itself');
+    // Arrange
+    const tags = ['type:data-access', 'domain:*', '*', 'root'];
+
+    // Act
+    const words = tags.map(describeTag);
+
+    // Assert
+    expect(words).toEqual([
+      'data-access',
+      'every domain',
+      'everything',
+      'the app itself',
+    ]);
   });
 });

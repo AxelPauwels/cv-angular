@@ -13,7 +13,7 @@ import { SubNavbar } from './sub-navbar';
       { labelKey: 't.nav.One', path: 'one' },
       { labelKey: 't.nav.Two', path: 'two' },
     ]"
-    labelKey="Domain navigation" />`,
+    labelKey="t.nav.domain-navigation" />`,
 })
 class Shell {}
 
@@ -22,7 +22,7 @@ class Page {}
 
 describe('SubNavbar', () => {
   it('links relative to the shell route and marks the current page active', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.configureTestingModule({
       providers: [
         // no translations: keys render as-is
@@ -41,6 +41,8 @@ describe('SubNavbar', () => {
     });
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/domain/two');
+
+    // Act
     await harness.fixture.whenStable();
     const element: HTMLElement = harness.fixture.nativeElement;
 
@@ -55,7 +57,7 @@ describe('SubNavbar', () => {
   });
 
   it('shows an icon tab with its label as accessible name', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.configureTestingModule({
       providers: [
         provideTolgee(() => Tolgee().init({ language: 'en' })),
@@ -70,6 +72,8 @@ describe('SubNavbar', () => {
     });
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/domain/home');
+
+    // Act
     await harness.fixture.whenStable();
     const link: HTMLAnchorElement =
       harness.fixture.nativeElement.querySelector('a');

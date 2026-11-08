@@ -49,8 +49,11 @@ describe('LanguageSwitcher', () => {
   }
 
   it('is a labelled icon menu button without the language code', async () => {
-    // Arrange & Act
-    const { trigger } = await render('nl');
+    // Arrange
+    const language = 'nl';
+
+    // Act
+    const { trigger } = await render(language);
 
     // Assert
     expect(trigger.getAttribute('aria-label')).toBe('Language');
@@ -58,8 +61,10 @@ describe('LanguageSwitcher', () => {
   });
 
   it('lists the full language names and checks the active one', async () => {
-    // Arrange & Act
+    // Arrange
     const { fixture, trigger } = await render('nl');
+
+    // Act
     const items = await openMenu(fixture, trigger);
 
     // Assert

@@ -17,8 +17,10 @@ describe('build info stores', () => {
   const settle = () => TestBed.inject(ApplicationRef).whenStable();
 
   it('loads the installed versions', async () => {
-    // Arrange & Act
+    // Arrange
     const store = TestBed.inject(VersionStore);
+
+    // Act
     TestBed.tick();
     TestBed.inject(HttpTestingController)
       .expectOne('/build-info/versions.json')
@@ -40,8 +42,10 @@ describe('build info stores', () => {
   });
 
   it('loads the projects and rules', async () => {
-    // Arrange & Act
+    // Arrange
     const store = TestBed.inject(ArchitectureStore);
+
+    // Act
     TestBed.tick();
     TestBed.inject(HttpTestingController)
       .expectOne('/build-info/architecture.json')
@@ -66,8 +70,10 @@ describe('build info stores', () => {
   });
 
   it('reports missing build info as an error, with empty data', async () => {
-    // Arrange & Act
+    // Arrange
     const store = TestBed.inject(VersionStore);
+
+    // Act
     TestBed.tick();
     TestBed.inject(HttpTestingController)
       .expectOne('/build-info/versions.json')

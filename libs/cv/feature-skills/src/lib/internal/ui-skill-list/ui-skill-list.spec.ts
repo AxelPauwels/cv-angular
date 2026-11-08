@@ -16,8 +16,10 @@ class Host {
 
 describe('UiSkillList', () => {
   it('lists a skill per entry, in order', async () => {
-    // Arrange & Act
+    // Arrange
     const fixture = TestBed.createComponent(Host);
+
+    // Act
     await fixture.whenStable();
     const items = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll(

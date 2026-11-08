@@ -18,16 +18,16 @@ describe('LanguageService', () => {
   }
 
   it('offers en, nl, fr and es', async () => {
-    // Arrange & Act
+    // Arrange
+    const expected = ['en', 'nl', 'fr', 'es'];
+
+    // Act
     const { service } = await start();
 
     // Assert
-    expect(service.languages.map((language) => language.code)).toEqual([
-      'en',
-      'nl',
-      'fr',
-      'es',
-    ]);
+    expect(service.languages.map((language) => language.code)).toEqual(
+      expected
+    );
   });
 
   it('loads a language lazily, switches to it and updates <html lang>', async () => {
@@ -50,8 +50,10 @@ describe('LanguageService', () => {
   });
 
   it('remembers the chosen language for the next visit', async () => {
-    // Arrange & Act
+    // Arrange
     const { service } = await start();
+
+    // Act
     await service.changeLanguage('fr');
 
     // Assert

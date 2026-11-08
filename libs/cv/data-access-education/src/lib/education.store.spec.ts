@@ -14,8 +14,10 @@ describe('EducationStore', () => {
   });
 
   it('exposes educations, certificates, additional learnings and trainings', async () => {
-    // Arrange & Act
+    // Arrange
     const store = TestBed.inject(EducationStore);
+
+    // Act
     await TestBed.inject(ApplicationRef).whenStable();
 
     // Assert
@@ -27,8 +29,10 @@ describe('EducationStore', () => {
   });
 
   it('keeps the result for the next consumer', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.inject(EducationStore);
+
+    // Act
     await TestBed.inject(ApplicationRef).whenStable();
 
     // Assert

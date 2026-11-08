@@ -20,8 +20,14 @@ function pathsOf(routes: DomainRoutes): [string, string][] {
 
 describe('ROUTES', () => {
   it('exposes every domain, also as default export', () => {
-    // Act & Assert
-    expect(domains).toEqual(['CV', 'SHOWCASE', 'TECHNICAL', 'MF']);
+    // Arrange
+    const expected = ['CV', 'SHOWCASE', 'TECHNICAL', 'MF'];
+
+    // Act
+    const exposed = Object.keys(ROUTES);
+
+    // Assert
+    expect(exposed).toEqual(expected);
     expect(ROUTES_DEFAULT).toBe(ROUTES);
   });
 
@@ -30,8 +36,10 @@ describe('ROUTES', () => {
     const root = rootOf(routes);
 
     it('has a router link for every path and a path for every router link', () => {
-      // Arrange & Act
+      // Arrange
       const keys = Object.keys(routes);
+
+      // Act
       const paths = keys.filter((key) => !key.endsWith(LINK_SUFFIX));
       const links = keys
         .filter((key) => key.endsWith(LINK_SUFFIX))
@@ -42,10 +50,20 @@ describe('ROUTES', () => {
     });
 
     it('builds every router link from the domain root and its path', () => {
-      // Act & Assert
-      for (const [key, path] of pathsOf(routes)) {
-        const expected = root ? `/${root}/${path}` : `/${path}`;
-        expect(routes[`${key}${LINK_SUFFIX}`], key).toBe(expected);
+      // Arrange
+      const expectedLink = (path: string) =>
+        root ? `/${root}/${path}` : `/${path}`;
+
+      // Act
+      const links = pathsOf(routes).map(([key, path]) => ({
+        key,
+        actual: routes[`${key}${LINK_SUFFIX}`],
+        expected: expectedLink(path),
+      }));
+
+      // Assert
+      for (const { key, actual, expected } of links) {
+        expect(actual, key).toBe(expected);
       }
       if ('ROOT' in routes) {
         expect(routes[`ROOT${LINK_SUFFIX}`]).toBe(`/${root}`);
@@ -53,26 +71,35 @@ describe('ROUTES', () => {
     });
 
     it('uses lowercase kebab-case path segments without slashes', () => {
-      // Act & Assert
-      for (const [key, path] of pathsOf(routes)) {
-        expect(path, key).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+      // Arrange
+      const kebabCase = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+
+      // Act
+      const segments = pathsOf(routes);
+
+      // Assert
+      for (const [key, path] of segments) {
+        expect(path, key).toMatch(kebabCase);
       }
       if (root) {
-        expect(root).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+        expect(root).toMatch(kebabCase);
       }
     });
 
     it('has no duplicate paths', () => {
-      // Arrange & Act
+      // Arrange
       const paths = pathsOf(routes).map(([, path]) => path);
 
+      // Act
+      const unique = new Set(paths);
+
       // Assert
-      expect(new Set(paths).size).toBe(paths.length);
+      expect(unique.size).toBe(paths.length);
     });
   });
 
   it('gives every url exactly one owner', () => {
-    // Arrange & Act
+    // Arrange
     // CV and MF are mounted at '', so their paths share the top level with
     // the other domains' roots; a clash would make one domain unreachable.
     const urls = domains.flatMap((domain) =>
@@ -81,7 +108,10 @@ describe('ROUTES', () => {
         .map(([, url]) => url)
     );
 
+    // Act
+    const duplicates = urls.filter((url, i) => urls.indexOf(url) !== i);
+
     // Assert
-    expect(urls.filter((url, i) => urls.indexOf(url) !== i)).toEqual([]);
+    expect(duplicates).toEqual([]);
   });
 });

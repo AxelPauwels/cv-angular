@@ -57,13 +57,21 @@ describe('AccessibilitySwitcher', () => {
     return { fixture, host, trigger, panel, changes };
   }
 
-  it('is a labelled button that opens and closes a labelled dialog', async () => {
-    // Arrange & Act
-    const { trigger, panel } = await render();
+  it('is a labelled button with its dialog closed', async () => {
+    // Arrange
+    const settings = { textSize: 100 };
+
+    // Act
+    const { trigger, panel } = await render(settings);
 
     // Assert
     expect(trigger.getAttribute('aria-label')).toBe('Accessibility');
     expect(panel.matches(':popover-open')).toBe(false);
+  });
+
+  it('opens a labelled dialog from the button', async () => {
+    // Arrange
+    const { trigger, panel } = await render();
 
     // Act
     trigger.click();
@@ -72,6 +80,12 @@ describe('AccessibilitySwitcher', () => {
     expect(panel.matches(':popover-open')).toBe(true);
     expect(panel.getAttribute('role')).toBe('dialog');
     expect(panel.getAttribute('aria-label')).toBe('Accessibility settings');
+  });
+
+  it('closes the dialog again from the button', async () => {
+    // Arrange
+    const { trigger, panel } = await render();
+    trigger.click();
 
     // Act
     // no close button: the popover closes on Escape, a click outside or the trigger
@@ -82,12 +96,15 @@ describe('AccessibilitySwitcher', () => {
   });
 
   it('offers the text sizes as a labelled radio group with the active one checked', async () => {
-    // Arrange & Act
-    const { host } = await render({ textSize: 125 });
-    const group = host.querySelector('[role="radiogroup"]');
-    const radios = Array.from(host.querySelectorAll('[role="radio"]'));
+    // Arrange
+    const settings = { textSize: 125 };
+
+    // Act
+    const { host } = await render(settings);
 
     // Assert
+    const group = host.querySelector('[role="radiogroup"]');
+    const radios = Array.from(host.querySelectorAll('[role="radio"]'));
     expect(
       host
         .querySelector(`#${group?.getAttribute('aria-labelledby')}`)
@@ -117,19 +134,26 @@ describe('AccessibilitySwitcher', () => {
     expect(changes).toEqual([{ textSize: 150 }]);
   });
 
-  it('shows the switches in their state and emits a flipped one', async () => {
-    // Arrange & Act
-    const { fixture, host, changes } = await render({ highContrast: true });
-    const switches = Array.from(
-      host.querySelectorAll<HTMLButtonElement>('[role="switch"]')
-    );
+  const switchesOf = (host: HTMLElement) =>
+    Array.from(host.querySelectorAll<HTMLButtonElement>('[role="switch"]'));
+
+  it('shows the switches in their state', async () => {
+    // Arrange
+    const settings = { highContrast: true };
+
+    // Act
+    const { host } = await render(settings);
 
     // Assert
-    expect(switches.map((item) => item.getAttribute('aria-checked'))).toEqual([
-      'false',
-      'true',
-      'false',
-    ]);
+    expect(
+      switchesOf(host).map((item) => item.getAttribute('aria-checked'))
+    ).toEqual(['false', 'true', 'false']);
+  });
+
+  it('emits a flipped switch', async () => {
+    // Arrange
+    const { fixture, host, changes } = await render({ highContrast: true });
+    const switches = switchesOf(host);
 
     // Act
     switches[0].click();
@@ -144,21 +168,19 @@ describe('AccessibilitySwitcher', () => {
   });
 
   it('emits a reset', async () => {
-    // Arrange & Act
+    // Arrange
     const { fixture, host } = await render();
     let resets = 0;
     fixture.componentInstance.resetSettings.subscribe(() => resets++);
-
-    // Assert
     const reset = host.querySelector<HTMLButtonElement>(
       '.accessibility-switcher__reset'
     );
-    expect(reset?.textContent?.trim()).toBe('restart_altReset');
 
     // Act
     reset?.click();
 
     // Assert
+    expect(reset?.textContent?.trim()).toBe('restart_altReset');
     expect(resets).toBe(1);
   });
 });

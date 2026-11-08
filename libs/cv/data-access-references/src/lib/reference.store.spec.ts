@@ -14,8 +14,10 @@ describe('ReferenceStore', () => {
   });
 
   it('exposes the references', async () => {
-    // Arrange & Act
+    // Arrange
     const store = TestBed.inject(ReferenceStore);
+
+    // Act
     await TestBed.inject(ApplicationRef).whenStable();
 
     // Assert
@@ -24,8 +26,10 @@ describe('ReferenceStore', () => {
   });
 
   it('keeps the result for the next consumer', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.inject(ReferenceStore);
+
+    // Act
     await TestBed.inject(ApplicationRef).whenStable();
 
     // Assert

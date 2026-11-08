@@ -13,12 +13,20 @@ describe('SkillStore', () => {
     });
   });
 
-  it('exposes the skills', async () => {
-    // Arrange & Act
+  it('has no skills before they have loaded', () => {
+    // Arrange
     const store = TestBed.inject(SkillStore);
 
+    // Act
+    const skills = store.skills();
+
     // Assert
-    expect(store.skills()).toEqual([]);
+    expect(skills).toEqual([]);
+  });
+
+  it('exposes the skills', async () => {
+    // Arrange
+    const store = TestBed.inject(SkillStore);
 
     // Act
     await TestBed.inject(ApplicationRef).whenStable();
@@ -29,8 +37,10 @@ describe('SkillStore', () => {
   });
 
   it('keeps the result for the next consumer', async () => {
-    // Arrange & Act
+    // Arrange
     TestBed.inject(SkillStore);
+
+    // Act
     await TestBed.inject(ApplicationRef).whenStable();
 
     // Assert

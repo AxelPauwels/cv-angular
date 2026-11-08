@@ -4,18 +4,32 @@ import { TourService } from './tour.service';
 describe('TourService', () => {
   afterEach(() => document.body.replaceChildren());
 
-  it('starts inactive and toggles with start and stop', () => {
-    // Arrange & Act
+  it('starts inactive', () => {
+    // Arrange
     const tour = TestBed.inject(TourService);
 
+    // Act
+    const active = tour.active();
+
     // Assert
-    expect(tour.active()).toBe(false);
+    expect(active).toBe(false);
+  });
+
+  it('becomes active with start', () => {
+    // Arrange
+    const tour = TestBed.inject(TourService);
 
     // Act
     tour.start();
 
     // Assert
     expect(tour.active()).toBe(true);
+  });
+
+  it('becomes inactive again with stop', () => {
+    // Arrange
+    const tour = TestBed.inject(TourService);
+    tour.start();
 
     // Act
     tour.stop();

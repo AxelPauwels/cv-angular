@@ -12,10 +12,13 @@ describe('App', () => {
   });
 
   it('should create the app', () => {
-    // Arrange & Act
-    const fixture = TestBed.createComponent(App);
+    // Arrange
+    const component = App;
+
+    // Act
+    const fixture = TestBed.createComponent(component);
 
     // Assert
-    expect(fixture.componentInstance).toBeTruthy();
+    expect(fixture.componentInstance).toBeInstanceOf(App);
   });
 });

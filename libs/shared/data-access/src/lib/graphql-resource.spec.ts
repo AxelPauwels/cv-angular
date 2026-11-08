@@ -23,10 +23,12 @@ describe('graphqlResource', () => {
   }
 
   it('answers queries in the browser', async () => {
-    // Arrange & Act
+    // Arrange
     const person = query<{ person: { firstName: string } }>(
       '{ person { firstName } }'
     );
+
+    // Act
     await TestBed.inject(ApplicationRef).whenStable();
 
     // Assert
@@ -34,7 +36,7 @@ describe('graphqlResource', () => {
   });
 
   it('maps the result to the frontend model', async () => {
-    // Arrange & Act
+    // Arrange
     const document = '{ person { firstName } }' as DocumentTypeDecoration<
       { person: { firstName: string } },
       Record<string, never>
@@ -42,6 +44,8 @@ describe('graphqlResource', () => {
     const name = runInInjectionContext(TestBed.inject(Injector), () =>
       graphqlResource(document, { map: ({ person }) => person.firstName })
     );
+
+    // Act
     await TestBed.inject(ApplicationRef).whenStable();
 
     // Assert
@@ -49,8 +53,10 @@ describe('graphqlResource', () => {
   });
 
   it('turns GraphQL errors into a resource error', async () => {
-    // Arrange & Act
+    // Arrange
     const broken = query('{ doesNotExist }');
+
+    // Act
     await TestBed.inject(ApplicationRef).whenStable();
 
     // Assert
