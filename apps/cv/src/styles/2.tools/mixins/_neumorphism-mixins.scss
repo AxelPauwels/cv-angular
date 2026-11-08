@@ -1,0 +1,29 @@
+// Neumorphism for an outlined mat-card: the card has the page's own surface color
+// and stands out through a dark shadow bottom right and a light one top left, in
+// both color schemes. Shadows alone are too faint an edge with higher contrast and
+// are dropped in forced colors, so a real outline comes back there. Include it on
+// the card's class in a component stylesheet; the corner radius stays the card's own.
+@mixin neumorphism-card {
+  --mat-card-outlined-container-color: var(--mat-sys-surface);
+  --mat-card-outlined-outline-color: transparent;
+
+  box-shadow:
+    8px 8px 16px
+      light-dark(
+        color-mix(in srgb, var(--mat-sys-shadow) 16%, transparent),
+        color-mix(in srgb, var(--mat-sys-shadow) 60%, transparent)
+      ),
+    -8px -8px 16px
+      light-dark(
+        var(--mat-sys-surface-container-lowest),
+        color-mix(in srgb, var(--mat-sys-on-surface) 7%, transparent)
+      );
+
+  :host-context(html[data-high-contrast]) & {
+    --mat-card-outlined-outline-color: var(--mat-sys-outline);
+  }
+
+  @media (forced-colors: active) {
+    --mat-card-outlined-outline-color: CanvasText;
+  }
+}

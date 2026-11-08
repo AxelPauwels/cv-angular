@@ -1,0 +1,275 @@
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use '@angular/material' as mat;
+@use './palettes/gold' as gold-palette;
+@use './palettes/honey' as honey-palette;
+@use './palettes/peach' as peach-palette;
+@use './palettes/tangerine' as tangerine-palette;
+@use './palettes/kiwi' as kiwi-palette;
+@use './palettes/bronze' as bronze-palette;
+@use './palettes/grape' as grape-palette;
+@use './palettes/silver' as silver-palette;
+@use './palettes/blackberry' as blackberry-palette;
+@use './palettes/water' as water-palette;
+@use './palettes/earth' as earth-palette;
+@use './palettes/fire' as fire-palette;
+@use './palettes/wind' as wind-palette;
+
+// Angular Material theming with `mat.theme()`: defines the CSS variables used to style
+// Material components according to the Material 3 design spec.
+// See https://material.angular.dev/guide/theming
+html {
+  // Typography is set per font in ./material-font-override (`data-font` on <html>)
+  @include mat.theme(
+    (
+      density: 0,
+    )
+  );
+
+  // A visible ring around every Material control that has keyboard focus (WCAG 2.4.7),
+  // not just Material's faint state layer. It takes the control's own text color, so it
+  // contrasts with the background in every context: on-primary on the toolbar,
+  // on-surface or primary elsewhere.
+  @include mat.strong-focus-indicators(
+    (
+      border-color: currentColor,
+    )
+  );
+
+  // Tabs color their label inside, leaving the link itself browser blue: inherit the
+  // surrounding text color instead, which the focus ring above takes on
+  .mat-mdc-tab-link {
+    color: inherit;
+    text-transform: capitalize;
+  }
+
+  // Follow the system until the user picks a mode (`data-color-scheme` on <html>).
+  // Material's color variables use `light-dark()`, so this switches every color.
+  color-scheme: light dark;
+
+  &[data-color-scheme='light'] {
+    color-scheme: light;
+  }
+
+  &[data-color-scheme='dark'] {
+    color-scheme: dark;
+  }
+}
+
+// Color themes, generated in ./palettes (`nx g @angular/material:theme-color`).
+// Chosen with `data-theme` on <html> (gold when unset). The bare
+// attribute selector also lets any element preview a theme, e.g. a menu swatch.
+// Keep the ids in sync with THEMES in @cv/shared-data-access.
+$themes: (
+  'gold': (
+    primary: gold-palette.$primary-palette,
+    tertiary: gold-palette.$tertiary-palette,
+  ),
+  'honey': (
+    primary: honey-palette.$primary-palette,
+    tertiary: honey-palette.$tertiary-palette,
+  ),
+  'kiwi': (
+    primary: kiwi-palette.$primary-palette,
+    tertiary: kiwi-palette.$tertiary-palette,
+  ),
+  'peach': (
+    primary: peach-palette.$primary-palette,
+    tertiary: peach-palette.$tertiary-palette,
+  ),
+  'tangerine': (
+    primary: tangerine-palette.$primary-palette,
+    tertiary: tangerine-palette.$tertiary-palette,
+  ),
+  'bronze': (
+    primary: bronze-palette.$primary-palette,
+    tertiary: bronze-palette.$tertiary-palette,
+  ),
+  'grape': (
+    primary: grape-palette.$primary-palette,
+    tertiary: grape-palette.$tertiary-palette,
+  ),
+  'silver': (
+    primary: silver-palette.$primary-palette,
+    tertiary: silver-palette.$tertiary-palette,
+  ),
+  'blackberry': (
+    primary: blackberry-palette.$primary-palette,
+    tertiary: blackberry-palette.$tertiary-palette,
+  ),
+  'water': (
+    primary: water-palette.$primary-palette,
+    tertiary: water-palette.$tertiary-palette,
+  ),
+  'earth': (
+    primary: earth-palette.$primary-palette,
+    tertiary: earth-palette.$tertiary-palette,
+  ),
+  'fire': (
+    primary: fire-palette.$primary-palette,
+    tertiary: fire-palette.$tertiary-palette,
+  ),
+  'wind': (
+    primary: wind-palette.$primary-palette,
+    tertiary: wind-palette.$tertiary-palette,
+  ),
+);
+
+@each $id, $color in $themes {
+  $selector: "[data-theme='#{$id}']";
+
+  @if $id == 'gold' {
+    $selector: 'html, #{$selector}';
+  }
+
+  #{$selector} {
+    @include mat.theme(
+      (
+        color: $color,
+      )
+    );
+  }
+}
+
+// The header's colors (`--ds-brand` and the text on it), used by the navbar and the
+// theme switcher's swatches. Material's primary, except where a theme sets its own.
+html,
+[data-theme] {
+  --ds-brand: var(--mat-sys-primary);
+  --ds-on-brand: var(--mat-sys-on-primary);
+
+  // The page's own primary, resolved here: the navbar swaps primary for the header
+  // color, so content rendered inside it (the accessibility popover) restores these
+  --ds-primary: var(--mat-sys-primary);
+  --ds-on-primary: var(--mat-sys-on-primary);
+
+  // a softer primary for secondary text (e.g. a section heading's tagline). Light
+  // mode mixes it toward the background, lowest contrast about 4.65:1 (WCAG AA).
+  // Dark mode uses the theme's lighter primary (tone 90), which only adds contrast
+  --ds-primary-soft: light-dark(
+    color-mix(in srgb, var(--mat-sys-primary) 88%, var(--mat-sys-surface)),
+    var(--mat-sys-primary-fixed)
+  );
+
+  // a softer text color on the header (e.g. the download tile), at least 5.4:1
+  --ds-on-brand-soft: color-mix(
+    in srgb,
+    var(--ds-on-brand) 88%,
+    var(--ds-brand)
+  );
+
+  // a subtle block on the header, tinted away from the text so it only adds contrast:
+  // darker behind light text (light mode), lighter behind dark text (dark mode)
+  --ds-brand-tint: light-dark(
+    color-mix(in srgb, var(--ds-brand) 86%, black),
+    color-mix(in srgb, var(--ds-brand) 75%, white)
+  );
+}
+
+// Gold: a lighter header than Material's tone 40, which reads as brown. Tone 50 with
+// white text lands just under 4.5:1 (4.497), so it takes 10% of tone 40: about 4.6:1
+// (WCAG AA). Dark mode keeps Material's own header colors.
+html,
+[data-theme='gold'] {
+  $palette: gold-palette.$primary-palette;
+
+  --ds-brand: light-dark(
+    #{color.mix(map.get($palette, 40), map.get($palette, 50), 10%)},
+    var(--mat-sys-primary)
+  );
+  --ds-on-brand: light-dark(
+    #{map.get($palette, 100)},
+    var(--mat-sys-on-primary)
+  );
+
+  // the light header has little room above 4.5:1, so no softer text there
+  --ds-on-brand-soft: light-dark(
+    var(--ds-on-brand),
+    color-mix(in srgb, var(--ds-on-brand) 88%, var(--ds-brand))
+  );
+}
+
+// Light headers: yellow, peach, orange, light green, silver and light blue only look like themselves in light tones, so
+// these themes get a lighter header with dark text instead of Material's tone 40. Each
+// sets its light-mode header color (dark mode uses tone 90). Primary itself stays at
+// tone 40, so colored text and buttons on the page keep their contrast.
+$light-header-themes: (
+  // tone 80, 20% toward gold's tone 60 so it reads more golden (dark text about 9:1)
+  'honey': (
+      honey-palette.$primary-palette,
+      color.mix(
+        map.get(gold-palette.$primary-palette, 60),
+        map.get(honey-palette.$primary-palette, 80),
+        20%
+      )
+    ),
+  'peach': (peach-palette.$primary-palette, 80),
+  'tangerine': (tangerine-palette.$primary-palette, 80),
+  // kiwi is a light, fresh green: Material's tone 40 would turn it into a dark olive
+  'kiwi': (kiwi-palette.$primary-palette, 80),
+  'silver': (silver-palette.$primary-palette, 80),
+  // wind is a light sky blue that only reads as itself in light tones
+  'wind': (wind-palette.$primary-palette, 80)
+);
+
+@each $id, $header in $light-header-themes {
+  $palette: list.nth($header, 1);
+
+  [data-theme='#{$id}'] {
+    $light: list.nth($header, 2);
+
+    @if meta.type-of($light) == 'number' {
+      $light: map.get($palette, $light);
+    }
+
+    --ds-brand: light-dark(#{$light}, #{map.get($palette, 90)});
+    --ds-on-brand: #{map.get($palette, 10)};
+    --ds-brand-tint: color-mix(in srgb, var(--ds-brand) 75%, white);
+  }
+}
+
+// Blackberry: a dark purple-gray header with white text in both modes (about 9:1). In
+// light mode primary is that dark color too; in dark mode it stays Material's light
+// tone, since dark text on the dark background would fail contrast.
+[data-theme='blackberry'] {
+  $palette: blackberry-palette.$primary-palette;
+
+  --mat-sys-primary: light-dark(
+    #{map.get($palette, 30)},
+    #{map.get($palette, 80)}
+  );
+  --ds-brand: #{map.get($palette, 30)};
+  --ds-on-brand: #{map.get($palette, 100)};
+  --ds-brand-tint: color-mix(in srgb, var(--ds-brand) 86%, black);
+}
+
+body {
+  // Default background, font and text colors from Material's system variables.
+  // See https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+}
+
+// Higher contrast from the accessibility settings (`data-high-contrast` on <html>),
+// for every theme at once: the accent colors take their darker (light mode) or lighter
+// (dark mode) fixed tones, and muted text and outlines become full text color.
+html[data-high-contrast] {
+  --mat-sys-primary: light-dark(
+    var(--mat-sys-on-primary-fixed-variant),
+    var(--mat-sys-primary-fixed)
+  );
+  --mat-sys-secondary: light-dark(
+    var(--mat-sys-on-secondary-fixed-variant),
+    var(--mat-sys-secondary-fixed)
+  );
+  --mat-sys-tertiary: light-dark(
+    var(--mat-sys-on-tertiary-fixed-variant),
+    var(--mat-sys-tertiary-fixed)
+  );
+  --mat-sys-on-surface-variant: var(--mat-sys-on-surface);
+  --mat-sys-outline: var(--mat-sys-on-surface);
+  --mat-sys-outline-variant: var(--mat-sys-on-surface);
+}

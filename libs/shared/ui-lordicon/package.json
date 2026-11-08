@@ -1,0 +1,10 @@
+{
+  "name": "@cv/shared-ui-lordicon",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/core": "^22.2.0",
+    "@lordicon/element": "^3.0.2"
+  },
+  "sideEffects": false,
+  "private": true
+}

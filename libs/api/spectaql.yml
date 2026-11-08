@@ -1,0 +1,27 @@
+# GraphQL API reference, generated from the schema by SpectaQL.
+# Run with `nx run api:graphql-docs`; the cv app embeds it in Technical > graphql docs.
+spectaql:
+  targetDir: dist/.graphql-docs/api
+  oneFile: true
+  themeDir: default
+
+introspection:
+  schemaFile: libs/api/src/lib/schema/type-defs.graphql
+
+info:
+  title: CV GraphQL API
+  description: >-
+    The schema behind this CV: every page loads its data through these queries.
+    It runs in the browser for now, answered by the in-memory api library.
+  x-introItems:
+    - title: Where it runs
+      description: >-
+        Requests to `POST /graphql` are answered in the browser by
+        `inBrowserGraphqlInterceptor`, which lazy-loads the schema and resolvers
+        from `@cv/api`. Later the same schema can be served from a server.
+
+servers:
+  # the app's own /graphql: posted by the app, answered in the browser for now
+  - url: https://axel-pauwels.web.app/graphql
+    description: Answered in the browser by the cv app (no network request)
+    production: true

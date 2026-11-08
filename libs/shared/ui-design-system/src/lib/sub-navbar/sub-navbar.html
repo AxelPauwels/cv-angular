@@ -1,0 +1,40 @@
+<nav
+  mat-tab-nav-bar
+  class="sub-navbar__tabs"
+  mat-stretch-tabs="false"
+  [tabPanel]="panel"
+  [attr.aria-label]="labelKey() | translate">
+  @for (item of items(); track item.path) {
+  <!-- An icon tab keeps its label as accessible name and tooltip (on hover and focus) -->
+  <a
+    mat-tab-link
+    class="sub-navbar__tab"
+    [routerLink]="item.path"
+    routerLinkActive
+    #link="routerLinkActive"
+    [active]="link.isActive"
+    [attr.aria-label]="item.icon ? (item.labelKey | translate) : null"
+    [matTooltip]="item.icon ? (item.labelKey | translate) : ''">
+    @if (item.icon) {
+    <mat-icon
+      class="sub-navbar__icon"
+      fontSet="material-symbols-outlined"
+      aria-hidden="true"
+      >{{ item.icon }}</mat-icon
+    >
+    } @else {
+    <span
+      class="sub-navbar__label"
+      [attr.data-label]="item.labelKey | translate"
+      >{{ item.labelKey | translate }}</span
+    >
+    }
+  </a>
+  }
+</nav>
+
+<!-- From md up the page scrolls here (see the styles): a Tab stop, as a tab panel
+     should be, and cdkScrollable so tooltips and menus follow the scroll -->
+<mat-tab-nav-panel #panel cdkScrollable class="sub-navbar__panel" tabindex="0">
+  <ng-content />
+</mat-tab-nav-panel>

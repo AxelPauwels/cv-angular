@@ -1,0 +1,98 @@
+@use '2.tools' as tools;
+@use '3.vendors/mat';
+
+:host {
+  display: block;
+}
+
+// Neumorphism, with the card's own corner radius; fills its grid cell, so cards in
+// a row are equally tall
+.card {
+  height: 100%;
+
+  @include tools.neumorphism-card;
+  @include mat.card-overrides(
+    (
+      title-text-font: var(--mat-sys-title-medium-font),
+      title-text-line-height: var(--mat-sys-title-medium-line-height),
+      title-text-size: var(--mat-sys-title-medium-size),
+      title-text-weight: var(--mat-sys-title-medium-weight),
+    )
+  );
+
+  // Material's own padding unless the card sets `--ds-card-header-padding`
+  &__header {
+    padding: var(--ds-card-header-padding, 16px 16px 0);
+
+    // Material's wrapper around the title and subtitle fills the header, so a tag can
+    // sit at the right edge
+    // stylelint-disable-next-line selector-class-pattern -- Material's own element
+    ::ng-deep .mat-mdc-card-header-text {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  &__icon {
+    align-items: center;
+    background-color: var(
+      --ds-card-icon-background,
+      var(--mat-sys-primary-container)
+    );
+    color: var(--ds-card-icon-color, var(--mat-sys-on-primary-container));
+    display: flex;
+    font-size: 1.25rem;
+    justify-content: center;
+
+    // Initials: the primary color, like the skill icons, with on-primary text, the
+    // pair Material keeps in contrast in every theme and color scheme
+    &--initials {
+      background-color: var(--mat-sys-primary);
+      color: var(--mat-sys-on-primary);
+      font: var(--mat-sys-label-large);
+      letter-spacing: 0.04em;
+    }
+  }
+
+  // The header lines the title up with the avatar's middle: no heading margins. A
+  // tag sits at the end of the title line, wrapping under it when there's no room.
+  &__title {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+    justify-content: space-between;
+    letter-spacing: 0.06em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  &__tag {
+    @include tools.tag;
+  }
+
+  &__subtitle {
+    margin: 0;
+  }
+
+  // The header's colors, so these tiles match the navbar in every theme and color
+  // scheme; the text on them keeps the navbar's contrast (5.4:1 or more)
+  &--brand {
+    --mat-card-subtitle-text-color: var(
+      --ds-on-brand,
+      var(--mat-sys-on-primary)
+    );
+    --mat-card-title-text-color: var(--ds-on-brand, var(--mat-sys-on-primary));
+
+    background-color: var(--ds-brand, var(--mat-sys-primary));
+    color: var(--ds-on-brand, var(--mat-sys-on-primary));
+    isolation: isolate;
+    overflow: hidden;
+    position: relative;
+
+    .card__icon {
+      background-color: color-mix(in srgb, currentcolor 16%, transparent);
+      color: inherit;
+    }
+  }
+}

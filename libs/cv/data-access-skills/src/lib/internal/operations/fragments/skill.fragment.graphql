@@ -1,0 +1,9 @@
+fragment SkillFields on Skill {
+  category
+  icon
+  entries {
+    name
+    level
+    icon
+  }
+}

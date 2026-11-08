@@ -12,3 +12,5 @@ Note: If you use a component based framework like Angular or React, this layer w
 // These can't be styled by child-components. So we style them here.
 // We prefer to use also prefix 'c-' so we know quickly in html where the styles are located.
 // We 'use' these styles to include the styles in our CSS rather then 'forward' them. We never re-use this in child-components.
+
+@forward 'c-spinner';

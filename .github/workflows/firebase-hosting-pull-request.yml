@@ -17,6 +17,8 @@ jobs:
       # build:production runs the e2e tests to include their report
       - run: npx playwright install --with-deps
       - run: npm run build:production
+        env:
+          TOLGEE_API_KEY: ${{ secrets.TOLGEE_API_KEY }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,328 @@
+<ds-page-title title="t.heading.architecture" />
+
+@if (store.isLoading()) {
+<mat-progress-bar mode="indeterminate" aria-label="Loading the architecture" />
+} @else if (store.error()) {
+<div class="architecture-overview__notice">
+  <mat-icon
+    class="architecture-overview__icon"
+    fontSet="material-symbols-outlined"
+    aria-hidden="true">
+    info
+  </mat-icon>
+  <div>
+    <h2 class="architecture-overview__notice-title">
+      Architecture not available
+    </h2>
+    <p class="architecture-overview__text">
+      The architecture is generated at build time and is not available here. Run
+      <code class="architecture-overview__code"
+        >npx nx run technical-data-access-build-info:build-info</code
+      >.
+    </p>
+  </div>
+</div>
+} @else {
+<!-- Domains × layers: the numbers, the matrix and the apps on top -->
+<section
+  class="architecture-overview__section"
+  aria-labelledby="architecture-domains-title">
+  <ds-section-heading
+    headingId="architecture-domains-title"
+    title="t.subheading.technical.domains-and-layers"
+    tagline="t.subheading.technical.domains-and-layers.description" />
+
+  <p class="architecture-overview__text">
+    The workspace is sliced vertically: every <strong>domain</strong> (a part of
+    the app) owns its libraries, split into <strong>layers</strong> by what they
+    do. Folders follow
+    <code class="architecture-overview__code"
+      >libs/&lt;domain&gt;/&lt;layer&gt;-&lt;name&gt;</code
+    >; <code class="architecture-overview__code">libs/shared</code> holds what
+    several domains use. Generated from the Nx project graph.
+  </p>
+
+  <dl class="architecture-overview__stats">
+    @for (stat of stats(); track stat.label) {
+    <div class="architecture-overview__stat">
+      <mat-icon
+        class="architecture-overview__icon"
+        fontSet="material-symbols-outlined"
+        aria-hidden="true"
+        >{{ stat.icon }}</mat-icon
+      >
+      <dt class="architecture-overview__stat-label">{{ stat.label }}</dt>
+      <dd class="architecture-overview__stat-value">{{ stat.value }}</dd>
+    </div>
+    }
+  </dl>
+
+  <!-- a wide table scrolls on its own; focusable so the keyboard can scroll it -->
+  <div
+    class="architecture-overview__scroll"
+    tabindex="0"
+    role="region"
+    aria-label="Libraries per domain and layer">
+    <table
+      mat-table
+      class="architecture-overview__table architecture-overview__matrix"
+      [dataSource]="domains()">
+      <ng-container matColumnDef="domain">
+        <th mat-header-cell *matHeaderCellDef scope="col">Domain</th>
+        <th
+          *matCellDef="let domain"
+          scope="row"
+          class="mat-mdc-cell mdc-data-table__cell architecture-overview__row-header">
+          {{ domain }}
+        </th>
+      </ng-container>
+      @for (layer of layers(); track layer) {
+      <ng-container [matColumnDef]="layer">
+        <th mat-header-cell *matHeaderCellDef scope="col">{{ layer }}</th>
+        <td mat-cell *matCellDef="let domain">
+          <ul class="architecture-overview__projects">
+            @for (project of cell(domain, layer); track project.name) {
+            <li>
+              <code
+                class="architecture-overview__project"
+                [title]="project.root"
+                >{{ project.name }}</code
+              >
+            </li>
+            }
+          </ul>
+        </td>
+      </ng-container>
+      }
+      <tr mat-header-row *matHeaderRowDef="matrixColumns()"></tr>
+      <tr mat-row *matRowDef="let row; columns: matrixColumns()"></tr>
+    </table>
+  </div>
+
+  <h3 class="architecture-overview__subtitle">Apps on top</h3>
+  <mat-chip-set aria-label="Apps">
+    @for (app of apps(); track app.name) {
+    <mat-chip [title]="app.root">
+      <mat-icon matChipAvatar fontSet="material-symbols-outlined">
+        {{ app.kind === 'e2e' ? 'fact_check' : 'web' }}
+      </mat-icon>
+      {{ app.name }} ({{ app.kind }})
+    </mat-chip>
+    }
+  </mat-chip-set>
+</section>
+
+<section
+  class="architecture-overview__section"
+  aria-labelledby="architecture-rules-title">
+  <ds-section-heading
+    headingId="architecture-rules-title"
+    title="t.subheading.technical.dependency-rules"
+    tagline="t.subheading.technical.dependency-rules.description" />
+
+  <p class="architecture-overview__text">
+    <a
+      class="architecture-overview__link"
+      href="https://github.com/softarc-consulting/sheriff"
+      target="_blank"
+      rel="noopener"
+      >Sheriff</a
+    >
+    checks every import against these rules from
+    <code class="architecture-overview__code">sheriff.config.ts</code>, in
+    ESLint and with
+    <code class="architecture-overview__code">sheriff verify</code>. A module
+    needs clearance on both its tags: its domain and its layer.
+  </p>
+
+  <div
+    class="architecture-overview__scroll"
+    tabindex="0"
+    role="region"
+    aria-label="Dependency rules">
+    <table
+      mat-table
+      class="architecture-overview__table architecture-overview__rules"
+      [dataSource]="store.rules()">
+      <ng-container matColumnDef="from">
+        <th mat-header-cell *matHeaderCellDef scope="col">Modules tagged</th>
+        <th
+          *matCellDef="let rule"
+          scope="row"
+          class="mat-mdc-cell mdc-data-table__cell architecture-overview__row-header">
+          <code class="architecture-overview__project">{{ rule.from }}</code>
+        </th>
+      </ng-container>
+      <ng-container matColumnDef="to">
+        <th mat-header-cell *matHeaderCellDef scope="col">may import</th>
+        <td mat-cell *matCellDef="let rule">
+          @if (rule.to.length) { {{ describeTargets(rule.to) }} } @else {
+          <em>nothing: it depends on no other module</em>
+          }
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="ruleColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: ruleColumns"></tr>
+    </table>
+  </div>
+</section>
+
+<section
+  class="architecture-overview__section"
+  aria-labelledby="architecture-public-api-title">
+  <ds-section-heading
+    headingId="architecture-public-api-title"
+    title="t.subheading.technical.public-api"
+    tagline="t.subheading.technical.public-api.description" />
+
+  <ul class="architecture-overview__points">
+    <li class="architecture-overview__point">
+      <mat-icon
+        class="architecture-overview__icon"
+        fontSet="material-symbols-outlined"
+        aria-hidden="true"
+        >inventory_2</mat-icon
+      >
+      <h3 class="architecture-overview__point-title">One entry point</h3>
+      <p class="architecture-overview__point-text">
+        Every library exports its public API from
+        <code class="architecture-overview__code">src/index.ts</code>, imported
+        as
+        <code class="architecture-overview__code">&#64;cv/&lt;project&gt;</code
+        >. Deep imports into a library are not allowed.
+      </p>
+    </li>
+    <li class="architecture-overview__point">
+      <mat-icon
+        class="architecture-overview__icon"
+        fontSet="material-symbols-outlined"
+        aria-hidden="true"
+        >lock</mat-icon
+      >
+      <h3 class="architecture-overview__point-title">Private by default</h3>
+      <p class="architecture-overview__point-text">
+        What the barrel does not export lives in
+        <code class="architecture-overview__code">src/lib/internal/</code>. A
+        lint rule stops a barrel from exporting anything from there.
+      </p>
+    </li>
+    <li class="architecture-overview__point">
+      <mat-icon
+        class="architecture-overview__icon"
+        fontSet="material-symbols-outlined"
+        aria-hidden="true"
+        >bolt</mat-icon
+      >
+      <h3 class="architecture-overview__point-title">Lazy pages</h3>
+      <p class="architecture-overview__point-text">
+        Feature libraries default-export their page, so a route lazy-loads it
+        with
+        <code class="architecture-overview__code"
+          >loadComponent: () =&gt; import('&#64;cv/…')</code
+        >.
+      </p>
+    </li>
+  </ul>
+</section>
+
+<section
+  class="architecture-overview__section"
+  aria-labelledby="architecture-layers-title">
+  <ds-section-heading
+    headingId="architecture-layers-title"
+    title="t.subheading.technical.layers"
+    tagline="t.subheading.technical.layers.description" />
+
+  <ol class="architecture-overview__points">
+    <li class="architecture-overview__point">
+      <mat-icon
+        class="architecture-overview__icon"
+        fontSet="material-symbols-outlined"
+        aria-hidden="true"
+        >web</mat-icon
+      >
+      <h3 class="architecture-overview__point-title">feature</h3>
+      <p class="architecture-overview__point-text">
+        A routed page. Injects a store and renders its signals.
+      </p>
+    </li>
+    <li class="architecture-overview__point">
+      <mat-icon
+        class="architecture-overview__icon"
+        fontSet="material-symbols-outlined"
+        aria-hidden="true"
+        >database</mat-icon
+      >
+      <h3 class="architecture-overview__point-title">data-access</h3>
+      <p class="architecture-overview__point-text">
+        A root signal store (NgRx Signals) that loads once and is shared
+        app-wide. Internally a service runs a typed GraphQL query and a mapper
+        turns the generated API types into hand-written frontend types.
+      </p>
+    </li>
+    <li class="architecture-overview__point">
+      <mat-icon
+        class="architecture-overview__icon"
+        fontSet="material-symbols-outlined"
+        aria-hidden="true"
+        >api</mat-icon
+      >
+      <h3 class="architecture-overview__point-title">api</h3>
+      <p class="architecture-overview__point-text">
+        The GraphQL schema and resolvers (<code
+          class="architecture-overview__code"
+          >&#64;cv/api</code
+        >), answered in the browser for now.
+      </p>
+    </li>
+    <li class="architecture-overview__point">
+      <mat-icon
+        class="architecture-overview__icon"
+        fontSet="material-symbols-outlined"
+        aria-hidden="true"
+        >widgets</mat-icon
+      >
+      <h3 class="architecture-overview__point-title">ui and util</h3>
+      <p class="architecture-overview__point-text">
+        Presentational components and plain functions or types, shared without
+        knowing about data.
+      </p>
+    </li>
+  </ol>
+</section>
+
+<section
+  class="architecture-overview__section"
+  aria-labelledby="architecture-dependencies-title">
+  <ds-section-heading
+    headingId="architecture-dependencies-title"
+    title="t.subheading.technical.dependencies"
+    tagline="t.subheading.technical.dependencies.description" />
+
+  <mat-accordion class="architecture-overview__accordion" multi>
+    @for (group of projectsByDomain(); track group.domain) {
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ group.domain }}</mat-panel-title>
+        <mat-panel-description>
+          {{ group.projects.length }} libraries
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ul class="architecture-overview__dependencies">
+        @for (project of group.projects; track project.name) {
+        <li class="architecture-overview__dependency">
+          <code class="architecture-overview__project">{{ project.name }}</code>
+          <span class="architecture-overview__dependency-arrow">
+            @if (project.dependencies.length) { imports @for (dependency of
+            project.dependencies; track dependency; let last = $last) {
+            <code class="architecture-overview__code">{{ dependency }}</code>{{
+            last ? '' : ', ' }} } } @else { imports no other project }
+          </span>
+        </li>
+        }
+      </ul>
+    </mat-expansion-panel>
+    }
+  </mat-accordion>
+</section>
+}

@@ -2,15 +2,15 @@
 
 @font-face {
   font-family: '#{$icomoon-font-family}';
-  src: url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?w8bjg6');
+  src: url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?6h7gdf');
   src:
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?w8bjg6#iefix')
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?6h7gdf#iefix')
       format('embedded-opentype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?w8bjg6')
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?6h7gdf')
       format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?w8bjg6')
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?6h7gdf')
       format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?w8bjg6##{$icomoon-font-family}')
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?6h7gdf##{$icomoon-font-family}')
       format('svg');
   font-weight: normal;
   font-style: normal;
@@ -32,6 +32,111 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.cv-icon-nestjs {
+  &:before {
+    content: $cv-icon-nestjs;
+  }
+}
+.cv-icon-sulu1 {
+  &:before {
+    content: $cv-icon-sulu1;
+  }
+}
+.cv-icon-scrum {
+  &:before {
+    content: $cv-icon-scrum;
+  }
+}
+.cv-icon-accessibility {
+  &:before {
+    content: $cv-icon-accessibility;
+  }
+}
+.cv-icon-translation {
+  &:before {
+    content: $cv-icon-translation;
+  }
+}
+.cv-icon-rest-api {
+  &:before {
+    content: $cv-icon-rest-api;
+  }
+}
+.cv-icon-angular-material {
+  &:before {
+    content: $cv-icon-angular-material;
+  }
+}
+.cv-icon-ai {
+  &:before {
+    content: $cv-icon-ai;
+  }
+}
+.cv-icon-githubcopilot {
+  &:before {
+    content: $cv-icon-githubcopilot;
+  }
+}
+.cv-icon-mysql {
+  &:before {
+    content: $cv-icon-mysql;
+  }
+}
+.cv-icon-robot {
+  &:before {
+    content: $cv-icon-robot;
+  }
+}
+.cv-icon-claude {
+  &:before {
+    content: $cv-icon-claude;
+  }
+}
+.cv-icon-cursor {
+  &:before {
+    content: $cv-icon-cursor;
+  }
+}
+.cv-icon-ngrx {
+  &:before {
+    content: $cv-icon-ngrx;
+  }
+}
+.cv-icon-nodejs {
+  &:before {
+    content: $cv-icon-nodejs;
+  }
+}
+.cv-icon-postman {
+  &:before {
+    content: $cv-icon-postman;
+  }
+}
+.cv-icon-symfony {
+  &:before {
+    content: $cv-icon-symfony;
+  }
+}
+.cv-icon-jetbrains {
+  &:before {
+    content: $cv-icon-jetbrains;
+  }
+}
+.cv-icon-nx {
+  &:before {
+    content: $cv-icon-nx;
+  }
+}
+.cv-icon-confluence {
+  &:before {
+    content: $cv-icon-confluence;
+  }
+}
+.cv-icon-jira {
+  &:before {
+    content: $cv-icon-jira;
+  }
+}
 .cv-icon-tv {
   &:before {
     content: $cv-icon-tv;

@@ -1,0 +1,68 @@
+<ol cdkAccordion class="timeline" [attr.aria-label]="label()">
+  @for (item of items(); track item; let index = $index, last = $last) {
+  <li
+    cdkAccordionItem
+    #step="cdkAccordionItem"
+    class="timeline__step"
+    [class.timeline__step--expanded]="step.expanded"
+    [expanded]="expandFirst() && index === 0 && item.expandable()">
+    <!-- accordion pattern: the button sits in a heading, so screen readers can jump between items -->
+    <ng-template #header>
+      @if (item.expandable()) {
+      <button
+        type="button"
+        class="timeline__header"
+        [id]="id + '-header-' + index"
+        [attr.aria-expanded]="step.expanded"
+        [attr.aria-controls]="id + '-content-' + index"
+        (click)="step.toggle()">
+        <span class="timeline__year">{{ item.badgeLabel() }}</span>
+        <span class="timeline__label">
+          <ng-container [ngTemplateOutlet]="item.header()" />
+        </span>
+        <span class="timeline__chevron" aria-hidden="true"></span>
+      </button>
+      } @else {
+      <!-- nothing to expand: a plain header, no button, chevron or hover -->
+      <div class="timeline__header timeline__header--static">
+        <span class="timeline__year">{{ item.badgeLabel() }}</span>
+        <span class="timeline__label">
+          <ng-container [ngTemplateOutlet]="item.header()" />
+        </span>
+      </div>
+      }
+    </ng-template>
+    @switch (headingLevel()) { @case (3) {
+    <h3 class="timeline__heading">
+      <ng-container [ngTemplateOutlet]="header" />
+    </h3>
+    } @case (4) {
+    <h4 class="timeline__heading">
+      <ng-container [ngTemplateOutlet]="header" />
+    </h4>
+    } @default {
+    <h2 class="timeline__heading">
+      <ng-container [ngTemplateOutlet]="header" />
+    </h2>
+    } }
+
+    <!-- the line to the next pill runs along this container, also when closed -->
+    <div
+      class="timeline__content-container"
+      [class.timeline__content-container--line]="!last">
+      @if (item.expandable()) {
+      <div
+        class="timeline__content"
+        role="region"
+        [id]="id + '-content-' + index"
+        [attr.aria-labelledby]="id + '-header-' + index"
+        [attr.inert]="step.expanded ? null : ''">
+        <div class="timeline__content-inner">
+          <ng-container [ngTemplateOutlet]="item.content()" />
+        </div>
+      </div>
+      }
+    </div>
+  </li>
+  }
+</ol>

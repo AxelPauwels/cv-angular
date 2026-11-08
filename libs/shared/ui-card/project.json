@@ -1,0 +1,32 @@
+{
+  "name": "shared-ui-card",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/ui-card/src",
+  "prefix": "ds",
+  "projectType": "library",
+  "tags": ["domain:shared", "type:ui"],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "project": "libs/shared/ui-card/ng-package.json",
+        "tsConfig": "libs/shared/ui-card/tsconfig.lib.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/shared/ui-card/tsconfig.lib.prod.json"
+        },
+        "development": {}
+      }
+    },
+    "test": {
+      "executor": "@nx/angular:unit-test",
+      "options": {
+        "watch": false,
+        "browsers": ["ChromiumHeadless"]
+      }
+    }
+  }
+}

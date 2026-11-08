@@ -1,0 +1,6 @@
+@for (dot of dots(); track dot.position) {
+<span
+  class="progress-dots__dot"
+  [class.progress-dots__dot--filled]="dot.filled"
+  [style.--ds-progress-dots-position]="dot.position"></span>
+}

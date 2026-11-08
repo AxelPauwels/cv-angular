@@ -1,0 +1,48 @@
+:host {
+  background-color: var(--mat-sys-surface-container-highest);
+  block-size: 0.5rem;
+  border-radius: var(--mat-sys-corner-full);
+  display: block;
+  overflow: hidden;
+
+  // forced colors drop the background colors: draw the track and fill as outlines
+  @media (forced-colors: active) {
+    border: 1px solid CanvasText;
+  }
+}
+
+.progress-bar {
+  // fills up from empty once, one bar 60ms after the other in a list
+  &__fill {
+    animation: progress-bar-fill 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: calc(var(--ds-progress-bar-index, 0) * 60ms + 150ms);
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--mat-sys-primary) 55%, var(--mat-sys-surface)),
+      var(--mat-sys-primary)
+    );
+    block-size: 100%;
+    border-radius: inherit;
+    display: block;
+    transform-origin: left;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+
+    // the app's own reduce motion setting (on <html>)
+    :host-context(html[data-reduce-motion]) & {
+      animation: none;
+    }
+
+    @media (forced-colors: active) {
+      background: CanvasText;
+    }
+  }
+}
+
+@keyframes progress-bar-fill {
+  from {
+    transform: scaleX(0);
+  }
+}

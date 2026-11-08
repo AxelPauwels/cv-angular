@@ -1,0 +1,21 @@
+// A small CSS-only spinner, for waits longer than ~300ms (no spinner component in the bundle)
+.c-spinner {
+  animation: c-spinner-rotate 0.8s linear infinite;
+  border: 0.25rem solid var(--mat-sys-primary-container);
+  border-radius: 50%;
+  border-top-color: var(--mat-sys-primary);
+  box-sizing: border-box;
+  display: inline-block;
+  height: 2.5rem;
+  width: 2.5rem;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation-duration: 2.4s;
+  }
+}
+
+@keyframes c-spinner-rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}

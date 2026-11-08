@@ -1,0 +1,5 @@
+query Skills {
+  skills {
+    ...SkillFields
+  }
+}

@@ -1,0 +1,11 @@
+/**
+Angular Material's Sass API (mixins, functions, palettes) without any CSS output,
+so other styles can load it on its own; the file name gives the `mat` namespace:
+
+  @use '3.vendors/mat';      // component styles, via the style include paths
+  @use '../3.vendors/mat';   // layers 4.elements to 9.utilities
+
+Only layers 1-3 load `@angular/*` directly (lint rule cv/scss-allowed-imports).
+*/
+
+@forward '@angular/material';

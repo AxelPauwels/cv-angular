@@ -1,0 +1,60 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../1.settings' as settings;
+
+// Font themes, chosen with `data-font` on <html> (red-hat when unset), like the color
+// themes in ./material-theme-override. Keep the ids in sync with FONTS in
+// @cv/shared-data-access. The bare attribute selector also lets any element preview a
+// font, e.g. a menu option.
+
+// Each font theme is a pairing:
+// - `body`: all text by default (Material's `plain` family: body, label, title-medium/small)
+// - `heading`: page and section headings (Material's `brand` family: display, headline,
+//   title-large)
+// Components that need a pairing's font outside Material's type scale use the
+// `--ds-font-body` / `--ds-font-heading` variables set here.
+// @font-face only downloads a font once something uses it, so unchosen fonts cost nothing.
+$fonts: (
+  'red-hat': (
+    body: settings.$font-family-red-hat,
+    heading: settings.$font-family-michroma,
+  ),
+  'michroma': (
+    body: settings.$font-family-michroma,
+    heading: settings.$font-family-michroma,
+  ),
+  'goldman': (
+    body: settings.$font-family-goldman,
+    heading: settings.$font-family-goldman,
+  ),
+  'syncopate': (
+    body: settings.$font-family-syncopate,
+    heading: settings.$font-family-syncopate,
+  ),
+  'bruno-ace': (
+    body: settings.$font-family-bruno-ace,
+    heading: settings.$font-family-bruno-ace,
+  ),
+);
+
+@each $id, $pairing in $fonts {
+  $selector: "[data-font='#{$id}']";
+
+  @if $id == 'red-hat' {
+    $selector: 'html, #{$selector}';
+  }
+
+  #{$selector} {
+    --ds-font-body: #{map.get($pairing, body)};
+    --ds-font-heading: #{map.get($pairing, heading)};
+
+    @include mat.theme(
+      (
+        typography: (
+          brand-family: map.get($pairing, heading),
+          plain-family: map.get($pairing, body),
+        ),
+      )
+    );
+  }
+}

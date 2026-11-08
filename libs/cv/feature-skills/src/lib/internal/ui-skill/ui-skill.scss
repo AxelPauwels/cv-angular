@@ -1,0 +1,20 @@
+// icon, name and dots on one line, centered on each other
+:host {
+  align-items: center;
+  column-gap: 0.75rem;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+}
+
+.ui-skill {
+  // as wide as the card's avatar above, so the icons share its center line
+  &__icon {
+    color: var(--mat-sys-primary);
+    font-size: 2rem;
+    justify-self: center;
+  }
+
+  &__name {
+    font: var(--mat-sys-label-large);
+  }
+}

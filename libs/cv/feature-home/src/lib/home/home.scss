@@ -1,0 +1,202 @@
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+// Block: scopes the blend modes to the hero instead of the whole page.
+.home-hero {
+  align-content: end;
+  background-color: var(--mat-sys-primary-container);
+  box-sizing: border-box;
+  display: grid;
+  flex: 1;
+  isolation: isolate;
+  min-height: 26rem;
+  overflow: hidden;
+  padding: 4.5rem 1.25rem 2rem; // for the tour button
+  position: relative;
+
+  // Theme tint: `color` keeps the photo's light and shadow and takes the hue
+  // of the theme's primary color (a gray photo for the graphite theme)
+  &::before {
+    background-color: var(--mat-sys-primary);
+    mix-blend-mode: color;
+    opacity: 0.65;
+  }
+
+  // Scrim: fades into the page surface behind the text, so the text keeps its
+  // contrast in light and dark mode without a text shadow
+  &::after {
+    background: linear-gradient(
+      to top,
+      var(--mat-sys-surface) 0,
+      color-mix(in srgb, var(--mat-sys-surface) 85%, transparent) 30%,
+      transparent 65%
+    );
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  @media (width >= 900px) {
+    padding: 2rem clamp(2rem, 5vw, 4rem) clamp(2rem, 6vh, 4rem);
+
+    // Darkens towards the text on the left, the face (center) stays clear
+    &::after {
+      background: linear-gradient(
+        to right,
+        var(--mat-sys-surface) 0,
+        color-mix(in srgb, var(--mat-sys-surface) 60%, transparent) 30%,
+        transparent 55%
+      );
+    }
+  }
+
+  // Windows high contrast: drop the tint and scrim
+  @media (forced-colors: active) {
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  // The photo and the pseudo layers stack in source order: picture, tint, scrim
+  &__picture {
+    display: contents;
+  }
+
+  &__image {
+    height: 100%;
+    inset: 0;
+    object-fit: cover;
+    object-position: 52% 30%; // keeps the face in frame on narrow screens
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+  }
+
+  // A soft glow ripples out of the tour button, then rests ~2s, over and over,
+  // to draw the eye. Only transform and opacity animate, on the compositor: no
+  // layout or paint per frame. It starts after the page has settled and stops
+  // for good once the visitor hovers or focuses the button (WCAG 2.2.2).
+  // Reduced motion (system or the site's own setting) switches it off.
+  &__tour-glow {
+    border-radius: var(--mat-sys-corner-full);
+    display: inline-flex;
+    inset-block-start: 1rem;
+    inset-inline-end: 1rem;
+    position: absolute;
+    z-index: 1;
+
+    &::before {
+      animation: home-tour-glow 3.6s ease-out 1.5s infinite;
+
+      // the light tone of the primary color in both light and dark mode
+      background-color: var(--mat-sys-primary-fixed);
+      border-radius: inherit;
+      content: '';
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      z-index: -1;
+
+      @media (prefers-reduced-motion: reduce), (forced-colors: active) {
+        animation: none;
+        display: none;
+      }
+    }
+
+    &--stopped::before {
+      animation: none;
+      display: none;
+    }
+  }
+
+  &__text {
+    color: var(--mat-sys-on-surface);
+    justify-self: center;
+    max-width: 36rem;
+    position: relative;
+    text-align: center;
+    z-index: 1; // above the scrim
+
+    @media (width >= 900px) {
+      justify-self: start;
+      text-align: start;
+    }
+
+    // Windows high contrast: put the text on a solid panel
+    @media (forced-colors: active) {
+      background-color: Canvas;
+      padding: 1rem;
+    }
+  }
+
+  // Reserve the lines while the data loads, so nothing shifts
+  &__name {
+    font: var(--mat-sys-display-medium);
+    letter-spacing: 0.04em;
+    margin: 0;
+    min-height: 1lh;
+    text-transform: uppercase;
+
+    @media (width < 600px) {
+      font: var(--mat-sys-headline-large);
+    }
+  }
+
+  &__first-name {
+    color: var(--mat-sys-primary);
+  }
+
+  &__title {
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-headline-small);
+    letter-spacing: 0.2em;
+    margin: 0.25rem 0 1.5rem;
+    min-height: 1lh;
+    text-transform: uppercase;
+
+    @media (width < 600px) {
+      font: var(--mat-sys-title-medium);
+    }
+  }
+
+  // a word never wraps internally, so "Front-End" stays on one line
+  &__title-word {
+    white-space: nowrap;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+
+    @media (width >= 900px) {
+      justify-content: flex-start;
+    }
+  }
+}
+
+// 1.6s pulse, then ~2s at rest: the pulse ends at 44% of the 3.6s cycle
+@keyframes home-tour-glow {
+  0% {
+    animation-timing-function: ease-out;
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  44%,
+  100% {
+    opacity: 0;
+    transform: scale(1.12, 1.45);
+  }
+}

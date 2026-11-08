@@ -1,0 +1,178 @@
+// A header is as high as $header-height (more when its label wraps); the year pill
+// sits in its middle. The line to the next pill runs along the content container,
+// starting $line-gap below this pill and ending $line-gap above the next one.
+$badge-width: 4.5rem; // room for a word like "present" instead of a year
+$badge-height: 2rem;
+$header-height: 72px;
+$header-padding: 24px;
+$line-gap: 8px;
+$pill-offset: calc(($header-height - $badge-height) / 2);
+
+:host {
+  display: block;
+}
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  // the heading only carries the button: no spacing or type of its own
+  &__heading {
+    font: inherit;
+    margin: 0;
+  }
+
+  &__header {
+    align-items: center;
+    background: none;
+    border: 0;
+    border-radius: var(--mat-sys-corner-small);
+    color: var(--mat-sys-on-surface);
+    cursor: pointer;
+    display: flex;
+    font: inherit;
+    min-height: $header-height;
+    padding: 0 $header-padding;
+    text-align: left;
+    width: 100%;
+
+    &:not(.timeline__header--static):hover {
+      background-color: color-mix(
+        in srgb,
+        var(--mat-sys-on-surface) 4%,
+        transparent
+      );
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--mat-sys-primary);
+      outline-offset: -2px;
+    }
+
+    // a step without content: not a button, so no pointer or hover
+    &--static {
+      cursor: default;
+    }
+  }
+
+  // the year pill; the open item's pill takes the primary color
+  &__year {
+    align-items: center;
+    background-color: var(--mat-sys-secondary-container);
+    border: 1px solid transparent; // an outline in forced colors
+    border-radius: calc($badge-height / 2);
+    box-sizing: border-box;
+    color: var(--mat-sys-on-secondary-container);
+    display: flex;
+    flex: none;
+    font: var(--mat-sys-label-large);
+    height: $badge-height;
+    justify-content: center;
+    margin-right: 1rem;
+    padding-inline: 0.25rem;
+    width: $badge-width;
+
+    .timeline__step--expanded & {
+      background-color: var(--mat-sys-primary);
+      color: var(--mat-sys-on-primary);
+    }
+  }
+
+  // title and subtitle (from the item), wrapping onto more lines when needed
+  &__label {
+    flex-grow: 1;
+    font: var(--mat-sys-title-medium);
+    min-width: 0;
+    padding-block: 0.75rem;
+
+    .timeline__step--expanded & {
+      font-weight: 600;
+    }
+  }
+
+  // A light chevron on closed items to show they expand; it fades out once open and
+  // keeps its space, so the label doesn't shift. Halfway between the outline colors.
+  &__chevron {
+    $color: color-mix(
+      in srgb,
+      var(--mat-sys-outline) 10%,
+      var(--mat-sys-outline-variant)
+    );
+
+    border-bottom: 2px solid $color;
+    border-right: 2px solid $color;
+    flex-shrink: 0;
+    height: 0.5rem;
+    margin-inline: 1rem 0.25rem;
+    rotate: 45deg;
+    transition: opacity 200ms ease;
+    width: 0.5rem;
+
+    .timeline__step--expanded & {
+      opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  // Opens and closes by animating the row height; a closed item is hidden from
+  // keyboard and screen readers once the animation is done
+  &__content-container {
+    display: grid;
+    grid-template-rows: 0fr;
+    margin-left: calc($header-padding + $badge-width / 2);
+    position: relative;
+    transition:
+      grid-template-rows 200ms ease,
+      visibility 0s 200ms;
+    visibility: hidden;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    .timeline__step--expanded & {
+      grid-template-rows: 1fr;
+      transition:
+        grid-template-rows 200ms ease,
+        visibility 0s;
+      visibility: visible;
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    &--line::before {
+      border-left: 1px solid var(--mat-sys-outline-variant);
+      bottom: calc($line-gap - $pill-offset);
+      content: '';
+      left: 0;
+      position: absolute;
+      top: calc($line-gap - $pill-offset);
+      visibility: visible; // the line stays while the content is hidden
+    }
+  }
+
+  &__content {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  // the open content sits on a soft surface, a little away from the line
+  &__content-inner {
+    background-color: var(--mat-sys-surface-container-low);
+    border-radius: var(--mat-sys-corner-medium);
+    margin: 5px 24px 24px 3rem;
+    padding: 1rem 1.25rem;
+
+    // Phones: give the open content the full width next to the line
+    @media (width < 600px) {
+      margin-inline: 1rem 0;
+      padding-inline: 1rem;
+    }
+  }
+}

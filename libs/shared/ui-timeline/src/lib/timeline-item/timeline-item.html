@@ -1,0 +1,45 @@
+<ng-template #header>
+  <span class="timeline-item__title">
+    {{ title() }} @if (tag(); as tag) {
+    <span class="timeline-item__tag">{{ tag }}</span>
+    }
+  </span>
+  @if (subtitle(); as subtitle) {
+  <span class="timeline-item__subtitle">{{ subtitle }}</span>
+  }
+</ng-template>
+
+<ng-template #content>
+  @if (contentOnly()) {
+  <ng-container [ngTemplateOutlet]="projected" />
+  } @else {
+  <p class="timeline-item__detail">
+    <mat-icon
+      class="timeline-item__detail-icon"
+      fontSet="material-symbols-outlined"
+      aria-hidden="true"
+      >calendar_month</mat-icon
+    >
+    <span>{{ period() }}</span>
+  </p>
+  @if (icon(); as icon) {
+  <div class="timeline-item__detail">
+    <mat-icon
+      class="timeline-item__detail-icon"
+      fontSet="material-symbols-outlined"
+      aria-hidden="true"
+      >{{ icon }}</mat-icon
+    >
+    <div class="timeline-item__details">
+      <ng-container [ngTemplateOutlet]="projected" />
+    </div>
+  </div>
+  }
+  <ng-container [ngTemplateOutlet]="details" />
+  }
+</ng-template>
+
+<!-- one slot, so the projected content can show in either layout -->
+<ng-template #projected><ng-content /></ng-template>
+<!-- extra rows, each with its own icon, below the period and the details -->
+<ng-template #details><ng-content select="ds-timeline-detail" /></ng-template>

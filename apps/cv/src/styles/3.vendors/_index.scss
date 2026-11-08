@@ -4,6 +4,7 @@ Vendors are third-party styles that are being used in a project. They are high i
 Examples: reset.css, normalise.css, bootstrap, bootstrap-overrides
 */
 
-// dependencies
-
 // forwards
+// (mat is not forwarded: components @use it directly)
+@forward './material-theme-override';
+@forward './material-font-override';

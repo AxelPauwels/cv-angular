@@ -1,34 +1,39 @@
 import { Routes } from '@angular/router';
-import { Wrapper, WrapperConfig } from './domains/shared/ui-federation/wrapper';
-import { Home } from './domains/home/home';
+import { cvMfeWrapperConfig, Wrapper } from '@cv/shared-ui-federation';
+import { ROUTES } from '@cv/shared-util-routing';
+
 export const appRoutes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'home',
+    path: ROUTES.CV.ROOT,
+    loadChildren: () =>
+      import('@cv/cv-feature-shell').then((m) => m.cvFeatureShellRoutes),
   },
   {
-    path: 'home',
-    component: Home,
+    path: ROUTES.SHOWCASE.ROOT,
+    loadChildren: () =>
+      import('@cv/showcase-feature-shell').then(
+        (m) => m.showcaseFeatureShellRoutes
+      ),
   },
   {
-    path: 'example',
-    loadComponent: () =>
-      import('./domains/example/example').then((m) => m.Example),
+    path: ROUTES.TECHNICAL.ROOT,
+    loadChildren: () =>
+      import('@cv/technical-feature-shell').then(
+        (m) => m.technicalFeatureShellRoutes
+      ),
+  },
+  // the admin page moved into the showcase; old links still find it
+  {
+    path: 'admin',
+    redirectTo: ROUTES.SHOWCASE.ADMIN_ROUTER_LINK,
   },
   {
-    path: 'cv-mfe',
+    path: ROUTES.MF.CV_MFE,
     component: Wrapper,
-    data: {
-      config: {
-        remoteName: 'cv-mfe',
-        exposedModule: './web-components',
-        elementName: 'cv-mfe',
-      } as WrapperConfig,
-    },
+    data: { config: cvMfeWrapperConfig },
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: ROUTES.CV.ROOT,
   },
 ];

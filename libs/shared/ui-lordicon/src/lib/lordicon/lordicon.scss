@@ -1,0 +1,16 @@
+:host {
+  --lord-icon-primary: var(--mat-sys-primary);
+  --lord-icon-secondary: var(--mat-sys-on-surface);
+
+  block-size: var(--ds-lordicon-size, 1em);
+  display: inline-block;
+  flex-shrink: 0;
+  inline-size: var(--ds-lordicon-size, 1em);
+  line-height: 1;
+}
+
+.lordicon {
+  block-size: 100%;
+  display: block;
+  inline-size: 100%;
+}

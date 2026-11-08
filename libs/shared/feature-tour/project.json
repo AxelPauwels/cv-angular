@@ -1,0 +1,32 @@
+{
+  "name": "shared-feature-tour",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/feature-tour/src",
+  "prefix": "shared",
+  "projectType": "library",
+  "tags": ["domain:shared", "type:feature"],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "project": "libs/shared/feature-tour/ng-package.json",
+        "tsConfig": "libs/shared/feature-tour/tsconfig.lib.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/shared/feature-tour/tsconfig.lib.prod.json"
+        },
+        "development": {}
+      }
+    },
+    "test": {
+      "executor": "@nx/angular:unit-test",
+      "options": {
+        "watch": false,
+        "browsers": ["ChromiumHeadless"]
+      }
+    }
+  }
+}

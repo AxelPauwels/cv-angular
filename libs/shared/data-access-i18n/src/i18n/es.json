@@ -1,0 +1,408 @@
+{
+  "t": {
+    "accessibility": {
+      "close": "Cerrar",
+      "high-contrast": "Mayor contraste",
+      "reduce-motion": "Reducir el movimiento",
+      "reset": "Restablecer valores predeterminados",
+      "switch": "Ajustes de accesibilidad",
+      "text-size": "Tamaño del texto",
+      "text-spacing": "Espaciado de texto más amplio",
+      "title": "Accesibilidad"
+    },
+    "admin": {
+      "count": "{on} de {total} activados",
+      "hidden-notice": "La página Admin ya no aparece en el menú. Puedes abrirla en /showcase/admin haciendo clic en «Axel Pauwels» en el pie de página.",
+      "linked": {
+        "off": "{item} también desactivado.",
+        "on": "{item} también activado."
+      },
+      "reset": "Restablecer valores predeterminados",
+      "section": {
+        "general": {
+          "title": "General"
+        },
+        "main-menu": {
+          "title": "Menú principal"
+        },
+        "navbar": {
+          "title": "Iconos de la barra de navegación"
+        },
+        "submenu": {
+          "title": "Submenú"
+        }
+      },
+      "title": "Administración",
+      "toggle": {
+        "color-scheme-switcher": {
+          "label": "Modo claro y oscuro"
+        },
+        "tour-button": {
+          "label": "Botón del recorrido en la página de inicio"
+        }
+      }
+    },
+    "at": "en",
+    "carousel": {
+      "next": "Siguiente",
+      "previous": "Anterior"
+    },
+    "city": {
+      "paris": "París"
+    },
+    "client": "Cliente",
+    "color-scheme": {
+      "dark": "Modo oscuro",
+      "light": "Modo claro y oscuro"
+    },
+    "common": {
+      "cv": "CV",
+      "download-cv": "Descargar CV",
+      "email": "Correo electrónico",
+      "ok": "OK",
+      "pdf": "PDF",
+      "reset": "Restablecer el valor predeterminado",
+      "under-construction": "Esta página está en construcción. ¡Vuelve pronto!"
+    },
+    "country": {
+      "belgium": "Bélgica"
+    },
+    "daughter": "hija",
+    "education": {
+      "bellouet-conseil": {
+        "degree": "Diploma de azúcar estirado | Diploma de azúcar vertido & azúcar soplado",
+        "specialization": "Azúcar estirado, azúcar vertido, azúcar soplado"
+      },
+      "level": {
+        "extra": "Clases adicionales",
+        "high-school": "Educación superior",
+        "secondary": "Educación Secundaria"
+      },
+      "school": {
+        "ter-duinen": {
+          "degree": "Diploma de Educación Secundaria"
+        }
+      },
+      "sint-jozef": {
+        "specialization": "Hotel TSO"
+      },
+      "ter-duinen": {
+        "specialization": "Hotel TSO"
+      },
+      "thomas-more": {
+        "degree": "Grado profesional en Informática aplicada",
+        "specialization": "IT Factory Aplicaciones"
+      },
+      "training": {
+        "status": {
+          "COMPLETED": "completado",
+          "ONGOING": "en curso",
+          "RECURRING": "cada año"
+        }
+      }
+    },
+    "experience": {
+      "job-description": {
+        "innomedio": {
+          "projects": "Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...",
+          "technologies": "Tecnología: Mantenimiento y expansión del sistema CMS desarrollado internamente en Symfony con SCSS. Asistencia telefónica a clientes con problemas o expansiones, y gestión del sistema de tickets de soporte en Teamleader. También GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ..."
+        },
+        "ordina": {
+          "projects": "Aplicación de aprendizaje electrónico"
+        },
+        "phpro": {
+          "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,...",
+          "technologies": "Tecnología: Trabajé principalmente con Magento 2 (PHP/Less), con algo de React y Sulu. También me adentré en el CSS de Triángulo Invertido (ITCSS) frontend de SEM&BIO en Sass. También usé GrumPhp, Vagrant, SequelPro, Git, Figma, BitBucket, Jira, Confluence, Jenkins y más."
+        },
+        "ravago": {
+          "projects": "Sistema de gestión de almacenes (WMS), posteriormente WMS2. Disponible tanto como aplicación de escritorio para oficina como aplicación móvil para escáneres portátiles en almacenes.",
+          "technologies": "Tecnología: Angular (Typescript/Scss) con Nx y el framework de interfaz de usuario Kendo. Además, Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise..."
+        }
+      },
+      "work-position": {
+        "3-it": "Desarrollador Frontend en prácticas",
+        "bergerie": "Chef de cocina fría / chef pastelero",
+        "bergerie-stage": "Becario de cocina",
+        "bruneau": "Chef de part / Pastelero",
+        "cardijn": "Sous chef",
+        "domaine-des-hautes-fagnes": "Becario de cocina",
+        "farmasie": "Sous Chef / Pastelero",
+        "innomedio": "Desarrollador de soporte PHP / Front-End",
+        "koekoek": "Sous Chef / Chef",
+        "koekoek-2": "Chef",
+        "nieuwen-buiten": "Becario de cocina",
+        "ordina": "Desarrollador front-end",
+        "phpro": "Desarrollador front-end de PHP",
+        "ravago": "Desarrollador angular senior",
+        "residentie": "Becario de servicio",
+        "zilte": "Chef de part / Pastelero"
+      }
+    },
+    "font": {
+      "switch": "Fuente"
+    },
+    "heading": {
+      "administrator": "Administrador",
+      "architecture": "Arquitectura",
+      "code-coverage": "cobertura de código",
+      "education": "Formación",
+      "end-to-end-tests": "Pruebas de extremo a extremo",
+      "experience": "Experiencia",
+      "graphql-docs": "graphql docs",
+      "personal": "personal",
+      "project-graph": "Grafo de proyectos",
+      "references": "referencias",
+      "skills": "Habilidades",
+      "versions": "versiones"
+    },
+    "home": {
+      "about-me": "Más sobre mí",
+      "experience": "Mi experiencia",
+      "portrait": "Retrato de {name}"
+    },
+    "internship": "Pasantía",
+    "language": {
+      "dutch": "Holandés",
+      "english": "Inglés",
+      "french": "Francés",
+      "german": "Alemán",
+      "italian": "Italiano",
+      "proficiency": {
+        "basic": "básicos",
+        "excellent": "Excelente",
+        "fair": "Intermedio",
+        "good": "Bueno",
+        "very-good": "Muy bueno"
+      },
+      "spanish": "Español",
+      "switch": "Selecciona un idioma"
+    },
+    "nav": {
+      "admin": "Admin",
+      "architecture": "Arquitectura",
+      "code-coverage": "cobertura de código",
+      "cv": "CV",
+      "cv-navigation": "Navegación del CV",
+      "dark": "Oscuro",
+      "dark-mode": "modo oscuro",
+      "education": "Formación",
+      "end-to-end-tests": "Pruebas de extremo a extremo",
+      "experience": "Experiencia",
+      "graphql-docs": "graphql docs",
+      "home": "Hogar",
+      "light": "Claro",
+      "light-mode": "modo claro",
+      "main-navigation": "Navegación principal",
+      "micro-frontends": "Microfrontends",
+      "personal": "Personal",
+      "project-graph": "Grafo de proyectos",
+      "references": "Referencias",
+      "showcase": "Escaparate",
+      "showcase-navigation": "Navegación del escaparate",
+      "skills": "Habilidades",
+      "technical": "Técnico",
+      "technical-navigation": "Navegación técnica",
+      "temp": {
+        "more": "Más"
+      },
+      "versions": "Versiones"
+    },
+    "personal": {
+      "about-me": {
+        "card": {
+          "description": {
+            "driver-license": {
+              "B": "B"
+            },
+            "marital-status": {
+              "married": "Casado"
+            },
+            "nationality": {
+              "BE": "BE"
+            },
+            "personality-type": {
+              "INTJ": "INTJ"
+            }
+          },
+          "title": {
+            "children": "Hijos",
+            "date-of-birth": "Fecha de nacimiento",
+            "driver-license": "Permiso de conducir",
+            "marital-status": "Estado civil",
+            "nationality": "Nacionalidad",
+            "personality-type": "Tipo de personalidad"
+          }
+        }
+      },
+      "hobby": {
+        "binge-watching": "Binche Watching",
+        "board-games": "Juegos de mesa",
+        "comment": {
+          "vlaamse-schietsport-koepel": "Vlaamse SchietsportKoepel",
+          "world-cube-association": "World Cube Association"
+        },
+        "member-of-vsk": "Miembro de VSK",
+        "member-of-wca": "Miembro de WCA",
+        "mtg": "Magic The Gathering (TCG)",
+        "rubik-s-cube-competitions": "Rubik’s Cubo Competiciones"
+      }
+    },
+    "present": "presente",
+    "son": "Hijo",
+    "spoken": "Hablado",
+    "subheading": {
+      "administrator": "Un gran poder conlleva una gran configuración",
+      "education": {
+        "certificates": "Certificados",
+        "certificates.description": "Preuve de curiosité et de dévouement",
+        "training-and-conferences": "Formación & conferencias",
+        "training-and-conferences.description": "Siempre aprendiendo, siempre curioso"
+      },
+      "frameworks": "marcos",
+      "horeca": "Hospitalidad",
+      "it": "TI",
+      "libraries": "bibliotecas",
+      "operating-systems": "sistemas operativos",
+      "personal": {
+        "about-me": "Sobre mí",
+        "about-me.description": "La persona detrás del código",
+        "about-me.prefix": "Identidad",
+        "connect": "Hablemos",
+        "connect.description": "Listo para crear algo extraordinario",
+        "connect.prefix": "Conectar",
+        "hobbies-and-interests": "Aficiones & intereses",
+        "hobbies-and-interests.description": "La vida más allá del código",
+        "hobbies-and-interests.prefix": "Pasiones",
+        "languages": "Idiomas",
+        "languages.description": "Tendiendo puentes entre culturas",
+        "languages.prefix": "Comunicación"
+      },
+      "programming-languages": "lenguajes de programación",
+      "skills": {
+        "additional-technologies": "tecnologías adicionales",
+        "ai": "IA & desarrollo agéntico",
+        "core-stack": "stack frontend principal",
+        "development-tools": "herramientas de desarrollo",
+        "engineering-practices": "prácticas de ingeniería",
+        "other": "otras habilidades",
+        "testing-and-quality": "pruebas & calidad",
+        "tools-and-methods": "herramientas & métodos"
+      },
+      "technical": {
+        "dependencies": "Dependencias por proyecto",
+        "dependencies.description": "Directamente del grafo de proyectos",
+        "dependency-rules": "Reglas de dependencia",
+        "dependency-rules.description": "Comprobadas en cada import",
+        "domains-and-layers": "Dominios × capas",
+        "domains-and-layers.description": "Cortes verticales, capas horizontales",
+        "layers": "Capas dentro de un dominio",
+        "layers.description": "Quién hace qué",
+        "public-api": "API pública",
+        "public-api.description": "Barrels y carpetas internas"
+      },
+      "version-control": "control de versiones"
+    },
+    "temp": {
+      "under-construction": {
+        "content-1": "Bienvenido a mi sitio web de CV!",
+        "content-2": "Por el momento, toda la información básica ya está disponible, pero las partes más interesantes aún están en desarrollo.",
+        "content-3": "Actualmente estoy trabajando en la sección \"Arquitectura\", que contendrá toda la información sobre este sitio web: la tecnología utilizada, la estructura, los enfoques de desarrollo, las versiones, el backend y mucho más... todo lo que hace feliz a un desarrollador.",
+        "content-4": "Además, también estoy desarrollando funciones interactivas, como un selector de modo claro/oscuro, cambio de colores, más idiomas, una página CRUD simulada donde podrás activar y desactivar algunas funcionalidades, y muchas otras cosas.",
+        "content-5": "Por último, también habrá una demostración de interfaces modernas, aunque he decidido desarrollar este sitio con una estética vintage y retro.",
+        "title": "En construcción"
+      },
+      "versions": "t.temp.versions"
+    },
+    "theme": {
+      "blackberry": "Pizarra",
+      "earth": "Bosque",
+      "gold": "Oro",
+      "grape": "Lavanda",
+      "honey": "Carmesí",
+      "peach": "Rosa",
+      "silver": "Ciruela",
+      "switch": "Selecciona un tema",
+      "tangerine": "Arena",
+      "water": "Océano"
+    },
+    "tour": {
+      "back": "Atrás",
+      "counter": "{current} / {total}",
+      "exit": "Salir del recorrido",
+      "finish": "Terminar",
+      "loading": "Cargando el recorrido…",
+      "next": "Siguiente",
+      "start": "Iniciar el recorrido",
+      "step": {
+        "architecture": {
+          "label": "Arquitectura",
+          "text": "¿Te preguntas cómo está hecha esta web? La sección técnica explica la arquitectura, el grafo del proyecto y las versiones utilizadas.",
+          "title": "Arquitectura"
+        },
+        "color-scheme": {
+          "label": "Modo oscuro",
+          "text": "Cambia entre un aspecto claro y uno oscuro. Por defecto, la web sigue la configuración de tu dispositivo.",
+          "title": "Modo claro y oscuro"
+        },
+        "contact": {
+          "label": "Contacto",
+          "text": "¿Quieres contactar conmigo? Escríbeme o encuéntrame en LinkedIn y GitHub con los iconos de abajo a la derecha.",
+          "title": "Ponte en contacto"
+        },
+        "cv": {
+          "label": "CV",
+          "text": "Aquí encontrarás todo sobre mí: datos personales, formación, experiencia, habilidades y referencias.",
+          "title": "Mi CV"
+        },
+        "download-cv": {
+          "label": "Descargar CV",
+          "text": "¿Prefieres leerlo sin conexión? Descarga aquí mi CV en PDF.\nConsejo: usa los botones de abajo o las flechas del teclado, y pulsa Escape para salir del recorrido en cualquier momento.",
+          "title": "Descarga mi CV"
+        },
+        "finish": {
+          "label": "Terminar",
+          "text": "Gracias por hacer el recorrido. Disfruta explorando, puedes volver a iniciar el recorrido desde la página de inicio cuando quieras.",
+          "title": "¡Eso es todo!"
+        },
+        "fonts": {
+          "label": "Fuentes",
+          "text": "¿Prefieres otro estilo? Cambia aquí la fuente de toda la web.",
+          "title": "Fuentes"
+        },
+        "languages": {
+          "label": "Idiomas",
+          "text": "La web está disponible en inglés, neerlandés, francés y español. Elige tu idioma aquí.",
+          "title": "Idiomas"
+        },
+        "settings": {
+          "label": "Tus preferencias",
+          "text": "Primero configura la web a tu gusto: el tema de color, la fuente, los ajustes de accesibilidad, el modo claro u oscuro y el idioma. Tus elecciones se guardan en este dispositivo.",
+          "title": "Hazlo a tu manera"
+        },
+        "showcase": {
+          "label": "Escaparate",
+          "text": "El escaparate muestra técnicas en la práctica, como micro-frontends, documentación GraphQL, cobertura de código y pruebas de extremo a extremo.",
+          "title": "Escaparate"
+        },
+        "technical": {
+          "label": "Técnico",
+          "text": "¿Te preguntas cómo está hecha esta web? La sección técnica muestra el grafo del proyecto, la arquitectura, la documentación GraphQL, la cobertura de código, las pruebas de extremo a extremo y las versiones utilizadas.",
+          "title": "Bajo el capó"
+        },
+        "themes": {
+          "label": "Temas",
+          "text": "Elige aquí uno de los temas de color. Cada tema aplica colores a juego en toda la web.",
+          "title": "Temas de color"
+        },
+        "welcome": {
+          "label": "Bienvenida",
+          "text": "Déjame enseñarte el sitio. Este breve recorrido te muestra la web y sus funciones. Usa los botones de abajo o las flechas del teclado, y pulsa Escape para salir en cualquier momento.",
+          "title": "¡Bienvenido!"
+        }
+      },
+      "step-of": "Paso {current} de {total}"
+    },
+    "website": "sitio web",
+    "written": "Escrito"
+  }
+}

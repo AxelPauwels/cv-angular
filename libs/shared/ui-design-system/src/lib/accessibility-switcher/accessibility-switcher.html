@@ -1,0 +1,65 @@
+<button
+  matIconButton
+  class="accessibility-switcher__trigger"
+  [popoverTargetElement]="panel"
+  [matTooltip]="'t.accessibility.switch' | translate"
+  [attr.aria-label]="'t.accessibility.switch' | translate">
+  <mat-icon fontSet="material-symbols-outlined">accessibility_new</mat-icon>
+</button>
+
+<div
+  #panel
+  popover
+  class="accessibility-switcher__panel"
+  role="dialog"
+  [attr.aria-label]="'t.accessibility.title' | translate">
+  <div class="accessibility-switcher__body">
+    <div class="accessibility-switcher__field">
+      <span class="accessibility-switcher__label" [id]="id + '-text-size'">
+        {{ 't.accessibility.text-size' | translate }}
+      </span>
+      <mat-button-toggle-group
+        class="accessibility-switcher__text-sizes"
+        hideSingleSelectionIndicator
+        [name]="id + '-text-size'"
+        [attr.aria-labelledby]="id + '-text-size'"
+        [value]="settings().textSize"
+        (change)="settingsChange.emit({ textSize: $event.value })">
+        @for (size of textSizes(); track size) {
+        <mat-button-toggle [value]="size">{{ size }}%</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+    </div>
+
+    <mat-slide-toggle
+      class="accessibility-switcher__toggle"
+      [checked]="settings().reduceMotion"
+      (change)="settingsChange.emit({ reduceMotion: $event.checked })">
+      {{ 't.accessibility.reduce-motion' | translate }}
+    </mat-slide-toggle>
+
+    <mat-slide-toggle
+      class="accessibility-switcher__toggle"
+      [checked]="settings().highContrast"
+      (change)="settingsChange.emit({ highContrast: $event.checked })">
+      {{ 't.accessibility.high-contrast' | translate }}
+    </mat-slide-toggle>
+
+    <mat-slide-toggle
+      class="accessibility-switcher__toggle"
+      [checked]="settings().wideTextSpacing"
+      (change)="settingsChange.emit({ wideTextSpacing: $event.checked })">
+      {{ 't.accessibility.text-spacing' | translate }}
+    </mat-slide-toggle>
+  </div>
+
+  <mat-divider />
+  <button
+    type="button"
+    matRipple
+    class="accessibility-switcher__reset"
+    (click)="resetSettings.emit()">
+    <mat-icon fontSet="material-symbols-outlined">restart_alt</mat-icon>
+    <span>{{ 't.common.reset' | translate }}</span>
+  </button>
+</div>

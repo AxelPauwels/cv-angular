@@ -1,0 +1,137 @@
+@use '2.tools' as tools;
+@use '3.vendors/mat';
+
+.accessibility-switcher {
+  // Sits on the primary-colored toolbar
+  &__trigger {
+    @include mat.icon-button-overrides(
+      (
+        icon-color: var(--mat-sys-on-primary),
+      )
+    );
+
+    anchor-name: --ds-accessibility-switcher;
+  }
+
+  // A native popover: centered in the viewport, or below the button where the browser
+  // supports anchor positioning. It lives inside the toolbar in the DOM, so it resets
+  // the colors, font and wrapping it would inherit from there.
+  &__panel {
+    // the navbar sets primary to the header color; the panel sits on the surface like
+    // the toolbar menus (which render in an overlay), so it takes the page's primary back
+    --mat-sys-primary: var(--ds-primary);
+    --mat-sys-on-primary: var(--ds-on-primary);
+
+    // the toolbar colors unthemed buttons inside it with its own text color (on-primary)
+    @include mat.toolbar-overrides(
+      (
+        container-text-color: var(--mat-sys-primary),
+      )
+    );
+    @include mat.icon-button-overrides(
+      (
+        icon-color: var(--mat-sys-on-surface-variant),
+      )
+    );
+
+    background-color: var(--mat-sys-surface-container);
+    border: 0;
+    border-radius: var(--mat-sys-corner-large);
+    box-shadow: var(--mat-sys-level2);
+    box-sizing: border-box;
+    color: var(--mat-sys-on-surface);
+    font: var(--mat-sys-body-medium);
+    max-height: calc(100dvh - 2rem);
+    overflow: auto;
+    padding: 0;
+    white-space: normal;
+    width: min(22rem, calc(100vw - 2rem));
+
+    &:popover-open {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @supports (position-area: bottom) {
+      inset: auto;
+      margin: 0.25rem 0;
+      position-anchor: --ds-accessibility-switcher;
+      position-area: bottom span-left;
+      position-try-fallbacks: flip-inline;
+
+      // percentages refer to the area next to the button here: keep a gap to the edge
+      width: min(22rem, calc(100% - 0.5rem));
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__label {
+    font: var(--mat-sys-label-large);
+  }
+
+  // four equal segments, wrapping only when the text is very large
+  &__text-sizes {
+    display: flex;
+    flex-wrap: wrap;
+
+    .mat-button-toggle {
+      flex: 1 1 auto;
+    }
+  }
+
+  // Looks like the reset item at the bottom of the toolbar menus (a mat-menu-item
+  // can't live outside a mat-menu)
+  &__reset {
+    @include tools.menu-reset;
+
+    align-items: center;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    flex: none;
+    font: var(--mat-sys-label-large);
+    gap: 1rem;
+    min-height: 48px;
+    overflow: hidden;
+    padding: 0 1rem;
+    position: relative;
+    text-align: start;
+    width: 100%;
+
+    // the state layer of a menu item
+    &::before {
+      background-color: currentcolor;
+      content: '';
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+    }
+
+    &:hover::before {
+      opacity: 0.08;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--mat-sys-primary);
+      outline-offset: -2px;
+
+      &::before {
+        opacity: 0.12;
+      }
+    }
+  }
+}

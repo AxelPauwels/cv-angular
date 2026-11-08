@@ -1,0 +1,110 @@
+@use '2.tools' as tools;
+
+// Header, the routed content, and a footer that stays at the bottom on short pages.
+// From md up the shell is exactly the screen high: header and footer stay put and
+// only the content scrolls (the sub-navbar's panel, see ds-sub-navbar), so the
+// scrollbar runs below the tabs instead of along the whole window. Small screens
+// keep scrolling the page, so the browser's address bar can still collapse.
+:host {
+  display: grid;
+  grid-template:
+    'header' auto
+    'main' 1fr
+    'footer' auto / 1fr;
+  min-height: 100dvh;
+
+  @include tools.screen(md) {
+    height: 100dvh;
+  }
+}
+
+.shell {
+  &__header {
+    grid-area: header;
+    min-width: 0;
+  }
+
+  // min-height 0 down to the scrolling panel, so it can shrink to the space left;
+  // a page without a sub-navbar scrolls here instead
+  &__main {
+    display: flex;
+    flex-direction: column;
+    grid-area: main;
+    min-height: 0;
+    min-width: 0;
+
+    @include tools.screen(md) {
+      overflow-y: auto;
+    }
+  }
+
+  // a flex column down to the routed page, so it can fill the main area
+  &__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  &__footer {
+    align-items: center;
+    background-color: var(--mat-sys-surface-container);
+    border-top: var(--mat-tab-divider-height, 1px) solid
+      var(--mat-tab-divider-color, var(--mat-sys-surface-variant));
+    color: var(--mat-sys-on-surface-variant);
+    display: flex;
+    flex-wrap: wrap;
+    font: var(--mat-sys-body-small);
+    gap: 0.5rem 1.5rem;
+    grid-area: footer;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+  }
+
+  &__copyright {
+    margin: 0;
+  }
+
+  // Looks like the rest of the line, underlined to show it is a link
+  &__admin-link {
+    color: inherit;
+    text-decoration: underline;
+
+    &:hover {
+      font-weight: 700;
+    }
+
+    &:focus-visible {
+      border-radius: var(--mat-sys-corner-extra-small);
+      outline: 2px solid currentcolor;
+      outline-offset: 2px;
+    }
+  }
+
+  // While the tour's chunk loads (only shown after 300ms)
+  &__tour-loading {
+    align-items: center;
+    background-color: color-mix(in srgb, var(--mat-sys-scrim) 72%, transparent);
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    position: fixed;
+    z-index: 1100;
+  }
+
+  &__tour {
+    &--leave {
+      animation: shell-tour-fade-out 200ms ease-in forwards;
+
+      @media (prefers-reduced-motion: reduce) {
+        animation-duration: 1ms;
+      }
+    }
+  }
+}
+
+@keyframes shell-tour-fade-out {
+  to {
+    opacity: 0;
+  }
+}

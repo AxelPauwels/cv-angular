@@ -1,6 +1,8 @@
 import { expect, Locator, Page, test } from '@playwright/test';
 
-const windows = (page: Page): Locator => page.locator('lib-mac-window');
+/** The mac window showcased next to the micro-frontend */
+const macWindow = (page: Page): Locator =>
+  page.locator('showcase-micro-frontends lib-mac-window');
 
 async function boxOf(locator: Locator) {
   const box = await locator.boundingBox();
@@ -12,27 +14,50 @@ async function boxOf(locator: Locator) {
 
 test.describe('mac-window', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/example');
+    await page.goto('/showcase/micro-frontends');
+    // The page is lazy-loaded; against the unminified dev server with parallel
+    // workers that can take several seconds. Wait for it once, so the
+    // assertions below keep the default timeout.
+    await expect(macWindow(page).locator('.mw__controls')).toBeVisible({
+      timeout: 20_000,
+    });
   });
 
-  test('shows the app title in a window', async ({ page }) => {
-    const appWindow = windows(page).first();
+  test('is showcased in its own tab, as a component library', async ({
+    page,
+  }) => {
+    // Arrange
+    const name = 'Component library: <lib-mac-window>';
 
-    await expect(appWindow.getByRole('heading', { level: 1 })).toHaveText('cv');
+    // Act
+    const heading = page.getByRole('heading', { name });
+
+    // Assert
+    await expect(page).toHaveURL(/\/showcase\/micro-frontends$/);
+    await expect(heading).toBeVisible();
   });
 
-  test('shows the example page content', async ({ page }) => {
-    await expect(page).toHaveURL(/\/example$/);
-    await expect(page.getByLabel('Person')).toHaveValue('1');
+  test('projects its content into the window body', async ({ page }) => {
+    // Arrange
+    const projected = 'Anything placed here is projected into the window.';
+
+    // Act
+    const content = macWindow(page).locator('.mw__content');
+
+    // Assert
+    await expect(content).toHaveText(projected);
   });
 
   test('draws the title bar with the red, yellow and green buttons', async ({
     page,
   }) => {
-    const appWindow = windows(page).first();
-    const controls = appWindow.locator('.mw__controls');
+    // Arrange
+    const controls = macWindow(page).locator('.mw__controls');
+
+    // Act
     const buttons = controls.locator('.mw__btn');
 
+    // Assert
     await expect(controls).toHaveCSS('background-color', 'rgb(43, 43, 43)');
     await expect(buttons).toHaveCount(3);
     await expect(buttons.nth(0)).toHaveCSS(
@@ -50,16 +75,25 @@ test.describe('mac-window', () => {
   });
 
   test('places the title bar above the content', async ({ page }) => {
-    const appWindow = windows(page).first();
-    const controls = await boxOf(appWindow.locator('.mw__controls'));
-    const content = await boxOf(appWindow.locator('.mw__content'));
+    // Arrange
+    const window = macWindow(page);
 
+    // Act
+    const controls = await boxOf(window.locator('.mw__controls'));
+    const content = await boxOf(window.locator('.mw__content'));
+
+    // Assert
     expect(controls.y + controls.height).toBeLessThanOrEqual(content.y + 1);
   });
 
   test('has rounded corners and a shadow', async ({ page }) => {
-    const frame = windows(page).first().locator('.mw');
+    // Arrange
+    const window = macWindow(page);
 
+    // Act
+    const frame = window.locator('.mw');
+
+    // Assert
     await expect(frame).toHaveCSS('border-radius', '20px');
     await expect(frame).not.toHaveCSS('box-shadow', 'none');
   });

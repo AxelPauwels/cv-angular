@@ -1,0 +1,15 @@
+fragment ExperienceFields on Experience {
+  category
+  work {
+    name
+    location
+    position
+  }
+  period {
+    start
+    end
+  }
+  isInternship
+  jobDescriptions
+  stack
+}

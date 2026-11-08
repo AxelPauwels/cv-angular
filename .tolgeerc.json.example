@@ -1,0 +1,14 @@
+{
+  "$schema": "https://docs.tolgee.io/cli-schema.json",
+  "apiKey": "",
+  "apiUrl": "https://app.tolgee.io",
+  "projectId": 23075,
+  "format": "JSON_TOLGEE",
+  "pull": {
+    "path": "./libs/shared/data-access-i18n/src/i18n"
+  },
+  "push": {
+    "filesTemplate": "./libs/shared/data-access-i18n/src/i18n/{languageTag}.json",
+    "forceMode": "KEEP"
+  }
+}

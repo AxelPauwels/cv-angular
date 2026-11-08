@@ -1,0 +1,14 @@
+# https://developers.google.com/search/docs/crawling-indexing/robots/intro
+User-agent: *
+# the admin page and the micro-frontend demo route are not content pages
+Disallow: /showcase/admin
+Disallow: /admin
+Disallow: /cv-mfe
+# generated reports, shown inside the technical pages
+Disallow: /coverage/
+Disallow: /e2e-report/
+Disallow: /graphql-docs/
+Disallow: /project-graph/
+Disallow: /build-info/
+
+Sitemap: https://axel-pauwels.web.app/sitemap.xml

@@ -1,0 +1,456 @@
+{
+  "t": {
+    "accessibility": {
+      "close": "Close",
+      "high-contrast": "Higher contrast",
+      "reduce-motion": "Reduce motion",
+      "reset": "Reset to defaults",
+      "switch": "Accessibility",
+      "text-size": "Text size",
+      "text-spacing": "Wider text spacing",
+      "title": "Accessibility"
+    },
+    "admin": {
+      "count": "{on} of {total} on",
+      "hidden-notice": "The Admin page is hidden from the menu. You can still open it at /showcase/admin by clicking “Axel Pauwels” in the footer.",
+      "linked": {
+        "off": "{item} switched off too.",
+        "on": "{item} switched on too."
+      },
+      "reset": "Reset to defaults",
+      "section": {
+        "general": {
+          "title": "General"
+        },
+        "main-menu": {
+          "title": "Main menu"
+        },
+        "navbar": {
+          "title": "Navbar icons"
+        },
+        "submenu": {
+          "title": "Submenu"
+        }
+      },
+      "title": "Admin",
+      "toggle": {
+        "color-scheme-switcher": {
+          "label": "Light and dark mode"
+        },
+        "tour-button": {
+          "label": "Tour button on homepage"
+        }
+      }
+    },
+    "at": "at",
+    "carousel": {
+      "next": "Next",
+      "previous": "Previous"
+    },
+    "city": {
+      "paris": "Paris"
+    },
+    "client": "Client",
+    "color-scheme": {
+      "dark": "Dark mode",
+      "light": "Light mode"
+    },
+    "common": {
+      "cv": "CV",
+      "download-cv": "Download CV",
+      "email": "Email",
+      "ok": "OK",
+      "pdf": "PDF",
+      "reset": "Reset",
+      "under-construction": "This page is under construction. Check back soon!"
+    },
+    "competence": {
+      "ai-assisted-development": {
+        "description": "GitHub Copilot and Cursor to speed up delivery and raise quality. Currently learning spec-driven development.",
+        "title": "Modern & AI-assisted development"
+      },
+      "angular-enterprise": {
+        "description": "Large-scale applications supporting complex business processes.",
+        "title": "Angular enterprise development"
+      },
+      "clean-code": {
+        "description": "Clear standards, reusable design and code that lasts.",
+        "title": "Clean, maintainable code"
+      },
+      "collaboration": {
+        "description": "Knowledge sharing and continuous improvement in multidisciplinary teams.",
+        "title": "Collaboration"
+      },
+      "front-end-architecture": {
+        "description": "Nx monorepos, reusable libraries and scalable state with RxJS & Signals.",
+        "title": "Front-end architecture"
+      }
+    },
+    "country": {
+      "belgium": "Belgium"
+    },
+    "daughter": "daughter",
+    "education": {
+      "bellouet-conseil": {
+        "degree": "Diploma of pulled sugar | Diploma of poured & blown sugar",
+        "specialization": "Pulled sugar, poured sugar, blown sugar"
+      },
+      "level": {
+        "extra": "Additional lessons",
+        "high-school": "High School",
+        "secondary": "Secondary School"
+      },
+      "school": {
+        "ter-duinen": {
+          "degree": "Diploma of Secondary Education"
+        }
+      },
+      "sint-jozef": {
+        "specialization": "Hotel TSO"
+      },
+      "ter-duinen": {
+        "specialization": "Hotel TSO"
+      },
+      "thomas-more": {
+        "degree": "Professional Bachelor in Applied Computer Science",
+        "specialization": "IT Factory Applications"
+      },
+      "training": {
+        "status": {
+          "COMPLETED": "completed",
+          "ONGOING": "ongoing",
+          "RECURRING": "yearly"
+        }
+      }
+    },
+    "experience": {
+      "job-description": {
+        "innomedio": {
+          "projects": "Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...",
+          "support": "Handled bug fixing, phone support and the support-ticket system while managing my own planning.",
+          "technologies": "Technology: Maintaining and expanding the in-house developed CMS system in Symfony with Scss. Providing telephone support for customers with issues or expansions, and managing the support ticket system in Teamleader. Also GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ...",
+          "websites": "Built new websites and webshops and extended custom CMS platforms"
+        },
+        "ordina": {
+          "programme": "Intensive programme taught by senior consultants, combining theory and practice across front-end, back-end and cloud – including Angular, React, RxJS, NestJS, TDD, testing, DevOps & CI, UX/UI, design systems, Git, Agile, and more.",
+          "projects": "Course and eLearning application"
+        },
+        "phpro": {
+          "agile": "Delivered within Agile/Scrum teams, in close contact with customers.",
+          "front-end": "Built reusable, scalable front-end solutions for webshops with an ITCSS architecture in Sass, plus React and Sulu work.",
+          "magento": "Developed and customised Magento 2 e-commerce platforms (B2C/B2B)",
+          "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,...",
+          "technologies": "Technology: Primarily worked with Magento 2 (PHP/Less), with some React and Sulu. Also delved into SEM&BIO's front-end Inverted Triangle CSS (ITCSS) in Sass. Also used GrumPhp, Vagrant, SequelPro, Git, Figma, BitBucket, Jira, Confluence, Jenkins, and more."
+        },
+        "ravago": {
+          "platform": "Drive the evolution of the front-end platform on Angular, Nx monorepos, GraphQL/Apollo and Kendo UI, improving maintainability, scalability and developer productivity.",
+          "projects": "Warehouse Management System (WMS), later WMS2. Both as desktop app for office and mobile app for handheld scanners in warehouses.",
+          "technologies": "Technology: Angular (Typescript/Scss) with Nx and the UI framework Kendo. Furthermore, Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise...",
+          "wms": "Design, build and evolve the WMS: a business-critical application covering stock, production and order handling – desktop for office staff, mobile for warehouse operators with scanners.",
+          "workflows": "Simplify complex workflows and automate repetitive tasks; introduced and promote effective use of AI-assisted development in the team."
+        }
+      },
+      "project": {
+        "ordina": "Professional Programme",
+        "ravago": "Warehouse Management System"
+      },
+      "work-position": {
+        "3-it": "Frontend developer intern",
+        "bergerie": "Cold kitchen chef / Pastry Chef",
+        "bergerie-stage": "Kitchen intern",
+        "bruneau": "Chef de part / Pastry Chef",
+        "cardijn": "Sous chef",
+        "domaine-des-hautes-fagnes": "Kitchen intern",
+        "farmasie": "Sous Chef / Pastry chef",
+        "innomedio": "PHP Support / Front-End Developer",
+        "koekoek": "Sous Chef / Chef",
+        "koekoek-2": "Chef",
+        "nieuwen-buiten": "Kitchen intern",
+        "ordina": "Front-End Developer",
+        "phpro": "PHP Front-End Developer",
+        "ravago": "Senior Angular Developer",
+        "residentie": "Service intern",
+        "zilte": "Chef de part / Pastry chef"
+      }
+    },
+    "font": {
+      "switch": "Font"
+    },
+    "heading": {
+      "administrator": "Administrator",
+      "architecture": "Architecture",
+      "code-coverage": "code coverage",
+      "education": "Education",
+      "end-to-end-tests": "End-to-end tests",
+      "experience": "experience",
+      "graphql-docs": "graphql docs",
+      "personal": "personal",
+      "project-graph": "Project graph",
+      "references": "References",
+      "skills": "skills",
+      "versions": "Versions"
+    },
+    "home": {
+      "about-me": "More about me",
+      "experience": "My experience",
+      "portrait": "Portrait of {name}"
+    },
+    "internship": "Internship",
+    "language": {
+      "dutch": "Dutch",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "italian": "Italian",
+      "native": "Native",
+      "proficiency": {
+        "basic": "Basic",
+        "excellent": "Excellent",
+        "fair": "Fair",
+        "good": "Good",
+        "very-good": "Very good"
+      },
+      "spanish": "Spanish",
+      "switch": "Language"
+    },
+    "nav": {
+      "admin": "Admin",
+      "architecture": "Architecture",
+      "code-coverage": "code coverage",
+      "cv": "CV",
+      "cv-navigation": "CV navigation",
+      "dark": "Dark",
+      "dark-mode": "dark mode",
+      "education": "Education",
+      "end-to-end-tests": "End-to-end tests",
+      "experience": "Experience",
+      "graphql-docs": "graphql docs",
+      "home": "Home",
+      "light": "Light",
+      "light-mode": "light mode",
+      "main-navigation": "Main navigation",
+      "micro-frontends": "Micro-frontends",
+      "personal": "Personal",
+      "project-graph": "Project graph",
+      "references": "References",
+      "showcase": "Showcase",
+      "showcase-navigation": "Showcase navigation",
+      "skills": "Skills",
+      "technical": "Technical",
+      "technical-navigation": "Technical navigation",
+      "temp": {
+        "more": "More..."
+      },
+      "versions": "Versions"
+    },
+    "personal": {
+      "about-me": {
+        "card": {
+          "description": {
+            "driver-license": {
+              "B": "B"
+            },
+            "marital-status": {
+              "married": "Married"
+            },
+            "nationality": {
+              "BE": "BE"
+            },
+            "personality-type": {
+              "INTJ": "INTJ"
+            }
+          },
+          "title": {
+            "children": "Children",
+            "date-of-birth": "Date of Birth",
+            "driver-license": "Driver license",
+            "location": "Location",
+            "marital-status": "Marital status",
+            "nationality": "Nationality",
+            "personality-type": "Personality type"
+          }
+        }
+      },
+      "hobby": {
+        "binge-watching": "Binche watching",
+        "board-games": "Board games",
+        "comment": {
+          "vlaamse-schietsport-koepel": "Vlaamse SchietsportKoepel",
+          "world-cube-association": "World Cube Association"
+        },
+        "member-of-vsk": "Member of VSK",
+        "member-of-wca": "Member of WCA",
+        "mtg": "Magic The Gathering (TCG)",
+        "rubik-s-cube-competitions": "Rubik’s Cube competitions"
+      },
+      "profile": "Senior front-end developer with 8 years of experience building enterprise web applications, of which 5 years fully dedicated to Angular. I design and evolve business-critical applications with a strong focus on maintainable architecture, clean code and long-term scalability. Pragmatic, quality-driven and a natural team player in Agile teams. I actively use modern practices and AI-assisted tooling to deliver faster without compromising on quality."
+    },
+    "present": "present",
+    "skill": {
+      "other": {
+        "testing": "Unit, integration & E2E testing"
+      }
+    },
+    "son": "son",
+    "spoken": "Speaking",
+    "subheading": {
+      "administrator": "With great power comes great configuration",
+      "education": {
+        "certificates": "Certificates",
+        "certificates.description": "Proof of curiosity and dedication",
+        "training-and-conferences": "Training & Conferences",
+        "training-and-conferences.description": "Always learning, still curious"
+      },
+      "frameworks": "frameworks",
+      "horeca": "Hospitality",
+      "it": "IT",
+      "libraries": "libraries",
+      "operating-systems": "operating systems",
+      "personal": {
+        "about-me": "About me",
+        "about-me.description": "The human behind the code",
+        "about-me.prefix": "Identity",
+        "connect": "Let's talk",
+        "connect.description": "Ready to create something extraordinary?",
+        "connect.prefix": "Connect",
+        "hobbies-and-interests": "Hobbies & Interests",
+        "hobbies-and-interests.description": "Life beyond the terminal",
+        "hobbies-and-interests.prefix": "Passions",
+        "languages": "Languages",
+        "languages.description": "Building bridges across cultures",
+        "languages.prefix": "Communication"
+      },
+      "programming-languages": "programming languages",
+      "skills": {
+        "additional-technologies": "additional technologies",
+        "ai": "AI & agentic development",
+        "core-stack": "core frontend stack",
+        "development-tools": "development tools",
+        "engineering-practices": "engineering practices",
+        "other": "other skills",
+        "testing-and-quality": "testing & quality",
+        "tools-and-methods": "tools & methods"
+      },
+      "technical": {
+        "dependencies": "Dependencies per project",
+        "dependencies.description": "Straight from the project graph",
+        "dependency-rules": "Dependency rules",
+        "dependency-rules.description": "Checked on every import",
+        "domains-and-layers": "Domains × layers",
+        "domains-and-layers.description": "Vertical slices, horizontal layers",
+        "layers": "Layers inside a domain",
+        "layers.description": "Who does what",
+        "public-api": "Public API",
+        "public-api.description": "Barrels and internal folders"
+      },
+      "tools-and-methods": "tools & methods",
+      "version-control": "version control"
+    },
+    "temp": {
+      "under-construction": {
+        "content-1": "Welcome on my CV website!",
+        "content-2": "At the moment all basic information is deployed... but the real fun stuff is still missing.\n",
+        "content-3": "I am working on 'Architecture' section which contains all info about this website: the technology, structure, approaches, versions, backend, and more... everything what makes a developer happy.",
+        "content-4": "Beside that also interacting features, like a light-dark mode switch, color-switch, more languages, a simulated crud page where you can toggle some features on and off, and more.",
+        "content-5": "Finally some modern UI showcase since I've choosen to develop this website as an old vintage feeling.",
+        "title": "Under Construction"
+      },
+      "versions": "Versions"
+    },
+    "theme": {
+      "blackberry": "Blackberry",
+      "bronze": "Bronze",
+      "earth": "Earth",
+      "fire": "Fire",
+      "gold": "Gold",
+      "grape": "Grape",
+      "honey": "Honey",
+      "kiwi": "Kiwi",
+      "peach": "Peach",
+      "silver": "Silver",
+      "switch": "Theme",
+      "tangerine": "Tangerine",
+      "water": "Water",
+      "wind": "Wind"
+    },
+    "tour": {
+      "back": "Back",
+      "counter": "{current} / {total}",
+      "exit": "Exit tour",
+      "finish": "Finish",
+      "loading": "Loading the tour…",
+      "next": "Next",
+      "start": "Start the tour",
+      "step": {
+        "architecture": {
+          "label": "Architecture",
+          "text": "Curious how this website is built? The technical section explains the architecture, the project graph and the versions in use.",
+          "title": "Architecture"
+        },
+        "color-scheme": {
+          "label": "Dark mode",
+          "text": "Switch between a light and a dark look. By default the website follows the setting of your device.",
+          "title": "Light and dark mode"
+        },
+        "contact": {
+          "label": "Contact",
+          "text": "Want to get in touch? Mail me or find me on LinkedIn and GitHub with the icons at the bottom right.",
+          "title": "Get in touch"
+        },
+        "cv": {
+          "label": "CV",
+          "text": "Here you find everything about me: personal details, education, experience, skills and references.",
+          "title": "My CV"
+        },
+        "download-cv": {
+          "label": "Download CV",
+          "text": "Prefer to read it offline? Download my CV as a PDF here.\nTip: use the buttons below or the arrow keys, and press Escape to stop the tour at any time.",
+          "title": "Download my CV"
+        },
+        "finish": {
+          "label": "Finish",
+          "text": "Thanks for taking the tour. Enjoy looking around, you can start the tour again from the home page at any time.",
+          "title": "That's it!"
+        },
+        "fonts": {
+          "label": "Fonts",
+          "text": "Prefer another style? Switch the font of the whole website here.",
+          "title": "Fonts"
+        },
+        "languages": {
+          "label": "Languages",
+          "text": "The website is available in English, Dutch, French and Spanish. Choose your language here.",
+          "title": "Languages"
+        },
+        "settings": {
+          "label": "Your preferences",
+          "text": "First set up the website the way you like it: the color theme, the font, accessibility settings, light or dark mode and the language. Your choices are remembered on this device.",
+          "title": "Make it your own"
+        },
+        "showcase": {
+          "label": "Showcase",
+          "text": "The showcase demonstrates techniques in practice, like micro-frontends, GraphQL docs, code coverage and end-to-end tests.",
+          "title": "Showcase"
+        },
+        "technical": {
+          "label": "Technical",
+          "text": "Curious how this website is built? The technical section shows the project graph, the architecture, the GraphQL docs, code coverage, end-to-end tests and the versions in use.",
+          "title": "Under the hood"
+        },
+        "themes": {
+          "label": "Themes",
+          "text": "Pick one of the color themes here. Every theme comes with matching colors for the whole website.",
+          "title": "Color themes"
+        },
+        "welcome": {
+          "label": "Welcome",
+          "text": "Let me show you around. This short tour walks you through the website and its features. Use the buttons below or the arrow keys, and press Escape to stop at any time.",
+          "title": "Welcome!"
+        }
+      },
+      "step-of": "Step {current} of {total}"
+    },
+    "website": "website",
+    "written": "Writing"
+  }
+}

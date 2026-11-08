@@ -1,0 +1,86 @@
+<section class="home-hero" aria-labelledby="home-hero-name">
+  <!--
+    Static srcset/sizes (no bindings), so the browser picks one source up front
+    and never starts the JPEG first. Keep in sync with the preload in index.html.
+  -->
+  <picture class="home-hero__picture">
+    <source
+      type="image/avif"
+      sizes="100vw"
+      srcset="
+        /assets/images/hero/axel-landscape-640x360.avif    640w,
+        /assets/images/hero/axel-landscape-960x540.avif    960w,
+        /assets/images/hero/axel-landscape-1280x720.avif  1280w,
+        /assets/images/hero/axel-landscape-1920x1080.avif 1920w,
+        /assets/images/hero/axel-landscape-3840x2160.avif 3840w
+      " />
+    <source
+      type="image/webp"
+      sizes="100vw"
+      srcset="
+        /assets/images/hero/axel-landscape-640x360.webp    640w,
+        /assets/images/hero/axel-landscape-960x540.webp    960w,
+        /assets/images/hero/axel-landscape-1280x720.webp  1280w,
+        /assets/images/hero/axel-landscape-1920x1080.webp 1920w,
+        /assets/images/hero/axel-landscape-3840x2160.webp 3840w
+      " />
+    <img
+      class="home-hero__image"
+      src="/assets/images/hero/axel-landscape-1280x720.jpg"
+      sizes="100vw"
+      srcset="
+        /assets/images/hero/axel-landscape-640x360.jpg    640w,
+        /assets/images/hero/axel-landscape-960x540.jpg    960w,
+        /assets/images/hero/axel-landscape-1280x720.jpg  1280w,
+        /assets/images/hero/axel-landscape-1920x1080.jpg 1920w,
+        /assets/images/hero/axel-landscape-3840x2160.jpg 3840w
+      "
+      width="1920"
+      height="1080"
+      fetchpriority="high"
+      [alt]="
+        fullName() ? ('t.home.portrait' | translate: { name: fullName() }) : ''
+      " />
+  </picture>
+
+  @if (showTourButton()) {
+  <!-- the wrapper carries the glow, so it never fights Material's own layers -->
+  <span
+    class="home-hero__tour-glow"
+    [class.home-hero__tour-glow--stopped]="glowStopped()"
+    (pointerenter)="glowStopped.set(true)"
+    (focusin)="glowStopped.set(true)">
+    <button
+      matButton="filled"
+      type="button"
+      class="home-hero__tour"
+      data-tour="start"
+      (click)="tour.start()">
+      <mat-icon fontSet="material-symbols-outlined">tour</mat-icon>
+      {{ 't.tour.start' | translate }}
+    </button>
+  </span>
+  }
+
+  <div class="home-hero__text">
+    <h1 id="home-hero-name" class="home-hero__name">
+      @if (store.person(); as person) {
+      <span class="home-hero__first-name">{{ person.firstName }}</span>
+      {{ person.lastName }} }
+    </h1>
+    <p class="home-hero__title">
+      @for (word of titleWords(); track $index) {
+      <span class="home-hero__title-word">{{ word }}</span>{{ $last ? '' : ' '
+      }} }
+    </p>
+
+    <div class="home-hero__actions">
+      <a matButton="filled" [routerLink]="routes.PERSONAL_ROUTER_LINK">
+        {{ 't.home.about-me' | translate }}
+      </a>
+      <a matButton="tonal" [routerLink]="routes.EXPERIENCE_ROUTER_LINK">
+        {{ 't.home.experience' | translate }}
+      </a>
+    </div>
+  </div>
+</section>

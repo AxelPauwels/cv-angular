@@ -5,12 +5,97 @@
     <title>CV</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="CV of Axel Pauwels, Senior Angular Front-End Developer from Geel, Belgium: experience, education, skills and references, built as an Angular and Nx showcase." />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined"
       rel="stylesheet" />
+    <script>
+      // Applies the saved settings to <html> before the first paint, so the page
+      // doesn't flash the defaults until the app boots. Mirrors ThemeService,
+      // FontService and AccessibilityService (@cv/shared-data-access) and Tolgee's
+      // LanguageStorage: keep the keys and attributes in sync with them.
+      (function () {
+        var root = document.documentElement;
+        var id = /^[\w-]+$/;
+        var media = function (query) {
+          return !!(window.matchMedia && matchMedia(query).matches);
+        };
+        try {
+          var storage = window.localStorage;
+          var theme = storage.getItem('cv-theme');
+          var font = storage.getItem('cv-font');
+          var scheme = storage.getItem('cv-color-scheme');
+          var language = storage.getItem('__tolgee_currentLanguage');
+          if (theme && id.test(theme)) root.dataset.theme = theme;
+          if (font && id.test(font)) root.dataset.font = font;
+          if (scheme === 'light' || scheme === 'dark') {
+            root.dataset.colorScheme = scheme;
+          }
+          if (language && id.test(language)) root.lang = language;
+
+          var a = JSON.parse(storage.getItem('cv-accessibility') || '{}') || {};
+          var flag = function (name, saved, fallback) {
+            root.toggleAttribute(
+              name,
+              typeof saved === 'boolean' ? saved : fallback
+            );
+          };
+          root.dataset.textSize = String(
+            [100, 112.5, 125, 150].indexOf(a.textSize) > -1 ? a.textSize : 100
+          );
+          flag(
+            'data-reduce-motion',
+            a.reduceMotion,
+            media('(prefers-reduced-motion: reduce)')
+          );
+          flag(
+            'data-high-contrast',
+            a.highContrast,
+            media('(prefers-contrast: more)')
+          );
+          flag('data-wide-text-spacing', a.wideTextSpacing, false);
+        } catch (e) {
+          // storage unavailable or not JSON: the app applies the defaults
+        }
+
+        // The home hero photo is the largest paint of the landing page (also the
+        // default route): start its download now instead of after the app and
+        // the home chunk load. Mirrors the AVIF <source> in
+        // libs/cv/feature-home/src/lib/home/home.html: keep srcset and sizes the
+        // same, or the browser downloads the photo twice.
+        if (/^\/(home\/?)?$/.test(location.pathname)) {
+          var hero = '/assets/images/hero/axel-landscape-';
+          var preload = document.createElement('link');
+          preload.rel = 'preload';
+          preload.as = 'image';
+          preload.type = 'image/avif';
+          preload.setAttribute('fetchpriority', 'high');
+          preload.setAttribute(
+            'imagesrcset',
+            [
+              [640, 360],
+              [960, 540],
+              [1280, 720],
+              [1920, 1080],
+              [3840, 2160],
+            ]
+              .map(function (size) {
+                return (
+                  hero + size[0] + 'x' + size[1] + '.avif ' + size[0] + 'w'
+                );
+              })
+              .join(', ')
+          );
+          preload.setAttribute('imagesizes', '100vw');
+          document.head.appendChild(preload);
+        }
+      })();
+    </script>
   </head>
   <body>
     <app-root></app-root>

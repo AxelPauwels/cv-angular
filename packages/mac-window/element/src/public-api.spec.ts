@@ -22,61 +22,97 @@ describe('mac-window element', () => {
   });
 
   it('uses "mac-window" as the default tag', () => {
-    expect(MAC_WINDOW_TAG).toBe('mac-window');
+    // Arrange
+    const expected = 'mac-window';
+
+    // Act
+    const tag = MAC_WINDOW_TAG;
+
+    // Assert
+    expect(tag).toBe(expected);
   });
 
   it('registers <mac-window> when the entry point is imported', async () => {
-    await customElements.whenDefined(MAC_WINDOW_TAG);
+    // Arrange
+    const tag = MAC_WINDOW_TAG;
 
-    expect(customElements.get(MAC_WINDOW_TAG)).toBeDefined();
+    // Act
+    await customElements.whenDefined(tag);
+
+    // Assert
+    expect(customElements.get(tag)).toBeDefined();
   });
 
   it('renders the window with its traffic-light buttons', async () => {
-    const element = await render(MAC_WINDOW_TAG);
+    // Arrange
+    const tag = MAC_WINDOW_TAG;
 
+    // Act
+    const element = await render(tag);
+
+    // Assert
     expect(element.querySelectorAll('.mw__controls .mw__btn')).toHaveLength(3);
   });
 
   it('projects its children into the content area', async () => {
-    const element = await render(MAC_WINDOW_TAG, '<p class="child">Hello</p>');
+    // Arrange
+    const child = '<p class="child">Hello</p>';
 
+    // Act
+    const element = await render(MAC_WINDOW_TAG, child);
+
+    // Assert
     expect(element.querySelector('.mw__content .child')?.textContent).toBe(
       'Hello'
     );
   });
 
   it('registers a custom tag name', async () => {
-    await defineMacWindow('custom-mac-window');
+    // Arrange
+    const tag = 'custom-mac-window';
 
-    expect(customElements.get('custom-mac-window')).toBeDefined();
-    expect(
-      (await render('custom-mac-window')).querySelector('.mw')
-    ).not.toBeNull();
+    // Act
+    await defineMacWindow(tag);
+
+    // Assert
+    expect(customElements.get(tag)).toBeDefined();
+    expect((await render(tag)).querySelector('.mw')).not.toBeNull();
   });
 
   it('can be called again for a tag that is already defined', async () => {
+    // Arrange
+    await customElements.whenDefined(MAC_WINDOW_TAG);
     const before = customElements.get(MAC_WINDOW_TAG);
 
-    await expect(defineMacWindow()).resolves.toBeUndefined();
+    // Act
+    const result = await defineMacWindow();
+
+    // Assert
+    expect(result).toBeUndefined();
     expect(customElements.get(MAC_WINDOW_TAG)).toBe(before);
   });
 
   it('can be called several times at once for the same tag', async () => {
-    await expect(
-      Promise.all([
-        defineMacWindow('parallel-mac-window'),
-        defineMacWindow('parallel-mac-window'),
-      ])
-    ).resolves.toBeDefined();
-    expect(customElements.get('parallel-mac-window')).toBeDefined();
+    // Arrange
+    const tag = 'parallel-mac-window';
+
+    // Act
+    const defined = Promise.all([defineMacWindow(tag), defineMacWindow(tag)]);
+
+    // Assert
+    await expect(defined).resolves.toBeDefined();
+    expect(customElements.get(tag)).toBeDefined();
   });
 
   it('leaves a tag that is defined by someone else untouched', async () => {
+    // Arrange
     class Other extends HTMLElement {}
     customElements.define('taken-mac-window', Other);
 
+    // Act
     await defineMacWindow('taken-mac-window');
 
+    // Assert
     expect(customElements.get('taken-mac-window')).toBe(Other);
   });
 });

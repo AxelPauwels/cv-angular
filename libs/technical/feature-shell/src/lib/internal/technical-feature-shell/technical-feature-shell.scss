@@ -1,0 +1,24 @@
+// Stretches to the footer, so an embedded page (the project graph) fills the
+// remaining height
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  // lets the sub-navbar's panel shrink to the space left and scroll
+  min-height: 0;
+}
+
+.technical-feature-shell {
+  &__nav {
+    flex: 1;
+    min-height: 0;
+  }
+
+  &__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "technical-data-access-build-info",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/technical/data-access-build-info/src",
+  "prefix": "technical",
+  "projectType": "library",
+  "tags": ["domain:technical", "type:data-access"],
+  "targets": {
+    "build-info": {
+      "executor": "nx:run-commands",
+      "inputs": [
+        "{workspaceRoot}/tools/build-info/generate.mjs",
+        "{workspaceRoot}/package.json",
+        "{workspaceRoot}/sheriff.config.ts",
+        {
+          "externalDependencies": ["nx"]
+        }
+      ],
+      "outputs": ["{workspaceRoot}/dist/.build-info"],
+      "options": {
+        "command": "node --no-warnings tools/build-info/generate.mjs"
+      }
+    },
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "project": "libs/technical/data-access-build-info/ng-package.json",
+        "tsConfig": "libs/technical/data-access-build-info/tsconfig.lib.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/technical/data-access-build-info/tsconfig.lib.prod.json"
+        },
+        "development": {}
+      }
+    },
+    "test": {
+      "executor": "@nx/angular:unit-test",
+      "options": {
+        "watch": false,
+        "browsers": ["ChromiumHeadless"]
+      }
+    }
+  }
+}

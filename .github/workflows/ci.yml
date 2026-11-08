@@ -26,6 +26,8 @@ jobs:
           cache: 'npm'
 
       - run: npm ci
+      # The dev environment imports the gitignored Tolgee tokens; use the empty template
+      - run: cp apps/cv/src/tokens/environment.tokens.example.ts apps/cv/src/tokens/environment.tokens.ts
       - run: npx playwright install --with-deps
 
       # Sets NX_BASE and NX_HEAD so `nx affected` compares against the last successful run on main

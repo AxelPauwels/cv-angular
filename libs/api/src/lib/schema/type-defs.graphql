@@ -1,0 +1,337 @@
+"""
+ISO 8601 date-time string, e.g. 2020-01-01T00:00:00.000Z (graphql-scalars DateTime)
+"""
+scalar DateTime
+
+enum EducationLevel {
+  SECONDARY_EDUCATION
+  HIGH_SCHOOL
+  CUSTOM_COURSE
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+"""
+ISO 639-1 two-letter language codes.
+Can include all official languages used worldwide.
+"""
+enum LanguageIsoCode {
+  NL # Dutch
+  FR # French
+  DE # German
+  EN # English
+  ES # Spanish
+  IT # Italian
+  #   ...
+}
+
+"""
+Locale codes combining two-letter language codes (iso codes) and region (BCP 47 standard).
+"""
+enum Locale {
+  NL_BE # Belgian Dutch (Flemish)
+  NL_NL # Netherlands Dutch
+  FR_BE # Belgian French (Walloon)
+  FR_FR # France French
+  DE_BE # Belgian German (Eupen region)
+  EN_GB # UK English
+  EN_US # US English
+  #   ...
+}
+
+"""
+In order of proficiency
+"""
+enum LanguageProficiency {
+  EXCELLENT
+  VERY_GOOD
+  GOOD
+  FAIR
+  BASIC
+}
+
+"""
+Common European Framework of Reference for Languages (CEFR) levels, from beginner to mastery.
+"""
+enum CefrLevel {
+  A1
+  A2
+  B1
+  B2
+  C1
+  C2
+}
+
+"""
+ISO 3166-1 alpha-2 country codes representing nationality.
+"""
+enum NationalityIsoCode {
+  BE # Belgian
+  NL # Dutch
+  FR # French
+  DE # German
+  LU # Luxembourgish
+  GB # British
+  IT # Italian
+  ES # Spanish
+  PT # Portuguese
+  US # American
+  CA # Canadian
+  #   ...
+}
+
+"""
+Personality types based on the Myers–Briggs Type Indicator (MBTI).
+Each type consists of four preferences:
+- (E) Extraversion / (I) Introversion
+- (S) Sensing / (N) Intuition
+- (T) Thinking / (F) Feeling
+- (J) Judging / (P) Perceiving
+"""
+enum PersonalityType {
+  # Analysts
+  INTJ # The Architect
+  INTP # The Logician
+  ENTJ # The Commander
+  ENTP # The Debater
+  # Diplomats
+  INFJ # The Advocate
+  INFP # The Mediator
+  ENFJ # The Protagonist
+  ENFP # The Campaigner
+  # Sentinels
+  ISTJ # The Logistician
+  ISFJ # The Defender
+  ESTJ # The Executive
+  ESFJ # The Consul
+  # Explorers
+  ISTP # The Virtuoso
+  ISFP # The Adventurer
+  ESTP # The Entrepreneur
+  ESFP # The Entertainer
+}
+
+"""
+Marital status of a person according to EU official categories.
+"""
+enum MaritalStatus {
+  SINGLE # Not married
+  MARRIED # Legally married
+  DIVORCED # Legally divorced
+  WIDOWED # Lost spouse by death
+  SEPARATED # Legally separated (but not divorced)
+  REGISTERED_PARTNERSHIP # Legal cohabitation / civil partnership
+  UNKNOWN # Unknown or not declared
+}
+
+"Sections of the skills page, in the order they are shown"
+enum SkillCategory {
+  "Core frontend stack: languages, framework and libraries used every day"
+  CORE_STACK
+  "Engineering practices: architecture, patterns and ways of working"
+  ENGINEERING_PRACTICES
+  "Testing, accessibility and code quality"
+  TESTING_AND_QUALITY
+  "AI & agentic development"
+  AI
+  "Development tools: version control, IDEs and collaboration"
+  DEVELOPMENT_TOOLS
+  "Additional technologies outside the core stack, e.g. back-end and CMS"
+  ADDITIONAL_TECHNOLOGIES
+}
+
+enum TrainingStatus {
+  COMPLETED
+  ONGOING
+  "Attended every year, e.g. a conference"
+  RECURRING
+}
+
+enum ExperienceCategory {
+  HORECA
+  IT
+}
+
+type Language {
+  isoCode: LanguageIsoCode!
+  locale: Locale!
+}
+
+type Period {
+  start: DateTime!
+  end: DateTime
+}
+
+type School {
+  name: String!
+  location: String!
+}
+
+type Education {
+  level: EducationLevel!
+  specialization: String!
+  school: School!
+  period: Period!
+  degree: String
+}
+
+type Address {
+  street: String!
+  number: String!
+  postalCode: String!
+  city: String!
+  country: String!
+}
+
+type ContactInfo {
+  address: Address!
+  phone: String!
+  email: String!
+  website: String
+  linkedIn: String
+  "Profile URL"
+  github: String
+}
+
+type LanguageSkill {
+  isNativeLanguage: Boolean!
+  language: Language!
+  spoken: LanguageProficiency!
+  written: LanguageProficiency!
+  "CEFR level; null for a native language"
+  cefrLevel: CefrLevel
+}
+
+type Hobby {
+  name: String!
+  comment: String
+  icon: String!
+}
+
+type PersonalInfo {
+  dateOfBirth: DateTime!
+  nationality: NationalityIsoCode!
+  maritalStatus: MaritalStatus!
+  "First name of the spouse or partner, if any"
+  partnerName: String
+  children: [Child!]!
+  personalityType: PersonalityType!
+}
+
+type Child {
+  name: String!
+  gender: Gender!
+}
+
+type Person {
+  firstName: String!
+  lastName: String!
+  functionTitle: String!
+  "Profile summary (translation key)"
+  profile: String!
+  contact: ContactInfo!
+  personal: PersonalInfo!
+  hobbies: [Hobby!]!
+  languages: [LanguageSkill!]!
+}
+
+type SkillEntry {
+  name: String!
+  "0–5 scale"
+  level: Int!
+  icon: String!
+}
+
+type Skill {
+  category: SkillCategory!
+  icon: String!
+  entries: [SkillEntry!]!
+}
+
+type AdditionalLearning {
+  name: String!
+  url: String!
+}
+
+type Certificate {
+  name: String!
+  "Verification link, or a note when there is none online"
+  url: String
+  "Who issued the certificate, e.g. Linux Professional Institute"
+  issuer: String!
+  year: Int!
+}
+
+"Core competence as shown on the CV"
+type Competence {
+  "Translation key"
+  title: String!
+  "Translation key"
+  description: String!
+}
+
+"A course, training or conference"
+type Training {
+  name: String!
+  "Who organised or taught it"
+  provider: String
+  "Year it took place; null while ongoing or for a recurring event"
+  year: Int
+  status: TrainingStatus!
+}
+
+type Work {
+  name: String!
+  location: String!
+  position: String!
+}
+
+type Experience {
+  category: ExperienceCategory!
+  work: Work!
+  period: Period!
+  isInternship: Boolean!
+  "Project or programme (translation key)"
+  project: String
+  "Translation keys"
+  jobDescriptions: [String!]
+  "Technologies and tools used"
+  stack: [String!]!
+}
+
+type Reference {
+  name: String!
+  "The employer the reference worked at"
+  work: String!
+  """
+  The employer's client where the reference worked with me, e.g. Ravago for
+  Sopra Steria; empty when the reference worked at the employer itself
+  """
+  client: String
+  workCategory: ExperienceCategory!
+  "When the reference worked in the given work category"
+  workCategoryPeriod: Period!
+  function: String!
+  phoneNumber: String
+}
+
+type Query {
+  educations: [Education!]!
+  additionalLearnings: [AdditionalLearning!]!
+  certificates: [Certificate!]!
+  person: Person!
+  skills: [Skill!]!
+  experiences: [Experience!]!
+  references: [Reference!]!
+  competences: [Competence!]!
+  trainings: [Training!]!
+  """
+  Other technologies, listed without a level.
+  A name, or a translation key (starting with t.) for a translatable label.
+  """
+  otherSkills: [String!]!
+}

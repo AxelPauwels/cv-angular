@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Keep in sync with libs/shared/util-routing (only the indexable pages). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://axel-pauwels.web.app/home</loc></url>
+  <url><loc>https://axel-pauwels.web.app/personal</loc></url>
+  <url><loc>https://axel-pauwels.web.app/education</loc></url>
+  <url><loc>https://axel-pauwels.web.app/experience</loc></url>
+  <url><loc>https://axel-pauwels.web.app/skills</loc></url>
+  <url><loc>https://axel-pauwels.web.app/references</loc></url>
+  <url><loc>https://axel-pauwels.web.app/showcase/micro-frontends</loc></url>
+  <url><loc>https://axel-pauwels.web.app/technical/architecture</loc></url>
+  <url><loc>https://axel-pauwels.web.app/technical/project-graph</loc></url>
+  <url><loc>https://axel-pauwels.web.app/technical/graphql-docs</loc></url>
+  <url><loc>https://axel-pauwels.web.app/technical/code-coverage</loc></url>
+  <url><loc>https://axel-pauwels.web.app/technical/end-to-end-tests</loc></url>
+  <url><loc>https://axel-pauwels.web.app/technical/versions</loc></url>
+</urlset>

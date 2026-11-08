@@ -1,0 +1,112 @@
+:host {
+  display: block;
+}
+
+.education-list {
+  &__degree {
+    margin: 0;
+  }
+
+  &__extras {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    margin-top: 2.5rem;
+  }
+
+  // heading on top; a subgrid lines up both headings and both cards side by side
+  &__extra {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    min-width: 0;
+    row-gap: 0;
+  }
+
+  &__card {
+    --mat-card-outlined-container-shape: var(--mat-sys-corner-large);
+  }
+
+  &__links {
+    display: grid;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // title + meta stacked on the left; a year (trainings) sits in its own column on the right
+  &__item {
+    display: grid;
+    gap: 0.125rem 1rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding-block: 0.75rem;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    & + & {
+      border-top: 1px solid var(--mat-sys-outline-variant);
+    }
+  }
+
+  &__title,
+  &__meta {
+    grid-column: 1;
+  }
+
+  &__title {
+    color: var(--mat-sys-on-surface-variant) !important;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+    text-transform: uppercase;
+  }
+
+  &__meta {
+    color: var(--mat-sys-primary);
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  &__year {
+    align-self: baseline;
+    color: var(--mat-sys-on-surface-variant);
+    font-size: 0.875rem;
+    font-variant-numeric: tabular-nums;
+    grid-column: 2;
+    grid-row: 1;
+    text-align: end;
+    white-space: nowrap;
+  }
+
+  &__link {
+    color: var(--mat-sys-primary);
+    justify-self: start;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+  }
+
+  &__link-icon {
+    font-size: 1rem;
+    height: 1rem;
+    margin-inline-start: 0.125rem;
+    vertical-align: -0.125em;
+    width: 1rem;
+  }
+
+  &__note {
+    color: var(--mat-sys-on-surface-variant);
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+}

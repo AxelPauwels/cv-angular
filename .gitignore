@@ -57,3 +57,9 @@ Thumbs.db
 .angular
 
 __screenshots__/
+.vitest-attachments/
+/apps/cv/src/tokens/environment.tokens.ts
+/.tolgeerc.json
+
+# i18n:missing review file (pushed with i18n:push-missing)
+/scripts/tolgee/i18n-missing-keys.json

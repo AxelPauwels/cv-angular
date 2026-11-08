@@ -3,3 +3,7 @@ Elements are the HTML native elements which we would not style base on the class
 
 Examples: body, h1, span, body:not(.admin-page), section
 */
+
+@forward 'e-html';
+@forward 'e-body';
+@forward 'e-scrollbar';

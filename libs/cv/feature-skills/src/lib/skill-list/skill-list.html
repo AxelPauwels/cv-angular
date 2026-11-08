@@ -1,0 +1,21 @@
+<ds-page-layout>
+  <ds-page-title title="t.heading.skills" />
+
+  @if (loading.pending()) { @if (loading.indicator()) {
+  <ds-loading-spinner />
+  } } @else if (store.error()) {
+  <p>Could not load skills: {{ store.error()?.message }}</p>
+  } @else {
+  <div class="skill-list__grid">
+    @for (skill of store.skills(); track skill.category) {
+    <!-- lang reads the language signal: the titles refresh when it changes -->
+    <ds-card
+      class="skill-list__card"
+      [attr.lang]="language()"
+      [title]="categoryKeys[skill.category] | translate">
+      <cv-ui-skill-list [entries]="skill.entries" />
+    </ds-card>
+    }
+  </div>
+  }
+</ds-page-layout>

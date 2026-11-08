@@ -5,6 +5,7 @@
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es2022",
@@ -14,7 +15,77 @@
     "skipDefaultLibCheck": true,
     "paths": {
       "@axel-pauwels/mac-window": ["./packages/mac-window/src/public-api.ts"],
-      "@axel-pauwels/cv-api": ["./libs/cv-api/src/index.ts"]
+      "@cv/showcase-feature-shell": [
+        "./libs/showcase/feature-shell/src/index.ts"
+      ],
+      "@cv/technical-feature-shell": [
+        "./libs/technical/feature-shell/src/index.ts"
+      ],
+      "@cv/shared-ui-design-system": [
+        "./libs/shared/ui-design-system/src/index.ts"
+      ],
+      "@cv/shared-ui-federation": ["./libs/shared/ui-federation/src/index.ts"],
+      "@cv/shared-data-access": ["./libs/shared/data-access/src/index.ts"],
+      "@cv/shared-util-routing": ["./libs/shared/util-routing/src/index.ts"],
+      "@cv/shared-data-access-i18n": [
+        "./libs/shared/data-access-i18n/src/index.ts"
+      ],
+      "@cv/shared-util-i18n": ["./libs/shared/util-i18n/src/index.ts"],
+      "@cv/cv-data-access-education": [
+        "./libs/cv/data-access-education/src/index.ts"
+      ],
+      "@cv/cv-data-access-experience": [
+        "./libs/cv/data-access-experience/src/index.ts"
+      ],
+      "@cv/cv-data-access-personal": [
+        "./libs/cv/data-access-personal/src/index.ts"
+      ],
+      "@cv/cv-data-access-references": [
+        "./libs/cv/data-access-references/src/index.ts"
+      ],
+      "@cv/cv-data-access-skills": [
+        "./libs/cv/data-access-skills/src/index.ts"
+      ],
+      "@cv/shared-util-types": ["./libs/shared/util-types/src/index.ts"],
+      "@cv/cv-feature-experience": [
+        "./libs/cv/feature-experience/src/index.ts"
+      ],
+      "@cv/cv-feature-shell": ["./libs/cv/feature-shell/src/index.ts"],
+      "@cv/cv-feature-skills": ["./libs/cv/feature-skills/src/index.ts"],
+      "@cv/cv-feature-references": [
+        "./libs/cv/feature-references/src/index.ts"
+      ],
+      "@cv/cv-feature-education": ["./libs/cv/feature-education/src/index.ts"],
+      "@cv/cv-feature-personal": ["./libs/cv/feature-personal/src/index.ts"],
+      "@cv/api": ["./libs/api/src/index.ts"],
+      "@cv/showcase-feature-micro-frontends": [
+        "./libs/showcase/feature-micro-frontends/src/index.ts"
+      ],
+      "@cv/technical-data-access-build-info": [
+        "./libs/technical/data-access-build-info/src/index.ts"
+      ],
+      "@cv/technical-feature-versions": [
+        "./libs/technical/feature-versions/src/index.ts"
+      ],
+      "@cv/technical-feature-architecture": [
+        "./libs/technical/feature-architecture/src/index.ts"
+      ],
+      "@cv/cv-feature-home": ["./libs/cv/feature-home/src/index.ts"],
+      "@cv/shared-feature-tour": ["./libs/shared/feature-tour/src/index.ts"],
+      "@cv/shared-ui-timeline": ["./libs/shared/ui-timeline/src/index.ts"],
+      "@cv/shared-ui-card": ["./libs/shared/ui-card/src/index.ts"],
+      "@cv/cv-feature-contact": ["./libs/cv/feature-contact/src/index.ts"],
+      "@cv/shared-ui-progress-bar": [
+        "./libs/shared/ui-progress-bar/src/index.ts"
+      ],
+      "@cv/shared-ui-lordicon": ["./libs/shared/ui-lordicon/src/index.ts"],
+      "@cv/shared-util-loading": ["./libs/shared/util-loading/src/index.ts"],
+      "@cv/showcase-feature-admin": [
+        "./libs/showcase/feature-admin/src/index.ts"
+      ],
+      "@cv/shared-ui-progress-dots": [
+        "./libs/shared/ui-progress-dots/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

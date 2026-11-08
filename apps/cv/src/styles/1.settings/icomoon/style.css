@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'cvIconFont';
-  src: url('fonts/cvIconFont.eot?w8bjg6');
+  src: url('fonts/cvIconFont.eot?6h7gdf');
   src:
-    url('fonts/cvIconFont.eot?w8bjg6#iefix') format('embedded-opentype'),
-    url('fonts/cvIconFont.ttf?w8bjg6') format('truetype'),
-    url('fonts/cvIconFont.woff?w8bjg6') format('woff'),
-    url('fonts/cvIconFont.svg?w8bjg6#cvIconFont') format('svg');
+    url('fonts/cvIconFont.eot?6h7gdf#iefix') format('embedded-opentype'),
+    url('fonts/cvIconFont.ttf?6h7gdf') format('truetype'),
+    url('fonts/cvIconFont.woff?6h7gdf') format('woff'),
+    url('fonts/cvIconFont.svg?6h7gdf#cvIconFont') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -26,6 +26,69 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.cv-icon-nestjs:before {
+  content: '\e93f';
+}
+.cv-icon-sulu1:before {
+  content: '\e940';
+}
+.cv-icon-scrum:before {
+  content: '\e93e';
+}
+.cv-icon-accessibility:before {
+  content: '\e93c';
+}
+.cv-icon-translation:before {
+  content: '\e93d';
+}
+.cv-icon-rest-api:before {
+  content: '\e93a';
+}
+.cv-icon-angular-material:before {
+  content: '\e93b';
+}
+.cv-icon-ai:before {
+  content: '\e936';
+}
+.cv-icon-githubcopilot:before {
+  content: '\e937';
+}
+.cv-icon-mysql:before {
+  content: '\e938';
+}
+.cv-icon-robot:before {
+  content: '\e939';
+}
+.cv-icon-claude:before {
+  content: '\e92c';
+}
+.cv-icon-cursor:before {
+  content: '\e92d';
+}
+.cv-icon-ngrx:before {
+  content: '\e92e';
+}
+.cv-icon-nodejs:before {
+  content: '\e92f';
+}
+.cv-icon-postman:before {
+  content: '\e930';
+}
+.cv-icon-symfony:before {
+  content: '\e931';
+}
+.cv-icon-jetbrains:before {
+  content: '\e932';
+}
+.cv-icon-nx:before {
+  content: '\e933';
+}
+.cv-icon-confluence:before {
+  content: '\e934';
+}
+.cv-icon-jira:before {
+  content: '\e935';
+}
 .cv-icon-tv:before {
   content: '\e924';
 }

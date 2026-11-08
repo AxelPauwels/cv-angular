@@ -1,0 +1,38 @@
+fragment PersonFields on Person {
+  firstName
+  lastName
+  functionTitle
+  contact {
+    address {
+      city
+      country
+    }
+    email
+    linkedIn
+    github
+  }
+  personal {
+    dateOfBirth
+    nationality
+    maritalStatus
+    children {
+      name
+      gender
+    }
+    personalityType
+  }
+  hobbies {
+    name
+    comment
+    icon
+  }
+  languages {
+    isNativeLanguage
+    language {
+      isoCode
+      locale
+    }
+    spoken
+    written
+  }
+}

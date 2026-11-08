@@ -1,0 +1,190 @@
+:host {
+  display: block;
+}
+
+.personal-details {
+  // Each section sizes its own grid
+  &__section {
+    container-type: inline-size;
+
+    & + & {
+      margin-top: 3rem;
+    }
+  }
+
+  // --- About me: no card, the facts in a grid of an icon, a label and a value ---
+
+  // Columns as wide as their content, the leftover space at the end of the row
+  // instead of between the columns on wide screens
+  &__facts {
+    display: grid;
+    gap: 1.5rem 3rem;
+    grid-template-columns: minmax(0, auto);
+    justify-content: start;
+    margin: 0;
+
+    @container (min-width: 30rem) {
+      grid-template-columns: repeat(2, minmax(0, auto));
+    }
+
+    // six facts: two even rows of three
+    @container (min-width: 52rem) {
+      grid-template-columns: repeat(3, minmax(0, auto));
+    }
+  }
+
+  &__fact {
+    align-items: center;
+    column-gap: 0.875rem;
+    display: grid;
+    grid-template:
+      'icon label' auto
+      'icon value' auto / auto 1fr;
+  }
+
+  // A small icon on a round background in the colors of the timeline's year pill
+  // (secondary container); decorative
+  &__fact-icon {
+    align-items: center;
+    background-color: var(--mat-sys-secondary-container);
+    border: 1px solid transparent; // an outline in forced colors
+    border-radius: 50%;
+    box-sizing: content-box;
+    color: var(--mat-sys-on-secondary-container);
+    display: flex;
+    font-size: 1.25rem;
+    grid-area: icon;
+    height: 1.25rem;
+    justify-content: center;
+    line-height: 1;
+    padding: 0.625rem;
+    width: 1.25rem;
+  }
+
+  &__fact-label {
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-label-small);
+    grid-area: label;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__fact-value {
+    font: var(--mat-sys-title-medium);
+    grid-area: value;
+    margin: 0;
+  }
+
+  // --- Languages: a card per language, its levels as text with a bar ---
+
+  &__languages {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @container (min-width: 30rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @container (min-width: 52rem) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__language {
+    display: grid;
+  }
+
+  &__levels {
+    border-top: 1px solid var(--mat-sys-outline-variant);
+    display: grid;
+    gap: 0.875rem;
+    margin: 1rem 0 0;
+    padding-top: 1rem;
+  }
+
+  &__level {
+    align-items: baseline;
+    column-gap: 0.5rem;
+    display: grid;
+    grid-template:
+      'label value' auto
+      'bar bar' auto / auto 1fr;
+  }
+
+  &__level-label {
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-label-small);
+    grid-area: label;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__level-value {
+    font: var(--mat-sys-label-large);
+    grid-area: value;
+    margin: 0;
+  }
+
+  &__level-bar {
+    grid-area: bar;
+    margin-top: 0.375rem;
+  }
+
+  // --- Hobbies: a grid of tiles in the primary color ---
+
+  // One column of short tiles on phones, two on tablets, four on wide screens;
+  // hobbies with a comment span two columns once there are at least two
+  &__hobbies {
+    display: grid;
+    gap: 1.5rem;
+    grid-auto-flow: dense;
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @container (min-width: 30rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @container (min-width: 52rem) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  // The brand cards, but in the primary color like the open timeline year pill
+  &__hobby {
+    --ds-brand: var(--mat-sys-primary);
+    --ds-on-brand: var(--mat-sys-on-primary);
+
+    display: grid;
+    min-height: 6.5rem;
+
+    @container (min-width: 30rem) {
+      min-height: 9rem;
+    }
+
+    &--wide {
+      @container (min-width: 30rem) {
+        grid-column: span 2;
+      }
+    }
+  }
+
+  // The hobby's icon, large and faint in the corner in the tile's text color;
+  // decorative
+  &__hobby-mark {
+    bottom: -0.75rem;
+    color: var(--ds-on-brand, currentcolor);
+    font-size: 6rem;
+    opacity: 0.14;
+    pointer-events: none;
+    position: absolute;
+    right: -0.5rem;
+    z-index: -1;
+  }
+}

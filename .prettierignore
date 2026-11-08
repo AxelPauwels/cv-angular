@@ -7,3 +7,6 @@
 
 .nx/self-healing
 /package-lock.json
+
+# Third-party Lordicon animations, kept as downloaded (minified)
+/libs/shared/ui-lordicon/src/assets

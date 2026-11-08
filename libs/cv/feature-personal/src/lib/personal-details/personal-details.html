@@ -1,0 +1,104 @@
+<ds-page-layout>
+  <ds-page-title title="t.heading.personal" />
+
+  @if (loading.pending()) { @if (loading.indicator()) {
+  <ds-loading-spinner />
+  } } @else if (store.error()) {
+  <p>Could not load personal details: {{ store.error()?.message }}</p>
+  } @else if (store.person(); as person) {
+  <section
+    class="personal-details__section"
+    aria-labelledby="personal-about-title">
+    <ds-section-heading
+      headingId="personal-about-title"
+      title="t.subheading.personal.about-me"
+      tagline="t.subheading.personal.about-me.description" />
+
+    <!-- only the facts, no card; the name lives on the home page -->
+    <dl class="personal-details__facts">
+      @for (fact of facts(); track fact.labelKey) {
+      <div class="personal-details__fact">
+        <mat-icon
+          class="personal-details__fact-icon"
+          fontSet="material-symbols-outlined"
+          aria-hidden="true"
+          >{{ fact.icon }}</mat-icon
+        >
+        <dt class="personal-details__fact-label">
+          {{ fact.labelKey | translate }}
+        </dt>
+        <!-- one line: whitespace between the parts would show, e.g. a double space in "Leuven,  Belgium" -->
+        <!-- prettier-ignore -->
+        <dd class="personal-details__fact-value">@for (part of fact.value; track $index) {@switch (part.kind) {@case ('key') {{{ part.text | translate }}} @case ('date') {{{ part.date | date: 'longDate' }}} @default {{{ part.text }}}}}</dd>
+      </div>
+      }
+    </dl>
+  </section>
+
+  <section
+    class="personal-details__section"
+    aria-labelledby="personal-languages-title">
+    <ds-section-heading
+      headingId="personal-languages-title"
+      title="t.subheading.personal.languages"
+      tagline="t.subheading.personal.languages.description" />
+
+    <ul class="personal-details__languages">
+      @for (entry of languages(); track entry.skill.language.isoCode) { @let
+      skill = entry.skill;
+      <li class="personal-details__language">
+        <ds-card
+          [title]="languageKeys[skill.language.isoCode] | translate"
+          [tag]="skill.isNativeLanguage ? ('t.language.native' | translate) : undefined"
+          [headingLevel]="3">
+          <dl class="personal-details__levels">
+            @for (level of entry.levels; track level.labelKey) {
+            <div class="personal-details__level">
+              <dt class="personal-details__level-label">
+                {{ level.labelKey | translate }}
+              </dt>
+              <dd class="personal-details__level-value">
+                {{ proficiencyKey(level.value) | translate }}
+              </dd>
+              <!-- the level is in the text above; the bar only shows it -->
+              <ds-progress-bar
+                class="personal-details__level-bar"
+                [value]="proficiencyPercentage[level.value]" />
+            </div>
+            }
+          </dl>
+        </ds-card>
+      </li>
+      }
+    </ul>
+  </section>
+
+  <section
+    class="personal-details__section"
+    aria-labelledby="personal-hobbies-title">
+    <ds-section-heading
+      headingId="personal-hobbies-title"
+      title="t.subheading.personal.hobbies-and-interests"
+      tagline="t.subheading.personal.hobbies-and-interests.description" />
+
+    <ul class="personal-details__hobbies">
+      @for (hobby of person.hobbies; track hobby.name) {
+      <li
+        class="personal-details__hobby"
+        [class.personal-details__hobby--wide]="hobby.comment">
+        <ds-card
+          appearance="brand"
+          [title]="hobby.name | translate"
+          [subtitle]="hobby.comment ? (hobby.comment | translate) : undefined"
+          [headingLevel]="3">
+          <span
+            class="personal-details__hobby-mark cv-icon"
+            [class]="'cv-icon-' + hobby.icon"
+            aria-hidden="true"></span>
+        </ds-card>
+      </li>
+      }
+    </ul>
+  </section>
+  }
+</ds-page-layout>

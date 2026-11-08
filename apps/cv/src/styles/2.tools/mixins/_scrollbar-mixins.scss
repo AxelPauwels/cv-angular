@@ -1,0 +1,45 @@
+// A slim, rounded scrollbar in the style of macOS: no track, only a pill-shaped
+// thumb that floats with some space around it and gets darker on hover.
+
+// The colors come from `--ds-scrollbar-thumb` and `--ds-scrollbar-thumb-hover`
+// (set on <html> in 4.elements/e-scrollbar, from the theme's on-surface), so the
+// thumb follows every palette and light or dark mode. Embedded pages (the reports
+// in an iframe) copy the rules that use these variables, see applyAppStyles in
+// @cv/shared-ui-design-system.
+
+// Chrome and Safari draw it with the ::-webkit-scrollbar pseudo elements; setting
+// `scrollbar-color` or `scrollbar-width` would switch those off in Chrome, so the
+// standard properties are only for browsers without them (Firefox).
+// In forced colors mode the browser draws its own system scrollbar.
+@mixin scrollbar($size: 0.75rem) {
+  @supports not selector(::-webkit-scrollbar) {
+    scrollbar-color: var(--ds-scrollbar-thumb) transparent;
+    scrollbar-width: thin;
+  }
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    height: $size;
+    width: $size;
+  }
+
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+
+  // The transparent border keeps the thumb clear of the edge: a slim pill
+  &::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background-color: var(--ds-scrollbar-thumb);
+    border: 0.1875rem solid transparent;
+    border-radius: $size;
+    min-height: 2.5rem;
+    min-width: 2.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover,
+  &::-webkit-scrollbar-thumb:active {
+    background-color: var(--ds-scrollbar-thumb-hover);
+  }
+}

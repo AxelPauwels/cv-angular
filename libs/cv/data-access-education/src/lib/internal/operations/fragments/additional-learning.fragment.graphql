@@ -1,0 +1,4 @@
+fragment AdditionalLearningFields on AdditionalLearning {
+  name
+  url
+}

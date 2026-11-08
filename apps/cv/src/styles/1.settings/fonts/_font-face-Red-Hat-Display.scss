@@ -1,8 +1,10 @@
+// Red Hat Display is a variable font: one file covers every weight (300-900),
+// so declare the range instead of 400, or the browser fakes bold.
 @font-face {
   font-display: swap;
   font-family: Red-Hat-Display;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300 900;
   src:
     url('/assets/fonts/Red-Hat-Display/Red-Hat-Display.woff2') format('woff2'),
     url('/assets/fonts/Red-Hat-Display/Red-Hat-Display.woff') format('woff');
@@ -12,7 +14,7 @@
   font-display: swap;
   font-family: Red-Hat-Display;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 300 900;
   src:
     url('/assets/fonts/Red-Hat-Display/Red-Hat-Display-italic.woff2')
       format('woff2'),

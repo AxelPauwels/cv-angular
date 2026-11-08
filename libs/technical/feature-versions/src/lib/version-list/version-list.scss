@@ -1,0 +1,44 @@
+@use '3.vendors/mat';
+
+:host {
+  display: block;
+  max-width: 80rem;
+}
+
+.version-list {
+  &__intro {
+    margin-block: 0 1rem;
+  }
+
+  // Masonry: cards of different heights flow into columns (two on wide screens, one
+  // on phones) instead of leaving rows with empty space. The cards' shadows need
+  // room, so the gaps and the padding are as wide as they reach.
+  &__grid {
+    column-gap: 2rem;
+    columns: 2 26rem;
+    padding: 1rem;
+  }
+
+  &__card {
+    @include mat.table-overrides(
+      (
+        background-color: transparent,
+      )
+    );
+
+    break-inside: avoid;
+    margin-bottom: 2rem;
+  }
+
+  // A body cell that is a row header (a plain <th>, Material only styles <td>)
+  &__package {
+    font-weight: normal;
+    text-align: start;
+  }
+
+  &__name {
+    color: var(--mat-sys-on-surface-variant);
+    display: block;
+    font-size: 0.85em;
+  }
+}

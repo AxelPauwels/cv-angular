@@ -1,0 +1,7 @@
+{
+  "name": "@cv/shared-util-types",
+  "version": "0.0.1",
+  "peerDependencies": {},
+  "sideEffects": false,
+  "private": true
+}

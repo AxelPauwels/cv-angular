@@ -1,0 +1,23 @@
+// Stretches to the footer, so an embedded report fills the remaining height
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  // lets the sub-navbar's panel shrink to the space left and scroll
+  min-height: 0;
+}
+
+.showcase-feature-shell {
+  &__nav {
+    flex: 1;
+    min-height: 0;
+  }
+
+  &__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1rem;
+  }
+}

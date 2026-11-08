@@ -1,0 +1,269 @@
+@use '3.vendors/mat';
+
+// Flat Material 3 surfaces in the style of the CV pages: sections with a
+// ds-section-heading, round icons in the colors of the personal facts, tables in an
+// outlined container. No cards around the sections.
+// the technical shell already pads the page; cap the width like the versions page
+:host {
+  display: block;
+  max-width: 80rem;
+}
+
+.architecture-overview {
+  &__section {
+    container-type: inline-size;
+
+    & + & {
+      margin-top: 3rem;
+    }
+  }
+
+  &__text {
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-body-large);
+    margin: 0 0 1.5rem;
+    max-width: 48rem;
+  }
+
+  &__link {
+    color: var(--mat-sys-primary);
+    text-underline-offset: 0.15em;
+  }
+
+  &__code {
+    background-color: var(--mat-sys-surface-container-high);
+    border-radius: var(--mat-sys-corner-extra-small);
+    color: var(--mat-sys-on-surface);
+    font-size: 0.875em;
+    padding: 0.0625rem 0.375rem;
+  }
+
+  // A small icon on a round background, like the personal facts (decorative)
+  &__icon {
+    align-items: center;
+    background-color: var(--mat-sys-secondary-container);
+    border: 1px solid transparent; // an outline in forced colors
+    border-radius: 50%;
+    box-sizing: content-box;
+    color: var(--mat-sys-on-secondary-container);
+    display: flex;
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    height: 1.25rem;
+    justify-content: center;
+    line-height: 1;
+    padding: 0.625rem;
+    width: 1.25rem;
+  }
+
+  // --- Error notice ---
+
+  &__notice {
+    align-items: flex-start;
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__notice-title {
+    font: var(--mat-sys-title-large);
+    margin: 0.375rem 0 0.5rem;
+  }
+
+  // --- Numbers: an icon, a label and a value, as in the personal facts ---
+
+  &__stats {
+    display: grid;
+    gap: 1.5rem 3rem;
+    grid-template-columns: repeat(2, minmax(0, auto));
+    justify-content: start;
+    margin: 0 0 2rem;
+
+    @container (min-width: 40rem) {
+      grid-template-columns: repeat(4, minmax(0, auto));
+    }
+  }
+
+  &__stat {
+    align-items: center;
+    column-gap: 0.875rem;
+    display: grid;
+    grid-template:
+      'icon label' auto
+      'icon value' auto / auto 1fr;
+
+    .architecture-overview__icon {
+      grid-area: icon;
+    }
+  }
+
+  &__stat-label {
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-label-small);
+    grid-area: label;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__stat-value {
+    font: var(--mat-sys-title-large);
+    grid-area: value;
+    margin: 0;
+  }
+
+  // --- Tables: an outlined, rounded container that scrolls sideways on its own ---
+
+  &__scroll {
+    border: 1px solid var(--mat-sys-outline-variant);
+    border-radius: var(--mat-sys-corner-large);
+    overflow-x: auto;
+
+    &:focus-visible {
+      outline: 2px solid var(--mat-sys-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__table {
+    @include mat.table-overrides(
+      (
+        background-color: transparent,
+        header-headline-color: var(--mat-sys-on-surface-variant),
+        header-headline-font: var(--mat-sys-label-medium-font),
+        header-headline-weight: var(--mat-sys-label-medium-weight),
+        header-headline-size: var(--mat-sys-label-medium-size),
+        row-item-outline-color: var(--mat-sys-outline-variant),
+      )
+    );
+
+    min-width: 100%;
+
+    th[mat-header-cell] {
+      background-color: var(--mat-sys-surface-container);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    td,
+    th {
+      padding-block: 0.75rem;
+      vertical-align: top;
+    }
+
+    tr:last-child > * {
+      border-bottom: none;
+    }
+  }
+
+  &__row-header {
+    color: var(--mat-sys-primary);
+    font: var(--mat-sys-title-small);
+    text-align: start;
+    white-space: nowrap;
+  }
+
+  &__projects {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // A project name: a small tonal pill
+  &__project {
+    background-color: var(--mat-sys-surface-container-high);
+    border-radius: var(--mat-sys-corner-small);
+    color: var(--mat-sys-on-surface);
+    display: inline-block;
+    font-size: 0.8125rem;
+    padding: 0.25rem 0.5rem;
+    white-space: nowrap;
+  }
+
+  &__subtitle {
+    color: var(--mat-sys-on-surface);
+    font: var(--mat-sys-title-medium);
+    margin: 2rem 0 0.75rem;
+  }
+
+  // --- Points: an icon, a title and a short text, in a grid ---
+
+  &__points {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @container (min-width: 36rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @container (min-width: 60rem) {
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    }
+  }
+
+  &__point {
+    // the text sits under its title, also when a neighbour in the row is taller
+    align-content: start;
+    column-gap: 1rem;
+    display: grid;
+    grid-template:
+      'icon title' auto
+      'icon text' auto / auto 1fr;
+
+    .architecture-overview__icon {
+      grid-area: icon;
+    }
+  }
+
+  &__point-title {
+    color: var(--mat-sys-on-surface);
+    font: var(--mat-sys-title-medium);
+    grid-area: title;
+    margin: 0.5rem 0 0.25rem;
+  }
+
+  &__point-text {
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-body-medium);
+    grid-area: text;
+    margin: 0;
+  }
+
+  // --- Dependencies per project: Material's accordion, flat on the page ---
+
+  &__accordion {
+    @include mat.expansion-overrides(
+      (
+        container-background-color: var(--mat-sys-surface-container-low),
+        container-shape: var(--mat-sys-corner-large),
+        header-text-color: var(--mat-sys-on-surface),
+        header-description-color: var(--mat-sys-on-surface-variant),
+      )
+    );
+
+    display: block;
+  }
+
+  &__dependencies {
+    display: grid;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__dependency {
+    align-items: baseline;
+    color: var(--mat-sys-on-surface-variant);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+    line-height: 1.8;
+  }
+}

@@ -1,0 +1,36 @@
+// A navigation label with a wider letter-spacing that turns bolder on hover and when
+// active, without the tabs around it shifting: an invisible copy in the active style
+// reserves the width. Put the label's text in `data-label` too. The copy is hidden,
+// so screen readers skip it. Include it on the tab; `$label` is the label's BEM
+// element class, e.g. `.main-navbar__label`.
+@mixin nav-label($label, $hover-weight: 700, $active-weight: 700) {
+  #{$label} {
+    display: inline-flex;
+    flex-direction: column;
+    transition: font-weight 200ms cubic-bezier(0.2, 0, 0, 1);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    &::after {
+      content: attr(data-label);
+      font-weight: $active-weight;
+      height: 0;
+      overflow: hidden;
+      pointer-events: none;
+      user-select: none;
+      visibility: hidden;
+    }
+  }
+
+  &:hover #{$label} {
+    font-weight: $hover-weight;
+  }
+
+  // nested to outrank Material's tab label weight; after hover, so an active tab
+  // keeps its style when hovered
+  &.mdc-tab--active #{$label} {
+    font-weight: $active-weight;
+  }
+}

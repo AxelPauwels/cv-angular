@@ -1,0 +1,181 @@
+import { Component } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { provideI18nTesting } from '@cv/shared-data-access-i18n';
+import { provideRouter, Router } from '@angular/router';
+import {
+  FeatureToggleService,
+  saveFeatureTogglesForTesting,
+} from '@cv/shared-data-access';
+import { Shell } from './shell';
+
+@Component({ template: '' })
+class Page {}
+
+describe('Shell', () => {
+  beforeEach(() => {
+    localStorage.clear();
+    // every menu item and navbar icon on, whatever the defaults
+    saveFeatureTogglesForTesting();
+  });
+
+  const mainMenu = (element: HTMLElement) =>
+    Array.from(element.querySelectorAll('header nav a')).map((link) =>
+      link.textContent?.trim()
+    );
+
+  it('hides the main menu items and navbar icons switched off on the admin page', async () => {
+    // Arrange
+    TestBed.configureTestingModule({
+      providers: [provideRouter([]), provideI18nTesting()],
+    });
+    const fixture = TestBed.createComponent(Shell);
+    const element: HTMLElement = fixture.nativeElement;
+    const toggles = TestBed.inject(FeatureToggleService);
+
+    // Act
+    toggles.change('main-menu-showcase', false);
+    toggles.change('navbar-download-cv', false);
+    toggles.change('navbar-language-switcher', false);
+    await fixture.whenStable();
+
+    // Assert
+    expect(mainMenu(element)).toEqual(['CV', 'TECHNICAL']);
+    expect(element.querySelector('ds-download-menu')).toBeNull();
+    expect(element.querySelector('ds-language-switcher')).toBeNull();
+    expect(element.querySelector('ds-theme-switcher')).toBeTruthy();
+  });
+
+  it('hides a main menu item once its last sub menu item is switched off', async () => {
+    // Arrange
+    TestBed.configureTestingModule({
+      providers: [provideRouter([]), provideI18nTesting()],
+    });
+    const fixture = TestBed.createComponent(Shell);
+    const element: HTMLElement = fixture.nativeElement;
+    const toggles = TestBed.inject(FeatureToggleService);
+    const technicalPages = [
+      'technical-architecture',
+      'technical-project-graph',
+      'technical-graphql-docs',
+      'technical-code-coverage',
+      'technical-end-to-end-tests',
+      'technical-versions',
+    ] as const;
+
+    // Act
+    technicalPages.forEach((id) => toggles.change(id, false));
+    await fixture.whenStable();
+
+    // Assert
+    expect(mainMenu(element)).toEqual(['CV', 'SHOWCASE']);
+  });
+
+  function configureWithPages() {
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter([
+          { path: 'home', component: Page },
+          { path: 'experience', component: Page },
+        ]),
+        provideI18nTesting(),
+      ],
+    });
+  }
+
+  it('has no footer on the home page', async () => {
+    // Arrange
+    configureWithPages();
+    const fixture = TestBed.createComponent(Shell);
+    const element: HTMLElement = fixture.nativeElement;
+
+    // Act
+    await TestBed.inject(Router).navigateByUrl('/home');
+    await fixture.whenStable();
+
+    // Assert
+    expect(element.querySelector('footer')).toBeNull();
+  });
+
+  it('has a footer on every other page', async () => {
+    // Arrange
+    configureWithPages();
+    const fixture = TestBed.createComponent(Shell);
+    const element: HTMLElement = fixture.nativeElement;
+
+    // Act
+    await TestBed.inject(Router).navigateByUrl('/experience');
+    await fixture.whenStable();
+
+    // Assert
+    expect(element.querySelector('footer')).toBeTruthy();
+  });
+
+  it('links the name in the footer to the admin page, also with its menu item off', async () => {
+    // Arrange
+    saveFeatureTogglesForTesting({ 'showcase-admin': false });
+    configureWithPages();
+    const fixture = TestBed.createComponent(Shell);
+    const element: HTMLElement = fixture.nativeElement;
+
+    // Act
+    await TestBed.inject(Router).navigateByUrl('/experience');
+    await fixture.whenStable();
+
+    // Assert
+    const link = element.querySelector<HTMLAnchorElement>('footer p a');
+    expect(link?.getAttribute('href')).toBe('/showcase/admin');
+    expect(link?.textContent).toContain('Axel Pauwels');
+    expect(getComputedStyle(link as Element).textDecorationLine).toBe(
+      'underline'
+    );
+  });
+
+  it('lays out header, main and footer with the domain navigation', async () => {
+    // Arrange
+    TestBed.configureTestingModule({
+      providers: [provideRouter([]), provideI18nTesting()],
+    });
+
+    // Act
+    const fixture = TestBed.createComponent(Shell);
+    await fixture.whenStable();
+
+    // Assert
+    const element: HTMLElement = fixture.nativeElement;
+    for (const landmark of ['header', 'main', 'footer']) {
+      expect(element.querySelector(landmark)).toBeTruthy();
+    }
+    expect(mainMenu(element)).toEqual(['CV', 'TECHNICAL', 'SHOWCASE']);
+    expect(element.querySelector('main router-outlet')).toBeTruthy();
+  });
+
+  it('offers the english and dutch cv as pdf downloads in the header', async () => {
+    // Arrange
+    TestBed.configureTestingModule({
+      providers: [provideRouter([]), provideI18nTesting()],
+    });
+    const fixture = TestBed.createComponent(Shell);
+    await fixture.whenStable();
+    const button = (
+      fixture.nativeElement as HTMLElement
+    ).querySelector<HTMLButtonElement>('header ds-download-menu button');
+
+    // Act
+    button?.click();
+    await fixture.whenStable();
+
+    // Assert
+    // The menu renders in an overlay outside the component, hence `document`
+    const links = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>('a.download-menu__option')
+    );
+    expect(links.map((link) => link.getAttribute('href'))).toEqual([
+      '/assets/documents/Axel%20Pauwels_CV_Senior-Angular-Developer_EN.pdf',
+      '/assets/documents/Axel%20Pauwels_CV_Senior-Angular-Developer_NL.pdf',
+    ]);
+    expect(links.map((link) => link.getAttribute('download'))).toEqual([
+      'Axel Pauwels_CV_Senior-Angular-Developer_EN.pdf',
+      'Axel Pauwels_CV_Senior-Angular-Developer_NL.pdf',
+    ]);
+  });
+});

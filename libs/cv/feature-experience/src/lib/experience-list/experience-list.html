@@ -1,0 +1,55 @@
+<ds-page-layout width="narrow">
+  <ds-page-title title="t.heading.experience" />
+
+  @if (loading.pending()) { @if (loading.indicator()) {
+  <ds-loading-spinner />
+  } } @else if (store.error()) {
+  <p>Could not load experiences: {{ store.error()?.message }}</p>
+  } @else { @for (group of groups(); track group.category; let first = $first) {
+  @if (first) {
+  <h2 class="cdk-visually-hidden">
+    {{ categoryKeys[group.category] | translate }}
+  </h2>
+  } @else {
+  <ds-timeline-divider [label]="categoryKeys[group.category] | translate" />
+  }
+  <!--
+  only the first timeline (IT) opens its newest item. Internships only have a
+  start year, so they get no "present" and show just that year. Internships and
+  hospitality jobs have nothing to expand: their period shows in the header.
+-->
+  <ds-timeline
+    [label]="categoryKeys[group.category] | translate"
+    [headingLevel]="3"
+    [expandFirst]="first">
+    @for (experience of group.experiences; track $index) {
+    <ds-timeline-item
+      [start]="experience.period.start"
+      [end]="experience.period.end"
+      [endLabel]="experience.isInternship ? undefined : ('t.present' | translate)"
+      badge="end"
+      [title]="experience.work.position | translate"
+      [subtitle]="experience.work.name + ' · ' + experience.work.location"
+      [tag]="experience.isInternship ? ('t.internship' | translate) : undefined"
+      [icon]="experience.duties.length ? 'trending_up' : undefined"
+      [expandable]="!experience.isInternship && group.category !== 'HORECA'">
+      @for (description of experience.duties; track description) {
+      <p class="experience-list__description">{{ description | translate }}</p>
+      } @for (project of experience.projects; track project) {
+      <ds-timeline-detail icon="folder_open">
+        <p class="experience-list__description">{{ project | translate }}</p>
+      </ds-timeline-detail>
+      } @if (experience.stack.length) {
+      <ds-timeline-detail>
+        <ul class="experience-list__stack">
+          @for (technology of experience.stack; track technology) {
+          <li class="experience-list__technology">{{ technology }}</li>
+          }
+        </ul>
+      </ds-timeline-detail>
+      }
+    </ds-timeline-item>
+    }
+  </ds-timeline>
+  } }
+</ds-page-layout>

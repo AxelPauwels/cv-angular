@@ -1,0 +1,50 @@
+<ds-page-title title="t.heading.versions" />
+
+@if (store.isLoading()) {
+<mat-progress-bar mode="indeterminate" aria-label="Loading the versions" />
+} @else if (store.error()) {
+<ds-card title="Versions not available" icon="info" iconFont="material">
+  <p>
+    The versions are generated at build time and are not available here. Run
+    <code>npx nx run technical-data-access-build-info:build-info</code>.
+  </p>
+</ds-card>
+} @else {
+<div class="version-list__grid">
+  @for (group of groups(); track group.category) {
+  <ds-card class="version-list__card" [title]="group.category">
+    <table mat-table [dataSource]="group.packages">
+      <caption class="cdk-visually-hidden">
+        {{ group.category }}
+      </caption>
+      <ng-container matColumnDef="package">
+        <th mat-header-cell *matHeaderCellDef scope="col">Package</th>
+        <th
+          *matCellDef="let entry"
+          scope="row"
+          class="mat-mdc-cell mdc-data-table__cell version-list__package">
+          @if (npmUrl(entry); as url) {
+          <a [href]="url" target="_blank" rel="noopener">{{ entry.label }}</a>
+          } @else { {{ entry.label }} }
+          <code class="version-list__name">{{ entry.name }}</code>
+        </th>
+      </ng-container>
+      <ng-container matColumnDef="version">
+        <th mat-header-cell *matHeaderCellDef scope="col">Installed</th>
+        <td mat-cell *matCellDef="let entry">
+          <code>{{ entry.version }}</code>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="range">
+        <th mat-header-cell *matHeaderCellDef scope="col">package.json</th>
+        <td mat-cell *matCellDef="let entry">
+          <code>{{ entry.range ?? '–' }}</code>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns"></tr>
+    </table>
+  </ds-card>
+  }
+</div>
+}

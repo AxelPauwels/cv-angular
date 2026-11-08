@@ -1,0 +1,14 @@
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  // Text size from the accessibility settings (`data-text-size` on <html>), relative to
+  // the browser's own size. Every size is in rem, so all text scales along.
+  // Keep the sizes in sync with TEXT_SIZES in @cv/shared-data-access.
+  @each $size in (112.5, 125, 150) {
+    &[data-text-size='#{$size}'] {
+      font-size: #{$size * 1%};
+    }
+  }
+}
