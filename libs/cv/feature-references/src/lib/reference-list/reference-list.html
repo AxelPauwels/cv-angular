@@ -19,35 +19,58 @@
       Two equal columns: the employer's references, then its clients'. Without
       clients the second stays empty, so every step's cards are equally wide.
       The columns are only labelled when there's a client to tell apart.
+      On a narrow screen they stack, the clients first.
     -->
       <div class="reference-list__columns">
-        @if (group.employer.references.length) {
+        @if (narrow()) {
         <ng-container
-          [ngTemplateOutlet]="column"
-          [ngTemplateOutletContext]="{
-          $implicit: group.employer,
-          id: 'reference-list-' + g + '-employer',
-          labelled: group.clients.length > 0
-        }" />
-        } @if (group.clients.length) {
-        <div class="reference-list__column">
-          @for (client of group.clients; track client.name; let c = $index) {
-          <ng-container
-            [ngTemplateOutlet]="column"
-            [ngTemplateOutletContext]="{
-            $implicit: client,
-            id: 'reference-list-' + g + '-client-' + c,
-            labelled: true,
-            client: true
-          }" />
-          }
-        </div>
+          [ngTemplateOutlet]="clientColumns"
+          [ngTemplateOutletContext]="{ $implicit: group, g: g }" />
+        <ng-container
+          [ngTemplateOutlet]="employerColumn"
+          [ngTemplateOutletContext]="{ $implicit: group, g: g }" />
+        } @else {
+        <ng-container
+          [ngTemplateOutlet]="employerColumn"
+          [ngTemplateOutletContext]="{ $implicit: group, g: g }" />
+        <ng-container
+          [ngTemplateOutlet]="clientColumns"
+          [ngTemplateOutletContext]="{ $implicit: group, g: g }" />
         }
       </div>
     </ds-timeline-item>
     }
   </ds-timeline>
   }
+
+  <ng-template #employerColumn let-group let-g="g">
+    @if (group.employer.references.length) {
+    <ng-container
+      [ngTemplateOutlet]="column"
+      [ngTemplateOutletContext]="{
+        $implicit: group.employer,
+        id: 'reference-list-' + g + '-employer',
+        labelled: group.clients.length > 0
+      }" />
+    }
+  </ng-template>
+
+  <ng-template #clientColumns let-group let-g="g">
+    @if (group.clients.length) {
+    <div class="reference-list__column">
+      @for (client of group.clients; track client.name; let c = $index) {
+      <ng-container
+        [ngTemplateOutlet]="column"
+        [ngTemplateOutletContext]="{
+          $implicit: client,
+          id: 'reference-list-' + g + '-client-' + c,
+          labelled: true,
+          client: true
+        }" />
+      }
+    </div>
+    }
+  </ng-template>
 
   <ng-template
     #column

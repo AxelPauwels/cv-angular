@@ -5,9 +5,22 @@
  * written as `var(--mat-sys-…)`: EmbeddedPage resolves them from the app.
  */
 
-/** SpectaQL: the page title already names the API, so its own <h1> goes */
+/**
+ * SpectaQL: the page title already names the API, so its own <h1> goes. Below
+ * SpectaQL's 48em breakpoint the sidebar ("All topics") is a drawer over the
+ * docs: it gets the app's background and text colors instead of the transparent
+ * one, so the docs don't show through it.
+ */
 export const GRAPHQL_DOCS_STYLES = `
 #content > h1.doc-heading:first-of-type { display: none !important; }
+@media (width < 48em) {
+  #sidebar {
+    background: var(--mat-sys-surface) !important;
+    color: var(--mat-sys-on-surface) !important;
+  }
+  #sidebar :is(a, button, h5) { color: inherit !important; }
+  #sidebar h4 { color: var(--mat-sys-on-surface-variant) !important; }
+}
 `;
 
 /** Istanbul: pill-shaped search field, fractions and coverage bars, no footer */
