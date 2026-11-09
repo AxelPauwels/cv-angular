@@ -1,98 +1,98 @@
 {
   "url": "https://axel-pauwels.web.app",
-  "fetchTime": "2026-11-09T10:44:22.977Z",
+  "fetchTime": "2026-11-09T13:19:09.616Z",
   "lighthouseVersion": "13.6.0",
   "formFactor": "desktop",
   "pages": {
     "/home": {
-      "performance": 95,
+      "performance": 96,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/personal": {
-      "performance": 96,
+      "performance": 98,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/education": {
-      "performance": 95,
+      "performance": 98,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/experience": {
-      "performance": 95,
+      "performance": 97,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/skills": {
-      "performance": 95,
+      "performance": 98,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/references": {
-      "performance": 95,
+      "performance": 98,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/technical/architecture": {
-      "performance": 95,
+      "performance": 97,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/technical/project-graph": {
-      "performance": 80,
+      "performance": 98,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/technical/graphql-docs": {
-      "performance": 96,
+      "performance": 98,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/technical/code-coverage": {
-      "performance": 95,
+      "performance": 98,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/technical/end-to-end-tests": {
-      "performance": 95,
+      "performance": 97,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/technical/versions": {
-      "performance": 95,
+      "performance": 97,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/showcase/micro-frontends": {
-      "performance": 95,
+      "performance": 94,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/showcase/lighthouse": {
-      "performance": 96,
+      "performance": 98,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/showcase/feature-toggles": {
-      "performance": 96,
+      "performance": 97,
       "accessibility": 100,
       "best-practices": 100,
-      "seo": 63
+      "seo": 100
     }
   }
 }

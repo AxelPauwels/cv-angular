@@ -64,6 +64,14 @@
     grid-area: footer;
     justify-content: space-between;
     padding: 0.5rem 1rem;
+
+    @media (width < 600px) {
+      justify-content: center;
+
+      .shell__copyright {
+        display: none;
+      }
+    }
   }
 
   &__copyright {

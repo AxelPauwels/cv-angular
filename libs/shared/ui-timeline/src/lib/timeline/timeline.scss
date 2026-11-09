@@ -198,3 +198,40 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
     }
   }
 }
+
+// Phones: a timeline nested in an open step drops its pills and line; each label
+// sits on top of its content card, lined up with the outer timeline's cards. The
+// outer card steps back (no surface or padding), so the cards don't double up.
+@media (width < 600px) {
+  .timeline__content-inner:has(.timeline) {
+    background: none;
+    padding: 0;
+  }
+
+  .timeline__content-inner .timeline {
+    .timeline__header {
+      min-height: 0;
+      padding: 0;
+    }
+
+    .timeline__year {
+      display: none;
+    }
+
+    .timeline__content-container {
+      margin-left: 0;
+
+      &--line::before {
+        display: none;
+      }
+    }
+
+    .timeline__content-inner {
+      margin: 0.25rem 0 1.5rem;
+    }
+
+    .timeline__step:last-child .timeline__content-inner {
+      margin-bottom: 0;
+    }
+  }
+}
