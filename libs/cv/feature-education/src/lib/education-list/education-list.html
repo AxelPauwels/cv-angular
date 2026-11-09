@@ -49,7 +49,7 @@
       <ds-timeline
         [label]="'t.education.hotelschool' | translate"
         [headingLevel]="4"
-        [expandFirst]="false">
+        [collapsible]="false">
         @for (education of group.educations; track $index) {
         <ds-timeline-item
           [start]="education.period.start"

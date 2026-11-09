@@ -57,8 +57,9 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
     }
   }
 
-  // the year pill, the same on open and closed items (the open item shows by its
-  // bold label and hidden chevron)
+  // the year pill; the open item's pill takes the primary color. Scoped to the
+  // step's own heading, so a timeline nested in an open step keeps light pills;
+  // an always-open (static) timeline keeps them light too.
   &__year {
     align-items: center;
     background-color: var(--mat-sys-secondary-container);
@@ -74,6 +75,14 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
     margin-right: 1rem;
     padding-inline: 0.25rem;
     width: $badge-width;
+
+    .timeline:not(.timeline--static)
+      > .timeline__step--expanded
+      > .timeline__heading
+      & {
+      background-color: var(--mat-sys-primary);
+      color: var(--mat-sys-on-primary);
+    }
   }
 
   // title and subtitle (from the item), wrapping onto more lines when needed
@@ -83,7 +92,10 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
     min-width: 0;
     padding-block: 0.75rem;
 
-    .timeline__step--expanded & {
+    .timeline:not(.timeline--static)
+      > .timeline__step--expanded
+      > .timeline__heading
+      & {
       font-weight: 600;
     }
   }
@@ -106,7 +118,10 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
     transition: opacity 200ms ease;
     width: 0.5rem;
 
-    .timeline__step--expanded & {
+    .timeline:not(.timeline--static)
+      > .timeline__step--expanded
+      > .timeline__heading
+      & {
       opacity: 0;
     }
 
@@ -131,7 +146,7 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
       transition: none;
     }
 
-    .timeline__step--expanded & {
+    .timeline__step--expanded > & {
       grid-template-rows: 1fr;
       transition:
         grid-template-rows 200ms ease,

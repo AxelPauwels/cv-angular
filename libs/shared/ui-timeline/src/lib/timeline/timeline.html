@@ -1,14 +1,21 @@
-<ol cdkAccordion class="timeline" [attr.aria-label]="label()">
+<ol
+  cdkAccordion
+  class="timeline"
+  [class.timeline--static]="!collapsible()"
+  [multi]="!collapsible()"
+  [attr.aria-label]="label()">
   @for (item of items(); track item; let index = $index, last = $last) {
   <li
     cdkAccordionItem
     #step="cdkAccordionItem"
     class="timeline__step"
     [class.timeline__step--expanded]="step.expanded"
-    [expanded]="expandFirst() && index === 0 && item.expandable()">
+    [expanded]="
+      item.expandable() && (!collapsible() || (expandFirst() && index === 0))
+    ">
     <!-- accordion pattern: the button sits in a heading, so screen readers can jump between items -->
     <ng-template #header>
-      @if (item.expandable()) {
+      @if (item.expandable() && collapsible()) {
       <button
         type="button"
         class="timeline__header"
@@ -23,8 +30,10 @@
         <span class="timeline__chevron" aria-hidden="true"></span>
       </button>
       } @else {
-      <!-- nothing to expand: a plain header, no button, chevron or hover -->
-      <div class="timeline__header timeline__header--static">
+      <!-- nothing to expand or always open: a plain header, no button, chevron or hover -->
+      <div
+        class="timeline__header timeline__header--static"
+        [id]="id + '-header-' + index">
         <span class="timeline__year">{{ item.badgeLabel() }}</span>
         <span class="timeline__label">
           <ng-container [ngTemplateOutlet]="item.header()" />
