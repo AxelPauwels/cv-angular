@@ -1,15 +1,7 @@
 import { Component } from '@angular/core';
 import { PageTitle } from '@cv/shared-ui-design-system';
 import { MatButton } from '@angular/material/button';
-import {
-  MatCard,
-  MatCardActions,
-  MatCardAvatar,
-  MatCardContent,
-  MatCardHeader,
-  MatCardSubtitle,
-  MatCardTitle,
-} from '@angular/material/card';
+import { Card, CardActions } from '@cv/shared-ui-card';
 import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
 import { MacWindow } from '@axel-pauwels/mac-window';
@@ -31,13 +23,8 @@ import {
     MacWindow,
     Wrapper,
     MatButton,
-    MatCard,
-    MatCardActions,
-    MatCardAvatar,
-    MatCardContent,
-    MatCardHeader,
-    MatCardSubtitle,
-    MatCardTitle,
+    Card,
+    CardActions,
     MatChip,
     MatChipSet,
     MatIcon,

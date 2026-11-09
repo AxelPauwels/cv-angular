@@ -13,7 +13,7 @@ describe('MicroFrontends', () => {
     const element: HTMLElement = fixture.nativeElement;
 
     // Assert
-    const [remote, library] = Array.from(element.querySelectorAll('section'));
+    const [remote, library] = Array.from(element.querySelectorAll('ds-card'));
     expect(remote.querySelector('shared-wrapper')).toBeTruthy();
     expect(remote.querySelector('a')?.getAttribute('href')).toBe(
       'https://cv-angular-mfe.web.app'

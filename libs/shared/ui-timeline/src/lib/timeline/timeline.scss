@@ -57,7 +57,8 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
     }
   }
 
-  // the year pill; the open item's pill takes the primary color
+  // the year pill, the same on open and closed items (the open item shows by its
+  // bold label and hidden chevron)
   &__year {
     align-items: center;
     background-color: var(--mat-sys-secondary-container);
@@ -73,11 +74,6 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
     margin-right: 1rem;
     padding-inline: 0.25rem;
     width: $badge-width;
-
-    .timeline__step--expanded & {
-      background-color: var(--mat-sys-primary);
-      color: var(--mat-sys-on-primary);
-    }
   }
 
   // title and subtitle (from the item), wrapping onto more lines when needed

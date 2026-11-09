@@ -79,6 +79,14 @@
     margin: 0;
   }
 
+  // Bottom right, however tall the card is: the card is a flex column, so the
+  // free space goes above the actions
+  &__actions {
+    gap: 0.5rem;
+    margin-top: auto;
+    padding: 0 16px 16px;
+  }
+
   // The header's colors, so these tiles match the navbar in every theme and color
   // scheme; the text on them keeps the navbar's contrast (5.4:1 or more)
   &--brand {

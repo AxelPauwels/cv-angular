@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Card } from './card';
+import { CardActions } from './card-actions';
 
 @Component({
-  imports: [Card],
+  imports: [Card, CardActions],
   template: `
     <ds-card title="Frameworks" icon="angular">
       <p class="projected">Body</p>
@@ -13,6 +14,10 @@ import { Card } from './card';
     <ds-card title="Roel Frison" subtitle="Front-end Lead" [headingLevel]="3" />
     <ds-card title="Board games" appearance="brand" />
     <ds-card title="Dutch" tag="Native" />
+    <ds-card title="With actions">
+      <p>Body</p>
+      <a dsCardActions href="#more">More</a>
+    </ds-card>
     <ds-card icon="angular" subtitle="Ignored"
       ><p class="projected">Body</p></ds-card
     >
@@ -109,7 +114,7 @@ describe('Card', () => {
 });
 
 @Component({
-  imports: [Card],
+  imports: [Card, CardActions],
   template: `
     <ds-card title="Roel Frison" initials="RF" />
     <ds-card title="Both" icon="angular" initials="BO" />
@@ -161,5 +166,28 @@ describe('Card initials', () => {
     expect(
       cards.filter((card) => card.querySelector('.card__tag')).length
     ).toBe(1);
+  });
+
+  it('puts actions in an actions row after the content, only when there are any', async () => {
+    // Arrange
+    const fixture = TestBed.createComponent(Host);
+
+    // Act
+    await fixture.whenStable();
+    const cards = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('ds-card')
+    );
+
+    // Assert
+    const withActions = cards.filter((card) =>
+      card.querySelector('.card__actions')
+    );
+    expect(withActions.length).toBe(1);
+    const actions = withActions[0].querySelector('.card__actions');
+    expect(actions?.querySelector('a[href="#more"]')).not.toBeNull();
+    expect(actions?.previousElementSibling?.tagName).toBe('MAT-CARD-CONTENT');
+    expect(
+      withActions[0].querySelector('mat-card-content a[href="#more"]')
+    ).toBeNull();
   });
 });
