@@ -44,7 +44,8 @@
     "i18n:missing": "node ./scripts/tolgee/missing.mjs",
     "i18n:push-missing": "node ./scripts/tolgee/push-missing.mjs",
     "lighthouse:audit": "npx nx run showcase-feature-lighthouse:audit",
-    "build-info": "npx nx run technical-data-access-build-info:build-info"
+    "build-info": "npx nx run technical-data-access-build-info:build-info",
+    "material-symbols:extract": "npx nx run cv:material-symbols:write"
   },
   "lint-staged": {
     "*.{css,scss}": [
