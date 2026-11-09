@@ -33,4 +33,13 @@
     min-height: 20rem;
     width: calc(100% + 2rem);
   }
+
+  // takes the place of the iframe until the user loads it
+  &__placeholder {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    min-height: 20rem;
+  }
 }

@@ -20,7 +20,7 @@ export const SHOWCASE_NAV_ITEMS: readonly (NavItem & {
   {
     labelKey: 't.nav.feature-toggles',
     path: ROUTES.SHOWCASE.FEATURE_TOGGLES,
-    toggle: 'showcase-admin',
+    toggle: 'showcase-feature-toggles',
   },
 ];
 

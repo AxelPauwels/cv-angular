@@ -61,11 +61,34 @@
       "cv": "CV",
       "download-cv": "Descargar CV",
       "email": "Correo electrónico",
+      "load-report": "Cargar informe",
       "loading": "Cargando",
       "ok": "OK",
       "pdf": "PDF",
       "reset": "Restablecer el valor predeterminado",
       "under-construction": "Esta página está en construcción. ¡Vuelve pronto!"
+    },
+    "competence": {
+      "ai-assisted-development": {
+        "description": "GitHub Copilot y Cursor para entregar más rápido y con mayor calidad. Actualmente aprendiendo spec-driven development.",
+        "title": "Desarrollo moderno y asistido por IA"
+      },
+      "angular-enterprise": {
+        "description": "Aplicaciones a gran escala que soportan procesos de negocio complejos.",
+        "title": "Desarrollo Angular empresarial"
+      },
+      "clean-code": {
+        "description": "Estándares claros, diseño reutilizable y código que perdura.",
+        "title": "Código limpio y mantenible"
+      },
+      "collaboration": {
+        "description": "Intercambio de conocimientos y mejora continua en equipos multidisciplinares.",
+        "title": "Colaboración"
+      },
+      "front-end-architecture": {
+        "description": "Monorepos Nx, librerías reutilizables y estado escalable con RxJS y Signals.",
+        "title": "Arquitectura front-end"
+      }
     },
     "country": {
       "belgium": "Bélgica"
@@ -76,6 +99,7 @@
         "degree": "Diploma de azúcar estirado | Diploma de azúcar vertido & azúcar soplado",
         "specialization": "Azúcar estirado, azúcar vertido, azúcar soplado"
       },
+      "hotelschool": "Escuela de hostelería",
       "level": {
         "extra": "Clases adicionales",
         "high-school": "Educación superior",
@@ -131,6 +155,10 @@
           "workflows": "Simplificar flujos de trabajo complejos y automatizar tareas repetitivas; introduje y promuevo un uso eficaz del desarrollo asistido por IA en el equipo."
         }
       },
+      "project": {
+        "ordina": "Programa profesional",
+        "ravago": "Warehouse Management System"
+      },
       "work-position": {
         "3-it": "Desarrollador Frontend en prácticas",
         "bergerie": "Chef de cocina fría / chef pastelero",
@@ -148,10 +176,38 @@
         "ravago": "Desarrollador angular senior",
         "residentie": "Becario de servicio",
         "zilte": "Chef de part / Pastelero"
+      }
+    },
+    "feature-toggles": {
+      "count": "{on} de {total} activados",
+      "hidden-notice": "La página características ya no aparece en el menú. Puedes abrirla en /showcase/feature-toggles haciendo clic en «Axel Pauwels» en el pie de página.",
+      "linked": {
+        "off": "{item} también desactivado.",
+        "on": "{item} también activado."
       },
-      "project": {
-        "ordina": "Programa profesional",
-        "ravago": "Warehouse Management System"
+      "reset": "Restablecer valores predeterminados",
+      "section": {
+        "general": {
+          "title": "General"
+        },
+        "main-menu": {
+          "title": "Menú principal"
+        },
+        "navbar": {
+          "title": "Iconos de la barra de navegación"
+        },
+        "submenu": {
+          "title": "Submenú"
+        }
+      },
+      "title": "Administración",
+      "toggle": {
+        "color-scheme-switcher": {
+          "label": "Modo claro y oscuro"
+        },
+        "tour-button": {
+          "label": "Botón del recorrido en la página de inicio"
+        }
       }
     },
     "font": {
@@ -164,7 +220,7 @@
       "education": "Formación",
       "end-to-end-tests": "Pruebas de extremo a extremo",
       "experience": "Experiencia",
-      "feature-toggles": "Feature toggles",
+      "feature-toggles": "Características",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
       "micro-frontends": "Micro-frontends",
@@ -198,6 +254,9 @@
       "switch": "Selecciona un idioma"
     },
     "lighthouse": {
+      "audit": {
+        "message": "Auditado el {date} con Lighthouse {version}"
+      },
       "category": {
         "accessibility": "Accesibilidad",
         "best-practices": "Prácticas recomendadas",
@@ -211,14 +270,12 @@
         "title": "Rangos de puntuación"
       },
       "not-audited": "Aún no auditado",
-      "page": "Página",
-      "audit": {
-        "message": "Auditado el {date} con Lighthouse {version}"
-      }
+      "page": "Página"
     },
     "nav": {
       "admin": "Admin",
       "architecture": "Arquitectura",
+      "back-to-top": "Volver arriba",
       "code-coverage": "cobertura de código",
       "cv": "CV",
       "cv-navigation": "Navegación del CV",
@@ -227,7 +284,7 @@
       "education": "Formación",
       "end-to-end-tests": "Pruebas de extremo a extremo",
       "experience": "Experiencia",
-      "feature-toggles": "Feature toggles",
+      "feature-toggles": "Características",
       "graphql-docs": "graphql docs",
       "home": "Hogar",
       "light": "Claro",
@@ -293,6 +350,11 @@
       "profile": "Desarrollador front-end sénior con 8 años de experiencia creando aplicaciones web empresariales, de los cuales 5 años dedicados por completo a Angular. Diseño y evoluciono aplicaciones críticas para el negocio con un fuerte enfoque en una arquitectura mantenible, código limpio y escalabilidad a largo plazo. Pragmático, orientado a la calidad y con un marcado espíritu de equipo en entornos Agile. Utilizo activamente prácticas modernas y herramientas asistidas por IA para entregar más rápido sin comprometer la calidad."
     },
     "present": "presente",
+    "skill": {
+      "other": {
+        "testing": "Testing unitario, de integración y E2E"
+      }
+    },
     "son": "Hijo",
     "spoken": "Hablado",
     "subheading": {
@@ -358,7 +420,7 @@
         "content-5": "Por último, también habrá una demostración de interfaces modernas, aunque he decidido desarrollar este sitio con una estética vintage y retro.",
         "title": "En construcción"
       },
-      "versions": "Versiones"
+      "versions": "t.temp.versions"
     },
     "theme": {
       "blackberry": "Pizarra",
@@ -398,7 +460,7 @@
         "contact": {
           "label": "Contacto",
           "text": "¿Quieres contactar conmigo? Escríbeme o encuéntrame en LinkedIn y GitHub con los iconos de abajo a la derecha.",
-          "title": "Ponte en contacto"
+          "title": "Contacto"
         },
         "cv": {
           "label": "CV",
@@ -407,7 +469,7 @@
         },
         "download-cv": {
           "label": "Descargar CV",
-          "text": "¿Prefieres leerlo sin conexión? Descarga aquí mi CV en PDF.\nConsejo: usa los botones de abajo o las flechas del teclado, y pulsa Escape para salir del recorrido en cualquier momento.",
+          "text": "¿Prefieres leerlo sin conexión? Descarga aquí mi CV en PDF.",
           "title": "Descarga mi CV"
         },
         "finish": {
@@ -428,7 +490,7 @@
         "settings": {
           "label": "Tus preferencias",
           "text": "Primero configura la web a tu gusto: el tema de color, la fuente, los ajustes de accesibilidad, el modo claro u oscuro y el idioma. Tus elecciones se guardan en este dispositivo.",
-          "title": "Hazlo a tu manera"
+          "title": "Preferencias"
         },
         "showcase": {
           "label": "Escaparate",
@@ -438,7 +500,7 @@
         "technical": {
           "label": "Técnico",
           "text": "¿Te preguntas cómo está hecha esta web? La sección técnica muestra el grafo del proyecto, la arquitectura, la documentación GraphQL, la cobertura de código, las pruebas de extremo a extremo y las versiones utilizadas.",
-          "title": "Bajo el capó"
+          "title": "Técnico"
         },
         "themes": {
           "label": "Temas",
@@ -454,33 +516,6 @@
       "step-of": "Paso {current} de {total}"
     },
     "website": "sitio web",
-    "written": "Escrito",
-    "competence": {
-      "ai-assisted-development": {
-        "description": "GitHub Copilot y Cursor para entregar más rápido y con mayor calidad. Actualmente aprendiendo spec-driven development.",
-        "title": "Desarrollo moderno y asistido por IA"
-      },
-      "angular-enterprise": {
-        "description": "Aplicaciones a gran escala que soportan procesos de negocio complejos.",
-        "title": "Desarrollo Angular empresarial"
-      },
-      "clean-code": {
-        "description": "Estándares claros, diseño reutilizable y código que perdura.",
-        "title": "Código limpio y mantenible"
-      },
-      "collaboration": {
-        "description": "Intercambio de conocimientos y mejora continua en equipos multidisciplinares.",
-        "title": "Colaboración"
-      },
-      "front-end-architecture": {
-        "description": "Monorepos Nx, librerías reutilizables y estado escalable con RxJS y Signals.",
-        "title": "Arquitectura front-end"
-      }
-    },
-    "skill": {
-      "other": {
-        "testing": "Testing unitario, de integración y E2E"
-      }
-    }
+    "written": "Escrito"
   }
 }

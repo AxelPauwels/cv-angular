@@ -44,6 +44,45 @@ const SCROLLBAR_COLORS = `:root {
   --ds-scrollbar-thumb-hover: color-mix(in srgb, CanvasText 65%, transparent);
 }`;
 
+/** Embedded pages that already keep their mode in sync (see matchColorScheme) */
+const watched = new WeakSet<Document>();
+
+/** Sets the mode classes the reports use, see matchColorScheme */
+function setModeClasses(target: Document): void {
+  const dark = target.documentElement.dataset['cvColorScheme'] === 'dark';
+  const root = target.documentElement;
+  root.classList.toggle('dark-mode', dark);
+  root.classList.toggle('light-mode', !dark);
+  target.body?.classList.toggle('vscode-dark', dark);
+  target.body?.classList.toggle('vscode-light', !dark);
+}
+
+/**
+ * Puts the embedded page in the app's light or dark mode instead of the system's:
+ * the generated reports pick their theme from `prefers-color-scheme` (an iframe
+ * gets the system's, not the app's), so on a phone in dark mode they'd turn dark
+ * in a light app. Each report takes a class instead: Playwright `light-mode` /
+ * `dark-mode` on <html>, the Nx project graph (theme "system") `vscode-light` /
+ * `vscode-dark` on <body>, which it watches. Other pages ignore the classes.
+ * Playwright sets its own class again after loading, so an observer puts ours
+ * back; setting a class that is already there changes nothing, so it settles.
+ */
+function matchColorScheme(target: Document, source: Document): void {
+  const dark = getComputedStyle(source.documentElement).colorScheme === 'dark';
+  const scheme = dark ? 'dark' : 'light';
+  const root = target.documentElement;
+  root.dataset['cvColorScheme'] = scheme;
+  root.style.colorScheme = scheme;
+  setModeClasses(target);
+
+  if (!watched.has(target) && target.defaultView) {
+    watched.add(target);
+    new target.defaultView.MutationObserver(() =>
+      setModeClasses(target)
+    ).observe(root, { attributeFilter: ['class'] });
+  }
+}
+
 /** The rules of the app's stylesheets, skipping cross-origin ones (e.g. the icon font) */
 function* appRules(source: Document): Generator<[CSSRule, string]> {
   for (const sheet of Array.from(source.styleSheets)) {
@@ -134,6 +173,7 @@ function themeColors(css: string, source: Document): string {
  *   shows through. When the app is in dark mode and the page isn't, the browser
  *   keeps the page's own light backdrop (color schemes differ), so its dark text
  *   stays readable.
+ * - the app's light or dark mode, not the system's (see matchColorScheme)
  * - the app's slim scrollbar (see scrollbarRules)
  * - `extraStyles`: rules for this page only (e.g. hiding a heading the page title
  *   already shows). They may use the app's theme colors as `var(--mat-sys-…)`
@@ -165,6 +205,8 @@ export function applyAppStyles(
   if (!text) {
     return; // the app's typography isn't loaded (e.g. in a unit test without styles)
   }
+
+  matchColorScheme(target, source);
 
   let style = target.getElementById(STYLE_ID);
   if (!style) {

@@ -29,7 +29,8 @@ interface ToggleSection {
 interface LinkedChange {
   readonly id: FeatureToggleId;
   readonly labelKey: string;
-  readonly messageKey: 't.admin.linked.on' | 't.admin.linked.off';
+  readonly messageKey:
+    't.feature-toggles.linked.on' | 't.feature-toggles.linked.off';
 }
 
 function submenu(
@@ -39,7 +40,7 @@ function submenu(
 ): ToggleSection {
   return {
     id,
-    prefixKey: 't.admin.section.submenu.title',
+    prefixKey: 't.feature-toggles.section.submenu.title',
     titleKey,
     toggles: featureTogglesInGroup(group),
   };
@@ -61,17 +62,17 @@ export class FeatureToggles {
   protected readonly sections: readonly ToggleSection[] = [
     {
       id: 'navbar',
-      titleKey: 't.admin.section.navbar.title',
+      titleKey: 't.feature-toggles.section.navbar.title',
       toggles: featureTogglesInGroup('navbar'),
     },
     {
       id: 'general',
-      titleKey: 't.admin.section.general.title',
+      titleKey: 't.feature-toggles.section.general.title',
       toggles: featureTogglesInGroup('general'),
     },
     {
       id: 'main-menu',
-      titleKey: 't.admin.section.main-menu.title',
+      titleKey: 't.feature-toggles.section.main-menu.title',
       newRow: true,
       toggles: featureTogglesInGroup('main-menu'),
     },
@@ -100,7 +101,7 @@ export class FeatureToggles {
   protected readonly linkedChanges = signal<readonly LinkedChange[]>([]);
 
   protected change(id: FeatureToggleId, enabled: boolean): void {
-    if (id === 'showcase-admin' && !enabled) {
+    if (id === 'showcase-feature-toggles' && !enabled) {
       this.explainHiddenAdmin();
     }
     const before = this.service.states();
@@ -112,7 +113,9 @@ export class FeatureToggles {
       ).map(({ id, labelKey }) => ({
         id,
         labelKey,
-        messageKey: after[id] ? 't.admin.linked.on' : 't.admin.linked.off',
+        messageKey: after[id]
+          ? 't.feature-toggles.linked.on'
+          : 't.feature-toggles.linked.off',
       }))
     );
   }
@@ -124,7 +127,7 @@ export class FeatureToggles {
    */
   private explainHiddenAdmin(): void {
     this.snackBar.open(
-      this.translate.instant('t.admin.hidden-notice'),
+      this.translate.instant('t.feature-toggles.hidden-notice'),
       this.translate.instant('t.common.ok')
     );
   }

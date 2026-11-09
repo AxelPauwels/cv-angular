@@ -1,0 +1,53 @@
+@use '2.tools' as tools;
+@use '3.vendors/mat';
+
+// Only on phones: from md up the window doesn't scroll (the shell's content does)
+:host {
+  display: block;
+
+  @include tools.screen(md) {
+    display: none;
+  }
+}
+
+.back-to-top {
+  // Above the page, below Material's overlays (menus, tooltips: z-index 1000)
+  // and the tour; clear of the home indicator on notched phones
+  &__button {
+    // primary, like the toolbar: stands out over any content it floats above
+    @include mat.fab-overrides(
+      (
+        small-container-color: var(--mat-sys-primary),
+        small-foreground-color: var(--mat-sys-on-primary),
+        small-state-layer-color: var(--mat-sys-on-primary),
+      )
+    );
+
+    inset-block-end: max(1rem, env(safe-area-inset-bottom));
+    inset-inline-end: max(1rem, env(safe-area-inset-right));
+    opacity: 0;
+    position: fixed;
+    transition:
+      opacity 200ms ease-in,
+      visibility 0s linear 200ms;
+    visibility: hidden; // out of the tab order and the accessibility tree
+    z-index: 999;
+
+    &--visible {
+      opacity: 1;
+      transition:
+        opacity 200ms ease-out,
+        visibility 0s;
+      visibility: visible;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    // the app's own reduce motion setting (on <html>)
+    :host-context(html[data-reduce-motion]) & {
+      transition: none;
+    }
+  }
+}

@@ -12,6 +12,11 @@ export interface TourStep {
    * covers all of them. Without a target the step is centered.
    */
   target?: string;
+  /**
+   * On phones (when the hamburger menu is shown) the tour opens the menu and
+   * highlights this instead of `target`; it closes the menu on other steps
+   */
+  menuTarget?: string;
   /** Short name, shown on the back/next buttons of the neighbouring steps */
   labelKey: string;
   titleKey: string;
@@ -22,7 +27,10 @@ export interface TourStep {
   someToggles?: readonly FeatureToggleId[];
 }
 
-type StepOptions = Pick<TourStep, 'target' | 'toggles' | 'someToggles'>;
+type StepOptions = Pick<
+  TourStep,
+  'target' | 'menuTarget' | 'toggles' | 'someToggles'
+>;
 
 function step(id: string, route: string, options: StepOptions = {}): TourStep {
   return {
@@ -36,11 +44,14 @@ function step(id: string, route: string, options: StepOptions = {}): TourStep {
 }
 
 /**
- * A domain's tab, or on phones (where the tabs are hidden) the hamburger menu:
- * the spotlight skips the target that is not rendered
+ * A domain's tab, or on phones (where the tabs are hidden) the domain in the
+ * opened hamburger menu
  */
-function menuTarget(domain: string): string {
-  return `[data-tour="menu-${domain}"], [data-tour="menu"]`;
+function domainTargets(domain: string): StepOptions {
+  return {
+    target: `[data-tour="menu-${domain}"]`,
+    menuTarget: `[data-tour="menu-panel"] [data-tour="menu-${domain}"]`,
+  };
 }
 
 export const DEFAULT_TOUR_STEPS: readonly TourStep[] = [
@@ -60,16 +71,16 @@ export const DEFAULT_TOUR_STEPS: readonly TourStep[] = [
     ],
   }),
   step('cv', ROUTES.CV.PERSONAL_ROUTER_LINK, {
-    target: menuTarget('cv'),
+    ...domainTargets('cv'),
     toggles: ['cv-personal'],
   }),
   step('technical', ROUTES.TECHNICAL.PROJECT_GRAPH_ROUTER_LINK, {
-    target: menuTarget('technical'),
+    ...domainTargets('technical'),
     toggles: ['main-menu-technical', 'technical-project-graph'],
   }),
   // the admin page stays reachable when only its menu item is switched off
   step('showcase', ROUTES.SHOWCASE.FEATURE_TOGGLES_ROUTER_LINK, {
-    target: menuTarget('showcase'),
+    ...domainTargets('showcase'),
     toggles: ['main-menu-showcase'],
   }),
   step('contact', ROUTES.CV.PERSONAL_ROUTER_LINK, {

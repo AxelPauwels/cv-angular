@@ -51,7 +51,7 @@ export const FEATURE_TOGGLES = [
   {
     id: 'tour-button',
     group: 'general',
-    labelKey: 't.admin.toggle.tour-button.label',
+    labelKey: 't.feature-toggles.toggle.tour-button.label',
   },
 
   menuItem('main-menu-technical', 'main-menu', 't.nav.technical'),
@@ -114,7 +114,7 @@ export const FEATURE_TOGGLES = [
   ),
   // switched off, only its menu item goes: the name in the footer still links to it
   menuItem(
-    'showcase-admin',
+    'showcase-feature-toggles',
     'showcase-menu',
     't.nav.feature-toggles',
     'main-menu-showcase'
@@ -126,7 +126,7 @@ export const FEATURE_TOGGLES = [
   navbarIcon('navbar-accessibility-switcher', 't.accessibility.switch'),
   navbarIcon(
     'navbar-color-scheme-switcher',
-    't.admin.toggle.color-scheme-switcher.label'
+    't.feature-toggles.toggle.color-scheme-switcher.label'
   ),
   navbarIcon('navbar-language-switcher', 't.language.switch'),
 ] as const satisfies readonly FeatureToggleDefinition[];

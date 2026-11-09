@@ -61,6 +61,7 @@
       "cv": "CV",
       "download-cv": "Download cv",
       "email": "E-mail",
+      "load-report": "Rapport laden",
       "loading": "Laden",
       "ok": "OK",
       "pdf": "pdf",
@@ -98,6 +99,7 @@
         "degree": "Diploma van getrokken suiker | Diploma van gegoten en geblazen suiker",
         "specialization": "Getrokken suiker, gegoten suiker, geblazen suiker"
       },
+      "hotelschool": "Hotelschool",
       "level": {
         "extra": "Aanvullende lessen",
         "high-school": "Hoger onderwijs",
@@ -176,6 +178,38 @@
         "zilte": "Chef de partie / Pâtissier"
       }
     },
+    "feature-toggles": {
+      "count": "{on} van {total} aan",
+      "hidden-notice": "De feature-toggles-pagina staat niet meer in het menu. Je kunt ze nog altijd openen via /showcase/feature-toggles door in de footer op “Axel Pauwels” te klikken.",
+      "linked": {
+        "off": "{item} ook uitgezet.",
+        "on": "{item} ook aangezet."
+      },
+      "reset": "Standaardwaarden herstellen",
+      "section": {
+        "general": {
+          "title": "Algemeen"
+        },
+        "main-menu": {
+          "title": "Hoofdmenu"
+        },
+        "navbar": {
+          "title": "Iconen in de navigatiebalk"
+        },
+        "submenu": {
+          "title": "Submenu"
+        }
+      },
+      "title": "Beheer",
+      "toggle": {
+        "color-scheme-switcher": {
+          "label": "Lichte en donkere modus"
+        },
+        "tour-button": {
+          "label": "Tour knop op de homepagina"
+        }
+      }
+    },
     "font": {
       "switch": "Lettertype"
     },
@@ -220,6 +254,9 @@
       "switch": "Taal"
     },
     "lighthouse": {
+      "audit": {
+        "message": "Getest op {date} met Lighthouse {version}"
+      },
       "category": {
         "accessibility": "Toegankelijkheid",
         "best-practices": "Praktische tips",
@@ -233,14 +270,12 @@
         "title": "Scorebereiken"
       },
       "not-audited": "Nog niet getest",
-      "page": "Pagina",
-      "audit": {
-        "message": "Getest op {date} met Lighthouse {version}"
-      }
+      "page": "Pagina"
     },
     "nav": {
       "admin": "Admin",
       "architecture": "Architectuur",
+      "back-to-top": "Terug naar boven",
       "code-coverage": "code coverage",
       "cv": "CV",
       "cv-navigation": "CV-navigatie",
@@ -425,7 +460,7 @@
         "contact": {
           "label": "Contact",
           "text": "Wil je contact opnemen? Mail me of vind me op LinkedIn en GitHub via de iconen rechtsonder.",
-          "title": "Neem contact op"
+          "title": "Contact"
         },
         "cv": {
           "label": "CV",
@@ -434,7 +469,7 @@
         },
         "download-cv": {
           "label": "CV downloaden",
-          "text": "Lees je liever offline? Download hier mijn CV als pdf.\nTip: gebruik de knoppen hieronder of de pijltjestoetsen, en druk op Escape om de rondleiding op elk moment te stoppen.",
+          "text": "Lees je liever offline? Download hier mijn CV als pdf.",
           "title": "Download mijn CV"
         },
         "finish": {
@@ -455,7 +490,7 @@
         "settings": {
           "label": "Jouw voorkeuren",
           "text": "Stel de website eerst in zoals jij hem wilt: het kleurthema, het lettertype, toegankelijkheidsinstellingen, lichte of donkere modus en de taal. Je keuzes worden onthouden op dit toestel.",
-          "title": "Maak het je eigen"
+          "title": "Voorkeuren"
         },
         "showcase": {
           "label": "Showcase",
@@ -465,7 +500,7 @@
         "technical": {
           "label": "Technisch",
           "text": "Benieuwd hoe deze website gebouwd is? Het technische gedeelte toont de projectgraaf, de architectuur, de GraphQL-documentatie, code coverage, end-to-end tests en de gebruikte versies.",
-          "title": "Onder de motorkap"
+          "title": "Technisch"
         },
         "themes": {
           "label": "Thema's",

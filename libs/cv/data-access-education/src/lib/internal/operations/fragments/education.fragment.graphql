@@ -1,4 +1,5 @@
 fragment EducationFields on Education {
+  category
   level
   period {
     start

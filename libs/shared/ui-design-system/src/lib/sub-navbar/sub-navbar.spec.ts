@@ -86,4 +86,145 @@ describe('SubNavbar', () => {
     );
     expect(link.classList).toContain('mdc-tab--active');
   });
+
+  describe('keyboard scrolling with nothing focused', () => {
+    @Component({
+      imports: [SubNavbar],
+      template: `<ds-sub-navbar
+        [items]="[{ labelKey: 't.nav.One', path: 'one' }]"
+        labelKey="t.nav.domain-navigation">
+        <div style="height: 2000px">page</div>
+      </ds-sub-navbar>`,
+    })
+    class TallPage {}
+
+    async function render(): Promise<HTMLElement> {
+      TestBed.configureTestingModule({
+        providers: [
+          provideTolgee(() => Tolgee().init({ language: 'en' })),
+          provideRouter([]),
+        ],
+      });
+      const fixture = TestBed.createComponent(TallPage);
+      await fixture.whenStable();
+      const panel: HTMLElement =
+        fixture.nativeElement.querySelector('.sub-navbar__panel');
+      // the scrolling panel, as from md up
+      Object.assign(panel.style, {
+        display: 'block',
+        height: '400px',
+        maxHeight: '400px',
+        flex: 'none',
+        overflowY: 'auto',
+        scrollBehavior: 'auto',
+      });
+      return panel;
+    }
+
+    function press(key: string, init: KeyboardEventInit = {}): KeyboardEvent {
+      const event = new KeyboardEvent('keydown', {
+        key,
+        bubbles: true,
+        cancelable: true,
+        ...init,
+      });
+      document.body.dispatchEvent(event);
+      return event;
+    }
+
+    it('scrolls the panel by a line, a page, or to its ends', async () => {
+      // Arrange
+      const panel = await render();
+      const bottom = panel.scrollHeight - panel.clientHeight;
+
+      // Act
+      const arrowDown = press('ArrowDown');
+      const afterArrowDown = panel.scrollTop;
+      press('PageDown');
+      const afterPageDown = panel.scrollTop;
+      press('ArrowUp');
+      const afterArrowUp = panel.scrollTop;
+      press('PageUp');
+      const afterPageUp = panel.scrollTop;
+      press(' ');
+      const afterSpace = panel.scrollTop;
+      press(' ', { shiftKey: true });
+      const afterShiftSpace = panel.scrollTop;
+      press('End');
+      const afterEnd = panel.scrollTop;
+      press('Home');
+      const afterHome = panel.scrollTop;
+
+      // Assert
+      expect(arrowDown.defaultPrevented).toBe(true);
+      expect(afterArrowDown).toBe(40);
+      expect(afterPageDown).toBe(40 + 350);
+      expect(afterArrowUp).toBe(350);
+      expect(afterPageUp).toBe(0);
+      expect(afterSpace).toBe(350);
+      expect(afterShiftSpace).toBe(0);
+      expect(afterEnd).toBe(bottom);
+      expect(afterHome).toBe(0);
+    });
+
+    it('leaves other keys to the browser', async () => {
+      // Arrange
+      const panel = await render();
+
+      // Act
+      const event = press('a');
+
+      // Assert
+      expect(event.defaultPrevented).toBe(false);
+      expect(panel.scrollTop).toBe(0);
+    });
+
+    it.each([
+      ['Alt', { altKey: true }],
+      ['Control', { ctrlKey: true }],
+      ['Meta', { metaKey: true }],
+    ])('leaves %s shortcuts to the browser', async (_, modifier) => {
+      // Arrange
+      const panel = await render();
+
+      // Act
+      const event = press('PageDown', modifier);
+
+      // Assert
+      expect(event.defaultPrevented).toBe(false);
+      expect(panel.scrollTop).toBe(0);
+    });
+
+    it('leaves keys already handled, or sent to a focused element, alone', async () => {
+      // Arrange
+      const panel = await render();
+      const handled = new KeyboardEvent('keydown', {
+        key: 'PageDown',
+        bubbles: true,
+        cancelable: true,
+      });
+      handled.preventDefault();
+
+      // Act
+      document.body.dispatchEvent(handled);
+      panel.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'PageDown', bubbles: true })
+      );
+
+      // Assert
+      expect(panel.scrollTop).toBe(0);
+    });
+
+    it('does nothing when the page fits in the panel', async () => {
+      // Arrange
+      const panel = await render();
+      Object.assign(panel.style, { height: '3000px', maxHeight: 'none' });
+
+      // Act
+      const event = press('PageDown');
+
+      // Assert
+      expect(event.defaultPrevented).toBe(false);
+    });
+  });
 });

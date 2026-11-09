@@ -1,18 +1,21 @@
-import { Component, input } from '@angular/core';
+import { Component, contentChild, input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import {
   MatCard,
+  MatCardActions,
   MatCardAvatar,
   MatCardContent,
   MatCardHeader,
   MatCardSubtitle,
   MatCardTitle,
 } from '@angular/material/card';
+import { CardActions } from './card-actions';
 
 @Component({
   selector: 'ds-card',
   imports: [
     MatCard,
+    MatCardActions,
     MatCardAvatar,
     MatCardContent,
     MatCardHeader,
@@ -37,4 +40,6 @@ export class Card {
    * out from the regular cards
    */
   readonly appearance = input<'default' | 'brand'>('default');
+  /** content marked `dsCardActions`: the card then gets an actions row */
+  protected readonly actions = contentChild(CardActions);
 }

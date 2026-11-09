@@ -28,6 +28,7 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
     background: none;
     border: 0;
     border-radius: var(--mat-sys-corner-small);
+    box-sizing: border-box; // the static header is a div: its padding fits in 100%
     color: var(--mat-sys-on-surface);
     cursor: pointer;
     display: flex;
@@ -56,7 +57,9 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
     }
   }
 
-  // the year pill; the open item's pill takes the primary color
+  // the year pill; the open item's pill takes the primary color. Scoped to the
+  // step's own heading, so a timeline nested in an open step keeps light pills;
+  // an always-open (static) timeline keeps them light too.
   &__year {
     align-items: center;
     background-color: var(--mat-sys-secondary-container);
@@ -73,7 +76,10 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
     padding-inline: 0.25rem;
     width: $badge-width;
 
-    .timeline__step--expanded & {
+    .timeline:not(.timeline--static)
+      > .timeline__step--expanded
+      > .timeline__heading
+      & {
       background-color: var(--mat-sys-primary);
       color: var(--mat-sys-on-primary);
     }
@@ -86,7 +92,10 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
     min-width: 0;
     padding-block: 0.75rem;
 
-    .timeline__step--expanded & {
+    .timeline:not(.timeline--static)
+      > .timeline__step--expanded
+      > .timeline__heading
+      & {
       font-weight: 600;
     }
   }
@@ -109,7 +118,10 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
     transition: opacity 200ms ease;
     width: 0.5rem;
 
-    .timeline__step--expanded & {
+    .timeline:not(.timeline--static)
+      > .timeline__step--expanded
+      > .timeline__heading
+      & {
       opacity: 0;
     }
 
@@ -134,7 +146,7 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
       transition: none;
     }
 
-    .timeline__step--expanded & {
+    .timeline__step--expanded > & {
       grid-template-rows: 1fr;
       transition:
         grid-template-rows 200ms ease,
@@ -160,6 +172,12 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
   &__content {
     min-height: 0;
     overflow: hidden;
+
+    // Phones: the open content reaches left over the line (see below); clip only
+    // vertically (the open/close animation), so its card isn't cut off
+    @media (width < 600px) {
+      overflow: visible clip;
+    }
   }
 
   // the open content sits on a soft surface, a little away from the line
@@ -169,10 +187,14 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
     margin: 5px 24px 24px 3rem;
     padding: 1rem 1.25rem;
 
-    // Phones: give the open content the full width next to the line
+    // Phones: the open content takes the full width, over the line; positioned
+    // with a z-index so it covers the line (the container's ::before) instead of
+    // sliding behind it
     @media (width < 600px) {
-      margin-inline: 1rem 0;
+      margin-inline: -2.25rem 0;
       padding-inline: 1rem;
+      position: relative;
+      z-index: 1;
     }
   }
 }

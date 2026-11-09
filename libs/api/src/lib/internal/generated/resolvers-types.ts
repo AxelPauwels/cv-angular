@@ -72,6 +72,8 @@ export type ContactInfo = {
 
 export type Education = {
   __typename?: 'Education';
+  /** The career it prepared for: the education page groups by it, like experience */
+  category: ExperienceCategory;
   degree?: Maybe<Scalars['String']['output']>;
   level: EducationLevel;
   period: Period;
@@ -564,6 +566,11 @@ export type EducationResolvers<
   ParentType extends ResolversParentTypes['Education'] =
     ResolversParentTypes['Education'],
 > = {
+  category?: Resolver<
+    ResolversTypes['ExperienceCategory'],
+    ParentType,
+    ContextType
+  >;
   degree?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   level?: Resolver<ResolversTypes['EducationLevel'], ParentType, ContextType>;
   period?: Resolver<ResolversTypes['Period'], ParentType, ContextType>;

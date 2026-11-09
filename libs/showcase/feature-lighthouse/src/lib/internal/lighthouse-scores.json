@@ -1,6 +1,6 @@
 {
   "url": "https://axel-pauwels.web.app",
-  "fetchTime": "2026-11-08T10:59:19.357Z",
+  "fetchTime": "2026-11-09T10:59:14.550Z",
   "lighthouseVersion": "13.6.0",
   "formFactor": "desktop",
   "pages": {
@@ -11,49 +11,49 @@
       "seo": 100
     },
     "/personal": {
-      "performance": 95,
+      "performance": 94,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/education": {
-      "performance": 95,
+      "performance": 86,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/experience": {
-      "performance": 94,
+      "performance": 93,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/skills": {
-      "performance": 95,
+      "performance": 80,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/references": {
-      "performance": 94,
+      "performance": 69,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/technical/architecture": {
-      "performance": 95,
+      "performance": 94,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/technical/project-graph": {
-      "performance": 61,
+      "performance": 64,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/technical/graphql-docs": {
-      "performance": 95,
+      "performance": 94,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
@@ -65,25 +65,31 @@
       "seo": 100
     },
     "/technical/end-to-end-tests": {
-      "performance": 94,
+      "performance": 87,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/technical/versions": {
-      "performance": 95,
+      "performance": 62,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/showcase/micro-frontends": {
-      "performance": 95,
+      "performance": 94,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/showcase/lighthouse": {
+      "performance": 85,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "/showcase/feature-toggles": {
-      "performance": 95,
+      "performance": 93,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 63

@@ -31,9 +31,18 @@
     background: linear-gradient(
       to top,
       var(--mat-sys-surface) 0,
-      color-mix(in srgb, var(--mat-sys-surface) 85%, transparent) 30%,
-      transparent 65%
+      color-mix(in srgb, var(--mat-sys-surface) 85%, transparent) 15%,
+      transparent 55%
     );
+
+    @media (width >= 600px) {
+      background: linear-gradient(
+        to top,
+        var(--mat-sys-surface) 0,
+        color-mix(in srgb, var(--mat-sys-surface) 85%, transparent) 30%,
+        transparent 65%
+      );
+    }
   }
 
   &::before,

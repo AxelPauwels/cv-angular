@@ -15,6 +15,9 @@ export class Timeline {
   readonly label = input.required<string>();
   readonly headingLevel = input<2 | 3 | 4>(2);
   readonly expandFirst = input(true);
+  // false: every item is open and stays open (no toggle), e.g. a timeline nested
+  // in another one's step
+  readonly collapsible = input(true);
 
   protected readonly items = contentChildren(TimelineItem);
   protected readonly id = `ds-timeline-${nextId++}`;

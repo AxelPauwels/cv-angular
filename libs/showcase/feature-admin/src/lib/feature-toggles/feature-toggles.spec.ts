@@ -109,7 +109,10 @@ describe('FeatureToggles', () => {
   it('switches the main menu item off with its last sub menu item, and says so', async () => {
     // Arrange
     const { harness, element, toggle } = await render();
-    TestBed.inject(FeatureToggleService).change('showcase-admin', false);
+    TestBed.inject(FeatureToggleService).change(
+      'showcase-feature-toggles',
+      false
+    );
     TestBed.inject(FeatureToggleService).change('showcase-lighthouse', false);
     TestBed.inject(MatSnackBar).dismiss();
     await harness.fixture.whenStable();
@@ -132,12 +135,14 @@ describe('FeatureToggles', () => {
     const { harness, toggle } = await render();
 
     // Act
-    toggle('showcase-admin')?.click();
+    toggle('showcase-feature-toggles')?.click();
     await harness.fixture.whenStable();
 
     // Assert
     expect(
-      TestBed.inject(FeatureToggleService).isEnabled('showcase-admin')()
+      TestBed.inject(FeatureToggleService).isEnabled(
+        'showcase-feature-toggles'
+      )()
     ).toBe(false);
     const snackBar = document.querySelector('mat-snack-bar-container');
     expect(snackBar?.textContent).toContain('Axel Pauwels');
@@ -147,7 +152,7 @@ describe('FeatureToggles', () => {
   it('keeps that message until "OK" closes it', async () => {
     // Arrange
     const { harness, toggle } = await render();
-    toggle('showcase-admin')?.click();
+    toggle('showcase-feature-toggles')?.click();
     await harness.fixture.whenStable();
     await new Promise((resolve) => setTimeout(resolve, 100));
     const ok = document.querySelector<HTMLButtonElement>(

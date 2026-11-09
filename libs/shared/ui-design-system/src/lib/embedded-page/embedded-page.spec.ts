@@ -8,7 +8,10 @@ import { provideTolgee, Tolgee } from '@tolgee/ngx';
 import { EmbeddedPage } from './embedded-page';
 
 describe('EmbeddedPage', () => {
-  async function render(answer: (http: HttpTestingController) => void) {
+  async function render(
+    answer: (http: HttpTestingController) => void,
+    loadOnRequest = false
+  ) {
     TestBed.configureTestingModule({
       providers: [
         provideHttpClient(),
@@ -20,12 +23,13 @@ describe('EmbeddedPage', () => {
     const fixture = TestBed.createComponent(EmbeddedPage);
     fixture.componentRef.setInput('src', '/coverage/index.html');
     fixture.componentRef.setInput('title', 't.heading.code-coverage');
+    fixture.componentRef.setInput('loadOnRequest', loadOnRequest);
     fixture.detectChanges();
     TestBed.tick();
 
     answer(TestBed.inject(HttpTestingController));
     await fixture.whenStable();
-    return fixture.nativeElement as HTMLElement;
+    return fixture;
   }
 
   it('shows an existing page in an iframe', async () => {
@@ -34,7 +38,7 @@ describe('EmbeddedPage', () => {
       http.expectOne('/coverage/index.html').flush('<html>coverage</html>');
 
     // Act
-    const element = await render(answer);
+    const element = (await render(answer)).nativeElement as HTMLElement;
 
     // Assert
     // the same page title as every content page, no card around the report
@@ -62,7 +66,7 @@ describe('EmbeddedPage', () => {
         .flush('<html><body><app-root></app-root></body></html>');
 
     // Act
-    const element = await render(answer);
+    const element = (await render(answer)).nativeElement as HTMLElement;
 
     // Assert
     expect(element.querySelector('iframe')).toBeNull();
@@ -77,10 +81,32 @@ describe('EmbeddedPage', () => {
         .flush('', { status: 404, statusText: 'Not Found' });
 
     // Act
-    const element = await render(answer);
+    const element = (await render(answer)).nativeElement as HTMLElement;
 
     // Assert
     expect(element.querySelector('iframe')).toBeNull();
     expect(element.textContent).toContain('not available');
+  });
+
+  it('loads a heavy page only when asked, and focuses it', async () => {
+    // Arrange
+    const answer = (http: HttpTestingController) =>
+      http.expectOne('/coverage/index.html').flush('<html>coverage</html>');
+    const fixture = await render(answer, true);
+    const element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelector('iframe')).toBeNull();
+    const button = element.querySelector<HTMLButtonElement>(
+      '.embedded-page__placeholder button'
+    );
+    expect(button?.textContent?.trim()).toBe('t.common.load-report');
+
+    // Act
+    button?.click();
+    await fixture.whenStable();
+
+    // Assert
+    const frame = element.querySelector('iframe');
+    expect(frame?.getAttribute('src')).toBe('/coverage/index.html');
+    expect(document.activeElement).toBe(frame);
   });
 });

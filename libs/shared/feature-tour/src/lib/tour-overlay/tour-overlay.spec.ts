@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router, RouterOutlet } from '@angular/router';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
@@ -33,6 +33,27 @@ class SecondPage {}
   template: '<router-outlet /><shared-tour />',
 })
 class Host {}
+
+/** A phone: the hamburger menu shows, its panel only while the tour opens it */
+@Component({
+  imports: [RouterOutlet, TourOverlay],
+  template: `
+    <button
+      data-tour="menu"
+      style="position: fixed; top: 0; left: 0; width: 40px; height: 40px">
+      menu
+    </button>
+    @if (tour.menuOpen()) {
+      <div data-tour="menu-panel">
+        <button data-tour="menu-second">second</button>
+      </div>
+    }
+    <router-outlet /><shared-tour />
+  `,
+})
+class PhoneHost {
+  protected readonly tour = inject(TourService);
+}
 
 function step(
   id: string,
@@ -69,7 +90,7 @@ describe('TourOverlay', () => {
     saveFeatureTogglesForTesting();
   });
 
-  async function render() {
+  async function render(host: Type<unknown> = Host, tourSteps = steps) {
     TestBed.configureTestingModule({
       providers: [
         provideRouter([
@@ -77,12 +98,12 @@ describe('TourOverlay', () => {
           { path: 'second', component: SecondPage },
         ]),
         provideI18nTesting(),
-        { provide: TOUR_STEPS, useValue: steps },
+        { provide: TOUR_STEPS, useValue: tourSteps },
       ],
     });
     const tour = TestBed.inject(TourService);
     tour.start();
-    const fixture = TestBed.createComponent(Host);
+    const fixture = TestBed.createComponent(host);
     await fixture.whenStable();
     const element = fixture.nativeElement as HTMLElement;
     const query = (selector: string) =>
@@ -111,7 +132,7 @@ describe('TourOverlay', () => {
       )
     );
     expect(query('[role="dialog"]')?.getAttribute('aria-modal')).toBe('true');
-    expect(text('.tour__title')).toBe('Make it your own');
+    expect(text('.tour__title')).toBe('Preferences');
     expect(text('.tour__counter')).toBe('1 / 3');
     expect(query('.tour__action--back')?.getAttribute('aria-disabled')).toBe(
       'true'
@@ -171,7 +192,7 @@ describe('TourOverlay', () => {
 
     // Assert
     expect(text('.tour__counter')).toBe('1 / 2');
-    expect(text('.tour__title')).toBe('Under the hood');
+    expect(text('.tour__title')).toBe('Technical');
   });
 
   it('navigates to the next step and names the previous one', async () => {
@@ -184,7 +205,7 @@ describe('TourOverlay', () => {
 
     // Assert
     await vi.waitFor(() => expect(TestBed.inject(Router).url).toBe('/second'));
-    expect(text('.tour__title')).toBe('Under the hood');
+    expect(text('.tour__title')).toBe('Technical');
     expect(text('.tour__counter')).toBe('2 / 3');
     expect(text('.tour__action--back')).toContain('Back Your preferences');
     expect(text('.tour__action--next')).toContain('Next Finish');
@@ -256,5 +277,60 @@ describe('TourOverlay', () => {
 
     // Assert
     expect(tour.active()).toBe(false);
+  });
+
+  describe('on phones', () => {
+    const menuSteps: TourStep[] = [
+      step('settings', '/first', '[data-tour="first"]'),
+      {
+        ...step('technical', '/second', '[data-tour="second"]'),
+        menuTarget: '[data-tour="menu-panel"] [data-tour="menu-second"]',
+      },
+      step('finish', '/second'),
+    ];
+
+    it('opens the menu for a step inside it', async () => {
+      // Arrange
+      const { query, fixture, tour } = await render(PhoneHost, menuSteps);
+
+      // Act
+      query('.tour__action--next')?.click();
+      await fixture.whenStable();
+
+      // Assert
+      await vi.waitFor(() => expect(tour.menuOpen()).toBe(true));
+      await vi.waitFor(() =>
+        expect(query('[data-tour="menu-second"]')).not.toBeNull()
+      );
+    });
+
+    it('closes the menu on the steps outside it', async () => {
+      // Arrange
+      const { query, fixture, tour } = await render(PhoneHost, menuSteps);
+      query('.tour__action--next')?.click();
+      await fixture.whenStable();
+      await vi.waitFor(() => expect(tour.menuOpen()).toBe(true));
+
+      // Act
+      query('.tour__action--next')?.click();
+      await fixture.whenStable();
+
+      // Assert
+      await vi.waitFor(() => expect(tour.menuOpen()).toBe(false));
+    });
+
+    it('closes the menu when the tour ends', async () => {
+      // Arrange
+      const { query, fixture, tour } = await render(PhoneHost, menuSteps);
+      query('.tour__action--next')?.click();
+      await fixture.whenStable();
+      await vi.waitFor(() => expect(tour.menuOpen()).toBe(true));
+
+      // Act
+      query('.tour__exit')?.click();
+
+      // Assert
+      expect(tour.menuOpen()).toBe(false);
+    });
   });
 });

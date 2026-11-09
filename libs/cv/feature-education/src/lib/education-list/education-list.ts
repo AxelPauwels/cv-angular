@@ -10,14 +10,27 @@ import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@tolgee/ngx';
 import { Card } from '@cv/shared-ui-card';
 import { byEndNewestFirst } from '@cv/shared-util-types';
-import { Timeline, TimelineItem } from '@cv/shared-ui-timeline';
+import {
+  Timeline,
+  TimelineDivider,
+  TimelineItem,
+} from '@cv/shared-ui-timeline';
 import {
   Education,
+  EducationCategory,
   EducationLevel,
   EducationStore,
   TrainingStatus,
 } from '@cv/cv-data-access-education';
-import { TranslationKey } from '@cv/shared-util-i18n';
+import { SubheadingTranslationKey, TranslationKey } from '@cv/shared-util-i18n';
+
+const CATEGORY_ORDER: readonly EducationCategory[] = ['IT', 'HORECA'];
+
+/** A course without an end lasted within its start year */
+const shown = (e: Education) => ({
+  start: e.period.start,
+  end: e.period.end ?? e.period.start,
+});
 
 @Component({
   selector: 'cv-education-list',
@@ -29,6 +42,7 @@ import { TranslationKey } from '@cv/shared-util-i18n';
     Card,
     MatIcon,
     Timeline,
+    TimelineDivider,
     TimelineItem,
     TranslatePipe,
   ],
@@ -39,15 +53,35 @@ export class EducationList {
   protected readonly store = inject(EducationStore);
   protected readonly loading = delayedLoading(() => this.store.isLoading());
 
-  protected readonly educations = computed(() => {
-    const shown = (e: Education) => ({
-      start: e.period.start,
-      end: e.period.end ?? e.period.start,
-    });
-    return [...this.store.educations()].sort((a, b) =>
+  /**
+   * One timeline per category, in this order; empty ones are left out. The
+   * hospitality group shows as one step spanning all its schools.
+   */
+  protected readonly groups = computed(() => {
+    const educations = [...this.store.educations()].sort((a, b) =>
       byEndNewestFirst(shown(a), shown(b))
     );
+    return CATEGORY_ORDER.map((category) => {
+      const inCategory = educations.filter((e) => e.category === category);
+      const periods = inCategory.map(shown);
+      return {
+        category,
+        educations: inCategory,
+        period: {
+          start: new Date(Math.min(...periods.map((p) => +p.start))),
+          end: new Date(Math.max(...periods.map((p) => +p.end))),
+        },
+      };
+    }).filter((group) => group.educations.length > 0);
   });
+
+  protected readonly categoryKeys: Record<
+    EducationCategory,
+    SubheadingTranslationKey
+  > = {
+    IT: 't.subheading.it',
+    HORECA: 't.subheading.horeca',
+  };
 
   protected readonly levelKeys: Record<EducationLevel, TranslationKey> = {
     SECONDARY_EDUCATION: 't.education.level.secondary',

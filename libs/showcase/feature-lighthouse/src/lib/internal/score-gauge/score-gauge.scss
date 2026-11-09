@@ -1,6 +1,6 @@
 // Lighthouse's gauge: a tinted disc, a ring filled up to the score, the score inside
 :host {
-  --score-gauge-size: 3.5rem;
+  --score-gauge-size: 2rem;
   --score-gauge-color: var(--ds-score-fail);
   --score-gauge-text: var(--ds-score-fail-text);
 
@@ -50,11 +50,12 @@
     transform-origin: 50% 50%;
   }
 
-  // bold and at least 18.66px, so large text for WCAG contrast
+  // small enough for "100" inside the ring; normal text, so the score colors
+  // reach 4.5:1 on the gauge's tint (WCAG 1.4.3)
   &__value {
     color: var(--score-gauge-text);
     font-family: var(--mat-sys-body-large-font), sans-serif;
-    font-size: max(1.25rem, 19px);
+    font-size: 0.6875rem;
     font-variant-numeric: tabular-nums;
     font-weight: 700;
     line-height: 1;

@@ -172,6 +172,8 @@ type School {
 }
 
 type Education {
+  "The career it prepared for: the education page groups by it, like experience"
+  category: ExperienceCategory!
   level: EducationLevel!
   specialization: String!
   school: School!

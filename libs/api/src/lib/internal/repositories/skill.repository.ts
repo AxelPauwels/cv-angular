@@ -92,7 +92,25 @@ const additionalTechnologiesSkill: Skill = {
   ],
 };
 
+/**
+ * Other technologies, listed without a level (the CV's "Other skills"): a name,
+ * or a translation key for a translatable label
+ */
+const otherSkills: string[] = [
+  'PHP',
+  'Magento 2',
+  'Symfony',
+  'MySQL',
+  'Node.js',
+  'React',
+  'REST APIs',
+  'Codegen',
+  // Unit, integration & E2E testing
+  't.skill.other.testing',
+];
+
 export const skillRepository = {
+  findOthers: (): string[] => otherSkills,
   findAll: (): Skill[] => [
     coreStackSkill,
     engineeringPracticesSkill,

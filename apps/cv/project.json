@@ -20,6 +20,25 @@
         }
       }
     },
+    "material-symbols": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "{workspaceRoot}/tools/material-symbols/material-symbols.mjs",
+        "{workspaceRoot}/apps/cv/src/**/*",
+        "{workspaceRoot}/libs/**/*.html",
+        "{workspaceRoot}/libs/**/*.ts"
+      ],
+      "options": {
+        "command": "node tools/material-symbols/material-symbols.mjs",
+        "cwd": "{workspaceRoot}"
+      },
+      "configurations": {
+        "write": {
+          "command": "node tools/material-symbols/material-symbols.mjs --write"
+        }
+      }
+    },
     "serve": {
       "continuous": true,
       "readyWhen": {

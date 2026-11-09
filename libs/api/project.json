@@ -47,6 +47,13 @@
       "options": {
         "command": "spectaql --quiet {projectRoot}/spectaql.yml"
       }
+    },
+    "test": {
+      "executor": "@nx/angular:unit-test",
+      "options": {
+        "watch": false,
+        "browsers": ["ChromiumHeadless"]
+      }
     }
   }
 }

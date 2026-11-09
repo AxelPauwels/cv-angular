@@ -24,6 +24,8 @@ export type ThemeId = Theme['id'];
 export type ColorScheme = 'light' | 'dark';
 
 export const DEFAULT_THEME: ThemeId = 'gold';
+/** The mode until the user picks one, whatever the system prefers */
+export const DEFAULT_COLOR_SCHEME: ColorScheme = 'light';
 
 export function isThemeId(id: string): id is ThemeId {
   return THEMES.some((theme) => theme.id === id);

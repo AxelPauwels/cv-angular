@@ -52,4 +52,11 @@
   <mat-card-content>
     <ng-content />
   </mat-card-content>
+
+  <!-- only with actions, so other cards keep no empty row at the bottom -->
+  @if (actions()) {
+  <mat-card-actions align="end" class="card__actions">
+    <ng-content select="[dsCardActions]" />
+  </mat-card-actions>
+  }
 </mat-card>

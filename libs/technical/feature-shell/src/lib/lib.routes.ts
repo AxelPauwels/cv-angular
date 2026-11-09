@@ -33,6 +33,8 @@ export const technicalFeatureShellRoutes: Route[] = [
         data: {
           src: '/project-graph/index.html',
           title: 't.heading.project-graph',
+          // the Nx graph app parses megabytes of script: only when asked
+          loadOnRequest: true,
         },
       },
       // reports are copied into the build as assets, see apps/cv/project.json

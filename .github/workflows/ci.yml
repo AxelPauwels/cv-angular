@@ -34,4 +34,6 @@ jobs:
       - uses: nrwl/nx-set-shas@v5
 
       - run: npx nx format:check
+      # Fails when an icon is missing from the subset Material Symbols font in index.html
+      - run: npx nx run cv:material-symbols
       - run: npx nx affected -t lint test build typecheck e2e --configuration=ci

@@ -3,6 +3,7 @@ import { fromYear } from '../utils/date';
 
 const secondaryEducations: Education[] = [
   {
+    category: 'HORECA',
     level: 'SECONDARY_EDUCATION',
     period: {
       start: fromYear('1998'),
@@ -18,6 +19,7 @@ const secondaryEducations: Education[] = [
   {
     // degree: 'Diploma of Secondary Education',
     degree: 't.education.school.ter-duinen.degree',
+    category: 'HORECA',
     level: 'SECONDARY_EDUCATION',
     period: {
       start: fromYear('2000'),
@@ -36,6 +38,7 @@ const customEducations: Education[] = [
   {
     // degree: 'Diploma of pulled sugar | Diploma of poured & blown sugar',
     degree: 't.education.bellouet-conseil.degree',
+    category: 'HORECA',
     level: 'CUSTOM_COURSE',
     period: {
       start: fromYear('2005'),
@@ -53,6 +56,7 @@ const highSchoolEducations: Education[] = [
   {
     // degree: 'Professionele bachelor in Toegepaste Informatica',
     degree: 't.education.thomas-more.degree',
+    category: 'IT',
     level: 'HIGH_SCHOOL',
     period: {
       start: fromYear('2015'),

@@ -1,11 +1,14 @@
 import {
+  afterNextRender,
   Component,
   computed,
   DestroyRef,
   DOCUMENT,
   ElementRef,
   inject,
+  Injector,
   input,
+  signal,
 } from '@angular/core';
 import { httpResource } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -32,6 +35,10 @@ const isSameOriginPath = (src: string) =>
  * checked first: without that, a missing report would show the app nested
  * inside itself.
  *
+ * With `loadOnRequest`, the iframe only loads once the user asks for it: for a
+ * heavy page (e.g. the project graph) that would otherwise block the main thread
+ * while the app starts.
+ *
  * The embedded page gets the app's font, scrollbar and a transparent background
  * (see applyAppStyles), also when the user switches font or theme while it is open.
  */
@@ -46,10 +53,14 @@ export class EmbeddedPage {
   readonly title = input.required<HeadingTranslationKey>();
   /** Extra CSS for the embedded page, e.g. to hide a heading the page title repeats */
   readonly styles = input('');
+  /** Show a button first and load the iframe on click, for heavy pages */
+  readonly loadOnRequest = input(false);
 
   private readonly sanitizer = inject(DomSanitizer);
   private readonly document = inject(DOCUMENT);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly injector = inject(Injector);
+  private readonly requested = signal(false);
 
   constructor() {
     // The font, theme and color scheme switchers set attributes on <html>: follow them into the iframe
@@ -64,6 +75,19 @@ export class EmbeddedPage {
     if (frame) {
       applyAppStyles(frame, this.document, this.styles());
     }
+  }
+
+  protected readonly showFrame = computed(
+    () => !this.loadOnRequest() || this.requested()
+  );
+
+  /** Loads the iframe and moves focus to it, as the button disappears */
+  protected load(): void {
+    this.requested.set(true);
+    afterNextRender(
+      () => this.host.nativeElement.querySelector('iframe')?.focus(),
+      { injector: this.injector }
+    );
   }
 
   private readonly page = httpResource.text(() =>

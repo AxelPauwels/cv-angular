@@ -172,7 +172,14 @@ export class TourOverlay {
       if (currentPath(this.router.url) !== step.route) {
         await this.router.navigateByUrl(step.route);
       }
-      const targets = step.target ? await this.waitFor(step.target, run) : [];
+      if (run !== this.run) {
+        return;
+      }
+      // after navigating: every navigation closes the hamburger menu
+      const inMenu = !!step.menuTarget && this.menuShown();
+      this.tour.showMenu(inMenu);
+      const target = inMenu ? step.menuTarget : step.target;
+      const targets = target ? await this.waitFor(target, run) : [];
       if (run !== this.run) {
         return;
       }
@@ -185,6 +192,13 @@ export class TourOverlay {
         this.loading.set(false);
       }
     }
+  }
+
+  /** The hamburger menu replaces the domain tabs on phones */
+  private menuShown(): boolean {
+    const trigger = this.document.querySelector('[data-tour="menu"]');
+    const rect = trigger?.getBoundingClientRect();
+    return !!rect && (rect.width > 0 || rect.height > 0);
   }
 
   /** Resolves with the elements once they render (lazy pages, data), or none */

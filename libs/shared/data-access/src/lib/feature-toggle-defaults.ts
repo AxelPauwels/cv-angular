@@ -21,9 +21,9 @@ export const FEATURE_TOGGLE_DEFAULTS = {
 
   // Showcase
   'main-menu-showcase': true, // main
-  'showcase-micro-frontends': false,
+  'showcase-micro-frontends': true,
   'showcase-lighthouse': true,
-  'showcase-admin': false,
+  'showcase-feature-toggles': true,
 
   // Technical
   'main-menu-technical': true, // main
