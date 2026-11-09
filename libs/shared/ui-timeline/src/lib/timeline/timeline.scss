@@ -199,6 +199,86 @@ $pill-offset: calc(($header-height - $badge-height) / 2);
   }
 }
 
+// Wider screens: a timeline nested in an open step continues the outer one. All
+// its items share the outer step's card; each pill sits on the outer line, level
+// with its item's title, and the line runs from the outer pill through them.
+@media (width >= 600px) {
+  // from the nested content to the outer line: the card's margin and padding
+  $to-line: calc(-3rem - 1.25rem);
+  $nested-pill-top: -0.25rem; // centers the pill on the title's first line
+  $nested-gap: 2.5rem;
+
+  // the pills sit left of the card: clip only vertically (the animation)
+  .timeline__content:has(.timeline) {
+    overflow: visible clip;
+  }
+
+  // the line from the outer pill down to the first nested pill
+  .timeline__step--expanded
+    > .timeline__content-container:not(.timeline__content-container--line):has(
+      .timeline
+    )::before {
+    border-left: 1px solid var(--mat-sys-outline-variant);
+    content: '';
+    height: calc(
+      5px + 1rem + $nested-pill-top - $line-gap - ($line-gap - $pill-offset)
+    );
+    left: 0;
+    position: absolute;
+    top: calc($line-gap - $pill-offset);
+  }
+
+  .timeline__content-inner .timeline {
+    .timeline__step {
+      position: relative;
+
+      & + .timeline__step {
+        margin-top: $nested-gap;
+      }
+
+      // the line to the next pill
+      &:not(:last-child)::before {
+        border-left: 1px solid var(--mat-sys-outline-variant);
+        bottom: calc(-1 * ($nested-gap + $nested-pill-top - $line-gap));
+        content: '';
+        left: $to-line;
+        position: absolute;
+        top: calc($nested-pill-top + $badge-height + $line-gap);
+      }
+    }
+
+    .timeline__header {
+      align-items: flex-start;
+      min-height: 0;
+      padding: 0;
+    }
+
+    .timeline__year {
+      left: calc($to-line - $badge-width / 2);
+      position: absolute;
+      top: $nested-pill-top;
+    }
+
+    .timeline__label {
+      padding-block: 0;
+    }
+
+    .timeline__content-container {
+      margin-left: 0;
+
+      &--line::before {
+        display: none;
+      }
+    }
+
+    .timeline__content-inner {
+      background: none;
+      margin: 0.5rem 0 0;
+      padding: 0;
+    }
+  }
+}
+
 // Phones: a timeline nested in an open step drops its pills and line; each label
 // sits on top of its content card, lined up with the outer timeline's cards. The
 // outer card steps back (no surface or padding), so the cards don't double up.
