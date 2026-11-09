@@ -89,6 +89,9 @@
     padding: 0.25rem 1rem 0.25rem 2rem;
     text-decoration: none;
 
+    // like the desktop sub navbar's tabs
+    text-transform: capitalize;
+
     &:focus-visible {
       outline: 2px solid currentcolor;
       outline-offset: -2px;

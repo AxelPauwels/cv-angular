@@ -78,6 +78,10 @@ export const typeDefs = /* GraphQL */ `
   scalar DateTime
 
   type Education {
+    """
+    The career it prepared for: the education page groups by it, like experience
+    """
+    category: ExperienceCategory!
     degree: String
     level: EducationLevel!
     period: Period!

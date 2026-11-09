@@ -5,6 +5,7 @@
       <button
         type="button"
         class="nav-accordion__toggle"
+        [attr.data-tour]="item.tourId"
         [class.nav-accordion__toggle--current]="item === activeItem()"
         [attr.aria-expanded]="item === expanded()"
         [attr.aria-controls]="idPrefix + '-' + i"

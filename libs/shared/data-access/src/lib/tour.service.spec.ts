@@ -87,4 +87,17 @@ describe('TourService', () => {
     // Assert
     expect(() => tour.stop()).not.toThrow();
   });
+
+  it('opens the menu on request and closes it when the tour stops', () => {
+    // Arrange
+    const tour = TestBed.inject(TourService);
+    tour.start();
+    tour.showMenu(true);
+
+    // Act
+    tour.stop();
+
+    // Assert
+    expect(tour.menuOpen()).toBe(false);
+  });
 });

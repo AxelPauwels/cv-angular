@@ -16,3 +16,4 @@ export * from './lib/section-heading/section-heading';
 export * from './lib/page-layout/page-layout';
 export * from './lib/mobile-menu/mobile-menu';
 export * from './lib/nav-accordion/nav-accordion';
+export * from './lib/back-to-top/back-to-top';

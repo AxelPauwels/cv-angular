@@ -20,7 +20,7 @@ describe('showcaseFeatureShellRoutes', () => {
     const toggles = TestBed.inject(FeatureToggleService);
     toggles.change('showcase-micro-frontends', true);
     toggles.change('showcase-lighthouse', true);
-    toggles.change('showcase-admin', true);
+    toggles.change('showcase-feature-toggles', true);
 
     // Act
     const harness = await RouterTestingHarness.create('/');
@@ -46,7 +46,7 @@ describe('showcaseFeatureShellRoutes', () => {
     const toggles = TestBed.inject(FeatureToggleService);
     toggles.change('showcase-micro-frontends', true);
     toggles.change('showcase-lighthouse', false);
-    toggles.change('showcase-admin', false);
+    toggles.change('showcase-feature-toggles', false);
 
     // Act
     const harness = await RouterTestingHarness.create('/feature-toggles');
@@ -59,5 +59,23 @@ describe('showcaseFeatureShellRoutes', () => {
         (link) => link.textContent?.trim()
       )
     ).toEqual(['Micro-frontends']);
+  });
+
+  it('lazy loads a standalone component for every page', async () => {
+    // Arrange
+    const pages = showcaseFeatureShellRoutes[0].children?.filter(
+      (route) => route.loadComponent
+    );
+
+    // Act
+    const components = await Promise.all(
+      pages?.map((route) => route.loadComponent?.()) ?? []
+    );
+
+    // Assert
+    expect(components.length).toBeGreaterThan(0);
+    for (const component of components) {
+      expect(component).toEqual(expect.any(Function));
+    }
   });
 });

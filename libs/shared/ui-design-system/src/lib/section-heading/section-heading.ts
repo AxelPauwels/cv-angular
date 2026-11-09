@@ -45,9 +45,14 @@ import { SubheadingTranslationKey } from '@cv/shared-util-i18n';
     .ds-section-heading__title {
       color: var(--mat-sys-primary);
       font: var(--mat-sys-headline-small);
+      font-size: 1.25rem;
       letter-spacing: 0.04em;
       margin: 0;
       text-transform: uppercase;
+
+      @media (width >= 600px) {
+        font-size: 1.5rem;
+      }
     }
 
     .ds-section-heading__tagline {

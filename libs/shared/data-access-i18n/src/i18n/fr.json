@@ -67,6 +67,28 @@
       "reset": "Rétablir par défaut",
       "under-construction": "Cette page est en construction. Revenez bientôt !"
     },
+    "competence": {
+      "ai-assisted-development": {
+        "description": "GitHub Copilot et Cursor pour livrer plus vite et améliorer la qualité. J’apprends actuellement le spec-driven development.",
+        "title": "Développement moderne & assisté par l’IA"
+      },
+      "angular-enterprise": {
+        "description": "Applications à grande échelle au service de processus métier complexes.",
+        "title": "Développement Angular en entreprise"
+      },
+      "clean-code": {
+        "description": "Des standards clairs, une conception réutilisable et un code durable.",
+        "title": "Code propre et maintenable"
+      },
+      "collaboration": {
+        "description": "Partage de connaissances et amélioration continue au sein d’équipes pluridisciplinaires.",
+        "title": "Collaboration"
+      },
+      "front-end-architecture": {
+        "description": "Monorepos Nx, bibliothèques réutilisables et gestion d’état évolutive avec RxJS & Signals.",
+        "title": "Architecture front-end"
+      }
+    },
     "country": {
       "belgium": "Belgique"
     },
@@ -76,6 +98,7 @@
         "degree": "Diplôme de Sucre tiré | Diplôme de sucre coulé & sucre soufflé",
         "specialization": "Sucre tiré, coulé, soufflé"
       },
+      "hotelschool": "École hôtelière",
       "level": {
         "extra": "Cours supplémentaires",
         "high-school": "Enseignement supérieur",
@@ -131,6 +154,10 @@
           "workflows": "Simplifier des workflows complexes et automatiser les tâches répétitives ; introduction et promotion d’un usage efficace du développement assisté par l’IA dans l’équipe."
         }
       },
+      "project": {
+        "ordina": "Programme professionnel",
+        "ravago": "Warehouse Management System"
+      },
       "work-position": {
         "3-it": "Stagiaire développeur frontend",
         "bergerie": "Garde manger / Pâtissier",
@@ -148,10 +175,38 @@
         "ravago": "Développeur Angular senior",
         "residentie": "Stagiaire en salle",
         "zilte": "Chef de partie / Pâtissier"
+      }
+    },
+    "feature-toggles": {
+      "count": "{on} sur {total} activés",
+      "hidden-notice": "La page caractéristiques n’apparaît plus dans le menu. Vous pouvez toujours l’ouvrir via /showcase/feature-toggles en cliquant sur « Axel Pauwels » dans le pied de page.",
+      "linked": {
+        "off": "{item} également désactivé.",
+        "on": "{item} également activé."
       },
-      "project": {
-        "ordina": "Programme professionnel",
-        "ravago": "Warehouse Management System"
+      "reset": "Rétablir les valeurs par défaut",
+      "section": {
+        "general": {
+          "title": "Général"
+        },
+        "main-menu": {
+          "title": "Menu principal"
+        },
+        "navbar": {
+          "title": "Icônes de la barre de navigation"
+        },
+        "submenu": {
+          "title": "Sous-menu"
+        }
+      },
+      "title": "Administration",
+      "toggle": {
+        "color-scheme-switcher": {
+          "label": "Mode clair et sombre"
+        },
+        "tour-button": {
+          "label": "Bouton de visite sur la page d’accueil"
+        }
       }
     },
     "font": {
@@ -164,7 +219,7 @@
       "education": "Formation",
       "end-to-end-tests": "Tests de bout en bout",
       "experience": "Expérience",
-      "feature-toggles": "Feature toggles",
+      "feature-toggles": "Caractéristiques",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
       "micro-frontends": "Micro-frontends",
@@ -198,6 +253,9 @@
       "switch": "Sélectionner une langue"
     },
     "lighthouse": {
+      "audit": {
+        "message": "Audité le {date} avec Lighthouse {version}"
+      },
       "category": {
         "accessibility": "Accessibilité",
         "best-practices": "Bonnes pratiques",
@@ -211,14 +269,12 @@
         "title": "Plages de score"
       },
       "not-audited": "Pas encore audité",
-      "page": "Page",
-      "audit": {
-        "message": "Audité le {date} avec Lighthouse {version}"
-      }
+      "page": "Page"
     },
     "nav": {
       "admin": "Admin",
       "architecture": "Architecture",
+      "back-to-top": "Retour en haut",
       "code-coverage": "couverture du code",
       "cv": "CV",
       "cv-navigation": "Navigation du CV",
@@ -227,7 +283,7 @@
       "education": "Formation",
       "end-to-end-tests": "Tests de bout en bout",
       "experience": "Expérience",
-      "feature-toggles": "Feature toggles",
+      "feature-toggles": "Caractéristiques",
       "graphql-docs": "graphql docs",
       "home": "Maison",
       "light": "Clair",
@@ -293,6 +349,11 @@
       "profile": "Développeur front-end senior avec 8 ans d’expérience dans la création d’applications web d’entreprise, dont 5 ans entièrement consacrés à Angular. Je conçois et fais évoluer des applications critiques en mettant l’accent sur une architecture maintenable, un code propre et l’évolutivité à long terme. Pragmatique, soucieux de la qualité et véritable esprit d’équipe au sein d’équipes Agile. J’utilise activement des pratiques modernes et des outils assistés par l’IA pour livrer plus vite sans compromettre la qualité."
     },
     "present": "présent",
+    "skill": {
+      "other": {
+        "testing": "Tests unitaires, d’intégration & E2E"
+      }
+    },
     "son": "Fils",
     "spoken": "Oral",
     "subheading": {
@@ -398,7 +459,7 @@
         "contact": {
           "label": "Contact",
           "text": "Envie de me contacter ? Écrivez-moi ou retrouvez-moi sur LinkedIn et GitHub grâce aux icônes en bas à droite.",
-          "title": "Contactez-moi"
+          "title": "Contact"
         },
         "cv": {
           "label": "CV",
@@ -407,7 +468,7 @@
         },
         "download-cv": {
           "label": "Télécharger le CV",
-          "text": "Vous préférez le lire hors ligne ? Téléchargez ici mon CV en PDF.\nAstuce : utilisez les boutons ci-dessous ou les touches fléchées, et appuyez sur Échap pour arrêter la visite à tout moment.",
+          "text": "Vous préférez le lire hors ligne ? Téléchargez ici mon CV en PDF.",
           "title": "Téléchargez mon CV"
         },
         "finish": {
@@ -428,7 +489,7 @@
         "settings": {
           "label": "Vos préférences",
           "text": "Commencez par régler le site à votre goût : le thème de couleur, la police, les réglages d'accessibilité, le mode clair ou sombre et la langue. Vos choix sont mémorisés sur cet appareil.",
-          "title": "Personnalisez le site"
+          "title": "Préférences"
         },
         "showcase": {
           "label": "Vitrine",
@@ -438,7 +499,7 @@
         "technical": {
           "label": "Technique",
           "text": "Curieux de savoir comment ce site est construit ? La section technique présente le graphe du projet, l'architecture, la documentation GraphQL, la couverture de code, les tests de bout en bout et les versions utilisées.",
-          "title": "Sous le capot"
+          "title": "Technique"
         },
         "themes": {
           "label": "Thèmes",
@@ -454,33 +515,6 @@
       "step-of": "Étape {current} sur {total}"
     },
     "website": "site web",
-    "written": "Écrit",
-    "competence": {
-      "ai-assisted-development": {
-        "description": "GitHub Copilot et Cursor pour livrer plus vite et améliorer la qualité. J’apprends actuellement le spec-driven development.",
-        "title": "Développement moderne & assisté par l’IA"
-      },
-      "angular-enterprise": {
-        "description": "Applications à grande échelle au service de processus métier complexes.",
-        "title": "Développement Angular en entreprise"
-      },
-      "clean-code": {
-        "description": "Des standards clairs, une conception réutilisable et un code durable.",
-        "title": "Code propre et maintenable"
-      },
-      "collaboration": {
-        "description": "Partage de connaissances et amélioration continue au sein d’équipes pluridisciplinaires.",
-        "title": "Collaboration"
-      },
-      "front-end-architecture": {
-        "description": "Monorepos Nx, bibliothèques réutilisables et gestion d’état évolutive avec RxJS & Signals.",
-        "title": "Architecture front-end"
-      }
-    },
-    "skill": {
-      "other": {
-        "testing": "Tests unitaires, d’intégration & E2E"
-      }
-    }
+    "written": "Écrit"
   }
 }

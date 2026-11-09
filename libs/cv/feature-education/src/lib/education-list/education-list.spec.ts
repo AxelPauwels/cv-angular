@@ -48,6 +48,35 @@ describe('EducationList', () => {
     expect(element.textContent).not.toContain('t.');
   });
 
+  it('shows IT, then a hospitality divider with one hotel school step holding each school', async () => {
+    // Arrange
+    const textOf = (element: Element | null | undefined) =>
+      element?.textContent?.replace(/\s+/g, ' ').trim();
+
+    // Act
+    const element = await render();
+
+    // Assert
+    // the top-level timelines, not the one nested in the hotel school step
+    const timelines = Array.from(
+      element.querySelectorAll('ds-timeline')
+    ).filter((timeline) => !timeline.parentElement?.closest('ds-timeline'));
+    expect(timelines).toHaveLength(2);
+    expect(textOf(element.querySelector('ds-timeline-divider'))).toBe(
+      'Hospitality'
+    );
+    // the hospitality timeline has a single step for the hotel school years
+    const [, hospitality] = timelines;
+    const steps = hospitality.querySelectorAll(':scope > ol > li');
+    expect(steps).toHaveLength(1);
+    expect(textOf(steps[0].querySelector('h3'))).toContain('Hotelschool');
+    // inside it, each school is a step of its own, newest first
+    const schools = Array.from(steps[0].querySelectorAll('h4'), textOf);
+    expect(schools).toHaveLength(3);
+    expect(schools[0]).toContain('2005');
+    expect(schools[2]).toContain('Sint Jozefs Instituut');
+  });
+
   it('puts each card in a section named by its own heading, with a tagline', async () => {
     // Arrange
     const selector = 'section[aria-labelledby]';

@@ -10,6 +10,8 @@ import type { DocumentTypeDecoration } from '@graphql-typed-document-node/core';
 export type EducationLevel =
   'CUSTOM_COURSE' | 'HIGH_SCHOOL' | 'SECONDARY_EDUCATION';
 
+export type ExperienceCategory = 'HORECA' | 'IT';
+
 export type TrainingStatus =
   | 'COMPLETED'
   | 'ONGOING'
@@ -26,6 +28,7 @@ export type CertificateFieldsFragment = {
 };
 
 export type EducationFieldsFragment = {
+  category: ExperienceCategory;
   level: EducationLevel;
   degree: string | null;
   specialization: string;
@@ -61,6 +64,7 @@ export type EducationsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type EducationsQuery = {
   educations: Array<{
+    category: ExperienceCategory;
     level: EducationLevel;
     degree: string | null;
     specialization: string;
@@ -123,6 +127,7 @@ export const CertificateFieldsFragmentDoc = new TypedDocumentString(
 export const EducationFieldsFragmentDoc = new TypedDocumentString(
   `
     fragment EducationFields on Education {
+  category
   level
   period {
     start
@@ -184,6 +189,7 @@ export const EducationsDocument = new TypedDocumentString(`
   }
 }
     fragment EducationFields on Education {
+  category
   level
   period {
     start

@@ -140,12 +140,15 @@
   // hobbies with a comment span two columns once there are at least two
   &__hobbies {
     display: grid;
-    gap: 1.5rem;
     grid-auto-flow: dense;
     grid-template-columns: 1fr;
     list-style: none;
     margin: 0;
     padding: 0;
+
+    @media (width >= 600px) {
+      gap: 1.5rem;
+    }
 
     @container (min-width: 30rem) {
       grid-template-columns: repeat(2, 1fr);
@@ -171,6 +174,22 @@
     &--wide {
       @container (min-width: 30rem) {
         grid-column: span 2;
+      }
+    }
+
+    @media (width < 600px) {
+      .card {
+        box-shadow:
+          8px 8px 16px
+            light-dark(
+              color-mix(in srgb, var(--mat-sys-shadow) 16%, transparent),
+              color-mix(in srgb, var(--mat-sys-shadow) 60%, transparent)
+            ),
+          -8px -8px 16px
+            light-dark(
+              var(--mat-sys-surface-container-lowest),
+              color-mix(in srgb, var(--mat-sys-on-surface) 7%, transparent)
+            );
       }
     }
   }

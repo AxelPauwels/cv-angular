@@ -36,4 +36,20 @@ describe('ExperienceStore', () => {
     // a page opened later gets the same store, already loaded
     expect(TestBed.inject(ExperienceStore).isLoading()).toBe(false);
   });
+
+  it('loads again on reload, keeping the data meanwhile', async () => {
+    // Arrange
+    const store = TestBed.inject(ExperienceStore);
+    await TestBed.inject(ApplicationRef).whenStable();
+
+    // Act
+    store.reload();
+    const loadingDuringReload = store.isLoading();
+    await TestBed.inject(ApplicationRef).whenStable();
+
+    // Assert
+    expect(loadingDuringReload).toBe(true);
+    expect(store.isLoading()).toBe(false);
+    expect(store.experiences().length).toBeGreaterThan(0);
+  });
 });

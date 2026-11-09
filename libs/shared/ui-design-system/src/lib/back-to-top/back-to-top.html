@@ -1,0 +1,12 @@
+<button
+  #button
+  matMiniFab
+  type="button"
+  class="back-to-top__button"
+  [class.back-to-top__button--visible]="visible()"
+  [attr.aria-label]="labelKey() | translate"
+  (click)="scrollToTop()">
+  <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">
+    arrow_upward
+  </mat-icon>
+</button>

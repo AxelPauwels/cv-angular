@@ -1,9 +1,17 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  signal,
+  untracked,
+} from '@angular/core';
 import { isActive, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatTabNavPanel } from '@angular/material/tabs';
 import {
   AccessibilityOptions,
   AccessibilitySwitcher,
+  BackToTop,
   ColorSchemeOption,
   ColorSchemeSwitcher,
   DownloadMenu,
@@ -47,6 +55,7 @@ import { MobileNav } from './mobile-nav/mobile-nav';
     FontSwitcher,
     ColorSchemeSwitcher,
     AccessibilitySwitcher,
+    BackToTop,
     // only used in @defer blocks, so they get their own lazy chunks
     TourOverlay,
     ContactLinks,
@@ -67,6 +76,14 @@ export class Shell {
 
   /** The hamburger menu that replaces the domain tabs on phones */
   protected readonly mobileMenuOpen = signal(false);
+
+  constructor() {
+    // the tour opens the menu for the steps on the domains, and closes it again
+    effect(() => {
+      const open = this.tour.menuOpen();
+      untracked(() => this.mobileMenuOpen.set(open));
+    });
+  }
 
   /** The footer's name links to the admin page */
   protected readonly adminLink = ROUTES.SHOWCASE.FEATURE_TOGGLES_ROUTER_LINK;

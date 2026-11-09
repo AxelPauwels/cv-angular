@@ -87,4 +87,22 @@ describe('technicalFeatureShellRoutes', () => {
       'Versions',
     ]);
   });
+
+  it('lazy loads a standalone component for every page', async () => {
+    // Arrange
+    const pages = technicalFeatureShellRoutes[0].children?.filter(
+      (route) => route.loadComponent
+    );
+
+    // Act
+    const components = await Promise.all(
+      pages?.map((route) => route.loadComponent?.()) ?? []
+    );
+
+    // Assert
+    expect(components.length).toBeGreaterThan(0);
+    for (const component of components) {
+      expect(component).toEqual(expect.any(Function));
+    }
+  });
 });

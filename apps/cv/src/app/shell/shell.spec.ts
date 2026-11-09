@@ -3,9 +3,14 @@ import { TestBed } from '@angular/core/testing';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
 import { provideRouter, Router } from '@angular/router';
 import {
+  AccessibilityService,
   FeatureToggleService,
+  FontService,
   saveFeatureTogglesForTesting,
+  ThemeService,
 } from '@cv/shared-data-access';
+import { LanguageService } from '@cv/shared-data-access-i18n';
+import { By } from '@angular/platform-browser';
 import { Shell } from './shell';
 
 @Component({ template: '' })
@@ -112,7 +117,7 @@ describe('Shell', () => {
 
   it('links the name in the footer to the admin page, also with its menu item off', async () => {
     // Arrange
-    saveFeatureTogglesForTesting({ 'showcase-admin': false });
+    saveFeatureTogglesForTesting({ 'showcase-feature-toggles': false });
     configureWithPages();
     const fixture = TestBed.createComponent(Shell);
     const element: HTMLElement = fixture.nativeElement;
@@ -177,5 +182,118 @@ describe('Shell', () => {
       'Axel Pauwels_CV_Senior-Angular-Developer_EN.pdf',
       'Axel Pauwels_CV_Senior-Angular-Developer_NL.pdf',
     ]);
+  });
+
+  describe('navbar preferences', () => {
+    async function render() {
+      TestBed.configureTestingModule({
+        providers: [provideRouter([]), provideI18nTesting()],
+      });
+      const fixture = TestBed.createComponent(Shell);
+      await fixture.whenStable();
+      const emit = (selector: string, output: string, value?: unknown) =>
+        fixture.debugElement
+          .query(By.css(selector))
+          .triggerEventHandler(output, value);
+      return { fixture, emit };
+    }
+
+    it('changes and resets the theme, ignoring unknown themes', async () => {
+      // Arrange
+      const { emit } = await render();
+      const themes = TestBed.inject(ThemeService);
+      const initial = themes.theme();
+      const other = themes.themes.find(({ id }) => id !== initial)?.id;
+
+      // Act
+      emit('ds-theme-switcher', 'themeChange', other);
+      const changed = themes.theme();
+      emit('ds-theme-switcher', 'themeChange', 'no-such-theme');
+      const afterUnknown = themes.theme();
+      emit('ds-theme-switcher', 'themeReset');
+
+      // Assert
+      expect(changed).toBe(other);
+      expect(afterUnknown).toBe(other);
+      expect(themes.theme()).toBe(initial);
+    });
+
+    it('changes and resets the font, ignoring unknown fonts', async () => {
+      // Arrange
+      const { emit } = await render();
+      const fonts = TestBed.inject(FontService);
+      const initial = fonts.font();
+      const other = fonts.fonts.find(({ id }) => id !== initial)?.id;
+
+      // Act
+      emit('ds-font-switcher', 'fontChange', other);
+      const changed = fonts.font();
+      emit('ds-font-switcher', 'fontChange', 'no-such-font');
+      const afterUnknown = fonts.font();
+      emit('ds-font-switcher', 'fontReset');
+
+      // Assert
+      expect(changed).toBe(other);
+      expect(afterUnknown).toBe(other);
+      expect(fonts.font()).toBe(initial);
+    });
+
+    it('changes and resets the color scheme', async () => {
+      // Arrange
+      const { emit } = await render();
+      const themes = TestBed.inject(ThemeService);
+      const initial = themes.colorScheme();
+      const other = initial === 'dark' ? 'light' : 'dark';
+
+      // Act
+      emit('ds-color-scheme-switcher', 'colorSchemeChange', other);
+      const changed = themes.colorScheme();
+      emit('ds-color-scheme-switcher', 'colorSchemeReset');
+
+      // Assert
+      expect(changed).toBe(other);
+      expect(themes.colorScheme()).toBe(initial);
+    });
+
+    it('changes the accessibility settings, dropping an unknown text size', async () => {
+      // Arrange
+      const { emit } = await render();
+      const accessibility = TestBed.inject(AccessibilityService);
+
+      // Act
+      emit('ds-accessibility-switcher', 'settingsChange', {
+        textSize: 125,
+        wideTextSpacing: true,
+      });
+      const changed = accessibility.settings();
+      emit('ds-accessibility-switcher', 'settingsChange', {
+        textSize: 999,
+        wideTextSpacing: false,
+      });
+      const afterUnknown = accessibility.settings();
+      emit('ds-accessibility-switcher', 'resetSettings');
+
+      // Assert
+      expect(changed.textSize).toBe(125);
+      expect(changed.wideTextSpacing).toBe(true);
+      expect(afterUnknown.textSize).toBe(125);
+      expect(afterUnknown.wideTextSpacing).toBe(false);
+      expect(accessibility.isDefault()).toBe(true);
+    });
+
+    it('changes and resets the language, ignoring unknown languages', async () => {
+      // Arrange
+      const { emit } = await render();
+      const languages = TestBed.inject(LanguageService);
+
+      // Act
+      emit('ds-language-switcher', 'languageChange', 'xx');
+      emit('ds-language-switcher', 'languageChange', 'nl');
+      await vi.waitFor(() => expect(languages.language()).toBe('nl'));
+      emit('ds-language-switcher', 'languageReset');
+
+      // Assert
+      await vi.waitFor(() => expect(languages.language()).toBe('en'));
+    });
   });
 });

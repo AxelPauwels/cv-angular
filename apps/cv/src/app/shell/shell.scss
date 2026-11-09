@@ -22,6 +22,11 @@
   &__header {
     grid-area: header;
     min-width: 0;
+
+    // only focused from code (by ds-back-to-top), never with Tab
+    &:focus {
+      outline: none;
+    }
   }
 
   // min-height 0 down to the scrolling panel, so it can shrink to the space left;

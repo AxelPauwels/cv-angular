@@ -58,8 +58,7 @@ describe('ThemeService', () => {
   it('toggles between light and dark and remembers it', () => {
     // Arrange
     const { service, root } = start();
-    const initial = service.colorScheme();
-    const toggled = initial === 'dark' ? 'light' : 'dark';
+    const toggled = 'dark';
 
     // Act
     service.toggleColorScheme();
@@ -100,19 +99,16 @@ describe('ThemeService', () => {
     expect(localStorage.getItem('cv-theme')).toBeNull();
   });
 
-  it('stops following the system once a color scheme is chosen', () => {
-    // Arrange
-    const { service } = start();
-
+  it('defaults to light, whatever the system prefers', () => {
     // Act
-    service.changeColorScheme('dark');
-    TestBed.tick();
+    const { service, root } = start();
 
     // Assert
-    expect(service.followsSystemColorScheme()).toBe(false);
+    expect(service.colorScheme()).toBe('light');
+    expect(root.dataset['colorScheme']).toBe('light');
   });
 
-  it('follows the system again after a color scheme reset', () => {
+  it('goes back to light after a color scheme reset', () => {
     // Arrange
     const { service, root } = start();
     service.changeColorScheme('dark');
@@ -123,12 +119,8 @@ describe('ThemeService', () => {
     TestBed.tick();
 
     // Assert
-    expect(service.followsSystemColorScheme()).toBe(true);
-    // without the attribute the styles follow the system
-    expect(root.dataset['colorScheme']).toBeUndefined();
+    expect(service.colorScheme()).toBe('light');
+    expect(root.dataset['colorScheme']).toBe('light');
     expect(localStorage.getItem('cv-color-scheme')).toBeNull();
-    expect(service.colorScheme()).toBe(
-      matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    );
   });
 });

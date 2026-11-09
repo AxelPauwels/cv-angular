@@ -18,6 +18,7 @@ export const resolvers: Resolvers = {
     educations: () => educationRepository.findAll(),
     experiences: () => experienceRepository.findAll(),
     skills: () => skillRepository.findAll(),
+    otherSkills: () => skillRepository.findOthers(),
     references: () => referenceRepository.findAll(),
     certificates: () => certificateRepository.findAll(),
     additionalLearnings: () => additionalLearningRepository.findAll(),

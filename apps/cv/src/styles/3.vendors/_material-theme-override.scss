@@ -45,13 +45,10 @@ html {
     text-transform: capitalize;
   }
 
-  // Follow the system until the user picks a mode (`data-color-scheme` on <html>).
-  // Material's color variables use `light-dark()`, so this switches every color.
-  color-scheme: light dark;
-
-  &[data-color-scheme='light'] {
-    color-scheme: light;
-  }
+  // Light until the user picks a mode (`data-color-scheme` on <html>), whatever the
+  // system prefers. Material's color variables use `light-dark()`, so this switches
+  // every color.
+  color-scheme: light;
 
   &[data-color-scheme='dark'] {
     color-scheme: dark;
@@ -59,9 +56,10 @@ html {
 
   // Score colors, the same as Google Lighthouse's report: the bright color draws the
   // gauge, the `-text` color writes the score. Light mode uses Lighthouse's darker text
-  // colors, so the bold score reaches 3:1 on the gauge's tint (WCAG 1.4.3, large text).
+  // colors (a bit darker green), so the small score reaches 4.5:1 on the gauge's tint
+  // (WCAG 1.4.3).
   --ds-score-pass: #0c6;
-  --ds-score-pass-text: light-dark(#080, #0c6);
+  --ds-score-pass-text: light-dark(#070, #0c6);
   --ds-score-average: #fa3;
   --ds-score-average-text: light-dark(#c33300, #fa3);
   --ds-score-fail: #f33;

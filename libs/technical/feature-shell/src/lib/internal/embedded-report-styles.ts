@@ -9,11 +9,22 @@
  * SpectaQL: the page title already names the API, so its own <h1> goes. Below
  * SpectaQL's 48em breakpoint the sidebar ("All topics") is a drawer over the
  * docs: it gets the app's background and text colors instead of the transparent
- * one, so the docs don't show through it.
+ * one, so the docs don't show through it. The sticky bar with the drawer's
+ * button gets the theme's brown secondary color instead of SpectaQL's white.
  */
 export const GRAPHQL_DOCS_STYLES = `
 #content > h1.doc-heading:first-of-type { display: none !important; }
 @media (width < 48em) {
+  #mobile-navbar {
+    background: var(--mat-sys-secondary) !important;
+    color: var(--mat-sys-on-secondary) !important;
+  }
+  #mobile-navbar .sidebar-open-button::after { color: inherit !important; }
+  #mobile-navbar .hamburger::after {
+    background: currentColor !important;
+    box-shadow: 0 5px 0 currentColor, 0 10px 0 currentColor !important;
+  }
+  #mobile-navbar .sidebar-open-button { color: inherit !important; }
   #sidebar {
     background: var(--mat-sys-surface) !important;
     color: var(--mat-sys-on-surface) !important;

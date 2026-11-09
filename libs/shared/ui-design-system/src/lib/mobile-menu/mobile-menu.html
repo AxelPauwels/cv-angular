@@ -14,6 +14,11 @@
   </mat-icon>
 </button>
 
-<div #panel class="mobile-menu__panel" [id]="panelId" [hidden]="!open()">
+<div
+  #panel
+  class="mobile-menu__panel"
+  data-tour="menu-panel"
+  [id]="panelId"
+  [hidden]="!open()">
   <ng-content />
 </div>

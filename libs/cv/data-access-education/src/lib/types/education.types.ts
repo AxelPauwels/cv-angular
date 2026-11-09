@@ -3,12 +3,16 @@ import type { Period } from '@cv/shared-util-types';
 export type EducationLevel =
   'SECONDARY_EDUCATION' | 'HIGH_SCHOOL' | 'CUSTOM_COURSE';
 
+/** The career an education prepared for, the same split as experience */
+export type EducationCategory = 'IT' | 'HORECA';
+
 export interface School {
   name: string;
   location: string;
 }
 
 export interface Education {
+  category: EducationCategory;
   level: EducationLevel;
   specialization: string;
   school: School;

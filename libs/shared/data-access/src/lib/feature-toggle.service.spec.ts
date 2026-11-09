@@ -77,7 +77,7 @@ describe('FeatureToggleService', () => {
     // Arrange
     saveFeatureTogglesForTesting();
     const service = TestBed.inject(FeatureToggleService);
-    service.change('showcase-admin', false);
+    service.change('showcase-feature-toggles', false);
     service.change('showcase-lighthouse', false);
 
     // Act
@@ -91,7 +91,7 @@ describe('FeatureToggleService', () => {
     // Arrange
     saveFeatureTogglesForTesting();
     const service = TestBed.inject(FeatureToggleService);
-    service.change('showcase-admin', false);
+    service.change('showcase-feature-toggles', false);
     service.change('showcase-lighthouse', false);
     service.change('showcase-micro-frontends', false);
 
@@ -128,7 +128,7 @@ describe('FeatureToggleService', () => {
     const service = TestBed.inject(FeatureToggleService);
     service.change('showcase-micro-frontends', false);
     service.change('showcase-lighthouse', false);
-    service.change('showcase-admin', false);
+    service.change('showcase-feature-toggles', false);
 
     // Act
     service.change('main-menu-showcase', true);
@@ -136,7 +136,7 @@ describe('FeatureToggleService', () => {
     // Assert
     expect(service.isEnabled('showcase-micro-frontends')()).toBe(true);
     expect(service.isEnabled('showcase-lighthouse')()).toBe(true);
-    expect(service.isEnabled('showcase-admin')()).toBe(true);
+    expect(service.isEnabled('showcase-feature-toggles')()).toBe(true);
   });
 
   it('leaves a main menu item switched off on purpose off', () => {
@@ -161,7 +161,7 @@ describe('FeatureToggleService', () => {
         'main-menu-showcase': true,
         'showcase-micro-frontends': false,
         'showcase-lighthouse': false,
-        'showcase-admin': false,
+        'showcase-feature-toggles': false,
       })
     );
 

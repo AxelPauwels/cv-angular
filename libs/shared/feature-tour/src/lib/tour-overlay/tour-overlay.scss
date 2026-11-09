@@ -172,10 +172,6 @@
     padding: 0.5rem;
     width: 100%;
 
-    @media (width < 600px) {
-      grid-template-columns: 1fr 1fr;
-    }
-
     @media (forced-colors: active) {
       border: 1px solid CanvasText;
     }
@@ -216,16 +212,23 @@
 
   &__action-step {
     font: var(--mat-sys-label-large);
+
+    // Phones: just "Back" / "Next"; the step names stay for screen readers
+    &:not(.tour__action-step--finish) {
+      @media (width < 600px) {
+        block-size: 1px;
+        clip-path: inset(50%);
+        inline-size: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+      }
+    }
   }
 
   // Exit spans the row below back and next
   &__exit {
     border: none;
-
-    @media (width < 600px) {
-      grid-column: 1 / -1;
-      grid-row: 2;
-    }
   }
 }
 

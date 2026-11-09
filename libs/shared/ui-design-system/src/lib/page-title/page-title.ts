@@ -37,10 +37,15 @@ import {
     .ds-page-title {
       color: var(--mat-sys-primary);
       font: var(--mat-sys-display-small);
+      font-size: 1.75rem;
       letter-spacing: 0.08em;
       margin: 0.5rem 0 2rem;
       text-align: center;
       text-transform: uppercase;
+
+      @media (width >= 600px) {
+        font-size: 2.25rem;
+      }
     }
 
     .ds-page-title--with-subtitle {

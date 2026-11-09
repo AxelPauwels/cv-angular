@@ -98,6 +98,7 @@
         "degree": "Diploma of pulled sugar | Diploma of poured & blown sugar",
         "specialization": "Pulled sugar, poured sugar, blown sugar"
       },
+      "hotelschool": "Hotelschool",
       "level": {
         "extra": "Additional lessons",
         "high-school": "High School",
@@ -176,6 +177,38 @@
         "zilte": "Chef de part / Pastry chef"
       }
     },
+    "feature-toggles": {
+      "count": "{on} of {total} on",
+      "hidden-notice": "The feature-toggles-page is hidden from the menu. You can still open it at /showcase/feature-toggles by clicking “Axel Pauwels” in the footer.",
+      "linked": {
+        "off": "{item} switched off too.",
+        "on": "{item} switched on too."
+      },
+      "reset": "Reset to defaults",
+      "section": {
+        "general": {
+          "title": "General"
+        },
+        "main-menu": {
+          "title": "Main menu"
+        },
+        "navbar": {
+          "title": "Navbar icons"
+        },
+        "submenu": {
+          "title": "Submenu"
+        }
+      },
+      "title": "Admin",
+      "toggle": {
+        "color-scheme-switcher": {
+          "label": "Light and dark mode"
+        },
+        "tour-button": {
+          "label": "Tour button on homepage"
+        }
+      }
+    },
     "font": {
       "switch": "Font"
     },
@@ -220,6 +253,9 @@
       "switch": "Language"
     },
     "lighthouse": {
+      "audit": {
+        "message": "Audited on {date} with Lighthouse {version}"
+      },
       "category": {
         "accessibility": "Accessibility",
         "best-practices": "Best Practices",
@@ -227,20 +263,18 @@
         "seo": "SEO"
       },
       "legend": {
-        "average": "Needs improvement",
-        "fail": "Poor",
-        "pass": "Good",
+        "average": "Average",
+        "fail": "Fail",
+        "pass": "Pass",
         "title": "Score ranges"
       },
       "not-audited": "Not audited yet",
-      "page": "Page",
-      "audit": {
-        "message": "Audited on {date} with Lighthouse {version}"
-      }
+      "page": "Page"
     },
     "nav": {
       "admin": "Admin",
       "architecture": "Architecture",
+      "back-to-top": "Back to top",
       "code-coverage": "code coverage",
       "cv": "CV",
       "cv-navigation": "CV navigation",
@@ -425,7 +459,7 @@
         "contact": {
           "label": "Contact",
           "text": "Want to get in touch? Mail me or find me on LinkedIn and GitHub with the icons at the bottom right.",
-          "title": "Get in touch"
+          "title": "Contact"
         },
         "cv": {
           "label": "CV",
@@ -434,7 +468,7 @@
         },
         "download-cv": {
           "label": "Download CV",
-          "text": "Prefer to read it offline? Download my CV as a PDF here.\nTip: use the buttons below or the arrow keys, and press Escape to stop the tour at any time.",
+          "text": "Prefer to read it offline? Download my CV as a PDF here.",
           "title": "Download my CV"
         },
         "finish": {
@@ -455,7 +489,7 @@
         "settings": {
           "label": "Your preferences",
           "text": "First set up the website the way you like it: the color theme, the font, accessibility settings, light or dark mode and the language. Your choices are remembered on this device.",
-          "title": "Make it your own"
+          "title": "Preferences"
         },
         "showcase": {
           "label": "Showcase",
@@ -465,7 +499,7 @@
         "technical": {
           "label": "Technical",
           "text": "Curious how this website is built? The technical section shows the project graph, the architecture, the GraphQL docs, code coverage, end-to-end tests and the versions in use.",
-          "title": "Under the hood"
+          "title": "Technical"
         },
         "themes": {
           "label": "Themes",

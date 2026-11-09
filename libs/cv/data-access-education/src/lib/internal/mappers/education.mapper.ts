@@ -17,6 +17,7 @@ export function toEducation({
   ...dto
 }: EducationFieldsFragment): Education {
   return {
+    category: dto.category,
     level: dto.level,
     specialization: dto.specialization,
     school: { ...dto.school },
