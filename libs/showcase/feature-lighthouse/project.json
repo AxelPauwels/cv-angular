@@ -32,7 +32,7 @@
       "executor": "nx:run-commands",
       "cache": false,
       "options": {
-        "command": "node tools/lighthouse/audit.mjs",
+        "command": "node --env-file-if-exists=.env tools/lighthouse/audit.mjs",
         "cwd": "{workspaceRoot}"
       }
     }

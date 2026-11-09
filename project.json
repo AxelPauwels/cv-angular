@@ -14,7 +14,11 @@
       "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/dist/.project-graph"],
       "options": {
-        "command": "nx graph --file=dist/.project-graph/index.html --open=false"
+        "commands": [
+          "nx graph --file=dist/.project-graph/index.html --open=false",
+          "node tools/project-graph/strip-task-data.mjs"
+        ],
+        "parallel": false
       }
     }
   }
