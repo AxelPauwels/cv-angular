@@ -9,10 +9,17 @@ permissions:
   pull-requests: write
 jobs:
   build_and_preview:
-    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    # Release PRs into main get their preview from release.yml, after the version commit
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      !(github.base_ref == 'main' && startsWith(github.head_ref, 'release/'))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: 'npm'
       - run: npm ci
       # build:production runs the e2e tests to include their report
       - run: npx playwright install --with-deps
