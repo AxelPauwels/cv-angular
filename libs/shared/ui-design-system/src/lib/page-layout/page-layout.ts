@@ -28,7 +28,7 @@ export type PageLayoutWidth = 'narrow' | 'wide';
         var(--ds-page-layout-max-width) + 2 *
           var(--ds-page-layout-padding-inline)
       );
-      padding: 1.5rem var(--ds-page-layout-padding-inline) 3rem;
+      padding: var(--ds-page-layout-padding-inline) 3rem;
       width: 100%;
     }
 

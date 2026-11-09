@@ -176,9 +176,14 @@ export class TourOverlay {
         return;
       }
       // after navigating: every navigation closes the hamburger menu
-      const inMenu = !!step.menuTarget && this.menuShown();
+      const phone = this.menuShown();
+      const inMenu = !!step.menuTarget && phone;
       this.tour.showMenu(inMenu);
-      const target = inMenu ? step.menuTarget : step.target;
+      const target = inMenu
+        ? step.menuTarget
+        : phone && step.centerOnPhones
+          ? undefined
+          : step.target;
       const targets = target ? await this.waitFor(target, run) : [];
       if (run !== this.run) {
         return;

@@ -332,5 +332,22 @@ describe('TourOverlay', () => {
       // Assert
       expect(tour.menuOpen()).toBe(false);
     });
+
+    it('centers a step without a spotlight when it is centered on phones', async () => {
+      // Arrange
+      const centered: TourStep[] = [
+        {
+          ...step('contact', '/first', '[data-tour="first"]'),
+          centerOnPhones: true,
+        },
+      ];
+
+      // Act
+      const { query } = await render(PhoneHost, centered);
+
+      // Assert
+      expect(query('.tour__spotlight--active')).toBeNull();
+      expect(query('.tour__pointer--visible')).toBeNull();
+    });
   });
 });
