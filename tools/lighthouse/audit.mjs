@@ -12,7 +12,13 @@
 // Either way each page is audited RUNS times and the median score is kept.
 // Keep PAGES in sync with LIGHTHOUSE_SECTIONS in the lib's lighthouse-pages.ts.
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -20,8 +26,9 @@ const LIGHTHOUSE = 'lighthouse@13.6.0';
 const PSI_ENDPOINT =
   'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
 const PSI_CONCURRENCY = 4;
-const OUTPUT =
-  'libs/showcase/feature-lighthouse/src/lib/internal/lighthouse-scores.json';
+const OUTPUT_DIR = 'libs/showcase/feature-lighthouse/src/lib/internal';
+const OUTPUT = `${OUTPUT_DIR}/lighthouse-scores.json`;
+const HISTORY_DIR = `${OUTPUT_DIR}/lighthouse-scores-history`;
 const CATEGORIES = ['performance', 'accessibility', 'best-practices', 'seo'];
 const PAGES = [
   '/home',
@@ -148,6 +155,17 @@ try {
 }
 
 const first = results.get(PAGES[0]).report;
+// e.g. 2026-11-09T13:19:09.616Z -> lighthouse-scores-2026-11-09_13h19.json (UTC, as in fetchTime)
+const historyFileOf = (fetchTime) => {
+  const [, date, hours, minutes] = /^(\d{4}-\d{2}-\d{2})T(\d{2}):(\d{2})/.exec(
+    new Date(fetchTime).toISOString()
+  );
+  return join(
+    HISTORY_DIR,
+    `lighthouse-scores-${date}_${hours}h${minutes}.json`
+  );
+};
+
 const output = {
   url: baseUrl,
   fetchTime: first.fetchTime,
@@ -155,5 +173,9 @@ const output = {
   formFactor: first.configSettings.formFactor,
   pages: Object.fromEntries(PAGES.map((p) => [p, results.get(p).scores])),
 };
-writeFileSync(OUTPUT, `${JSON.stringify(output, null, 2)}\n`);
-console.log(`Wrote ${OUTPUT}`);
+const json = `${JSON.stringify(output, null, 2)}\n`;
+const historyFile = historyFileOf(output.fetchTime);
+mkdirSync(HISTORY_DIR, { recursive: true });
+writeFileSync(OUTPUT, json);
+writeFileSync(historyFile, json);
+console.log(`Wrote ${OUTPUT}\nWrote ${historyFile}`);
