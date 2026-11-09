@@ -60,6 +60,10 @@ CI checks this with `npx nx run cv:material-symbols` and fails with the missing 
 npx nx g @nx/angular:application apps/cv-mfe1
 npx nx g @angular-architects/native-federation:init --project=cv-mfe1 --port=4201 --type=remote
 
+## Release branches
+
+How `develop` → `release/x.y.z` → `main` works, with automatic versioning, tagging and Firebase previews: see [README.release-branches.md](README.release-branches.md).
+
 ## Publish npm packages
 
 Before building the package add this to package.json for public packages:
