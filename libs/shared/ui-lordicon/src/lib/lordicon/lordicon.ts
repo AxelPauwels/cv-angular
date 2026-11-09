@@ -73,7 +73,7 @@ export class Lordicon {
   readonly icon = input.required<LordiconName>();
   /** Selector of the ancestor whose hover or focus plays the icon */
   readonly target = input('a, button');
-  readonly stroke = input<'light' | 'regular' | 'bold'>('regular');
+  readonly stroke = input<'light' | 'regular' | 'bold'>('bold');
 
   protected readonly src = computed(
     () => `assets/lordicon/${ICONS[this.icon()]}.json`

@@ -140,6 +140,7 @@
   // hobbies with a comment span two columns once there are at least two
   &__hobbies {
     display: grid;
+    gap: 1rem;
     grid-auto-flow: dense;
     grid-template-columns: 1fr;
     list-style: none;
