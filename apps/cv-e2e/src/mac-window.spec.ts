@@ -39,7 +39,7 @@ test.describe('mac-window', () => {
 
   test('projects its content into the window body', async ({ page }) => {
     // Arrange
-    const projected = 'Anything placed here is projected into the window.';
+    const projected = 'My npm package from www.npmjs.com';
 
     // Act
     const content = macWindow(page).locator('.mw__content');
