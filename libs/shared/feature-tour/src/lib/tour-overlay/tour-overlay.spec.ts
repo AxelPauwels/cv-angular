@@ -1,4 +1,4 @@
-import { Component, inject, Type } from '@angular/core';
+import { Component, inject, signal, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router, RouterOutlet } from '@angular/router';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
@@ -27,6 +27,34 @@ class FirstPage {}
 
 @Component({ template: '<button data-tour="second">second</button>' })
 class SecondPage {}
+
+/** A target in the lower half of the viewport */
+@Component({
+  template: `
+    <button
+      data-tour="bottom"
+      style="position: fixed; bottom: 10px; left: 10px; width: 40px; height: 20px">
+      bottom
+    </button>
+  `,
+})
+class BottomPage {}
+
+/** A target that renders late, like a page waiting for its data */
+@Component({
+  template: `
+    @if (ready()) {
+      <button data-tour="slow">slow</button>
+    }
+  `,
+})
+class SlowPage {
+  protected readonly ready = signal(false);
+
+  constructor() {
+    setTimeout(() => this.ready.set(true), 800);
+  }
+}
 
 @Component({
   imports: [RouterOutlet, TourOverlay],
@@ -96,6 +124,8 @@ describe('TourOverlay', () => {
         provideRouter([
           { path: 'first', component: FirstPage },
           { path: 'second', component: SecondPage },
+          { path: 'bottom', component: BottomPage },
+          { path: 'slow', component: SlowPage },
         ]),
         provideI18nTesting(),
         { provide: TOUR_STEPS, useValue: tourSteps },
@@ -277,6 +307,113 @@ describe('TourOverlay', () => {
 
     // Assert
     expect(tour.active()).toBe(false);
+  });
+
+  it('stays on the first step with the left arrow', async () => {
+    // Arrange
+    const { text, press } = await render();
+
+    // Act
+    await press('ArrowLeft');
+
+    // Assert
+    expect(text('.tour__counter')).toBe('1 / 3');
+    expect(text('.tour__title')).toBe('Preferences');
+  });
+
+  it('takes over Escape and the arrow keys from the page', async () => {
+    // Arrange
+    await render();
+    const keys = ['ArrowRight', 'ArrowLeft', 'Escape'].map(
+      (key) => new KeyboardEvent('keydown', { key, cancelable: true })
+    );
+
+    // Act
+    for (const key of keys) document.dispatchEvent(key);
+
+    // Assert
+    expect(keys.map((key) => key.defaultPrevented)).toEqual([true, true, true]);
+  });
+
+  it('leaves other keys to the page', async () => {
+    // Arrange
+    const { text } = await render();
+    const tab = new KeyboardEvent('keydown', { key: 'Tab', cancelable: true });
+
+    // Act
+    document.dispatchEvent(tab);
+
+    // Assert
+    expect(tab.defaultPrevented).toBe(false);
+    expect(text('.tour__counter')).toBe('1 / 3');
+  });
+
+  it('names the dialog by the step title and announces the progress', async () => {
+    // Arrange
+    const { query, text, press } = await render();
+
+    // Act
+    await press('ArrowRight');
+
+    // Assert
+    const labelledBy =
+      query('[role="dialog"]')?.getAttribute('aria-labelledby');
+    expect(text(`#${labelledBy}`)).toBe('Technical');
+    expect(query('.tour__card')?.getAttribute('aria-live')).toBe('polite');
+    expect(text('.tour__card')).toContain('Step 2 of 3');
+  });
+
+  it('points up at a target in the upper half of the screen', async () => {
+    // Arrange
+    const page = () => render();
+
+    // Act
+    const { query } = await page();
+
+    // Assert
+    const pointer = await vi.waitFor(() => {
+      const element = query('.tour__pointer--visible');
+      expect(element).not.toBeNull();
+      return element as HTMLElement;
+    });
+    expect(pointer.classList).not.toContain('tour__pointer--down');
+  });
+
+  it('points down at a target in the lower half of the screen', async () => {
+    // Arrange
+    const bottomSteps = [step('bottom', '/bottom', '[data-tour="bottom"]')];
+
+    // Act
+    const { query } = await render(Host, bottomSteps);
+
+    // Assert
+    const pointer = await vi.waitFor(() => {
+      const element = query('.tour__pointer--visible');
+      expect(element).not.toBeNull();
+      return element as HTMLElement;
+    });
+    expect(pointer.classList).toContain('tour__pointer--down');
+  });
+
+  it('shows a loading status while the target is slow, and the spotlight after', async () => {
+    // Arrange
+    const slowSteps = [step('slow', '/slow', '[data-tour="slow"]')];
+
+    // Act
+    const { query, text } = await render(Host, slowSteps);
+
+    // Assert
+    await vi.waitFor(() =>
+      expect(query('.tour__loading[role="status"]')).not.toBeNull()
+    );
+    expect(text('.tour__loading')).toBe('Loading the tour…');
+    await vi.waitFor(
+      () => {
+        expect(query('.tour__loading')).toBeNull();
+        expect(query('.tour__spotlight--active')).not.toBeNull();
+      },
+      { timeout: 2000 }
+    );
   });
 
   describe('on phones', () => {

@@ -61,8 +61,8 @@
       "cv": "CV",
       "download-cv": "Download CV",
       "email": "Email",
-      "load-report": "Load report",
       "loading": "Loading",
+      "load-report": "Load report",
       "ok": "OK",
       "pdf": "PDF",
       "reset": "Reset",
@@ -179,7 +179,7 @@
       }
     },
     "feature-toggles": {
-      "count": "{on} of {total} on",
+      "count": "{on}/{total} ON",
       "hidden-notice": "The feature-toggles-page is hidden from the menu. You can still open it at /showcase/feature-toggles by clicking “Axel Pauwels” in the footer.",
       "linked": {
         "off": "{item} switched off too.",
@@ -474,7 +474,7 @@
         },
         "finish": {
           "label": "Finish",
-          "text": "Thanks for taking the tour. Enjoy looking around, you can start the tour again from the home page at any time.",
+          "text": "Thanks for taking the tour.",
           "title": "That's it!"
         },
         "fonts": {

@@ -130,6 +130,107 @@ describe('FeatureToggles', () => {
     );
   });
 
+  it('switches the main menu item back on with its first sub menu item, and says so', async () => {
+    // Arrange
+    const { harness, element, toggle } = await render();
+    const service = TestBed.inject(FeatureToggleService);
+    service.change('showcase-feature-toggles', false);
+    service.change('showcase-lighthouse', false);
+    service.change('showcase-micro-frontends', false);
+    TestBed.inject(MatSnackBar).dismiss();
+    await harness.fixture.whenStable();
+
+    // Act
+    toggle('showcase-micro-frontends')?.click();
+    await harness.fixture.whenStable();
+
+    // Assert
+    expect(toggle('main-menu-showcase')?.getAttribute('aria-checked')).toBe(
+      'true'
+    );
+    expect(element.querySelector('[role="status"]')?.textContent).toContain(
+      'Showcase switched on too.'
+    );
+  });
+
+  it('announces nothing when a change switches nothing along', async () => {
+    // Arrange
+    const { harness, element, toggle } = await render();
+
+    // Act
+    toggle()?.click();
+    await harness.fixture.whenStable();
+
+    // Assert
+    expect(element.querySelector('[role="status"]')?.textContent?.trim()).toBe(
+      ''
+    );
+  });
+
+  it('clears the announcement on reset', async () => {
+    // Arrange
+    const { harness, element, toggle } = await render();
+    const service = TestBed.inject(FeatureToggleService);
+    service.change('showcase-feature-toggles', false);
+    service.change('showcase-lighthouse', false);
+    TestBed.inject(MatSnackBar).dismiss();
+    toggle('showcase-micro-frontends')?.click();
+    await harness.fixture.whenStable();
+
+    // Act
+    element.querySelector<HTMLButtonElement>('button[matButton]')?.click();
+    await harness.fixture.whenStable();
+
+    // Assert
+    expect(element.querySelector('[role="status"]')?.textContent?.trim()).toBe(
+      ''
+    );
+  });
+
+  it('counts the switches that are on per card', async () => {
+    // Arrange
+    const { harness, element } = await render();
+    // the navbar icons: several switches, none linked to another
+    const card = element.querySelector('ds-card') as HTMLElement;
+    // the numbers only: the wording is the translator's
+    const count = () =>
+      card.querySelector('.feature-toggles__tag')?.textContent?.match(/\d+/g);
+    const total = card.querySelectorAll('mat-slide-toggle').length;
+
+    // Act
+    const before = count();
+    card.querySelector<HTMLButtonElement>('mat-slide-toggle button')?.click();
+    await harness.fixture.whenStable();
+    const after = count();
+
+    // Assert
+    expect(total).toBeGreaterThan(1);
+    expect(before).toEqual([String(total), String(total)]);
+    expect(after).toEqual([String(total - 1), String(total)]);
+  });
+
+  it('names every card as a region, by its title', async () => {
+    // Arrange
+    const page = render;
+
+    // Act
+    const { element } = await page();
+
+    // Assert
+    const regions = Array.from(element.querySelectorAll('ds-card'));
+    expect(regions.map((region) => region.getAttribute('role'))).toEqual(
+      Array(6).fill('region')
+    );
+    expect(regions.map((region) => region.getAttribute('aria-label'))).toEqual([
+      'Navbar icons',
+      'General',
+      'Main menu',
+      'Submenu CV',
+      'Submenu Technical',
+      'Submenu Showcase',
+    ]);
+  });
+
   it('says how to get back here when its own menu item is switched off', async () => {
     // Arrange
     const { harness, toggle } = await render();
@@ -178,6 +279,28 @@ describe('FeatureToggles', () => {
     await harness.fixture.whenStable();
 
     // Assert
+    expect(document.querySelector('mat-snack-bar-container')).toBeNull();
+  });
+
+  it('shows no message when switching its own menu item back on', async () => {
+    // Arrange
+    const { harness, toggle } = await render();
+    TestBed.inject(FeatureToggleService).change(
+      'showcase-feature-toggles',
+      false
+    );
+    await harness.fixture.whenStable();
+
+    // Act
+    toggle('showcase-feature-toggles')?.click();
+    await harness.fixture.whenStable();
+
+    // Assert
+    expect(
+      TestBed.inject(FeatureToggleService).isEnabled(
+        'showcase-feature-toggles'
+      )()
+    ).toBe(true);
     expect(document.querySelector('mat-snack-bar-container')).toBeNull();
   });
 });
