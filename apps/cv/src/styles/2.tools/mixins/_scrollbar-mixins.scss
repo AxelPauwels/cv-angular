@@ -5,7 +5,7 @@
 // (set on <html> in 4.elements/e-scrollbar, from the theme's on-surface), so the
 // thumb follows every palette and light or dark mode. Embedded pages (the reports
 // in an iframe) copy the rules that use these variables, see applyAppStyles in
-// @cv/shared-ui-design-system.
+// @cv/shared-ui-embedded-page.
 
 // Chrome and Safari draw it with the ::-webkit-scrollbar pseudo elements; setting
 // `scrollbar-color` or `scrollbar-width` would switch those off in Chrome, so the

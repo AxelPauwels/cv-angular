@@ -7,7 +7,7 @@
     "@tolgee/ngx": "^7.3.0",
     "@cv/shared-data-access": "0.0.1",
     "@cv/shared-ui-card": "0.0.1",
-    "@cv/shared-ui-design-system": "0.0.1"
+    "@cv/shared-ui-page": "0.0.1"
   },
   "sideEffects": false,
   "private": true

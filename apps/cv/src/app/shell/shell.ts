@@ -23,7 +23,7 @@ import {
   MobileMenu,
   NavItem,
   ThemeSwitcher,
-} from '@cv/shared-ui-design-system';
+} from '@cv/shared-ui-layout';
 import { isLanguageCode, LanguageService } from '@cv/shared-data-access-i18n';
 import {
   AccessibilityService,

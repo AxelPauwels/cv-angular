@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PageLayout, PageTitle } from '@cv/shared-ui-design-system';
+import { PageLayout, PageTitle } from '@cv/shared-ui-page';
 import { MatButton } from '@angular/material/button';
 import { Card, CardActions } from '@cv/shared-ui-card';
 import { MatChip, MatChipSet } from '@angular/material/chips';

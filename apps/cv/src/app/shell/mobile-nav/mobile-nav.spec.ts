@@ -5,7 +5,7 @@ import {
   FeatureToggleService,
   saveFeatureTogglesForTesting,
 } from '@cv/shared-data-access';
-import { NavItem } from '@cv/shared-ui-design-system';
+import { NavItem } from '@cv/shared-ui-layout';
 import { ROUTES } from '@cv/shared-util-routing';
 import { MobileNav } from './mobile-nav';
 

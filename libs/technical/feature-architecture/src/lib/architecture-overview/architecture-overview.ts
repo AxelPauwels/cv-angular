@@ -4,11 +4,7 @@ import {
   computed,
   inject,
 } from '@angular/core';
-import {
-  PageLayout,
-  PageTitle,
-  SectionHeading,
-} from '@cv/shared-ui-design-system';
+import { PageLayout, PageTitle, SectionHeading } from '@cv/shared-ui-page';
 import {
   MatAccordion,
   MatExpansionPanel,
@@ -23,6 +19,7 @@ import {
   ArchitectureStore,
   ProjectInfo,
 } from '@cv/technical-data-access-build-info';
+import { ScrollEdges } from '../internal/scroll-edges/scroll-edges';
 
 /** Known domains and layers first, in reading order; anything new follows */
 const DOMAIN_ORDER = ['cv', 'showcase', 'technical', 'shared'];
@@ -64,6 +61,7 @@ export function describeTargets(tags: string[]): string {
     MatIcon,
     MatProgressBar,
     MatTableModule,
+    ScrollEdges,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './architecture-overview.html',

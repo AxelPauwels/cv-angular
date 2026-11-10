@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { EmbeddedPage } from '@cv/shared-ui-design-system';
+import { EmbeddedPage } from '@cv/shared-ui-embedded-page';
 import { ROUTES } from '@cv/shared-util-routing';
 import { TechnicalFeatureShell } from './internal/technical-feature-shell/technical-feature-shell';
 import { firstVisibleTechnicalPage } from './technical-nav-items';

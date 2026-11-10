@@ -6,9 +6,11 @@
     "@tolgee/ngx": "^7.3.0",
     "@cv/cv-data-access-skills": "0.0.1",
     "@cv/shared-ui-card": "0.0.1",
-    "@cv/shared-ui-design-system": "0.0.1",
     "@cv/shared-ui-progress-dots": "0.0.1",
-    "@cv/shared-data-access-i18n": "0.0.1"
+    "@cv/shared-data-access-i18n": "0.0.1",
+    "@cv/shared-util-loading": "0.0.1",
+    "@cv/shared-ui-loading-spinner": "0.0.1",
+    "@cv/shared-ui-page": "0.0.1"
   },
   "sideEffects": false,
   "private": true

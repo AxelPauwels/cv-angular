@@ -2,11 +2,6 @@
 
 :host {
   display: block;
-  max-width: 100rem;
-
-  ds-page-layout {
-    padding: 0;
-  }
 }
 
 .micro-frontends {
@@ -33,18 +28,20 @@
       }
 
       mat-card-actions {
-        padding-top: 1rem;
+        padding-top: 0.5rem;
       }
     }
   }
 
-  // The live demo sits on a contrasting surface
+  // The live demo sits on a contrasting surface. The spacing in the cards is kept
+  // tight so both cards fit in one screen next to each other (no vertical scrollbar
+  // at 1440x900 or 1536x864), with the same page padding as every other page.
   &__demo {
     background-color: var(--mat-sys-surface-container);
     border: 2px dashed var(--mat-sys-on-surface);
     border-radius: var(--mat-sys-corner-medium);
-    margin-block: 1rem 1.5rem;
-    padding: 1rem;
+    margin-block: 0.75rem 1rem;
+    padding: 0.75rem;
   }
 
   // The window is always white, so its content keeps light-mode text colors, also in
@@ -52,20 +49,25 @@
   &__window {
     color: var(--mat-sys-on-surface);
     color-scheme: light;
+
+    p {
+      margin-block: 0.5rem;
+    }
   }
 
   &__steps {
+    margin-block: 0.75rem;
     padding-inline-start: 1.25rem;
 
     li + li {
-      margin-top: 0.5rem;
+      margin-top: 0.25rem;
     }
   }
 
   // Pills in the colors of the timeline's year pills
   &__chips {
     display: block;
-    margin-top: 1rem;
+    margin-top: 0.75rem;
 
     mat-chip {
       background-color: var(--mat-sys-primary-container);

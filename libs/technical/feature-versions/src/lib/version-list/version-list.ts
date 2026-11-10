@@ -1,5 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
-import { PageTitle } from '@cv/shared-ui-design-system';
+import { PageTitle } from '@cv/shared-ui-page';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { Card } from '@cv/shared-ui-card';

@@ -1,5 +1,5 @@
 import { Component, computed, inject, input, resource } from '@angular/core';
-import { NavAccordion, NavItem } from '@cv/shared-ui-design-system';
+import { NavAccordion, NavItem } from '@cv/shared-ui-layout';
 import { FeatureToggleService } from '@cv/shared-data-access';
 import { ROUTES } from '@cv/shared-util-routing';
 import { TranslatePipe } from '@tolgee/ngx';

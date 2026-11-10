@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Card } from '@cv/shared-ui-card';
-import { PageTitle } from '@cv/shared-ui-design-system';
+import { PageTitle } from '@cv/shared-ui-page';
 import { MatIcon } from '@angular/material/icon';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
