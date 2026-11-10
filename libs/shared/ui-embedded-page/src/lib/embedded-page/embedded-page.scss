@@ -21,6 +21,7 @@
     top: 2rem;
 
     @media (width < 600px) {
+      margin-right: 1rem;
       position: static;
     }
   }
@@ -28,11 +29,13 @@
   &__frame {
     border: none;
     flex: 1;
-    margin: 0 0 -1rem -1rem;
+
+    // margin: 0 0 -1rem -1rem;
 
     // on very short screens the page scrolls rather than squash the report
     min-height: 20rem;
-    width: calc(100% + 2rem);
+
+    // width: calc(100% + 2rem);
   }
 
   // takes the place of the iframe until the user loads it
