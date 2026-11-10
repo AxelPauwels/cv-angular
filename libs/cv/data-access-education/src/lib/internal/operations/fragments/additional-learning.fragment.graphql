@@ -1,4 +1,5 @@
 fragment AdditionalLearningFields on AdditionalLearning {
+  uuid
   name
   url
 }

@@ -1,5 +1,5 @@
 <ul class="ui-skill-list">
-  @for (entry of entries(); track entry.name; let index = $index) {
+  @for (entry of entries(); track entry.id; let index = $index) {
   <li>
     <cv-ui-skill
       [name]="entry.name"

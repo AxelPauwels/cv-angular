@@ -23,18 +23,20 @@ export type SkillCategory =
   | 'TESTING_AND_QUALITY';
 
 export type SkillFieldsFragment = {
+  uuid: string;
   category: SkillCategory;
   icon: string;
-  entries: Array<{ name: string; level: number; icon: string }>;
+  entries: Array<{ uuid: string; name: string; level: number; icon: string }>;
 };
 
 export type SkillsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type SkillsQuery = {
   skills: Array<{
+    uuid: string;
     category: SkillCategory;
     icon: string;
-    entries: Array<{ name: string; level: number; icon: string }>;
+    entries: Array<{ uuid: string; name: string; level: number; icon: string }>;
   }>;
 };
 
@@ -61,9 +63,11 @@ export class TypedDocumentString<TResult, TVariables>
 export const SkillFieldsFragmentDoc = new TypedDocumentString(
   `
     fragment SkillFields on Skill {
+  uuid
   category
   icon
   entries {
+    uuid
     name
     level
     icon
@@ -79,9 +83,11 @@ export const SkillsDocument = new TypedDocumentString(`
   }
 }
     fragment SkillFields on Skill {
+  uuid
   category
   icon
   entries {
+    uuid
     name
     level
     icon

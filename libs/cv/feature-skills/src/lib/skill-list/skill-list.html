@@ -7,7 +7,7 @@
   <p>Could not load skills: {{ store.error()?.message }}</p>
   } @else {
   <div class="skill-list__grid">
-    @for (skill of store.skills(); track skill.category) {
+    @for (skill of store.skills(); track skill.id) {
     <!-- lang reads the language signal: the titles refresh when it changes -->
     <ds-card
       class="skill-list__card"

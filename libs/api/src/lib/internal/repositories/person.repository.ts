@@ -4,6 +4,7 @@ import { hobbyRepository } from './hobby.repository';
 import { languageSkillRepository } from './language-skill.repository';
 
 const person: Person = {
+  uuid: '057a3b0c-7418-4ef8-94b1-5548943990a4',
   firstName: 'Axel',
   lastName: 'Pauwels',
   functionTitle: 'Senior Angular Front-End Developer',

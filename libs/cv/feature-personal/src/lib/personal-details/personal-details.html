@@ -44,8 +44,8 @@
       tagline="t.subheading.personal.languages.description" />
 
     <ul class="personal-details__languages">
-      @for (entry of languages(); track entry.skill.language.isoCode) { @let
-      skill = entry.skill;
+      @for (entry of languages(); track entry.skill.id) { @let skill =
+      entry.skill;
       <li class="personal-details__language">
         <ds-card
           [title]="languageKeys[skill.language.isoCode] | translate"
@@ -82,7 +82,7 @@
       tagline="t.subheading.personal.hobbies-and-interests.description" />
 
     <ul class="personal-details__hobbies">
-      @for (hobby of person.hobbies; track hobby.name) {
+      @for (hobby of person.hobbies; track hobby.id) {
       <li
         class="personal-details__hobby"
         [class.personal-details__hobby--wide]="hobby.comment">

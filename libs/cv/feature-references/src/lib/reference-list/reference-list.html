@@ -94,7 +94,7 @@
       <ul
         class="reference-list__cards"
         [attr.aria-labelledby]="labelled ? id : null">
-        @for (reference of column.references; track reference.name) {
+        @for (reference of column.references; track reference.id) {
         <li class="reference-list__item">
           <ds-card
             class="reference-list__card"

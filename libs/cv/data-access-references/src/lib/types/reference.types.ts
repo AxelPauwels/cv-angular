@@ -1,7 +1,10 @@
 import type { ExperienceCategory } from '@cv/cv-data-access-experience';
 import type { Period } from '@cv/shared-util-types';
 
+export type ReferenceId = string;
+
 export interface Reference {
+  id: ReferenceId;
   name: string;
   /** The employer the reference worked at */
   work: string;
