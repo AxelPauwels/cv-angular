@@ -17,17 +17,33 @@ class Host {
   readonly contentWidth = signal(600);
 }
 
+/**
+ * Resolves once a ResizeObserver created now reports on `element`. Observers are
+ * notified in creation order, so every observer the directive made earlier has
+ * reported by then too.
+ */
+function resizeReported(element: HTMLElement): Promise<void> {
+  return new Promise((resolve) => {
+    const observer = new ResizeObserver(() => {
+      observer.disconnect();
+      resolve();
+    });
+    observer.observe(element);
+  });
+}
+
 describe('ScrollEdges', () => {
   async function render(contentWidth: number) {
     const fixture = TestBed.createComponent(Host);
     fixture.componentInstance.contentWidth.set(contentWidth);
-    await fixture.whenStable();
-    // the ResizeObserver reports after layout
-    await new Promise((resolve) => requestAnimationFrame(resolve));
+    // renders and runs afterNextRender, which creates the directive's observer
     await fixture.whenStable();
     const element = (fixture.nativeElement as HTMLElement).querySelector(
       '[technicalScrollEdges]'
     ) as HTMLElement;
+    // wait for the directive's observer instead of guessing a frame count
+    await resizeReported(element);
+    await fixture.whenStable();
     return { fixture, element };
   }
 
