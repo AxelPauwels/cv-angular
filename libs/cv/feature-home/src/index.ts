@@ -1,1 +1,3 @@
-export { Home } from './lib/home/home';
+import { Home } from './lib/home/home';
+
+export default Home;

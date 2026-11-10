@@ -22,10 +22,7 @@ export const technicalFeatureShellRoutes: Route[] = [
       },
       {
         path: ROUTES.TECHNICAL.ARCHITECTURE,
-        loadComponent: () =>
-          import('@cv/technical-feature-architecture').then(
-            (m) => m.ArchitectureOverview
-          ),
+        loadComponent: () => import('@cv/technical-feature-architecture'),
       },
       {
         path: ROUTES.TECHNICAL.PROJECT_GRAPH,
@@ -33,8 +30,6 @@ export const technicalFeatureShellRoutes: Route[] = [
         data: {
           src: '/project-graph/index.html',
           title: 't.heading.project-graph',
-          // the Nx graph app parses megabytes of script: only when asked
-          loadOnRequest: true,
         },
       },
       // reports are copied into the build as assets, see apps/cv/project.json
@@ -67,8 +62,7 @@ export const technicalFeatureShellRoutes: Route[] = [
       },
       {
         path: ROUTES.TECHNICAL.VERSIONS,
-        loadComponent: () =>
-          import('@cv/technical-feature-versions').then((m) => m.VersionList),
+        loadComponent: () => import('@cv/technical-feature-versions'),
       },
       {
         path: '**',

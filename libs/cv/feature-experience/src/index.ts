@@ -1,1 +1,3 @@
-export { ExperienceList } from './lib/experience-list/experience-list';
+import { ExperienceList } from './lib/experience-list/experience-list';
+
+export default ExperienceList;

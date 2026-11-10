@@ -1,11 +1,21 @@
 import { reflectComponentType, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
-import { provideRouter, Router } from '@angular/router';
+import { provideRouter, Route, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { FeatureToggleService } from '@cv/shared-data-access';
 import { ROUTES } from '@cv/shared-util-routing';
 import { showcaseFeatureShellRoutes } from './lib.routes';
+
+/** The component a route lazy loads: like the router, it takes a module's default export */
+async function loadedComponent(route?: Route): Promise<Type<unknown>> {
+  const loaded = await route?.loadComponent?.();
+  return (
+    loaded && typeof loaded === 'object' && 'default' in loaded
+      ? loaded.default
+      : loaded
+  ) as Type<unknown>;
+}
 
 const SHOWCASE_TOGGLES = [
   'showcase-micro-frontends',
@@ -146,7 +156,7 @@ describe('showcaseFeatureShellRoutes', () => {
     );
 
     // Act
-    const component = (await route?.loadComponent?.()) as Type<unknown>;
+    const component = await loadedComponent(route);
 
     // Assert
     expect(reflectComponentType(component)?.selector).toBe(selector);
@@ -159,9 +169,7 @@ describe('showcaseFeatureShellRoutes', () => {
     );
 
     // Act
-    const components = await Promise.all(
-      pages?.map((route) => route.loadComponent?.()) ?? []
-    );
+    const components = await Promise.all(pages?.map(loadedComponent) ?? []);
 
     // Assert
     expect(components.length).toBeGreaterThan(0);

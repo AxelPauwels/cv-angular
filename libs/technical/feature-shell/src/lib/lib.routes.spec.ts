@@ -1,13 +1,25 @@
+import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
 import {
   provideRouter,
+  Route,
   Router,
   withComponentInputBinding,
 } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { FeatureToggleService } from '@cv/shared-data-access';
 import { technicalFeatureShellRoutes } from './lib.routes';
+
+/** The component a route lazy loads: like the router, it takes a module's default export */
+async function loadedComponent(route?: Route): Promise<Type<unknown>> {
+  const loaded = await route?.loadComponent?.();
+  return (
+    loaded && typeof loaded === 'object' && 'default' in loaded
+      ? loaded.default
+      : loaded
+  ) as Type<unknown>;
+}
 
 // every technical page, so the tests don't depend on the toggle defaults
 const TECHNICAL_PAGES = [
@@ -95,9 +107,7 @@ describe('technicalFeatureShellRoutes', () => {
     );
 
     // Act
-    const components = await Promise.all(
-      pages?.map((route) => route.loadComponent?.()) ?? []
-    );
+    const components = await Promise.all(pages?.map(loadedComponent) ?? []);
 
     // Assert
     expect(components.length).toBeGreaterThan(0);

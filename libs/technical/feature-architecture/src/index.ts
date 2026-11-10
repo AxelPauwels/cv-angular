@@ -1,1 +1,3 @@
-export { ArchitectureOverview } from './lib/architecture-overview/architecture-overview';
+import { ArchitectureOverview } from './lib/architecture-overview/architecture-overview';
+
+export default ArchitectureOverview;

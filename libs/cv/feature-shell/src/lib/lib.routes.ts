@@ -10,32 +10,27 @@ export const cvFeatureShellRoutes: Route[] = [
       { path: '', pathMatch: 'full', redirectTo: ROUTES.CV.HOME },
       {
         path: ROUTES.CV.HOME,
-        loadComponent: () => import('@cv/cv-feature-home').then((m) => m.Home),
+        loadComponent: () => import('@cv/cv-feature-home'),
       },
       {
         path: ROUTES.CV.PERSONAL,
-        loadComponent: () =>
-          import('@cv/cv-feature-personal').then((m) => m.PersonalDetails),
+        loadComponent: () => import('@cv/cv-feature-personal'),
       },
       {
         path: ROUTES.CV.EDUCATION,
-        loadComponent: () =>
-          import('@cv/cv-feature-education').then((m) => m.EducationList),
+        loadComponent: () => import('@cv/cv-feature-education'),
       },
       {
         path: ROUTES.CV.EXPERIENCE,
-        loadComponent: () =>
-          import('@cv/cv-feature-experience').then((m) => m.ExperienceList),
+        loadComponent: () => import('@cv/cv-feature-experience'),
       },
       {
         path: ROUTES.CV.SKILLS,
-        loadComponent: () =>
-          import('@cv/cv-feature-skills').then((m) => m.SkillList),
+        loadComponent: () => import('@cv/cv-feature-skills'),
       },
       {
         path: ROUTES.CV.REFERENCES,
-        loadComponent: () =>
-          import('@cv/cv-feature-references').then((m) => m.ReferenceList),
+        loadComponent: () => import('@cv/cv-feature-references'),
       },
     ],
   },

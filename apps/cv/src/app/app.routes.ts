@@ -5,22 +5,15 @@ import { ROUTES } from '@cv/shared-util-routing';
 export const appRoutes: Routes = [
   {
     path: ROUTES.CV.ROOT,
-    loadChildren: () =>
-      import('@cv/cv-feature-shell').then((m) => m.cvFeatureShellRoutes),
+    loadChildren: () => import('@cv/cv-feature-shell'),
   },
   {
     path: ROUTES.SHOWCASE.ROOT,
-    loadChildren: () =>
-      import('@cv/showcase-feature-shell').then(
-        (m) => m.showcaseFeatureShellRoutes
-      ),
+    loadChildren: () => import('@cv/showcase-feature-shell'),
   },
   {
     path: ROUTES.TECHNICAL.ROOT,
-    loadChildren: () =>
-      import('@cv/technical-feature-shell').then(
-        (m) => m.technicalFeatureShellRoutes
-      ),
+    loadChildren: () => import('@cv/technical-feature-shell'),
   },
   // the feature toggles page (formerly admin) moved into the showcase; old links still find it
   {
