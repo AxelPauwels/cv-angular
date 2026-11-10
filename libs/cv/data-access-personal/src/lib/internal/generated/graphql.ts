@@ -64,6 +64,7 @@ export type PersonalityType =
   | 'ISTP';
 
 export type PersonFieldsFragment = {
+  uuid: string;
   firstName: string;
   lastName: string;
   functionTitle: string;
@@ -80,8 +81,14 @@ export type PersonFieldsFragment = {
     personalityType: PersonalityType;
     children: Array<{ name: string; gender: Gender }>;
   };
-  hobbies: Array<{ name: string; comment: string | null; icon: string }>;
+  hobbies: Array<{
+    uuid: string;
+    name: string;
+    comment: string | null;
+    icon: string;
+  }>;
   languages: Array<{
+    uuid: string;
     isNativeLanguage: boolean;
     spoken: LanguageProficiency;
     written: LanguageProficiency;
@@ -93,6 +100,7 @@ export type PersonQueryVariables = Exact<{ [key: string]: never }>;
 
 export type PersonQuery = {
   person: {
+    uuid: string;
     firstName: string;
     lastName: string;
     functionTitle: string;
@@ -109,8 +117,14 @@ export type PersonQuery = {
       personalityType: PersonalityType;
       children: Array<{ name: string; gender: Gender }>;
     };
-    hobbies: Array<{ name: string; comment: string | null; icon: string }>;
+    hobbies: Array<{
+      uuid: string;
+      name: string;
+      comment: string | null;
+      icon: string;
+    }>;
     languages: Array<{
+      uuid: string;
       isNativeLanguage: boolean;
       spoken: LanguageProficiency;
       written: LanguageProficiency;
@@ -142,6 +156,7 @@ export class TypedDocumentString<TResult, TVariables>
 export const PersonFieldsFragmentDoc = new TypedDocumentString(
   `
     fragment PersonFields on Person {
+  uuid
   firstName
   lastName
   functionTitle
@@ -165,11 +180,13 @@ export const PersonFieldsFragmentDoc = new TypedDocumentString(
     personalityType
   }
   hobbies {
+    uuid
     name
     comment
     icon
   }
   languages {
+    uuid
     isNativeLanguage
     language {
       isoCode
@@ -189,6 +206,7 @@ export const PersonDocument = new TypedDocumentString(`
   }
 }
     fragment PersonFields on Person {
+  uuid
   firstName
   lastName
   functionTitle
@@ -212,11 +230,13 @@ export const PersonDocument = new TypedDocumentString(`
     personalityType
   }
   hobbies {
+    uuid
     name
     comment
     icon
   }
   languages {
+    uuid
     isNativeLanguage
     language {
       isoCode

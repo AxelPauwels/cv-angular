@@ -1,7 +1,9 @@
 fragment SkillFields on Skill {
+  uuid
   category
   icon
   entries {
+    uuid
     name
     level
     icon

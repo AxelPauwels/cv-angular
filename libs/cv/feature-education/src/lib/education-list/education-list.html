@@ -13,7 +13,7 @@
   <ds-timeline
     [label]="categoryKeys[group.category] | translate"
     [headingLevel]="3">
-    @for (education of group.educations; track $index) {
+    @for (education of group.educations; track education.id) {
     <ds-timeline-item
       [start]="education.period.start"
       [end]="education.period.end"
@@ -50,7 +50,7 @@
         [label]="'t.education.hotelschool' | translate"
         [headingLevel]="4"
         [collapsible]="false">
-        @for (education of group.educations; track $index) {
+        @for (education of group.educations; track education.id) {
         <ds-timeline-item
           [start]="education.period.start"
           [end]="education.period.end"
@@ -87,7 +87,7 @@
 
       <ds-card class="education-list__card">
         <ul class="education-list__links">
-          @for (training of store.trainings(); track training.name) {
+          @for (training of store.trainings(); track training.id) {
           <li class="education-list__item">
             <span class="education-list__title">{{ training.name }}</span>
             @if (training.provider) {
@@ -98,8 +98,7 @@
               }}</span
             >
           </li>
-          } @for (learning of store.additionalLearnings(); track learning.name)
-          {
+          } @for (learning of store.additionalLearnings(); track learning.id) {
           <li class="education-list__item">
             @if (isLink(learning.url)) {
             <a
@@ -137,7 +136,7 @@
 
       <ds-card class="education-list__card">
         <ul class="education-list__links">
-          @for (certificate of store.certificates(); track certificate.name) {
+          @for (certificate of store.certificates(); track certificate.id) {
           <li class="education-list__item">
             @if (isLink(certificate.url)) {
             <a

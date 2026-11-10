@@ -22,7 +22,7 @@
     [label]="categoryKeys[group.category] | translate"
     [headingLevel]="3"
     [expandFirst]="first">
-    @for (experience of group.experiences; track $index) {
+    @for (experience of group.experiences; track experience.id) {
     <ds-timeline-item
       [start]="experience.period.start"
       [end]="experience.period.end"

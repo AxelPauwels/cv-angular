@@ -1,4 +1,5 @@
 fragment ExperienceFields on Experience {
+  uuid
   category
   work {
     name

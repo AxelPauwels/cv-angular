@@ -1,5 +1,7 @@
 import type { Period } from '@cv/shared-util-types';
 
+export type ExperienceId = string;
+
 export type ExperienceCategory = 'HORECA' | 'IT';
 
 export interface Work {
@@ -9,6 +11,7 @@ export interface Work {
 }
 
 export interface Experience {
+  id: ExperienceId;
   category: ExperienceCategory;
   work: Work;
   period: Period;

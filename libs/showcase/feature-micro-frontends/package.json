@@ -6,8 +6,8 @@
     "@axel-pauwels/mac-window": "^1.0.0",
     "@cv/shared-ui-federation": "0.0.1",
     "@angular/material": "^22.2.5",
-    "@cv/shared-ui-design-system": "0.0.1",
-    "@cv/shared-ui-card": "0.0.1"
+    "@cv/shared-ui-card": "0.0.1",
+    "@cv/shared-ui-page": "0.0.1"
   },
   "sideEffects": false,
   "private": true

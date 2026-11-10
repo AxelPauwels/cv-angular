@@ -1,3 +1,7 @@
+export type PersonId = string;
+export type HobbyId = string;
+export type LanguageSkillId = string;
+
 /** ISO 3166-1 alpha-2 country codes representing nationality */
 export type NationalityIsoCode =
   'BE' | 'NL' | 'FR' | 'DE' | 'LU' | 'GB' | 'IT' | 'ES' | 'PT' | 'US' | 'CA';
@@ -72,6 +76,7 @@ export interface PersonalInfo {
 }
 
 export interface Hobby {
+  id: HobbyId;
   name: string;
   comment?: string;
   icon: string;
@@ -83,6 +88,7 @@ export interface Language {
 }
 
 export interface LanguageSkill {
+  id: LanguageSkillId;
   isNativeLanguage: boolean;
   language: Language;
   spoken: LanguageProficiency;
@@ -90,6 +96,7 @@ export interface LanguageSkill {
 }
 
 export interface Person {
+  id: PersonId;
   firstName: string;
   lastName: string;
   functionTitle: string;

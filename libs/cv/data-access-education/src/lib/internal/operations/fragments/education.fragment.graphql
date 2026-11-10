@@ -1,4 +1,5 @@
 fragment EducationFields on Education {
+  uuid
   category
   level
   period {

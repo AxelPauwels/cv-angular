@@ -1,4 +1,5 @@
 fragment ReferenceFields on Reference {
+  uuid
   name
   work
   client

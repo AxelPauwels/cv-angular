@@ -83,7 +83,11 @@ describe('EducationService', () => {
     const recurring = trainings
       .value()
       ?.find((training) => training.name === 'NG-BE');
-    expect(recurring).toEqual({ name: 'NG-BE', status: 'RECURRING' });
+    expect(recurring).toEqual({
+      id: expect.any(String),
+      name: 'NG-BE',
+      status: 'RECURRING',
+    });
     for (const training of trainings.value() ?? []) {
       expect(training.provider).not.toBeNull();
       expect(training.year).not.toBeNull();

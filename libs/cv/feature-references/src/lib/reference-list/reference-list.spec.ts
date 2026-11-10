@@ -206,6 +206,7 @@ describe('groupByWork', () => {
     end?: string,
     client?: string
   ): Reference => ({
+    id: name,
     name,
     work,
     client,

@@ -6,12 +6,9 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import {
-  delayedLoading,
-  LoadingSpinner,
-  PageTitle,
-  PageLayout,
-} from '@cv/shared-ui-design-system';
+import { delayedLoading } from '@cv/shared-util-loading';
+import { LoadingSpinner } from '@cv/shared-ui-loading-spinner';
+import { PageTitle, PageLayout } from '@cv/shared-ui-page';
 import { NgTemplateOutlet } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@tolgee/ngx';

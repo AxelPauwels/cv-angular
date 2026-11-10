@@ -1,4 +1,6 @@
+import { reflectComponentType, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { ROUTES } from '@cv/shared-util-routing';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { inBrowserGraphqlInterceptor } from '@cv/shared-data-access';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
@@ -65,6 +67,51 @@ describe('cvFeatureShellRoutes', () => {
         (link) => link.getAttribute('aria-label') ?? link.textContent?.trim()
       )
     ).toEqual(['Home', 'Personal', 'Experience', 'Skills']);
+  });
+
+  it('marks the opened page as the active sub item', async () => {
+    // Arrange
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter(cvFeatureShellRoutes),
+        provideI18nTesting(),
+        provideHttpClient(withInterceptors([inBrowserGraphqlInterceptor])),
+      ],
+    });
+
+    // Act
+    const harness = await RouterTestingHarness.create('/education');
+    // routerLinkActive marks the tab after the navigation has rendered
+    await harness.fixture.whenStable();
+    const element: HTMLElement = harness.fixture.nativeElement;
+
+    // Assert
+    // tab links with a tab panel mark the open page as the selected tab
+    const active = element.querySelector(
+      'ds-sub-navbar > nav a[aria-selected="true"]'
+    );
+    expect(TestBed.inject(Router).url).toBe('/education');
+    expect(active?.textContent?.trim()).toBe('Education');
+  });
+
+  it.each([
+    [ROUTES.CV.HOME, 'cv-home'],
+    [ROUTES.CV.PERSONAL, 'cv-personal-details'],
+    [ROUTES.CV.EDUCATION, 'cv-education-list'],
+    [ROUTES.CV.EXPERIENCE, 'cv-experience-list'],
+    [ROUTES.CV.SKILLS, 'cv-skill-list'],
+    [ROUTES.CV.REFERENCES, 'cv-reference-list'],
+  ])('lazy loads the "%s" page as <%s>', async (path, selector) => {
+    // Arrange
+    const route = cvFeatureShellRoutes[0].children?.find(
+      (child) => child.path === path
+    );
+
+    // Act
+    const component = (await route?.loadComponent?.()) as Type<unknown>;
+
+    // Assert
+    expect(reflectComponentType(component)?.selector).toBe(selector);
   });
 
   it('lazy loads a standalone component for every page', async () => {

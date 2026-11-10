@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { NavItem } from '@cv/shared-ui-design-system';
+import { NavItem } from '@cv/shared-ui-layout';
 import { FeatureToggleId, FeatureToggleService } from '@cv/shared-data-access';
 import { ROUTES } from '@cv/shared-util-routing';
 

@@ -4,6 +4,7 @@ import type { Reference } from '../../types/reference.types';
 
 export function toReference(dto: ReferenceFieldsFragment): Reference {
   return {
+    id: dto.uuid,
     name: dto.name,
     work: dto.work,
     client: dto.client ?? undefined,

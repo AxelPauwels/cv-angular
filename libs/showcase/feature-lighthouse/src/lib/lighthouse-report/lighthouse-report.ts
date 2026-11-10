@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { TranslatePipe } from '@tolgee/ngx';
 import { LanguageService } from '@cv/shared-data-access-i18n';
-import { PageTitle } from '@cv/shared-ui-design-system';
+import { PageTitle } from '@cv/shared-ui-page';
 import {
   LIGHTHOUSE_CATEGORIES,
   LIGHTHOUSE_RUN,

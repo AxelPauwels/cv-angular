@@ -102,6 +102,53 @@ describe('build info stores', () => {
     expect(store.rules()).toEqual([]);
   });
 
+  it('is loading, with no versions yet, until the answer arrives', () => {
+    // Arrange
+    const store = TestBed.inject(VersionStore);
+
+    // Act
+    TestBed.tick();
+
+    // Assert
+    TestBed.inject(HttpTestingController).expectOne(
+      '/build-info/versions.json'
+    );
+    expect(store.isLoading()).toBe(true);
+    expect(store.packages()).toEqual([]);
+    expect(store.error()).toBeUndefined();
+  });
+
+  it('is loading, with no projects or rules yet, until the answer arrives', () => {
+    // Arrange
+    const store = TestBed.inject(ArchitectureStore);
+
+    // Act
+    TestBed.tick();
+
+    // Assert
+    TestBed.inject(HttpTestingController).expectOne(
+      '/build-info/architecture.json'
+    );
+    expect(store.isLoading()).toBe(true);
+    expect(store.projects()).toEqual([]);
+    expect(store.rules()).toEqual([]);
+  });
+
+  it('fetches the build info only once, however often it is injected', () => {
+    // Arrange
+    const first = TestBed.inject(VersionStore);
+
+    // Act
+    const second = TestBed.inject(VersionStore);
+    TestBed.tick();
+
+    // Assert
+    expect(second).toBe(first);
+    TestBed.inject(HttpTestingController).expectOne(
+      '/build-info/versions.json'
+    );
+  });
+
   it('fetches the versions again on reload', async () => {
     // Arrange
     const store = TestBed.inject(VersionStore);

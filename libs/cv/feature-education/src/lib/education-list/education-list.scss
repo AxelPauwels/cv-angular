@@ -110,3 +110,7 @@
     font-weight: 400;
   }
 }
+
+ds-timeline ::ng-deep .timeline__content {
+  border-left: 1px solid var(--mat-sys-outline-variant);
+}

@@ -1,5 +1,10 @@
 import type { Period } from '@cv/shared-util-types';
 
+export type EducationId = string;
+export type CertificateId = string;
+export type TrainingId = string;
+export type AdditionalLearningId = string;
+
 export type EducationLevel =
   'SECONDARY_EDUCATION' | 'HIGH_SCHOOL' | 'CUSTOM_COURSE';
 
@@ -12,6 +17,7 @@ export interface School {
 }
 
 export interface Education {
+  id: EducationId;
   category: EducationCategory;
   level: EducationLevel;
   specialization: string;
@@ -21,6 +27,7 @@ export interface Education {
 }
 
 export interface Certificate {
+  id: CertificateId;
   name: string;
   /** Who issued it, e.g. Linux Professional Institute */
   issuer: string;
@@ -32,6 +39,7 @@ export type TrainingStatus = 'COMPLETED' | 'ONGOING' | 'RECURRING';
 
 /** A course, training or conference */
 export interface Training {
+  id: TrainingId;
   name: string;
   /** Who organised or taught it */
   provider?: string;
@@ -41,6 +49,7 @@ export interface Training {
 }
 
 export interface AdditionalLearning {
+  id: AdditionalLearningId;
   name: string;
   url: string;
 }

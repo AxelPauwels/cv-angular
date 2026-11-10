@@ -1,4 +1,5 @@
 fragment PersonFields on Person {
+  uuid
   firstName
   lastName
   functionTitle
@@ -22,11 +23,13 @@ fragment PersonFields on Person {
     personalityType
   }
   hobbies {
+    uuid
     name
     comment
     icon
   }
   languages {
+    uuid
     isNativeLanguage
     language {
       isoCode
