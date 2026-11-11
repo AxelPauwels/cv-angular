@@ -17,6 +17,7 @@ export function toEducation({
   ...dto
 }: EducationFieldsFragment): Education {
   return {
+    id: dto.uuid,
     category: dto.category,
     level: dto.level,
     specialization: dto.specialization,
@@ -27,21 +28,24 @@ export function toEducation({
 }
 
 export function toCertificate({
+  uuid,
   name,
   url,
   issuer,
   year,
 }: CertificateFieldsFragment): Certificate {
-  return { name, issuer, year, ...(url ? { url } : {}) };
+  return { id: uuid, name, issuer, year, ...(url ? { url } : {}) };
 }
 
 export function toTraining({
+  uuid,
   name,
   provider,
   year,
   status,
 }: TrainingFieldsFragment): Training {
   return {
+    id: uuid,
     name,
     status,
     ...(provider ? { provider } : {}),
@@ -52,5 +56,5 @@ export function toTraining({
 export function toAdditionalLearning(
   dto: AdditionalLearningFieldsFragment
 ): AdditionalLearning {
-  return { name: dto.name, url: dto.url };
+  return { id: dto.uuid, name: dto.name, url: dto.url };
 }

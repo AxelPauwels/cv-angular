@@ -1,7 +1,9 @@
 {
   "name": "@cv/shared-util-loading",
   "version": "0.0.1",
-  "peerDependencies": {},
+  "peerDependencies": {
+    "@angular/core": "~22.2.0"
+  },
   "sideEffects": false,
   "private": true
 }

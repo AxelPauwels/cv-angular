@@ -17,6 +17,11 @@ export interface TourStep {
    * highlights this instead of `target`; it closes the menu on other steps
    */
   menuTarget?: string;
+  /**
+   * On phones (when the hamburger menu is shown) the step is centered without
+   * a spotlight, for targets that sit far off screen there (e.g. the footer)
+   */
+  centerOnPhones?: boolean;
   /** Short name, shown on the back/next buttons of the neighbouring steps */
   labelKey: string;
   titleKey: string;
@@ -29,7 +34,7 @@ export interface TourStep {
 
 type StepOptions = Pick<
   TourStep,
-  'target' | 'menuTarget' | 'toggles' | 'someToggles'
+  'target' | 'menuTarget' | 'centerOnPhones' | 'toggles' | 'someToggles'
 >;
 
 function step(id: string, route: string, options: StepOptions = {}): TourStep {
@@ -83,8 +88,10 @@ export const DEFAULT_TOUR_STEPS: readonly TourStep[] = [
     ...domainTargets('showcase'),
     toggles: ['main-menu-showcase'],
   }),
+  // on phones the contact links are at the very bottom of the page
   step('contact', ROUTES.CV.PERSONAL_ROUTER_LINK, {
     target: '[data-tour="contact"] a',
+    centerOnPhones: true,
   }),
   step('finish', ROUTES.CV.HOME_ROUTER_LINK),
 ];

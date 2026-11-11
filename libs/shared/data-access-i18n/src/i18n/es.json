@@ -61,8 +61,8 @@
       "cv": "CV",
       "download-cv": "Descargar CV",
       "email": "Correo electrónico",
-      "load-report": "Cargar informe",
       "loading": "Cargando",
+      "load-report": "Cargar informe",
       "ok": "OK",
       "pdf": "PDF",
       "reset": "Restablecer el valor predeterminado",
@@ -179,7 +179,7 @@
       }
     },
     "feature-toggles": {
-      "count": "{on} de {total} activados",
+      "count": "{on}/{total} ACTIVADOS",
       "hidden-notice": "La página características ya no aparece en el menú. Puedes abrirla en /showcase/feature-toggles haciendo clic en «Axel Pauwels» en el pie de página.",
       "linked": {
         "off": "{item} también desactivado.",
@@ -441,7 +441,7 @@
     "tour": {
       "back": "Atrás",
       "counter": "{current} / {total}",
-      "exit": "Salir del recorrido",
+      "exit": "Detener",
       "finish": "Terminar",
       "loading": "Cargando el recorrido…",
       "next": "Siguiente",
@@ -474,7 +474,7 @@
         },
         "finish": {
           "label": "Terminar",
-          "text": "Gracias por hacer el recorrido. Disfruta explorando, puedes volver a iniciar el recorrido desde la página de inicio cuando quieras.",
+          "text": "Gracias por hacer el recorrido.",
           "title": "¡Eso es todo!"
         },
         "fonts": {

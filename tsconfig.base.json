@@ -21,9 +21,6 @@
       "@cv/technical-feature-shell": [
         "./libs/technical/feature-shell/src/index.ts"
       ],
-      "@cv/shared-ui-design-system": [
-        "./libs/shared/ui-design-system/src/index.ts"
-      ],
       "@cv/shared-ui-federation": ["./libs/shared/ui-federation/src/index.ts"],
       "@cv/shared-data-access": ["./libs/shared/data-access/src/index.ts"],
       "@cv/shared-util-routing": ["./libs/shared/util-routing/src/index.ts"],
@@ -88,6 +85,14 @@
       ],
       "@cv/showcase-feature-lighthouse": [
         "./libs/showcase/feature-lighthouse/src/index.ts"
+      ],
+      "@cv/shared-ui-layout": ["./libs/shared/ui-layout/src/index.ts"],
+      "@cv/shared-ui-page": ["./libs/shared/ui-page/src/index.ts"],
+      "@cv/shared-ui-loading-spinner": [
+        "./libs/shared/ui-loading-spinner/src/index.ts"
+      ],
+      "@cv/shared-ui-embedded-page": [
+        "./libs/shared/ui-embedded-page/src/index.ts"
       ]
     }
   },

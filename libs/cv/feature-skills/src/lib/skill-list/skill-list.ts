@@ -1,10 +1,7 @@
 import { Component, inject } from '@angular/core';
-import {
-  delayedLoading,
-  LoadingSpinner,
-  PageTitle,
-  PageLayout,
-} from '@cv/shared-ui-design-system';
+import { delayedLoading } from '@cv/shared-util-loading';
+import { LoadingSpinner } from '@cv/shared-ui-loading-spinner';
+import { PageTitle, PageLayout } from '@cv/shared-ui-page';
 import { TranslatePipe } from '@tolgee/ngx';
 import { SkillCategory, SkillStore } from '@cv/cv-data-access-skills';
 import { Card } from '@cv/shared-ui-card';

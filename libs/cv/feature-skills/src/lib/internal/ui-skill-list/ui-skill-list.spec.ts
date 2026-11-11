@@ -9,8 +9,8 @@ import { UiSkillList } from './ui-skill-list';
 })
 class Host {
   readonly entries: SkillEntry[] = [
-    { name: 'Angular', level: 5, icon: 'angular' },
-    { name: 'React', level: 3, icon: 'react' },
+    { id: 'angular', name: 'Angular', level: 5, icon: 'angular' },
+    { id: 'react', name: 'React', level: 3, icon: 'react' },
   ];
 }
 

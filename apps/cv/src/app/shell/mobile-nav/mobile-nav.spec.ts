@@ -5,7 +5,7 @@ import {
   FeatureToggleService,
   saveFeatureTogglesForTesting,
 } from '@cv/shared-data-access';
-import { NavItem } from '@cv/shared-ui-design-system';
+import { NavItem } from '@cv/shared-ui-layout';
 import { ROUTES } from '@cv/shared-util-routing';
 import { MobileNav } from './mobile-nav';
 
@@ -14,6 +14,9 @@ const DOMAINS: NavItem[] = [
   { labelKey: 't.nav.technical', path: ROUTES.TECHNICAL.ROOT },
   { labelKey: 't.nav.showcase', path: ROUTES.SHOWCASE.ROOT },
 ];
+
+// the pages come from three lazy loaded feature shells, which can take a while on a cold run
+const MENU_LOADED = { timeout: 5000 };
 
 describe('MobileNav', () => {
   beforeEach(() => {
@@ -64,7 +67,7 @@ describe('MobileNav', () => {
     await vi.waitFor(async () => {
       await fixture.whenStable();
       expect(element.querySelector('ds-nav-accordion')).toBeTruthy();
-    });
+    }, MENU_LOADED);
 
     // Assert
     expect(element.querySelector('[role="status"]')).toBeNull();
@@ -79,7 +82,7 @@ describe('MobileNav', () => {
     await vi.waitFor(async () => {
       await fixture.whenStable();
       expect(element.querySelector('ds-nav-accordion')).toBeTruthy();
-    });
+    }, MENU_LOADED);
 
     // Act
     TestBed.inject(FeatureToggleService).change('technical-versions', false);
@@ -100,7 +103,7 @@ describe('MobileNav', () => {
     await vi.waitFor(async () => {
       await fixture.whenStable();
       expect(element.querySelector('ds-nav-accordion')).toBeTruthy();
-    });
+    }, MENU_LOADED);
 
     // Assert
     expect(groups(element)).toEqual(['Home']);

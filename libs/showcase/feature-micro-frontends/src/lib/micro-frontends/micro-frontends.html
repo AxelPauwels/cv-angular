@@ -1,112 +1,115 @@
-<ds-page-title title="t.heading.micro-frontends" />
+<ds-page-layout>
+  <ds-page-title title="t.heading.micro-frontends" />
 
-<div class="micro-frontends__grid">
-  <ds-card
-    class="micro-frontends__card"
-    title="Micro-frontend: <cv-mfe>"
-    subtitle="Loaded at runtime, from its own deployment"
-    icon="cloud_download"
-    iconFont="material">
-    <div class="micro-frontends__demo">
-      <shared-wrapper [config]="cvMfe" />
-    </div>
+  <div class="micro-frontends__grid">
+    <ds-card
+      class="micro-frontends__card"
+      title="Micro-frontend: <cv-mfe>"
+      subtitle="Loaded at runtime, from its own deployment"
+      icon="cloud_download"
+      iconFont="material">
+      <div class="micro-frontends__demo">
+        <shared-wrapper [config]="cvMfe" />
+      </div>
 
-    <p>
-      A separate Angular app with its own repository and deployment. This app
-      does not contain its code: it is loaded in the browser, when this page
-      opens.
-    </p>
-    <ol class="micro-frontends__steps">
-      <li>
-        At startup, <code>initFederation()</code> reads
-        <code>federation.manifest.json</code>, which maps the name
-        <code>cv-mfe</code> to the remote's <code>remoteEntry.json</code>.
-      </li>
-      <li>
-        Here, <code>Wrapper</code> (<code>&#64;cv/shared-ui-federation</code>)
-        calls <code>loadRemoteModule('cv-mfe', './web-components')</code>.
-      </li>
-      <li>
-        That module registers the custom element <code>&lt;cv-mfe&gt;</code>
-        (Angular Elements), and the wrapper adds it to the page.
-      </li>
-      <li>
-        Angular and RxJS are shared with this app as singletons (Native
-        Federation), so they are downloaded once.
-      </li>
-    </ol>
+      <p>
+        A separate Angular app with its own repository and deployment. This app
+        does not contain its code: it is loaded in the browser, when this page
+        opens.
+      </p>
+      <ol class="micro-frontends__steps">
+        <li>
+          At startup, <code>initFederation()</code> reads
+          <code>federation.manifest.json</code>, which maps the name
+          <code>cv-mfe</code> to the remote's <code>remoteEntry.json</code>.
+        </li>
+        <li>
+          Here, <code>Wrapper</code> (<code>&#64;cv/shared-ui-federation</code>)
+          calls <code>loadRemoteModule('cv-mfe', './web-components')</code>.
+        </li>
+        <li>
+          That module registers the custom element <code>&lt;cv-mfe&gt;</code>
+          (Angular Elements), and the wrapper adds it to the page.
+        </li>
+        <li>
+          Angular and RxJS are shared with this app as singletons (Native
+          Federation), so they are downloaded once.
+        </li>
+      </ol>
 
-    <mat-chip-set class="micro-frontends__chips" aria-label="Technologies">
-      <mat-chip>Native Federation</mat-chip>
-      <mat-chip>Angular Elements</mat-chip>
-      <mat-chip>Separate deployment</mat-chip>
-    </mat-chip-set>
+      <mat-chip-set class="micro-frontends__chips" aria-label="Technologies">
+        <mat-chip>Native Federation</mat-chip>
+        <mat-chip>Angular Elements</mat-chip>
+        <mat-chip>Separate deployment</mat-chip>
+      </mat-chip-set>
 
-    <a
-      dsCardActions
-      matButton="outlined"
-      [href]="remoteUrl"
-      target="_blank"
-      rel="noopener">
-      Open the remote app
-      <mat-icon iconPositionEnd fontSet="material-symbols-outlined">
-        open_in_new
-      </mat-icon>
-      <span class="cdk-visually-hidden">({{ remoteUrl }}, new tab)</span>
-    </a>
-  </ds-card>
+      <a
+        dsCardActions
+        matButton="outlined"
+        [href]="remoteUrl"
+        target="_blank"
+        rel="noopener">
+        Open the remote app
+        <mat-icon iconPositionEnd fontSet="material-symbols-outlined">
+          open_in_new
+        </mat-icon>
+        <span class="cdk-visually-hidden">({{ remoteUrl }}, new tab)</span>
+      </a>
+    </ds-card>
 
-  <ds-card
-    class="micro-frontends__card"
-    title="Component library: <lib-mac-window>"
-    subtitle="Bundled at build time, from this repository"
-    icon="package_2"
-    iconFont="material">
-    <div class="micro-frontends__demo">
-      <lib-mac-window class="micro-frontends__window">
-        <p>Anything placed here is projected into the window.</p>
-      </lib-mac-window>
-    </div>
+    <ds-card
+      class="micro-frontends__card"
+      title="Component library: <lib-mac-window>"
+      subtitle="Bundled at build time, from this repository"
+      icon="package_2"
+      iconFont="material">
+      <div class="micro-frontends__demo">
+        <lib-mac-window class="micro-frontends__window">
+          <p style="padding-left: 0.5rem">My npm package from www.npmjs.com</p>
+        </lib-mac-window>
+      </div>
 
-    <p>
-      The opposite approach, for comparison: the component ships with this app
-      instead of being loaded from another deployment.
-    </p>
-    <ol class="micro-frontends__steps">
-      <li>
-        <code>MacWindow</code> lives in this repository, in
-        <code>packages/mac-window</code>.
-      </li>
-      <li>
-        It is published to npm as <code>&#64;axel-pauwels/mac-window</code>.
-      </li>
-      <li>
-        This app installs it and bundles it at build time, so nothing is loaded
-        at runtime.
-      </li>
-      <li>
-        It also ships as the web component <code>&lt;mac-window&gt;</code>
-        (<code>&#64;axel-pauwels/mac-window/element</code>), for any framework.
-      </li>
-    </ol>
+      <p>
+        The opposite approach, for comparison: the component ships with this app
+        instead of being loaded from another deployment.
+      </p>
+      <ol class="micro-frontends__steps">
+        <li>
+          <code>MacWindow</code> lives in this repository, in
+          <code>packages/mac-window</code>.
+        </li>
+        <li>
+          It is published to npm as <code>&#64;axel-pauwels/mac-window</code>.
+        </li>
+        <li>
+          This app installs it and bundles it at build time, so nothing is
+          loaded at runtime.
+        </li>
+        <li>
+          It also ships as the web component <code>&lt;mac-window&gt;</code>
+          (<code>&#64;axel-pauwels/mac-window/element</code>), for any
+          framework.
+        </li>
+      </ol>
 
-    <mat-chip-set class="micro-frontends__chips" aria-label="Technologies">
-      <mat-chip>Angular library</mat-chip>
-      <mat-chip>Web component</mat-chip>
-      <mat-chip>npm</mat-chip>
-    </mat-chip-set>
+      <mat-chip-set class="micro-frontends__chips" aria-label="Technologies">
+        <mat-chip>Angular library</mat-chip>
+        <mat-chip>Web component</mat-chip>
+        <mat-chip>npm</mat-chip>
+      </mat-chip-set>
 
-    <a
-      dsCardActions
-      matButton="outlined"
-      [href]="npmUrl"
-      target="_blank"
-      rel="noopener">
-      View on npm
-      <mat-icon iconPositionEnd fontSet="material-symbols-outlined">
-        open_in_new
-      </mat-icon>
-      <span class="cdk-visually-hidden">(new tab)</span>
-    </a>
-  </ds-card>
-</div>
+      <a
+        dsCardActions
+        matButton="outlined"
+        [href]="npmUrl"
+        target="_blank"
+        rel="noopener">
+        View on npm
+        <mat-icon iconPositionEnd fontSet="material-symbols-outlined">
+          open_in_new
+        </mat-icon>
+        <span class="cdk-visually-hidden">(new tab)</span>
+      </a>
+    </ds-card>
+  </div>
+</ds-page-layout>

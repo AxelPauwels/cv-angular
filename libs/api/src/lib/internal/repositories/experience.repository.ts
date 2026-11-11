@@ -3,6 +3,7 @@ import { fromDate, fromYear } from '../utils/date';
 
 const horecaExperiences: Experience[] = [
   {
+    uuid: '62cf8ed0-2f1a-4ba6-a965-577e7cb7b490',
     category: 'HORECA',
     stack: [],
     isInternship: false,
@@ -18,6 +19,7 @@ const horecaExperiences: Experience[] = [
     },
   },
   {
+    uuid: '6a7cbcd1-44c1-47c1-b2ae-297ca0f3859f',
     category: 'HORECA',
     stack: [],
     isInternship: false,
@@ -33,6 +35,7 @@ const horecaExperiences: Experience[] = [
     },
   },
   {
+    uuid: '67c3555d-a416-405e-b52b-095db820920f',
     category: 'HORECA',
     stack: [],
     isInternship: false,
@@ -48,6 +51,7 @@ const horecaExperiences: Experience[] = [
     },
   },
   {
+    uuid: 'edcbd212-8253-41ff-891c-36e8a38da0fc',
     category: 'HORECA',
     stack: [],
     isInternship: false,
@@ -63,6 +67,7 @@ const horecaExperiences: Experience[] = [
     },
   },
   {
+    uuid: '6e929ade-cc0a-4eef-be26-34a1141334e8',
     category: 'HORECA',
     stack: [],
     isInternship: false,
@@ -78,6 +83,7 @@ const horecaExperiences: Experience[] = [
     },
   },
   {
+    uuid: '351bd364-25d6-4f6e-8bb9-857b52e69010',
     category: 'HORECA',
     stack: [],
     isInternship: false,
@@ -93,6 +99,7 @@ const horecaExperiences: Experience[] = [
     },
   },
   {
+    uuid: '8d87c332-bb07-4203-bfd1-2f5eeba7aefe',
     category: 'HORECA',
     stack: [],
     isInternship: false,
@@ -108,6 +115,7 @@ const horecaExperiences: Experience[] = [
     },
   },
   {
+    uuid: '9eb94128-d00f-4227-9099-ed10f3ed24b6',
     category: 'HORECA',
     stack: [],
     isInternship: true,
@@ -122,6 +130,7 @@ const horecaExperiences: Experience[] = [
     },
   },
   {
+    uuid: 'd390af68-f8a6-41e4-957d-2cb01f89c30e',
     category: 'HORECA',
     stack: [],
     isInternship: true,
@@ -136,6 +145,7 @@ const horecaExperiences: Experience[] = [
     },
   },
   {
+    uuid: '8f9418e2-1208-48f1-bc35-f82812c5e22e',
     category: 'HORECA',
     stack: [],
     isInternship: true,
@@ -150,6 +160,7 @@ const horecaExperiences: Experience[] = [
     },
   },
   {
+    uuid: 'a03b5d26-a851-4bf3-8f76-c53219795f9a',
     category: 'HORECA',
     stack: [],
     isInternship: true,
@@ -167,6 +178,7 @@ const horecaExperiences: Experience[] = [
 
 const itExperiences: Experience[] = [
   {
+    uuid: '306f7048-e1c0-48a0-a4a3-a85b80345c0c',
     category: 'IT',
     isInternship: false,
     period: {
@@ -204,6 +216,7 @@ const itExperiences: Experience[] = [
     ],
   },
   {
+    uuid: 'e847b20a-fb95-4f70-a41b-5f0fc782601f',
     category: 'IT',
     isInternship: false,
     period: {
@@ -235,6 +248,7 @@ const itExperiences: Experience[] = [
     ],
   },
   {
+    uuid: '6f97e3a0-8d7a-4a74-b6bd-2f798db045f9',
     category: 'IT',
     isInternship: false,
     period: {
@@ -264,6 +278,7 @@ const itExperiences: Experience[] = [
     ],
   },
   {
+    uuid: 'db6e9c29-646d-486e-a609-19747b01bb40',
     category: 'IT',
     isInternship: false,
     period: {
@@ -294,6 +309,7 @@ const itExperiences: Experience[] = [
     ],
   },
   {
+    uuid: 'e7c41efa-e6b6-447d-84bf-7d88c848f99b',
     category: 'IT',
     isInternship: true,
     stack: [],

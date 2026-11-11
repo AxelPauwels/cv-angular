@@ -1,11 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
-import {
-  delayedLoading,
-  LoadingSpinner,
-  PageTitle,
-  SectionHeading,
-  PageLayout,
-} from '@cv/shared-ui-design-system';
+import { delayedLoading } from '@cv/shared-util-loading';
+import { LoadingSpinner } from '@cv/shared-ui-loading-spinner';
+import { PageTitle, SectionHeading, PageLayout } from '@cv/shared-ui-page';
 import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@tolgee/ngx';
 import { Card } from '@cv/shared-ui-card';

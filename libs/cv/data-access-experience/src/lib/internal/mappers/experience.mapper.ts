@@ -4,6 +4,7 @@ import type { Experience } from '../../types/experience.types';
 
 export function toExperience(dto: ExperienceFieldsFragment): Experience {
   return {
+    id: dto.uuid,
     category: dto.category,
     work: { ...dto.work },
     period: toPeriod(dto.period),

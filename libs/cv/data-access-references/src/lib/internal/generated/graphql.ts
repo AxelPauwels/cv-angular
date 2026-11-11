@@ -10,6 +10,7 @@ import type { DocumentTypeDecoration } from '@graphql-typed-document-node/core';
 export type ExperienceCategory = 'HORECA' | 'IT';
 
 export type ReferenceFieldsFragment = {
+  uuid: string;
   name: string;
   work: string;
   client: string | null;
@@ -22,6 +23,7 @@ export type ReferencesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type ReferencesQuery = {
   references: Array<{
+    uuid: string;
     name: string;
     work: string;
     client: string | null;
@@ -54,6 +56,7 @@ export class TypedDocumentString<TResult, TVariables>
 export const ReferenceFieldsFragmentDoc = new TypedDocumentString(
   `
     fragment ReferenceFields on Reference {
+  uuid
   name
   work
   client
@@ -74,6 +77,7 @@ export const ReferencesDocument = new TypedDocumentString(`
   }
 }
     fragment ReferenceFields on Reference {
+  uuid
   name
   work
   client

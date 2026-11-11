@@ -1,4 +1,4 @@
-import { NavItem } from '@cv/shared-ui-design-system';
+import { NavItem } from '@cv/shared-ui-layout';
 import { FeatureToggleId } from '@cv/shared-data-access';
 import { ROUTES } from '@cv/shared-util-routing';
 

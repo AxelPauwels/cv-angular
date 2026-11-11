@@ -111,6 +111,61 @@
 
   // --- Tables: an outlined, rounded container that scrolls sideways on its own ---
 
+  // A shadow on each edge that has more table behind it (see ScrollEdges), so a
+  // table wider than the screen shows that it scrolls sideways
+  &__frame {
+    --architecture-edge-shadow: color-mix(
+      in srgb,
+      var(--mat-sys-on-surface) 30%,
+      transparent
+    );
+
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      inset-block: 1px; // inside the outline
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      transition: opacity 150ms ease-out;
+      width: 2.5rem;
+      z-index: 1;
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    &::before {
+      background: linear-gradient(
+        to right,
+        var(--architecture-edge-shadow),
+        transparent
+      );
+      border-end-start-radius: var(--mat-sys-corner-large);
+      border-start-start-radius: var(--mat-sys-corner-large);
+      left: 1px;
+    }
+
+    &::after {
+      background: linear-gradient(
+        to left,
+        var(--architecture-edge-shadow),
+        transparent
+      );
+      border-end-end-radius: var(--mat-sys-corner-large);
+      border-start-end-radius: var(--mat-sys-corner-large);
+      right: 1px;
+    }
+
+    &:has(> .scroll-edges--start)::before,
+    &:has(> .scroll-edges--end)::after {
+      opacity: 1;
+    }
+  }
+
   &__scroll {
     border: 1px solid var(--mat-sys-outline-variant);
     border-radius: var(--mat-sys-corner-large);

@@ -10,6 +10,7 @@ import type { DocumentTypeDecoration } from '@graphql-typed-document-node/core';
 export type ExperienceCategory = 'HORECA' | 'IT';
 
 export type ExperienceFieldsFragment = {
+  uuid: string;
   category: ExperienceCategory;
   isInternship: boolean;
   jobDescriptions: Array<string> | null;
@@ -22,6 +23,7 @@ export type ExperiencesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type ExperiencesQuery = {
   experiences: Array<{
+    uuid: string;
     category: ExperienceCategory;
     isInternship: boolean;
     jobDescriptions: Array<string> | null;
@@ -54,6 +56,7 @@ export class TypedDocumentString<TResult, TVariables>
 export const ExperienceFieldsFragmentDoc = new TypedDocumentString(
   `
     fragment ExperienceFields on Experience {
+  uuid
   category
   work {
     name
@@ -78,6 +81,7 @@ export const ExperiencesDocument = new TypedDocumentString(`
   }
 }
     fragment ExperienceFields on Experience {
+  uuid
   category
   work {
     name

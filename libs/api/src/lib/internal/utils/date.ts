@@ -14,5 +14,14 @@ export function fromDate(date: `${number}-${number}-${number}`): Date {
   if (!DATE.test(date)) {
     throw new Error(`Invalid date: ${date}. Expected "YYYY-MM-DD".`);
   }
-  return new Date(`${date}T00:00:00Z`);
+  const parsed = new Date(`${date}T00:00:00Z`);
+  // Date rolls 2021-02-30 over to March 2 and gives up on month 13: a real
+  // day reads back as itself
+  if (
+    Number.isNaN(parsed.getTime()) ||
+    parsed.toISOString().slice(0, 10) !== date
+  ) {
+    throw new Error(`Invalid date: ${date}. No such day.`);
+  }
+  return parsed;
 }

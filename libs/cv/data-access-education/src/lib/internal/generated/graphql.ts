@@ -18,9 +18,14 @@ export type TrainingStatus =
   /** Attended every year, e.g. a conference */
   | 'RECURRING';
 
-export type AdditionalLearningFieldsFragment = { name: string; url: string };
+export type AdditionalLearningFieldsFragment = {
+  uuid: string;
+  name: string;
+  url: string;
+};
 
 export type CertificateFieldsFragment = {
+  uuid: string;
   name: string;
   url: string | null;
   issuer: string;
@@ -28,6 +33,7 @@ export type CertificateFieldsFragment = {
 };
 
 export type EducationFieldsFragment = {
+  uuid: string;
   category: ExperienceCategory;
   level: EducationLevel;
   degree: string | null;
@@ -37,6 +43,7 @@ export type EducationFieldsFragment = {
 };
 
 export type TrainingFieldsFragment = {
+  uuid: string;
   name: string;
   provider: string | null;
   year: number | null;
@@ -46,13 +53,14 @@ export type TrainingFieldsFragment = {
 export type AdditionalLearningsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type AdditionalLearningsQuery = {
-  additionalLearnings: Array<{ name: string; url: string }>;
+  additionalLearnings: Array<{ uuid: string; name: string; url: string }>;
 };
 
 export type CertificatesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type CertificatesQuery = {
   certificates: Array<{
+    uuid: string;
     name: string;
     url: string | null;
     issuer: string;
@@ -64,6 +72,7 @@ export type EducationsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type EducationsQuery = {
   educations: Array<{
+    uuid: string;
     category: ExperienceCategory;
     level: EducationLevel;
     degree: string | null;
@@ -77,6 +86,7 @@ export type TrainingsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type TrainingsQuery = {
   trainings: Array<{
+    uuid: string;
     name: string;
     provider: string | null;
     year: number | null;
@@ -107,6 +117,7 @@ export class TypedDocumentString<TResult, TVariables>
 export const AdditionalLearningFieldsFragmentDoc = new TypedDocumentString(
   `
     fragment AdditionalLearningFields on AdditionalLearning {
+  uuid
   name
   url
 }
@@ -116,6 +127,7 @@ export const AdditionalLearningFieldsFragmentDoc = new TypedDocumentString(
 export const CertificateFieldsFragmentDoc = new TypedDocumentString(
   `
     fragment CertificateFields on Certificate {
+  uuid
   name
   url
   issuer
@@ -127,6 +139,7 @@ export const CertificateFieldsFragmentDoc = new TypedDocumentString(
 export const EducationFieldsFragmentDoc = new TypedDocumentString(
   `
     fragment EducationFields on Education {
+  uuid
   category
   level
   period {
@@ -146,6 +159,7 @@ export const EducationFieldsFragmentDoc = new TypedDocumentString(
 export const TrainingFieldsFragmentDoc = new TypedDocumentString(
   `
     fragment TrainingFields on Training {
+  uuid
   name
   provider
   year
@@ -161,6 +175,7 @@ export const AdditionalLearningsDocument = new TypedDocumentString(`
   }
 }
     fragment AdditionalLearningFields on AdditionalLearning {
+  uuid
   name
   url
 }`) as unknown as TypedDocumentString<
@@ -174,6 +189,7 @@ export const CertificatesDocument = new TypedDocumentString(`
   }
 }
     fragment CertificateFields on Certificate {
+  uuid
   name
   url
   issuer
@@ -189,6 +205,7 @@ export const EducationsDocument = new TypedDocumentString(`
   }
 }
     fragment EducationFields on Education {
+  uuid
   category
   level
   period {
@@ -212,6 +229,7 @@ export const TrainingsDocument = new TypedDocumentString(`
   }
 }
     fragment TrainingFields on Training {
+  uuid
   name
   provider
   year

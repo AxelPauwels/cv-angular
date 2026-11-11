@@ -1,0 +1,1128 @@
+<!doctype html>
+<!-- TEMP dev page: preview of all GIFs in assets/gifs. Delete before release. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>GIF preview</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 16px;
+        font-family: system-ui, sans-serif;
+        background: #f4f4f5;
+        color: #18181b;
+      }
+      h1 {
+        font-size: 1.25rem;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      }
+      li {
+        border-radius: 8px;
+        text-align: center;
+      }
+      img {
+        width: 75%;
+        height: auto;
+        display: block;
+        margin-top: -25px;
+      }
+      span {
+        display: block;
+        margin-top: -25px;
+        font-size: 0.875rem;
+      }
+
+      /* Walking: crosses the bottom of the viewport, offscreen right -> offscreen left */
+      body {
+        padding-bottom: 260px;
+        overflow-x: hidden;
+      }
+      .walker {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 240px;
+        height: 240px;
+        pointer-events: none;
+        animation: walk-across 15s linear infinite;
+      }
+      @keyframes walk-across {
+        from {
+          transform: translateX(100vw);
+        }
+        to {
+          transform: translateX(-100%);
+        }
+      }
+      /* Hard landing: drops from above the viewport to the bottom-left and stays there */
+      .lander {
+        position: fixed;
+        left: 16px;
+        bottom: 0;
+        width: 240px;
+        height: 240px;
+        pointer-events: none;
+        transform: translateY(-100vh);
+      }
+      .lander.is-falling {
+        animation: drop-in 1.4s cubic-bezier(0.55, 0, 1, 0.45) both;
+      }
+      .lander > * {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      @keyframes drop-in {
+        from {
+          transform: translateY(-100vh);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      /* Parkour run: the vault GIF hops a row of crates across a stage (drawn on a canvas, frame-synced) */
+      .stage {
+        display: block;
+        width: 100%;
+        height: 220px;
+        background: #e4e4e7;
+        border-radius: 8px;
+      }
+      .stage-label {
+        margin: 16px 0 6px;
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .walker {
+          animation: none;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .lander,
+        .lander.is-falling {
+          animation: none;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>GIF preview (temporary)</h1>
+    <canvas
+      class="stage"
+      role="img"
+      aria-label="Character vaulting over a row of crates"></canvas>
+    <script>
+      // Parkour run: draw Vault-Over-Obstacle frame by frame (ImageDecoder) so each jump lines up with a crate.
+      (async () => {
+        const SRC = 'assets/gifs/Vault-Over-Obstacle-512x512.gif';
+        const canvas = document.querySelector('.stage');
+        if (!('ImageDecoder' in window)) {
+          canvas.replaceWith(
+            Object.assign(new Image(220, 220), {
+              src: SRC,
+              alt: 'Vault over obstacle',
+            })
+          );
+          return;
+        }
+
+        const dec = new ImageDecoder({
+          data: await (await fetch(SRC)).arrayBuffer(),
+          type: 'image/gif',
+        });
+        await dec.tracks.ready;
+        const count = dec.tracks.selectedTrack.frameCount;
+        const starts = []; // start time (ms) of each frame within one loop
+        let loopMs = 0;
+        for (let i = 0; i < count; i++) {
+          const { image } = await dec.decode({ frameIndex: i });
+          starts.push(loopMs);
+          loopMs += image.duration / 1000;
+          image.close();
+        }
+        const frameAt = (ms) => {
+          let i = 0;
+          while (i + 1 < count && starts[i + 1] <= ms) i++;
+          return i;
+        };
+
+        // Geometry in CSS px. Measured from the GIF: feet on y=378, body centre x=253, airborne ~820-1400ms
+        // (frames 25-42); the foot steps on and the hand plants at ~40px height, so the crate is tall and narrow.
+        const SIZE = 200,
+          K = SIZE / 512,
+          FOOT_Y = 378,
+          CENTER_X = 253;
+        const AIR_START = 820,
+          AIR_END = 1400;
+        const HOP = 110; // distance covered per vault
+        const CRATE_AHEAD = 62; // crate centre ahead of the take-off spot
+        const CRATE_W = 28,
+          CRATE_H = 32,
+          START_X = -70;
+        const ease = (p) => p * p * (3 - 2 * p);
+        const ctx = canvas.getContext('2d');
+        let W = 0,
+          H = 0;
+
+        const resize = () => {
+          const dpr = devicePixelRatio || 1;
+          W = canvas.clientWidth;
+          H = canvas.clientHeight;
+          canvas.width = Math.round(W * dpr);
+          canvas.height = Math.round(H * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        };
+
+        const hopsPerPass = () => Math.ceil((W - START_X + 80) / HOP);
+
+        const draw = (frame, x) => {
+          const ground = H - 24;
+          ctx.clearRect(0, 0, W, H);
+          ctx.fillStyle = '#a1a1aa';
+          ctx.fillRect(0, ground, W, 2);
+          for (let i = 0; i < hopsPerPass(); i++) {
+            const cx = START_X + i * HOP + CRATE_AHEAD,
+              left = cx - CRATE_W / 2,
+              top = ground - CRATE_H;
+            ctx.fillStyle = '#b45309';
+            ctx.fillRect(left, top, CRATE_W, CRATE_H);
+            ctx.strokeStyle = '#78350f';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(left + 1, top + 1, CRATE_W - 2, CRATE_H - 2);
+            ctx.beginPath();
+            ctx.moveTo(left + 2, top + 2);
+            ctx.lineTo(left + CRATE_W - 2, top + CRATE_H - 2);
+            ctx.stroke();
+          }
+          ctx.drawImage(
+            frame,
+            x - CENTER_X * K,
+            ground - FOOT_Y * K,
+            SIZE,
+            SIZE
+          );
+        };
+
+        const render = async (t) => {
+          const passMs = hopsPerPass() * loopMs;
+          const tp = t % passMs,
+            hop = Math.floor(tp / loopMs),
+            phase = tp % loopMs;
+          const p = Math.min(
+            1,
+            Math.max(0, (phase - AIR_START) / (AIR_END - AIR_START))
+          );
+          const { image } = await dec.decode({ frameIndex: frameAt(phase) });
+          draw(image, START_X + hop * HOP + HOP * ease(p));
+          image.close();
+        };
+
+        resize();
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          // Still scene: standing in front of the first fully visible crate.
+          const { image } = await dec.decode({ frameIndex: 0 });
+          draw(image, START_X + 2 * HOP);
+          image.close();
+          return;
+        }
+
+        let visible = true,
+          busy = false,
+          lastFrame = -1,
+          dirty = true;
+        new IntersectionObserver(([e]) => {
+          visible = e.isIntersecting;
+        }).observe(canvas);
+        new ResizeObserver(() => {
+          resize();
+          dirty = true;
+        }).observe(canvas);
+        const t0 = performance.now();
+        const tick = (now) => {
+          requestAnimationFrame(tick);
+          if (!visible || busy) return;
+          const t = now - t0,
+            f = frameAt(t % loopMs);
+          if (f === lastFrame && !dirty) return; // only redraw when the GIF frame changes
+          busy = true;
+          lastFrame = f;
+          dirty = false;
+          render(t).finally(() => {
+            busy = false;
+          });
+        };
+        requestAnimationFrame(tick);
+      })();
+    </script>
+    <p class="stage-label">
+      Variation A: walk, cross-fade into the vault, cross-fade back
+    </p>
+    <canvas
+      class="stage stage--course"
+      data-mode="fade"
+      role="img"
+      aria-label="Character walks in, blends into a vault over a block in the middle and blends back into walking"></canvas>
+    <p class="stage-label">Variation B: walk, stop, vault, stop, walk</p>
+    <canvas
+      class="stage stage--course"
+      data-mode="stop"
+      role="img"
+      aria-label="Character walks in, stops, vaults over a block in the middle, stops and walks on"></canvas>
+    <script>
+      // Walk -> vault -> walk: Walking-Right walks to a block in the middle, Vault-Over-Obstacle clears it,
+      // then the walk continues offscreen. Both GIFs walk/vault in place, so the page moves the character.
+      // data-mode="fade": true cross-fade between clips. data-mode="stop": hard cuts on standing poses with a pause.
+      (async () => {
+        const canvases = [...document.querySelectorAll('.stage--course')];
+        if (!('ImageDecoder' in window)) {
+          canvases.forEach((c) => {
+            c.hidden = true;
+            c.previousElementSibling.hidden = true;
+          });
+          return;
+        }
+
+        const loadClip = async (src) => {
+          const dec = new ImageDecoder({
+            data: await (await fetch(src)).arrayBuffer(),
+            type: 'image/gif',
+          });
+          await dec.tracks.ready;
+          const count = dec.tracks.selectedTrack.frameCount,
+            starts = [];
+          let total = 0;
+          for (let i = 0; i < count; i++) {
+            const { image } = await dec.decode({ frameIndex: i });
+            starts.push(total);
+            total += image.duration / 1000;
+            image.close();
+          }
+          const frameAt = (ms) => {
+            ms = ((ms % total) + total) % total;
+            let i = 0;
+            while (i + 1 < count && starts[i + 1] <= ms) i++;
+            return i;
+          };
+          return { dec, starts, total, frameAt };
+        };
+        const [walk, vault] = await Promise.all([
+          loadClip('assets/gifs/Walking-Right-512x512.gif'),
+          loadClip('assets/gifs/Vault-Over-Obstacle-512x512.gif'),
+        ]);
+
+        // Measured from the GIFs (512px frame coordinates).
+        const SIZE = 200,
+          K = SIZE / 512;
+        const WALK = { clip: walk, footY: 358, cx: 262 };
+        const VAULT = { clip: vault, footY: 378, cx: 253 };
+        const WALK_SPEED = 0.185 * K; // px/ms, matches the planted foot so it doesn't slide
+        const PASS_FRAME = 14; // legs passing = closest walk pose to standing
+        const STRIDE_MS = walk.starts[45] - walk.starts[14];
+        const AIR_START = 820,
+          AIR_END = 1400,
+          HOP = 110,
+          CRATE_AHEAD = 62,
+          CRATE_W = 28,
+          CRATE_H = 32;
+        const PAUSE = 800;
+        const MODES = {
+          // Skip the vault's idle start/end and dissolve between the clips. Around each dissolve the clips
+          // slow down to `slow` speed (over `ramp` ms for the walk, `vRamp` ms for the vault) and speed up again.
+          fade: {
+            vStart: vault.starts[8],
+            vEnd: vault.starts[58],
+            fade: 450,
+            slow: 0.3,
+            ramp: 700,
+            vRamp: 400,
+          },
+          // Play the vault from standing (frame 0) to standing (frame 80) and hold those poses; hard cuts.
+          stop: {
+            vStart: vault.starts[0],
+            vEnd: vault.starts[80],
+            fade: 0,
+            hold: 450,
+          },
+        };
+        const ease = (p) => p * p * (3 - 2 * p);
+        const clamp = (v) => Math.min(1, Math.max(0, v));
+
+        // Playback-speed track: segments of real duration `dur` whose speed goes linearly from r0 to r1.
+        // Returns the clip time reached after `s` real ms. Position is derived from clip time, so feet never slide.
+        const track = (segs) => (s) => {
+          let clip = 0;
+          for (const { dur, r0, r1 } of segs) {
+            const d = Math.min(s, dur);
+            if (d <= 0) break;
+            clip +=
+              r0 === r1 ? d * r0 : d * r0 + ((r1 - r0) * d * d) / (2 * dur);
+            s -= dur;
+          }
+          return clip;
+        };
+
+        const createCourse = (canvas) => {
+          const mode = MODES[canvas.dataset.mode];
+          const ctx = canvas.getContext('2d');
+          const fig = document.createElement('canvas'); // figures are composited here first (see draw)
+          const fctx = fig.getContext('2d');
+          let W = 0,
+            H = 0,
+            plan;
+
+          const layout = () => {
+            const dpr = devicePixelRatio || 1;
+            W = canvas.clientWidth;
+            H = canvas.clientHeight;
+            canvas.width = fig.width = Math.round(W * dpr);
+            canvas.height = fig.height = Math.round(H * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            fctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            const crateX = W / 2,
+              takeoff = crateX - CRATE_AHEAD,
+              land = takeoff + HOP;
+            // Walk in for whole strides so we arrive at the take-off spot exactly on the passing pose.
+            const strides = Math.ceil(
+              (takeoff + 120) / (WALK_SPEED * STRIDE_MS)
+            );
+            if (mode.slow) {
+              const { fade, slow, ramp, vRamp } = mode;
+              const rampClip = (dur) => (dur * (1 + slow)) / 2; // clip time covered while ramping 1 <-> slow
+              // Walk in: full speed, slow down, then dissolve into the vault at slow speed.
+              const walkInClip = strides * STRIDE_MS;
+              const walkFull = walkInClip - rampClip(ramp) - fade * slow;
+              const walkIn = track([
+                { dur: walkFull, r0: 1, r1: 1 },
+                { dur: ramp, r0: 1, r1: slow },
+                { dur: fade, r0: slow, r1: slow },
+              ]);
+              const t1 = walkFull + ramp + fade; // dissolve into the vault done, at take-off spot
+              // Vault: starts slow inside the dissolve, full speed through the jump, slows into the dissolve out.
+              const vFull =
+                mode.vEnd - mode.vStart - 2 * (fade * slow + rampClip(vRamp));
+              const vault = track([
+                { dur: fade, r0: slow, r1: slow },
+                { dur: vRamp, r0: slow, r1: 1 },
+                { dur: vFull, r0: 1, r1: 1 },
+                { dur: vRamp, r0: 1, r1: slow },
+                { dur: fade, r0: slow, r1: slow },
+              ]);
+              const tvs = t1 - fade; // vault starts (fading in)
+              const tl = tvs + 2 * fade + 2 * vRamp + vFull; // vault done (faded out)
+              // Walk out: starts slow inside the dissolve, then speeds up to full speed.
+              const walkOut = track([
+                { dur: fade, r0: slow, r1: slow },
+                { dur: ramp, r0: slow, r1: 1 },
+                { dur: Infinity, r0: 1, r1: 1 },
+              ]);
+              const tws = tl - fade; // walk out starts (fading in)
+              const outClip = (W + 120 - land) / WALK_SPEED;
+              const t3 =
+                tws + fade + ramp + (outClip - fade * slow - rampClip(ramp));
+              plan = {
+                crateX,
+                takeoff,
+                land,
+                walkInClip,
+                walkIn,
+                vault,
+                walkOut,
+                t1,
+                tvs,
+                tl,
+                tws,
+                t3,
+                total: t3 + PAUSE,
+              };
+              return;
+            }
+            const t1 = strides * STRIDE_MS; // arrive at take-off spot
+            const tv = t1 + mode.hold; // vault starts
+            const tl = tv + (mode.vEnd - mode.vStart); // vault done (landed, standing)
+            const t2 = tl + mode.hold; // walk resumes
+            const t3 = t2 + (W + 120 - land) / WALK_SPEED;
+            plan = {
+              crateX,
+              takeoff,
+              land,
+              t1,
+              tv,
+              tl,
+              t2,
+              t3,
+              total: t3 + PAUSE,
+            };
+          };
+
+          const vaultX = (vt) =>
+            plan.takeoff +
+            HOP * ease(clamp((vt - AIR_START) / (AIR_END - AIR_START)));
+
+          // Which clip frames to draw at time t (two layers while cross-fading).
+          // Variation A: slow-down -> eased dissolve -> slow start, both into and out of the vault.
+          const layersFade = (t) => {
+            const { takeoff, land, walkInClip, t1, tvs, tl, tws, t3 } = plan;
+            const passMs = walk.starts[PASS_FRAME];
+            const fade = mode.fade;
+            const walkInAt = () => {
+              const c = plan.walkIn(t);
+              return {
+                ...WALK,
+                f: walk.frameAt(passMs - walkInClip + c),
+                x: takeoff - WALK_SPEED * (walkInClip - c),
+              };
+            };
+            const walkOutAt = () => {
+              const c = plan.walkOut(t - tws);
+              return {
+                ...WALK,
+                f: walk.frameAt(passMs + c),
+                x: land + WALK_SPEED * c,
+              };
+            };
+            const vaultAt = () => {
+              const vt = mode.vStart + plan.vault(t - tvs);
+              return { ...VAULT, f: vault.frameAt(vt), x: vaultX(vt) };
+            };
+            if (t < tvs) return [{ ...walkInAt(), a: 1 }];
+            if (t < t1) {
+              const w = walkInAt(),
+                a = ease((t - tvs) / fade);
+              return [
+                { ...w, a: 1 - a },
+                { ...vaultAt(), x: w.x, a },
+              ]; // vault pose sits exactly on the walker
+            }
+            if (t < tws) return [{ ...vaultAt(), a: 1 }];
+            if (t < tl) {
+              const w = walkOutAt(),
+                a = ease((t - tws) / fade);
+              return [
+                { ...vaultAt(), x: w.x, a: 1 - a },
+                { ...w, a },
+              ];
+            }
+            if (t < t3) return [{ ...walkOutAt(), a: 1 }];
+            return []; // offscreen pause before the next pass
+          };
+
+          const layersAt = (t) => {
+            if (mode.slow) return layersFade(t);
+            const { takeoff, land, t1, tv, tl, t2, t3 } = plan;
+            const passMs = walk.starts[PASS_FRAME];
+            const walkIn = {
+              ...WALK,
+              f: walk.frameAt(passMs - t1 + t),
+              x: takeoff - WALK_SPEED * (t1 - t),
+              a: 1,
+            };
+            if (t < t1) return [walkIn];
+            if (t < tv)
+              return [
+                { ...VAULT, f: vault.frameAt(mode.vStart), x: takeoff, a: 1 },
+              ]; // stopped, standing
+            if (t < tl) {
+              const vt = mode.vStart + (t - tv);
+              const a = mode.fade ? clamp((t - tv) / mode.fade) : 1;
+              const layers = [
+                { ...VAULT, f: vault.frameAt(vt), x: vaultX(vt), a },
+              ];
+              if (a < 1)
+                layers.unshift({
+                  ...WALK,
+                  f: PASS_FRAME,
+                  x: takeoff,
+                  a: 1 - a,
+                });
+              return layers;
+            }
+            if (t < t2)
+              return [{ ...VAULT, f: vault.frameAt(mode.vEnd), x: land, a: 1 }]; // landed, standing
+            if (t < t3) {
+              const a = mode.fade ? clamp((t - t2) / mode.fade) : 1;
+              const x = land + WALK_SPEED * (t - t2);
+              const layers = [
+                { ...WALK, f: walk.frameAt(passMs + (t - t2)), x, a },
+              ];
+              // The fading-out landing pose travels with the walk, so the two don't drift apart into a double figure.
+              if (a < 1)
+                layers.unshift({
+                  ...VAULT,
+                  f: vault.frameAt(mode.vEnd),
+                  x,
+                  a: 1 - a,
+                });
+              return layers;
+            }
+            return []; // offscreen pause before the next pass
+          };
+
+          const render = async (t) => {
+            const layers = layersAt(t % plan.total);
+            const frames = await Promise.all(
+              layers.map((l) => l.clip.dec.decode({ frameIndex: l.f }))
+            );
+            // Additive ('lighter') blending of a and 1-a gives a true dissolve: where both figures overlap the
+            // body stays fully opaque, instead of dipping to ~75% opacity (the flicker) with normal alpha.
+            fctx.clearRect(0, 0, W, H);
+            fctx.globalCompositeOperation = 'lighter';
+            const ground = H - 24;
+            layers.forEach((l, i) => {
+              fctx.globalAlpha = l.a;
+              fctx.drawImage(
+                frames[i].image,
+                l.x - l.cx * K,
+                ground - l.footY * K,
+                SIZE,
+                SIZE
+              );
+              frames[i].image.close();
+            });
+            fctx.globalAlpha = 1;
+            fctx.globalCompositeOperation = 'source-over';
+
+            const left = plan.crateX - CRATE_W / 2,
+              top = ground - CRATE_H;
+            ctx.clearRect(0, 0, W, H);
+            ctx.fillStyle = '#a1a1aa';
+            ctx.fillRect(0, ground, W, 2);
+            ctx.fillStyle = '#b45309';
+            ctx.fillRect(left, top, CRATE_W, CRATE_H);
+            ctx.strokeStyle = '#78350f';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(left + 1, top + 1, CRATE_W - 2, CRATE_H - 2);
+            ctx.drawImage(fig, 0, 0, W, H);
+          };
+
+          layout();
+          return { canvas, layout, layersAt, render, plan: () => plan };
+        };
+
+        const courses = canvases.map(createCourse);
+        if (new URLSearchParams(location.search).has('debug'))
+          window.courses = courses; // dev hook for stills
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          courses.forEach((c) => c.render(c.plan().t1 - 1)); // still: standing just before the block
+          return;
+        }
+
+        for (const course of courses) {
+          let visible = true,
+            busy = false,
+            lastKey = '';
+          new IntersectionObserver(([e]) => {
+            visible = e.isIntersecting;
+          }).observe(course.canvas);
+          new ResizeObserver(() => {
+            course.layout();
+            lastKey = '';
+          }).observe(course.canvas);
+          const t0 = performance.now();
+          const tick = (now) => {
+            requestAnimationFrame(tick);
+            if (!visible || busy) return;
+            const t = (now - t0) % course.plan().total;
+            const key = course
+              .layersAt(t)
+              .map((l) => `${l.f}:${Math.round(l.x)}:${l.a.toFixed(2)}`)
+              .join('|');
+            if (key === lastKey) return;
+            busy = true;
+            lastKey = key;
+            course.render(t).finally(() => {
+              busy = false;
+            });
+          };
+          requestAnimationFrame(tick);
+        }
+      })();
+    </script>
+    <p class="stage-label">
+      Carrying a crate: Injured-Walk-Right, left to right
+    </p>
+    <canvas
+      class="stage stage--carry"
+      role="img"
+      aria-label="Character slowly carries a heavy crate across the stage with both hands"></canvas>
+    <script>
+      // Injured-Walk-Right walks in place, hunched with both hands at knee height. The page moves him across
+      // and draws a crate that follows his hands every frame; his hands are redrawn on top so they grip it.
+      (async () => {
+        const canvas = document.querySelector('.stage--carry');
+        if (!('ImageDecoder' in window)) {
+          canvas.hidden = true;
+          canvas.previousElementSibling.hidden = true;
+          return;
+        }
+
+        const dec = new ImageDecoder({
+          data: await (
+            await fetch('assets/gifs/Injured-Walk-Right-512x512.gif')
+          ).arrayBuffer(),
+          type: 'image/gif',
+        });
+        await dec.tracks.ready;
+        const count = dec.tracks.selectedTrack.frameCount,
+          starts = [];
+        let loopMs = 0;
+        for (let i = 0; i < count; i++) {
+          const { image } = await dec.decode({ frameIndex: i });
+          starts.push(loopMs);
+          loopMs += image.duration / 1000;
+          image.close();
+        }
+        const frameAt = (ms) => {
+          ms %= loopMs;
+          let i = 0;
+          while (i + 1 < count && starts[i + 1] <= ms) i++;
+          return i;
+        };
+
+        // Hand position per frame (512px frame coords), measured from skin pixels at knee height,
+        // gaps filled and smoothed over 7 frames.
+        const HANDS = [
+          [270, 301],
+          [266, 301],
+          [263, 300],
+          [259, 300],
+          [256, 300],
+          [254, 300],
+          [252, 301],
+          [251, 301],
+          [251, 301],
+          [251, 302],
+          [252, 302],
+          [253, 302],
+          [254, 302],
+          [255, 302],
+          [257, 301],
+          [260, 301],
+          [263, 300],
+          [266, 300],
+          [269, 299],
+          [272, 298],
+          [276, 297],
+          [279, 297],
+          [281, 296],
+          [283, 296],
+          [284, 295],
+          [284, 295],
+          [283, 295],
+          [282, 295],
+          [281, 295],
+          [281, 295],
+          [281, 295],
+          [280, 295],
+          [280, 295],
+          [279, 295],
+          [278, 295],
+          [277, 296],
+          [276, 296],
+          [275, 297],
+          [274, 298],
+          [273, 298],
+          [273, 299],
+          [272, 299],
+          [272, 299],
+          [272, 299],
+          [272, 299],
+          [272, 298],
+          [272, 298],
+          [272, 297],
+          [273, 296],
+          [274, 296],
+          [275, 295],
+          [277, 294],
+          [279, 294],
+          [281, 293],
+          [283, 293],
+          [286, 292],
+          [288, 292],
+          [290, 292],
+          [291, 292],
+          [291, 292],
+          [291, 292],
+          [291, 292],
+          [290, 292],
+          [289, 292],
+          [288, 293],
+          [287, 293],
+          [285, 293],
+          [284, 294],
+          [283, 295],
+          [281, 295],
+          [280, 296],
+          [279, 297],
+          [277, 297],
+          [276, 298],
+          [275, 299],
+          [275, 299],
+          [274, 299],
+          [274, 299],
+          [273, 299],
+          [273, 299],
+          [274, 298],
+          [274, 297],
+          [275, 296],
+          [275, 295],
+          [277, 295],
+          [278, 294],
+          [279, 294],
+          [281, 293],
+          [283, 293],
+          [286, 292],
+          [288, 292],
+          [291, 292],
+          [293, 291],
+          [294, 291],
+          [296, 291],
+          [296, 291],
+          [296, 291],
+          [296, 291],
+          [295, 291],
+          [294, 291],
+          [293, 292],
+          [292, 292],
+          [290, 293],
+          [289, 294],
+          [288, 294],
+          [286, 295],
+          [285, 296],
+          [284, 297],
+          [283, 298],
+          [282, 299],
+          [282, 300],
+          [281, 300],
+          [281, 300],
+          [280, 300],
+          [280, 299],
+          [280, 298],
+          [281, 297],
+          [281, 295],
+          [282, 294],
+          [284, 293],
+          [285, 292],
+          [288, 291],
+          [290, 291],
+          [292, 290],
+          [294, 290],
+          [296, 290],
+          [298, 289],
+          [299, 289],
+          [300, 289],
+          [300, 290],
+          [299, 290],
+          [298, 290],
+          [297, 291],
+          [295, 291],
+          [293, 292],
+          [291, 292],
+          [289, 293],
+          [288, 293],
+          [286, 294],
+          [284, 294],
+          [282, 295],
+          [280, 295],
+          [279, 296],
+          [277, 296],
+          [277, 297],
+          [276, 298],
+          [276, 298],
+          [276, 299],
+          [275, 299],
+          [275, 299],
+          [275, 299],
+          [275, 299],
+          [276, 298],
+          [276, 297],
+          [277, 296],
+          [277, 295],
+          [279, 294],
+          [280, 293],
+          [282, 293],
+          [283, 292],
+          [285, 292],
+          [286, 291],
+          [288, 291],
+          [289, 291],
+          [290, 291],
+          [290, 291],
+          [290, 291],
+          [289, 291],
+          [289, 291],
+          [288, 291],
+          [287, 292],
+          [285, 292],
+          [284, 292],
+          [284, 293],
+          [283, 294],
+          [282, 295],
+          [281, 296],
+          [281, 297],
+          [281, 298],
+          [281, 299],
+          [280, 299],
+          [280, 300],
+          [280, 300],
+          [279, 301],
+          [277, 301],
+          [276, 301],
+          [273, 301],
+        ];
+        const SIZE = 200,
+          K = SIZE / 512,
+          FOOT_Y = 355,
+          CENTER_X = 270;
+        const SPEED = 0.072 * K; // px/ms, matches the planted foot of this slow, heavy walk
+        const BOX_W = 78,
+          BOX_H = 44,
+          GRIP = 12; // crate in frame px; its top edge sits GRIP px above the hands
+        const PAUSE = 800;
+
+        // Hands-only overlay per frame: the skin pixels around the hands, so they can be drawn over the crate.
+        const HAND_BOX = { w: 120, h: 44, above: 40 };
+        const work = new OffscreenCanvas(512, 512),
+          wctx = work.getContext('2d', { willReadFrequently: true });
+        const handCache = new Map();
+        const handsLayer = (f, image) => {
+          if (handCache.has(f)) return handCache.get(f);
+          const [hx, hy] = HANDS[f],
+            sx = hx - HAND_BOX.w / 2,
+            sy = hy - HAND_BOX.above;
+          wctx.clearRect(0, 0, 512, 512);
+          wctx.drawImage(image, 0, 0);
+          const img = wctx.getImageData(sx, sy, HAND_BOX.w, HAND_BOX.h),
+            d = img.data;
+          for (let i = 0; i < d.length; i += 4) {
+            const skin =
+              d[i + 3] > 120 &&
+              d[i] > 140 &&
+              d[i] > d[i + 1] + 20 &&
+              d[i + 1] > d[i + 2] &&
+              d[i + 1] > 80;
+            if (!skin) d[i + 3] = 0;
+          }
+          const layer = new OffscreenCanvas(HAND_BOX.w, HAND_BOX.h);
+          layer.getContext('2d').putImageData(img, 0, 0);
+          const entry = { layer, sx, sy };
+          handCache.set(f, entry);
+          return entry;
+        };
+
+        const ctx = canvas.getContext('2d');
+        let W = 0,
+          H = 0,
+          total = 0;
+        const START_X = -90;
+        const layout = () => {
+          const dpr = devicePixelRatio || 1;
+          W = canvas.clientWidth;
+          H = canvas.clientHeight;
+          canvas.width = Math.round(W * dpr);
+          canvas.height = Math.round(H * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          total = (W + 90 - START_X) / SPEED + PAUSE;
+        };
+
+        const stateAt = (t) => {
+          t %= total;
+          const x = START_X + SPEED * t;
+          return x > W + 90 ? null : { f: frameAt(t), x };
+        };
+
+        const render = async (t) => {
+          const s = stateAt(t);
+          // Decode BEFORE clearing: clearing first and awaiting the decode lets the browser paint an empty stage (flicker).
+          const image = s
+            ? (await dec.decode({ frameIndex: s.f })).image
+            : null;
+          const ground = H - 24;
+          ctx.clearRect(0, 0, W, H);
+          ctx.fillStyle = '#a1a1aa';
+          ctx.fillRect(0, ground, W, 2);
+          if (!s) return;
+          // Everything below is drawn in the GIF's own 512px coordinates, scaled into place.
+          ctx.save();
+          ctx.translate(s.x - CENTER_X * K, ground - FOOT_Y * K);
+          ctx.scale(K, K);
+          ctx.drawImage(image, 0, 0);
+          const [hx, hy] = HANDS[s.f],
+            bx = hx - BOX_W / 2,
+            by = hy - GRIP;
+          ctx.fillStyle = '#b45309';
+          ctx.fillRect(bx, by, BOX_W, BOX_H);
+          ctx.strokeStyle = '#78350f';
+          ctx.lineWidth = 5;
+          ctx.strokeRect(bx + 2.5, by + 2.5, BOX_W - 5, BOX_H - 5);
+          ctx.beginPath();
+          ctx.moveTo(bx + 5, by + 5);
+          ctx.lineTo(bx + BOX_W - 5, by + BOX_H - 5);
+          ctx.stroke();
+          const hands = handsLayer(s.f, image);
+          ctx.drawImage(hands.layer, hands.sx, hands.sy);
+          ctx.restore();
+          image.close();
+        };
+
+        layout();
+        if (new URLSearchParams(location.search).has('debug'))
+          Object.assign(window, {
+            carryRender: render,
+            carryTotal: () => total,
+            carrySpeed: SPEED,
+          });
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          render((W / 2 - START_X) / SPEED);
+          return;
+        }
+
+        let visible = true,
+          busy = false,
+          lastKey = '';
+        new IntersectionObserver(([e]) => {
+          visible = e.isIntersecting;
+        }).observe(canvas);
+        new ResizeObserver(() => {
+          layout();
+          lastKey = '';
+        }).observe(canvas);
+        const t0 = performance.now();
+        const tick = (now) => {
+          requestAnimationFrame(tick);
+          if (!visible || busy) return;
+          const s = stateAt(now - t0);
+          const key = s ? `${s.f}:${Math.round(s.x * 2)}` : 'empty';
+          if (key === lastKey) return;
+          busy = true;
+          lastKey = key;
+          render(now - t0).finally(() => {
+            busy = false;
+          });
+        };
+        requestAnimationFrame(tick);
+      })();
+    </script>
+    <ul id="list"></ul>
+    <img
+      class="walker"
+      src="assets/gifs/Walking-Left-512x512.gif"
+      alt="Walking"
+      width="512"
+      height="512" />
+    <div class="lander" role="img" aria-label="Hard landing"></div>
+    <script>
+      // Hard landing: fall on the first frame, then play the GIF exactly once and stay on its last frame.
+      (async () => {
+        const lander = document.querySelector('.lander');
+        const bytes = new Uint8Array(
+          await (
+            await fetch('assets/gifs/Hard-Landing-Front-512x512.gif')
+          ).arrayBuffer()
+        );
+
+        // Strip the NETSCAPE2.0 loop extension (19 bytes) so the browser plays the GIF only once.
+        const tag = new TextEncoder().encode('NETSCAPE2.0');
+        let at = -1;
+        for (let i = 0; i < bytes.length - tag.length && at < 0; i++) {
+          if (
+            bytes[i] === 0x21 &&
+            bytes[i + 1] === 0xff &&
+            bytes[i + 2] === 0x0b &&
+            tag.every((b, j) => bytes[i + 3 + j] === b)
+          )
+            at = i;
+        }
+        const parts =
+          at < 0 ? [bytes] : [bytes.subarray(0, at), bytes.subarray(at + 19)];
+        const blob = new Blob(parts, { type: 'image/gif' });
+
+        // First frame as a still poster while falling (canvas draws an animated image's first frame).
+        const source = new Image();
+        source.src = URL.createObjectURL(blob);
+        await source.decode();
+        const poster = document.createElement('canvas');
+        poster.width = poster.height = 512;
+        poster.getContext('2d').drawImage(source, 0, 0);
+        lander.append(poster);
+
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; // stay on the still frame
+
+        // Decode the playing copy up front so the swap is instant; a fresh URL starts playback at frame 1 when shown.
+        const gif = new Image(512, 512);
+        gif.alt = '';
+        gif.src = URL.createObjectURL(blob);
+        await gif.decode();
+
+        const PLAY_LEAD_MS = 50; // start the GIF this long before the fall ends
+        lander.classList.add('is-falling');
+        const fallMs = lander.getAnimations()[0].effect.getTiming().duration; // from the CSS (1.4s)
+        setTimeout(
+          () => poster.replaceWith(gif),
+          Math.max(0, fallMs - PLAY_LEAD_MS)
+        );
+      })();
+    </script>
+    <script>
+      const gifs = [
+        'Cast-Spell-Forward-512x512.gif',
+        'Cheering-512x512.gif',
+        'Clapping-512x512.gif',
+        'Climb-Ladder-Up-left-512x512.gif',
+        'Climb-Ladder-Up-right-512x512.gif',
+        'Crawl-Left-512x512.gif',
+        'Crawl-Right-512x512.gif',
+        'Crouch-Walk-512x512.gif',
+        'Crouching-Idle-512x512.gif',
+        'Dodge-Roll-Forward-512x512.gif',
+        'Dodge-Roll-Left-512x512.gif',
+        'Dodge-Roll-Right-512x512.gif',
+        'Fighting-Stance-Idle-Right-512x512.gif',
+        'Friendly-Arm-Wave-1--512x512.gif',
+        'Hanging-Idle-Left-512x512.gif',
+        'Hanging-Idle-Right-512x512.gif',
+        'Hard-Landing-Front-512x512.gif',
+        'Hard-Landing-Left-512x512.gif',
+        'Hard-Landing-Right-512x512.gif',
+        'Hit-Reaction-Front-512x512.gif',
+        'Injured-Walk-Right-512x512.gif',
+        'Nod-Yes-Front-512x512.gif',
+        'Pick-Up-Object-From-Ground-512x512.gif',
+        'Point-Forward-512x512.gif',
+        'Point-Left-512x512.gif',
+        'Point-Right-512x512.gif',
+        'Side-Kick-Left-512x512.gif',
+        'Spinning-Back-Kick-512x512.gif',
+        'Standing-Idle-512x512.gif',
+        'Vault-Over-Obstacle-512x512.gif',
+        'Walking-Left-512x512.gif',
+        'Walking-Right-512x512.gif',
+        'Waving-Man-512x512.gif',
+      ];
+      const list = document.getElementById('list');
+      for (const name of gifs) {
+        const li = document.createElement('li');
+        const img = document.createElement('img');
+        img.src = 'assets/gifs/' + name;
+        img.alt = name.replace('-512x512.gif', '').replace(/-+/g, ' ').trim();
+        img.width = 512;
+        img.height = 512;
+        const label = document.createElement('span');
+        label.textContent = name;
+        li.append(img, label);
+        list.append(li);
+      }
+    </script>
+  </body>
+</html>

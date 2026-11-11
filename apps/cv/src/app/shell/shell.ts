@@ -5,6 +5,7 @@ import {
   inject,
   signal,
   untracked,
+  viewChild,
 } from '@angular/core';
 import { isActive, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatTabNavPanel } from '@angular/material/tabs';
@@ -22,7 +23,7 @@ import {
   MobileMenu,
   NavItem,
   ThemeSwitcher,
-} from '@cv/shared-ui-design-system';
+} from '@cv/shared-ui-layout';
 import { isLanguageCode, LanguageService } from '@cv/shared-data-access-i18n';
 import {
   AccessibilityService,
@@ -76,12 +77,23 @@ export class Shell {
 
   /** The hamburger menu that replaces the domain tabs on phones */
   protected readonly mobileMenuOpen = signal(false);
+  private readonly mobileMenu = viewChild(MobileMenu);
 
   constructor() {
-    // the tour opens the menu for the steps on the domains, and closes it again
+    // the tour opens the menu for the steps on the domains, and closes it again.
+    // Set on the menu itself: between two menu steps the navigation closes it
+    // and the tour reopens it in the same tick, so the `[(open)]` binding would
+    // see no change and leave the menu closed
     effect(() => {
       const open = this.tour.menuOpen();
-      untracked(() => this.mobileMenuOpen.set(open));
+      untracked(() => {
+        const menu = this.mobileMenu();
+        if (menu) {
+          menu.open.set(open);
+        } else {
+          this.mobileMenuOpen.set(open);
+        }
+      });
     });
   }
 
@@ -102,7 +114,7 @@ export class Shell {
   protected readonly cvDownloads: DownloadOption[] = (
     ['EN', 'NL'] as const
   ).map((code) => {
-    const fileName = `Axel Pauwels_CV_Senior-Angular-Developer_${code}.pdf`;
+    const fileName = `Axel-Pauwels_CV_Senior-Angular-Developer_${code}.pdf`;
     return {
       href: `/assets/documents/${encodeURIComponent(fileName)}`,
       fileName,

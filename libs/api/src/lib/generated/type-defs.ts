@@ -3,6 +3,11 @@ export const typeDefs = /* GraphQL */ `
   type AdditionalLearning {
     name: String!
     url: String!
+
+    """
+    Unique identifier (UUID)
+    """
+    uuid: ID!
   }
 
   type Address {
@@ -36,6 +41,11 @@ export const typeDefs = /* GraphQL */ `
     Verification link, or a note when there is none online
     """
     url: String
+
+    """
+    Unique identifier (UUID)
+    """
+    uuid: ID!
     year: Int!
   }
 
@@ -57,6 +67,11 @@ export const typeDefs = /* GraphQL */ `
     Translation key
     """
     title: String!
+
+    """
+    Unique identifier (UUID)
+    """
+    uuid: ID!
   }
 
   type ContactInfo {
@@ -87,6 +102,11 @@ export const typeDefs = /* GraphQL */ `
     period: Period!
     school: School!
     specialization: String!
+
+    """
+    Unique identifier (UUID)
+    """
+    uuid: ID!
   }
 
   enum EducationLevel {
@@ -114,6 +134,11 @@ export const typeDefs = /* GraphQL */ `
     Technologies and tools used
     """
     stack: [String!]!
+
+    """
+    Unique identifier (UUID)
+    """
+    uuid: ID!
     work: Work!
   }
 
@@ -132,6 +157,11 @@ export const typeDefs = /* GraphQL */ `
     comment: String
     icon: String!
     name: String!
+
+    """
+    Unique identifier (UUID)
+    """
+    uuid: ID!
   }
 
   type Language {
@@ -171,6 +201,11 @@ export const typeDefs = /* GraphQL */ `
     isNativeLanguage: Boolean!
     language: Language!
     spoken: LanguageProficiency!
+
+    """
+    Unique identifier (UUID)
+    """
+    uuid: ID!
     written: LanguageProficiency!
   }
 
@@ -235,6 +270,11 @@ export const typeDefs = /* GraphQL */ `
     Profile summary (translation key)
     """
     profile: String!
+
+    """
+    Unique identifier (UUID)
+    """
+    uuid: ID!
   }
 
   type PersonalInfo {
@@ -306,6 +346,11 @@ export const typeDefs = /* GraphQL */ `
     phoneNumber: String
 
     """
+    Unique identifier (UUID)
+    """
+    uuid: ID!
+
+    """
     The employer the reference worked at
     """
     work: String!
@@ -326,6 +371,11 @@ export const typeDefs = /* GraphQL */ `
     category: SkillCategory!
     entries: [SkillEntry!]!
     icon: String!
+
+    """
+    Unique identifier (UUID)
+    """
+    uuid: ID!
   }
 
   """
@@ -371,6 +421,11 @@ export const typeDefs = /* GraphQL */ `
     """
     level: Int!
     name: String!
+
+    """
+    Unique identifier (UUID)
+    """
+    uuid: ID!
   }
 
   """
@@ -384,6 +439,11 @@ export const typeDefs = /* GraphQL */ `
     """
     provider: String
     status: TrainingStatus!
+
+    """
+    Unique identifier (UUID)
+    """
+    uuid: ID!
 
     """
     Year it took place; null while ongoing or for a recurring event

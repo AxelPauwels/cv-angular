@@ -6,6 +6,7 @@ type HobbyDto = PersonFieldsFragment['hobbies'][number];
 
 export function toPerson(dto: PersonFieldsFragment): Person {
   return {
+    id: dto.uuid,
     firstName: dto.firstName,
     lastName: dto.lastName,
     functionTitle: dto.functionTitle,
@@ -16,7 +17,8 @@ export function toPerson(dto: PersonFieldsFragment): Person {
       children: dto.personal.children.map((child) => ({ ...child })),
     },
     hobbies: dto.hobbies.map(toHobby),
-    languages: dto.languages.map((skill) => ({
+    languages: dto.languages.map(({ uuid, ...skill }) => ({
+      id: uuid,
       ...skill,
       language: { ...skill.language },
     })),
@@ -32,6 +34,6 @@ function toContactInfo({ linkedIn, github, ...dto }: ContactDto): ContactInfo {
   };
 }
 
-function toHobby({ comment, ...dto }: HobbyDto): Hobby {
-  return { ...dto, ...(comment ? { comment } : {}) };
+function toHobby({ uuid, comment, ...dto }: HobbyDto): Hobby {
+  return { id: uuid, ...dto, ...(comment ? { comment } : {}) };
 }

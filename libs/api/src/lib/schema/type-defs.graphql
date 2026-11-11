@@ -172,6 +172,8 @@ type School {
 }
 
 type Education {
+  "Unique identifier (UUID)"
+  uuid: ID!
   "The career it prepared for: the education page groups by it, like experience"
   category: ExperienceCategory!
   level: EducationLevel!
@@ -200,6 +202,8 @@ type ContactInfo {
 }
 
 type LanguageSkill {
+  "Unique identifier (UUID)"
+  uuid: ID!
   isNativeLanguage: Boolean!
   language: Language!
   spoken: LanguageProficiency!
@@ -209,6 +213,8 @@ type LanguageSkill {
 }
 
 type Hobby {
+  "Unique identifier (UUID)"
+  uuid: ID!
   name: String!
   comment: String
   icon: String!
@@ -230,6 +236,8 @@ type Child {
 }
 
 type Person {
+  "Unique identifier (UUID)"
+  uuid: ID!
   firstName: String!
   lastName: String!
   functionTitle: String!
@@ -242,6 +250,8 @@ type Person {
 }
 
 type SkillEntry {
+  "Unique identifier (UUID)"
+  uuid: ID!
   name: String!
   "0–5 scale"
   level: Int!
@@ -249,17 +259,23 @@ type SkillEntry {
 }
 
 type Skill {
+  "Unique identifier (UUID)"
+  uuid: ID!
   category: SkillCategory!
   icon: String!
   entries: [SkillEntry!]!
 }
 
 type AdditionalLearning {
+  "Unique identifier (UUID)"
+  uuid: ID!
   name: String!
   url: String!
 }
 
 type Certificate {
+  "Unique identifier (UUID)"
+  uuid: ID!
   name: String!
   "Verification link, or a note when there is none online"
   url: String
@@ -270,6 +286,8 @@ type Certificate {
 
 "Core competence as shown on the CV"
 type Competence {
+  "Unique identifier (UUID)"
+  uuid: ID!
   "Translation key"
   title: String!
   "Translation key"
@@ -278,6 +296,8 @@ type Competence {
 
 "A course, training or conference"
 type Training {
+  "Unique identifier (UUID)"
+  uuid: ID!
   name: String!
   "Who organised or taught it"
   provider: String
@@ -293,6 +313,8 @@ type Work {
 }
 
 type Experience {
+  "Unique identifier (UUID)"
+  uuid: ID!
   category: ExperienceCategory!
   work: Work!
   period: Period!
@@ -306,6 +328,8 @@ type Experience {
 }
 
 type Reference {
+  "Unique identifier (UUID)"
+  uuid: ID!
   name: String!
   "The employer the reference worked at"
   work: String!

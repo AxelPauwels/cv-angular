@@ -61,8 +61,8 @@
       "cv": "CV",
       "download-cv": "Télécharger le CV",
       "email": "E-mail",
-      "load-report": "Charger le rapport",
       "loading": "Chargement",
+      "load-report": "Charger le rapport",
       "ok": "OK",
       "pdf": "PDF",
       "reset": "Rétablir par défaut",
@@ -179,7 +179,7 @@
       }
     },
     "feature-toggles": {
-      "count": "{on} sur {total} activés",
+      "count": "{on}/{total} ACTIVES",
       "hidden-notice": "La page caractéristiques n’apparaît plus dans le menu. Vous pouvez toujours l’ouvrir via /showcase/feature-toggles en cliquant sur « Axel Pauwels » dans le pied de page.",
       "linked": {
         "off": "{item} également désactivé.",
@@ -441,7 +441,7 @@
     "tour": {
       "back": "Retour",
       "counter": "{current} / {total}",
-      "exit": "Quitter la visite",
+      "exit": "Arrêt",
       "finish": "Terminer",
       "loading": "Chargement de la visite…",
       "next": "Suivant",
@@ -474,7 +474,7 @@
         },
         "finish": {
           "label": "Terminer",
-          "text": "Merci d'avoir suivi la visite. Bonne découverte, vous pouvez relancer la visite depuis la page d'accueil à tout moment.",
+          "text": "Merci d'avoir suivi la visite.",
           "title": "C'est tout !"
         },
         "fonts": {

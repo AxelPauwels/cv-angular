@@ -61,46 +61,50 @@
       }
     </dl>
 
-    <!-- a wide table scrolls on its own; focusable so the keyboard can scroll it -->
-    <div
-      class="architecture-overview__scroll"
-      tabindex="0"
-      role="region"
-      aria-label="Libraries per domain and layer">
-      <table
-        mat-table
-        class="architecture-overview__table architecture-overview__matrix"
-        [dataSource]="domains()">
-        <ng-container matColumnDef="domain">
-          <th mat-header-cell *matHeaderCellDef scope="col">Domain</th>
-          <th
-            *matCellDef="let domain"
-            scope="row"
-            class="mat-mdc-cell mdc-data-table__cell architecture-overview__row-header">
-            {{ domain }}
-          </th>
-        </ng-container>
-        @for (layer of layers(); track layer) {
-        <ng-container [matColumnDef]="layer">
-          <th mat-header-cell *matHeaderCellDef scope="col">{{ layer }}</th>
-          <td mat-cell *matCellDef="let domain">
-            <ul class="architecture-overview__projects">
-              @for (project of cell(domain, layer); track project.name) {
-              <li>
-                <code
-                  class="architecture-overview__project"
-                  [title]="project.root"
-                  >{{ project.name }}</code
-                >
-              </li>
-              }
-            </ul>
-          </td>
-        </ng-container>
-        }
-        <tr mat-header-row *matHeaderRowDef="matrixColumns()"></tr>
-        <tr mat-row *matRowDef="let row; columns: matrixColumns()"></tr>
-      </table>
+    <!-- a wide table scrolls on its own, with a shadow on the edge that has more;
+      focusable so the keyboard can scroll it -->
+    <div class="architecture-overview__frame">
+      <div
+        class="architecture-overview__scroll"
+        technicalScrollEdges
+        tabindex="0"
+        role="region"
+        aria-label="Libraries per domain and layer">
+        <table
+          mat-table
+          class="architecture-overview__table architecture-overview__matrix"
+          [dataSource]="domains()">
+          <ng-container matColumnDef="domain">
+            <th mat-header-cell *matHeaderCellDef scope="col">Domain</th>
+            <th
+              *matCellDef="let domain"
+              scope="row"
+              class="mat-mdc-cell mdc-data-table__cell architecture-overview__row-header">
+              {{ domain }}
+            </th>
+          </ng-container>
+          @for (layer of layers(); track layer) {
+          <ng-container [matColumnDef]="layer">
+            <th mat-header-cell *matHeaderCellDef scope="col">{{ layer }}</th>
+            <td mat-cell *matCellDef="let domain">
+              <ul class="architecture-overview__projects">
+                @for (project of cell(domain, layer); track project.name) {
+                <li>
+                  <code
+                    class="architecture-overview__project"
+                    [title]="project.root"
+                    >{{ project.name }}</code
+                  >
+                </li>
+                }
+              </ul>
+            </td>
+          </ng-container>
+          }
+          <tr mat-header-row *matHeaderRowDef="matrixColumns()"></tr>
+          <tr mat-row *matRowDef="let row; columns: matrixColumns()"></tr>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -127,35 +131,42 @@
       needs clearance on both its tags: its domain and its layer.
     </p>
 
-    <div
-      class="architecture-overview__scroll"
-      tabindex="0"
-      role="region"
-      aria-label="Dependency rules">
-      <table
-        mat-table
-        class="architecture-overview__table architecture-overview__rules"
-        [dataSource]="store.rules()">
-        <ng-container matColumnDef="from">
-          <th mat-header-cell *matHeaderCellDef scope="col">Modules tagged</th>
-          <th
-            *matCellDef="let rule"
-            scope="row"
-            class="mat-mdc-cell mdc-data-table__cell architecture-overview__row-header">
-            <code class="architecture-overview__project">{{ rule.from }}</code>
-          </th>
-        </ng-container>
-        <ng-container matColumnDef="to">
-          <th mat-header-cell *matHeaderCellDef scope="col">may import</th>
-          <td mat-cell *matCellDef="let rule">
-            @if (rule.to.length) { {{ describeTargets(rule.to) }} } @else {
-            <em>nothing: it depends on no other module</em>
-            }
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="ruleColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: ruleColumns"></tr>
-      </table>
+    <div class="architecture-overview__frame">
+      <div
+        class="architecture-overview__scroll"
+        technicalScrollEdges
+        tabindex="0"
+        role="region"
+        aria-label="Dependency rules">
+        <table
+          mat-table
+          class="architecture-overview__table architecture-overview__rules"
+          [dataSource]="store.rules()">
+          <ng-container matColumnDef="from">
+            <th mat-header-cell *matHeaderCellDef scope="col">
+              Modules tagged
+            </th>
+            <th
+              *matCellDef="let rule"
+              scope="row"
+              class="mat-mdc-cell mdc-data-table__cell architecture-overview__row-header">
+              <code class="architecture-overview__project"
+                >{{ rule.from }}</code
+              >
+            </th>
+          </ng-container>
+          <ng-container matColumnDef="to">
+            <th mat-header-cell *matHeaderCellDef scope="col">may import</th>
+            <td mat-cell *matCellDef="let rule">
+              @if (rule.to.length) { {{ describeTargets(rule.to) }} } @else {
+              <em>nothing: it depends on no other module</em>
+              }
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="ruleColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: ruleColumns"></tr>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -208,10 +219,11 @@
         >
         <h3 class="architecture-overview__point-title">Lazy pages</h3>
         <p class="architecture-overview__point-text">
-          Feature libraries default-export their page, so a route lazy-loads it
+          Feature libraries export their page by name, so a route lazy-loads it
           with
           <code class="architecture-overview__code"
-            >loadComponent: () =&gt; import('&#64;cv/…')</code
+            >loadComponent: () =&gt; import('&#64;cv/…').then((m) =&gt;
+            m.Page)</code
           >.
         </p>
       </li>

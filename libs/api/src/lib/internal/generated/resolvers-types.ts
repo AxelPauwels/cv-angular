@@ -20,6 +20,8 @@ export type AdditionalLearning = {
   __typename?: 'AdditionalLearning';
   name: Scalars['String']['output'];
   url: Scalars['String']['output'];
+  /** Unique identifier (UUID) */
+  uuid: Scalars['ID']['output'];
 };
 
 export type Address = {
@@ -41,6 +43,8 @@ export type Certificate = {
   name: Scalars['String']['output'];
   /** Verification link, or a note when there is none online */
   url?: Maybe<Scalars['String']['output']>;
+  /** Unique identifier (UUID) */
+  uuid: Scalars['ID']['output'];
   year: Scalars['Int']['output'];
 };
 
@@ -57,6 +61,8 @@ export type Competence = {
   description: Scalars['String']['output'];
   /** Translation key */
   title: Scalars['String']['output'];
+  /** Unique identifier (UUID) */
+  uuid: Scalars['ID']['output'];
 };
 
 export type ContactInfo = {
@@ -79,6 +85,8 @@ export type Education = {
   period: Period;
   school: School;
   specialization: Scalars['String']['output'];
+  /** Unique identifier (UUID) */
+  uuid: Scalars['ID']['output'];
 };
 
 export type EducationLevel =
@@ -95,6 +103,8 @@ export type Experience = {
   project?: Maybe<Scalars['String']['output']>;
   /** Technologies and tools used */
   stack: Array<Scalars['String']['output']>;
+  /** Unique identifier (UUID) */
+  uuid: Scalars['ID']['output'];
   work: Work;
 };
 
@@ -107,6 +117,8 @@ export type Hobby = {
   comment?: Maybe<Scalars['String']['output']>;
   icon: Scalars['String']['output'];
   name: Scalars['String']['output'];
+  /** Unique identifier (UUID) */
+  uuid: Scalars['ID']['output'];
 };
 
 export type Language = {
@@ -132,6 +144,8 @@ export type LanguageSkill = {
   isNativeLanguage: Scalars['Boolean']['output'];
   language: Language;
   spoken: LanguageProficiency;
+  /** Unique identifier (UUID) */
+  uuid: Scalars['ID']['output'];
   written: LanguageProficiency;
 };
 
@@ -170,6 +184,8 @@ export type Person = {
   personal: PersonalInfo;
   /** Profile summary (translation key) */
   profile: Scalars['String']['output'];
+  /** Unique identifier (UUID) */
+  uuid: Scalars['ID']['output'];
 };
 
 export type PersonalInfo = {
@@ -237,6 +253,8 @@ export type Reference = {
   function: Scalars['String']['output'];
   name: Scalars['String']['output'];
   phoneNumber?: Maybe<Scalars['String']['output']>;
+  /** Unique identifier (UUID) */
+  uuid: Scalars['ID']['output'];
   /** The employer the reference worked at */
   work: Scalars['String']['output'];
   workCategory: ExperienceCategory;
@@ -255,6 +273,8 @@ export type Skill = {
   category: SkillCategory;
   entries: Array<SkillEntry>;
   icon: Scalars['String']['output'];
+  /** Unique identifier (UUID) */
+  uuid: Scalars['ID']['output'];
 };
 
 /** Sections of the skills page, in the order they are shown */
@@ -278,6 +298,8 @@ export type SkillEntry = {
   /** 0–5 scale */
   level: Scalars['Int']['output'];
   name: Scalars['String']['output'];
+  /** Unique identifier (UUID) */
+  uuid: Scalars['ID']['output'];
 };
 
 /** A course, training or conference */
@@ -287,6 +309,8 @@ export type Training = {
   /** Who organised or taught it */
   provider?: Maybe<Scalars['String']['output']>;
   status: TrainingStatus;
+  /** Unique identifier (UUID) */
+  uuid: Scalars['ID']['output'];
   /** Year it took place; null while ongoing or for a recurring event */
   year?: Maybe<Scalars['Int']['output']>;
 };
@@ -438,6 +462,7 @@ export type ResolversTypes = {
   ExperienceCategory: ExperienceCategory;
   Gender: Gender;
   Hobby: ResolverTypeWrapper<Hobby>;
+  ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Language: ResolverTypeWrapper<Language>;
   LanguageIsoCode: LanguageIsoCode;
@@ -475,6 +500,7 @@ export type ResolversParentTypes = {
   Education: Education;
   Experience: Experience;
   Hobby: Hobby;
+  ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
   Language: Language;
   LanguageSkill: LanguageSkill;
@@ -498,6 +524,7 @@ export type AdditionalLearningResolvers<
 > = {
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uuid?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 };
 
 export type AddressResolvers<
@@ -520,6 +547,7 @@ export type CertificateResolvers<
   issuer?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  uuid?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   year?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
 };
 
@@ -539,6 +567,7 @@ export type CompetenceResolvers<
 > = {
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uuid?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 };
 
 export type ContactInfoResolvers<
@@ -576,6 +605,7 @@ export type EducationResolvers<
   period?: Resolver<ResolversTypes['Period'], ParentType, ContextType>;
   school?: Resolver<ResolversTypes['School'], ParentType, ContextType>;
   specialization?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uuid?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 };
 
 export type ExperienceResolvers<
@@ -597,6 +627,7 @@ export type ExperienceResolvers<
   period?: Resolver<ResolversTypes['Period'], ParentType, ContextType>;
   project?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   stack?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  uuid?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   work?: Resolver<ResolversTypes['Work'], ParentType, ContextType>;
 };
 
@@ -608,6 +639,7 @@ export type HobbyResolvers<
   comment?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   icon?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uuid?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 };
 
 export type LanguageResolvers<
@@ -644,6 +676,7 @@ export type LanguageSkillResolvers<
     ParentType,
     ContextType
   >;
+  uuid?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   written?: Resolver<
     ResolversTypes['LanguageProficiency'],
     ParentType,
@@ -677,6 +710,7 @@ export type PersonResolvers<
   lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   personal?: Resolver<ResolversTypes['PersonalInfo'], ParentType, ContextType>;
   profile?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uuid?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 };
 
 export type PersonalInfoResolvers<
@@ -770,6 +804,7 @@ export type ReferenceResolvers<
     ParentType,
     ContextType
   >;
+  uuid?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   work?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   workCategory?: Resolver<
     ResolversTypes['ExperienceCategory'],
@@ -804,6 +839,7 @@ export type SkillResolvers<
     ContextType
   >;
   icon?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uuid?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 };
 
 export type SkillEntryResolvers<
@@ -814,6 +850,7 @@ export type SkillEntryResolvers<
   icon?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   level?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uuid?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 };
 
 export type TrainingResolvers<
@@ -824,6 +861,7 @@ export type TrainingResolvers<
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   provider?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<ResolversTypes['TrainingStatus'], ParentType, ContextType>;
+  uuid?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
 };
 

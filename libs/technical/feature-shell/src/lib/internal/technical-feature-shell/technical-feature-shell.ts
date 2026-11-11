@@ -1,6 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavItem, SubNavbar } from '@cv/shared-ui-design-system';
+import { NavItem, SubNavbar } from '@cv/shared-ui-layout';
 import { FeatureToggleService } from '@cv/shared-data-access';
 import { TECHNICAL_NAV_ITEMS } from '../../technical-nav-items';
 

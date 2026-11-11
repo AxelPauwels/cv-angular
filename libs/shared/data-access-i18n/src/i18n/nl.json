@@ -61,8 +61,8 @@
       "cv": "CV",
       "download-cv": "Download cv",
       "email": "E-mail",
-      "load-report": "Rapport laden",
       "loading": "Laden",
+      "load-report": "Rapport laden",
       "ok": "OK",
       "pdf": "pdf",
       "reset": "Reset",
@@ -179,7 +179,7 @@
       }
     },
     "feature-toggles": {
-      "count": "{on} van {total} aan",
+      "count": "{on}/{total} AAN",
       "hidden-notice": "De feature-toggles-pagina staat niet meer in het menu. Je kunt ze nog altijd openen via /showcase/feature-toggles door in de footer op “Axel Pauwels” te klikken.",
       "linked": {
         "off": "{item} ook uitgezet.",
@@ -441,7 +441,7 @@
     "tour": {
       "back": "Terug",
       "counter": "{current} / {total}",
-      "exit": "Rondleiding stoppen",
+      "exit": "Stop",
       "finish": "Afronden",
       "loading": "De rondleiding wordt geladen…",
       "next": "Volgende",
@@ -474,7 +474,7 @@
         },
         "finish": {
           "label": "Afronden",
-          "text": "Bedankt voor het volgen van de rondleiding. Veel plezier met rondkijken, je kunt de rondleiding altijd opnieuw starten vanaf de startpagina.",
+          "text": "Bedankt voor het volgen van de rondleiding.",
           "title": "Dat was het!"
         },
         "fonts": {
