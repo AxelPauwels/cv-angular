@@ -175,8 +175,8 @@ describe('Shell', () => {
       document.querySelectorAll<HTMLAnchorElement>('a.download-menu__option')
     );
     expect(links.map((link) => link.getAttribute('href'))).toEqual([
-      '/assets/documents/Axel%20Pauwels_CV_Senior-Angular-Developer_EN.pdf',
-      '/assets/documents/Axel%20Pauwels_CV_Senior-Angular-Developer_NL.pdf',
+      '/assets/documents/Axel-Pauwels_CV_Senior-Angular-Developer_EN.pdf',
+      '/assets/documents/Axel-Pauwels_CV_Senior-Angular-Developer_NL.pdf',
     ]);
     expect(links.map((link) => link.getAttribute('download'))).toEqual([
       'Axel-Pauwels_CV_Senior-Angular-Developer_EN.pdf',
