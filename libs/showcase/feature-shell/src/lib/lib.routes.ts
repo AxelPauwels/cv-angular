@@ -16,16 +16,23 @@ export const showcaseFeatureShellRoutes: Route[] = [
       },
       {
         path: ROUTES.SHOWCASE.MICRO_FRONTENDS,
-        loadComponent: () => import('@cv/showcase-feature-micro-frontends'),
+        loadComponent: () =>
+          import('@cv/showcase-feature-micro-frontends').then(
+            (m) => m.MicroFrontends
+          ),
       },
       {
         path: ROUTES.SHOWCASE.LIGHTHOUSE,
-        loadComponent: () => import('@cv/showcase-feature-lighthouse'),
+        loadComponent: () =>
+          import('@cv/showcase-feature-lighthouse').then(
+            (m) => m.LighthouseReport
+          ),
       },
       // always reachable, also when switched off: the footer links here
       {
         path: ROUTES.SHOWCASE.FEATURE_TOGGLES,
-        loadComponent: () => import('@cv/showcase-feature-admin'),
+        loadComponent: () =>
+          import('@cv/showcase-feature-admin').then((m) => m.FeatureToggles),
       },
       // the page's old url; links shared before the rename still find it
       {

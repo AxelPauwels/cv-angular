@@ -1,3 +1,1 @@
-import { VersionList } from './lib/version-list/version-list';
-
-export default VersionList;
+export { VersionList } from './lib/version-list/version-list';

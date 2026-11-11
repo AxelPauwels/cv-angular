@@ -4,20 +4,10 @@ import { ROUTES } from '@cv/shared-util-routing';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { inBrowserGraphqlInterceptor } from '@cv/shared-data-access';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
-import { provideRouter, Route, Router } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { FeatureToggleService } from '@cv/shared-data-access';
 import { cvFeatureShellRoutes } from './lib.routes';
-
-/** The component a route lazy loads: like the router, it takes a module's default export */
-async function loadedComponent(route?: Route): Promise<Type<unknown>> {
-  const loaded = await route?.loadComponent?.();
-  return (
-    loaded && typeof loaded === 'object' && 'default' in loaded
-      ? loaded.default
-      : loaded
-  ) as Type<unknown>;
-}
 
 describe('cvFeatureShellRoutes', () => {
   beforeEach(() => localStorage.clear());
@@ -118,7 +108,7 @@ describe('cvFeatureShellRoutes', () => {
     );
 
     // Act
-    const component = await loadedComponent(route);
+    const component = (await route?.loadComponent?.()) as Type<unknown>;
 
     // Assert
     expect(reflectComponentType(component)?.selector).toBe(selector);
@@ -131,7 +121,9 @@ describe('cvFeatureShellRoutes', () => {
     );
 
     // Act
-    const components = await Promise.all(pages?.map(loadedComponent) ?? []);
+    const components = await Promise.all(
+      pages?.map((route) => route.loadComponent?.()) ?? []
+    );
 
     // Assert
     expect(components.length).toBeGreaterThan(0);

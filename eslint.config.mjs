@@ -51,6 +51,21 @@ export default [
           ],
         },
       ],
+      // ng-packagr wraps a buildable lib's barrel in `export * from './index'`, which drops
+      // `default`: the lib then builds on its own, but every lib that imports it fails
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'ExportDefaultDeclaration',
+          message:
+            "A barrel must not use `export default`: the built lib loses it. Use a named export and lazy-load with `import('@cv/…').then((m) => m.Page)`.",
+        },
+        {
+          selector: 'ExportSpecifier[exported.name="default"]',
+          message:
+            "A barrel must not re-export `default`: the built lib loses it. Use a named export and lazy-load with `import('@cv/…').then((m) => m.Page)`.",
+        },
+      ],
     },
   },
   {

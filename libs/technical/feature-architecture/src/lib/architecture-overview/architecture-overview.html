@@ -219,10 +219,11 @@
         >
         <h3 class="architecture-overview__point-title">Lazy pages</h3>
         <p class="architecture-overview__point-text">
-          Feature libraries default-export their page, so a route lazy-loads it
+          Feature libraries export their page by name, so a route lazy-loads it
           with
           <code class="architecture-overview__code"
-            >loadComponent: () =&gt; import('&#64;cv/…')</code
+            >loadComponent: () =&gt; import('&#64;cv/…').then((m) =&gt;
+            m.Page)</code
           >.
         </p>
       </li>
