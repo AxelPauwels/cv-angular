@@ -90,5 +90,6 @@
     "version": {
       "preVersionCommand": "npm whoami --registry=https://registry.npmjs.org/ && npx nx run-many -t build --projects=packages/*"
     }
-  }
+  },
+  "nxCloudId": "6af4b97c0f1e1cd9125ec2fd"
 }
