@@ -114,7 +114,7 @@ export class Shell {
   protected readonly cvDownloads: DownloadOption[] = (
     ['EN', 'NL'] as const
   ).map((code) => {
-    const fileName = `Axel Pauwels_CV_Senior-Angular-Developer_${code}.pdf`;
+    const fileName = `Axel-Pauwels_CV_Senior-Angular-Developer_${code}.pdf`;
     return {
       href: `/assets/documents/${encodeURIComponent(fileName)}`,
       fileName,

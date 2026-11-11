@@ -179,8 +179,8 @@ describe('Shell', () => {
       '/assets/documents/Axel%20Pauwels_CV_Senior-Angular-Developer_NL.pdf',
     ]);
     expect(links.map((link) => link.getAttribute('download'))).toEqual([
-      'Axel Pauwels_CV_Senior-Angular-Developer_EN.pdf',
-      'Axel Pauwels_CV_Senior-Angular-Developer_NL.pdf',
+      'Axel-Pauwels_CV_Senior-Angular-Developer_EN.pdf',
+      'Axel-Pauwels_CV_Senior-Angular-Developer_NL.pdf',
     ]);
   });
 
