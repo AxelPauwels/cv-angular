@@ -15,9 +15,14 @@ describe('MicroFrontends', () => {
     // Assert
     const [remote, library] = Array.from(element.querySelectorAll('ds-card'));
     expect(remote.querySelector('shared-wrapper')).toBeTruthy();
-    expect(remote.querySelector('a')?.getAttribute('href')).toBe(
-      'https://cv-angular-mfe.web.app'
-    );
+    expect(
+      Array.from(remote.querySelectorAll('a')).map((link) =>
+        link.getAttribute('href')
+      )
+    ).toEqual([
+      'https://cv-angular-mfe.web.app',
+      'https://cv-angular-mfe.web.app/api/',
+    ]);
     expect(library.querySelector('lib-mac-window')).toBeTruthy();
   });
 });

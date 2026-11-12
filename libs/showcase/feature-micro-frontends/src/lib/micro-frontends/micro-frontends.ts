@@ -5,11 +5,7 @@ import { Card, CardActions } from '@cv/shared-ui-card';
 import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
 import { MacWindow } from '@axel-pauwels/mac-window';
-import {
-  cvMfeWrapperConfig,
-  Wrapper,
-  WrapperConfig,
-} from '@cv/shared-ui-federation';
+import { CvMfe } from '@cv/shared-ui-federation';
 
 /**
  * Two ways this app reuses UI built elsewhere: a micro-frontend loaded at
@@ -21,7 +17,7 @@ import {
   imports: [
     PageTitle,
     MacWindow,
-    Wrapper,
+    CvMfe,
     MatButton,
     Card,
     CardActions,
@@ -34,8 +30,12 @@ import {
   styleUrl: './micro-frontends.scss',
 })
 export class MicroFrontends {
-  protected readonly cvMfe: WrapperConfig = cvMfeWrapperConfig;
   protected readonly remoteUrl = 'https://cv-angular-mfe.web.app';
+  protected readonly remoteApiDocsUrl = `${this.remoteUrl}/api/`;
   protected readonly npmUrl =
     'https://www.npmjs.com/package/@axel-pauwels/mac-window';
+  protected readonly cvMfeSnippet = `
+    const me = signal({ role: 'Developer', coffee: 12 });
+    const isHireable = computed(() => me().coffee > 5);
+  `;
 }

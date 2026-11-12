@@ -39,6 +39,10 @@ More info:
 
 Tolgee, the `i18n:*` commands and how translation keys are used: see [README.translations.md](README.translations.md).
 
+## Micro-frontends
+
+How the `<cv-mfe>` micro-frontend is loaded, used with typed inputs, developed against a local remote, and updated when the remote ships a new version: see [README.micro-frontends.md](README.micro-frontends.md).
+
 ## Material Symbols icons
 
 The app loads the Material Symbols icon font from Google Fonts in [apps/cv/src/index.html](apps/cv/src/index.html), but only the icons it uses (`icon_names=…` in the font URL). The full font is ~290 KiB and hides every icon until it has loaded, which cost Lighthouse performance points on every page. The subset is a few KiB.

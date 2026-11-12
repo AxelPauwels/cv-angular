@@ -18,7 +18,7 @@ const person: Person = {
       street: 'Sint-Gerardusstraat',
     },
     email: 'axelpauwels.be@gmail.com',
-    github: 'https://github.com/AxelPauwels',
+    github: 'https://github.com/AxelPauwels/cv-angular/',
     linkedIn: 'https://www.linkedin.com/in/axelpauwels/',
     phone: '+32 477 96 88 00',
     website: 'https://axel-pauwels-cv.web.app/personal',

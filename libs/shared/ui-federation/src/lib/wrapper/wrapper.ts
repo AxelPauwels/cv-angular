@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, ElementRef, inject, input } from '@angular/core';
+import {
+  Component,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { loadRemoteModule } from '@angular-architects/native-federation';
 
 export interface WrapperConfig {
@@ -14,12 +21,15 @@ export const initWrapperConfig: WrapperConfig = {
   elementName: '',
 };
 
-export const cvMfeWrapperConfig: WrapperConfig = {
-  remoteName: 'cv-mfe',
-  exposedModule: './web-components',
-  elementName: 'cv-mfe',
-};
-
+/**
+ * Loads a remote's web component (Native Federation) and renders it. Generic:
+ * for a known remote, prefer its typed component (e.g. `CvMfe`).
+ *
+ * `inputs` are set as properties on the custom element. Angular Elements maps
+ * each `input()` of the remote's component to a property of the same
+ * (camelCase) name, so any value works, not only strings. They are set again
+ * whenever `inputs` changes.
+ */
 @Component({
   selector: 'shared-wrapper',
   imports: [CommonModule],
@@ -37,6 +47,11 @@ export class Wrapper {
   // (see bootstrap.ts)
   config = input(initWrapperConfig);
 
+  /** Values for the remote component's inputs, by input name */
+  inputs = input<Readonly<Record<string, unknown>>>({});
+
+  private readonly element = signal<HTMLElement | undefined>(undefined);
+
   constructor() {
     effect(async () => {
       const { exposedModule, remoteName, elementName } = this.config();
@@ -47,6 +62,16 @@ export class Wrapper {
       await loadRemoteModule(remoteName, exposedModule);
       const root = document.createElement(elementName);
       this.elm.nativeElement.appendChild(root);
+      this.element.set(root);
+    });
+
+    // Properties set before the element is defined are picked up by Angular
+    // Elements once it upgrades, so this needn't wait for the remote's define
+    effect(() => {
+      const element = this.element();
+      if (element) {
+        Object.assign(element, this.inputs());
+      }
     });
   }
 }
