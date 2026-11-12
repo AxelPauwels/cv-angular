@@ -68,4 +68,42 @@ describe('MainNavbar', () => {
     // Assert
     expect(active).toBe('CV');
   });
+
+  it('shows an icon tab named by its label, and marks it active', async () => {
+    // Arrange
+    TestBed.configureTestingModule({
+      providers: [
+        provideTolgee(() => Tolgee().init({ language: 'en' })),
+        provideRouter([
+          { path: 'home', component: Page },
+          { path: 'cv', component: Page },
+        ]),
+      ],
+    });
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/home');
+    const fixture = TestBed.createComponent(Host);
+
+    // Act
+    fixture.componentRef.setInput('items', [
+      { labelKey: 'Home', path: 'home', icon: 'home', tourId: 'menu-home' },
+      { labelKey: 'CV', path: 'cv' },
+    ]);
+    await fixture.whenStable();
+
+    // Assert
+    const element: HTMLElement = fixture.nativeElement;
+    const [home, cv] = Array.from(element.querySelectorAll('nav a'));
+    expect(home.getAttribute('href')).toBe('/home');
+    expect(home.getAttribute('aria-label')).toBe('Home');
+    expect(home.getAttribute('data-tour')).toBe('menu-home');
+    expect(home.querySelector('mat-icon')?.textContent?.trim()).toBe('home');
+    expect(home.querySelector('mat-icon')?.getAttribute('aria-hidden')).toBe(
+      'true'
+    );
+    expect(home.classList).toContain('mdc-tab--active');
+    // a text tab has no aria-label: its text is its name
+    expect(cv.getAttribute('aria-label')).toBeNull();
+    expect(cv.textContent?.trim()).toBe('CV');
+  });
 });

@@ -23,9 +23,10 @@ describe('Shell', () => {
     saveFeatureTogglesForTesting();
   });
 
+  // accessible names: the home tab is an icon labelled by aria-label
   const mainMenu = (element: HTMLElement) =>
-    Array.from(element.querySelectorAll('header nav a')).map((link) =>
-      link.textContent?.trim()
+    Array.from(element.querySelectorAll('header nav a')).map(
+      (link) => link.getAttribute('aria-label') ?? link.textContent?.trim()
     );
 
   it('hides the main menu items and navbar icons switched off on the admin page', async () => {
@@ -44,7 +45,7 @@ describe('Shell', () => {
     await fixture.whenStable();
 
     // Assert
-    expect(mainMenu(element)).toEqual(['CV', 'TECHNICAL']);
+    expect(mainMenu(element)).toEqual(['Home', 'CV', 'TECHNICAL']);
     expect(element.querySelector('ds-download-menu')).toBeNull();
     expect(element.querySelector('ds-language-switcher')).toBeNull();
     expect(element.querySelector('ds-theme-switcher')).toBeTruthy();
@@ -72,7 +73,49 @@ describe('Shell', () => {
     await fixture.whenStable();
 
     // Assert
-    expect(mainMenu(element)).toEqual(['CV', 'SHOWCASE']);
+    expect(mainMenu(element)).toEqual(['Home', 'CV', 'SHOWCASE']);
+  });
+
+  it('hides the cv main menu item once all cv pages are switched off, but keeps home', async () => {
+    // Arrange
+    TestBed.configureTestingModule({
+      providers: [provideRouter([]), provideI18nTesting()],
+    });
+    const fixture = TestBed.createComponent(Shell);
+    const element: HTMLElement = fixture.nativeElement;
+    const toggles = TestBed.inject(FeatureToggleService);
+    const cvPages = [
+      'cv-personal',
+      'cv-education',
+      'cv-experience',
+      'cv-skills',
+      'cv-references',
+    ] as const;
+
+    // Act
+    cvPages.forEach((id) => toggles.change(id, false));
+    await fixture.whenStable();
+
+    // Assert
+    expect(mainMenu(element)).toEqual(['Home', 'TECHNICAL', 'SHOWCASE']);
+  });
+
+  it('shows home as an icon tab, named and linked to the home page', async () => {
+    // Arrange
+    TestBed.configureTestingModule({
+      providers: [provideRouter([]), provideI18nTesting()],
+    });
+
+    // Act
+    const fixture = TestBed.createComponent(Shell);
+    await fixture.whenStable();
+
+    // Assert
+    const element: HTMLElement = fixture.nativeElement;
+    const home = element.querySelector('header nav a[data-tour="menu-home"]');
+    expect(home?.getAttribute('href')).toBe('/home');
+    expect(home?.getAttribute('aria-label')).toBe('Home');
+    expect(home?.querySelector('mat-icon')?.textContent?.trim()).toBe('home');
   });
 
   function configureWithPages() {
@@ -80,7 +123,7 @@ describe('Shell', () => {
       providers: [
         provideRouter([
           { path: 'home', component: Page },
-          { path: 'experience', component: Page },
+          { path: 'cv/experience', component: Page },
         ]),
         provideI18nTesting(),
       ],
@@ -108,7 +151,7 @@ describe('Shell', () => {
     const element: HTMLElement = fixture.nativeElement;
 
     // Act
-    await TestBed.inject(Router).navigateByUrl('/experience');
+    await TestBed.inject(Router).navigateByUrl('/cv/experience');
     await fixture.whenStable();
 
     // Assert
@@ -123,7 +166,7 @@ describe('Shell', () => {
     const element: HTMLElement = fixture.nativeElement;
 
     // Act
-    await TestBed.inject(Router).navigateByUrl('/experience');
+    await TestBed.inject(Router).navigateByUrl('/cv/experience');
     await fixture.whenStable();
 
     // Assert
@@ -150,7 +193,7 @@ describe('Shell', () => {
     for (const landmark of ['header', 'main', 'footer']) {
       expect(element.querySelector(landmark)).toBeTruthy();
     }
-    expect(mainMenu(element)).toEqual(['CV', 'TECHNICAL', 'SHOWCASE']);
+    expect(mainMenu(element)).toEqual(['Home', 'CV', 'TECHNICAL', 'SHOWCASE']);
     expect(element.querySelector('main router-outlet')).toBeTruthy();
   });
 

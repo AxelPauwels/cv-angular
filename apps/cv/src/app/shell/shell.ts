@@ -102,7 +102,7 @@ export class Shell {
 
   /** The home page fills the screen on its own: no footer there */
   protected readonly onHome = isActive(
-    ROUTES.CV.HOME_ROUTER_LINK,
+    ROUTES.HOME.ROOT_ROUTER_LINK,
     inject(Router),
     {
       paths: 'exact',
@@ -124,7 +124,18 @@ export class Shell {
   });
 
   private readonly allNavItems: (NavItem & { toggle?: FeatureToggleId })[] = [
-    { labelKey: 't.nav.cv', path: ROUTES.CV.ROOT, tourId: 'menu-cv' },
+    {
+      labelKey: 't.nav.home',
+      path: ROUTES.HOME.ROOT,
+      icon: 'home',
+      tourId: 'menu-home',
+    },
+    {
+      labelKey: 't.nav.cv',
+      path: ROUTES.CV.ROOT,
+      tourId: 'menu-cv',
+      toggle: 'main-menu-cv',
+    },
     {
       labelKey: 't.nav.technical',
       path: ROUTES.TECHNICAL.ROOT,

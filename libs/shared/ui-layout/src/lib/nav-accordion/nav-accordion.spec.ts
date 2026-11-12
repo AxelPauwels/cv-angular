@@ -10,11 +10,13 @@ import { NavAccordion } from './nav-accordion';
 class Page {}
 
 const ITEMS: NavItem[] = [
+  // no children: a link of its own instead of a group
+  { labelKey: 't.nav.home', path: 'home', icon: 'home' },
   {
     labelKey: 't.nav.cv',
-    path: '',
+    path: 'cv',
     children: [
-      { labelKey: 't.nav.home', path: 'home', icon: 'home' },
+      { labelKey: 't.nav.personal', path: 'personal', icon: 'person' },
       { labelKey: 't.nav.skills', path: 'skills' },
     ],
   },
@@ -33,7 +35,8 @@ describe('NavAccordion', () => {
         provideTolgee(() => Tolgee().init({ language: 'en' })),
         provideRouter([
           { path: 'home', component: Page },
-          { path: 'skills', component: Page },
+          { path: 'cv/personal', component: Page },
+          { path: 'cv/skills', component: Page },
           { path: 'showcase/admin', component: Page },
         ]),
       ],
@@ -45,7 +48,9 @@ describe('NavAccordion', () => {
     await fixture.whenStable();
     const element: HTMLElement = fixture.nativeElement;
     const toggles = [
-      ...element.querySelectorAll<HTMLButtonElement>('.nav-accordion__toggle'),
+      ...element.querySelectorAll<HTMLButtonElement>(
+        'button.nav-accordion__toggle'
+      ),
     ];
     const lists = [
       ...element.querySelectorAll<HTMLElement>('.nav-accordion__links'),
@@ -70,7 +75,7 @@ describe('NavAccordion', () => {
 
   it('opens one domain at a time', async () => {
     // Arrange
-    const { fixture, toggles, lists } = await setup('/home');
+    const { fixture, toggles, lists } = await setup('/cv/personal');
 
     // Act
     toggles[1].click();
@@ -82,7 +87,7 @@ describe('NavAccordion', () => {
 
   it('closes the open domain when clicked again', async () => {
     // Arrange
-    const { fixture, toggles, lists } = await setup('/home');
+    const { fixture, toggles, lists } = await setup('/cv/personal');
 
     // Act
     toggles[0].click();
@@ -95,7 +100,7 @@ describe('NavAccordion', () => {
 
   it('links to each page below its domain and marks the current one', async () => {
     // Arrange
-    const url = '/skills';
+    const url = '/cv/skills';
 
     // Act
     const { element } = await setup(url);
@@ -105,8 +110,8 @@ describe('NavAccordion', () => {
       ...element.querySelectorAll<HTMLAnchorElement>('.nav-accordion__link'),
     ];
     expect(links.map((link) => link.getAttribute('href'))).toEqual([
-      '/home',
-      '/skills',
+      '/cv/personal',
+      '/cv/skills',
       '/showcase/admin',
     ]);
     expect(links.map((link) => link.getAttribute('aria-current'))).toEqual([
@@ -114,5 +119,26 @@ describe('NavAccordion', () => {
       'page',
       null,
     ]);
+  });
+
+  it('shows an item without pages as a link of its own, marked when current', async () => {
+    // Arrange
+    const url = '/home';
+
+    // Act
+    const { element, toggles, lists } = await setup(url);
+
+    // Assert
+    const home = element.querySelector<HTMLAnchorElement>(
+      'a.nav-accordion__toggle'
+    );
+    expect(home?.getAttribute('href')).toBe('/home');
+    expect(home?.getAttribute('aria-current')).toBe('page');
+    expect(home?.getAttribute('aria-expanded')).toBeNull();
+    expect(home?.classList).toContain('nav-accordion__toggle--current');
+    expect(home?.querySelector('mat-icon')?.textContent?.trim()).toBe('home');
+    // only the domains with pages are groups, all closed on the home page
+    expect(toggles).toHaveLength(2);
+    expect(lists.map((list) => list.hidden)).toEqual([true, true]);
   });
 });

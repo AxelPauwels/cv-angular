@@ -23,14 +23,21 @@ describe('LighthouseReport', () => {
     const sections = Array.from(element.querySelectorAll('h2')).map((h) =>
       h.textContent?.trim()
     );
-    const cvPages = Array.from(
-      element.querySelectorAll('table')[0].querySelectorAll('tbody th')
-    ).map((th) => th.textContent?.trim());
+    const pagesOf = (table: number) =>
+      Array.from(
+        element.querySelectorAll('table')[table].querySelectorAll('tbody th')
+      ).map((th) => th.textContent?.trim());
 
     // Assert
-    expect(sections).toEqual(['CV', 'Technical', 'Showcase']);
-    expect(cvPages[0]).toBe('Home');
-    expect(cvPages).toHaveLength(6);
+    expect(sections).toEqual(['Home', 'CV', 'Technical', 'Showcase']);
+    expect(pagesOf(0)).toEqual(['Home']);
+    expect(pagesOf(1)).toEqual([
+      'Personal',
+      'Education',
+      'Experience',
+      'Skills',
+      'References',
+    ]);
   });
 
   it('gives every row the four Lighthouse scores, in Lighthouse order', async () => {

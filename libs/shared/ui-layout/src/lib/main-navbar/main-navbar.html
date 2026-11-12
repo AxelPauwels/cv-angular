@@ -10,17 +10,29 @@
     [tabPanel]="tabPanel()"
     [attr.aria-label]="labelKey() | translate">
     @for (item of items(); track item.path) {
+    <!-- An icon tab keeps its label as accessible name and tooltip (on hover and focus) -->
     <a
       mat-tab-link
       class="main-navbar__tab"
       [attr.data-tour]="item.tourId"
       [routerLink]="'/' + item.path"
-      [active]="item === activeItem()">
+      [active]="item === activeItem()"
+      [attr.aria-label]="item.icon ? (item.labelKey | translate) : null"
+      [matTooltip]="item.icon ? (item.labelKey | translate) : ''">
+      @if (item.icon) {
+      <mat-icon
+        class="main-navbar__icon"
+        fontSet="material-symbols-outlined"
+        aria-hidden="true"
+        >{{ item.icon }}</mat-icon
+      >
+      } @else {
       <span
         class="main-navbar__label"
         [attr.data-label]="item.labelKey | translate | uppercase"
         >{{ item.labelKey | translate | uppercase }}</span
       >
+      }
     </a>
     }
   </nav>

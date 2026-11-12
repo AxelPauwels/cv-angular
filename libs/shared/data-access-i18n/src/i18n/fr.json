@@ -286,7 +286,7 @@
       "experience": "Expérience",
       "feature-toggles": "Caractéristiques",
       "graphql-docs": "graphql docs",
-      "home": "Maison",
+      "home": "Accueil",
       "light": "Clair",
       "lighthouse": "Lighthouse",
       "light-mode": "mode clair",
@@ -481,6 +481,11 @@
           "label": "Polices",
           "text": "Vous préférez un autre style ? Changez ici la police de tout le site.",
           "title": "Polices"
+        },
+        "home": {
+          "label": "Accueil",
+          "text": "L'icône de la maison dans le menu vous ramène toujours à cette page, où que vous soyez sur le site.",
+          "title": "Accueil"
         },
         "languages": {
           "label": "Langues",

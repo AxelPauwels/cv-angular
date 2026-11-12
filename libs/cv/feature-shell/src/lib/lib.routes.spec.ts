@@ -28,20 +28,12 @@ describe('cvFeatureShellRoutes', () => {
     const element: HTMLElement = harness.fixture.nativeElement;
 
     // Assert
-    expect(TestBed.inject(Router).url).toBe('/home');
+    expect(TestBed.inject(Router).url).toBe('/personal');
     expect(
       Array.from(element.querySelectorAll('ds-sub-navbar > nav a')).map(
-        // accessible names: the home tab is an icon labelled by aria-label
-        (link) => link.getAttribute('aria-label') ?? link.textContent?.trim()
+        (link) => link.textContent?.trim()
       )
-    ).toEqual([
-      'Home',
-      'Personal',
-      'Education',
-      'Experience',
-      'Skills',
-      'References',
-    ]);
+    ).toEqual(['Personal', 'Education', 'Experience', 'Skills', 'References']);
   });
 
   it('leaves out the sub items switched off on the admin page', async () => {
@@ -64,9 +56,44 @@ describe('cvFeatureShellRoutes', () => {
     // Assert
     expect(
       Array.from(element.querySelectorAll('ds-sub-navbar > nav a')).map(
-        (link) => link.getAttribute('aria-label') ?? link.textContent?.trim()
+        (link) => link.textContent?.trim()
       )
-    ).toEqual(['Home', 'Personal', 'Experience', 'Skills']);
+    ).toEqual(['Personal', 'Experience', 'Skills']);
+  });
+
+  it('opens the first sub item that is not switched off', async () => {
+    // Arrange
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter(cvFeatureShellRoutes),
+        provideI18nTesting(),
+        provideHttpClient(withInterceptors([inBrowserGraphqlInterceptor])),
+      ],
+    });
+    TestBed.inject(FeatureToggleService).change('cv-personal', false);
+
+    // Act
+    await RouterTestingHarness.create('/');
+
+    // Assert
+    expect(TestBed.inject(Router).url).toBe('/education');
+  });
+
+  it('sends unknown cv urls to the first sub item', async () => {
+    // Arrange
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter(cvFeatureShellRoutes),
+        provideI18nTesting(),
+        provideHttpClient(withInterceptors([inBrowserGraphqlInterceptor])),
+      ],
+    });
+
+    // Act
+    await RouterTestingHarness.create('/does-not-exist');
+
+    // Assert
+    expect(TestBed.inject(Router).url).toBe('/personal');
   });
 
   it('marks the opened page as the active sub item', async () => {
@@ -95,7 +122,6 @@ describe('cvFeatureShellRoutes', () => {
   });
 
   it.each([
-    [ROUTES.CV.HOME, 'cv-home'],
     [ROUTES.CV.PERSONAL, 'cv-personal-details'],
     [ROUTES.CV.EDUCATION, 'cv-education-list'],
     [ROUTES.CV.EXPERIENCE, 'cv-experience-list'],

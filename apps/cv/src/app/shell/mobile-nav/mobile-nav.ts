@@ -24,7 +24,8 @@ async function loadPages(): Promise<Record<string, Pages>> {
 }
 
 /**
- * The mobile menu's content: the domains with their pages. Rendered in a
+ * The mobile menu's content: the domains with their pages (home is a link of
+ * its own). Rendered in a
  * `@defer` block once the menu first opens.
  */
 @Component({
@@ -64,11 +65,16 @@ export class MobileNav {
     }
     const pages = this.pages.value();
     const toggles: Partial<Record<string, boolean>> = this.toggles();
-    return this.domains().map((domain) => ({
-      ...domain,
-      children: (pages[domain.path] ?? []).filter(
-        ({ toggle }) => !toggle || toggles[toggle]
-      ),
-    }));
+    // a domain without pages (home) stays a plain link
+    return this.domains().map((domain) =>
+      domain.path in pages
+        ? {
+            ...domain,
+            children: pages[domain.path].filter(
+              ({ toggle }) => !toggle || toggles[toggle]
+            ),
+          }
+        : domain
+    );
   });
 }

@@ -13,6 +13,7 @@ export const FEATURE_TOGGLE_DEFAULTS = {
   'tour-button': true,
 
   // CV
+  'main-menu-cv': true, // main
   'cv-personal': true,
   'cv-education': true,
   'cv-experience': true,

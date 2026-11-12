@@ -32,11 +32,11 @@ const HISTORY_DIR = `${OUTPUT_DIR}/lighthouse-scores-history`;
 const CATEGORIES = ['performance', 'accessibility', 'best-practices', 'seo'];
 const PAGES = [
   '/home',
-  '/personal',
-  '/education',
-  '/experience',
-  '/skills',
-  '/references',
+  '/cv/personal',
+  '/cv/education',
+  '/cv/experience',
+  '/cv/skills',
+  '/cv/references',
   '/technical/architecture',
   '/technical/project-graph',
   '/technical/graphql-docs',

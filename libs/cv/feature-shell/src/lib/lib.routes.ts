@@ -1,16 +1,18 @@
 import { Route } from '@angular/router';
 import { CvFeatureShell } from './internal/cv-feature-shell/cv-feature-shell';
 import { ROUTES } from '@cv/shared-util-routing';
+import { firstVisibleCvPage } from './cv-nav-items';
 
 export const cvFeatureShellRoutes: Route[] = [
   {
     path: '',
     component: CvFeatureShell,
     children: [
-      { path: '', pathMatch: 'full', redirectTo: ROUTES.CV.HOME },
       {
-        path: ROUTES.CV.HOME,
-        loadComponent: () => import('@cv/cv-feature-home').then((m) => m.Home),
+        path: '',
+        pathMatch: 'full',
+        // the first page that is not switched off on the admin page
+        redirectTo: firstVisibleCvPage,
       },
       {
         path: ROUTES.CV.PERSONAL,
@@ -36,6 +38,10 @@ export const cvFeatureShellRoutes: Route[] = [
         path: ROUTES.CV.REFERENCES,
         loadComponent: () =>
           import('@cv/cv-feature-references').then((m) => m.ReferenceList),
+      },
+      {
+        path: '**',
+        redirectTo: firstVisibleCvPage,
       },
     ],
   },

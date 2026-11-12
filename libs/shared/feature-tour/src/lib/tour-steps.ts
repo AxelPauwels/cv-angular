@@ -49,8 +49,8 @@ function step(id: string, route: string, options: StepOptions = {}): TourStep {
 }
 
 /**
- * A domain's tab, or on phones (where the tabs are hidden) the domain in the
- * opened hamburger menu
+ * A main menu item's tab, or on phones (where the tabs are hidden) the item in
+ * the opened hamburger menu
  */
 function domainTargets(domain: string): StepOptions {
   return {
@@ -60,12 +60,12 @@ function domainTargets(domain: string): StepOptions {
 }
 
 export const DEFAULT_TOUR_STEPS: readonly TourStep[] = [
-  step('download-cv', ROUTES.CV.HOME_ROUTER_LINK, {
+  step('download-cv', ROUTES.HOME.ROOT_ROUTER_LINK, {
     target: '[data-tour="download-cv"] button',
     toggles: ['navbar-download-cv'],
   }),
   // every navbar icon except the download: theme, font, accessibility, ...
-  step('settings', ROUTES.CV.HOME_ROUTER_LINK, {
+  step('settings', ROUTES.HOME.ROOT_ROUTER_LINK, {
     target: '[data-tour="settings"] button',
     someToggles: [
       'navbar-theme-switcher',
@@ -75,9 +75,11 @@ export const DEFAULT_TOUR_STEPS: readonly TourStep[] = [
       'navbar-language-switcher',
     ],
   }),
+  // the home tab brings a visitor back to where the tour starts
+  step('home', ROUTES.HOME.ROOT_ROUTER_LINK, domainTargets('home')),
   step('cv', ROUTES.CV.PERSONAL_ROUTER_LINK, {
     ...domainTargets('cv'),
-    toggles: ['cv-personal'],
+    toggles: ['main-menu-cv', 'cv-personal'],
   }),
   step('technical', ROUTES.TECHNICAL.PROJECT_GRAPH_ROUTER_LINK, {
     ...domainTargets('technical'),
@@ -93,7 +95,7 @@ export const DEFAULT_TOUR_STEPS: readonly TourStep[] = [
     target: '[data-tour="contact"] a',
     centerOnPhones: true,
   }),
-  step('finish', ROUTES.CV.HOME_ROUTER_LINK),
+  step('finish', ROUTES.HOME.ROOT_ROUTER_LINK),
 ];
 
 /** The steps of the tour, in order; replace it to tour other pages (or in tests) */

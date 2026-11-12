@@ -4,6 +4,7 @@ import { NavItem, SubNavbar } from '@cv/shared-ui-layout';
 import { FeatureToggleService } from '@cv/shared-data-access';
 import { CV_NAV_ITEMS } from '../../cv-nav-items';
 
+/** Layout of the CV domain: its sub navbar above the active page */
 @Component({
   selector: 'cv-feature-shell',
   imports: [RouterOutlet, SubNavbar],
@@ -16,6 +17,6 @@ export class CvFeatureShell {
   /** The items switched off on the admin page are left out */
   protected readonly navItems = computed<NavItem[]>(() => {
     const toggles = this.toggles();
-    return CV_NAV_ITEMS.filter(({ toggle }) => !toggle || toggles[toggle]);
+    return CV_NAV_ITEMS.filter(({ toggle }) => toggles[toggle]);
   });
 }

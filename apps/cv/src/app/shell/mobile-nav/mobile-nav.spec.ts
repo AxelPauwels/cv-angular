@@ -10,6 +10,7 @@ import { ROUTES } from '@cv/shared-util-routing';
 import { MobileNav } from './mobile-nav';
 
 const DOMAINS: NavItem[] = [
+  { labelKey: 't.nav.home', path: ROUTES.HOME.ROOT, icon: 'home' },
   { labelKey: 't.nav.cv', path: ROUTES.CV.ROOT },
   { labelKey: 't.nav.technical', path: ROUTES.TECHNICAL.ROOT },
   { labelKey: 't.nav.showcase', path: ROUTES.SHOWCASE.ROOT },
@@ -71,7 +72,8 @@ describe('MobileNav', () => {
 
     // Assert
     expect(element.querySelector('[role="status"]')).toBeNull();
-    expect(groups(element)).toEqual(['CV', 'Technical', 'Showcase']);
+    expect(groups(element)).toEqual(['Home', 'CV', 'Technical', 'Showcase']);
+    expect(links(element)).toContain('/cv/personal');
     expect(links(element)).toContain('/technical/versions');
     expect(links(element)).toContain('/showcase/lighthouse');
   });
@@ -93,11 +95,9 @@ describe('MobileNav', () => {
     expect(links(element)).toContain('/technical/architecture');
   });
 
-  it('shows a domain without pages of its own as an empty group', async () => {
+  it('shows home, without pages of its own, as a link instead of a group', async () => {
     // Arrange
-    const { fixture, element } = await render([
-      { labelKey: 't.nav.home', path: 'elsewhere' },
-    ]);
+    const { fixture, element } = await render();
 
     // Act
     await vi.waitFor(async () => {
@@ -106,7 +106,13 @@ describe('MobileNav', () => {
     }, MENU_LOADED);
 
     // Assert
-    expect(groups(element)).toEqual(['Home']);
-    expect(links(element)).toEqual([]);
+    const home = element.querySelector<HTMLAnchorElement>(
+      'a.nav-accordion__toggle'
+    );
+    expect(home?.getAttribute('href')).toBe('/home');
+    expect(home?.textContent).toContain('Home');
+    expect(
+      element.querySelectorAll('button.nav-accordion__toggle')
+    ).toHaveLength(3);
   });
 });

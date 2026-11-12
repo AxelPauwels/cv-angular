@@ -56,10 +56,14 @@ function page(labelKey: NavTranslationKey, link: string): LighthousePage {
 /** The main menu, each item with its sub menu items: every page of the app */
 export const LIGHTHOUSE_SECTIONS: readonly LighthouseSection[] = [
   {
+    id: 'home',
+    labelKey: 't.nav.home',
+    pages: [page('t.nav.home', ROUTES.HOME.ROOT_ROUTER_LINK)],
+  },
+  {
     id: 'cv',
     labelKey: 't.nav.cv',
     pages: [
-      page('t.nav.home', ROUTES.CV.HOME_ROUTER_LINK),
       page('t.nav.personal', ROUTES.CV.PERSONAL_ROUTER_LINK),
       page('t.nav.education', ROUTES.CV.EDUCATION_ROUTER_LINK),
       page('t.nav.experience', ROUTES.CV.EXPERIENCE_ROUTER_LINK),

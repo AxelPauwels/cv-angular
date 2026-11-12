@@ -286,7 +286,7 @@
       "experience": "Experiencia",
       "feature-toggles": "Características",
       "graphql-docs": "graphql docs",
-      "home": "Hogar",
+      "home": "Inicio",
       "light": "Claro",
       "lighthouse": "Lighthouse",
       "light-mode": "modo claro",
@@ -481,6 +481,11 @@
           "label": "Fuentes",
           "text": "¿Prefieres otro estilo? Cambia aquí la fuente de toda la web.",
           "title": "Fuentes"
+        },
+        "home": {
+          "label": "Inicio",
+          "text": "El icono de la casa en el menú te devuelve siempre a esta página, estés donde estés en el sitio web.",
+          "title": "Inicio"
         },
         "languages": {
           "label": "Idiomas",
