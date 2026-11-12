@@ -42,15 +42,18 @@ The version follows [semantic versioning](https://semver.org/): `major.minor.pat
 
 ## What runs where
 
-| Event                                       | Workflow                                                                                   | What it does                                                                    |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| Push to `develop`, `release/**` or `main`   | [`ci.yml`](.github/workflows/ci.yml)                                                       | Format check, lint, test, build, typecheck and e2e of the affected projects.    |
-| Any pull request                            | [`ci.yml`](.github/workflows/ci.yml)                                                       | Same checks.                                                                    |
-| PR `develop` → `release/*` (or any other)   | [`firebase-hosting-pull-request.yml`](.github/workflows/firebase-hosting-pull-request.yml) | Firebase preview channel, link posted on the PR.                                |
-| PR `release/x.y.z` → `main`, opened/updated | [`release.yml`](.github/workflows/release.yml) → **Version**                               | Checks the version, sets it in `package.json`, commits `chore(release): x.y.z`. |
-| PR `release/x.y.z` → `main`, opened/updated | [`release.yml`](.github/workflows/release.yml) → **Firebase preview**                      | Builds the version commit and deploys it to a preview channel.                  |
-| PR `release/x.y.z` → `main`, merged         | [`release.yml`](.github/workflows/release.yml) → **Tag and GitHub release**                | Tags the merge commit `x.y.z` and creates a GitHub release with notes.          |
-| Push to `main` (the merge)                  | [`firebase-hosting-merge.yml`](.github/workflows/firebase-hosting-merge.yml)               | Production build and deploy to the live channel.                                |
+| Event                                       | Workflow                                                                                                | What it does                                                                           |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Push to `develop`, `release/**` or `main`   | [`ci.yml`](.github/workflows/ci.yml)                                                                    | Format check, lint, test, build, typecheck and e2e of the affected projects.           |
+| Any pull request                            | [`ci.yml`](.github/workflows/ci.yml)                                                                    | Same checks.                                                                           |
+| PR `develop` → `release/*` (or any other)   | [`firebase-hosting-pull-request.yml`](.github/workflows/firebase-hosting-pull-request.yml)              | Firebase preview channel, link posted on the PR.                                       |
+| PR `release/x.y.z` → `main`, opened/updated | [`release.yml`](.github/workflows/release.yml) → **Version**                                            | Checks the version, sets it in `package.json`, commits `chore(release): x.y.z`.        |
+| PR `release/x.y.z` → `main`, opened/updated | [`release.yml`](.github/workflows/release.yml) → **Firebase preview**                                   | Builds the version commit and deploys it to a preview channel.                         |
+| PR `release/x.y.z` → `main`, merged         | [`release.yml`](.github/workflows/release.yml) → **Tag and GitHub release**                             | Tags the merge commit `x.y.z` and creates a GitHub release with notes.                 |
+| PR `release/x.y.z` → `main`, merged         | [`release.yml`](.github/workflows/release.yml) → [`deploy-live.yml`](.github/workflows/deploy-live.yml) | After the tag: production build of the merge commit, deployed to the **live** channel. |
+| By hand: _Actions → Deploy live_            | [`deploy-live.yml`](.github/workflows/deploy-live.yml)                                                  | Redeploys an existing release tag live, for example to roll back.                      |
+
+**Only a merged release goes live.** Any other push or merge into `main` runs CI but is not deployed. Package releases (`mac-window@x.y.z`) are never deployed.
 
 ### Why the tag is made on merge, not when the PR is opened
 
@@ -109,7 +112,7 @@ Merge with **Create a merge commit** (not squash or rebase). That keeps `main` a
 After the merge:
 
 - **Release / Tag and GitHub release** tags the merge commit on `main` as `1.0.0` and creates a GitHub release (the _Releases_ page of the repository) with notes generated from the merged PRs;
-- **Deploy to Firebase Hosting on merge** builds `main` and deploys it live.
+- **Release / Deploy live** builds that merge commit and deploys it live (after the tag; if tagging fails, nothing is deployed).
 
 You can delete the release branch afterwards; the tag keeps the version.
 
