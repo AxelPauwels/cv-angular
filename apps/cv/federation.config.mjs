@@ -44,6 +44,11 @@ export default withNativeFederation({
     // In-browser GraphQL API: bundled into the app, not shared
     'graphql',
     /^@graphql-tools\//,
+    // Tolgee: bundled into the app, not shared (no remote uses it). Shared, it
+    // was prebuilt as a whole package with its development entry, so production
+    // shipped the in-context editor (React + MUI, ~300 kB gzipped) on the
+    // critical path
+    /^@tolgee\//,
   ],
 
   // Please read our FAQ about sharing libs:

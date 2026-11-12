@@ -2,12 +2,22 @@
   <ds-main-navbar [items]="navItems()" [tabPanel]="panel">
     <!-- Phones: a hamburger menu instead of the tabs; its content loads once opened.
          A click outside closes it, except while the tour opens it for its steps -->
+    <!-- Prefetched once the menu button is on screen (phones only: it is hidden
+         on wider screens), so opening it rarely has to wait -->
     <ds-mobile-menu
+      #mobileMenuHost
       dsNavbarStart
       [(open)]="mobileMenuOpen"
       [closeOnOutsideClick]="!tour.active()">
-      @defer (when mobileMenuOpen()) {
+      @defer (when mobileMenuOpen(); prefetch on viewport(mobileMenuHost)) {
       <app-mobile-nav [domains]="navItems()" />
+      } @loading (after 300ms; minimum 300ms) {
+      <div class="shell__menu-loading" role="status">
+        <span class="c-spinner" aria-hidden="true"></span>
+        <span class="cdk-visually-hidden"
+          >{{ 't.nav.menu-loading' | translate }}</span
+        >
+      </div>
       }
     </ds-mobile-menu>
     @if (toggles()['navbar-download-cv']) {

@@ -7,6 +7,7 @@ import {
 } from '@cv/shared-data-access';
 import { NavItem } from '@cv/shared-ui-layout';
 import { ROUTES } from '@cv/shared-util-routing';
+import { LOADING_DELAY_MS } from '@cv/shared-util-loading';
 import { MobileNav } from './mobile-nav';
 
 const DOMAINS: NavItem[] = [
@@ -47,7 +48,7 @@ describe('MobileNav', () => {
       element.querySelectorAll<HTMLAnchorElement>('.nav-accordion__link')
     ).map((link) => link.getAttribute('href'));
 
-  it('announces that the menu is loading until the pages are in', async () => {
+  it('shows no spinner while the pages load fast (prefetched)', async () => {
     // Arrange
     const { fixture, element } = await render();
 
@@ -55,9 +56,27 @@ describe('MobileNav', () => {
     fixture.detectChanges();
 
     // Assert
-    const status = element.querySelector('[role="status"]');
-    expect(status?.textContent?.trim()).toBe('Loading the menu…');
+    expect(element.querySelector('[role="status"]')).toBeNull();
     expect(element.querySelector('ds-nav-accordion')).toBeNull();
+  });
+
+  it('announces that the menu is loading when the pages take a while', async () => {
+    // Arrange
+    vi.useFakeTimers();
+    const { fixture, element } = await render();
+
+    try {
+      // Act: the pages are still loading after the loading delay
+      fixture.detectChanges();
+      vi.advanceTimersByTime(LOADING_DELAY_MS);
+      fixture.detectChanges();
+
+      // Assert
+      const status = element.querySelector('[role="status"]');
+      expect(status?.textContent?.trim()).toBe('Loading the menu…');
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it('lists every domain with its pages', async () => {
