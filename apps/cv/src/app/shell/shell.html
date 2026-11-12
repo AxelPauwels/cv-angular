@@ -1,7 +1,11 @@
 <header #header class="shell__header" tabindex="-1" [inert]="tour.active()">
   <ds-main-navbar [items]="navItems()" [tabPanel]="panel">
-    <!-- Phones: a hamburger menu instead of the tabs; its content loads once opened -->
-    <ds-mobile-menu dsNavbarStart [(open)]="mobileMenuOpen">
+    <!-- Phones: a hamburger menu instead of the tabs; its content loads once opened.
+         A click outside closes it, except while the tour opens it for its steps -->
+    <ds-mobile-menu
+      dsNavbarStart
+      [(open)]="mobileMenuOpen"
+      [closeOnOutsideClick]="!tour.active()">
       @defer (when mobileMenuOpen()) {
       <app-mobile-nav [domains]="navItems()" />
       }

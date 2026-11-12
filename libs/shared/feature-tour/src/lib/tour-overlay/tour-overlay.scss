@@ -133,10 +133,22 @@
     margin: 0 0 0.75rem;
   }
 
+  // Room for the longest step text, so the card keeps one height on every
+  // step: 4 lines, 5 below 480px (small phones), 6 below xs (375px). In `lh`,
+  // so it grows along with a larger text size.
   &__text {
     font: var(--mat-sys-body-large);
     margin: 0;
+    min-height: 4lh;
     white-space: pre-line;
+
+    @media (width < 480px) {
+      min-height: 5lh;
+    }
+
+    @media (width < 375px) {
+      min-height: 6lh;
+    }
   }
 
   &__footer {

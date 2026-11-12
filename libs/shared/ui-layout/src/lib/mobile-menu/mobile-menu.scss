@@ -1,10 +1,12 @@
+@use '2.tools' as tools;
 @use '3.vendors/mat';
 
-// Only on phones: wider screens show the main navbar's tabs instead
+// Only on phones and small tablets (< md): wider screens show the main
+// navbar's tabs instead
 :host {
   display: none;
 
-  @media (width < 600px) {
+  @include tools.screen-below(md) {
     display: block;
   }
 }

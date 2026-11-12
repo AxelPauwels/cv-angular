@@ -75,7 +75,7 @@ export class Shell {
   /** Which menu items and navbar icons show, switched on the admin page */
   protected readonly toggles = inject(FeatureToggleService).states;
 
-  /** The hamburger menu that replaces the domain tabs on phones */
+  /** The hamburger menu that replaces the domain tabs below md (768px) */
   protected readonly mobileMenuOpen = signal(false);
   private readonly mobileMenu = viewChild(MobileMenu);
 

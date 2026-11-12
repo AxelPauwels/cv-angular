@@ -16,7 +16,7 @@ import { activeNavItem } from '../internal/active-nav-item';
  * content (e.g. a language switcher) is shown at the end of the toolbar; content
  * marked `dsNavbarStart` (e.g. a `ds-mobile-menu`) at its start.
  *
- * On phones (< 600px) the tabs are hidden: a `ds-mobile-menu` takes their place.
+ * Below md (< 768px: phones and small tablets) the tabs are hidden: a `ds-mobile-menu` takes their place.
  */
 @Component({
   selector: 'ds-main-navbar',

@@ -482,11 +482,6 @@
           "text": "Vous préférez un autre style ? Changez ici la police de tout le site.",
           "title": "Polices"
         },
-        "home": {
-          "label": "Accueil",
-          "text": "L'icône de la maison dans le menu vous ramène toujours à cette page, où que vous soyez sur le site.",
-          "title": "Accueil"
-        },
         "languages": {
           "label": "Langues",
           "text": "Le site est disponible en anglais, néerlandais, français et espagnol. Choisissez votre langue ici.",

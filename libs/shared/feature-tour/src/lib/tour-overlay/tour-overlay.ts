@@ -16,7 +16,7 @@ import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@tolgee/ngx';
 import { FeatureToggleService, TourService } from '@cv/shared-data-access';
 import { LOADING_DELAY_MS } from '@cv/shared-util-loading';
-import { TourStep, TOUR_STEPS } from '../tour-steps';
+import { SpotlightFrame, TourStep, TOUR_STEPS } from '../tour-steps';
 
 interface Box {
   top: number;
@@ -75,6 +75,8 @@ export class TourOverlay {
   /** The spotlight, in viewport coordinates; empty and centered without a target */
   protected readonly spotlight = signal<Box>(this.centerBox());
   protected readonly hasTarget = signal(false);
+  /** A step's own corner; null keeps the stylesheet's corner */
+  protected readonly spotlightRadius = signal<string | null>(null);
   /** Shown when a page or its target takes longer than LOADING_DELAY_MS */
   protected readonly loading = signal(false);
 
@@ -91,6 +93,8 @@ export class TourOverlay {
   });
 
   private targets: readonly Element[] = [];
+  /** The frame of the current step's target (or menu target) */
+  private targetFrame: SpotlightFrame | undefined;
   private readonly resizeObserver =
     typeof ResizeObserver === 'undefined'
       ? undefined
@@ -188,6 +192,12 @@ export class TourOverlay {
       if (run !== this.run) {
         return;
       }
+      this.targetFrame = inMenu
+        ? step.menuSpotlight
+        : target
+          ? step.spotlight
+          : undefined;
+      this.spotlightRadius.set(this.targetFrame?.radius ?? null);
       this.observe(targets);
       targets[0]?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       this.measure();
@@ -224,13 +234,22 @@ export class TourOverlay {
     });
   }
 
+  /**
+   * Measure again when a target or one of its ancestors changes size: a target
+   * also moves when something around it grows or shrinks (e.g. the menu
+   * collapsing the previous step's group above it), without resizing itself
+   */
   private observe(targets: readonly Element[]): void {
-    for (const target of this.targets) {
-      this.resizeObserver?.unobserve(target);
-    }
+    this.resizeObserver?.disconnect();
     this.targets = targets;
     for (const target of targets) {
-      this.resizeObserver?.observe(target);
+      for (
+        let element: Element | null = target;
+        element;
+        element = element.parentElement
+      ) {
+        this.resizeObserver?.observe(element);
+      }
     }
   }
 
@@ -245,15 +264,24 @@ export class TourOverlay {
       this.spotlight.set(this.centerBox());
       return;
     }
-    const top = Math.min(...rects.map((rect) => rect.top));
-    const left = Math.min(...rects.map((rect) => rect.left));
-    const bottom = Math.max(...rects.map((rect) => rect.bottom));
-    const right = Math.max(...rects.map((rect) => rect.right));
+    const padding = this.targetFrame?.padding ?? SPOTLIGHT_PADDING;
+    const {
+      top = 0,
+      right = 0,
+      bottom = 0,
+      left = 0,
+    } = this.targetFrame?.trim ?? {};
+    const box = {
+      top: Math.min(...rects.map((rect) => rect.top)) + top,
+      left: Math.min(...rects.map((rect) => rect.left)) + left,
+      bottom: Math.max(...rects.map((rect) => rect.bottom)) - bottom,
+      right: Math.max(...rects.map((rect) => rect.right)) - right,
+    };
     this.spotlight.set({
-      top: top - SPOTLIGHT_PADDING,
-      left: left - SPOTLIGHT_PADDING,
-      width: right - left + SPOTLIGHT_PADDING * 2,
-      height: bottom - top + SPOTLIGHT_PADDING * 2,
+      top: box.top - padding,
+      left: box.left - padding,
+      width: box.right - box.left + padding * 2,
+      height: box.bottom - box.top + padding * 2,
     });
   }
 
