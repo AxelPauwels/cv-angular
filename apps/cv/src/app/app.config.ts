@@ -10,7 +10,10 @@ import {
   withPreloading,
 } from '@angular/router';
 import { appRoutes } from './app.routes';
-import { inBrowserGraphqlInterceptor } from '@cv/shared-data-access';
+import {
+  FEDERATION_MANIFEST_URL,
+  inBrowserGraphqlInterceptor,
+} from '@cv/shared-data-access';
 import { provideI18n } from '@cv/shared-data-access-i18n';
 import { environment } from '../environments/environment';
 
@@ -23,6 +26,11 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withPreloading(PreloadAllModules)
     ),
+    // the same manifest main.ts started federation with
+    {
+      provide: FEDERATION_MANIFEST_URL,
+      useValue: environment.federationManifest,
+    },
     provideI18n(environment.tolgee),
   ],
 };

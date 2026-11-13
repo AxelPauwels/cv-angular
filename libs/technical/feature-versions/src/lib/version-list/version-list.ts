@@ -49,7 +49,11 @@ export class VersionList {
     }));
   });
 
-  protected npmUrl(entry: PackageVersion): string | undefined {
+  /** A remote links to its deployment, an installed package to npm */
+  protected link(entry: PackageVersion): string | undefined {
+    if (entry.remote) {
+      return entry.url;
+    }
     return entry.range
       ? `https://www.npmjs.com/package/${entry.name}`
       : undefined;

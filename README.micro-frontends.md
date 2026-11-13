@@ -74,6 +74,8 @@ The remote deploys itself: a merge to `main` in `cv-angular-mfe` builds and depl
 
 **Same inputs, same Angular version: nothing to do here.** The next page load picks up the new version. No rebuild or redeploy of this app.
 
+**Which version is live:** Technical → Versions lists every remote of the manifest under Micro-frontends, with the version it is deployed with. The page reads it at runtime from the remote's `version.json` (next to its `remoteEntry.json`, written by `nx run cv-mfe:version-info` from the remote's `package.json` on every build and serve). A remote that can't be reached, or that doesn't publish a `version.json`, shows as _unavailable_. In development this is your local remote: restart `npm start` there after pulling this change, so it serves `version.json`.
+
 **The remote's inputs changed** (added, renamed, removed or different types):
 
 1. Update [`CvMfeInputs`](libs/shared/ui-federation/src/lib/internal/cv-mfe.ts) to match the remote's API docs.

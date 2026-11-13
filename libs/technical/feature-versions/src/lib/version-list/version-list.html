@@ -27,7 +27,7 @@
           *matCellDef="let entry"
           scope="row"
           class="mat-mdc-cell mdc-data-table__cell version-list__package">
-          @if (npmUrl(entry); as url) {
+          @if (link(entry); as url) {
           <a [href]="url" target="_blank" rel="noopener">{{ entry.label }}</a>
           } @else { {{ entry.label }} }
         </th>

@@ -19,7 +19,10 @@ describe('VersionList', () => {
     const fixture = TestBed.createComponent(VersionList);
     fixture.detectChanges();
     TestBed.tick();
-    answer(TestBed.inject(HttpTestingController));
+    const http = TestBed.inject(HttpTestingController);
+    answer(http);
+    // the remotes' versions load next to it: none here
+    http.expectOne('federation.manifest.json').flush({});
     await fixture.whenStable();
     return fixture.nativeElement as HTMLElement;
   }
