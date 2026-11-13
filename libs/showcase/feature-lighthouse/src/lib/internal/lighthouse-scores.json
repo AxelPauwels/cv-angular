@@ -10,31 +10,31 @@
       "best-practices": 100,
       "seo": 100
     },
-    "/personal": {
+    "/cv/personal": {
       "performance": 98,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
-    "/education": {
+    "/cv/education": {
       "performance": 98,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
-    "/experience": {
+    "/cv/experience": {
       "performance": 97,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
-    "/skills": {
+    "/cv/skills": {
       "performance": 98,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
-    "/references": {
+    "/cv/references": {
       "performance": 98,
       "accessibility": 100,
       "best-practices": 100,

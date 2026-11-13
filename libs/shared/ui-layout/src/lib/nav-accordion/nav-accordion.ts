@@ -11,7 +11,8 @@ let nextId = 0;
 /**
  * The whole navigation as an accordion: one button per domain that shows its
  * pages (`children`), one domain open at a time. The domain of the current url
- * starts open. Used in a `ds-mobile-menu`.
+ * starts open. An item without `children` (e.g. home) is a plain link. Used in
+ * a `ds-mobile-menu`.
  */
 @Component({
   selector: 'ds-nav-accordion',

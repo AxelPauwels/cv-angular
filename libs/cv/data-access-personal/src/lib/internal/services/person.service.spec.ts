@@ -36,7 +36,7 @@ describe('PersonService', () => {
     expect(person.value()?.personal.dateOfBirth).toBeInstanceOf(Date);
     expect(person.value()?.contact.address.city).toBe('Geel');
     expect(person.value()?.contact.github).toBe(
-      'https://github.com/AxelPauwels'
+      'https://github.com/AxelPauwels/cv-angular/'
     );
     expect(person.value()?.languages.length).toBeGreaterThan(0);
   });

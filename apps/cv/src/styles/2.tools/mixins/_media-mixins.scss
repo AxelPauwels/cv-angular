@@ -12,3 +12,17 @@
     @warn "Breakpoint '#{$breakpoint}' not found in \$breakpoints map.";
   }
 }
+
+// Below a breakpoint: the counterpart of `screen`, so the two never overlap
+// (`screen(md)` from 768px up, `screen-below(md)` up to 767.98px)
+@mixin screen-below($breakpoint) {
+  $value: map.get($all-breakpoints, $breakpoint);
+
+  @if $value {
+    @media screen and (width < $value) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$breakpoint}' not found in \$breakpoints map.";
+  }
+}

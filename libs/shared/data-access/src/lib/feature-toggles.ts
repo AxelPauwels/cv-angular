@@ -54,14 +54,15 @@ export const FEATURE_TOGGLES = [
     labelKey: 't.feature-toggles.toggle.tour-button.label',
   },
 
+  menuItem('main-menu-cv', 'main-menu', 't.nav.cv'),
   menuItem('main-menu-technical', 'main-menu', 't.nav.technical'),
   menuItem('main-menu-showcase', 'main-menu', 't.nav.showcase'),
 
-  menuItem('cv-personal', 'cv-menu', 't.nav.personal'),
-  menuItem('cv-education', 'cv-menu', 't.nav.education'),
-  menuItem('cv-experience', 'cv-menu', 't.nav.experience'),
-  menuItem('cv-skills', 'cv-menu', 't.nav.skills'),
-  menuItem('cv-references', 'cv-menu', 't.nav.references'),
+  menuItem('cv-personal', 'cv-menu', 't.nav.personal', 'main-menu-cv'),
+  menuItem('cv-education', 'cv-menu', 't.nav.education', 'main-menu-cv'),
+  menuItem('cv-experience', 'cv-menu', 't.nav.experience', 'main-menu-cv'),
+  menuItem('cv-skills', 'cv-menu', 't.nav.skills', 'main-menu-cv'),
+  menuItem('cv-references', 'cv-menu', 't.nav.references', 'main-menu-cv'),
 
   menuItem(
     'technical-architecture',

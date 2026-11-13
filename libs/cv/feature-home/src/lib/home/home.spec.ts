@@ -69,7 +69,7 @@ describe('Home', () => {
       Array.from(element.querySelectorAll('.home-hero__actions a')).map(
         (link) => link.getAttribute('href')
       )
-    ).toEqual(['/personal', '/experience']);
+    ).toEqual(['/cv/personal', '/cv/experience']);
     expect(element.textContent).not.toContain('t.');
   });
 

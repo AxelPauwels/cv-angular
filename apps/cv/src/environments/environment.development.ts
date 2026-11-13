@@ -9,6 +9,8 @@ export const environment: Environment = {
   nodeVersion: 'todo',
   gitCommit: 'todo',
   buildDate: new Date().toISOString(),
+  // the remotes served locally (cv-mfe: `nx serve cv-mfe` on port 4300)
+  federationManifest: 'federation.manifest.localhost.json',
   tolgee: {
     apiUrl: TOKENS.TOLGEE.API_URL,
     apiKey: TOKENS.TOLGEE.API_KEY,

@@ -12,22 +12,33 @@ import type {
   ProjectInfo,
 } from './types/build-info.types';
 
-/** Installed versions of the main frameworks and tools; loads once */
+/**
+ * Installed versions of the main frameworks and tools, plus the deployed
+ * version of each micro-frontend remote (read at runtime, added once in);
+ * loads once
+ */
 export const VersionStore = signalStore(
   { providedIn: 'root' },
   withProps(() => ({
     _versions: inject(BuildInfoService).versions(),
+    _remotes: inject(BuildInfoService).remoteVersions(),
   })),
-  withComputed(({ _versions }) => ({
+  withComputed(({ _versions, _remotes }) => ({
     packages: computed((): PackageVersion[] =>
-      _versions.hasValue() ? _versions.value() : []
+      _versions.hasValue()
+        ? [
+            ..._versions.value(),
+            ...(_remotes.hasValue() ? _remotes.value() : []),
+          ]
+        : []
     ),
     isLoading: computed(() => _versions.isLoading()),
     error: computed(() => _versions.error()),
   })),
-  withMethods(({ _versions }) => ({
+  withMethods(({ _versions, _remotes }) => ({
     reload(): void {
       _versions.reload();
+      _remotes.reload();
     },
   }))
 );

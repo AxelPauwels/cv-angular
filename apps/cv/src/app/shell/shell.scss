@@ -95,6 +95,12 @@
   }
 
   // While the tour's chunk loads (only shown after 300ms)
+  &__menu-loading {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+  }
+
   &__tour-loading {
     align-items: center;
     background-color: color-mix(in srgb, var(--mat-sys-scrim) 72%, transparent);

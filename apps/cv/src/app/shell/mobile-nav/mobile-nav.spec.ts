@@ -7,9 +7,11 @@ import {
 } from '@cv/shared-data-access';
 import { NavItem } from '@cv/shared-ui-layout';
 import { ROUTES } from '@cv/shared-util-routing';
+import { LOADING_DELAY_MS } from '@cv/shared-util-loading';
 import { MobileNav } from './mobile-nav';
 
 const DOMAINS: NavItem[] = [
+  { labelKey: 't.nav.home', path: ROUTES.HOME.ROOT, icon: 'home' },
   { labelKey: 't.nav.cv', path: ROUTES.CV.ROOT },
   { labelKey: 't.nav.technical', path: ROUTES.TECHNICAL.ROOT },
   { labelKey: 't.nav.showcase', path: ROUTES.SHOWCASE.ROOT },
@@ -46,7 +48,7 @@ describe('MobileNav', () => {
       element.querySelectorAll<HTMLAnchorElement>('.nav-accordion__link')
     ).map((link) => link.getAttribute('href'));
 
-  it('announces that the menu is loading until the pages are in', async () => {
+  it('shows no spinner while the pages load fast (prefetched)', async () => {
     // Arrange
     const { fixture, element } = await render();
 
@@ -54,9 +56,27 @@ describe('MobileNav', () => {
     fixture.detectChanges();
 
     // Assert
-    const status = element.querySelector('[role="status"]');
-    expect(status?.textContent?.trim()).toBe('Loading the menu…');
+    expect(element.querySelector('[role="status"]')).toBeNull();
     expect(element.querySelector('ds-nav-accordion')).toBeNull();
+  });
+
+  it('announces that the menu is loading when the pages take a while', async () => {
+    // Arrange
+    vi.useFakeTimers();
+    const { fixture, element } = await render();
+
+    try {
+      // Act: the pages are still loading after the loading delay
+      fixture.detectChanges();
+      vi.advanceTimersByTime(LOADING_DELAY_MS);
+      fixture.detectChanges();
+
+      // Assert
+      const status = element.querySelector('[role="status"]');
+      expect(status?.textContent?.trim()).toBe('Loading the menu…');
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it('lists every domain with its pages', async () => {
@@ -71,7 +91,8 @@ describe('MobileNav', () => {
 
     // Assert
     expect(element.querySelector('[role="status"]')).toBeNull();
-    expect(groups(element)).toEqual(['CV', 'Technical', 'Showcase']);
+    expect(groups(element)).toEqual(['Home', 'CV', 'Technical', 'Showcase']);
+    expect(links(element)).toContain('/cv/personal');
     expect(links(element)).toContain('/technical/versions');
     expect(links(element)).toContain('/showcase/lighthouse');
   });
@@ -93,11 +114,9 @@ describe('MobileNav', () => {
     expect(links(element)).toContain('/technical/architecture');
   });
 
-  it('shows a domain without pages of its own as an empty group', async () => {
+  it('shows home, without pages of its own, as a link instead of a group', async () => {
     // Arrange
-    const { fixture, element } = await render([
-      { labelKey: 't.nav.home', path: 'elsewhere' },
-    ]);
+    const { fixture, element } = await render();
 
     // Act
     await vi.waitFor(async () => {
@@ -106,7 +125,13 @@ describe('MobileNav', () => {
     }, MENU_LOADED);
 
     // Assert
-    expect(groups(element)).toEqual(['Home']);
-    expect(links(element)).toEqual([]);
+    const home = element.querySelector<HTMLAnchorElement>(
+      'a.nav-accordion__toggle'
+    );
+    expect(home?.getAttribute('href')).toBe('/home');
+    expect(home?.textContent).toContain('Home');
+    expect(
+      element.querySelectorAll('button.nav-accordion__toggle')
+    ).toHaveLength(3);
   });
 });

@@ -1,19 +1,22 @@
 import { Component, input } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
+import { MatTooltip } from '@angular/material/tooltip';
 import { MatTabLink, MatTabNav, MatTabNavPanel } from '@angular/material/tabs';
 import { TranslatePipe } from '@tolgee/ngx';
 import { NavItem } from '../nav-item';
 import { activeNavItem } from '../internal/active-nav-item';
 
 /**
- * Toolbar with one tab per domain. The layout owns the content area: it passes
+ * Toolbar with one tab per domain (an item with an `icon` shows the icon instead
+ * of its label). The layout owns the content area: it passes
  * the `mat-tab-nav-panel` around its routed content as `tabPanel`. Projected
  * content (e.g. a language switcher) is shown at the end of the toolbar; content
  * marked `dsNavbarStart` (e.g. a `ds-mobile-menu`) at its start.
  *
- * On phones (< 600px) the tabs are hidden: a `ds-mobile-menu` takes their place.
+ * Below md (< 768px: phones and small tablets) the tabs are hidden: a `ds-mobile-menu` takes their place.
  */
 @Component({
   selector: 'ds-main-navbar',
@@ -22,6 +25,8 @@ import { activeNavItem } from '../internal/active-nav-item';
     MatToolbar,
     MatTabNav,
     MatTabLink,
+    MatIcon,
+    MatTooltip,
     TranslatePipe,
     UpperCasePipe,
   ],

@@ -56,6 +56,14 @@
     &--current {
       font-weight: 700;
     }
+
+    // an item without pages links straight to its page: no chevron
+    &--link {
+      box-sizing: border-box;
+      gap: 0.5rem;
+      justify-content: flex-start;
+      text-decoration: none;
+    }
   }
 
   &__chevron {
@@ -109,6 +117,7 @@
   &__icon {
     font-size: 1.25rem;
     height: 1.25rem;
+    padding-bottom: 4px;
     width: 1.25rem;
   }
 }

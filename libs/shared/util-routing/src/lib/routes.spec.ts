@@ -21,7 +21,7 @@ function pathsOf(routes: DomainRoutes): [string, string][] {
 describe('ROUTES', () => {
   it('exposes every domain, also as default export', () => {
     // Arrange
-    const expected = ['CV', 'SHOWCASE', 'TECHNICAL', 'MF'];
+    const expected = ['HOME', 'CV', 'SHOWCASE', 'TECHNICAL', 'MF'];
 
     // Act
     const exposed = Object.keys(ROUTES);
@@ -100,8 +100,8 @@ describe('ROUTES', () => {
 
   it('gives every url exactly one owner', () => {
     // Arrange
-    // CV and MF are mounted at '', so their paths share the top level with
-    // the other domains' roots; a clash would make one domain unreachable.
+    // MF is mounted at '', so its paths share the top level with the other
+    // domains' roots; a clash would make one domain unreachable.
     const urls = domains.flatMap((domain) =>
       Object.entries(ROUTES[domain] as DomainRoutes)
         .filter(([key]) => key.endsWith(LINK_SUFFIX))

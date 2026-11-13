@@ -13,4 +13,6 @@ export interface Environment {
   gitCommit: string;
   buildDate: string;
   tolgee?: TolgeeConfig; // Local development only
+  /** Maps each remote (micro-frontend) to its remoteEntry.json, from `public/` */
+  federationManifest: string;
 }

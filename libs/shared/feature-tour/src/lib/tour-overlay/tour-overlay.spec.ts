@@ -199,6 +199,60 @@ describe('TourOverlay', () => {
     expect(spotlight.style.width).toBe(`${140 + padding * 2}px`);
   });
 
+  it('frames a target with its own padding, trim and corner', async () => {
+    // Arrange
+    const framed: TourStep[] = [
+      {
+        ...step('settings', '/first', '[data-tour="first"]'),
+        spotlight: { padding: 5, radius: '20px', trim: { top: 4, bottom: 1 } },
+      },
+      step('finish', '/second'),
+    ];
+
+    // Act
+    const { query } = await render(Host, framed);
+
+    // Assert
+    const spotlight = await vi.waitFor(() => {
+      const element = query('.tour__spotlight--active');
+      expect(element).not.toBeNull();
+      return element as HTMLElement;
+    });
+    const rects = Array.from(
+      document.querySelectorAll('[data-tour="first"]')
+    ).map((target) => target.getBoundingClientRect());
+    const top = Math.min(...rects.map((rect) => rect.top));
+    const left = Math.min(...rects.map((rect) => rect.left));
+    const bottom = Math.max(...rects.map((rect) => rect.bottom));
+    expect(parseFloat(spotlight.style.top)).toBeCloseTo(top + 4 - 5);
+    expect(parseFloat(spotlight.style.left)).toBeCloseTo(left - 5);
+    expect(parseFloat(spotlight.style.height)).toBeCloseTo(
+      bottom - top - 4 - 1 + 5 * 2
+    );
+    expect(spotlight.style.borderRadius).toBe('20px');
+  });
+
+  it('keeps the default frame and corner for a step without its own', async () => {
+    // Arrange
+    const padding = 8;
+
+    // Act
+    const { query } = await render();
+
+    // Assert
+    const spotlight = await vi.waitFor(() => {
+      const element = query('.tour__spotlight--active');
+      expect(element).not.toBeNull();
+      return element as HTMLElement;
+    });
+    const rects = Array.from(
+      document.querySelectorAll('[data-tour="first"]')
+    ).map((target) => target.getBoundingClientRect());
+    const top = Math.min(...rects.map((rect) => rect.top));
+    expect(parseFloat(spotlight.style.top)).toBeCloseTo(top - padding);
+    expect(spotlight.style.borderRadius).toBe('');
+  });
+
   it('keeps a step while one of its some-toggles is on', async () => {
     // Arrange
     saveFeatureTogglesForTesting({ 'navbar-theme-switcher': false });
@@ -425,6 +479,73 @@ describe('TourOverlay', () => {
       },
       step('finish', '/second'),
     ];
+
+    it('frames a step in the menu with its menu frame, not its target frame', async () => {
+      // Arrange
+      const framed: TourStep[] = [
+        step('settings', '/first', '[data-tour="first"]'),
+        {
+          ...menuSteps[1],
+          spotlight: { padding: 40, radius: '40px' },
+          menuSpotlight: { trim: { top: 7, bottom: 9 } },
+        },
+        step('finish', '/second'),
+      ];
+      const { query, fixture } = await render(PhoneHost, framed);
+
+      // Act
+      query('.tour__action--next')?.click();
+      await fixture.whenStable();
+
+      // Assert
+      const padding = 8;
+      const row = await vi.waitFor(() => {
+        const element = query('[data-tour="menu-second"]');
+        expect(element).not.toBeNull();
+        return (element as HTMLElement).getBoundingClientRect();
+      });
+      await vi.waitFor(() => {
+        const spotlight = query('.tour__spotlight') as HTMLElement;
+        expect(parseFloat(spotlight.style.top)).toBeCloseTo(
+          row.top + 7 - padding
+        );
+        expect(parseFloat(spotlight.style.height)).toBeCloseTo(
+          row.height - 7 - 9 + padding * 2
+        );
+        expect(spotlight.style.borderRadius).toBe('');
+      });
+    });
+
+    it('follows a target that moves when the layout around it changes', async () => {
+      // Arrange
+      const padding = 8;
+      const { query, fixture } = await render(PhoneHost, menuSteps);
+      query('.tour__action--next')?.click();
+      await fixture.whenStable();
+      const target = await vi.waitFor(() => {
+        const element = query('[data-tour="menu-second"]');
+        expect(element).not.toBeNull();
+        return element as HTMLElement;
+      });
+      await vi.waitFor(() =>
+        expect(query('.tour__spotlight--active')).not.toBeNull()
+      );
+
+      // Act
+      // something above the target grows (e.g. a group of the menu opening)
+      const spacer = document.createElement('div');
+      spacer.style.height = '100px';
+      target.before(spacer);
+
+      // Assert
+      await vi.waitFor(() => {
+        const spotlight = query('.tour__spotlight') as HTMLElement;
+        expect(parseFloat(spotlight.style.top)).toBeCloseTo(
+          target.getBoundingClientRect().top - padding
+        );
+      });
+      spacer.remove();
+    });
 
     it('opens the menu for a step inside it', async () => {
       // Arrange

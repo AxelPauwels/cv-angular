@@ -18,9 +18,10 @@ let nextId = 0;
 
 /**
  * A hamburger button that shows and hides a panel with the projected content
- * (e.g. a `ds-nav-accordion`), for phones (< 600px; hidden on wider screens).
- * A disclosure: the button says whether the panel is open, Escape and every
- * navigation close it. Place it in a `ds-main-navbar` with `dsNavbarStart`.
+ * (e.g. a `ds-nav-accordion`), for phones and small tablets (below the md
+ * breakpoint, 768px; hidden on wider screens).
+ * A disclosure: the button says whether the panel is open, Escape, a click
+ * outside the menu and every navigation close it. Place it in a `ds-main-navbar` with `dsNavbarStart`.
  */
 @Component({
   selector: 'ds-mobile-menu',
@@ -29,13 +30,21 @@ let nextId = 0;
   styleUrl: './mobile-menu.scss',
   host: {
     '(keydown.escape)': 'closeFromKeyboard()',
+    '(document:click)': 'closeFromOutside($event)',
   },
 })
 export class MobileMenu {
   readonly open = model(false);
   readonly labelKey = input<NavTranslationKey>('t.nav.menu');
+  /**
+   * Whether a click outside the button and the panel closes the menu, like the
+   * close button does. Switch it off while something else drives the menu
+   * (e.g. a guided tour with its own buttons).
+   */
+  readonly closeOnOutsideClick = input(true);
 
   protected readonly panelId = `ds-mobile-menu-panel-${nextId++}`;
+  private readonly host: HTMLElement = inject(ElementRef).nativeElement;
   private readonly button = viewChild.required('button', { read: ElementRef });
   private readonly panel = viewChild.required<ElementRef<HTMLElement>>('panel');
 
@@ -54,6 +63,17 @@ export class MobileMenu {
 
   protected closeFromKeyboard(): void {
     if (this.open()) {
+      this.close();
+    }
+  }
+
+  protected closeFromOutside(event: Event): void {
+    if (
+      this.open() &&
+      this.closeOnOutsideClick() &&
+      event.target instanceof Node &&
+      !this.host.contains(event.target)
+    ) {
       this.close();
     }
   }

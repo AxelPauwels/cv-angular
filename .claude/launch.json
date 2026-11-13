@@ -44,6 +44,19 @@
         "dist/apps/cv/browser"
       ],
       "port": 4320
+    },
+    {
+      "name": "cv-dev-local-mfe",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-I",
+        "-m",
+        "http.server",
+        "4202",
+        "--directory",
+        "dist/dev/apps/cv/browser"
+      ],
+      "port": 4202
     }
   ]
 }

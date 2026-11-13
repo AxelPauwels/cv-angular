@@ -16,6 +16,12 @@ describe('build info stores', () => {
 
   const settle = () => TestBed.inject(ApplicationRef).whenStable();
 
+  /** The remotes load next to the versions: none here */
+  const noRemotes = () =>
+    TestBed.inject(HttpTestingController)
+      .expectOne('federation.manifest.json')
+      .flush({});
+
   it('loads the installed versions', async () => {
     // Arrange
     const store = TestBed.inject(VersionStore);
@@ -34,6 +40,7 @@ describe('build info stores', () => {
           },
         ],
       });
+    noRemotes();
     await settle();
 
     // Assert
@@ -78,6 +85,7 @@ describe('build info stores', () => {
     TestBed.inject(HttpTestingController)
       .expectOne('/build-info/versions.json')
       .flush('', { status: 404, statusText: 'Not Found' });
+    noRemotes();
     await settle();
 
     // Assert
@@ -157,12 +165,14 @@ describe('build info stores', () => {
     http
       .expectOne('/build-info/versions.json')
       .flush('', { status: 404, statusText: 'Not Found' });
+    noRemotes();
     await settle();
 
     // Act
     store.reload();
     TestBed.tick();
     http.expectOne('/build-info/versions.json').flush({ packages: [] });
+    noRemotes();
     await settle();
 
     // Assert
@@ -191,5 +201,92 @@ describe('build info stores', () => {
     // Assert
     expect(store.error()).toBeUndefined();
     expect(store.isLoading()).toBe(false);
+  });
+
+  describe('remote versions', () => {
+    const versions = (http: HttpTestingController) =>
+      http.expectOne('/build-info/versions.json').flush({ packages: [] });
+
+    it('lists each remote of the manifest with its deployed version', async () => {
+      // Arrange
+      const store = TestBed.inject(VersionStore);
+      const http = TestBed.inject(HttpTestingController);
+      TestBed.tick();
+      versions(http);
+
+      // Act
+      http.expectOne('federation.manifest.json').flush({
+        'cv-mfe': 'https://remote.example/remoteEntry.json',
+      });
+      await vi.waitFor(() =>
+        http
+          .expectOne('https://remote.example/version.json')
+          .flush({ name: '@axel-pauwels/cv-mfe', version: '1.2.0' })
+      );
+      await settle();
+
+      // Assert
+      expect(store.packages()).toEqual([
+        {
+          category: 'Micro-frontends',
+          name: '@axel-pauwels/cv-mfe',
+          label: 'cv-mfe (remote)',
+          version: '1.2.0',
+          remote: true,
+          url: 'https://remote.example/',
+        },
+      ]);
+    });
+
+    it('shows a remote that cannot be reached as unavailable', async () => {
+      // Arrange
+      const store = TestBed.inject(VersionStore);
+      const http = TestBed.inject(HttpTestingController);
+      TestBed.tick();
+      versions(http);
+
+      // Act
+      http.expectOne('federation.manifest.json').flush({
+        'cv-mfe': 'https://remote.example/remoteEntry.json',
+      });
+      await vi.waitFor(() =>
+        http
+          .expectOne('https://remote.example/version.json')
+          .flush('', { status: 404, statusText: 'Not Found' })
+      );
+      await settle();
+
+      // Assert
+      expect(store.packages()[0]).toMatchObject({
+        name: 'cv-mfe',
+        version: 'unavailable',
+      });
+    });
+
+    it('shows no unexpected values from a remote', async () => {
+      // Arrange
+      const store = TestBed.inject(VersionStore);
+      const http = TestBed.inject(HttpTestingController);
+      TestBed.tick();
+      versions(http);
+
+      // Act
+      http.expectOne('federation.manifest.json').flush({
+        'cv-mfe': 'https://remote.example/remoteEntry.json',
+        other: 'javascript:alert(1)',
+      });
+      await vi.waitFor(() =>
+        http
+          .expectOne('https://remote.example/version.json')
+          .flush({ name: '<img src=x>', version: 'latest<script>' })
+      );
+      await settle();
+
+      // Assert
+      const [cvMfe, other] = store.packages();
+      expect(cvMfe).toMatchObject({ name: 'cv-mfe', version: 'unavailable' });
+      expect(other).toMatchObject({ name: 'other', version: 'unavailable' });
+      expect(other.url).toBeUndefined();
+    });
   });
 });

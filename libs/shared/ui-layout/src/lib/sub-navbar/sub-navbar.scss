@@ -35,8 +35,8 @@
 
     background-color: var(--mat-sys-surface-container);
 
-    // Phones (< 600px): the mobile menu in the main navbar lists every page
-    @media (width < 600px) {
+    // Below md: the mobile menu in the main navbar lists every page
+    @include tools.screen-below(md) {
       display: none;
     }
   }

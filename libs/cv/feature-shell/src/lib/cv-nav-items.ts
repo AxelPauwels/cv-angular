@@ -1,11 +1,11 @@
+import { inject } from '@angular/core';
 import { NavItem } from '@cv/shared-ui-layout';
-import { FeatureToggleId } from '@cv/shared-data-access';
+import { FeatureToggleId, FeatureToggleService } from '@cv/shared-data-access';
 import { ROUTES } from '@cv/shared-util-routing';
 
-/** The pages of the CV domain; all but home are switched on the admin page */
-export const CV_NAV_ITEMS: readonly (NavItem & { toggle?: FeatureToggleId })[] =
+/** The pages of the CV domain, each switched on the admin page */
+export const CV_NAV_ITEMS: readonly (NavItem & { toggle: FeatureToggleId })[] =
   [
-    { labelKey: 't.nav.home', path: ROUTES.CV.HOME, icon: 'home' },
     {
       labelKey: 't.nav.personal',
       path: ROUTES.CV.PERSONAL,
@@ -28,3 +28,12 @@ export const CV_NAV_ITEMS: readonly (NavItem & { toggle?: FeatureToggleId })[] =
       toggle: 'cv-references',
     },
   ];
+
+/** For a redirect: the first page that is switched on (in an injection context) */
+export function firstVisibleCvPage(): string {
+  const toggles = inject(FeatureToggleService).states();
+  return (
+    CV_NAV_ITEMS.find(({ toggle }) => toggles[toggle])?.path ??
+    ROUTES.CV.PERSONAL
+  );
+}

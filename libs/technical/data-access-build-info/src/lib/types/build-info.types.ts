@@ -6,8 +6,12 @@ export interface PackageVersion {
   name: string;
   label: string;
   version: string;
-  /** the range in package.json, absent for the runtime */
+  /** the range in package.json, absent for the runtime and the remotes */
   range?: string;
+  /** a micro-frontend loaded at runtime, not installed */
+  remote?: boolean;
+  /** where it lives, for a remote: its deployment */
+  url?: string;
 }
 
 export type ProjectKind = 'app' | 'e2e' | 'lib';

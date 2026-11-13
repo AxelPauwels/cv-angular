@@ -1,3 +1,4 @@
+import { HOME } from './internal/home.routes';
 import { CV } from './internal/cv.routes';
 import { SHOWCASE } from './internal/showcase.routes';
 import { TECHNICAL } from './internal/technical.routes';
@@ -8,6 +9,7 @@ import { MF } from './internal/micro-frontend.routes';
  * route config, `X_ROUTER_LINK` the absolute url to use in a routerLink.
  */
 export const ROUTES = {
+  HOME,
   CV,
   SHOWCASE,
   TECHNICAL,

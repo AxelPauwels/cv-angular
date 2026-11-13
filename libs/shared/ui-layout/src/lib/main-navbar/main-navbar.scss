@@ -10,7 +10,7 @@
   display: block;
 }
 
-// Phones (< 600px): the domain tabs make way for the projected start content (the
+// Below md (phones and small tablets): the domain tabs make way for the projected start content (the
 // mobile menu's hamburger) on the left, the actions stay on the right.
 .main-navbar {
   // as high as its content (the tabs) instead of Material's fixed row height
@@ -45,7 +45,7 @@
   align-items: flex-end;
   padding-left: 0;
 
-  @media (width < 600px) {
+  @include tools.screen-below(md) {
     align-items: center;
     padding-inline: 0.25rem;
 
@@ -62,7 +62,7 @@
   &__start {
     display: none;
 
-    @media (width < 600px) {
+    @include tools.screen-below(md) {
       align-items: center;
       display: flex;
     }
@@ -74,7 +74,7 @@
     flex: 1 1 auto;
     min-width: 0;
 
-    @media (width < 600px) {
+    @include tools.screen-below(md) {
       display: none;
     }
   }
@@ -87,7 +87,7 @@
     gap: 0.25rem;
     margin-left: 0.5rem;
 
-    @media (width < 600px) {
+    @include tools.screen-below(md) {
       margin-left: auto;
       padding-block: 0.25rem;
     }

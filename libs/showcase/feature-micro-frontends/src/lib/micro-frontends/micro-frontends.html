@@ -9,7 +9,7 @@
       icon="cloud_download"
       iconFont="material">
       <div class="micro-frontends__demo">
-        <shared-wrapper [config]="cvMfe" />
+        <shared-cv-mfe [snippet]="cvMfeSnippet" />
       </div>
 
       <p>
@@ -46,6 +46,7 @@
       <a
         dsCardActions
         matButton="outlined"
+        class="micro-frontends__action"
         [href]="remoteUrl"
         target="_blank"
         rel="noopener">
@@ -54,6 +55,21 @@
           open_in_new
         </mat-icon>
         <span class="cdk-visually-hidden">({{ remoteUrl }}, new tab)</span>
+      </a>
+      <a
+        dsCardActions
+        matButton="outlined"
+        class="micro-frontends__action"
+        [href]="remoteApiDocsUrl"
+        target="_blank"
+        rel="noopener">
+        Open the remote API docs
+        <mat-icon iconPositionEnd fontSet="material-symbols-outlined">
+          open_in_new
+        </mat-icon>
+        <span class="cdk-visually-hidden"
+          >({{ remoteApiDocsUrl }}, new tab)</span
+        >
       </a>
     </ds-card>
 
@@ -101,6 +117,7 @@
       <a
         dsCardActions
         matButton="outlined"
+        class="micro-frontends__action"
         [href]="npmUrl"
         target="_blank"
         rel="noopener">

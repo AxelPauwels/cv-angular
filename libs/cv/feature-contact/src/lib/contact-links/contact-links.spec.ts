@@ -32,7 +32,7 @@ describe('ContactLinks', () => {
     ]);
     expect(links[0].getAttribute('href')).toMatch(/^mailto:/);
     expect(links[2].getAttribute('href')).toBe(
-      'https://github.com/AxelPauwels'
+      'https://github.com/AxelPauwels/cv-angular/'
     );
     expect(
       element.querySelector('ds-lordicon')?.getAttribute('aria-hidden')

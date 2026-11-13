@@ -10,13 +10,17 @@ class Page {}
 @Component({
   imports: [MobileMenu],
   template: `
-    <ds-mobile-menu [(open)]="open">
+    <ds-mobile-menu
+      [(open)]="open"
+      [closeOnOutsideClick]="closeOnOutsideClick()">
       <a class="link" href="#">Page</a>
     </ds-mobile-menu>
+    <p class="outside">Page content</p>
   `,
 })
 class Host {
   readonly open = signal(false);
+  readonly closeOnOutsideClick = signal(true);
 }
 
 describe('MobileMenu', () => {
@@ -103,5 +107,56 @@ describe('MobileMenu', () => {
 
     // Assert
     expect(panel.hidden).toBe(true);
+  });
+
+  it('closes on a click outside the menu, like the close button', async () => {
+    // Arrange
+    const { fixture, element, button, panel } = await setup();
+    document.body.append(element);
+    button.click();
+    await fixture.whenStable();
+
+    // Act
+    element.querySelector<HTMLElement>('.outside')?.click();
+    await fixture.whenStable();
+
+    // Assert
+    expect(panel.hidden).toBe(true);
+    expect(fixture.componentInstance.open()).toBe(false);
+    expect(button.getAttribute('aria-expanded')).toBe('false');
+    element.remove();
+  });
+
+  it('stays open on a click inside the panel', async () => {
+    // Arrange
+    const { fixture, element, button, panel } = await setup();
+    document.body.append(element);
+    button.click();
+    await fixture.whenStable();
+
+    // Act
+    panel.click();
+    await fixture.whenStable();
+
+    // Assert
+    expect(panel.hidden).toBe(false);
+    element.remove();
+  });
+
+  it('stays open on a click outside while that is switched off', async () => {
+    // Arrange
+    const { fixture, element, button, panel } = await setup();
+    document.body.append(element);
+    fixture.componentInstance.closeOnOutsideClick.set(false);
+    button.click();
+    await fixture.whenStable();
+
+    // Act
+    element.querySelector<HTMLElement>('.outside')?.click();
+    await fixture.whenStable();
+
+    // Assert
+    expect(panel.hidden).toBe(false);
+    element.remove();
   });
 });

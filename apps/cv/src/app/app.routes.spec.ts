@@ -30,24 +30,25 @@ describe('appRoutes', () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const element: HTMLElement = fixture.nativeElement;
+    // icon tabs are named by their aria-label
+    const activeLabel = (link: Element | null) =>
+      link?.getAttribute('aria-label') ?? link?.textContent?.trim();
     const linkLabels = (selector: string) =>
       Array.from(element.querySelectorAll(`${selector} a`)).map(
-        // icon tabs are named by their aria-label
-        (link) =>
-          link.getAttribute('aria-label') ?? link.textContent?.trim() ?? ''
+        (link) => activeLabel(link) ?? ''
       );
     return {
       url: TestBed.inject(Router).url,
       main: linkLabels('ds-main-navbar > mat-toolbar > nav'),
-      activeMain: element
-        .querySelector('ds-main-navbar > mat-toolbar .mdc-tab--active')
-        ?.textContent?.trim(),
+      activeMain: activeLabel(
+        element.querySelector('ds-main-navbar > mat-toolbar .mdc-tab--active')
+      ),
       // only the tab links: page content inside the sub navbar has links too
       sub: linkLabels('ds-sub-navbar > nav'),
     };
   }
 
-  it('defaults to the cv home page', async () => {
+  it('defaults to the home page, a main menu item without sub items', async () => {
     // Arrange
     const url = '/';
 
@@ -56,10 +57,22 @@ describe('appRoutes', () => {
 
     // Assert
     expect(page.url).toBe('/home');
-    expect(page.main).toEqual(['CV', 'TECHNICAL', 'SHOWCASE']);
+    expect(page.main).toEqual(['Home', 'CV', 'TECHNICAL', 'SHOWCASE']);
+    expect(page.activeMain).toBe('Home');
+    expect(page.sub).toEqual([]);
+  });
+
+  it('shows the cv sub items', async () => {
+    // Arrange
+    const url = '/cv';
+
+    // Act
+    const page = await navigate(url);
+
+    // Assert
+    expect(page.url).toBe('/cv/personal');
     expect(page.activeMain).toBe('CV');
     expect(page.sub).toEqual([
-      'Home',
       'Personal',
       'Education',
       'Experience',
@@ -116,7 +129,21 @@ describe('appRoutes', () => {
     ]);
   });
 
-  it('redirects unknown urls to the cv domain', async () => {
+  it.each([
+    ['/personal', '/cv/personal'],
+    ['/education', '/cv/education'],
+    ['/experience', '/cv/experience'],
+    ['/skills', '/cv/skills'],
+    ['/references', '/cv/references'],
+  ])('sends the old cv url %s to %s', async (url, expected) => {
+    // Act
+    const page = await navigate(url);
+
+    // Assert
+    expect(page.url).toBe(expected);
+  });
+
+  it('redirects unknown urls to the home page', async () => {
     // Arrange
     const url = '/does-not-exist';
 
@@ -129,7 +156,7 @@ describe('appRoutes', () => {
 
   it('navigates from the cv domain to the showcase domain', async () => {
     // Arrange
-    const harness = await RouterTestingHarness.create('/personal');
+    const harness = await RouterTestingHarness.create('/cv/personal');
     const router = TestBed.inject(Router);
 
     // Act
@@ -141,7 +168,7 @@ describe('appRoutes', () => {
 
   it('navigates from the cv domain to the technical domain', async () => {
     // Arrange
-    const harness = await RouterTestingHarness.create('/personal');
+    const harness = await RouterTestingHarness.create('/cv/personal');
     const router = TestBed.inject(Router);
 
     // Act

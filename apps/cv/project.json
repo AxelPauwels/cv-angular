@@ -149,7 +149,13 @@
               "maximumError": "8kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "fileReplacements": [
+            {
+              "replace": "node_modules/@tolgee/web/dist/tolgee-web.development.esm.js",
+              "with": "node_modules/@tolgee/web/dist/tolgee-web.production.esm.js"
+            }
+          ]
         },
         "development": {
           "outputPath": "dist/dev/apps/cv",
