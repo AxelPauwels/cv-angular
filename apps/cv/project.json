@@ -110,7 +110,7 @@
           },
           {
             "glob": "**/*",
-            "input": "coverage/cv",
+            "input": "coverage/all",
             "output": "coverage"
           },
           {

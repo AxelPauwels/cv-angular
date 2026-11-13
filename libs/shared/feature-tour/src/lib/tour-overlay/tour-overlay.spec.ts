@@ -56,6 +56,10 @@ class SlowPage {
   }
 }
 
+/** A target that is in the page but takes no space, like a collapsed panel */
+@Component({ template: '<button data-tour="hidden" hidden>hidden</button>' })
+class HiddenPage {}
+
 @Component({
   imports: [RouterOutlet, TourOverlay],
   template: '<router-outlet /><shared-tour />',
@@ -126,6 +130,8 @@ describe('TourOverlay', () => {
           { path: 'second', component: SecondPage },
           { path: 'bottom', component: BottomPage },
           { path: 'slow', component: SlowPage },
+          { path: 'hidden', component: HiddenPage },
+          { path: 'empty', component: SecondPage },
         ]),
         provideI18nTesting(),
         { provide: TOUR_STEPS, useValue: tourSteps },
@@ -468,6 +474,65 @@ describe('TourOverlay', () => {
       },
       { timeout: 2000 }
     );
+  });
+
+  it('steps back with the back button', async () => {
+    // Arrange
+    const { query, text, fixture, press } = await render();
+    await press('ArrowRight');
+
+    // Act
+    query('.tour__action--back')?.click();
+    await fixture.whenStable();
+
+    // Assert
+    expect(text('.tour__counter')).toBe('1 / 3');
+    await vi.waitFor(() => expect(TestBed.inject(Router).url).toBe('/first'));
+  });
+
+  it('centers the step when its target never shows up', async () => {
+    // Arrange: every look at the clock is 3 seconds later, so the wait times out
+    let now = Date.now();
+    vi.spyOn(Date, 'now').mockImplementation(() => (now += 3000));
+    const missing = [step('missing', '/empty', '[data-tour="missing"]')];
+
+    // Act
+    const { query } = await render(Host, missing);
+
+    // Assert
+    await vi.waitFor(() => expect(query('.tour__loading')).toBeNull());
+    expect(query('.tour__spotlight--active')).toBeNull();
+    expect(query('.tour__pointer--visible')).toBeNull();
+    vi.restoreAllMocks();
+  });
+
+  it('centers the step when its target takes no space', async () => {
+    // Arrange
+    const hidden = [step('hidden', '/hidden', '[data-tour="hidden"]')];
+
+    // Act
+    const { query } = await render(Host, hidden);
+
+    // Assert
+    await vi.waitFor(() => expect(TestBed.inject(Router).url).toBe('/hidden'));
+    expect(query('.tour__spotlight--active')).toBeNull();
+  });
+
+  it('shows only the latest step when the visitor moves on during a navigation', async () => {
+    // Arrange
+    const { query, text, fixture } = await render();
+
+    // Act: the next step starts its navigation, the one after overtakes it
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+    TestBed.tick();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+    TestBed.tick();
+    await fixture.whenStable();
+
+    // Assert: the last step has no target, so the overtaken step's spotlight stays off
+    await vi.waitFor(() => expect(TestBed.inject(Router).url).toBe('/second'));
+    expect(text('.tour__counter')).toBe('3 / 3');
+    expect(query('.tour__spotlight--active')).toBeNull();
   });
 
   describe('on phones', () => {

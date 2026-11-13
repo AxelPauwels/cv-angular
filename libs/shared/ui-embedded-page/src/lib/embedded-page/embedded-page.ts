@@ -81,8 +81,15 @@ export class EmbeddedPage {
   /** Same timing as the loading spinner: no flash for a fast load, no flicker */
   protected readonly loading = delayedLoading(() => this.page.isLoading());
 
+  /**
+   * By status, not hasValue(): a resource that read the required `src` before it
+   * was set and then goes idle (a page on another origin) keeps that error, and
+   * hasValue() would throw it
+   */
   protected readonly isAvailable = computed(
-    () => this.page.hasValue() && !this.page.value().includes('<app-root')
+    () =>
+      this.page.status() === 'resolved' &&
+      !(this.page.value() ?? '').includes('<app-root')
   );
 
   protected readonly frameSrc = computed<SafeResourceUrl | undefined>(() =>

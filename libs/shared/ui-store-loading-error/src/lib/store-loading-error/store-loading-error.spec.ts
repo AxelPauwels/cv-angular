@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormatSimple, provideTolgee, Tolgee } from '@tolgee/ngx';
 import { StoreLoadingError } from './store-loading-error';
@@ -7,10 +7,12 @@ import { StoreLoadingError } from './store-loading-error';
   imports: [StoreLoadingError],
   template: `<ds-store-loading-error
     message="t.error.load.skills"
-    [error]="error" />`,
+    [error]="error()" />`,
 })
 class Host {
-  error: { message: string } | undefined = new Error('Network down');
+  readonly error = signal<{ message: string } | undefined>(
+    new Error('Network down')
+  );
 }
 
 describe('StoreLoadingError', () => {
@@ -33,7 +35,7 @@ describe('StoreLoadingError', () => {
 
   async function render(error?: { message: string }) {
     const fixture = TestBed.createComponent(Host);
-    fixture.componentInstance.error = error;
+    fixture.componentInstance.error.set(error);
     await fixture.whenStable();
     return (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
       'ds-store-loading-error'
@@ -75,5 +77,34 @@ describe('StoreLoadingError', () => {
     expect(
       element?.querySelector('mat-icon')?.getAttribute('aria-hidden')
     ).toBe('true');
+  });
+
+  it('shows the message without details when the store gives no error', async () => {
+    // Arrange
+    const error = undefined;
+
+    // Act
+    const element = await render(error);
+
+    // Assert
+    expect(element?.querySelector('p')?.textContent?.trim()).toBe(
+      'Could not load skills:'
+    );
+  });
+
+  it('follows a new error from the store', async () => {
+    // Arrange
+    const fixture = TestBed.createComponent(Host);
+    await fixture.whenStable();
+
+    // Act
+    fixture.componentInstance.error.set(new Error('Timeout'));
+    await fixture.whenStable();
+
+    // Assert
+    const element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelector('p')?.textContent?.trim()).toBe(
+      'Could not load skills: Timeout'
+    );
   });
 });

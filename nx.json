@@ -30,7 +30,8 @@
     },
     "@nx/angular:unit-test": {
       "cache": true,
-      "inputs": ["default", "^production"]
+      "inputs": ["default", "^production"],
+      "outputs": ["{workspaceRoot}/coverage/{projectName}"]
     },
     "@nx/angular:ng-packagr-lite": {
       "cache": true,

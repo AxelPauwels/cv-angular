@@ -86,4 +86,76 @@ describe('BackToTop', () => {
     expect(document.activeElement).toBe(element.querySelector('.top'));
     element.remove();
   });
+
+  describe('scroll behavior', () => {
+    afterEach(() => {
+      document.documentElement.removeAttribute('data-reduce-motion');
+    });
+
+    /** Clicks the button and returns how the page was scrolled */
+    async function scrollBehavior(): Promise<ScrollBehavior | undefined> {
+      const { button } = await setup();
+      const scroll = vi
+        .spyOn(window, 'scrollTo')
+        .mockImplementation(() => undefined);
+      button.click();
+      const [options] = scroll.mock.calls[0] as unknown as [ScrollToOptions];
+      return options.behavior;
+    }
+
+    it('scrolls smoothly by default', async () => {
+      // Arrange
+      vi.spyOn(window, 'matchMedia').mockReturnValue({
+        matches: false,
+      } as MediaQueryList);
+
+      // Act
+      const behavior = await scrollBehavior();
+
+      // Assert
+      expect(behavior).toBe('smooth');
+    });
+
+    it("jumps at once with the app's reduce motion setting", async () => {
+      // Arrange
+      document.documentElement.setAttribute('data-reduce-motion', '');
+
+      // Act
+      const behavior = await scrollBehavior();
+
+      // Assert
+      expect(behavior).toBe('auto');
+    });
+
+    it('jumps at once when the system prefers reduced motion', async () => {
+      // Arrange
+      vi.spyOn(window, 'matchMedia').mockReturnValue({
+        matches: true,
+      } as MediaQueryList);
+
+      // Act
+      const behavior = await scrollBehavior();
+
+      // Assert
+      expect(behavior).toBe('auto');
+    });
+  });
+
+  it('leaves the focus alone when the button did not have it', async () => {
+    // Arrange: clicked with a mouse, the focus is elsewhere
+    const { element, button } = await setup();
+    document.body.append(element);
+    vi.spyOn(window, 'scrollTo').mockImplementation(() => undefined);
+    const other = document.createElement('input');
+    document.body.append(other);
+    other.focus();
+
+    // Act
+    button.click();
+
+    // Assert
+    expect(document.activeElement).toBe(other);
+    other.remove();
+    element.remove();
+  });
 });

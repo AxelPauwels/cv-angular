@@ -127,4 +127,166 @@ describe('applyAppStyles', () => {
     ).toBeNull();
     expect(fontOf(frame, 'p')).toBe('serif');
   });
+
+  describe('with stylesheets in the app', () => {
+    const added: HTMLStyleElement[] = [];
+
+    /** Adds a stylesheet to the app's document */
+    function appStyle(css: string): HTMLStyleElement {
+      const style = document.createElement('style');
+      style.textContent = css;
+      document.head.append(style);
+      added.push(style);
+      return style;
+    }
+
+    const embeddedCss = (frame: HTMLIFrameElement) =>
+      frame.contentDocument?.getElementById('cv-embedded-styles')
+        ?.textContent ?? '';
+
+    afterEach(() => {
+      added.splice(0).forEach((style) => style.remove());
+    });
+
+    it("brings the app's fonts along, with urls that point at the app", async () => {
+      // Arrange
+      root.style.setProperty(
+        '--mat-sys-body-medium-font',
+        'Goldman, sans-serif'
+      );
+      appStyle(
+        '@font-face { font-family: TestFont; src: url("fonts/test.woff2") format("woff2"); }'
+      );
+      const frame = await embed();
+
+      // Act
+      applyAppStyles(frame, document);
+
+      // Assert
+      const css = embeddedCss(frame);
+      expect(css).toContain('TestFont');
+      expect(css).toContain(new URL('fonts/test.woff2', document.baseURI).href);
+    });
+
+    it("brings the app's global scrollbar rules along, not a component's", async () => {
+      // Arrange
+      root.style.setProperty(
+        '--mat-sys-body-medium-font',
+        'Goldman, sans-serif'
+      );
+      appStyle(
+        '.app-scroll::-webkit-scrollbar { width: 7px; } .cmp[_ngcontent-abc]::-webkit-scrollbar { width: 9px; }'
+      );
+      const frame = await embed();
+
+      // Act
+      applyAppStyles(frame, document);
+
+      // Assert
+      const css = embeddedCss(frame);
+      expect(css).toContain('.app-scroll::-webkit-scrollbar');
+      expect(css).not.toContain('_ngcontent-abc');
+    });
+
+    it('skips a stylesheet it may not read, like a cross-origin one', async () => {
+      // Arrange
+      root.style.setProperty(
+        '--mat-sys-body-medium-font',
+        'Goldman, sans-serif'
+      );
+      const style = appStyle(
+        '@font-face { font-family: Hidden; src: url(x.woff2); }'
+      );
+      Object.defineProperty(style.sheet, 'cssRules', {
+        get: () => {
+          throw new DOMException('cross-origin', 'SecurityError');
+        },
+      });
+      const frame = await embed();
+
+      // Act
+      applyAppStyles(frame, document);
+
+      // Assert
+      expect(embeddedCss(frame)).not.toContain('Hidden');
+      expect(fontOf(frame, 'p')).toBe('Goldman, sans-serif');
+    });
+  });
+
+  describe("the app's light or dark mode", () => {
+    afterEach(() => {
+      root.style.removeProperty('color-scheme');
+    });
+
+    it("puts the page in the app's dark mode, also when the page resets it", async () => {
+      // Arrange
+      root.style.setProperty(
+        '--mat-sys-body-medium-font',
+        'Goldman, sans-serif'
+      );
+      root.style.colorScheme = 'dark';
+      const frame = await embed();
+      const doc = frame.contentDocument as Document;
+
+      // Act
+      applyAppStyles(frame, document);
+      // a report setting its own theme class after loading
+      doc.documentElement.className = 'light-mode';
+
+      // Assert
+      expect(doc.body.classList).toContain('vscode-dark');
+      await vi.waitFor(() =>
+        expect(doc.documentElement.classList).toContain('dark-mode')
+      );
+      expect(doc.documentElement.classList).not.toContain('light-mode');
+      expect(doc.documentElement.style.colorScheme).toBe('dark');
+    });
+
+    it("puts the page in the app's light mode", async () => {
+      // Arrange
+      root.style.setProperty(
+        '--mat-sys-body-medium-font',
+        'Goldman, sans-serif'
+      );
+      root.style.colorScheme = 'light';
+      const frame = await embed();
+
+      // Act
+      applyAppStyles(frame, document);
+
+      // Assert
+      const doc = frame.contentDocument as Document;
+      expect(doc.documentElement.classList).toContain('light-mode');
+      expect(doc.body.classList).toContain('vscode-light');
+    });
+  });
+
+  it('leaves a page alone that it cannot reach', () => {
+    // Arrange: a cross-origin frame throws on contentDocument
+    const frame = {
+      get contentDocument(): Document {
+        throw new DOMException('cross-origin', 'SecurityError');
+      },
+    } as unknown as HTMLIFrameElement;
+    root.style.setProperty('--mat-sys-body-medium-font', 'Goldman, sans-serif');
+
+    // Act
+    const apply = () => applyAppStyles(frame, document);
+
+    // Assert
+    expect(apply).not.toThrow();
+  });
+
+  it('leaves a frame alone that has no page yet', () => {
+    // Arrange: not in the document, so it has no content document
+    const frame = document.createElement('iframe');
+    root.style.setProperty('--mat-sys-body-medium-font', 'Goldman, sans-serif');
+
+    // Act
+    const apply = () => applyAppStyles(frame, document);
+
+    // Assert
+    expect(apply).not.toThrow();
+    expect(frame.contentDocument).toBeNull();
+  });
 });

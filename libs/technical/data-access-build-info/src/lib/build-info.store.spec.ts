@@ -288,5 +288,32 @@ describe('build info stores', () => {
       expect(other).toMatchObject({ name: 'other', version: 'unavailable' });
       expect(other.url).toBeUndefined();
     });
+
+    it('still lists the installed versions when the manifest is missing', async () => {
+      // Arrange
+      const store = TestBed.inject(VersionStore);
+      const http = TestBed.inject(HttpTestingController);
+      TestBed.tick();
+      http.expectOne('/build-info/versions.json').flush({
+        packages: [
+          {
+            category: 'Framework',
+            name: '@angular/core',
+            label: 'Angular',
+            version: '22.2.4',
+          },
+        ],
+      });
+
+      // Act
+      http
+        .expectOne('federation.manifest.json')
+        .flush('', { status: 404, statusText: 'Not Found' });
+      await settle();
+
+      // Assert
+      expect(store.packages().map((entry) => entry.label)).toEqual(['Angular']);
+      expect(store.error()).toBeUndefined();
+    });
   });
 });
