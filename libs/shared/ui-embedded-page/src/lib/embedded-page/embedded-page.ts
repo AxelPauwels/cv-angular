@@ -15,6 +15,7 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { TranslatePipe } from '@tolgee/ngx';
 import { HeadingTranslationKey } from '@cv/shared-util-i18n';
 import { PageTitle } from '@cv/shared-ui-page';
+import { TranslatePartsPipe } from '@cv/shared-ui-i18n';
 import { delayedLoading } from '@cv/shared-util-loading';
 import { applyAppStyles } from './embedded-styles';
 
@@ -37,7 +38,14 @@ const isSameOriginPath = (src: string) =>
  */
 @Component({
   selector: 'ds-embedded-page',
-  imports: [MatButton, MatIcon, MatProgressBar, PageTitle, TranslatePipe],
+  imports: [
+    MatButton,
+    MatIcon,
+    MatProgressBar,
+    PageTitle,
+    TranslatePipe,
+    TranslatePartsPipe,
+  ],
   templateUrl: './embedded-page.html',
   styleUrl: './embedded-page.scss',
 })

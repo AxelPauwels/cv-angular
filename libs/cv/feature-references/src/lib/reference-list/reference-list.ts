@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { delayedLoading } from '@cv/shared-util-loading';
 import { LoadingSpinner } from '@cv/shared-ui-loading-spinner';
+import { StoreLoadingError } from '@cv/shared-ui-store-loading-error';
 import { PageTitle, PageLayout } from '@cv/shared-ui-page';
 import { NgTemplateOutlet } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
@@ -106,6 +107,7 @@ const NARROW_QUERY = '(width < 600px)';
   imports: [
     PageLayout,
     LoadingSpinner,
+    StoreLoadingError,
     PageTitle,
     Card,
     NgTemplateOutlet,

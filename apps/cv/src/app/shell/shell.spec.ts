@@ -158,7 +158,7 @@ describe('Shell', () => {
     expect(element.querySelector('footer')).toBeTruthy();
   });
 
-  it('links the name in the footer to the admin page, also with its menu item off', async () => {
+  it('links the name in the footer to the admin page while its menu item is off', async () => {
     // Arrange
     saveFeatureTogglesForTesting({ 'showcase-feature-toggles': false });
     configureWithPages();
@@ -176,6 +176,23 @@ describe('Shell', () => {
     expect(getComputedStyle(link as Element).textDecorationLine).toBe(
       'underline'
     );
+  });
+
+  it('shows the name in the footer without a link while the admin menu item is on', async () => {
+    // Arrange
+    saveFeatureTogglesForTesting({ 'showcase-feature-toggles': true });
+    configureWithPages();
+    const fixture = TestBed.createComponent(Shell);
+    const element: HTMLElement = fixture.nativeElement;
+
+    // Act
+    await TestBed.inject(Router).navigateByUrl('/cv/experience');
+    await fixture.whenStable();
+
+    // Assert
+    const copyright = element.querySelector('footer p');
+    expect(copyright?.querySelector('a')).toBeNull();
+    expect(copyright?.textContent).toContain('Axel Pauwels');
   });
 
   it('lays out header, main and footer with the domain navigation', async () => {

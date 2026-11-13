@@ -20,6 +20,10 @@ import {
   ProjectInfo,
 } from '@cv/technical-data-access-build-info';
 import { ScrollEdges } from '../internal/scroll-edges/scroll-edges';
+import { NgTemplateOutlet } from '@angular/common';
+import { TranslatePipe } from '@tolgee/ngx';
+import { TranslationKey } from '@cv/shared-util-i18n';
+import { TranslatePartsPipe } from '@cv/shared-ui-i18n';
 
 /** Known domains and layers first, in reading order; anything new follows */
 const DOMAIN_ORDER = ['cv', 'showcase', 'technical', 'shared'];
@@ -29,17 +33,36 @@ const byOrder = (order: string[]) => (a: string, b: string) =>
   (order.indexOf(a) + 1 || order.length + 1) -
     (order.indexOf(b) + 1 || order.length + 1) || a.localeCompare(b);
 
-/** `type:feature` -> `feature`, `domain:*` -> `every domain`, ... */
-export function describeTag(tag: string): string {
-  if (tag === 'root') return 'the app itself';
-  if (tag === '*') return 'everything';
-  if (tag === 'domain:*') return 'every domain';
-  return tag.replace(/^(type|domain):/, '');
+/** A number on top of the page */
+interface Stat {
+  icon: string;
+  label: TranslationKey;
+  value: number;
 }
 
-/** `['same domain', 'domain:shared']` -> `same domain, shared` */
-export function describeTargets(tags: string[]): string {
-  return tags.map(describeTag).join(', ');
+/** A sheriff tag in words: a translation key, or the bare tag name */
+export interface TagLabel {
+  key?: TranslationKey;
+  name?: string;
+}
+
+/** Tags that read as words; the generator writes sheriff's `sameTag` as `same domain` */
+const TAG_KEYS: Record<string, TranslationKey> = {
+  root: 't.architecture.tag.root',
+  '*': 't.architecture.tag.everything',
+  'domain:*': 't.architecture.tag.every-domain',
+  'same domain': 't.architecture.tag.same-domain',
+};
+
+/** `type:feature` -> `feature`, `domain:*` -> the key for `every domain`, ... */
+export function describeTag(tag: string): TagLabel {
+  const key = TAG_KEYS[tag];
+  return key ? { key } : { name: tag.replace(/^(type|domain):/, '') };
+}
+
+/** `['same domain', 'domain:shared']` -> the key for `same domain`, then `shared` */
+export function describeTargets(tags: string[]): TagLabel[] {
+  return tags.map(describeTag);
 }
 
 /**
@@ -62,6 +85,9 @@ export function describeTargets(tags: string[]): string {
     MatProgressBar,
     MatTableModule,
     ScrollEdges,
+    NgTemplateOutlet,
+    TranslatePipe,
+    TranslatePartsPipe,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './architecture-overview.html',
@@ -119,11 +145,27 @@ export class ArchitectureOverview {
   );
 
   /** The numbers on top of the page */
-  protected readonly stats = computed(() => [
-    { icon: 'web', label: 'Apps', value: this.apps().length },
-    { icon: 'category', label: 'Domains', value: this.domains().length },
-    { icon: 'layers', label: 'Layers', value: this.layers().length },
-    { icon: 'deployed_code', label: 'Libraries', value: this.libs().length },
+  protected readonly stats = computed((): Stat[] => [
+    {
+      icon: 'web',
+      label: 't.architecture.stat.apps',
+      value: this.apps().length,
+    },
+    {
+      icon: 'category',
+      label: 't.architecture.stat.domains',
+      value: this.domains().length,
+    },
+    {
+      icon: 'layers',
+      label: 't.architecture.stat.layers',
+      value: this.layers().length,
+    },
+    {
+      icon: 'deployed_code',
+      label: 't.architecture.stat.libraries',
+      value: this.libs().length,
+    },
   ]);
 
   protected cell(domain: string, layer: string): ProjectInfo[] {

@@ -4,7 +4,9 @@
   @if (loading.pending()) { @if (loading.indicator()) {
   <ds-loading-spinner />
   } } @else if (store.error()) {
-  <p>Could not load skills: {{ store.error()?.message }}</p>
+  <ds-store-loading-error
+    message="t.error.load.skills"
+    [error]="store.error()" />
   } @else {
   <div class="skill-list__grid">
     @for (skill of store.skills(); track skill.id) {

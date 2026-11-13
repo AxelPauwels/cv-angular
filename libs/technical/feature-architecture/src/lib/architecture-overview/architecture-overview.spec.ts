@@ -261,23 +261,24 @@ describe('ArchitectureOverview', () => {
 describe('describeTag', () => {
   it('reads sheriff tags as words', () => {
     // Arrange
-    const tags = ['type:data-access', 'domain:*', '*', 'root'];
+    const tags = ['type:data-access', 'domain:*', '*', 'root', 'same domain'];
 
     // Act
     const words = tags.map(describeTag);
 
     // Assert
     expect(words).toEqual([
-      'data-access',
-      'every domain',
-      'everything',
-      'the app itself',
+      { name: 'data-access' },
+      { key: 't.architecture.tag.every-domain' },
+      { key: 't.architecture.tag.everything' },
+      { key: 't.architecture.tag.root' },
+      { key: 't.architecture.tag.same-domain' },
     ]);
   });
 });
 
 describe('describeTargets', () => {
-  it('joins the targets of a rule as words', () => {
+  it('describes every target of a rule', () => {
     // Arrange
     const tags = ['same domain', 'domain:shared', 'type:util'];
 
@@ -285,10 +286,14 @@ describe('describeTargets', () => {
     const words = describeTargets(tags);
 
     // Assert
-    expect(words).toBe('same domain, shared, util');
+    expect(words).toEqual([
+      { key: 't.architecture.tag.same-domain' },
+      { name: 'shared' },
+      { name: 'util' },
+    ]);
   });
 
-  it('describes no targets as an empty text', () => {
+  it('describes no targets as an empty list', () => {
     // Arrange
     const tags: string[] = [];
 
@@ -296,6 +301,6 @@ describe('describeTargets', () => {
     const words = describeTargets(tags);
 
     // Assert
-    expect(words).toBe('');
+    expect(words).toEqual([]);
   });
 });

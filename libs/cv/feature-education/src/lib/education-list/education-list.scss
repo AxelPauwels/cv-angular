@@ -112,7 +112,7 @@
 }
 
 :host
-  ds-timeline:first-of-type
+  ds-timeline.main-timeline
   ::ng-deep
   .timeline__step
   > .timeline__content-container:not(.timeline__content-container--line) {

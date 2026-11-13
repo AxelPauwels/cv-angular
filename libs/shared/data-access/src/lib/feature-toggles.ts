@@ -113,7 +113,7 @@ export const FEATURE_TOGGLES = [
     't.nav.lighthouse',
     'main-menu-showcase'
   ),
-  // switched off, only its menu item goes: the name in the footer still links to it
+  // switched off, only its menu item goes: the name in the footer then links to it
   menuItem(
     'showcase-feature-toggles',
     'showcase-menu',
