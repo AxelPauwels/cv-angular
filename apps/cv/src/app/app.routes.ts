@@ -40,6 +40,11 @@ export const appRoutes: Routes = [
         (m) => m.technicalFeatureShellRoutes
       ),
   },
+  {
+    path: ROUTES.CONTACT.ROOT,
+    loadComponent: () =>
+      import('@cv/cv-feature-contact-form').then((m) => m.ContactForm),
+  },
   // old links to the cv pages still find them
   ...FORMER_CV_PAGES.map((page) => ({
     path: page,

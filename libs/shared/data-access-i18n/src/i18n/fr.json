@@ -160,6 +160,40 @@
         "title": "Architecture front-end"
       }
     },
+    "contact": {
+      "count": "{count} sur {max} caractères",
+      "error": {
+        "email": {
+          "invalid": "Saisissez une adresse e-mail valide, par exemple nom@exemple.fr.",
+          "required": "Saisissez votre adresse e-mail."
+        },
+        "message": {
+          "max-length": "Utilisez au maximum {messageMax} caractères.",
+          "min-length": "Écrivez au moins {messageMin} caractères.",
+          "required": "Saisissez un message."
+        },
+        "name": {
+          "max-length": "Utilisez au maximum {nameMax} caractères.",
+          "required": "Saisissez votre nom."
+        },
+        "send": "Votre message n'a pas pu être envoyé. Réessayez plus tard ou contactez-moi sur LinkedIn.",
+        "subject": {
+          "max-length": "Utilisez au maximum {subjectMax} caractères.",
+          "required": "Saisissez un objet."
+        }
+      },
+      "field": {
+        "email": "E-mail",
+        "message": "Message",
+        "name": "Nom",
+        "subject": "Objet"
+      },
+      "required-hint": "Tous les champs sont obligatoires.",
+      "send": "Envoyer",
+      "sending": "Envoi de votre message…",
+      "sent": "Merci ! Votre message a été envoyé. Je vous répondrai rapidement.",
+      "title": "Contact"
+    },
     "country": {
       "belgium": "Belgique"
     },
@@ -301,6 +335,7 @@
       "administrator": "Administrateur",
       "architecture": "Architecture",
       "code-coverage": "couverture du code",
+      "contact": "Contact",
       "education": "Formation",
       "end-to-end-tests": "Tests de bout en bout",
       "experience": "Expérience",

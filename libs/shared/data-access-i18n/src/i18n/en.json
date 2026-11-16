@@ -160,6 +160,40 @@
         "title": "Front-end architecture"
       }
     },
+    "contact": {
+      "count": "{count} of {max} characters",
+      "error": {
+        "email": {
+          "invalid": "Enter a valid email address, like name@example.com.",
+          "required": "Enter your email address."
+        },
+        "message": {
+          "max-length": "Use at most {messageMax} characters.",
+          "min-length": "Write at least {messageMin} characters.",
+          "required": "Enter a message."
+        },
+        "name": {
+          "max-length": "Use at most {nameMax} characters.",
+          "required": "Enter your name."
+        },
+        "send": "Your message could not be sent. Try again later, or reach me on LinkedIn.",
+        "subject": {
+          "max-length": "Use at most {subjectMax} characters.",
+          "required": "Enter a subject."
+        }
+      },
+      "field": {
+        "email": "Email",
+        "message": "Message",
+        "name": "Name",
+        "subject": "Subject"
+      },
+      "required-hint": "All fields are required.",
+      "send": "Send",
+      "sending": "Sending your message…",
+      "sent": "Thanks! Your message has been sent. I will get back to you soon.",
+      "title": "Contact"
+    },
     "country": {
       "belgium": "Belgium"
     },
@@ -301,6 +335,7 @@
       "administrator": "Administrator",
       "architecture": "Architecture",
       "code-coverage": "code coverage",
+      "contact": "Contact",
       "education": "Education",
       "end-to-end-tests": "End-to-end tests",
       "experience": "experience",

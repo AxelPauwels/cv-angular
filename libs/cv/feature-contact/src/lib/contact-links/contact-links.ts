@@ -1,10 +1,15 @@
 import { Component, computed, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { MatTooltip } from '@angular/material/tooltip';
 import { TranslatePipe } from '@tolgee/ngx';
+import { ROUTES } from '@cv/shared-util-routing';
 import { PersonStore } from '@cv/cv-data-access-personal';
 import { Lordicon, type LordiconName } from '@cv/shared-ui-lordicon';
 
 interface ContactLink {
+  /** An external url, or the contact page as router link */
   href: string;
+  routerLink?: boolean;
   icon: LordiconName;
   label: string;
   translate: boolean;
@@ -12,7 +17,7 @@ interface ContactLink {
 
 @Component({
   selector: 'cv-contact-links',
-  imports: [Lordicon, TranslatePipe],
+  imports: [Lordicon, RouterLink, MatTooltip, TranslatePipe],
   templateUrl: './contact-links.html',
   styleUrl: './contact-links.scss',
 })
@@ -26,10 +31,12 @@ export class ContactLinks {
     }
 
     const links: ContactLink[] = [
+      // the contact page with its form, which mails to this address
       {
-        href: `mailto:${contact.email}`,
+        href: ROUTES.CONTACT.ROOT_ROUTER_LINK,
+        routerLink: true,
         icon: 'mail',
-        label: 't.common.email',
+        label: 't.contact.title',
         translate: true,
       },
     ];

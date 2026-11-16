@@ -160,6 +160,40 @@
         "title": "Arquitectura front-end"
       }
     },
+    "contact": {
+      "count": "{count} de {max} caracteres",
+      "error": {
+        "email": {
+          "invalid": "Introduce un correo electrónico válido, como nombre@ejemplo.es.",
+          "required": "Introduce tu correo electrónico."
+        },
+        "message": {
+          "max-length": "Usa como máximo {messageMax} caracteres.",
+          "min-length": "Escribe al menos {messageMin} caracteres.",
+          "required": "Introduce un mensaje."
+        },
+        "name": {
+          "max-length": "Usa como máximo {nameMax} caracteres.",
+          "required": "Introduce tu nombre."
+        },
+        "send": "No se pudo enviar tu mensaje. Inténtalo más tarde o escríbeme en LinkedIn.",
+        "subject": {
+          "max-length": "Usa como máximo {subjectMax} caracteres.",
+          "required": "Introduce un asunto."
+        }
+      },
+      "field": {
+        "email": "Correo electrónico",
+        "message": "Mensaje",
+        "name": "Nombre",
+        "subject": "Asunto"
+      },
+      "required-hint": "Todos los campos son obligatorios.",
+      "send": "Enviar",
+      "sending": "Enviando tu mensaje…",
+      "sent": "¡Gracias! Tu mensaje se ha enviado. Te responderé pronto.",
+      "title": "Contacto"
+    },
     "country": {
       "belgium": "Bélgica"
     },
@@ -301,6 +335,7 @@
       "administrator": "Administrador",
       "architecture": "Arquitectura",
       "code-coverage": "cobertura de código",
+      "contact": "Contacto",
       "education": "Formación",
       "end-to-end-tests": "Pruebas de extremo a extremo",
       "experience": "Experiencia",

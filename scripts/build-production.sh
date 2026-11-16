@@ -5,6 +5,15 @@ set -e
 TOKENS=apps/cv/src/tokens/environment.tokens.ts
 [ -f "$TOKENS" ] || cp apps/cv/src/tokens/environment.tokens.example.ts "$TOKENS"
 
+# The contact form's Web3Forms access key, from the WEB3FORMS_ACCESS_KEY secret.
+# It ends up in the bundle (the browser sends it), but stays out of the repo
+if [ -n "$WEB3FORMS_ACCESS_KEY" ]; then
+  echo "✉️  Adding the Web3Forms access key..."
+  node scripts/set-web3forms-key.mjs "$TOKENS"
+else
+  echo "⚠️  WEB3FORMS_ACCESS_KEY not set, the contact form cannot send"
+fi
+
 # The deploy workflows pass the TOLGEE_API_KEY secret, so production ships the
 # latest translations; the key only talks to Tolgee and never enters the build
 if [ -n "$TOLGEE_API_KEY" ]; then

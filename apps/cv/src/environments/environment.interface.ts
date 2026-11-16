@@ -15,4 +15,11 @@ export interface Environment {
   tolgee?: TolgeeConfig; // Local development only
   /** Maps each remote (micro-frontend) to its remoteEntry.json, from `public/` */
   federationManifest: string;
+  /**
+   * Web3Forms access key for the contact form (https://web3forms.com), from
+   * the tokens file. It ships in the bundle (the browser sends it), which
+   * Web3Forms allows: it only sends mail to the inbox it belongs to. It stays
+   * out of the repo, though. Empty: the form shows that sending failed.
+   */
+  web3formsAccessKey: string;
 }

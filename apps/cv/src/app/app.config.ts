@@ -15,7 +15,10 @@ import {
   inBrowserGraphqlInterceptor,
 } from '@cv/shared-data-access';
 import { provideI18n } from '@cv/shared-data-access-i18n';
+import { provideContact } from '@cv/cv-data-access-contact';
 import { environment } from '../environments/environment';
+import { provideSignalFormsConfig } from '@angular/forms/signals';
+import { NG_STATUS_CLASSES } from '@angular/forms/signals/compat';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -32,5 +35,10 @@ export const appConfig: ApplicationConfig = {
       useValue: environment.federationManifest,
     },
     provideI18n(environment.tolgee),
+    provideContact({ web3formsAccessKey: environment.web3formsAccessKey }),
+    // ng-valid, ng-invalid, ng-touched, ... on fields bound with [formField]
+    provideSignalFormsConfig({
+      classes: NG_STATUS_CLASSES,
+    }),
   ],
 };

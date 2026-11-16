@@ -21,7 +21,7 @@ function pathsOf(routes: DomainRoutes): [string, string][] {
 describe('ROUTES', () => {
   it('exposes every domain, also as default export', () => {
     // Arrange
-    const expected = ['HOME', 'CV', 'SHOWCASE', 'TECHNICAL', 'MF'];
+    const expected = ['HOME', 'CV', 'SHOWCASE', 'TECHNICAL', 'CONTACT', 'MF'];
 
     // Act
     const exposed = Object.keys(ROUTES);

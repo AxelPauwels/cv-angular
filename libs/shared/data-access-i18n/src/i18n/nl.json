@@ -160,6 +160,40 @@
         "title": "Front-end architectuur"
       }
     },
+    "contact": {
+      "count": "{count} van {max} tekens",
+      "error": {
+        "email": {
+          "invalid": "Vul een geldig e-mailadres in, zoals naam@voorbeeld.be.",
+          "required": "Vul je e-mailadres in."
+        },
+        "message": {
+          "max-length": "Gebruik maximaal {messageMax} tekens.",
+          "min-length": "Schrijf minstens {messageMin} tekens.",
+          "required": "Vul een bericht in."
+        },
+        "name": {
+          "max-length": "Gebruik maximaal {nameMax} tekens.",
+          "required": "Vul je naam in."
+        },
+        "send": "Je bericht kon niet verstuurd worden. Probeer het later opnieuw, of bereik me via LinkedIn.",
+        "subject": {
+          "max-length": "Gebruik maximaal {subjectMax} tekens.",
+          "required": "Vul een onderwerp in."
+        }
+      },
+      "field": {
+        "email": "E-mail",
+        "message": "Bericht",
+        "name": "Naam",
+        "subject": "Onderwerp"
+      },
+      "required-hint": "Alle velden zijn verplicht.",
+      "send": "Versturen",
+      "sending": "Je bericht wordt verstuurd…",
+      "sent": "Bedankt! Je bericht is verstuurd. Ik neem snel contact met je op.",
+      "title": "Contact"
+    },
     "country": {
       "belgium": "België"
     },
@@ -301,6 +335,7 @@
       "administrator": "Beheerder",
       "architecture": "Architectuur",
       "code-coverage": "code coverage",
+      "contact": "Contact",
       "education": "Opleiding",
       "end-to-end-tests": "End-to-end tests",
       "experience": "ervaring",

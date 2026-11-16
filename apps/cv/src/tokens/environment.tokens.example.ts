@@ -3,6 +3,7 @@
 //   cp apps/cv/src/tokens/environment.tokens.example.ts apps/cv/src/tokens/environment.tokens.ts
 // CI copies it as is, so builds and tests compile without the real file:
 // keep it a valid module, with placeholders only, never a real key.
+// Created before this file had WEB3FORMS? Copy that export into yours.
 
 import { TolgeeConfig } from '../environments/environment.interface';
 
@@ -20,6 +21,14 @@ const TOLGEE: TolgeeConst = {
 
 export const TOKENS = {
   TOLGEE: TOLGEE,
+};
+
+// Web3Forms access key of the contact form's inbox (https://web3forms.com).
+// A separate export: the production build imports only this one, so the
+// Tolgee key never ends up in the bundle. CI fills it in from the
+// WEB3FORMS_ACCESS_KEY secret (scripts/build-production.sh).
+export const WEB3FORMS = {
+  ACCESS_KEY: '', // paste your access key here
 };
 
 // Note:
