@@ -23,6 +23,10 @@ on:
 permissions:
   contents: read
 
+# Nx Cloud read-write CI token; anonymous access to the remote cache is disabled
+env:
+  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
 jobs:
   deploy:
     name: Deploy live

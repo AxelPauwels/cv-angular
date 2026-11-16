@@ -7,6 +7,10 @@ permissions:
   checks: write
   contents: read
   pull-requests: write
+# Nx Cloud read-write CI token; anonymous access to the remote cache is disabled
+env:
+  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
 jobs:
   build_and_preview:
     # Release PRs into main get their preview from release.yml, after the version commit
