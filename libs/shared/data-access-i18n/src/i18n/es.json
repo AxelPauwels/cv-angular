@@ -333,6 +333,7 @@
     },
     "heading": {
       "administrator": "Administrador",
+      "ai-assistant": "Asistente IA",
       "architecture": "Arquitectura",
       "code-coverage": "cobertura de código",
       "contact": "Contacto",
@@ -424,6 +425,7 @@
     },
     "nav": {
       "admin": "Admin",
+      "ai-assistant": "Asistente IA",
       "architecture": "Arquitectura",
       "back-to-top": "Volver arriba",
       "code-coverage": "cobertura de código",
@@ -438,8 +440,8 @@
       "graphql-docs": "graphql docs",
       "home": "Hogar",
       "light": "Claro",
-      "lighthouse": "Lighthouse",
       "light-mode": "modo claro",
+      "lighthouse": "Lighthouse",
       "main-navigation": "Navegación principal",
       "menu": "Menú",
       "menu-loading": "Cargando el menú…",
@@ -696,6 +698,36 @@
       }
     },
     "website": "sitio web",
-    "written": "Escrito"
+    "written": "Escrito",
+    "ai-assistant": {
+      "assistant": "Asistente",
+      "disclaimer": "Las respuestas las genera Google Gemini y pueden contener errores. Tus preguntas se envían a Google a través de Firebase.",
+      "error": "Algo salió mal al responder. Inténtalo de nuevo.",
+      "hint": "Intro para enviar, Mayús+Intro para una nueva línea.",
+      "intro": "Pregunta lo que quieras sobre Axel, su trabajo, sus habilidades o sus referencias. El asistente busca la respuesta en la API de este sitio.",
+      "limit-reached": "Has alcanzado el número máximo de preguntas para esta visita. Recarga la página para empezar de nuevo.",
+      "log-label": "Conversación",
+      "not-configured": "El asistente IA está desactivado en esta versión del sitio.",
+      "question": "Tu pregunta",
+      "retry": "Reintentar",
+      "send": "Enviar",
+      "stop": "Detener",
+      "suggestion": {
+        "languages": "¿Qué idiomas habla Axel?",
+        "reference": "¿Puedes darme una referencia de su último trabajo?",
+        "stack": "¿Qué tecnologías usa Axel?"
+      },
+      "suggestions": "Prueba una de estas",
+      "thinking": "El asistente está respondiendo…",
+      "tool": {
+        "getEducation": "Formación consultada",
+        "getExperiences": "Experiencia laboral consultada",
+        "getProfile": "Perfil consultado",
+        "getReferences": "Referencias consultadas",
+        "getSkills": "Habilidades consultadas"
+      },
+      "you": "Tú",
+      "quota-reached": "El asistente ha alcanzado su límite gratuito de hoy. Vuelve a intentarlo mañana."
+    }
   }
 }

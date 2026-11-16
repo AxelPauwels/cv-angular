@@ -24,6 +24,7 @@ export const FEATURE_TOGGLE_DEFAULTS = {
   'main-menu-showcase': true, // main
   'showcase-micro-frontends': true,
   'showcase-lighthouse': true,
+  'showcase-ai-assistant': true,
   'showcase-feature-toggles': true,
 
   // Technical

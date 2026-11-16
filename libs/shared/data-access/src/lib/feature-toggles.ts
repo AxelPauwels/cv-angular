@@ -113,6 +113,12 @@ export const FEATURE_TOGGLES = [
     't.nav.lighthouse',
     'main-menu-showcase'
   ),
+  menuItem(
+    'showcase-ai-assistant',
+    'showcase-menu',
+    't.nav.ai-assistant',
+    'main-menu-showcase'
+  ),
   // switched off, only its menu item goes: the name in the footer then links to it
   menuItem(
     'showcase-feature-toggles',

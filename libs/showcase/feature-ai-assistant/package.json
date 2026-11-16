@@ -1,0 +1,17 @@
+{
+  "name": "@cv/showcase-feature-ai-assistant",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/core": "^22.2.0",
+    "@angular/material": "^22.2.5",
+    "@hashbrownai/angular": "^0.8.3",
+    "@tolgee/ngx": "^7.3.0",
+    "@cv/shared-data-access-i18n": "0.0.1",
+    "@cv/shared-ui-page": "0.0.1",
+    "@cv/showcase-data-access-assistant": "0.0.1",
+    "@hashbrownai/core": "^0.8.3",
+    "@cv/showcase-ui-assistant": "0.0.1"
+  },
+  "sideEffects": false,
+  "private": true
+}

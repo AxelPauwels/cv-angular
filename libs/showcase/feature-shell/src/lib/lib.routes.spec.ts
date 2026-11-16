@@ -10,6 +10,7 @@ import { showcaseFeatureShellRoutes } from './lib.routes';
 const SHOWCASE_TOGGLES = [
   'showcase-micro-frontends',
   'showcase-lighthouse',
+  'showcase-ai-assistant',
   'showcase-feature-toggles',
 ] as const;
 type ShowcaseToggle = (typeof SHOWCASE_TOGGLES)[number];
@@ -29,6 +30,7 @@ describe('showcaseFeatureShellRoutes', () => {
     const toggles = TestBed.inject(FeatureToggleService);
     toggles.change('showcase-micro-frontends', true);
     toggles.change('showcase-lighthouse', true);
+    toggles.change('showcase-ai-assistant', true);
     toggles.change('showcase-feature-toggles', true);
 
     // Act
@@ -41,7 +43,12 @@ describe('showcaseFeatureShellRoutes', () => {
       Array.from(element.querySelectorAll('ds-sub-navbar > nav a')).map(
         (link) => link.textContent?.trim()
       )
-    ).toEqual(['Micro-frontends', 'Lighthouse', 'Feature toggles']);
+    ).toEqual([
+      'Micro-frontends',
+      'Lighthouse',
+      'AI assistant',
+      'Feature toggles',
+    ]);
   });
 
   it('keeps the feature toggles page reachable when its menu item is switched off', async () => {
@@ -55,6 +62,7 @@ describe('showcaseFeatureShellRoutes', () => {
     const toggles = TestBed.inject(FeatureToggleService);
     toggles.change('showcase-micro-frontends', true);
     toggles.change('showcase-lighthouse', false);
+    toggles.change('showcase-ai-assistant', false);
     toggles.change('showcase-feature-toggles', false);
 
     // Act
@@ -100,6 +108,7 @@ describe('showcaseFeatureShellRoutes', () => {
       configure({
         'showcase-micro-frontends': false,
         'showcase-lighthouse': false,
+        'showcase-ai-assistant': false,
         'showcase-feature-toggles': false,
       });
 
@@ -138,6 +147,7 @@ describe('showcaseFeatureShellRoutes', () => {
   it.each([
     [ROUTES.SHOWCASE.MICRO_FRONTENDS, 'showcase-micro-frontends'],
     [ROUTES.SHOWCASE.LIGHTHOUSE, 'showcase-lighthouse-report'],
+    [ROUTES.SHOWCASE.AI_ASSISTANT, 'showcase-ai-assistant'],
     [ROUTES.SHOWCASE.FEATURE_TOGGLES, 'showcase-feature-toggles'],
   ])('lazy loads the "%s" page as <%s>', async (path, selector) => {
     // Arrange

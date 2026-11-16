@@ -1,4 +1,8 @@
-import { TOKENS, WEB3FORMS } from '../tokens/environment.tokens';
+import {
+  FIREBASE_ASSISTANT,
+  TOKENS,
+  WEB3FORMS,
+} from '../tokens/environment.tokens';
 import { Environment } from './environment.interface';
 
 export const environment: Environment = {
@@ -17,5 +21,19 @@ export const environment: Environment = {
     apiUrl: TOKENS.TOLGEE.API_URL,
     apiKey: TOKENS.TOLGEE.API_KEY,
     cdnPrefix: TOKENS.TOLGEE.CDN_PREFIX,
+  },
+  assistant: {
+    // the keys come from the gitignored tokens file (GitHub secrets in CI)
+    firebase: {
+      apiKey: FIREBASE_ASSISTANT.API_KEY,
+      authDomain: 'axel-pauwels.firebaseapp.com',
+      projectId: 'axel-pauwels',
+      appId: FIREBASE_ASSISTANT.APP_ID,
+    },
+    recaptchaSiteKey: FIREBASE_ASSISTANT.RECAPTCHA_SITE_KEY,
+    model: 'gemini-3.5-flash-lite',
+    // the shared debug token from the tokens file; without one, each browser
+    // prints its own in the console to register in App Check > Manage debug tokens
+    appCheckDebugToken: FIREBASE_ASSISTANT.APP_CHECK_DEBUG_TOKEN || true,
   },
 };

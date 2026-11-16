@@ -14,6 +14,16 @@ else
   echo "⚠️  WEB3FORMS_ACCESS_KEY not set, the contact form cannot send"
 fi
 
+# The AI assistant's Firebase AI Logic keys, from the FIREBASE_API_KEY,
+# FIREBASE_APP_ID and RECAPTCHA_SITE_KEY secrets. Public by design (they end up
+# in the bundle, App Check guards their use), but they stay out of the repo
+if [ -n "$FIREBASE_API_KEY" ]; then
+  echo "🤖 Adding the AI assistant's Firebase keys..."
+  node scripts/set-assistant-keys.mjs "$TOKENS"
+else
+  echo "⚠️  FIREBASE_API_KEY not set, the AI assistant is switched off"
+fi
+
 # The deploy workflows pass the TOLGEE_API_KEY secret, so production ships the
 # latest translations; the key only talks to Tolgee and never enters the build
 if [ -n "$TOLGEE_API_KEY" ]; then

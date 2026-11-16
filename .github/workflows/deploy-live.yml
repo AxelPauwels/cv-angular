@@ -65,6 +65,9 @@ jobs:
         env:
           TOLGEE_API_KEY: ${{ secrets.TOLGEE_API_KEY }}
           WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY }}
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
