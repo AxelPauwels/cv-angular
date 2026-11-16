@@ -1,12 +1,20 @@
-import { exposeComponent, exposeMarkdown } from '@hashbrownai/angular';
+import type { Type } from '@angular/core';
+import {
+  type ExposedComponent,
+  exposeComponent,
+  exposeMarkdown,
+} from '@hashbrownai/angular';
 import { s } from '@hashbrownai/core';
 import { PersonCard } from '@cv/showcase-ui-assistant';
 
 /**
  * The components the model may answer with. It never writes HTML: it picks
  * one of these and fills its inputs, which Skillet validates.
+ *
+ * Explicitly typed: the inferred type names Hashbrown's internal markdown
+ * component, whose private members can't be emitted in declarations (TS4094).
  */
-export const ASSISTANT_COMPONENTS = [
+export const ASSISTANT_COMPONENTS: ExposedComponent<Type<unknown>>[] = [
   exposeMarkdown({
     name: 'text',
     description: 'Text for the visitor, in markdown (lists, bold, links).',
