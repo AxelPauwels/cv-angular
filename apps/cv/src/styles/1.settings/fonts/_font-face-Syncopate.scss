@@ -3,9 +3,7 @@
   font-family: Syncopate;
   font-style: normal;
   font-weight: 400;
-  src:
-    url('/assets/fonts/Syncopate/Syncopate-regular.woff2') format('woff2'),
-    url('/assets/fonts/Syncopate/Syncopate-regular.woff') format('woff');
+  src: url('/assets/fonts/Syncopate/Syncopate-regular.woff2') format('woff2');
 }
 
 @font-face {
@@ -13,7 +11,17 @@
   font-family: Syncopate;
   font-style: normal;
   font-weight: 700;
-  src:
-    url('/assets/fonts/Syncopate/Syncopate-bold.woff2') format('woff2'),
-    url('/assets/fonts/Syncopate/Syncopate-bold.woff') format('woff');
+  src: url('/assets/fonts/Syncopate/Syncopate-bold.woff2') format('woff2');
+}
+
+// Arial resized to Syncopate's metrics: shown until the web font arrives
+// (font-display: swap), so the swap doesn't shift the layout (CLS).
+// Measured with fontTools against Arial; recompute if the font file changes.
+@font-face {
+  ascent-override: 55.74%;
+  descent-override: 15.73%;
+  font-family: Syncopate-fallback;
+  line-gap-override: 0%;
+  size-adjust: 162.32%;
+  src: local('Arial');
 }

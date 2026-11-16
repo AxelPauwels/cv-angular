@@ -1,14 +1,49 @@
 @use 'fonts'; // Use @use for importing static asset declarations
 
-$font-family-base: 'Roboto', sans-serif;
+$font-family-base: 'Roboto', 'Roboto-fallback', sans-serif;
 $font-family-icomoon:
   normal normal 1rem/1.5rem 'cvIconFont',
   sans-serif;
-$font-family-bruno-ace: 'Bruno-Ace-SC', sans-serif;
-$font-family-syncopate: 'Syncopate', sans-serif;
-$font-family-michroma: 'Michroma', sans-serif;
-$font-family-goldman: 'Goldman', sans-serif;
-$font-family-red-hat: 'Red-Hat-Display', sans-serif;
+
+// Body fonts
+$font-family-red-hat: 'Red-Hat-Display', 'Red-Hat-Display-fallback', sans-serif;
+$font-family-roboto: 'Roboto', 'Roboto-fallback', sans-serif;
+$font-family-inter: 'Inter', 'Inter-fallback', sans-serif;
+$font-family-ibm-plex-sans: (
+  'IBM-Plex-Sans',
+  'IBM-Plex-Sans-fallback',
+  sans-serif
+);
+$font-family-atkinson: (
+  'Atkinson-Hyperlegible-Next',
+  'Atkinson-Hyperlegible-Next-fallback',
+  sans-serif
+);
+$font-family-open-sans: 'Open-Sans', 'Open-Sans-fallback', sans-serif;
+$font-family-nunito: 'Nunito', 'Nunito-fallback', sans-serif;
+$font-family-source-serif: 'Source-Serif-4', 'Source-Serif-4-fallback', serif;
+$font-family-lexend: 'Lexend', 'Lexend-fallback', sans-serif;
+$font-family-manrope: 'Manrope', 'Manrope-fallback', sans-serif;
+
+// Heading fonts
+$font-family-michroma: 'Michroma', 'Michroma-fallback', sans-serif;
+$font-family-goldman: 'Goldman', 'Goldman-fallback', sans-serif;
+$font-family-syncopate: 'Syncopate', 'Syncopate-fallback', sans-serif;
+$font-family-ibm-plex-mono: (
+  'IBM-Plex-Mono',
+  'IBM-Plex-Mono-fallback',
+  monospace
+);
+$font-family-bruno-ace: 'Bruno-Ace-SC', 'Bruno-Ace-SC-fallback', sans-serif;
+$font-family-montserrat: 'Montserrat', 'Montserrat-fallback', sans-serif;
+$font-family-orbitron: 'Orbitron', 'Orbitron-fallback', sans-serif;
+$font-family-space-grotesk: (
+  'Space-Grotesk',
+  'Space-Grotesk-fallback',
+  sans-serif
+);
+$font-family-audiowide: 'Audiowide', 'Audiowide-fallback', sans-serif;
+$font-family-oxanium: 'Oxanium', 'Oxanium-fallback', sans-serif;
 
 $font-size-xxs: 0.5rem;
 $font-size-xs: 0.6875rem;

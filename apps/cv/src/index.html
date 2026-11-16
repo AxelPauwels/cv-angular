@@ -64,6 +64,38 @@
           // storage unavailable or not JSON: the app applies the defaults
         }
 
+        // Preload the active pairing's body font (Latin subset), so the browser
+        // fetches it alongside the CSS instead of after parsing it. Only that one
+        // file: heading fonts and the other pairings download when a page uses
+        // them, and their size-matched fallbacks keep the swap from shifting the
+        // layout. Mirrors the pairings in
+        // apps/cv/src/styles/3.vendors/_material-font-override.scss and the files
+        // in 1.settings/fonts: keep them in sync.
+        var bodyFonts = {
+          'red-hat': 'Red-Hat-Display/Red-Hat-Display.woff2',
+          roboto: 'Roboto/Roboto-latin.woff2',
+          inter: 'Inter/Inter-latin.woff2',
+          'ibm-plex': 'IBM-Plex-Sans/IBM-Plex-Sans-latin.woff2',
+          atkinson:
+            'Atkinson-Hyperlegible-Next/Atkinson-Hyperlegible-Next-latin.woff2',
+          'open-sans': 'Open-Sans/Open-Sans-latin.woff2',
+          nunito: 'Nunito/Nunito-latin.woff2',
+          'source-serif': 'Source-Serif-4/Source-Serif-4-latin.woff2',
+          lexend: 'Lexend/Lexend-latin.woff2',
+          manrope: 'Manrope/Manrope-latin.woff2',
+        };
+        var bodyFont = document.createElement('link');
+        bodyFont.rel = 'preload';
+        bodyFont.as = 'font';
+        bodyFont.type = 'font/woff2';
+        bodyFont.crossOrigin = 'anonymous';
+        bodyFont.href =
+          '/assets/fonts/' +
+          (Object.prototype.hasOwnProperty.call(bodyFonts, root.dataset.font)
+            ? bodyFonts[root.dataset.font]
+            : bodyFonts['red-hat']);
+        document.head.appendChild(bodyFont);
+
         // The home hero photo is the largest paint of the landing page (also the
         // default route): start its download now instead of after the app and
         // the home chunk load. Mirrors the AVIF <source> in

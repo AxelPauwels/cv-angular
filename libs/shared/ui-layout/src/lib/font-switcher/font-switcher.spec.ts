@@ -16,8 +16,8 @@ describe('FontSwitcher', () => {
     });
     const fixture = TestBed.createComponent(FontSwitcher);
     fixture.componentRef.setInput('fonts', [
-      { id: 'red-hat', label: 'Red Hat Display' },
-      { id: 'goldman', label: 'Goldman' },
+      { id: 'red-hat', label: 'Red Hat' },
+      { id: 'roboto', label: 'Roboto' },
     ]);
     fixture.componentRef.setInput('font', font);
     await fixture.whenStable();
@@ -51,7 +51,7 @@ describe('FontSwitcher', () => {
 
   it('lists the fonts in their own face and marks the active one', async () => {
     // Arrange
-    const { fixture, trigger } = await render('goldman');
+    const { fixture, trigger } = await render('roboto');
 
     // Act
     const labels = (await openMenu(fixture, trigger)).map((item) =>
@@ -60,12 +60,12 @@ describe('FontSwitcher', () => {
 
     // Assert
     expect(labels.map((label) => label?.textContent?.trim())).toEqual([
-      'Red Hat Display',
-      'Goldman',
+      'Red Hat',
+      'Roboto',
     ]);
     expect(labels.map((label) => label?.getAttribute('data-font'))).toEqual([
       'red-hat',
-      'goldman',
+      'roboto',
     ]);
     expect(
       Array.from(document.querySelectorAll('[role="menuitemradio"]'), (item) =>
@@ -85,7 +85,7 @@ describe('FontSwitcher', () => {
     items[1].click();
 
     // Assert
-    expect(chosen).toEqual(['goldman']);
+    expect(chosen).toEqual(['roboto']);
   });
 
   it('emits a reset from the last menu item', async () => {

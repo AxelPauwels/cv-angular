@@ -38,7 +38,7 @@ export const FEATURE_TOGGLE_DEFAULTS = {
   // Navbar icons
   'navbar-download-cv': true,
   'navbar-theme-switcher': true,
-  'navbar-font-switcher': false,
+  'navbar-font-switcher': true,
   'navbar-accessibility-switcher': true,
   'navbar-color-scheme-switcher': true,
   'navbar-language-switcher': true,

@@ -3,9 +3,7 @@
   font-family: Goldman;
   font-style: normal;
   font-weight: 400;
-  src:
-    url('/assets/fonts/Goldman/Goldman-Regular.woff2') format('woff2'),
-    url('/assets/fonts/Goldman/Goldman-Regular.woff') format('woff');
+  src: url('/assets/fonts/Goldman/Goldman-Regular.woff2') format('woff2');
 }
 
 @font-face {
@@ -13,7 +11,17 @@
   font-family: Goldman;
   font-style: normal;
   font-weight: 700;
-  src:
-    url('/assets/fonts/Goldman/Goldman-Bold.woff2') format('woff2'),
-    url('/assets/fonts/Goldman/Goldman-Bold.woff') format('woff');
+  src: url('/assets/fonts/Goldman/Goldman-Bold.woff2') format('woff2');
+}
+
+// Arial resized to Goldman's metrics: shown until the web font arrives
+// (font-display: swap), so the swap doesn't shift the layout (CLS).
+// Measured with fontTools against Arial; recompute if the font file changes.
+@font-face {
+  ascent-override: 68.83%;
+  descent-override: 17.23%;
+  font-family: Goldman-fallback;
+  line-gap-override: 0%;
+  size-adjust: 116.2%;
+  src: local('Arial');
 }

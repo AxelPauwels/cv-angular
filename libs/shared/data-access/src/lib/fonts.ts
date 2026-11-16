@@ -1,14 +1,20 @@
 /**
  * Font themes; the ids match the `data-font` selectors in the app's 3.vendors styles,
  * where each id maps to a font pairing (body font + heading font).
- * The label is the body font's own name, so it is not translated.
+ * The label is a short alias of the body font's name (the menu has little room), so it is
+ * not translated.
  */
 export const FONTS = [
-  { id: 'red-hat', label: 'Red Hat Display' },
-  { id: 'michroma', label: 'Michroma' },
-  { id: 'goldman', label: 'Goldman' },
-  { id: 'syncopate', label: 'Syncopate' },
-  { id: 'bruno-ace', label: 'Bruno Ace SC' },
+  { id: 'red-hat', label: 'Red Hat' },
+  { id: 'roboto', label: 'Roboto' },
+  { id: 'inter', label: 'Inter' },
+  { id: 'ibm-plex', label: 'IBM Plex' },
+  { id: 'atkinson', label: 'Atkinson' },
+  { id: 'open-sans', label: 'Open Sans' },
+  { id: 'nunito', label: 'Nunito' },
+  { id: 'source-serif', label: 'Source Serif' },
+  { id: 'lexend', label: 'Lexend' },
+  { id: 'manrope', label: 'Manrope' },
 ] as const;
 
 export type Font = (typeof FONTS)[number];

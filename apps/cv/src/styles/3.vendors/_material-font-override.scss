@@ -13,27 +13,59 @@
 //   title-large)
 // Components that need a pairing's font outside Material's type scale use the
 // `--ds-font-body` / `--ds-font-heading` variables set here.
+// - `preview-weight` (optional, 500 when unset): the weight of the pairing's own option in
+//   the font menu. Fonts differ in stroke thickness at the same weight (Red Hat Display
+//   is much lighter than Roboto at 500), so each option gets the weight that makes the
+//   labels look equally heavy. Tuned by eye side by side; only the menu preview uses it.
 // @font-face only downloads a font once something uses it, so unchosen fonts cost nothing.
 $fonts: (
   'red-hat': (
     body: settings.$font-family-red-hat,
     heading: settings.$font-family-michroma,
+    preview-weight: 650,
   ),
-  'michroma': (
-    body: settings.$font-family-michroma,
-    heading: settings.$font-family-michroma,
-  ),
-  'goldman': (
-    body: settings.$font-family-goldman,
+  'roboto': (
+    body: settings.$font-family-roboto,
     heading: settings.$font-family-goldman,
+    preview-weight: 450,
   ),
-  'syncopate': (
-    body: settings.$font-family-syncopate,
+  'inter': (
+    body: settings.$font-family-inter,
     heading: settings.$font-family-syncopate,
   ),
-  'bruno-ace': (
-    body: settings.$font-family-bruno-ace,
+  'ibm-plex': (
+    body: settings.$font-family-ibm-plex-sans,
+    heading: settings.$font-family-ibm-plex-mono,
+  ),
+  'atkinson': (
+    body: settings.$font-family-atkinson,
     heading: settings.$font-family-bruno-ace,
+    preview-weight: 450,
+  ),
+  'open-sans': (
+    body: settings.$font-family-open-sans,
+    heading: settings.$font-family-montserrat,
+    preview-weight: 550,
+  ),
+  'nunito': (
+    body: settings.$font-family-nunito,
+    heading: settings.$font-family-orbitron,
+    preview-weight: 650,
+  ),
+  'source-serif': (
+    body: settings.$font-family-source-serif,
+    heading: settings.$font-family-space-grotesk,
+    preview-weight: 500,
+  ),
+  'lexend': (
+    body: settings.$font-family-lexend,
+    heading: settings.$font-family-audiowide,
+    preview-weight: 400,
+  ),
+  'manrope': (
+    body: settings.$font-family-manrope,
+    heading: settings.$font-family-oxanium,
+    preview-weight: 600,
   ),
 );
 
@@ -47,6 +79,7 @@ $fonts: (
   #{$selector} {
     --ds-font-body: #{map.get($pairing, body)};
     --ds-font-heading: #{map.get($pairing, heading)};
+    --ds-font-preview-weight: #{map.get($pairing, preview-weight) or 500};
 
     @include mat.theme(
       (
