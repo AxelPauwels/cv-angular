@@ -9,32 +9,57 @@
     [error]="store.error()" />
   } @else if (store.person(); as person) {
   <section
-    class="personal-details__section"
+    class="personal-details__section personal-details__about"
     aria-labelledby="personal-about-title">
-    <ds-section-heading
-      headingId="personal-about-title"
-      title="t.subheading.personal.about-me"
-      tagline="t.subheading.personal.about-me.description" />
+    <div class="personal-details__about-main">
+      <ds-section-heading
+        headingId="personal-about-title"
+        title="t.subheading.personal.about-me"
+        tagline="t.subheading.personal.about-me.description" />
 
-    <!-- only the facts, no card; the name lives on the home page -->
-    <dl class="personal-details__facts">
-      @for (fact of facts(); track fact.labelKey) {
-      <div class="personal-details__fact">
-        <mat-icon
-          class="personal-details__fact-icon"
-          fontSet="material-symbols-outlined"
-          aria-hidden="true"
-          >{{ fact.icon }}</mat-icon
-        >
-        <dt class="personal-details__fact-label">
-          {{ fact.labelKey | translate }}
-        </dt>
-        <!-- one line: whitespace between the parts would show, e.g. a double space in "Leuven,  Belgium" -->
-        <!-- prettier-ignore -->
-        <dd class="personal-details__fact-value">@for (part of fact.value; track $index) {@switch (part.kind) {@case ('key') {{{ part.text | translate }}} @case ('date') {{{ part.date | date: 'longDate' }}} @default {{{ part.text }}}}}</dd>
-      </div>
-      }
-    </dl>
+      <!-- only the facts, no card; the name lives on the home page -->
+      <dl class="personal-details__facts">
+        @for (fact of facts(); track fact.labelKey) {
+        <div class="personal-details__fact">
+          <mat-icon
+            class="personal-details__fact-icon"
+            fontSet="material-symbols-outlined"
+            aria-hidden="true"
+            >{{ fact.icon }}</mat-icon
+          >
+          <dt class="personal-details__fact-label">
+            {{ fact.labelKey | translate }}
+          </dt>
+          <!-- one line: whitespace between the parts would show, e.g. a double space in "Leuven,  Belgium" -->
+          <!-- prettier-ignore -->
+          <dd class="personal-details__fact-value">@for (part of fact.value; track $index) {@switch (part.kind) {@case ('key') {{{ part.text | translate }}} @case ('date') {{{ part.date | date: 'longDate' }}} @default {{{ part.text }}}}}</dd>
+        </div>
+        }
+      </dl>
+    </div>
+
+    <!-- Decorative (the page itself is about him), so an empty alt. Static
+         srcset/sizes, in sync with the widths in the stylesheet; 12 kB to 101 kB
+         depending on the screen instead of the 850 kB original -->
+    <picture class="personal-details__avatar">
+      <source
+        type="image/webp"
+        sizes="(width >= 992px) 20rem, 14rem"
+        srcset="
+          /assets/images/avatar/friendly-3d-avatar-240x256.webp  240w,
+          /assets/images/avatar/friendly-3d-avatar-480x513.webp  480w,
+          /assets/images/avatar/friendly-3d-avatar-720x769.webp  720w,
+          /assets/images/avatar/friendly-3d-avatar-960x1026.webp 960w
+        " />
+      <img
+        class="personal-details__avatar-image"
+        src="/assets/images/avatar/friendly-3d-avatar-480x513.png"
+        alt=""
+        width="480"
+        height="513"
+        loading="lazy"
+        decoding="async" />
+    </picture>
   </section>
 
   <section

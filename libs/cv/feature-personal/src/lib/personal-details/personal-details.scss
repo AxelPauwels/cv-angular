@@ -6,6 +6,7 @@
   // Each section sizes its own grid
   &__section {
     container-type: inline-size;
+    position: relative;
 
     & + & {
       margin-top: 3rem;
@@ -13,6 +14,47 @@
   }
 
   // --- About me: no card, the facts in a grid of an icon, a label and a value ---
+
+  // The heading and facts on the left, the avatar on the right
+  &__about {
+    align-items: center;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  // its own container, so the facts' columns follow the space left of the avatar
+  &__about-main {
+    container-type: inline-size;
+  }
+
+  &__avatar {
+    align-self: end;
+    bottom: -0.75rem;
+    display: block;
+    position: absolute;
+    right: 0;
+
+    // keep these widths in sync with `sizes` on the <source> in the template
+    width: 14rem;
+    z-index: 100;
+
+    @media (width >= 524px) and (width < 620px) {
+      right: -3.5rem;
+    }
+
+    // from lg: at md the bigger avatar would cover the page title
+    @media (width >= 992px) {
+      margin-inline-start: 2rem;
+      width: 20rem;
+    }
+  }
+
+  &__avatar-image {
+    display: block;
+    height: auto;
+    max-width: 15rem;
+    width: 100%;
+  }
 
   // Columns as wide as their content, the leftover space at the end of the row
   // instead of between the columns on wide screens

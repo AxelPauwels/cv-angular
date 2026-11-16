@@ -49,7 +49,8 @@ function defineLordiconElement(): Promise<void> {
  * ```
  *
  * Size it with `font-size` or `--ds-lordicon-size` (1em by default). The colors
- * follow the theme (`--mat-sys-primary`); override them with `--lord-icon-primary`
+ * follow the theme (`--mat-sys-primary`, blending into a lighter primary in light
+ * mode and into the text color in dark mode); override them with `--lord-icon-primary`
  * and `--lord-icon-secondary`.
  */
 @Component({
