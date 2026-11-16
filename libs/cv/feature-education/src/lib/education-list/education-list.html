@@ -4,13 +4,16 @@
   @if (loading.pending()) { @if (loading.indicator()) {
   <ds-loading-spinner />
   } } @else if (store.error()) {
-  <p>Could not load education: {{ store.error()?.message }}</p>
+  <ds-store-loading-error
+    message="t.error.load.education"
+    [error]="store.error()" />
   } @else { @for (group of groups(); track group.category; let first = $first) {
   @if (first) {
   <h2 class="cdk-visually-hidden">
     {{ categoryKeys[group.category] | translate }}
   </h2>
   <ds-timeline
+    class="main-timeline"
     [label]="categoryKeys[group.category] | translate"
     [headingLevel]="3">
     @for (education of group.educations; track education.id) {

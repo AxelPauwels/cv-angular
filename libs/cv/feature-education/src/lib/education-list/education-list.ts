@@ -1,6 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { delayedLoading } from '@cv/shared-util-loading';
 import { LoadingSpinner } from '@cv/shared-ui-loading-spinner';
+import { StoreLoadingError } from '@cv/shared-ui-store-loading-error';
 import { PageTitle, SectionHeading, PageLayout } from '@cv/shared-ui-page';
 import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@tolgee/ngx';
@@ -33,6 +34,7 @@ const shown = (e: Education) => ({
   imports: [
     PageLayout,
     LoadingSpinner,
+    StoreLoadingError,
     PageTitle,
     SectionHeading,
     Card,

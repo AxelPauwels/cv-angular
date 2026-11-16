@@ -42,6 +42,73 @@
         }
       }
     },
+    "architecture": {
+      "dependencies": {
+        "count": "{count} bibliotheken",
+        "imports": "importeert",
+        "none": "geen ander project"
+      },
+      "domains": {
+        "intro": "De workspace is verticaal opgedeeld: elk <strong>domein</strong> (een deel van de app) heeft zijn eigen bibliotheken, verdeeld in <strong>lagen</strong> volgens wat ze doen. Mappen volgen <code>libs/<domain>/<layer>-<name></code>; <code>libs/shared</code> bevat wat meerdere domeinen gebruiken. Gemaakt vanuit de Nx-projectgraaf."
+      },
+      "layer": {
+        "api": {
+          "text": "Het GraphQL-schema en de resolvers (<code>@cv/api</code>), voorlopig beantwoord in de browser."
+        },
+        "data-access": {
+          "text": "Een root signal store (NgRx Signals) die één keer laadt en in de hele app gedeeld wordt. Intern voert een service een getypeerde GraphQL-query uit en zet een mapper de gegenereerde API-types om naar handgeschreven frontendtypes."
+        },
+        "feature": {
+          "text": "Een gerouteerde pagina. Injecteert een store en toont zijn signals."
+        },
+        "ui-util": {
+          "text": "Presentatiecomponenten en gewone functies of types, gedeeld zonder iets van data te weten.",
+          "title": "ui en util"
+        }
+      },
+      "loading": "De architectuur wordt geladen",
+      "matrix": {
+        "domain": "Domein",
+        "label": "Bibliotheken per domein en laag"
+      },
+      "not-available": {
+        "text": "De architectuur wordt tijdens de build gemaakt en is hier niet beschikbaar. Voer <code>npx nx run technical-data-access-build-info:build-info</code> uit.",
+        "title": "Architectuur niet beschikbaar"
+      },
+      "public-api": {
+        "entry": {
+          "text": "Elke bibliotheek exporteert haar publieke API vanuit <code>src/index.ts</code>, geïmporteerd als <code>@cv/<project></code>. Diepe imports in een bibliotheek zijn niet toegestaan.",
+          "title": "Eén toegangspunt"
+        },
+        "lazy": {
+          "text": "Featurebibliotheken exporteren hun pagina bij naam, zodat een route ze lazy laadt met <code>loadComponent: () => import('@cv/…').then((m) => m.Page)</code>.",
+          "title": "Lazy pagina’s"
+        },
+        "private": {
+          "text": "Wat de barrel niet exporteert, staat in <code>src/lib/internal/</code>. Een lintregel verhindert dat een barrel daar iets uit exporteert.",
+          "title": "Standaard privé"
+        }
+      },
+      "rules": {
+        "from": "Modules met tag",
+        "intro": "controleert elke import aan de hand van deze regels uit <code>sheriff.config.ts</code>, in ESLint en met <code>sheriff verify</code>. Een module heeft toestemming nodig voor beide tags: zijn domein en zijn laag.",
+        "label": "Afhankelijkheidsregels",
+        "none": "niets: het hangt van geen andere module af",
+        "to": "mogen importeren"
+      },
+      "stat": {
+        "apps": "Apps",
+        "domains": "Domeinen",
+        "layers": "Lagen",
+        "libraries": "Bibliotheken"
+      },
+      "tag": {
+        "every-domain": "elk domein",
+        "everything": "alles",
+        "root": "de app zelf",
+        "same-domain": "hetzelfde domein"
+      }
+    },
     "at": "aan",
     "carousel": {
       "carousel": "carrousel",
@@ -63,9 +130,12 @@
       "email": "E-mail",
       "loading": "Laden",
       "load-report": "Rapport laden",
+      "new-tab": "(nieuw tabblad)",
+      "new-tab-url": "({url}, nieuw tabblad)",
       "ok": "OK",
       "pdf": "pdf",
       "reset": "Reset",
+      "technologies": "Technologieën",
       "under-construction": "Aan deze pagina wordt nog gewerkt. Kom snel terug!"
     },
     "competence": {
@@ -126,6 +196,20 @@
           "ONGOING": "lopend",
           "RECURRING": "jaarlijks"
         }
+      }
+    },
+    "embedded-page": {
+      "loading": "Het rapport wordt geladen",
+      "not-available": "Dit rapport is hier niet beschikbaar. Het wordt gemaakt door de productiebuild (<code>npm run build:production</code>).",
+      "open-new-tab": "Openen in een nieuw tabblad"
+    },
+    "error": {
+      "load": {
+        "education": "Kon de opleidingen niet laden: {error}",
+        "experience": "Kon de ervaring niet laden: {error}",
+        "personal-details": "Kon de persoonlijke gegevens niet laden: {error}",
+        "references": "Kon de referenties niet laden: {error}",
+        "skills": "Kon de vaardigheden niet laden: {error}"
       }
     },
     "experience": {
@@ -271,6 +355,37 @@
       },
       "not-audited": "Nog niet getest",
       "page": "Pagina"
+    },
+    "micro-frontends": {
+      "lib": {
+        "angular-library": "Angular-bibliotheek",
+        "demo": "Mijn npm-package van www.npmjs.com",
+        "intro": "De omgekeerde aanpak, ter vergelijking: de component zit in deze app in plaats van geladen te worden vanuit een andere deployment.",
+        "step": {
+          "bundle": "Deze app installeert het en bundelt het tijdens de build, dus tijdens runtime wordt niets geladen.",
+          "element": "Het is ook beschikbaar als webcomponent <code><mac-window></code> (<code>@axel-pauwels/mac-window/element</code>), voor elk framework.",
+          "publish": "Het wordt op npm gepubliceerd als <code>@axel-pauwels/mac-window</code>.",
+          "source": "<code>MacWindow</code> staat in deze repository, in <code>packages/mac-window</code>."
+        },
+        "subtitle": "Gebundeld tijdens de build, vanuit deze repository",
+        "title": "Componentenbibliotheek: <lib-mac-window>",
+        "view-npm": "Bekijk op npm",
+        "web-component": "Webcomponent"
+      },
+      "mfe": {
+        "intro": "Een aparte Angular-app met een eigen repository en deployment. Deze app bevat de code niet: ze wordt in de browser geladen wanneer deze pagina opent.",
+        "open-api-docs": "Open de API-documentatie van de remote",
+        "open-remote": "Open de remote app",
+        "separate-deployment": "Aparte deployment",
+        "step": {
+          "load": "Hier roept <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) <code>loadRemoteModule('cv-mfe', './web-components')</code> aan.",
+          "manifest": "Bij het opstarten leest <code>initFederation()</code> het bestand <code>federation.manifest.json</code>, dat de naam <code>cv-mfe</code> koppelt aan de <code>remoteEntry.json</code> van de remote.",
+          "register": "Die module registreert het custom element <code><cv-mfe></code> (Angular Elements) en de wrapper voegt het toe aan de pagina.",
+          "shared": "Angular en RxJS worden als singletons gedeeld met deze app (Native Federation), dus ze worden maar één keer gedownload."
+        },
+        "subtitle": "Geladen tijdens runtime, vanuit een eigen deployment",
+        "title": "Micro-frontend: <cv-mfe>"
+      }
     },
     "nav": {
       "admin": "Admin",
@@ -482,6 +597,11 @@
           "text": "Liever een andere stijl? Wijzig hier het lettertype van de hele website.",
           "title": "Lettertypes"
         },
+        "home": {
+          "label": "Home",
+          "text": "Het huisje in het menu brengt je altijd terug naar deze pagina, waar je ook bent op de website.",
+          "title": "Home"
+        },
         "languages": {
           "label": "Talen",
           "text": "De website is beschikbaar in het Engels, Nederlands, Frans en Spaans. Kies hier je taal.",
@@ -514,6 +634,31 @@
         }
       },
       "step-of": "Stap {current} van {total}"
+    },
+    "versions": {
+      "category": {
+        "api": "API",
+        "architecture": "Architectuur",
+        "code-quality": "Codekwaliteit",
+        "framework": "Framework",
+        "i18n": "i18n",
+        "micro-frontends": "Micro-frontends",
+        "monorepo": "Monorepo",
+        "runtime": "Runtime",
+        "state": "State",
+        "testing": "Testen",
+        "ui": "UI"
+      },
+      "column": {
+        "installed": "Geïnstalleerd",
+        "name": "Naam",
+        "package": "Package"
+      },
+      "loading": "De versies worden geladen",
+      "not-available": {
+        "text": "De versies worden tijdens de build gemaakt en zijn hier niet beschikbaar. Voer <code>npx nx run technical-data-access-build-info:build-info</code> uit.",
+        "title": "Versies niet beschikbaar"
+      }
     },
     "website": "website",
     "written": "Schriftelijk"

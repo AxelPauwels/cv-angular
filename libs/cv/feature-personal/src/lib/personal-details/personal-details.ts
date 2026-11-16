@@ -1,6 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { delayedLoading } from '@cv/shared-util-loading';
 import { LoadingSpinner } from '@cv/shared-ui-loading-spinner';
+import { StoreLoadingError } from '@cv/shared-ui-store-loading-error';
 import { PageTitle, SectionHeading, PageLayout } from '@cv/shared-ui-page';
 import { DatePipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
@@ -45,6 +46,7 @@ const key = (value: string): FactPart => ({ kind: 'key', text: value });
   imports: [
     PageLayout,
     LoadingSpinner,
+    StoreLoadingError,
     PageTitle,
     SectionHeading,
     Card,

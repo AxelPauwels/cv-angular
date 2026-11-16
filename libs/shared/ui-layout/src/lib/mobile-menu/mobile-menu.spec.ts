@@ -15,7 +15,7 @@ class Page {}
       [closeOnOutsideClick]="closeOnOutsideClick()">
       <a class="link" href="#">Page</a>
     </ds-mobile-menu>
-    <p class="outside">Page content</p>
+    <p class="outside" tabindex="-1">Page content</p>
   `,
 })
 class Host {
@@ -157,6 +157,44 @@ describe('MobileMenu', () => {
 
     // Assert
     expect(panel.hidden).toBe(false);
+    element.remove();
+  });
+
+  it('does nothing on Escape while closed', async () => {
+    // Arrange
+    const { fixture, element, button, panel } = await setup();
+    document.body.append(element);
+    const outside = element.querySelector<HTMLElement>('.outside');
+    outside?.focus();
+
+    // Act
+    button.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
+    );
+    await fixture.whenStable();
+
+    // Assert
+    expect(panel.hidden).toBe(true);
+    expect(document.activeElement).toBe(outside);
+    element.remove();
+  });
+
+  it('keeps the focus where it is when closing with the focus outside the panel', async () => {
+    // Arrange
+    const { fixture, element, button, panel } = await setup();
+    document.body.append(element);
+    button.click();
+    await fixture.whenStable();
+    const outside = element.querySelector<HTMLElement>('.outside');
+    outside?.focus();
+
+    // Act
+    outside?.click();
+    await fixture.whenStable();
+
+    // Assert
+    expect(panel.hidden).toBe(true);
+    expect(document.activeElement).toBe(outside);
     element.remove();
   });
 });

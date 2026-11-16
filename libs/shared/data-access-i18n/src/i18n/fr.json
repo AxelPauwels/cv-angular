@@ -42,6 +42,73 @@
         }
       }
     },
+    "architecture": {
+      "dependencies": {
+        "count": "{count} bibliothèques",
+        "imports": "importe",
+        "none": "aucun autre projet"
+      },
+      "domains": {
+        "intro": "Le workspace est découpé verticalement : chaque <strong>domaine</strong> (une partie de l’application) possède ses bibliothèques, réparties en <strong>couches</strong> selon leur rôle. Les dossiers suivent <code>libs/<domain>/<layer>-<name></code> ; <code>libs/shared</code> contient ce que plusieurs domaines utilisent. Généré à partir du graphe de projets Nx."
+      },
+      "layer": {
+        "api": {
+          "text": "Le schéma GraphQL et les resolvers (<code>@cv/api</code>), exécutés dans le navigateur pour l’instant."
+        },
+        "data-access": {
+          "text": "Un signal store racine (NgRx Signals) qui se charge une fois et est partagé dans toute l’application. En interne, un service exécute une requête GraphQL typée et un mapper transforme les types d’API générés en types frontend écrits à la main."
+        },
+        "feature": {
+          "text": "Une page routée. Elle injecte un store et affiche ses signals."
+        },
+        "ui-util": {
+          "text": "Des composants de présentation et de simples fonctions ou types, partagés sans rien savoir des données.",
+          "title": "ui et util"
+        }
+      },
+      "loading": "Chargement de l’architecture",
+      "matrix": {
+        "domain": "Domaine",
+        "label": "Bibliothèques par domaine et par couche"
+      },
+      "not-available": {
+        "text": "L’architecture est générée au build et n’est pas disponible ici. Lancez <code>npx nx run technical-data-access-build-info:build-info</code>.",
+        "title": "Architecture non disponible"
+      },
+      "public-api": {
+        "entry": {
+          "text": "Chaque bibliothèque exporte son API publique depuis <code>src/index.ts</code>, importée en tant que <code>@cv/<project></code>. Les imports profonds dans une bibliothèque sont interdits.",
+          "title": "Un seul point d’entrée"
+        },
+        "lazy": {
+          "text": "Les bibliothèques feature exportent leur page par son nom, pour qu’une route la charge en lazy avec <code>loadComponent: () => import('@cv/…').then((m) => m.Page)</code>.",
+          "title": "Pages lazy"
+        },
+        "private": {
+          "text": "Ce que le barrel n’exporte pas se trouve dans <code>src/lib/internal/</code>. Une règle de lint empêche un barrel d’en exporter quoi que ce soit.",
+          "title": "Privé par défaut"
+        }
+      },
+      "rules": {
+        "from": "Modules avec le tag",
+        "intro": "vérifie chaque import selon ces règles de <code>sheriff.config.ts</code>, dans ESLint et avec <code>sheriff verify</code>. Un module doit être autorisé pour ses deux tags : son domaine et sa couche.",
+        "label": "Règles de dépendance",
+        "none": "rien : il ne dépend d’aucun autre module",
+        "to": "peuvent importer"
+      },
+      "stat": {
+        "apps": "Applications",
+        "domains": "Domaines",
+        "layers": "Couches",
+        "libraries": "Bibliothèques"
+      },
+      "tag": {
+        "every-domain": "chaque domaine",
+        "everything": "tout",
+        "root": "l’application elle-même",
+        "same-domain": "même domaine"
+      }
+    },
     "at": "à",
     "carousel": {
       "carousel": "carrousel",
@@ -63,9 +130,12 @@
       "email": "E-mail",
       "loading": "Chargement",
       "load-report": "Charger le rapport",
+      "new-tab": "(nouvel onglet)",
+      "new-tab-url": "({url}, nouvel onglet)",
       "ok": "OK",
       "pdf": "PDF",
       "reset": "Rétablir par défaut",
+      "technologies": "Technologies",
       "under-construction": "Cette page est en construction. Revenez bientôt !"
     },
     "competence": {
@@ -126,6 +196,20 @@
           "ONGOING": "en cours",
           "RECURRING": "chaque année"
         }
+      }
+    },
+    "embedded-page": {
+      "loading": "Chargement du rapport",
+      "not-available": "Ce rapport n’est pas disponible ici. Il est généré par le build de production (<code>npm run build:production</code>).",
+      "open-new-tab": "Ouvrir dans un nouvel onglet"
+    },
+    "error": {
+      "load": {
+        "education": "Impossible de charger la formation : {error}",
+        "experience": "Impossible de charger les expériences : {error}",
+        "personal-details": "Impossible de charger les informations personnelles : {error}",
+        "references": "Impossible de charger les références : {error}",
+        "skills": "Impossible de charger les compétences : {error}"
       }
     },
     "experience": {
@@ -272,6 +356,37 @@
       "not-audited": "Pas encore audité",
       "page": "Page"
     },
+    "micro-frontends": {
+      "lib": {
+        "angular-library": "Bibliothèque Angular",
+        "demo": "Mon package npm sur www.npmjs.com",
+        "intro": "L’approche inverse, pour comparer : le composant est livré avec cette application au lieu d’être chargé depuis un autre déploiement.",
+        "step": {
+          "bundle": "Cette application l’installe et l’intègre au build : rien n’est chargé à l’exécution.",
+          "element": "Il existe aussi en web component <code><mac-window></code> (<code>@axel-pauwels/mac-window/element</code>), pour n’importe quel framework.",
+          "publish": "Il est publié sur npm sous le nom <code>@axel-pauwels/mac-window</code>.",
+          "source": "<code>MacWindow</code> se trouve dans ce dépôt, dans <code>packages/mac-window</code>."
+        },
+        "subtitle": "Intégrée au build, depuis ce dépôt",
+        "title": "Bibliothèque de composants : <lib-mac-window>",
+        "view-npm": "Voir sur npm",
+        "web-component": "Web component"
+      },
+      "mfe": {
+        "intro": "Une application Angular distincte, avec son propre dépôt et son propre déploiement. Cette application ne contient pas son code : il est chargé dans le navigateur à l’ouverture de cette page.",
+        "open-api-docs": "Ouvrir la documentation de l’API remote",
+        "open-remote": "Ouvrir l’application remote",
+        "separate-deployment": "Déploiement séparé",
+        "step": {
+          "load": "Ici, <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) appelle <code>loadRemoteModule('cv-mfe', './web-components')</code>.",
+          "manifest": "Au démarrage, <code>initFederation()</code> lit <code>federation.manifest.json</code>, qui associe le nom <code>cv-mfe</code> au <code>remoteEntry.json</code> du remote.",
+          "register": "Ce module enregistre l’élément personnalisé <code><cv-mfe></code> (Angular Elements), et le wrapper l’ajoute à la page.",
+          "shared": "Angular et RxJS sont partagés avec cette application comme singletons (Native Federation) : ils ne sont téléchargés qu’une fois."
+        },
+        "subtitle": "Chargé à l’exécution, depuis son propre déploiement",
+        "title": "Micro-frontend : <cv-mfe>"
+      }
+    },
     "nav": {
       "admin": "Admin",
       "architecture": "Architecture",
@@ -286,7 +401,7 @@
       "experience": "Expérience",
       "feature-toggles": "Caractéristiques",
       "graphql-docs": "graphql docs",
-      "home": "Accueil",
+      "home": "Maison",
       "light": "Clair",
       "lighthouse": "Lighthouse",
       "light-mode": "mode clair",
@@ -482,6 +597,11 @@
           "text": "Vous préférez un autre style ? Changez ici la police de tout le site.",
           "title": "Polices"
         },
+        "home": {
+          "label": "Accueil",
+          "text": "L'icône de la maison dans le menu vous ramène toujours à cette page, où que vous soyez sur le site.",
+          "title": "Accueil"
+        },
         "languages": {
           "label": "Langues",
           "text": "Le site est disponible en anglais, néerlandais, français et espagnol. Choisissez votre langue ici.",
@@ -514,6 +634,31 @@
         }
       },
       "step-of": "Étape {current} sur {total}"
+    },
+    "versions": {
+      "category": {
+        "api": "API",
+        "architecture": "Architecture",
+        "code-quality": "Qualité du code",
+        "framework": "Framework",
+        "i18n": "i18n",
+        "micro-frontends": "Micro-frontends",
+        "monorepo": "Monorepo",
+        "runtime": "Exécution",
+        "state": "État",
+        "testing": "Tests",
+        "ui": "Interface"
+      },
+      "column": {
+        "installed": "Installée",
+        "name": "Nom",
+        "package": "Package"
+      },
+      "loading": "Chargement des versions",
+      "not-available": {
+        "text": "Les versions sont générées au build et ne sont pas disponibles ici. Lancez <code>npx nx run technical-data-access-build-info:build-info</code>.",
+        "title": "Versions non disponibles"
+      }
     },
     "website": "site web",
     "written": "Écrit"

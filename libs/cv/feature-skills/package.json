@@ -10,7 +10,8 @@
     "@cv/shared-data-access-i18n": "0.0.1",
     "@cv/shared-util-loading": "0.0.1",
     "@cv/shared-ui-loading-spinner": "0.0.1",
-    "@cv/shared-ui-page": "0.0.1"
+    "@cv/shared-ui-page": "0.0.1",
+    "@cv/shared-ui-store-loading-error": "0.0.1"
   },
   "sideEffects": false,
   "private": true

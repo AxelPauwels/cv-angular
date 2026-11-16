@@ -1,7 +1,14 @@
 import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { inBrowserGraphqlInterceptor } from '@cv/shared-data-access';
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from '@angular/common/http/testing';
+import {
+  GRAPHQL_ENDPOINT,
+  inBrowserGraphqlInterceptor,
+} from '@cv/shared-data-access';
 import { EducationStore } from './education.store';
 
 describe('EducationStore', () => {
@@ -54,5 +61,52 @@ describe('EducationStore', () => {
     expect(loadingDuringReload).toBe(true);
     expect(store.isLoading()).toBe(false);
     expect(store.educations().length).toBeGreaterThan(0);
+  });
+
+  describe('against a server', () => {
+    beforeEach(() => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        providers: [provideHttpClient(), provideHttpClientTesting()],
+      });
+    });
+
+    it('has empty lists while loading', () => {
+      // Arrange
+      const store = TestBed.inject(EducationStore);
+
+      // Act
+      TestBed.tick();
+
+      // Assert
+      expect(store.isLoading()).toBe(true);
+      expect(store.educations()).toEqual([]);
+      expect(store.certificates()).toEqual([]);
+      expect(store.additionalLearnings()).toEqual([]);
+      expect(store.trainings()).toEqual([]);
+      expect(store.error()).toBeUndefined();
+    });
+
+    it('reports an error when the api fails, with empty lists', async () => {
+      // Arrange
+      const store = TestBed.inject(EducationStore);
+      TestBed.tick();
+
+      // Act
+      for (const request of TestBed.inject(HttpTestingController).match(
+        GRAPHQL_ENDPOINT
+      )) {
+        request.flush('', { status: 500, statusText: 'Server Error' });
+      }
+      await TestBed.inject(ApplicationRef).whenStable();
+
+      // Assert
+      expect(store.isLoading()).toBe(false);
+      expect(store.error()).toBeDefined();
+      expect(store.educations()).toEqual([]);
+      expect(store.certificates()).toEqual([]);
+      expect(store.additionalLearnings()).toEqual([]);
+      expect(store.trainings()).toEqual([]);
+    });
   });
 });

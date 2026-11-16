@@ -4,7 +4,9 @@
   @if (loading.pending()) { @if (loading.indicator()) {
   <ds-loading-spinner />
   } } @else if (store.error()) {
-  <p>Could not load references: {{ store.error()?.message }}</p>
+  <ds-store-loading-error
+    message="t.error.load.references"
+    [error]="store.error()" />
   } @else {
   <ds-timeline [label]="'t.heading.references' | translate">
     @for (group of groups(); track group.work; let g = $index) {

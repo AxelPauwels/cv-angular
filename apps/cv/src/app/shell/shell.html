@@ -74,12 +74,14 @@
 <footer class="shell__footer" [inert]="tour.active()">
   <p class="shell__copyright">
     © {{ year }}
-    <!-- the way to the admin page, also when its menu item is switched off -->
+    <!-- the way back to the admin page, only while its menu item is switched off -->
+    @if (toggles()['showcase-feature-toggles']) { Axel Pauwels } @else {
     <a class="shell__admin-link" [routerLink]="adminLink"
       >Axel Pauwels<span class="cdk-visually-hidden">
         – {{ 't.nav.feature-toggles' | translate }}</span
       ></a
     >
+    }
   </p>
   <!-- the contact links load the cv api, so only once the footer is in view
        (or the tour points at them, also when the footer is scrolled away) -->

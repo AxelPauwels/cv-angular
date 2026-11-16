@@ -15,12 +15,16 @@ else
 fi
 
 # The coverage and e2e reports, the GraphQL docs, the build info and the project
-# graph are copied into the build as assets (/coverage, /e2e-report,
+# graph are copied into the build as assets (/coverage from coverage/all, /e2e-report,
 # /graphql-docs, /build-info and /project-graph, see apps/cv/project.json),
 # so generate them first.
 # `nx serve` serves them as well once they exist (the showcase and technical tabs show them).
+
+# Every project, merged into one report (coverage/all), so the coverage page
+# shows what all the tests cover, not only the app's own tests
 echo "🧪 Running unit tests with coverage..."
-npx nx run cv:test:ci --coverage
+npx nx run-many -t test --all --configuration=ci --coverage
+npm run coverage:merge
 
 echo "🎭 Running e2e tests..."
 npx nx run cv-e2e:e2e

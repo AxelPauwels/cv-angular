@@ -1,6 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { delayedLoading } from '@cv/shared-util-loading';
 import { LoadingSpinner } from '@cv/shared-ui-loading-spinner';
+import { StoreLoadingError } from '@cv/shared-ui-store-loading-error';
 import { PageTitle, PageLayout } from '@cv/shared-ui-page';
 import { TranslatePipe } from '@tolgee/ngx';
 import { byEndNewestFirst } from '@cv/shared-util-types';
@@ -27,6 +28,7 @@ const CATEGORY_ORDER: readonly ExperienceCategory[] = ['IT', 'HORECA'];
   imports: [
     PageLayout,
     LoadingSpinner,
+    StoreLoadingError,
     PageTitle,
     Timeline,
     TimelineDetail,

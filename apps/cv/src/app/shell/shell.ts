@@ -97,7 +97,7 @@ export class Shell {
     });
   }
 
-  /** The footer's name links to the admin page */
+  /** The footer's name links to the admin page while its menu item is off */
   protected readonly adminLink = ROUTES.SHOWCASE.FEATURE_TOGGLES_ROUTER_LINK;
 
   /** The home page fills the screen on its own: no footer there */

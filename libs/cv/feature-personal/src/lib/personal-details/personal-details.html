@@ -4,7 +4,9 @@
   @if (loading.pending()) { @if (loading.indicator()) {
   <ds-loading-spinner />
   } } @else if (store.error()) {
-  <p>Could not load personal details: {{ store.error()?.message }}</p>
+  <ds-store-loading-error
+    message="t.error.load.personal-details"
+    [error]="store.error()" />
   } @else if (store.person(); as person) {
   <section
     class="personal-details__section"
