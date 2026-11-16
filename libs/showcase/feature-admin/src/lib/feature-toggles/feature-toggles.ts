@@ -102,7 +102,7 @@ export class FeatureToggles {
 
   protected change(id: FeatureToggleId, enabled: boolean): void {
     if (id === 'showcase-feature-toggles' && !enabled) {
-      this.explainHiddenAdmin();
+      this._explainHiddenAdmin();
     }
     const before = this.service.states();
     this.service.change(id, enabled);
@@ -125,7 +125,7 @@ export class FeatureToggles {
    * says where to find it. It stays until the visitor closes it with "OK": no
    * time limit to read it (WCAG 2.2.1).
    */
-  private explainHiddenAdmin(): void {
+  private _explainHiddenAdmin(): void {
     this.snackBar.open(
       this.translate.instant('t.feature-toggles.hidden-notice'),
       this.translate.instant('t.common.ok')

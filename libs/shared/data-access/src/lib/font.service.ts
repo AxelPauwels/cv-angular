@@ -15,7 +15,7 @@ export class FontService {
 
   readonly fonts = FONTS;
 
-  private readonly _font = signal<FontId>(this.savedFont());
+  private readonly _font = signal<FontId>(this._savedFont());
   readonly font = this._font.asReadonly();
 
   constructor() {
@@ -43,7 +43,7 @@ export class FontService {
     }
   }
 
-  private savedFont(): FontId {
+  private _savedFont(): FontId {
     let saved: string | null = null;
     try {
       saved = this.window?.localStorage.getItem(FONT_KEY) ?? null;

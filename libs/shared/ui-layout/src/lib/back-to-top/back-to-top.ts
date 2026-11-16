@@ -70,7 +70,7 @@ export class BackToTop {
       this.document.activeElement === this.button().nativeElement;
     view?.scrollTo({
       top: 0,
-      behavior: this.reduceMotion() ? 'auto' : 'smooth',
+      behavior: this._reduceMotion() ? 'auto' : 'smooth',
     });
     if (hadFocus) {
       this.focusTarget()?.focus({ preventScroll: true });
@@ -78,7 +78,7 @@ export class BackToTop {
   }
 
   /** The app's own setting (on <html>) or, without it, the system preference */
-  private reduceMotion(): boolean {
+  private _reduceMotion(): boolean {
     return (
       this.document.documentElement.hasAttribute('data-reduce-motion') ||
       !!this.document.defaultView?.matchMedia?.(

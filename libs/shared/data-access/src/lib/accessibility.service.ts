@@ -25,13 +25,13 @@ export class AccessibilityService {
 
   private readonly defaults: AccessibilitySettings = {
     textSize: 100,
-    reduceMotion: this.matches('(prefers-reduced-motion: reduce)'),
-    highContrast: this.matches('(prefers-contrast: more)'),
+    reduceMotion: this._matches('(prefers-reduced-motion: reduce)'),
+    highContrast: this._matches('(prefers-contrast: more)'),
     wideTextSpacing: false,
   };
 
   private readonly changes = signal<Partial<AccessibilitySettings>>(
-    this.savedChanges()
+    this._savedChanges()
   );
 
   readonly settings = computed<AccessibilitySettings>(() => ({
@@ -54,7 +54,7 @@ export class AccessibilityService {
   }
 
   change(settings: Partial<AccessibilitySettings>): void {
-    const changes = { ...this.changes(), ...this.valid(settings) };
+    const changes = { ...this.changes(), ...this._valid(settings) };
     // a setting changed back to its default follows the system again
     for (const key of Object.keys(changes) as (keyof AccessibilitySettings)[]) {
       if (changes[key] === this.defaults[key]) {
@@ -62,18 +62,18 @@ export class AccessibilityService {
       }
     }
     this.changes.set(changes);
-    this.save(changes);
+    this._save(changes);
   }
 
   reset(): void {
     this.changes.set({});
-    this.save({});
+    this._save({});
   }
 
-  private savedChanges(): Partial<AccessibilitySettings> {
+  private _savedChanges(): Partial<AccessibilitySettings> {
     try {
       const saved = this.window?.localStorage.getItem(ACCESSIBILITY_KEY);
-      return saved ? this.valid(JSON.parse(saved)) : {};
+      return saved ? this._valid(JSON.parse(saved)) : {};
     } catch {
       // storage unavailable or not JSON: start from the defaults
       return {};
@@ -81,7 +81,7 @@ export class AccessibilityService {
   }
 
   /** Keeps only known settings with a valid value (stored data is external input) */
-  private valid(input: unknown): Partial<AccessibilitySettings> {
+  private _valid(input: unknown): Partial<AccessibilitySettings> {
     if (typeof input !== 'object' || input === null) {
       return {};
     }
@@ -102,7 +102,7 @@ export class AccessibilityService {
     return valid;
   }
 
-  private save(changes: Partial<AccessibilitySettings>): void {
+  private _save(changes: Partial<AccessibilitySettings>): void {
     try {
       if (Object.keys(changes).length === 0) {
         this.window?.localStorage.removeItem(ACCESSIBILITY_KEY);
@@ -117,7 +117,7 @@ export class AccessibilityService {
     }
   }
 
-  private matches(query: string): boolean {
+  private _matches(query: string): boolean {
     return this.window?.matchMedia?.(query).matches ?? false;
   }
 }

@@ -57,7 +57,7 @@ export class TourOverlay {
   private readonly tour = inject(TourService);
 
   /** Without the steps whose feature is switched off on the admin page */
-  protected readonly steps = this.visibleSteps();
+  protected readonly steps = this._visibleSteps();
   protected readonly index = signal(0);
   protected readonly step = computed(() => this.steps[this.index()]);
   protected readonly previous = computed(
@@ -73,7 +73,7 @@ export class TourOverlay {
   }));
 
   /** The spotlight, in viewport coordinates; empty and centered without a target */
-  protected readonly spotlight = signal<Box>(this.centerBox());
+  protected readonly spotlight = signal<Box>(this._centerBox());
   protected readonly hasTarget = signal(false);
   /** A step's own corner; null keeps the stylesheet's corner */
   protected readonly spotlightRadius = signal<string | null>(null);
@@ -106,7 +106,7 @@ export class TourOverlay {
   constructor() {
     effect(() => {
       const step = this.step();
-      untracked(() => void this.show(step));
+      untracked(() => void this._show(step));
     });
     afterNextRender(() => this.scheduleMeasure());
     inject(DestroyRef).onDestroy(() => {
@@ -118,7 +118,7 @@ export class TourOverlay {
     });
   }
 
-  private visibleSteps(): readonly TourStep[] {
+  private _visibleSteps(): readonly TourStep[] {
     const toggles = inject(FeatureToggleService).states();
     return inject(TOUR_STEPS).filter(
       (step) =>
@@ -164,12 +164,12 @@ export class TourOverlay {
     if (!this.frame && this.window) {
       this.frame = this.window.requestAnimationFrame(() => {
         this.frame = 0;
-        this.measure();
+        this._measure();
       });
     }
   }
 
-  private async show(step: TourStep): Promise<void> {
+  private async _show(step: TourStep): Promise<void> {
     const run = ++this.run;
     const spinner = setTimeout(() => this.loading.set(true), LOADING_DELAY_MS);
     try {
@@ -180,7 +180,7 @@ export class TourOverlay {
         return;
       }
       // after navigating: every navigation closes the hamburger menu
-      const phone = this.menuShown();
+      const phone = this._menuShown();
       const inMenu = !!step.menuTarget && phone;
       this.tour.showMenu(inMenu);
       const target = inMenu
@@ -188,7 +188,7 @@ export class TourOverlay {
         : phone && step.centerOnPhones
           ? undefined
           : step.target;
-      const targets = target ? await this.waitFor(target, run) : [];
+      const targets = target ? await this._waitFor(target, run) : [];
       if (run !== this.run) {
         return;
       }
@@ -198,9 +198,9 @@ export class TourOverlay {
           ? step.spotlight
           : undefined;
       this.spotlightRadius.set(this.targetFrame?.radius ?? null);
-      this.observe(targets);
+      this._observe(targets);
       targets[0]?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-      this.measure();
+      this._measure();
     } finally {
       clearTimeout(spinner);
       if (run === this.run) {
@@ -210,14 +210,14 @@ export class TourOverlay {
   }
 
   /** The hamburger menu replaces the domain tabs on phones */
-  private menuShown(): boolean {
+  private _menuShown(): boolean {
     const trigger = this.document.querySelector('[data-tour="menu"]');
     const rect = trigger?.getBoundingClientRect();
     return !!rect && (rect.width > 0 || rect.height > 0);
   }
 
   /** Resolves with the elements once they render (lazy pages, data), or none */
-  private waitFor(selector: string, run: number): Promise<readonly Element[]> {
+  private _waitFor(selector: string, run: number): Promise<readonly Element[]> {
     const started = Date.now();
     return new Promise((resolve) => {
       const check = () => {
@@ -239,7 +239,7 @@ export class TourOverlay {
    * also moves when something around it grows or shrinks (e.g. the menu
    * collapsing the previous step's group above it), without resizing itself
    */
-  private observe(targets: readonly Element[]): void {
+  private _observe(targets: readonly Element[]): void {
     this.resizeObserver?.disconnect();
     this.targets = targets;
     for (const target of targets) {
@@ -254,14 +254,14 @@ export class TourOverlay {
   }
 
   /** One spotlight around every rendered target */
-  private measure(): void {
+  private _measure(): void {
     const rects = this.targets
       .filter((target) => target.isConnected)
       .map((target) => target.getBoundingClientRect())
       .filter((rect) => rect.width || rect.height);
     this.hasTarget.set(rects.length > 0);
     if (!rects.length) {
-      this.spotlight.set(this.centerBox());
+      this.spotlight.set(this._centerBox());
       return;
     }
     const padding = this.targetFrame?.padding ?? SPOTLIGHT_PADDING;
@@ -285,7 +285,7 @@ export class TourOverlay {
     });
   }
 
-  private centerBox(): Box {
+  private _centerBox(): Box {
     return {
       top: (this.window?.innerHeight ?? 0) / 2,
       left: (this.window?.innerWidth ?? 0) / 2,

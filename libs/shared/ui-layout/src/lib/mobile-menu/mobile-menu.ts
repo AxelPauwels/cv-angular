@@ -51,7 +51,7 @@ export class MobileMenu {
   constructor() {
     const subscription = inject(Router).events.subscribe((event) => {
       if (event instanceof NavigationEnd && this.open()) {
-        this.close();
+        this._close();
       }
     });
     inject(DestroyRef).onDestroy(() => subscription.unsubscribe());
@@ -63,7 +63,7 @@ export class MobileMenu {
 
   protected closeFromKeyboard(): void {
     if (this.open()) {
-      this.close();
+      this._close();
     }
   }
 
@@ -74,12 +74,12 @@ export class MobileMenu {
       event.target instanceof Node &&
       !this.host.contains(event.target)
     ) {
-      this.close();
+      this._close();
     }
   }
 
   /** Focus would get lost in the hidden panel: it goes back to the button */
-  private close(): void {
+  private _close(): void {
     const panel = this.panel().nativeElement;
     const focusInPanel = panel.contains(panel.ownerDocument.activeElement);
     this.open.set(false);
