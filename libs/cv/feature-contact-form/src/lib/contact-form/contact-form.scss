@@ -1,0 +1,181 @@
+:host {
+  display: block;
+}
+
+.contact-form {
+  // the controls and their label share the page background, so the label
+  // can sit on the control's border and hide the line behind it
+  --contact-form-background: var(--mat-sys-surface);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-inline: auto;
+  max-width: 40rem;
+
+  // collapses to nothing after sending: grid rows animate from 1fr to 0fr,
+  // which a height of auto cannot. Reduce motion makes it instant
+  &__body {
+    --contact-form-collapse: 0.8s;
+
+    display: grid;
+    grid-template-rows: 1fr;
+    transition:
+      grid-template-rows var(--contact-form-collapse) ease-in-out,
+      opacity 0.5s ease-in-out,
+      visibility 0s linear 0s;
+
+    &--collapsed {
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition:
+        grid-template-rows var(--contact-form-collapse) ease-in-out,
+        opacity 0.5s ease-in-out,
+        visibility 0s linear var(--contact-form-collapse);
+      visibility: hidden;
+    }
+  }
+
+  &__body-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: -0.5rem -0.25rem;
+    min-height: 0;
+    overflow: hidden;
+
+    // room for the focus outlines and the labels on the border, which the
+    // overflow would cut off
+    padding: 0.5rem 0.25rem;
+  }
+
+  &__hint,
+  &__count {
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-body-medium);
+    margin: 0;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    // room for the half of the label that sticks out above the border
+    padding-block-start: 0.5rem;
+    position: relative;
+  }
+
+  // on the top border of the control, like an outlined text field
+  &__label {
+    background: var(--contact-form-background);
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-body-medium);
+    inset-block-start: 0.5rem;
+    inset-inline-start: 0.625rem;
+    line-height: 1;
+    max-width: calc(100% - 1.25rem);
+    padding-inline: 0.25rem;
+    position: absolute;
+    transform: translateY(-50%);
+  }
+
+  &__field:focus-within &__label {
+    color: var(--mat-sys-primary);
+  }
+
+  &__field:has(.ng-invalid.ng-touched) &__label {
+    color: var(--mat-sys-error);
+  }
+
+  // native controls; the ng-* classes come from provideSignalFormsConfig
+  &__control {
+    background: var(--contact-form-background);
+    border: 1px solid var(--mat-sys-outline);
+    border-radius: var(--mat-sys-corner-small);
+    box-sizing: border-box;
+    color: var(--mat-sys-on-surface);
+    font: var(--mat-sys-body-large);
+    min-height: 3rem;
+    padding: 0.75rem;
+    width: 100%;
+
+    &:hover {
+      border-color: var(--mat-sys-on-surface);
+    }
+
+    &:focus-visible {
+      border-color: var(--mat-sys-primary);
+      outline: 2px solid var(--mat-sys-primary);
+      outline-offset: 1px;
+    }
+
+    // only once the visitor left the field or tried to send: not while typing a first time
+    &.ng-invalid.ng-touched {
+      border-color: var(--mat-sys-error);
+
+      // a 2px look without a wider border, which would push the form down
+      box-shadow: inset 0 0 0 1px var(--mat-sys-error);
+    }
+
+    &--message {
+      resize: vertical;
+    }
+  }
+
+  &__below {
+    align-items: flex-start;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  // one line is always reserved, so the form does not jump when an error shows or goes
+  &__errors {
+    color: var(--mat-sys-error);
+    flex: 1;
+    font: var(--mat-sys-body-medium);
+    list-style: none;
+    margin: 0;
+    min-height: var(--mat-sys-body-medium-line-height, 1.25rem);
+    padding: 0;
+  }
+
+  &__count {
+    flex-shrink: 0;
+  }
+
+  &__submit {
+    align-self: flex-start;
+  }
+
+  &__status {
+    color: var(--mat-sys-on-surface);
+    font: var(--mat-sys-body-large);
+    margin: 0;
+    text-align: center;
+
+    // focused from code after sending; only a keyboard focus shows a ring
+    &:focus {
+      outline: none;
+    }
+
+    &:empty {
+      display: none;
+    }
+
+    // the send error stays with the button it belongs to
+    &--error {
+      color: var(--mat-sys-error);
+      text-align: start;
+    }
+  }
+
+  &__honeypot {
+    height: 1px;
+    left: -10000px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+  }
+}

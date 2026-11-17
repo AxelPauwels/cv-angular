@@ -1,6 +1,9 @@
 :host {
   --lord-icon-primary: var(--mat-sys-primary);
-  --lord-icon-secondary: var(--mat-sys-on-surface);
+  --lord-icon-secondary: light-dark(
+    color-mix(in srgb, var(--mat-sys-primary) 65%, white),
+    var(--mat-sys-on-surface)
+  );
 
   block-size: var(--ds-lordicon-size, 1em);
   display: inline-block;

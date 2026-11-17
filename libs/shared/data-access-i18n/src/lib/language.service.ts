@@ -40,7 +40,7 @@ export class LanguageService {
 
   /** Back to the browser language (else English), and forgets the choice */
   async resetLanguage(): Promise<void> {
-    await this.translate.changeLanguage(this.browserLanguage());
+    await this.translate.changeLanguage(this._browserLanguage());
     // changing the language saved it again: forget it, so detection runs next visit
     try {
       this.window?.localStorage.removeItem(LANGUAGE_KEY);
@@ -50,7 +50,7 @@ export class LanguageService {
   }
 
   /** Like Tolgee's LanguageDetector: `nl-BE` matches `nl` */
-  private browserLanguage(): LanguageCode {
+  private _browserLanguage(): LanguageCode {
     const browser = this.window?.navigator.language ?? '';
     const base = browser.split('-')[0];
     return isLanguageCode(browser)

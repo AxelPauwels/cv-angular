@@ -18,6 +18,11 @@ export const SHOWCASE_NAV_ITEMS: readonly (NavItem & {
     toggle: 'showcase-lighthouse',
   },
   {
+    labelKey: 't.nav.ai-assistant',
+    path: ROUTES.SHOWCASE.AI_ASSISTANT,
+    toggle: 'showcase-ai-assistant',
+  },
+  {
     labelKey: 't.nav.feature-toggles',
     path: ROUTES.SHOWCASE.FEATURE_TOGGLES,
     toggle: 'showcase-feature-toggles',

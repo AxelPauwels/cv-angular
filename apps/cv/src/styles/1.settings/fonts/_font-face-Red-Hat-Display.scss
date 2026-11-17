@@ -5,9 +5,8 @@
   font-family: Red-Hat-Display;
   font-style: normal;
   font-weight: 300 900;
-  src:
-    url('/assets/fonts/Red-Hat-Display/Red-Hat-Display.woff2') format('woff2'),
-    url('/assets/fonts/Red-Hat-Display/Red-Hat-Display.woff') format('woff');
+  src: url('/assets/fonts/Red-Hat-Display/Red-Hat-Display.woff2')
+    format('woff2');
 }
 
 @font-face {
@@ -15,9 +14,18 @@
   font-family: Red-Hat-Display;
   font-style: italic;
   font-weight: 300 900;
-  src:
-    url('/assets/fonts/Red-Hat-Display/Red-Hat-Display-italic.woff2')
-      format('woff2'),
-    url('/assets/fonts/Red-Hat-Display/Red-Hat-Display-italic.woff')
-      format('woff');
+  src: url('/assets/fonts/Red-Hat-Display/Red-Hat-Display-italic.woff2')
+    format('woff2');
+}
+
+// Arial resized to Red Hat Display's metrics: shown until the web font arrives
+// (font-display: swap), so the swap doesn't shift the layout (CLS).
+// Measured with fontTools against Arial; recompute if the font file changes.
+@font-face {
+  ascent-override: 102.14%;
+  descent-override: 30.6%;
+  font-family: Red-Hat-Display-fallback;
+  line-gap-override: 0%;
+  size-adjust: 99.67%;
+  src: local('Arial');
 }

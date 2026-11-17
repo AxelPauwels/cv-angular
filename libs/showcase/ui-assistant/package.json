@@ -1,0 +1,11 @@
+{
+  "name": "@cv/showcase-ui-assistant",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/core": "^22.2.0",
+    "@tolgee/ngx": "^7.3.0",
+    "@cv/shared-ui-card": "0.0.1"
+  },
+  "sideEffects": false,
+  "private": true
+}

@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  max-width: 24rem;
+}
+
+.person-card {
+  &__work,
+  &__period {
+    font: var(--mat-sys-body-medium);
+    margin: 0;
+  }
+
+  &__period {
+    color: var(--mat-sys-on-surface-variant);
+    margin-block-start: 0.25rem;
+  }
+}

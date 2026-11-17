@@ -69,6 +69,27 @@ export default [
     },
   },
   {
+    // private methods start with `_`, so they stand out from the public and template API;
+    // non-private methods never do, so the prefix always means "private"
+    files: ['**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts'],
+    rules: {
+      '@typescript-eslint/naming-convention': [
+        'error',
+        {
+          selector: 'classMethod',
+          modifiers: ['private'],
+          format: null,
+          leadingUnderscore: 'require',
+        },
+        {
+          selector: 'classMethod',
+          format: null,
+          leadingUnderscore: 'forbid',
+        },
+      ],
+    },
+  },
+  {
     files: [
       '**/*.ts',
       '**/*.tsx',

@@ -1,0 +1,86 @@
+<ds-page-layout width="narrow">
+  <ds-page-title title="t.heading.contact" />
+
+  <form class="contact-form" [formRoot]="contactForm">
+    <div
+      class="contact-form__body"
+      [class.contact-form__body--collapsed]="sent()"
+      [inert]="sent()">
+      <div class="contact-form__body-inner">
+        @for (item of fields; track item.name) { @let name = item.name;
+        <div class="contact-form__field">
+          <label class="contact-form__label" [for]="'contact-' + name">
+            {{ item.labelKey | translate }}
+            <span aria-hidden="true">*</span>
+          </label>
+          <input
+            class="contact-form__control"
+            [id]="'contact-' + name"
+            [type]="name === 'email' ? 'email' : 'text'"
+            [attr.autocomplete]="name === 'subject' ? 'off' : name"
+            [formField]="field(name)"
+            [attr.aria-invalid]="shownErrors(name).length > 0"
+            [attr.aria-describedby]="shownErrors(name).length ? 'contact-' + name + '-errors' : null" />
+          <ul class="contact-form__errors" [id]="'contact-' + name + '-errors'">
+            @for (error of shownErrors(name); track error.kind) {
+            <li>{{ error.message ?? '' | translate: limits }}</li>
+            }
+          </ul>
+        </div>
+        }
+
+        <div class="contact-form__field">
+          <label class="contact-form__label" for="contact-message">
+            {{ 't.contact.field.message' | translate }}
+            <span aria-hidden="true">*</span>
+          </label>
+          <textarea
+            class="contact-form__control contact-form__control--message"
+            id="contact-message"
+            rows="8"
+            [formField]="contactForm.message"
+            [attr.aria-invalid]="shownErrors('message').length > 0"
+            [attr.aria-describedby]="shownErrors('message').length ? 'contact-message-count contact-message-errors' : 'contact-message-count'"></textarea>
+          <div class="contact-form__below">
+            <ul class="contact-form__errors" id="contact-message-errors">
+              @for (error of shownErrors('message'); track error.kind) {
+              <li>{{ error.message ?? '' | translate: limits }}</li>
+              }
+            </ul>
+            <p class="contact-form__count" id="contact-message-count">
+              {{ 't.contact.count' | translate: messageCount() }}
+            </p>
+          </div>
+        </div>
+
+        <button
+          matButton="filled"
+          class="contact-form__submit"
+          type="submit"
+          [attr.aria-disabled]="contactForm().submitting() || null">
+          {{ 't.contact.send' | translate }}
+        </button>
+
+        <!-- honeypot: off screen and out of the tab order, so only bots fill it -->
+        <div class="contact-form__honeypot" aria-hidden="true">
+          <label for="contact-botcheck">Botcheck</label>
+          <input
+            id="contact-botcheck"
+            type="checkbox"
+            tabindex="-1"
+            autocomplete="off"
+            [formField]="contactForm.botcheck" />
+        </div>
+      </div>
+    </div>
+
+    <p #status class="contact-form__status" role="status" tabindex="-1">
+      @if (contactForm().submitting()) { {{ 't.contact.sending' | translate }} }
+      @else if (sent()) { {{ 't.contact.sent' | translate }} }
+    </p>
+    <p class="contact-form__status contact-form__status--error" role="alert">
+      @for (error of contactForm().errors(); track error.kind) { {{
+      error.message ?? '' | translate }} }
+    </p>
+  </form>
+</ds-page-layout>

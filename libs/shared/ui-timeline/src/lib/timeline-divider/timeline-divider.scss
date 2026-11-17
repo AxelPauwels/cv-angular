@@ -1,6 +1,6 @@
 // Lines up with `ds-timeline`: its line runs through the middle of the year
 // pills, a header padding plus half a pill from the left
-$badge-width: 4rem;
+$badge-width: 4.5rem; // same as `ds-timeline`
 $header-padding: 24px;
 $line-gap: 8px;
 $line-length: 1.5rem;
@@ -23,15 +23,19 @@ $line-length: 1.5rem;
   font: var(--mat-sys-title-small);
   gap: $line-gap;
   letter-spacing: 0.08em;
-  margin: 0 0 0 1.75rem;
+  margin: 0 0 0 $header-padding;
   text-transform: uppercase;
   white-space: nowrap;
   width: $badge-width;
 
+  // like the timeline's line: its left edge on the pill's centre, not a 1px
+  // box centred on it (that lands half a pixel to the left)
   &::before,
   &::after {
+    align-self: flex-start;
     border-left: 1px solid var(--mat-sys-outline-variant);
     content: '';
     height: $line-length;
+    margin-left: calc($badge-width / 2);
   }
 }

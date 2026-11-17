@@ -1,3 +1,5 @@
+import type { AssistantConfig } from '@cv/showcase-data-access-assistant';
+
 type EnvironmentType = 'development' | 'uat' | 'production';
 
 export interface TolgeeConfig {
@@ -15,4 +17,17 @@ export interface Environment {
   tolgee?: TolgeeConfig; // Local development only
   /** Maps each remote (micro-frontend) to its remoteEntry.json, from `public/` */
   federationManifest: string;
+  /**
+   * Web3Forms access key for the contact form (https://web3forms.com), from
+   * the tokens file. It ships in the bundle (the browser sends it), which
+   * Web3Forms allows: it only sends mail to the inbox it belongs to. It stays
+   * out of the repo, though. Empty: the form shows that sending failed.
+   */
+  web3formsAccessKey: string;
+  /**
+   * The AI assistant (showcase): Firebase AI Logic on the Spark plan. Public
+   * values by design (the Gemini key stays at Firebase, App Check guards the
+   * use). Any empty value: the assistant page says it is switched off.
+   */
+  assistant: AssistantConfig;
 }

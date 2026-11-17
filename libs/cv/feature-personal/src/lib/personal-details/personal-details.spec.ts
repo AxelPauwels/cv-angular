@@ -22,7 +22,7 @@ describe('PersonalDetails', () => {
     // Assert
     // three sections, each with a heading and a tagline in an hgroup
     const headings = Array.from(
-      element.querySelectorAll('section > ds-section-heading > hgroup')
+      element.querySelectorAll('section ds-section-heading > hgroup')
     );
     expect(
       headings.map((h) => h.querySelector('h2')?.textContent?.trim())
@@ -34,6 +34,11 @@ describe('PersonalDetails', () => {
     const about = element.querySelector('.personal-details__facts');
     expect(about).not.toBeNull();
     expect(about?.closest('ds-card')).toBeNull();
+    // the avatar beside the facts is decorative: an empty alt
+    const avatar = element.querySelector<HTMLImageElement>(
+      '.personal-details__about .personal-details__avatar-image'
+    );
+    expect(avatar?.getAttribute('alt')).toBe('');
     const facts = Array.from(
       element.querySelectorAll('.personal-details__facts > div')
     );

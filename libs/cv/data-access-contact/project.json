@@ -1,0 +1,31 @@
+{
+  "name": "cv-data-access-contact",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/cv/data-access-contact/src",
+  "prefix": "cv",
+  "projectType": "library",
+  "tags": ["domain:cv", "type:data-access"],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "project": "libs/cv/data-access-contact/ng-package.json",
+        "tsConfig": "libs/cv/data-access-contact/tsconfig.lib.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/cv/data-access-contact/tsconfig.lib.prod.json"
+        },
+        "development": {}
+      }
+    },
+    "test": {
+      "executor": "@nx/angular:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
+  }
+}

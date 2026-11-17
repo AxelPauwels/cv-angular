@@ -3,7 +3,17 @@
   font-family: Michroma;
   font-style: normal;
   font-weight: 400;
-  src:
-    url('/assets/fonts/Michroma/Michroma-regular.woff2') format('woff2'),
-    url('/assets/fonts/Michroma/Michroma-regular.woff') format('woff');
+  src: url('/assets/fonts/Michroma/Michroma-regular.woff2') format('woff2');
+}
+
+// Arial resized to Michroma's (much wider) metrics: shown until the web font arrives
+// (font-display: swap), so the swap doesn't shift the layout (CLS).
+// Measured with fontTools against Arial; recompute if the font file changes.
+@font-face {
+  ascent-override: 56.14%;
+  descent-override: 14.05%;
+  font-family: Michroma-fallback;
+  line-gap-override: 0%;
+  size-adjust: 142.47%;
+  src: local('Arial');
 }

@@ -160,6 +160,40 @@
         "title": "Front-end architectuur"
       }
     },
+    "contact": {
+      "count": "{count} van {max} tekens",
+      "error": {
+        "email": {
+          "invalid": "Vul een geldig e-mailadres in, zoals naam@voorbeeld.be.",
+          "required": "Vul je e-mailadres in."
+        },
+        "message": {
+          "max-length": "Gebruik maximaal {messageMax} tekens.",
+          "min-length": "Schrijf minstens {messageMin} tekens.",
+          "required": "Vul een bericht in."
+        },
+        "name": {
+          "max-length": "Gebruik maximaal {nameMax} tekens.",
+          "required": "Vul je naam in."
+        },
+        "send": "Je bericht kon niet verstuurd worden. Probeer het later opnieuw, of bereik me via LinkedIn.",
+        "subject": {
+          "max-length": "Gebruik maximaal {subjectMax} tekens.",
+          "required": "Vul een onderwerp in."
+        }
+      },
+      "field": {
+        "email": "E-mail",
+        "message": "Bericht",
+        "name": "Naam",
+        "subject": "Onderwerp"
+      },
+      "required-hint": "Alle velden zijn verplicht.",
+      "send": "Versturen",
+      "sending": "Je bericht wordt verstuurd…",
+      "sent": "Bedankt! Je bericht is verstuurd. Ik neem snel contact met je op.",
+      "title": "Contact"
+    },
     "country": {
       "belgium": "België"
     },
@@ -299,8 +333,10 @@
     },
     "heading": {
       "administrator": "Beheerder",
+      "ai-assistant": "AI-assistent",
       "architecture": "Architectuur",
       "code-coverage": "code coverage",
+      "contact": "Contact",
       "education": "Opleiding",
       "end-to-end-tests": "End-to-end tests",
       "experience": "ervaring",
@@ -389,6 +425,7 @@
     },
     "nav": {
       "admin": "Admin",
+      "ai-assistant": "AI-assistent",
       "architecture": "Architectuur",
       "back-to-top": "Terug naar boven",
       "code-coverage": "code coverage",
@@ -403,8 +440,8 @@
       "graphql-docs": "graphql docs",
       "home": "Home",
       "light": "Licht",
-      "lighthouse": "Lighthouse",
       "light-mode": "lichte modus",
+      "lighthouse": "Lighthouse",
       "main-navigation": "Hoofdnavigatie",
       "menu": "Menu",
       "menu-loading": "Het menu wordt geladen…",
@@ -661,6 +698,36 @@
       }
     },
     "website": "website",
-    "written": "Schriftelijk"
+    "written": "Schriftelijk",
+    "ai-assistant": {
+      "assistant": "Assistent",
+      "disclaimer": "Antwoorden worden gegenereerd door Google Gemini en kunnen fouten bevatten. Je vragen worden via Firebase naar Google gestuurd.",
+      "error": "Er ging iets mis bij het antwoorden. Probeer het opnieuw.",
+      "hint": "Enter om te versturen, Shift+Enter voor een nieuwe regel.",
+      "intro": "Stel gerust een vraag over Axel, zijn werk, vaardigheden of referenties. De assistent zoekt het antwoord op in de eigen API van deze site.",
+      "limit-reached": "Je hebt het maximum aantal vragen voor dit bezoek bereikt. Herlaad de pagina om opnieuw te beginnen.",
+      "log-label": "Gesprek",
+      "not-configured": "De AI-assistent staat uit op deze versie van de site.",
+      "question": "Jouw vraag",
+      "retry": "Opnieuw proberen",
+      "send": "Versturen",
+      "stop": "Stoppen",
+      "suggestion": {
+        "languages": "Welke talen spreekt Axel?",
+        "reference": "Kan je me een referentie geven van zijn laatste werk?",
+        "stack": "Welke technologieën gebruikt Axel?"
+      },
+      "suggestions": "Probeer een van deze",
+      "thinking": "De assistent is aan het antwoorden…",
+      "tool": {
+        "getEducation": "Opleiding opgezocht",
+        "getExperiences": "Werkervaring opgezocht",
+        "getProfile": "Profiel opgezocht",
+        "getReferences": "Referenties opgezocht",
+        "getSkills": "Vaardigheden opgezocht"
+      },
+      "you": "Jij",
+      "quota-reached": "De assistent heeft zijn gratis limiet voor vandaag bereikt. Probeer het morgen opnieuw."
+    }
   }
 }

@@ -160,6 +160,40 @@
         "title": "Architecture front-end"
       }
     },
+    "contact": {
+      "count": "{count} sur {max} caractères",
+      "error": {
+        "email": {
+          "invalid": "Saisissez une adresse e-mail valide, par exemple nom@exemple.fr.",
+          "required": "Saisissez votre adresse e-mail."
+        },
+        "message": {
+          "max-length": "Utilisez au maximum {messageMax} caractères.",
+          "min-length": "Écrivez au moins {messageMin} caractères.",
+          "required": "Saisissez un message."
+        },
+        "name": {
+          "max-length": "Utilisez au maximum {nameMax} caractères.",
+          "required": "Saisissez votre nom."
+        },
+        "send": "Votre message n'a pas pu être envoyé. Réessayez plus tard ou contactez-moi sur LinkedIn.",
+        "subject": {
+          "max-length": "Utilisez au maximum {subjectMax} caractères.",
+          "required": "Saisissez un objet."
+        }
+      },
+      "field": {
+        "email": "E-mail",
+        "message": "Message",
+        "name": "Nom",
+        "subject": "Objet"
+      },
+      "required-hint": "Tous les champs sont obligatoires.",
+      "send": "Envoyer",
+      "sending": "Envoi de votre message…",
+      "sent": "Merci ! Votre message a été envoyé. Je vous répondrai rapidement.",
+      "title": "Contact"
+    },
     "country": {
       "belgium": "Belgique"
     },
@@ -299,8 +333,10 @@
     },
     "heading": {
       "administrator": "Administrateur",
+      "ai-assistant": "Assistant IA",
       "architecture": "Architecture",
       "code-coverage": "couverture du code",
+      "contact": "Contact",
       "education": "Formation",
       "end-to-end-tests": "Tests de bout en bout",
       "experience": "Expérience",
@@ -389,6 +425,7 @@
     },
     "nav": {
       "admin": "Admin",
+      "ai-assistant": "Assistant IA",
       "architecture": "Architecture",
       "back-to-top": "Retour en haut",
       "code-coverage": "couverture du code",
@@ -403,8 +440,8 @@
       "graphql-docs": "graphql docs",
       "home": "Maison",
       "light": "Clair",
-      "lighthouse": "Lighthouse",
       "light-mode": "mode clair",
+      "lighthouse": "Lighthouse",
       "main-navigation": "Navigation principale",
       "menu": "Menu",
       "menu-loading": "Chargement du menu…",
@@ -661,6 +698,36 @@
       }
     },
     "website": "site web",
-    "written": "Écrit"
+    "written": "Écrit",
+    "ai-assistant": {
+      "assistant": "Assistant",
+      "disclaimer": "Les réponses sont générées par Google Gemini et peuvent contenir des erreurs. Vos questions sont envoyées à Google via Firebase.",
+      "error": "Une erreur s'est produite pendant la réponse. Veuillez réessayer.",
+      "hint": "Entrée pour envoyer, Maj+Entrée pour une nouvelle ligne.",
+      "intro": "Posez n'importe quelle question sur Axel, son travail, ses compétences ou ses références. L'assistant cherche la réponse dans l'API de ce site.",
+      "limit-reached": "Vous avez atteint le nombre maximum de questions pour cette visite. Rechargez la page pour recommencer.",
+      "log-label": "Conversation",
+      "not-configured": "L'assistant IA est désactivé sur cette version du site.",
+      "question": "Votre question",
+      "retry": "Réessayer",
+      "send": "Envoyer",
+      "stop": "Arrêter",
+      "suggestion": {
+        "languages": "Quelles langues Axel parle-t-il ?",
+        "reference": "Pouvez-vous me donner une référence de son dernier emploi ?",
+        "stack": "Quelles technologies Axel utilise-t-il ?"
+      },
+      "suggestions": "Essayez l'une de ces questions",
+      "thinking": "L'assistant répond…",
+      "tool": {
+        "getEducation": "Formation consultée",
+        "getExperiences": "Expérience professionnelle consultée",
+        "getProfile": "Profil consulté",
+        "getReferences": "Références consultées",
+        "getSkills": "Compétences consultées"
+      },
+      "you": "Vous",
+      "quota-reached": "L'assistant a atteint sa limite gratuite pour aujourd'hui. Veuillez réessayer demain."
+    }
   }
 }

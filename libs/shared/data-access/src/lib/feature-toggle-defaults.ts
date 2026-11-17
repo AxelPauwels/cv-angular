@@ -24,6 +24,7 @@ export const FEATURE_TOGGLE_DEFAULTS = {
   'main-menu-showcase': true, // main
   'showcase-micro-frontends': true,
   'showcase-lighthouse': true,
+  'showcase-ai-assistant': true,
   'showcase-feature-toggles': true,
 
   // Technical
@@ -38,7 +39,7 @@ export const FEATURE_TOGGLE_DEFAULTS = {
   // Navbar icons
   'navbar-download-cv': true,
   'navbar-theme-switcher': true,
-  'navbar-font-switcher': false,
+  'navbar-font-switcher': true,
   'navbar-accessibility-switcher': true,
   'navbar-color-scheme-switcher': true,
   'navbar-language-switcher': true,

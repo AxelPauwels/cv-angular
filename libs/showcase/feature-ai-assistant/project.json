@@ -1,0 +1,32 @@
+{
+  "name": "showcase-feature-ai-assistant",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/showcase/feature-ai-assistant/src",
+  "prefix": "showcase",
+  "projectType": "library",
+  "tags": ["domain:showcase", "type:feature"],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "project": "libs/showcase/feature-ai-assistant/ng-package.json",
+        "tsConfig": "libs/showcase/feature-ai-assistant/tsconfig.lib.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/showcase/feature-ai-assistant/tsconfig.lib.prod.json"
+        },
+        "development": {}
+      }
+    },
+    "test": {
+      "executor": "@nx/angular:unit-test",
+      "options": {
+        "watch": false,
+        "browsers": ["ChromiumHeadless"]
+      }
+    }
+  }
+}

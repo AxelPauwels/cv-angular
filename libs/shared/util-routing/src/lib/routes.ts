@@ -3,6 +3,7 @@ import { CV } from './internal/cv.routes';
 import { SHOWCASE } from './internal/showcase.routes';
 import { TECHNICAL } from './internal/technical.routes';
 import { MF } from './internal/micro-frontend.routes';
+import { CONTACT } from './internal/contact.routes';
 
 /**
  * Every route of the app, per domain. `X` is the path segment to use in a
@@ -13,6 +14,7 @@ export const ROUTES = {
   CV,
   SHOWCASE,
   TECHNICAL,
+  CONTACT,
   MF,
 } as const;
 

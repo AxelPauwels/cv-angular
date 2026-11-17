@@ -97,7 +97,22 @@
       "@cv/shared-ui-store-loading-error": [
         "./libs/shared/ui-store-loading-error/src/index.ts"
       ],
-      "@cv/shared-ui-i18n": ["./libs/shared/ui-i18n/src/index.ts"]
+      "@cv/shared-ui-i18n": ["./libs/shared/ui-i18n/src/index.ts"],
+      "@cv/cv-data-access-contact": [
+        "./libs/cv/data-access-contact/src/index.ts"
+      ],
+      "@cv/cv-feature-contact-form": [
+        "./libs/cv/feature-contact-form/src/index.ts"
+      ],
+      "@cv/showcase-data-access-assistant": [
+        "./libs/showcase/data-access-assistant/src/index.ts"
+      ],
+      "@cv/showcase-ui-assistant": [
+        "./libs/showcase/ui-assistant/src/index.ts"
+      ],
+      "@cv/showcase-feature-ai-assistant": [
+        "./libs/showcase/feature-ai-assistant/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -12,9 +12,11 @@
   }
 
   // The label's own `data-font` redefines the font pairing, so this is that pairing's
-  // body font, the one the label names (opening the menu downloads the previews, ~20 kB each)
+  // body font, the one the label names (opening the menu downloads the previews, ~20 kB each),
+  // at the weight that evens out how heavy the fonts look side by side
   &__label {
     font-family: var(--ds-font-body);
+    font-weight: var(--ds-font-preview-weight, 500);
   }
 
   &__check {

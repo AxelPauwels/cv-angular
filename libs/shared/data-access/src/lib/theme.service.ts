@@ -31,11 +31,11 @@ export class ThemeService {
 
   readonly themes = THEMES;
 
-  private readonly _theme = signal<ThemeId>(this.savedTheme());
+  private readonly _theme = signal<ThemeId>(this._savedTheme());
   readonly theme = this._theme.asReadonly();
 
   private readonly chosenColorScheme = signal<ColorScheme | undefined>(
-    this.savedColorScheme()
+    this._savedColorScheme()
   );
   readonly colorScheme = computed<ColorScheme>(
     () => this.chosenColorScheme() ?? DEFAULT_COLOR_SCHEME
@@ -51,41 +51,41 @@ export class ThemeService {
 
   changeTheme(id: ThemeId): void {
     this._theme.set(id);
-    this.save(THEME_KEY, id);
+    this._save(THEME_KEY, id);
   }
 
   /** Back to the default theme, and forgets the choice */
   resetTheme(): void {
     this._theme.set(DEFAULT_THEME);
-    this.remove(THEME_KEY);
+    this._remove(THEME_KEY);
   }
 
   changeColorScheme(scheme: ColorScheme): void {
     this.chosenColorScheme.set(scheme);
-    this.save(COLOR_SCHEME_KEY, scheme);
+    this._save(COLOR_SCHEME_KEY, scheme);
   }
 
   /** Back to the default (light) mode, and forgets the choice */
   resetColorScheme(): void {
     this.chosenColorScheme.set(undefined);
-    this.remove(COLOR_SCHEME_KEY);
+    this._remove(COLOR_SCHEME_KEY);
   }
 
   toggleColorScheme(): void {
     this.changeColorScheme(this.colorScheme() === 'dark' ? 'light' : 'dark');
   }
 
-  private savedTheme(): ThemeId {
-    const saved = this.load(THEME_KEY);
+  private _savedTheme(): ThemeId {
+    const saved = this._load(THEME_KEY);
     return saved && isThemeId(saved) ? saved : DEFAULT_THEME;
   }
 
-  private savedColorScheme(): ColorScheme | undefined {
-    const saved = this.load(COLOR_SCHEME_KEY);
+  private _savedColorScheme(): ColorScheme | undefined {
+    const saved = this._load(COLOR_SCHEME_KEY);
     return saved === 'light' || saved === 'dark' ? saved : undefined;
   }
 
-  private load(key: string): string | null {
+  private _load(key: string): string | null {
     try {
       return this.window?.localStorage.getItem(key) ?? null;
     } catch {
@@ -93,7 +93,7 @@ export class ThemeService {
     }
   }
 
-  private remove(key: string): void {
+  private _remove(key: string): void {
     try {
       this.window?.localStorage.removeItem(key);
     } catch {
@@ -101,7 +101,7 @@ export class ThemeService {
     }
   }
 
-  private save(key: string, value: string): void {
+  private _save(key: string, value: string): void {
     try {
       this.window?.localStorage.setItem(key, value);
     } catch {

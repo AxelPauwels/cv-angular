@@ -79,6 +79,7 @@ describe('FeatureToggleService', () => {
     const service = TestBed.inject(FeatureToggleService);
     service.change('showcase-feature-toggles', false);
     service.change('showcase-lighthouse', false);
+    service.change('showcase-ai-assistant', false);
 
     // Act
     service.change('showcase-micro-frontends', false);
@@ -93,6 +94,7 @@ describe('FeatureToggleService', () => {
     const service = TestBed.inject(FeatureToggleService);
     service.change('showcase-feature-toggles', false);
     service.change('showcase-lighthouse', false);
+    service.change('showcase-ai-assistant', false);
     service.change('showcase-micro-frontends', false);
 
     // Act
@@ -128,6 +130,7 @@ describe('FeatureToggleService', () => {
     const service = TestBed.inject(FeatureToggleService);
     service.change('showcase-micro-frontends', false);
     service.change('showcase-lighthouse', false);
+    service.change('showcase-ai-assistant', false);
     service.change('showcase-feature-toggles', false);
 
     // Act
@@ -161,6 +164,7 @@ describe('FeatureToggleService', () => {
         'main-menu-showcase': true,
         'showcase-micro-frontends': false,
         'showcase-lighthouse': false,
+        'showcase-ai-assistant': false,
         'showcase-feature-toggles': false,
       })
     );

@@ -29,7 +29,7 @@ export class FeatureToggleService {
 
   readonly toggles = FEATURE_TOGGLES;
 
-  private readonly _states = signal<FeatureToggleStates>(this.savedStates());
+  private readonly _states = signal<FeatureToggleStates>(this._savedStates());
   readonly states = this._states.asReadonly();
 
   isEnabled(id: FeatureToggleId): Signal<boolean> {
@@ -40,7 +40,7 @@ export class FeatureToggleService {
     this._states.update((states) =>
       withLinkedMenuItems({ ...states, [id]: enabled }, id)
     );
-    this.save();
+    this._save();
   }
 
   /** Every toggle back to its default, and forgets the choices */
@@ -54,7 +54,7 @@ export class FeatureToggleService {
   }
 
   /** Saved values are external input: keep only known ids with boolean values */
-  private savedStates(): FeatureToggleStates {
+  private _savedStates(): FeatureToggleStates {
     const states = defaultFeatureToggleStates();
     try {
       const saved: unknown = JSON.parse(
@@ -73,7 +73,7 @@ export class FeatureToggleService {
     return withConsistentMenuItems(states);
   }
 
-  private save(): void {
+  private _save(): void {
     const states = this._states();
     const defaults = defaultFeatureToggleStates();
     const changed = Object.fromEntries(

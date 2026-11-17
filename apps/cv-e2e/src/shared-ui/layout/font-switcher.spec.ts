@@ -1,5 +1,5 @@
 import { expect, Page, test } from '@playwright/test';
-import { html, openShell, setFeatureToggles } from '../../support/ui';
+import { html, openShell } from '../../support/ui';
 
 /** `ds-font-switcher` (shared-ui-layout): the font menu in the navbar */
 const trigger = (page: Page) =>
@@ -9,71 +9,62 @@ const option = (page: Page, name: string) =>
   page.getByRole('menu').getByRole('menuitemradio', { name });
 
 test.describe('ds-font-switcher', () => {
-  test('is switched off by default', async ({ page }) => {
-    // Arrange
+  test.beforeEach(async ({ page }) => {
     await openShell(page);
-
-    // Act
-    const button = trigger(page);
-
-    // Assert
-    await expect(button).toHaveCount(0);
   });
 
-  test.describe('switched on', () => {
-    test.beforeEach(async ({ page }) => {
-      await setFeatureToggles(page, { 'navbar-font-switcher': true });
-      await openShell(page);
-    });
+  test('lists every font, each label in its own font', async ({ page }) => {
+    // Arrange
+    await trigger(page).click();
 
-    test('lists every font, each label in its own font', async ({ page }) => {
-      // Arrange
-      await trigger(page).click();
+    // Act
+    const options = page.getByRole('menu').getByRole('menuitemradio');
 
-      // Act
-      const options = page.getByRole('menu').getByRole('menuitemradio');
+    // Assert
+    await expect(options).toHaveText([
+      /Red Hat/,
+      /Roboto/,
+      /Inter/,
+      /IBM Plex/,
+      /Atkinson/,
+      /Open Sans/,
+      /Nunito/,
+      /Source Serif/,
+      /Lexend/,
+      /Manrope/,
+    ]);
+    await expect(
+      option(page, 'Inter').locator('.font-switcher__label')
+    ).toHaveAttribute('data-font', 'inter');
+    await expect(option(page, 'Red Hat')).toHaveAttribute(
+      'aria-checked',
+      'true'
+    );
+  });
 
-      // Assert
-      await expect(options).toHaveText([
-        /Red Hat Display/,
-        /Michroma/,
-        /Goldman/,
-        /Syncopate/,
-        /Bruno Ace SC/,
-      ]);
-      await expect(
-        option(page, 'Michroma').locator('.font-switcher__label')
-      ).toHaveAttribute('data-font', 'michroma');
-      await expect(option(page, 'Red Hat Display')).toHaveAttribute(
-        'aria-checked',
-        'true'
-      );
-    });
+  test('switches the font and remembers it', async ({ page }) => {
+    // Arrange
+    await trigger(page).click();
 
-    test('switches the font and remembers it', async ({ page }) => {
-      // Arrange
-      await trigger(page).click();
+    // Act
+    await option(page, 'Inter').click();
 
-      // Act
-      await option(page, 'Michroma').click();
+    // Assert
+    await expect(html(page)).toHaveAttribute('data-font', 'inter');
+    await page.reload();
+    await expect(html(page)).toHaveAttribute('data-font', 'inter');
+  });
 
-      // Assert
-      await expect(html(page)).toHaveAttribute('data-font', 'michroma');
-      await page.reload();
-      await expect(html(page)).toHaveAttribute('data-font', 'michroma');
-    });
+  test('resets to the default font', async ({ page }) => {
+    // Arrange
+    await trigger(page).click();
+    await option(page, 'Roboto').click();
+    await trigger(page).click();
 
-    test('resets to the default font', async ({ page }) => {
-      // Arrange
-      await trigger(page).click();
-      await option(page, 'Goldman').click();
-      await trigger(page).click();
+    // Act
+    await page.getByRole('menuitem', { name: 'Reset' }).click();
 
-      // Act
-      await page.getByRole('menuitem', { name: 'Reset' }).click();
-
-      // Assert
-      await expect(html(page)).toHaveAttribute('data-font', 'red-hat');
-    });
+    // Assert
+    await expect(html(page)).toHaveAttribute('data-font', 'red-hat');
   });
 });

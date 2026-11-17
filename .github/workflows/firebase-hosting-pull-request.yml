@@ -7,6 +7,10 @@ permissions:
   checks: write
   contents: read
   pull-requests: write
+# Nx Cloud read-write CI token; anonymous access to the remote cache is disabled
+env:
+  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
 jobs:
   build_and_preview:
     # Release PRs into main get their preview from release.yml, after the version commit
@@ -26,6 +30,10 @@ jobs:
       - run: npm run build:production
         env:
           TOLGEE_API_KEY: ${{ secrets.TOLGEE_API_KEY }}
+          WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY }}
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}

@@ -33,7 +33,7 @@ export class TourService {
   stop(): void {
     this._active.set(false);
     this._menuOpen.set(false);
-    this.focusOpener();
+    this._focusOpener();
     this.opener = null;
   }
 
@@ -46,7 +46,7 @@ export class TourService {
    * The tour navigates, so the opener may have been re-rendered: then focus
    * its replacement, found by the same `data-tour` marker
    */
-  private focusOpener(): void {
+  private _focusOpener(): void {
     const marker = this.opener?.dataset['tour'];
     const opener = this.opener?.isConnected
       ? this.opener

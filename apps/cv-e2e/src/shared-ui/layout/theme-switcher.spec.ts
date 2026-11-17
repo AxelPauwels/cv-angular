@@ -76,8 +76,11 @@ test.describe('ds-theme-switcher', () => {
 
     // Act
     await page.keyboard.press('Enter');
-    await expect(page.getByRole('menu')).toBeVisible();
+    // mat-menu focuses its first item after the next render, not when it shows:
+    // wait for that focus, or ArrowDown would only activate the first item
+    await expect(option(page, 'Peach')).toBeFocused();
     await page.keyboard.press('ArrowDown');
+    await expect(option(page, 'Tangerine')).toBeFocused();
     await page.keyboard.press('Enter');
 
     // Assert: the first item had the focus, so the second one is chosen

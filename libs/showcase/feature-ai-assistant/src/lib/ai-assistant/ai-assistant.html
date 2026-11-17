@@ -1,0 +1,148 @@
+<ds-page-layout class="ai-assistant" width="narrow">
+  <ds-page-title title="t.heading.ai-assistant" />
+
+  <p class="ai-assistant__intro">{{ 't.ai-assistant.intro' | translate }}</p>
+
+  @if (!configured) {
+  <p class="ai-assistant__notice" role="status">
+    {{ 't.ai-assistant.not-configured' | translate }}
+  </p>
+  } @else {
+  <!-- scrolls on its own (from md up), so the form stays at the bottom; focusable to scroll with the keyboard -->
+  <div
+    #conversation
+    class="ai-assistant__conversation"
+    role="region"
+    tabindex="0"
+    [attr.aria-label]="'t.ai-assistant.log-label' | translate"
+    (scroll)="onScroll(conversation)">
+    <!-- role="log": new messages are announced; aria-busy holds that back while an answer streams in -->
+    <ol class="ai-assistant__log" role="log" [attr.aria-busy]="busy()">
+      @for (message of messages(); track $index) { @switch (message.role) {
+      @case ('user') {
+      <li class="ai-assistant__message ai-assistant__message--user">
+        <span class="cdk-visually-hidden"
+          >{{ 't.ai-assistant.you' | translate }}:</span
+        >
+        <p class="ai-assistant__bubble">{{ userText(message.content) }}</p>
+      </li>
+      } @case ('assistant') {
+      <li class="ai-assistant__message ai-assistant__message--assistant">
+        <span class="cdk-visually-hidden"
+          >{{ 't.ai-assistant.assistant' | translate }}:</span
+        >
+        @for (call of message.toolCalls; track call.toolCallId) {
+        <p class="ai-assistant__tool">
+          <mat-icon
+            fontSet="material-symbols-outlined"
+            aria-hidden="true"
+            class="ai-assistant__tool-icon"
+            >{{ call.status === 'done' ? 'check' : 'database' }}</mat-icon
+          >
+          {{ toolLabel(call.name) | translate }}
+        </p>
+        }
+        <div class="ai-assistant__answer">
+          <hb-render-message [message]="message" />
+        </div>
+      </li>
+      } @case ('error') {
+      <li class="ai-assistant__message ai-assistant__message--error">
+        <p class="ai-assistant__bubble">
+          {{ (quotaReached() ? 't.ai-assistant.quota-reached' :
+          't.ai-assistant.error') | translate }}
+        </p>
+      </li>
+      } } }
+    </ol>
+
+    @if (busy()) {
+    <p class="ai-assistant__thinking" aria-hidden="true">
+      {{ 't.ai-assistant.thinking' | translate }}
+    </p>
+    } @if (failed() && !busy()) { @if (quotaReached()) {
+    <p class="ai-assistant__notice" role="alert">
+      {{ 't.ai-assistant.quota-reached' | translate }}
+    </p>
+    } @else {
+    <div class="ai-assistant__failed" role="alert">
+      <p>{{ 't.ai-assistant.error' | translate }}</p>
+      <button mat-stroked-button type="button" (click)="retry()">
+        {{ 't.ai-assistant.retry' | translate }}
+      </button>
+    </div>
+    } } @if (messages().length === 0) {
+    <div class="ai-assistant__suggestions">
+      <p class="ai-assistant__suggestions-title" id="ai-assistant-suggestions">
+        {{ 't.ai-assistant.suggestions' | translate }}
+      </p>
+      <ul aria-labelledby="ai-assistant-suggestions">
+        @for (suggestion of suggestions; track suggestion) { @let label =
+        suggestion | translate;
+        <li>
+          <button mat-stroked-button type="button" (click)="ask(label)">
+            {{ label }}
+          </button>
+        </li>
+        }
+      </ul>
+    </div>
+    }
+  </div>
+
+  <!-- what is going on, for screen readers -->
+  <p class="cdk-visually-hidden" role="status">
+    @if (busy()) { {{ 't.ai-assistant.thinking' | translate }} }
+  </p>
+
+  <!-- sticks to the bottom of the screen while the page scrolls (phones) -->
+  <div class="ai-assistant__bottom">
+    @if (limitReached()) {
+    <p class="ai-assistant__notice" role="status">
+      {{ 't.ai-assistant.limit-reached' | translate }}
+    </p>
+    } @else {
+    <form class="ai-assistant__form" (submit)="submit($event)">
+      <label class="ai-assistant__label" for="ai-assistant-question">
+        {{ 't.ai-assistant.question' | translate }}
+      </label>
+      <textarea
+        class="ai-assistant__control"
+        id="ai-assistant-question"
+        rows="2"
+        autocomplete="off"
+        aria-describedby="ai-assistant-hint"
+        [maxLength]="maxLength"
+        [value]="question()"
+        [disabled]="quotaReached()"
+        (input)="question.set($any($event.target).value)"
+        (keydown)="onKeydown($event)"></textarea>
+      <div class="ai-assistant__below">
+        <p class="ai-assistant__hint" id="ai-assistant-hint">
+          {{ 't.ai-assistant.hint' | translate }}
+        </p>
+        <div class="ai-assistant__actions">
+          @if (busy()) {
+          <button mat-stroked-button type="button" (click)="stop()">
+            <mat-icon fontSet="material-symbols-outlined" aria-hidden="true"
+              >stop</mat-icon
+            >
+            {{ 't.ai-assistant.stop' | translate }}
+          </button>
+          }
+          <button
+            mat-flat-button
+            type="submit"
+            [disabled]="busy() || quotaReached() || !question().trim()">
+            <mat-icon fontSet="material-symbols-outlined" aria-hidden="true"
+              >send</mat-icon
+            >
+            {{ 't.ai-assistant.send' | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+    }
+  </div>
+  }
+</ds-page-layout>

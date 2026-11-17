@@ -95,6 +95,25 @@ describe('AccessibilitySwitcher', () => {
     expect(panel.matches(':popover-open')).toBe(false);
   });
 
+  it('closes the dialog on Escape, also when something cancels the key', async () => {
+    // Arrange
+    const { trigger, panel } = await render();
+    trigger.click();
+    // the trigger's tooltip cancels Escape when it shows
+    const escape = new KeyboardEvent('keydown', {
+      key: 'Escape',
+      bubbles: true,
+      cancelable: true,
+    });
+    escape.preventDefault();
+
+    // Act
+    trigger.dispatchEvent(escape);
+
+    // Assert
+    expect(panel.matches(':popover-open')).toBe(false);
+  });
+
   it('offers the text sizes as a labelled radio group with the active one checked', async () => {
     // Arrange
     const settings = { textSize: 125 };

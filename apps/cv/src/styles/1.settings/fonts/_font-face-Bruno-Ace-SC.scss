@@ -3,7 +3,18 @@
   font-family: Bruno-Ace-SC;
   font-style: normal;
   font-weight: 400;
-  src:
-    url('/assets/fonts/Bruno-Ace-SC/Bruno-Ace-SC-regular.woff2') format('woff2'),
-    url('/assets/fonts/Bruno-Ace-SC/Bruno-Ace-SC-regular.woff') format('woff');
+  src: url('/assets/fonts/Bruno-Ace-SC/Bruno-Ace-SC-regular.woff2')
+    format('woff2');
+}
+
+// Arial resized to Bruno Ace SC's metrics: shown until the web font arrives
+// (font-display: swap), so the swap doesn't shift the layout (CLS).
+// Measured with fontTools against Arial; recompute if the font file changes.
+@font-face {
+  ascent-override: 56.23%;
+  descent-override: 14.07%;
+  font-family: Bruno-Ace-SC-fallback;
+  line-gap-override: 0%;
+  size-adjust: 142.25%;
+  src: local('Arial');
 }

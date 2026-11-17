@@ -51,14 +51,14 @@ export class BuildInfoService {
         );
         return Promise.all(
           Object.entries(manifest).map(([remote, entry]) =>
-            this.remoteVersion(remote, entry)
+            this._remoteVersion(remote, entry)
           )
         );
       },
     });
   }
 
-  private async remoteVersion(
+  private async _remoteVersion(
     remote: string,
     remoteEntry: unknown
   ): Promise<PackageVersion> {
