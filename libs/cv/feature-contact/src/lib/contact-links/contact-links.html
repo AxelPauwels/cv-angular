@@ -2,7 +2,25 @@
 <ul
   class="contact-links"
   [attr.aria-label]="'t.subheading.personal.connect' | translate">
-  @for (link of links(); track link.href) {
+  @if (aiAssistantLink(); as aiLink) {
+  <!-- the AI assistant, before the mail link: a robot that glows every few seconds -->
+  @let aiLabel = 't.contact.ai-assistant' | translate;
+  <li>
+    <a
+      class="contact-links__link contact-links__link--ai"
+      [routerLink]="aiLink"
+      [attr.aria-label]="aiLabel"
+      [matTooltip]="aiLabel"
+      matTooltipPosition="above">
+      <mat-icon
+        class="contact-links__ai-icon"
+        fontSet="material-symbols-outlined"
+        aria-hidden="true"
+        >smart_toy</mat-icon
+      >
+    </a>
+  </li>
+  } @for (link of links(); track link.href) {
   <!-- icon-only links: the label is the accessible name and, above the icon
        like the navbar icons' tooltips, shown on hover and focus -->
   @let label = link.translate ? (link.label | translate) : link.label;

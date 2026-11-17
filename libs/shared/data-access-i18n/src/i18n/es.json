@@ -161,6 +161,7 @@
       }
     },
     "contact": {
+      "ai-assistant": "Pregunta a mi asistente de IA",
       "count": "{count} de {max} caracteres",
       "error": {
         "email": {

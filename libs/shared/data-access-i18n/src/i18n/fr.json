@@ -161,6 +161,7 @@
       }
     },
     "contact": {
+      "ai-assistant": "Demandez à mon assistant IA",
       "count": "{count} sur {max} caractères",
       "error": {
         "email": {

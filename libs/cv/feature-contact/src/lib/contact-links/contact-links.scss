@@ -39,4 +39,38 @@
     color: var(--mat-sys-primary);
     font-size: 2.5rem;
   }
+
+  // the robot matches the lordicons' visual size; it glows and bobs once, then
+  // rests for 3s, forever. No motion for visitors who asked for less of it
+  &__ai-icon {
+    animation: contact-links-ai-glow 4s ease-in-out 3s infinite;
+    color: var(--mat-sys-primary);
+    font-size: 2rem;
+    height: 2rem;
+    width: 2rem;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+
+    // the app's own reduce motion setting (on <html>)
+    :host-context(html[data-reduce-motion]) & {
+      animation: none;
+    }
+  }
+}
+
+// 1s of movement, then 3s at rest: the delay between two glows
+@keyframes contact-links-ai-glow {
+  0%,
+  25%,
+  100% {
+    filter: drop-shadow(0 0 0 transparent);
+    transform: translateY(0) scale(1);
+  }
+
+  12.5% {
+    filter: drop-shadow(0 0 0.375rem var(--mat-sys-primary));
+    transform: translateY(-2px) scale(1.08);
+  }
 }
