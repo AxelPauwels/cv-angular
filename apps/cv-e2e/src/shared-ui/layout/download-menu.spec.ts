@@ -68,7 +68,10 @@ test.describe('ds-download-menu', () => {
 
     // Act
     await page.keyboard.press('Enter');
-    await expect(page.getByRole('menu')).toBeVisible();
+    // mat-menu focuses its first item after the next render, not when it shows:
+    // an earlier Escape closes the menu, then that late focus lands in the
+    // leaving panel and is lost instead of going back to the button
+    await expect(page.getByRole('menuitem').first()).toBeFocused();
     await page.keyboard.press('Escape');
 
     // Assert
