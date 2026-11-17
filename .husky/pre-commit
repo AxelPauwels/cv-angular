@@ -1,3 +1,18 @@
+# Keep the Material Symbols font URL in index.html in sync with the icons the code
+# uses (see README.icons.md). Runs before lint-staged, so Prettier formats it too.
+ICONS_INDEX=apps/cv/src/index.html
+if ! node tools/material-symbols/material-symbols.mjs > /dev/null 2>&1; then
+  if git diff --quiet -- "$ICONS_INDEX"; then
+    node tools/material-symbols/material-symbols.mjs --write && git add "$ICONS_INDEX" || exit 1
+  else
+    # Unstaged edits in index.html: don't sneak them into this commit.
+    node tools/material-symbols/material-symbols.mjs --write || exit 1
+    echo "Updated the Material Symbols URL in $ICONS_INDEX, which has other unstaged changes."
+    echo "Stage what you want from it and commit again."
+    exit 1
+  fi
+fi
+
 # Run prettier (see package.json):
 npx lint-staged
 
