@@ -42,6 +42,9 @@ describe('CvKnowledgeService', () => {
     // Assert
     expect(profile.name).toContain('Axel');
     expect(profile).not.toHaveProperty('contact');
+    expect(profile.location.city).toBeTruthy();
+    expect(profile.location.country).toMatch(/^t\.country\./);
+    expect(JSON.stringify(profile)).not.toMatch(/street|postalCode/);
     expect(experiences.some(({ category }) => category === 'IT')).toBe(true);
     expect(skills.categories.length).toBeGreaterThan(0);
     expect(education.educations.length).toBeGreaterThan(0);
