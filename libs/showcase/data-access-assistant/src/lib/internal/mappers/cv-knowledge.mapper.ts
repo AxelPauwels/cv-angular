@@ -41,6 +41,11 @@ export function toAssistantProfile({
     name: `${person.firstName} ${person.lastName}`,
     functionTitle: person.functionTitle,
     profile: person.profile,
+    // the personal page shows the same: city and the translated country
+    location: {
+      city: person.contact.address.city,
+      country: `t.country.${person.contact.address.country}`,
+    },
     links: {
       website: optional(person.contact.website),
       linkedIn: optional(person.contact.linkedIn),

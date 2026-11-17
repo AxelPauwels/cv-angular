@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { MatTooltip } from '@angular/material/tooltip';
 import { TranslatePipe } from '@tolgee/ngx';
 import { ROUTES } from '@cv/shared-util-routing';
+import { FeatureToggleService } from '@cv/shared-data-access';
 import { PersonStore } from '@cv/cv-data-access-personal';
 import { Lordicon, type LordiconName } from '@cv/shared-ui-lordicon';
 
@@ -23,6 +24,14 @@ interface ContactLink {
 })
 export class ContactLinks {
   private readonly store = inject(PersonStore);
+  private readonly toggles = inject(FeatureToggleService).states;
+
+  /** The AI assistant page, while its showcase item is switched on */
+  protected readonly aiAssistantLink = computed(() =>
+    this.toggles()['showcase-ai-assistant']
+      ? ROUTES.SHOWCASE.AI_ASSISTANT_ROUTER_LINK
+      : null
+  );
 
   protected readonly links = computed((): ContactLink[] => {
     const contact = this.store.person()?.contact;

@@ -49,7 +49,8 @@
     }
   </section>
 
-  <div class="tour__footer">
+  <!-- moves up when the spotlight would be under it -->
+  <div #footer class="tour__footer" [style.bottom.px]="footerBottom()">
     <p class="tour__counter" aria-hidden="true">
       {{ 't.tour.counter' | translate: progress() }}
     </p>

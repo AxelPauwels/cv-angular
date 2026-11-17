@@ -22,7 +22,8 @@ export const ASSISTANT_TOOLS = [
   createTool({
     name: 'getProfile',
     description: `Returns Axel's profile: name, job title, a profile summary,
-links (website, LinkedIn, GitHub), hobbies and spoken languages.`,
+where he lives (city and country), links (website, LinkedIn, GitHub),
+hobbies and spoken languages.`,
     handler: () => load((knowledge) => knowledge.profile()),
   }),
   createTool({

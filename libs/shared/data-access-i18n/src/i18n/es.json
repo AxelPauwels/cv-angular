@@ -42,6 +42,36 @@
         }
       }
     },
+    "ai-assistant": {
+      "assistant": "Asistente",
+      "disclaimer": "Las respuestas las genera Google Gemini y pueden contener errores. Tus preguntas se envían a Google a través de Firebase.",
+      "error": "Algo salió mal al responder. Inténtalo de nuevo.",
+      "hint": "Intro para enviar, Mayús+Intro para una nueva línea.",
+      "intro": "No dudes en plantear cualquier pregunta que puedas tener sobre mí, mi trabajo, sus habilidades o sus referencias.",
+      "limit-reached": "Has alcanzado el número máximo de preguntas para esta visita. Recarga la página para empezar de nuevo.",
+      "log-label": "Conversación",
+      "not-configured": "El asistente IA está desactivado en esta versión del sitio.",
+      "question": "Tu pregunta",
+      "quota-reached": "El asistente ha alcanzado su límite gratuito de hoy. Vuelve a intentarlo mañana.",
+      "retry": "Reintentar",
+      "send": "Enviar",
+      "stop": "Detener",
+      "suggestion": {
+        "languages": "¿Qué idiomas habla Axel?",
+        "reference": "¿Puedes darme una referencia de su último trabajo?",
+        "stack": "¿Qué tecnologías usa Axel?"
+      },
+      "suggestions": "Prueba una de estas",
+      "thinking": "El asistente está respondiendo…",
+      "tool": {
+        "getEducation": "Formación consultada",
+        "getExperiences": "Experiencia laboral consultada",
+        "getProfile": "Perfil consultado",
+        "getReferences": "Referencias consultadas",
+        "getSkills": "Habilidades consultadas"
+      },
+      "you": "Tú"
+    },
     "architecture": {
       "dependencies": {
         "count": "{count} bibliotecas",
@@ -161,6 +191,7 @@
       }
     },
     "contact": {
+      "ai-assistant": "Pregunta a mi asistente de IA",
       "count": "{count} de {max} caracteres",
       "error": {
         "email": {
@@ -405,13 +436,13 @@
         },
         "subtitle": "Empaquetada en el build, desde este repositorio",
         "title": "Biblioteca de componentes: <lib-mac-window>",
-        "view-npm": "Ver en npm",
+        "view-npm": "Ver en npmjs",
         "web-component": "Web component"
       },
       "mfe": {
         "intro": "Una aplicación Angular independiente, con su propio repositorio y despliegue. Esta aplicación no contiene su código: se carga en el navegador al abrir esta página.",
-        "open-api-docs": "Abrir la documentación de la API remota",
-        "open-remote": "Abrir la aplicación remota",
+        "open-api-docs": "Docs de la API remota",
+        "open-remote": "Aplicación remota",
         "separate-deployment": "Despliegue independiente",
         "step": {
           "load": "Aquí, <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) llama a <code>loadRemoteModule('cv-mfe', './web-components')</code>.",
@@ -440,8 +471,8 @@
       "graphql-docs": "graphql docs",
       "home": "Hogar",
       "light": "Claro",
-      "light-mode": "modo claro",
       "lighthouse": "Lighthouse",
+      "light-mode": "modo claro",
       "main-navigation": "Navegación principal",
       "menu": "Menú",
       "menu-loading": "Cargando el menú…",
@@ -599,6 +630,10 @@
       "next": "Siguiente",
       "start": "Iniciar el recorrido",
       "step": {
+        "ai-assistant": {
+          "text": "¿Te interesan mi experiencia, mis habilidades o mis referencias? Haz clic en el robot de abajo a la derecha y mi asistente de IA te responde con los datos de este sitio.",
+          "title": "Pregunta a mi asistente de IA"
+        },
         "architecture": {
           "label": "Arquitectura",
           "text": "¿Te preguntas cómo está hecha esta web? La sección técnica explica la arquitectura, el grafo del proyecto y las versiones utilizadas.",
@@ -698,36 +733,6 @@
       }
     },
     "website": "sitio web",
-    "written": "Escrito",
-    "ai-assistant": {
-      "assistant": "Asistente",
-      "disclaimer": "Las respuestas las genera Google Gemini y pueden contener errores. Tus preguntas se envían a Google a través de Firebase.",
-      "error": "Algo salió mal al responder. Inténtalo de nuevo.",
-      "hint": "Intro para enviar, Mayús+Intro para una nueva línea.",
-      "intro": "Pregunta lo que quieras sobre Axel, su trabajo, sus habilidades o sus referencias. El asistente busca la respuesta en la API de este sitio.",
-      "limit-reached": "Has alcanzado el número máximo de preguntas para esta visita. Recarga la página para empezar de nuevo.",
-      "log-label": "Conversación",
-      "not-configured": "El asistente IA está desactivado en esta versión del sitio.",
-      "question": "Tu pregunta",
-      "retry": "Reintentar",
-      "send": "Enviar",
-      "stop": "Detener",
-      "suggestion": {
-        "languages": "¿Qué idiomas habla Axel?",
-        "reference": "¿Puedes darme una referencia de su último trabajo?",
-        "stack": "¿Qué tecnologías usa Axel?"
-      },
-      "suggestions": "Prueba una de estas",
-      "thinking": "El asistente está respondiendo…",
-      "tool": {
-        "getEducation": "Formación consultada",
-        "getExperiences": "Experiencia laboral consultada",
-        "getProfile": "Perfil consultado",
-        "getReferences": "Referencias consultadas",
-        "getSkills": "Habilidades consultadas"
-      },
-      "you": "Tú",
-      "quota-reached": "El asistente ha alcanzado su límite gratuito de hoy. Vuelve a intentarlo mañana."
-    }
+    "written": "Escrito"
   }
 }

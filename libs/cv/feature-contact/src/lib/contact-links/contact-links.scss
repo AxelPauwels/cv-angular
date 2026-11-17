@@ -10,6 +10,12 @@
   margin: 0;
   padding: 0;
 
+  // the icons have different heights (the AI circle is smaller): center them
+  > li {
+    align-items: center;
+    display: flex;
+  }
+
   // 24px high targets (WCAG 2.5.8); the underline shows on hover and focus only,
   // the icon and the footer position mark them as links
   &__link {
@@ -38,5 +44,146 @@
   &__icon {
     color: var(--mat-sys-primary);
     font-size: 2.5rem;
+  }
+
+  // The AI assistant stands out from the outlined icons: an inverted icon, a light
+  // robot in a filled primary circle, a little smaller than the lordicons. On
+  // hover or keyboard focus it eases into an outlined icon like the others (no
+  // circle, the lordicons' two tones), and back, in 600ms, a little quicker than
+  // the lordicons' own hover animations (1-1.5s). Like the home page's tour
+  // button, a soft pulse spreads out of the circle and fades, then rests ~2s,
+  // over and over: it starts after 3s, stops while the link is hovered or
+  // focused (and starts again 3s after), and is off with reduced motion (system
+  // or the site's own setting, which also serves as the way to stop it for
+  // WCAG 2.2.2). Only transform and opacity animate (compositor only).
+  &__link--ai {
+    // its own stacking context: the pulse sits behind the circle, above the footer
+    isolation: isolate;
+  }
+
+  &__ai {
+    // the two tones of the robot's gradient: inverted, a light robot that blends
+    // into a primary tint (the lordicons go from primary into a lighter primary)
+    --contact-links-ai-tone-1: var(--mat-sys-on-primary);
+    --contact-links-ai-tone-2: color-mix(
+      in srgb,
+      var(--mat-sys-on-primary) 65%,
+      var(--mat-sys-primary)
+    );
+
+    align-items: center;
+    background-color: var(--mat-sys-primary);
+    block-size: 2.25rem;
+    border-radius: var(--mat-sys-corner-full);
+    display: inline-flex;
+    inline-size: 2.25rem;
+    justify-content: center;
+    position: relative;
+    transition: background-color 600ms ease;
+
+    // the pulse, behind the circle: as the tour button's glow
+    &::before {
+      animation: contact-links-ai-pulse 3.6s ease-out 3s infinite;
+
+      // the primary color itself (brown in the gold theme), fading out
+      background-color: var(--mat-sys-primary);
+      border-radius: inherit;
+      content: '';
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      z-index: -1;
+
+      @media (prefers-reduced-motion: reduce), (forced-colors: active) {
+        animation: none;
+        display: none;
+      }
+    }
+
+    // the app's own reduce motion setting (on <html>)
+    :host-context(html[data-reduce-motion]) &::before {
+      animation: none;
+    }
+
+    // Windows high contrast: an outlined circle in the link color
+    @media (forced-colors: active) {
+      border: 1px solid LinkText;
+    }
+  }
+
+  // hovered or focused: no circle, and the same tones as the lordicons next to it
+  &__link:hover &__ai,
+  &__link:focus-visible &__ai {
+    --contact-links-ai-tone-1: var(--mat-sys-primary);
+    --contact-links-ai-tone-2: light-dark(
+      color-mix(in srgb, var(--mat-sys-primary) 65%, white),
+      var(--mat-sys-on-surface)
+    );
+
+    background-color: transparent;
+  }
+
+  // no pulse around the outlined icon; it starts again 3s after
+  &__link:hover &__ai::before,
+  &__link:focus-visible &__ai::before {
+    animation: none;
+  }
+
+  // The robot is drawn at its hovered size, the lordicons' visual size (~30px
+  // drawn in their 2.5rem box), and scaled down to 1.75rem at rest; without its
+  // circle it grows back to full size (the drawing, ~30px, stays inside the
+  // 2.25rem circle). Scaling down, never up: a transform scale above 1
+  // stretches the SVG's bitmap (blurry until it snaps sharp at the end), and
+  // transitioning its size instead re-centers it every frame (it shivered).
+  &__link:hover &__ai-icon,
+  &__link:focus-visible &__ai-icon {
+    transform: none;
+  }
+
+  &__ai-icon {
+    block-size: 2.45rem;
+    flex-shrink: 0;
+    inline-size: 2.45rem;
+    transform: scale(calc(1.75 / 2.45));
+    transition: transform 600ms ease;
+
+    @media (forced-colors: active) {
+      path {
+        fill: LinkText;
+      }
+    }
+  }
+
+  &__ai-tone-1,
+  &__ai-tone-2 {
+    transition: stop-color 600ms ease;
+  }
+
+  &__ai-tone-1 {
+    stop-color: var(--contact-links-ai-tone-1);
+  }
+
+  &__ai-tone-2 {
+    stop-color: var(--contact-links-ai-tone-2);
+  }
+}
+
+// as the tour button's glow: a 1.6s pulse, then ~2s at rest (it ends at 44% of
+// the 3.6s cycle). A transform counts toward the page's scroll size, so the
+// pulse stays inside the footer (3.5rem high: 0.5rem padding around the 2.5rem
+// icons), or a scrollbar flickers in and out: 2.25rem × 1.45 = 3.26rem. All in
+// rem, so it still fits at larger text sizes.
+@keyframes contact-links-ai-pulse {
+  0% {
+    animation-timing-function: ease-out;
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  44%,
+  100% {
+    opacity: 0;
+    transform: scale(1.45);
   }
 }

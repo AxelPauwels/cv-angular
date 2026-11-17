@@ -5,9 +5,11 @@ import {
   DestroyRef,
   DOCUMENT,
   effect,
+  ElementRef,
   inject,
   signal,
   untracked,
+  viewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { A11yModule } from '@angular/cdk/a11y';
@@ -29,6 +31,12 @@ interface Box {
 const SPOTLIGHT_PADDING = 8;
 /** Give up on a target that does not show up, and center the step instead */
 const TARGET_TIMEOUT_MS = 5000;
+/** The back/exit/next bar's distance from the bottom, as in the stylesheet */
+const FOOTER_BOTTOM_REM = 1.5;
+/** The arrow above a spotlight: its 0.75rem gap and 2.5rem icon */
+const POINTER_REM = 3.25;
+/** Space between a lifted bar and what it makes room for */
+const FOOTER_GAP_REM = 0.75;
 
 /**
  * The guided tour: a scrim with a spotlight on the step's target, an arrow
@@ -79,6 +87,12 @@ export class TourOverlay {
   protected readonly spotlightRadius = signal<string | null>(null);
   /** Shown when a page or its target takes longer than LOADING_DELAY_MS */
   protected readonly loading = signal(false);
+  /**
+   * The back/exit/next bar's distance from the bottom when it moves up out of
+   * the spotlight's way; null keeps the stylesheet's place
+   */
+  protected readonly footerBottom = signal<number | null>(null);
+  private readonly footer = viewChild<ElementRef<HTMLElement>>('footer');
 
   /** Point down at targets in the lower half, up at the others */
   protected readonly pointer = computed(() => {
@@ -262,6 +276,7 @@ export class TourOverlay {
     this.hasTarget.set(rects.length > 0);
     if (!rects.length) {
       this.spotlight.set(this._centerBox());
+      this.footerBottom.set(null);
       return;
     }
     const padding = this.targetFrame?.padding ?? SPOTLIGHT_PADDING;
@@ -283,6 +298,39 @@ export class TourOverlay {
       width: box.right - box.left + padding * 2,
       height: box.bottom - box.top + padding * 2,
     });
+    this.footerBottom.set(this._footerBottom());
+  }
+
+  /**
+   * Moves the back/exit/next bar up, just above the spotlight and its arrow,
+   * when they would be under it in its usual place (e.g. a footer link on a
+   * narrow screen); null keeps it there
+   */
+  private _footerBottom(): number | null {
+    const footer = this.footer()?.nativeElement;
+    if (!footer || !this.window) {
+      return null;
+    }
+    const rem = parseFloat(
+      this.window.getComputedStyle(this.document.documentElement).fontSize
+    );
+    const viewportWidth = this.window.innerWidth;
+    const viewportHeight = this.window.innerHeight;
+    const { width, height } = footer.getBoundingClientRect();
+    // where the bar sits by default: centered, 1.5rem from the bottom
+    const footerLeft = (viewportWidth - width) / 2;
+    const footerBottom = viewportHeight - FOOTER_BOTTOM_REM * rem;
+    const footerTop = footerBottom - height;
+
+    const box = this.spotlight();
+    const pointerAbove = this.pointer().direction === 'down';
+    const top = box.top - (pointerAbove ? POINTER_REM * rem : 0);
+    const overlaps =
+      box.left < footerLeft + width &&
+      box.left + box.width > footerLeft &&
+      top < footerBottom &&
+      box.top + box.height > footerTop;
+    return overlaps ? viewportHeight - top + FOOTER_GAP_REM * rem : null;
   }
 
   private _centerBox(): Box {

@@ -1,5 +1,6 @@
-# Only what the assistant may tell a visitor: no phone numbers, address or
-# personal details (date of birth, family) ever reach the language model.
+# Only what the assistant may tell a visitor: no phone numbers, street address
+# or personal details (date of birth, family) ever reach the language model.
+# Like the personal page, only the city and country of the address.
 
 query AssistantProfile {
   person {
@@ -8,6 +9,10 @@ query AssistantProfile {
     functionTitle
     profile
     contact {
+      address {
+        city
+        country
+      }
       website
       linkedIn
       github

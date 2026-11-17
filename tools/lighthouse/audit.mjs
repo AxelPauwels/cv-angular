@@ -3,6 +3,11 @@
 //   npx nx run showcase-feature-lighthouse:audit
 //   npx nx run showcase-feature-lighthouse:audit --url=https://my-preview.web.app
 //   npx nx run showcase-feature-lighthouse:audit --runs=5
+//   npx nx run showcase-feature-lighthouse:audit --pages=/showcase/ai-assistant
+//
+// With --pages (comma separated) only those pages are audited and their scores merged
+// into the current file; the other pages and the run details (url, time, version)
+// stay as they are, and no history file is written: that is for full runs.
 //
 // Where Lighthouse runs matters more than which URL it loads: the desktop preset does
 // not throttle the CPU, so a busy or slow laptop drags Performance down. With
@@ -45,6 +50,7 @@ const PAGES = [
   '/technical/versions',
   '/showcase/micro-frontends',
   '/showcase/lighthouse',
+  '/showcase/ai-assistant',
   '/showcase/feature-toggles',
 ];
 
@@ -53,6 +59,16 @@ const arg = (name) =>
 const baseUrl = new URL(arg('url') ?? 'https://axel-pauwels.web.app').origin;
 const runs = Math.max(1, Number.parseInt(arg('runs') ?? '3', 10) || 3);
 const apiKey = process.env.PSI_API_KEY?.trim();
+const only = arg('pages')
+  ?.split(',')
+  .map((p) => p.trim())
+  .filter(Boolean);
+const unknown = only?.filter((p) => !PAGES.includes(p)) ?? [];
+if (unknown.length) {
+  console.error(`Not in PAGES: ${unknown.join(', ')}`);
+  process.exit(1);
+}
+const toAudit = only?.length ? only : PAGES;
 
 const median = (values) => {
   const sorted = [...values].sort((a, b) => a - b);
@@ -136,7 +152,7 @@ const results = new Map();
 const dir = apiKey ? undefined : mkdtempSync(join(tmpdir(), 'lighthouse-'));
 try {
   if (apiKey) {
-    const queue = [...PAGES];
+    const queue = [...toAudit];
     await Promise.all(
       Array.from({ length: PSI_CONCURRENCY }, async () => {
         for (let path; (path = queue.shift());) {
@@ -146,12 +162,26 @@ try {
     );
   } else {
     // Local runs stay sequential: parallel Chrome instances would skew Performance.
-    for (const path of PAGES) {
+    for (const path of toAudit) {
       results.set(path, await auditPage(path, (url) => auditLocally(url, dir)));
     }
   }
 } finally {
   if (dir) rmSync(dir, { recursive: true, force: true });
+}
+
+if (toAudit !== PAGES) {
+  // only some pages: merge their scores into the last full run, in PAGES order
+  const current = JSON.parse(readFileSync(OUTPUT, 'utf8'));
+  const pages = Object.fromEntries(
+    PAGES.filter((p) => results.has(p) || current.pages[p]).map((p) => [
+      p,
+      results.get(p)?.scores ?? current.pages[p],
+    ])
+  );
+  writeFileSync(OUTPUT, `${JSON.stringify({ ...current, pages }, null, 2)}\n`);
+  console.log(`Merged ${toAudit.join(', ')} into ${OUTPUT}`);
+  process.exit(0);
 }
 
 const first = results.get(PAGES[0]).report;

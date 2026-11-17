@@ -16,6 +16,8 @@ export interface AssistantProfile {
   name: string;
   functionTitle: string;
   profile: string;
+  /** Where Axel lives: the city and a country key (`t.country.…`), no street */
+  location: { city: string; country: string };
   links: { website?: string; linkedIn?: string; github?: string };
   hobbies: { name: string; comment?: string }[];
   languages: {

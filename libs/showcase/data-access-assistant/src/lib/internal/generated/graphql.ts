@@ -58,6 +58,7 @@ export type AssistantProfileQuery = {
       website: string | null;
       linkedIn: string | null;
       github: string | null;
+      address: { city: string; country: string };
     };
     hobbies: Array<{ name: string; comment: string | null }>;
     languages: Array<{
@@ -161,6 +162,10 @@ export const AssistantProfileDocument = new TypedDocumentString(`
     functionTitle
     profile
     contact {
+      address {
+        city
+        country
+      }
       website
       linkedIn
       github

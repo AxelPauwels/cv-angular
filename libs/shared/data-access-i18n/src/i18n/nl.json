@@ -42,6 +42,36 @@
         }
       }
     },
+    "ai-assistant": {
+      "assistant": "Assistent",
+      "disclaimer": "Antwoorden worden gegenereerd door Google Gemini en kunnen fouten bevatten. Je vragen worden via Firebase naar Google gestuurd.",
+      "error": "Er ging iets mis bij het antwoorden. Probeer het opnieuw.",
+      "hint": "Enter om te versturen, Shift+Enter voor een nieuwe regel.",
+      "intro": "Stel gerust een vraag over mij, mijn werk, vaardigheden of referenties.",
+      "limit-reached": "Je hebt het maximum aantal vragen voor dit bezoek bereikt. Herlaad de pagina om opnieuw te beginnen.",
+      "log-label": "Gesprek",
+      "not-configured": "De AI-assistent staat uit op deze versie van de site.",
+      "question": "Jouw vraag",
+      "quota-reached": "De assistent heeft zijn gratis limiet voor vandaag bereikt. Probeer het morgen opnieuw.",
+      "retry": "Opnieuw proberen",
+      "send": "Versturen",
+      "stop": "Stoppen",
+      "suggestion": {
+        "languages": "Welke talen spreekt Axel?",
+        "reference": "Kan je me een referentie geven van zijn laatste werk?",
+        "stack": "Welke technologieën gebruikt Axel?"
+      },
+      "suggestions": "Probeer een van deze",
+      "thinking": "De assistent is aan het antwoorden…",
+      "tool": {
+        "getEducation": "Opleiding opgezocht",
+        "getExperiences": "Werkervaring opgezocht",
+        "getProfile": "Profiel opgezocht",
+        "getReferences": "Referenties opgezocht",
+        "getSkills": "Vaardigheden opgezocht"
+      },
+      "you": "Jij"
+    },
     "architecture": {
       "dependencies": {
         "count": "{count} bibliotheken",
@@ -126,7 +156,7 @@
     },
     "common": {
       "cv": "CV",
-      "download-cv": "Download cv",
+      "download-cv": "Download CV",
       "email": "E-mail",
       "loading": "Laden",
       "load-report": "Rapport laden",
@@ -161,6 +191,7 @@
       }
     },
     "contact": {
+      "ai-assistant": "Vraag het mijn AI-assistent",
       "count": "{count} van {max} tekens",
       "error": {
         "email": {
@@ -405,13 +436,13 @@
         },
         "subtitle": "Gebundeld tijdens de build, vanuit deze repository",
         "title": "Componentenbibliotheek: <lib-mac-window>",
-        "view-npm": "Bekijk op npm",
+        "view-npm": "Bekijk op npmjs",
         "web-component": "Webcomponent"
       },
       "mfe": {
         "intro": "Een aparte Angular-app met een eigen repository en deployment. Deze app bevat de code niet: ze wordt in de browser geladen wanneer deze pagina opent.",
-        "open-api-docs": "Open de API-documentatie van de remote",
-        "open-remote": "Open de remote app",
+        "open-api-docs": "Remote API docs",
+        "open-remote": "Remote app",
         "separate-deployment": "Aparte deployment",
         "step": {
           "load": "Hier roept <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) <code>loadRemoteModule('cv-mfe', './web-components')</code> aan.",
@@ -440,8 +471,8 @@
       "graphql-docs": "graphql docs",
       "home": "Home",
       "light": "Licht",
-      "light-mode": "lichte modus",
       "lighthouse": "Lighthouse",
+      "light-mode": "lichte modus",
       "main-navigation": "Hoofdnavigatie",
       "menu": "Menu",
       "menu-loading": "Het menu wordt geladen…",
@@ -594,11 +625,15 @@
       "back": "Terug",
       "counter": "{current} / {total}",
       "exit": "Stop",
-      "finish": "Afronden",
+      "finish": "Sluit",
       "loading": "De rondleiding wordt geladen…",
       "next": "Volgende",
       "start": "Start de rondleiding",
       "step": {
+        "ai-assistant": {
+          "text": "Benieuwd naar mijn ervaring, vaardigheden of referenties? Klik op de robot rechtsonder en mijn AI-assistent antwoordt rechtstreeks met de gegevens van deze site.",
+          "title": "Vraag het mijn AI-assistent"
+        },
         "architecture": {
           "label": "Architectuur",
           "text": "Benieuwd hoe deze website gebouwd is? Het technische gedeelte legt de architectuur, de projectgraaf en de gebruikte versies uit.",
@@ -698,36 +733,6 @@
       }
     },
     "website": "website",
-    "written": "Schriftelijk",
-    "ai-assistant": {
-      "assistant": "Assistent",
-      "disclaimer": "Antwoorden worden gegenereerd door Google Gemini en kunnen fouten bevatten. Je vragen worden via Firebase naar Google gestuurd.",
-      "error": "Er ging iets mis bij het antwoorden. Probeer het opnieuw.",
-      "hint": "Enter om te versturen, Shift+Enter voor een nieuwe regel.",
-      "intro": "Stel gerust een vraag over Axel, zijn werk, vaardigheden of referenties. De assistent zoekt het antwoord op in de eigen API van deze site.",
-      "limit-reached": "Je hebt het maximum aantal vragen voor dit bezoek bereikt. Herlaad de pagina om opnieuw te beginnen.",
-      "log-label": "Gesprek",
-      "not-configured": "De AI-assistent staat uit op deze versie van de site.",
-      "question": "Jouw vraag",
-      "retry": "Opnieuw proberen",
-      "send": "Versturen",
-      "stop": "Stoppen",
-      "suggestion": {
-        "languages": "Welke talen spreekt Axel?",
-        "reference": "Kan je me een referentie geven van zijn laatste werk?",
-        "stack": "Welke technologieën gebruikt Axel?"
-      },
-      "suggestions": "Probeer een van deze",
-      "thinking": "De assistent is aan het antwoorden…",
-      "tool": {
-        "getEducation": "Opleiding opgezocht",
-        "getExperiences": "Werkervaring opgezocht",
-        "getProfile": "Profiel opgezocht",
-        "getReferences": "Referenties opgezocht",
-        "getSkills": "Vaardigheden opgezocht"
-      },
-      "you": "Jij",
-      "quota-reached": "De assistent heeft zijn gratis limiet voor vandaag bereikt. Probeer het morgen opnieuw."
-    }
+    "written": "Schriftelijk"
   }
 }
