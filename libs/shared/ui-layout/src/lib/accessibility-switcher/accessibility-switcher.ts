@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, ElementRef, input, output, viewChild } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import {
   MatButtonToggle,
@@ -35,6 +35,9 @@ let nextId = 0;
   ],
   templateUrl: './accessibility-switcher.html',
   styleUrl: './accessibility-switcher.scss',
+  host: {
+    '(keydown.escape)': 'closeFromKeyboard()',
+  },
 })
 export class AccessibilitySwitcher {
   readonly textSizes = input.required<readonly number[]>();
@@ -43,4 +46,18 @@ export class AccessibilitySwitcher {
   readonly resetSettings = output<void>();
 
   protected readonly id = `ds-accessibility-${nextId++}`;
+  private readonly panel = viewChild.required<ElementRef<HTMLElement>>('panel');
+
+  /**
+   * The popover closes itself on Escape, unless the trigger's tooltip shows
+   * (after tabbing to it): that tooltip takes Escape for itself and cancels it
+   * before it reaches the popover. Escape bubbles here first, so it closes
+   * the panel anyway, and the browser moves the focus back to the trigger.
+   */
+  protected closeFromKeyboard(): void {
+    const panel = this.panel().nativeElement;
+    if (panel.matches(':popover-open')) {
+      panel.hidePopover();
+    }
+  }
 }

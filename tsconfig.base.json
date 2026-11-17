@@ -103,6 +103,15 @@
       ],
       "@cv/cv-feature-contact-form": [
         "./libs/cv/feature-contact-form/src/index.ts"
+      ],
+      "@cv/showcase-data-access-assistant": [
+        "./libs/showcase/data-access-assistant/src/index.ts"
+      ],
+      "@cv/showcase-ui-assistant": [
+        "./libs/showcase/ui-assistant/src/index.ts"
+      ],
+      "@cv/showcase-feature-ai-assistant": [
+        "./libs/showcase/feature-ai-assistant/src/index.ts"
       ]
     }
   },

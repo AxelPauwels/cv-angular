@@ -5,6 +5,8 @@ export const SHOWCASE = {
   MICRO_FRONTENDS_ROUTER_LINK: '/showcase/micro-frontends',
   LIGHTHOUSE: 'lighthouse',
   LIGHTHOUSE_ROUTER_LINK: '/showcase/lighthouse',
+  AI_ASSISTANT: 'ai-assistant',
+  AI_ASSISTANT_ROUTER_LINK: '/showcase/ai-assistant',
   FEATURE_TOGGLES: 'feature-toggles',
   FEATURE_TOGGLES_ROUTER_LINK: '/showcase/feature-toggles',
 } as const;

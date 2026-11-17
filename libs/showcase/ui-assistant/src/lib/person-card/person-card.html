@@ -1,0 +1,16 @@
+<ds-card
+  [headingLevel]="3"
+  [initials]="initials()"
+  [title]="name()"
+  [subtitle]="function()">
+  <p class="person-card__work">
+    {{ employer() }} @if (client(); as client) {
+    <span class="person-card__client">· {{ client }}</span>
+    }
+  </p>
+  @if (startYear(); as start) {
+  <p class="person-card__period">
+    {{ start }} – {{ endYear() ?? ('t.present' | translate) }}
+  </p>
+  }
+</ds-card>

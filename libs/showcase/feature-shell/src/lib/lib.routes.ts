@@ -28,6 +28,13 @@ export const showcaseFeatureShellRoutes: Route[] = [
             (m) => m.LighthouseReport
           ),
       },
+      {
+        path: ROUTES.SHOWCASE.AI_ASSISTANT,
+        loadComponent: () =>
+          import('@cv/showcase-feature-ai-assistant').then(
+            (m) => m.AiAssistant
+          ),
+      },
       // always reachable, also when switched off: the footer links here
       {
         path: ROUTES.SHOWCASE.FEATURE_TOGGLES,

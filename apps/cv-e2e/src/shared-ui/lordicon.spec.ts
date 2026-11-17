@@ -21,10 +21,10 @@ test.describe('ds-lordicon', () => {
     const contact = page.getByRole('list', { name: "Let's talk" });
 
     // Act
-    const email = contact.getByRole('link', { name: 'Email' });
+    const link = contact.getByRole('link', { name: 'Contact', exact: true });
 
     // Assert
-    await expect(email.locator('ds-lordicon')).toHaveAttribute(
+    await expect(link.locator('ds-lordicon')).toHaveAttribute(
       'aria-hidden',
       'true'
     );
@@ -75,10 +75,12 @@ test.describe('ds-lordicon', () => {
     page,
   }) => {
     // Arrange
-    const email = page.getByRole('link', { name: 'Email' });
+    const link = page
+      .getByRole('list', { name: "Let's talk" })
+      .getByRole('link', { name: 'Contact', exact: true });
 
     // Act
-    const placeholder = email.locator('lord-icon .cv-icon');
+    const placeholder = link.locator('lord-icon .cv-icon');
 
     // Assert
     await expect(placeholder).toHaveCount(1);

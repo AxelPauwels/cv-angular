@@ -121,4 +121,32 @@ test.describe('ds-accessibility-switcher', () => {
     // Assert
     await expect(panel(page)).toBeHidden();
   });
+
+  test('closes with Escape after tabbing to the button, while its tooltip shows', async ({
+    page,
+    browserName,
+  }) => {
+    // Arrange: Tab from the control before it, so the tooltip shows
+    const button = trigger(page);
+    await button.evaluate((element) => {
+      const controls = Array.from(
+        document.querySelectorAll<HTMLElement>('button, a[href]')
+      );
+      controls[controls.indexOf(element as HTMLElement) - 1]?.focus();
+    });
+    // WebKit (like Safari) skips buttons on Tab unless Alt is held
+    await page.keyboard.press(browserName === 'webkit' ? 'Alt+Tab' : 'Tab');
+    await expect(button).toBeFocused();
+    // mat-tooltip has no tooltip role (it describes the button instead)
+    await expect(page.locator('.mat-mdc-tooltip')).toBeVisible();
+    await page.keyboard.press('Enter');
+    await expect(panel(page)).toBeVisible();
+
+    // Act
+    await page.keyboard.press('Escape');
+
+    // Assert
+    await expect(panel(page)).toBeHidden();
+    await expect(button).toBeFocused();
+  });
 });

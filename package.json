@@ -56,6 +56,7 @@
   },
   "private": true,
   "dependencies": {
+    "@ag-ui/core": "1.0.3",
     "@angular/animations": "~22.2.0",
     "@angular/cdk": "~22.2.5",
     "@angular/common": "~22.2.0",
@@ -69,12 +70,15 @@
     "@axel-pauwels/mac-window": "^1.0.0",
     "@graphql-tools/merge": "^10.0.8",
     "@graphql-tools/schema": "^11.0.8",
+    "@hashbrownai/angular": "0.8.3",
+    "@hashbrownai/core": "0.8.3",
     "@lordicon/element": "^3.0.2",
     "@ngrx/signals": "^22.0.1",
     "@softarc/detective": "^2.1.2",
     "@softarc/native-federation-node": "^2.0.10",
     "@tolgee/ngx": "^7.3.0",
     "es-module-shims": "^1.5.12",
+    "firebase": "^13.3.0",
     "graphql": "^16.14.2",
     "graphql-scalars": "^2.0.1",
     "rxjs": "~7.8.0"

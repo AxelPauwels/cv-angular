@@ -1,0 +1,107 @@
+# Only what the assistant may tell a visitor: no phone numbers, address or
+# personal details (date of birth, family) ever reach the language model.
+
+query AssistantProfile {
+  person {
+    firstName
+    lastName
+    functionTitle
+    profile
+    contact {
+      website
+      linkedIn
+      github
+    }
+    hobbies {
+      name
+      comment
+    }
+    languages {
+      isNativeLanguage
+      language {
+        isoCode
+      }
+      spoken
+      written
+      cefrLevel
+    }
+  }
+}
+
+query AssistantExperiences {
+  experiences {
+    uuid
+    category
+    work {
+      name
+      location
+      position
+    }
+    period {
+      start
+      end
+    }
+    isInternship
+    project
+    jobDescriptions
+    stack
+  }
+}
+
+query AssistantReferences {
+  references {
+    uuid
+    name
+    function
+    work
+    client
+    workCategory
+    workCategoryPeriod {
+      start
+      end
+    }
+  }
+}
+
+query AssistantSkills {
+  skills {
+    category
+    entries {
+      name
+      level
+    }
+  }
+  otherSkills
+  competences {
+    title
+    description
+  }
+}
+
+query AssistantEducation {
+  educations {
+    category
+    level
+    specialization
+    degree
+    school {
+      name
+      location
+    }
+    period {
+      start
+      end
+    }
+  }
+  certificates {
+    name
+    issuer
+    year
+  }
+  trainings {
+    name
+    provider
+    year
+    status
+  }
+}
