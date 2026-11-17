@@ -19,6 +19,15 @@
         ]
       },
       {
+        "source": "!**/*.@(js|css|avif|webp|png|jpg|jpeg|svg|ico|ttf|woff|woff2)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
         "source": "**/*.@(js|css)",
         "headers": [
           {
