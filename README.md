@@ -41,6 +41,8 @@ Tolgee, the `i18n:*` commands and how translation keys are used: see [README.tra
 
 ## Micro-frontends
 
+The AI assistant's Firebase console and Google Cloud setup (AI Logic, App Check, reCAPTCHA, keys and secrets, debug tokens, troubleshooting): see [README.console-cloud.md](README.console-cloud.md).
+
 How the `<cv-mfe>` micro-frontend is loaded, used with typed inputs, developed against a local remote, and updated when the remote ships a new version: see [README.micro-frontends.md](README.micro-frontends.md).
 
 ## Material Symbols icons

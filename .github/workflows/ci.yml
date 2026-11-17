@@ -41,4 +41,13 @@ jobs:
       - run: npx nx format:check
       # Fails when an icon is missing from the subset Material Symbols font in index.html
       - run: npx nx run cv:material-symbols
-      - run: npx nx affected -t lint test build typecheck e2e --configuration=ci
+      - run: npx nx affected -t lint test build typecheck --configuration=ci
+      # Without --configuration: the same task as `nx run cv-e2e:e2e` in
+      # build-production.sh, so the release and deploy builds reuse this result
+      # from Nx Cloud instead of running every test again
+      - run: npx nx affected -t e2e
+        env:
+          # Chromium only for day-to-day work; every browser on release
+          # branches, main and pull requests into main (see playwright.config.mts)
+          # (an empty value means every browser; `cond && '' || x` would always give x)
+          E2E_BROWSERS: ${{ !(github.ref_name == 'main' || startsWith(github.ref_name, 'release/') || github.base_ref == 'main') && 'chromium' || '' }}

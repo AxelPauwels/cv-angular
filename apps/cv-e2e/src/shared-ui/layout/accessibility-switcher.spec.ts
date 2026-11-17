@@ -137,8 +137,13 @@ test.describe('ds-accessibility-switcher', () => {
     // WebKit (like Safari) skips buttons on Tab unless Alt is held
     await page.keyboard.press(browserName === 'webkit' ? 'Alt+Tab' : 'Tab');
     await expect(button).toBeFocused();
-    // mat-tooltip has no tooltip role (it describes the button instead)
-    await expect(page.locator('.mat-mdc-tooltip')).toBeVisible();
+    // mat-tooltip has no tooltip role (it describes the button instead).
+    // The previous control's tooltip can still be fading out, so match by text
+    await expect(
+      page
+        .locator('.mat-mdc-tooltip')
+        .filter({ hasText: /^\s*Accessibility\s*$/ })
+    ).toBeVisible();
     await page.keyboard.press('Enter');
     await expect(panel(page)).toBeVisible();
 
