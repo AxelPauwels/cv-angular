@@ -1,6 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { TranslatePipe } from '@tolgee/ngx';
 import { ROUTES } from '@cv/shared-util-routing';
@@ -19,7 +18,7 @@ interface ContactLink {
 
 @Component({
   selector: 'cv-contact-links',
-  imports: [Lordicon, MatIcon, RouterLink, MatTooltip, TranslatePipe],
+  imports: [Lordicon, RouterLink, MatTooltip, TranslatePipe],
   templateUrl: './contact-links.html',
   styleUrl: './contact-links.scss',
 })

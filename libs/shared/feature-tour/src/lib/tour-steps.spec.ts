@@ -17,6 +17,7 @@ describe('DEFAULT_TOUR_STEPS', () => {
       'technical',
       'showcase',
       'contact',
+      'ai-assistant',
       'finish',
     ]);
     expect(steps[0].route).toBe(ROUTES.HOME.ROOT_ROUTER_LINK);
@@ -69,7 +70,29 @@ describe('DEFAULT_TOUR_STEPS', () => {
       technical: domain,
       showcase: domain,
       contact: none,
+      'ai-assistant': {
+        ...none,
+        // the AI assistant's circle, framed as a circle
+        spotlight: { padding: 6, radius: '50%' },
+      },
       finish: none,
     });
+  });
+
+  it('spotlights only the contact icons, and the AI assistant link in its own step', () => {
+    // Arrange
+    const byId = (id: string) => DEFAULT_TOUR_STEPS.find((s) => s.id === id);
+
+    // Act
+    const contact = byId('contact');
+    const aiAssistant = byId('ai-assistant');
+
+    // Assert
+    expect(contact?.target).toBe(
+      '[data-tour="contact"] a:not([data-tour="ai-assistant"])'
+    );
+    expect(aiAssistant?.target).toBe('[data-tour="ai-assistant"]');
+    expect(aiAssistant?.toggles).toEqual(['showcase-ai-assistant']);
+    expect(aiAssistant?.centerOnPhones).toBe(true);
   });
 });

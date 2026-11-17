@@ -85,6 +85,12 @@ const NAVBAR_SPOTLIGHT: SpotlightFrame = {
 };
 
 /**
+ * The AI assistant's 2.25rem circle, framed as a circle: 6px around it, fully
+ * rounded
+ */
+const AI_ASSISTANT_SPOTLIGHT: SpotlightFrame = { padding: 6, radius: '50%' };
+
+/**
  * A main menu item's tab, or on phones (where the tabs are hidden) the item in
  * the opened hamburger menu
  */
@@ -132,10 +138,18 @@ export const DEFAULT_TOUR_STEPS: readonly TourStep[] = [
     ...domainTargets('showcase'),
     toggles: ['main-menu-showcase'],
   }),
-  // on phones the contact links are at the very bottom of the page
+  // on phones the contact links are at the very bottom of the page. Only the
+  // mail, LinkedIn and GitHub icons: the AI assistant next to them has its own step
   step('contact', ROUTES.CV.PERSONAL_ROUTER_LINK, {
-    target: '[data-tour="contact"] a',
+    target: '[data-tour="contact"] a:not([data-tour="ai-assistant"])',
     centerOnPhones: true,
+  }),
+  // the round AI assistant link before the contact icons, in a round spotlight
+  step('ai-assistant', ROUTES.CV.PERSONAL_ROUTER_LINK, {
+    target: '[data-tour="ai-assistant"]',
+    centerOnPhones: true,
+    spotlight: AI_ASSISTANT_SPOTLIGHT,
+    toggles: ['showcase-ai-assistant'],
   }),
   step('finish', ROUTES.HOME.ROOT_ROUTER_LINK),
 ];

@@ -88,6 +88,12 @@
       "best-practices": 100,
       "seo": 100
     },
+    "/showcase/ai-assistant": {
+      "performance": 96,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
     "/showcase/feature-toggles": {
       "performance": 97,
       "accessibility": 100,
