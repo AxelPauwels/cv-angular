@@ -46,7 +46,9 @@ npx nx run-many -t test --all --configuration=ci --coverage
 npm run coverage:merge
 
 echo "🎭 Running e2e tests..."
-npx nx run cv-e2e:e2e
+# Every browser (empty E2E_BROWSERS), and the same task as `nx affected -t e2e`
+# in ci.yml: when CI already ran this commit, Nx Cloud returns its result
+E2E_BROWSERS= npx nx run cv-e2e:e2e
 
 echo "📚 Generating the GraphQL API docs..."
 npx nx run api:graphql-docs

@@ -10,6 +10,23 @@ const localURL = isCI ? 'http://localhost:4200' : 'http://localhost:4201';
 const baseURL = process.env['BASE_URL'] || getReadyUrl(localURL);
 
 /**
+ * E2E_BROWSERS=chromium,firefox limits the run to those projects; unset or
+ * empty runs all of them. CI sets chromium on develop and keeps every browser
+ * for release branches and main. It is an input of the e2e target
+ * (project.json), so a chromium-only result never stands in for a full run.
+ */
+const browsers = (process.env['E2E_BROWSERS'] ?? '')
+  .split(',')
+  .map((name) => name.trim())
+  .filter(Boolean);
+const unknown = browsers.filter(
+  (name) => !['chromium', 'firefox', 'webkit'].includes(name)
+);
+if (unknown.length) {
+  throw new Error(`E2E_BROWSERS: unknown browser(s) ${unknown.join(', ')}`);
+}
+
+/**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
@@ -33,8 +50,9 @@ export default defineConfig({
     openHtmlReport: 'never',
   }),
   // Locally the tests hit the unminified dev server; Playwright's default (half
-  // the CPU cores) overloads it and pages time out. CI keeps the preset's 1.
-  workers: isCI ? 1 : 3,
+  // the CPU cores) overloads it and pages time out. CI serves the production
+  // build from a static server, so its 4 vCPUs (public repo) run 2 workers.
+  workers: isCI ? 2 : 3,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL,
@@ -82,5 +100,5 @@ export default defineConfig({
       name: 'Google Chrome',
       use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     } */
-  ],
+  ].filter(({ name }) => !browsers.length || browsers.includes(name ?? '')),
 });
