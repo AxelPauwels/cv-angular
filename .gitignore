@@ -73,3 +73,4 @@ __screenshots__/
 
 # i18n:missing review file (pushed with i18n:push-missing)
 /scripts/tolgee/i18n-missing-keys.json
+/libs/shared/data-access-i18n/temp/
