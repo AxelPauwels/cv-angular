@@ -1,5 +1,6 @@
 import {
   afterNextRender,
+  booleanAttribute,
   Component,
   computed,
   CUSTOM_ELEMENTS_SCHEMA,
@@ -10,11 +11,17 @@ import {
  * Lordicon icons this app ships, by what they show. The JSON files live in this
  * lib's `src/assets` folder and are served from `assets/lordicon/`, so a visitor
  * never makes a request to Lordicon's CDN.
+ *
+ * Each also has a `<file>.thick.json` copy for `thick`: after adding an icon, run
+ * `node tools/lordicon/stroke-width.mjs` to write it.
  */
 const ICONS = {
+  'code-branch': 'zkiskfnp',
   github: 'acgiczyg',
+  layers: 'noncoqhc',
   linkedin: 'bnzbstbp',
   mail: 'icuxkywm',
+  terminal: 'eeolefdw',
 } as const;
 
 export type LordiconName = keyof typeof ICONS;
@@ -52,6 +59,9 @@ function defineLordiconElement(): Promise<void> {
  * follow the theme (`--mat-sys-primary`, blending into a lighter primary in light
  * mode and into the text color in dark mode); override them with `--lord-icon-primary`
  * and `--lord-icon-secondary`.
+ *
+ * `thick` makes the lines 1.5 times as wide, to sit next to Icomoon or Material
+ * Symbols glyphs: Lordicon's own `stroke="bold"` is about half as thick as those.
  */
 @Component({
   selector: 'ds-lordicon',
@@ -75,9 +85,12 @@ export class Lordicon {
   /** Selector of the ancestor whose hover or focus plays the icon */
   readonly target = input('a, button');
   readonly stroke = input<'light' | 'regular' | 'bold'>('bold');
+  /** 1.5 times the line width (a `.thick.json` copy of the icon) */
+  readonly thick = input(false, { transform: booleanAttribute });
 
   protected readonly src = computed(
-    () => `assets/lordicon/${ICONS[this.icon()]}.json`
+    () =>
+      `assets/lordicon/${ICONS[this.icon()]}${this.thick() ? '.thick' : ''}.json`
   );
 
   constructor() {
