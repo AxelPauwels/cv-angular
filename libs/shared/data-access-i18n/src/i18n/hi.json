@@ -233,6 +233,7 @@
     "experience": {
       "job-description": {
         "innomedio": {
+          "projects": "Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...",
           "support": "अपनी योजना खुद संभालते हुए बग फ़िक्सिंग, फ़ोन सपोर्ट और सपोर्ट-टिकट सिस्टम संभाला।",
           "technologies": "तकनीक: Symfony और Scss में इन-हाउस विकसित CMS सिस्टम का रखरखाव और विस्तार। समस्याओं या विस्तार वाले ग्राहकों को फ़ोन सपोर्ट देना, और Teamleader में सपोर्ट टिकट सिस्टम संभालना। साथ ही GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ...",
           "websites": "नई वेबसाइटें और वेबशॉप बनाईं और कस्टम CMS प्लैटफ़ॉर्म का विस्तार किया"
@@ -248,6 +249,7 @@
           "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,..."
         },
         "ravago": {
+          "platform": "Angular, Nx मोनोरिपो, GraphQL/Apollo और Kendo UI पर फ़्रंट-एंड प्लैटफ़ॉर्म के विकास को आगे बढ़ाना, जिससे मेंटेनेबिलिटी, स्केलेबिलिटी और डेवलपर उत्पादकता बेहतर हो।",
           "projects": "Warehouse Management System (WMS), बाद में WMS2। ऑफ़िस के लिए डेस्कटॉप ऐप और गोदामों में हैंडहेल्ड स्कैनर के लिए मोबाइल ऐप, दोनों रूपों में।",
           "technologies": "तकनीक: Nx और UI फ़्रेमवर्क Kendo के साथ Angular (Typescript/Scss)। इसके अलावा Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise...",
           "wms": "WMS को डिज़ाइन करना, बनाना और विकसित करना: स्टॉक, उत्पादन और ऑर्डर प्रबंधन को कवर करने वाला एक बिज़नेस-क्रिटिकल एप्लिकेशन – ऑफ़िस स्टाफ़ के लिए डेस्कटॉप पर, स्कैनर वाले गोदाम कर्मचारियों के लिए मोबाइल पर।",

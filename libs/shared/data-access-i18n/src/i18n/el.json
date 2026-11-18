@@ -233,6 +233,7 @@
     "experience": {
       "job-description": {
         "innomedio": {
+          "projects": "Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...",
           "support": "Διόρθωση σφαλμάτων, τηλεφωνική υποστήριξη και διαχείριση του συστήματος αιτημάτων υποστήριξης, οργανώνοντας τον δικό μου προγραμματισμό.",
           "technologies": "Τεχνολογία: Συντήρηση και επέκταση του εσωτερικά αναπτυγμένου συστήματος CMS σε Symfony με Scss. Τηλεφωνική υποστήριξη πελατών με προβλήματα ή επεκτάσεις και διαχείριση του συστήματος αιτημάτων υποστήριξης στο Teamleader. Επίσης GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ...",
           "websites": "Ανάπτυξη νέων ιστότοπων και ηλεκτρονικών καταστημάτων και επέκταση προσαρμοσμένων πλατφορμών CMS"
@@ -248,6 +249,7 @@
           "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,..."
         },
         "ravago": {
+          "platform": "Καθοδήγηση της εξέλιξης της πλατφόρμας front-end με Angular, Nx monorepos, GraphQL/Apollo και Kendo UI, βελτιώνοντας τη συντηρησιμότητα, την κλιμακωσιμότητα και την παραγωγικότητα των developers.",
           "projects": "Warehouse Management System (WMS), αργότερα WMS2. Τόσο ως εφαρμογή υπολογιστή για το γραφείο όσο και ως εφαρμογή για φορητούς σαρωτές στις αποθήκες.",
           "technologies": "Τεχνολογία: Angular (Typescript/Scss) με Nx και το UI framework Kendo. Επίσης Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise...",
           "wms": "Σχεδιασμός, ανάπτυξη και εξέλιξη του WMS: μιας κρίσιμης για την επιχείρηση εφαρμογής για απόθεμα, παραγωγή και διαχείριση παραγγελιών – σε υπολογιστή για το προσωπικό γραφείου, σε κινητό για τους εργαζόμενους της αποθήκης με σαρωτές.",

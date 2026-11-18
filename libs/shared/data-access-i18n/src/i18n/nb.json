@@ -233,6 +233,7 @@
     "experience": {
       "job-description": {
         "innomedio": {
+          "projects": "Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...",
           "support": "Håndterte feilretting, telefonstøtte og supportsaksystemet, og styrte min egen planlegging.",
           "technologies": "Teknologi: Vedlikehold og videreutvikling av det egenutviklede CMS-systemet i Symfony med Scss. Telefonstøtte for kunder med problemer eller utvidelser, og håndtering av supportsaksystemet i Teamleader. I tillegg GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ...",
           "websites": "Bygde nye nettsteder og nettbutikker og utvidet skreddersydde CMS-plattformer"
@@ -248,6 +249,7 @@
           "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,..."
         },
         "ravago": {
+          "platform": "Drive utviklingen av front-end-plattformen med Angular, Nx-monorepoer, GraphQL/Apollo og Kendo UI, og forbedre vedlikeholdbarhet, skalerbarhet og utviklerproduktivitet.",
           "projects": "Warehouse Management System (WMS), senere WMS2. Både som skrivebordsapp for kontoret og mobilapp for håndholdte skannere på lagrene.",
           "technologies": "Teknologi: Angular (Typescript/Scss) med Nx og UI-rammeverket Kendo. Videre Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise...",
           "wms": "Designe, bygge og videreutvikle WMS-et: en forretningskritisk applikasjon for lager, produksjon og ordrehåndtering – på skrivebordet for kontoransatte, på mobil for lagerarbeidere med skannere.",
