@@ -1,50 +1,15 @@
 {
   "t": {
     "accessibility": {
-      "close": "Sluiten",
       "high-contrast": "Hoger contrast",
       "reduce-motion": "Minder beweging",
-      "reset": "Standaardinstellingen herstellen",
       "switch": "Toegankelijkheid",
       "text-size": "Tekstgrootte",
       "text-spacing": "Ruimere tekstafstand",
       "title": "Toegankelijkheid"
     },
-    "admin": {
-      "count": "{on} van {total} aan",
-      "hidden-notice": "De Admin-pagina staat niet meer in het menu. Je kunt ze nog altijd openen via /showcase/feature-toggles door in de footer op “Axel Pauwels” te klikken.",
-      "linked": {
-        "off": "{item} ook uitgezet.",
-        "on": "{item} ook aangezet."
-      },
-      "reset": "Standaardwaarden herstellen",
-      "section": {
-        "general": {
-          "title": "Algemeen"
-        },
-        "main-menu": {
-          "title": "Hoofdmenu"
-        },
-        "navbar": {
-          "title": "Iconen in de navigatiebalk"
-        },
-        "submenu": {
-          "title": "Submenu"
-        }
-      },
-      "title": "Beheer",
-      "toggle": {
-        "color-scheme-switcher": {
-          "label": "Lichte en donkere modus"
-        },
-        "tour-button": {
-          "label": "Tour knop op de homepagina"
-        }
-      }
-    },
     "ai-assistant": {
       "assistant": "Assistent",
-      "disclaimer": "Antwoorden worden gegenereerd door Google Gemini en kunnen fouten bevatten. Je vragen worden via Firebase naar Google gestuurd.",
       "error": "Er ging iets mis bij het antwoorden. Probeer het opnieuw.",
       "hint": "Enter om te versturen, Shift+Enter voor een nieuwe regel.",
       "intro": "Stel gerust een vraag over mij, mijn werk, vaardigheden of referenties.",
@@ -140,12 +105,6 @@
       }
     },
     "at": "aan",
-    "carousel": {
-      "carousel": "carrousel",
-      "next": "Volgende",
-      "page": "Pagina {current} van {total}",
-      "previous": "Vorige"
-    },
     "city": {
       "paris": "Parijs"
     },
@@ -157,16 +116,12 @@
     "common": {
       "cv": "CV",
       "download-cv": "Download CV",
-      "email": "E-mail",
       "loading": "Laden",
-      "load-report": "Rapport laden",
       "new-tab": "(nieuw tabblad)",
       "new-tab-url": "({url}, nieuw tabblad)",
       "ok": "OK",
-      "pdf": "pdf",
       "reset": "Reset",
-      "technologies": "Technologieën",
-      "under-construction": "Aan deze pagina wordt nog gewerkt. Kom snel terug!"
+      "technologies": "Technologieën"
     },
     "competence": {
       "ai-assisted-development": {
@@ -219,7 +174,6 @@
         "name": "Naam",
         "subject": "Onderwerp"
       },
-      "required-hint": "Alle velden zijn verplicht.",
       "send": "Versturen",
       "sending": "Je bericht wordt verstuurd…",
       "sent": "Bedankt! Je bericht is verstuurd. Ik neem snel contact met je op.",
@@ -228,7 +182,6 @@
     "country": {
       "belgium": "België"
     },
-    "daughter": "dochter",
     "education": {
       "bellouet-conseil": {
         "degree": "Diploma van getrokken suiker | Diploma van gegoten en geblazen suiker",
@@ -293,8 +246,7 @@
           "agile": "Oplevering binnen Agile/Scrum-teams, in nauw contact met de klant.",
           "front-end": "Herbruikbare, schaalbare front-end oplossingen voor webshops met een ITCSS-architectuur in Sass, aangevuld met React en Sulu.",
           "magento": "Ontwikkeling en maatwerk van Magento 2 e-commerceplatformen (B2C/B2B)",
-          "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,...",
-          "technologies": "Technologie: Voornamelijk gewerkt met Magento 2 (PHP/Less), en soms een beetje React en Sulu. Ook verdiept in front-end Inverted Triagle CSS (ITCSS) van SEM&BIO in Sass. Verder GrumPhp, Vagrant, SequelPro, Git, Figma, BitBucket, Jira, Confluence, Jenkins, ..."
+          "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,..."
         },
         "ravago": {
           "platform": "Verdere uitbouw van het front-end platform met Angular, Nx-monorepos, GraphQL/Apollo en Kendo UI, met betere onderhoudbaarheid, schaalbaarheid en ontwikkelproductiviteit als resultaat.",
@@ -349,7 +301,6 @@
           "title": "Submenu"
         }
       },
-      "title": "Beheer",
       "toggle": {
         "color-scheme-switcher": {
           "label": "Lichte en donkere modus"
@@ -362,8 +313,75 @@
     "font": {
       "switch": "Lettertype"
     },
+    "foundations": {
+      "icons": {
+        "icomoon": "Merk- en technologielogo's uit verschillende iconensets en eigen SVG's, samengevoegd tot één zelf gehost font met de IcoMoon-app. Eén bestand, één request, en elk logo neemt de grootte en kleur van de tekst rond zich over: <code>cv-icon cv-icon-angular</code>.",
+        "lordicon": "Geanimeerde iconen: elk icoon is een kleine Lottie-animatie die speelt wanneer je erover hovert. De JSON-bestanden komen van deze site, nooit van het CDN van Lordicon, en de player laadt pas wanneer het eerste icoon verschijnt. Hover er hieronder eens over.",
+        "material": "Interface-iconen (menu, sluiten, versturen, …) van Google Fonts. Een buildscript zoekt de iconen die de code gebruikt en vraagt alleen die op: een subset van enkele KiB in plaats van het volledige font.",
+        "sample": "Enkele Icomoon-iconen"
+      },
+      "intro": "De afspraken waarop elke pagina gebouwd is: hoe de globale stijlen gelaagd zijn, waar de iconen vandaan komen en hoe data de componenten bereikt.",
+      "itcss": {
+        "addition": "Toevoeging van SEM&BIO",
+        "axis": {
+          "broad": "Breed bereik, lage specificiteit",
+          "specific": "Smal bereik, hoge specificiteit"
+        },
+        "intro": "De globale stijlen in <code>apps/cv/src/styles</code> volgen <strong>ITCSS</strong> (Inverted Triangle CSS), zoals ik het bij SEM&BIO leerde. Elke laag is een map, in volgorde geïmporteerd: brede regels met een lage specificiteit eerst, smalle en specifieke als laatste, zodat een latere laag wint zonder specificiteitsgevechten. Componentstijlen blijven ingekapseld in Angular; de lagen bevatten alleen wat echt globaal is.",
+        "layer": {
+          "components": {
+            "name": "Components",
+            "text": "Zelfstandige stukjes UI. Hier bijna leeg: Angular-componenten dragen hun eigen ingekapselde stijlen."
+          },
+          "elements": {
+            "name": "Elements",
+            "text": "Kale HTML-elementen zonder class: <code>html</code>, <code>body</code>, de scrollbalk."
+          },
+          "objects": {
+            "name": "Objects",
+            "text": "Layoutpatronen die schikken in plaats van versieren, gedeeld door elke pagina."
+          },
+          "patterns": {
+            "name": "Patterns",
+            "text": "Componenten die te specifiek zijn om te hergebruiken, zoals één bepaalde header."
+          },
+          "scopes": {
+            "name": "Scopes",
+            "text": "Extra specificiteit voor één context, zoals <code>.c-accordion.s-homepage</code>. Bewust bijna leeg gehouden."
+          },
+          "settings": {
+            "name": "Settings",
+            "text": "Variabelen en fontdefinities: typografie, witruimte, breakpoints en het Icomoon-font."
+          },
+          "tools": {
+            "name": "Tools",
+            "text": "Mixins en functies. Ze geven geen CSS tot een andere laag ze gebruikt."
+          },
+          "utilities": {
+            "name": "Utilities",
+            "text": "Hulpklassen met één doel die altijd winnen, de enige laag waar <code>!important</code> mag, zoals de toegankelijkheids- en fontklassen."
+          },
+          "vendors": {
+            "name": "Vendors",
+            "text": "Stijlen van derden, hoog in de stapel zodat de lagen eronder ze kunnen overschrijven: het Angular Material-thema, de paletten en overrides."
+          }
+        }
+      },
+      "state": {
+        "devtools": {
+          "alt": "Tijdelijke afbeelding voor een screenshot van de Redux DevTools-browserextensie",
+          "caption": "De Redux DevTools-browserextensie kan een signal store volgen via <code>withDevtools</code> van ngrx-toolkit. Screenshot volgt binnenkort."
+        },
+        "intro": "Elke data-access-library heeft een <strong>NgRx Signal Store</strong>: het Redux-idee van één alleen-lezen bron van waarheid, gebouwd op Angular-signals in plaats van actions en reducers. Componenten halen zelf nooit data op.",
+        "step": {
+          "component": "De pagina leest de signals, en Angular werkt alleen bij wat veranderd is.",
+          "service": "Een service laadt de data met <code>httpResource</code> en zet de API-types om naar frontend-types.",
+          "store": "De store bewaart ze als state (<code>withLinkedState</code>), zodat ze in de Redux DevTools verschijnen, en voegt enkele methodes toe (<code>withMethods</code>)."
+        },
+        "stores": "De stores"
+      }
+    },
     "heading": {
-      "administrator": "Beheerder",
       "ai-assistant": "AI-assistent",
       "architecture": "Architectuur",
       "code-coverage": "code coverage",
@@ -372,6 +390,7 @@
       "end-to-end-tests": "End-to-end tests",
       "experience": "ervaring",
       "feature-toggles": "Feature toggles",
+      "foundations": "Frontend-fundamenten",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
       "micro-frontends": "Micro-frontends",
@@ -455,24 +474,21 @@
       }
     },
     "nav": {
-      "admin": "Admin",
       "ai-assistant": "AI-assistent",
       "architecture": "Architectuur",
       "back-to-top": "Terug naar boven",
       "code-coverage": "code coverage",
       "cv": "CV",
       "cv-navigation": "CV-navigatie",
-      "dark": "Donker",
-      "dark-mode": "donkere modus",
       "education": "Opleiding",
       "end-to-end-tests": "End-to-end tests",
       "experience": "Ervaring",
       "feature-toggles": "Feature toggles",
+      "foundations": "Fundamenten",
       "graphql-docs": "graphql docs",
       "home": "Home",
       "light": "Licht",
       "lighthouse": "Lighthouse",
-      "light-mode": "lichte modus",
       "main-navigation": "Hoofdnavigatie",
       "menu": "Menu",
       "menu-loading": "Het menu wordt geladen…",
@@ -485,9 +501,6 @@
       "skills": "Vaardigheden",
       "technical": "Technisch",
       "technical-navigation": "Technische navigatie",
-      "temp": {
-        "more": "Meer..."
-      },
       "versions": "Versies"
     },
     "personal": {
@@ -538,10 +551,8 @@
         "testing": "Unit-, integratie- & E2E-testen"
       }
     },
-    "son": "Zoon",
     "spoken": "Mondeling",
     "subheading": {
-      "administrator": "Met grote macht komt grote configuratie",
       "education": {
         "certificates": "Certificaten",
         "certificates.description": "Blijk van nieuwsgierigheid en toewijding",
@@ -549,35 +560,24 @@
         "training-and-conferences.description": "Altijd lerend, nog steeds nieuwsgierig"
       },
       "feature-toggles": "Met grote macht komt grote configuratie",
-      "frameworks": "frameworks",
       "horeca": "Horeca",
       "it": "IT",
-      "libraries": "libraries",
-      "operating-systems": "besturingssystemen",
       "personal": {
         "about-me": "Over mij",
         "about-me.description": "De mens achter de code",
-        "about-me.prefix": "Identiteit",
         "connect": "Laten we praten",
-        "connect.description": "Klaar om iets buitengewoons te creëren",
-        "connect.prefix": "Connecteer",
         "hobbies-and-interests": "Hobby's & interesses",
         "hobbies-and-interests.description": "Het leven buiten de code",
-        "hobbies-and-interests.prefix": "Passies",
         "languages": "Talen",
-        "languages.description": "Bruggen bouwen tussen culturen",
-        "languages.prefix": "Communicatie"
+        "languages.description": "Bruggen bouwen tussen culturen"
       },
-      "programming-languages": "programmeertalen",
       "skills": {
         "additional-technologies": "andere technologieën",
         "ai": "AI & agentic development",
         "core-stack": "core frontend stack",
         "development-tools": "ontwikkeltools",
         "engineering-practices": "engineering practices",
-        "other": "andere vaardigheden",
-        "testing-and-quality": "testen & kwaliteit",
-        "tools-and-methods": "tools & methodes"
+        "testing-and-quality": "testen & kwaliteit"
       },
       "technical": {
         "dependencies": "Afhankelijkheden per project",
@@ -586,24 +586,17 @@
         "dependency-rules.description": "Gecontroleerd bij elke import",
         "domains-and-layers": "Domeinen & lagen",
         "domains-and-layers.description": "Verticale slices, horizontale lagen",
+        "icons": "Iconen",
+        "icons.description": "Twee fonts en geanimeerde iconen",
+        "itcss": "Stijlen in lagen",
+        "itcss.description": "Inverted triangle CSS",
         "layers": "Lagen binnen een domein",
         "layers.description": "Wie doet wat",
         "public-api": "Publieke API",
-        "public-api.description": "Barrels en interne mappen"
-      },
-      "tools-and-methods": "tools & methodes",
-      "version-control": "versiebeheer"
-    },
-    "temp": {
-      "under-construction": {
-        "content-1": "Welkom op mijn cv-website!",
-        "content-2": "Op dit moment is alle basisinformatie beschikbaar, maar de echt leuke onderdelen ontbreken nog.",
-        "content-3": "Ik werk momenteel aan de sectie 'Architectuur', waarin alle informatie over deze website wordt verzameld: de gebruikte technologieën, structuur, ontwikkeling aanpak, standaarden, versies, backend en meer... alles waar een ontwikkelaar blij van wordt.",
-        "content-4": "Daarnaast werk ik ook aan interactieve functies, zoals een schakelaar voor licht- en donkermodus, kleurthema's, extra talen, een gesimuleerde CRUD-pagina waarop je bepaalde functies kunt in- en uitschakelen, en nog veel meer.",
-        "content-5": "Tot slot komt er ook een showcase van moderne UI-componenten",
-        "title": "In ontwikkeling"
-      },
-      "versions": "Versies"
+        "public-api.description": "Barrels en interne mappen",
+        "state": "State",
+        "state.description": "NgRx signal stores"
+      }
     },
     "theme": {
       "blackberry": "Braambes",
@@ -631,6 +624,7 @@
       "start": "Start de rondleiding",
       "step": {
         "ai-assistant": {
+          "label": "AI-assistent",
           "text": "Benieuwd naar mijn ervaring, vaardigheden of referenties? Klik op de robot rechtsonder en mijn AI-assistent antwoordt rechtstreeks met de gegevens van deze site.",
           "title": "Vraag het mijn AI-assistent"
         },
