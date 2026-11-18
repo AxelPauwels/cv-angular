@@ -2,7 +2,6 @@
   "name": "@cv/cv-feature-personal",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^22.2.0",
     "@angular/core": "^22.2.0",
     "@tolgee/ngx": "^7.3.0",
     "@cv/cv-data-access-personal": "0.0.1",
@@ -12,7 +11,9 @@
     "@cv/shared-util-loading": "0.0.1",
     "@cv/shared-ui-loading-spinner": "0.0.1",
     "@cv/shared-ui-page": "0.0.1",
-    "@cv/shared-ui-store-loading-error": "0.0.1"
+    "@cv/shared-ui-store-loading-error": "0.0.1",
+    "@cv/shared-ui-i18n": "0.0.1",
+    "@cv/shared-data-access-i18n": "0.0.1"
   },
   "sideEffects": false,
   "private": true

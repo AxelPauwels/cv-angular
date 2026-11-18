@@ -3,11 +3,12 @@ import { delayedLoading } from '@cv/shared-util-loading';
 import { LoadingSpinner } from '@cv/shared-ui-loading-spinner';
 import { StoreLoadingError } from '@cv/shared-ui-store-loading-error';
 import { PageTitle, SectionHeading, PageLayout } from '@cv/shared-ui-page';
-import { DatePipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@tolgee/ngx';
 import { Card } from '@cv/shared-ui-card';
 import { ProgressBar } from '@cv/shared-ui-progress-bar';
+import { LocalDatePipe } from '@cv/shared-ui-i18n';
+import { LanguageService } from '@cv/shared-data-access-i18n';
 import {
   LanguageIsoCode,
   LanguageProficiency,
@@ -50,7 +51,7 @@ const key = (value: string): FactPart => ({ kind: 'key', text: value });
     PageTitle,
     SectionHeading,
     Card,
-    DatePipe,
+    LocalDatePipe,
     MatIcon,
     ProgressBar,
     TranslatePipe,
@@ -60,6 +61,8 @@ const key = (value: string): FactPart => ({ kind: 'key', text: value });
 })
 export class PersonalDetails {
   protected readonly store = inject(PersonStore);
+  /** Dates follow the active language */
+  protected readonly language = inject(LanguageService).language;
   protected readonly loading = delayedLoading(() => this.store.isLoading());
 
   protected readonly languageKeys: Record<LanguageIsoCode, string> = {

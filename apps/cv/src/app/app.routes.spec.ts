@@ -57,7 +57,7 @@ describe('appRoutes', () => {
 
     // Assert
     expect(page.url).toBe('/home');
-    expect(page.main).toEqual(['Home', 'CV', 'TECHNICAL', 'SHOWCASE']);
+    expect(page.main).toEqual(['Home', 'CV', 'Technical', 'Showcase']);
     expect(page.activeMain).toBe('Home');
     expect(page.sub).toEqual([]);
   });
@@ -90,7 +90,7 @@ describe('appRoutes', () => {
 
     // Assert
     expect(page.url).toBe('/showcase/micro-frontends');
-    expect(page.activeMain).toBe('SHOWCASE');
+    expect(page.activeMain).toBe('Showcase');
     expect(page.sub).toEqual([
       'Micro-frontends',
       'Lighthouse',
@@ -119,7 +119,7 @@ describe('appRoutes', () => {
 
     // Assert
     expect(page.url).toBe('/technical/architecture');
-    expect(page.activeMain).toBe('TECHNICAL');
+    expect(page.activeMain).toBe('Technical');
     expect(page.sub).toEqual([
       'Architecture',
       'Foundations',

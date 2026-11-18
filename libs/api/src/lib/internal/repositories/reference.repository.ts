@@ -4,7 +4,7 @@ import { fromYear } from '../utils/date';
 const horecaReferences: Reference[] = [
   {
     uuid: 'f116c10b-36b0-4445-8ca7-c2ef31c41485',
-    function: 'Chef',
+    function: 't.reference.function.chef',
     name: 'Bart Van De Perre',
     phoneNumber: '0476 / 90 76 21',
     work: 'Den Cardijn',
@@ -16,7 +16,7 @@ const horecaReferences: Reference[] = [
   },
   {
     uuid: '3910d86d-2015-4895-a4ad-2f136e7bda7e',
-    function: 'Chef',
+    function: 't.reference.function.chef',
     name: 'Bart Gils',
     phoneNumber: '0479 / 51 42 19',
     work: 'De Koekoek',
@@ -28,7 +28,7 @@ const horecaReferences: Reference[] = [
   },
   {
     uuid: '00be0fc6-c1b7-48b1-a638-e7f57935b1b6',
-    function: 'Chef',
+    function: 't.reference.function.chef',
     name: 'Ivan Menten',
     phoneNumber: '0478 / 74 28 56',
     work: 'De Farmasie',
@@ -40,7 +40,7 @@ const horecaReferences: Reference[] = [
   },
   {
     uuid: '11246932-5ca3-4fb2-bdb2-b5b1791a014e',
-    function: 'Chef',
+    function: 't.reference.function.chef',
     name: 'Vicky Geunes',
     phoneNumber: '03 / 283 40 40',
     work: "'t Zilte",
@@ -52,7 +52,7 @@ const horecaReferences: Reference[] = [
   },
   {
     uuid: 'b8473bfc-b181-4643-ab2e-9248048a7013',
-    function: 'Chef',
+    function: 't.reference.function.chef',
     name: 'Jean Pierre Bruneau',
     phoneNumber: '02 / 421 70 70',
     work: 'Bruneau',
@@ -64,7 +64,7 @@ const horecaReferences: Reference[] = [
   },
   {
     uuid: '4511689f-d906-4eb7-8b8e-f3432e34bb4e',
-    function: 'Chef',
+    function: 't.reference.function.chef',
     name: 'Guy Lefevere',
     phoneNumber: '0478 / 25 83 31',
     work: 'La Bergerie',
@@ -79,7 +79,7 @@ const horecaReferences: Reference[] = [
 const itReferences: Reference[] = [
   {
     uuid: '0df7efef-d5f3-4e30-9555-8f28bf43dd66',
-    function: 'People Manager & Lead Front-End Developer',
+    function: 't.reference.function.people-manager-lead-front-end-developer',
     name: 'Kevin Jannis',
     work: 'Sopra Steria',
     workCategory: 'IT',
@@ -89,7 +89,7 @@ const itReferences: Reference[] = [
   },
   {
     uuid: 'c58d04fa-bae1-4e29-a99d-cfceeca2c781',
-    function: 'Digital Factory Lead',
+    function: 't.reference.function.digital-factory-lead',
     name: 'Marijke Boye',
     work: 'Sopra Steria',
     workCategory: 'IT',
@@ -99,7 +99,7 @@ const itReferences: Reference[] = [
   },
   {
     uuid: '63247627-fdd8-4757-a870-920fa651cf64',
-    function: 'Business Unit Manager',
+    function: 't.reference.function.business-unit-manager',
     name: 'Bart Headens',
     work: 'Sopra Steria',
     workCategory: 'IT',
@@ -109,7 +109,7 @@ const itReferences: Reference[] = [
   },
   {
     uuid: '3bdae9c4-14dd-43fc-a4f4-1dd18fee9dbf',
-    function: 'Lead Front-End Developer',
+    function: 't.reference.function.lead-front-end-developer',
     name: 'Roel Frison',
     phoneNumber: '0496 / 98 76 86',
     work: 'Sopra Steria',
@@ -122,7 +122,7 @@ const itReferences: Reference[] = [
   },
   {
     uuid: 'ff8d0984-e01a-47f6-97e6-1c150744b8c5',
-    function: 'Lead Back-End Developer',
+    function: 't.reference.function.lead-back-end-developer',
     name: 'Lowie Cuypers',
     work: 'Sopra Steria',
     client: 'Ravago',
@@ -134,7 +134,7 @@ const itReferences: Reference[] = [
   },
   {
     uuid: 'cbe15574-e306-470c-a456-821b70fc733a',
-    function: 'QA Lead',
+    function: 't.reference.function.qa-lead',
     name: 'Bettina Verheyen',
     work: 'Sopra Steria',
     client: 'Ravago',
@@ -146,7 +146,7 @@ const itReferences: Reference[] = [
   },
   {
     uuid: '852dac39-6bf6-4eab-91e4-29e995259071',
-    function: 'Lead Full-Stack Developer',
+    function: 't.reference.function.lead-full-stack-developer',
     name: 'Ewald Van Der Veken',
     phoneNumber: '0471 / 10 38 21',
     work: 'Innomedio',
@@ -158,7 +158,7 @@ const itReferences: Reference[] = [
   },
   {
     uuid: '9f303fa0-b394-4e99-8949-b2556eaa1700',
-    function: 'Operations & Project Manager',
+    function: 't.reference.function.operations-project-manager',
     name: 'Karen Vermeire',
     work: 'Innomedio',
     workCategory: 'IT',
@@ -169,7 +169,7 @@ const itReferences: Reference[] = [
   },
   {
     uuid: '3a5fd543-81d1-4bfd-928b-11bd99720175',
-    function: 'Lead Full-Stack Developer',
+    function: 't.reference.function.lead-full-stack-developer',
     name: 'Tom Bevers',
     phoneNumber: '0473 / 74 20 06',
     work: 'PHPro',
@@ -181,7 +181,7 @@ const itReferences: Reference[] = [
   },
   {
     uuid: '1a634b2e-8a2d-4cea-a95a-daade4bccd48',
-    function: 'Team Lead & Lead Front-End Developer',
+    function: 't.reference.function.team-lead-lead-front-end-developer',
     name: 'Stef Liekens',
     work: 'PHPro',
     workCategory: 'IT',

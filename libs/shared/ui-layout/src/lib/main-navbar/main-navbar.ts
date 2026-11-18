@@ -1,5 +1,4 @@
 import { Component, input } from '@angular/core';
-import { UpperCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
@@ -28,7 +27,6 @@ import { activeNavItem } from '../internal/active-nav-item';
     MatIcon,
     MatTooltip,
     TranslatePipe,
-    UpperCasePipe,
   ],
   templateUrl: './main-navbar.html',
   styleUrl: './main-navbar.scss',

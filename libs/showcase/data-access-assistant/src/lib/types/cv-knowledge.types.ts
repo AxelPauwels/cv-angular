@@ -45,6 +45,7 @@ export interface AssistantExperience {
 export interface AssistantReference {
   id: string;
   name: string;
+  /** Their role (translation key) */
   function: string;
   /** The employer the reference worked at */
   employer: string;

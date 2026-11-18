@@ -320,7 +320,6 @@
         "material": "Interface-iconen (menu, sluiten, versturen, …) van Google Fonts. Een buildscript zoekt de iconen die de code gebruikt en vraagt alleen die op: een subset van enkele KiB in plaats van het volledige font.",
         "sample": "Enkele Icomoon-iconen"
       },
-      "intro": "De afspraken waarop elke pagina gebouwd is: hoe de globale stijlen gelaagd zijn, waar de iconen vandaan komen en hoe data de componenten bereikt.",
       "itcss": {
         "addition": "Toevoeging van SEM&BIO",
         "axis": {
@@ -369,8 +368,7 @@
       },
       "state": {
         "devtools": {
-          "alt": "Tijdelijke afbeelding voor een screenshot van de Redux DevTools-browserextensie",
-          "caption": "De Redux DevTools-browserextensie kan een signal store volgen via <code>withDevtools</code> van ngrx-toolkit. Screenshot volgt binnenkort."
+          "alt": "Tijdelijke afbeelding voor een screenshot van de Redux DevTools-browserextensie"
         },
         "intro": "Elke data-access-library heeft een <strong>NgRx Signal Store</strong>: het Redux-idee van één alleen-lezen bron van waarheid, gebouwd op Angular-signals in plaats van actions en reducers. Componenten halen zelf nooit data op.",
         "step": {
@@ -411,8 +409,11 @@
       "english": "Engels",
       "french": "Frans",
       "german": "Duits",
+      "greek": "Grieks",
+      "hindi": "Hindi",
       "italian": "Italiaans",
       "native": "Moedertaal",
+      "norwegian": "Noors",
       "proficiency": {
         "basic": "basis",
         "excellent": "Uitstekend",
@@ -546,6 +547,20 @@
       "profile": "Senior front-end developer met 8 jaar ervaring in enterprise webapplicaties, waarvan ruim 5 jaar volledig gespecialiseerd in Angular. Ik ontwerp en bouw bedrijfskritische applicaties met een sterke focus op onderhoudbare architectuur, clean code en schaalbaarheid op lange termijn. Pragmatisch, kwaliteitsgericht en een echte teamspeler binnen Agile-teams. Ik zet moderne werkwijzen en AI-ondersteunde tooling doelgericht in om sneller op te leveren zonder in te boeten aan kwaliteit."
     },
     "present": "heden",
+    "reference": {
+      "function": {
+        "business-unit-manager": "Business unit manager",
+        "chef": "Chef-kok",
+        "digital-factory-lead": "Digital Factory Lead",
+        "lead-back-end-developer": "Lead back-end developer",
+        "lead-front-end-developer": "Lead front-end developer",
+        "lead-full-stack-developer": "Lead full-stack developer",
+        "operations-project-manager": "Operations & projectmanager",
+        "people-manager-lead-front-end-developer": "People manager & lead front-end developer",
+        "qa-lead": "QA lead",
+        "team-lead-lead-front-end-developer": "Teamleader & lead front-end developer"
+      }
+    },
     "skill": {
       "other": {
         "testing": "Unit-, integratie- & E2E-testen"

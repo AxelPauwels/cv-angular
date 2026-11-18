@@ -3,7 +3,7 @@
     "accessibility": {
       "high-contrast": "Mayor contraste",
       "reduce-motion": "Reducir el movimiento",
-      "switch": "Ajustes de accesibilidad",
+      "switch": "Accesibilidad",
       "text-size": "Tamaño del texto",
       "text-spacing": "Espaciado de texto más amplio",
       "title": "Accesibilidad"
@@ -12,7 +12,7 @@
       "assistant": "Asistente",
       "error": "Algo salió mal al responder. Inténtalo de nuevo.",
       "hint": "Intro para enviar, Mayús+Intro para una nueva línea.",
-      "intro": "No dudes en plantear cualquier pregunta que puedas tener sobre mí, mi trabajo, sus habilidades o sus referencias.",
+      "intro": "Pregunta lo que quieras sobre mí, mi trabajo, mis habilidades o mis referencias.",
       "limit-reached": "Has alcanzado el número máximo de preguntas para esta visita. Recarga la página para empezar de nuevo.",
       "log-label": "Conversación",
       "not-configured": "El asistente IA está desactivado en esta versión del sitio.",
@@ -111,7 +111,7 @@
     "client": "Cliente",
     "color-scheme": {
       "dark": "Modo oscuro",
-      "light": "Modo claro y oscuro"
+      "light": "Modo claro"
     },
     "common": {
       "cv": "CV",
@@ -120,7 +120,7 @@
       "new-tab": "(nueva pestaña)",
       "new-tab-url": "({url}, nueva pestaña)",
       "ok": "OK",
-      "reset": "Restablecer el valor predeterminado",
+      "reset": "Restablecer",
       "technologies": "Tecnologías"
     },
     "competence": {
@@ -141,7 +141,7 @@
         "title": "Colaboración"
       },
       "front-end-architecture": {
-        "description": "Monorepos Nx, librerías reutilizables y estado escalable con RxJS y Signals.",
+        "description": "Monorepos Nx, bibliotecas reutilizables y estado escalable con RxJS y Signals.",
         "title": "Arquitectura front-end"
       }
     },
@@ -240,7 +240,7 @@
         },
         "ordina": {
           "programme": "Programa intensivo impartido por consultores sénior, que combina teoría y práctica en front-end, back-end y cloud – incluidos Angular, React, RxJS, NestJS, TDD, testing, DevOps y CI, UX/UI, design systems, Git, Agile y más.",
-          "projects": "Aplicación de aprendizaje electrónico"
+          "projects": "Aplicación de cursos y eLearning"
         },
         "phpro": {
           "agile": "Entregas dentro de equipos Agile/Scrum, en estrecho contacto con los clientes.",
@@ -268,20 +268,20 @@
         "cardijn": "Sous chef",
         "domaine-des-hautes-fagnes": "Becario de cocina",
         "farmasie": "Sous Chef / Pastelero",
-        "innomedio": "Desarrollador de soporte PHP / Front-End",
+        "innomedio": "Soporte PHP / Desarrollador front-end",
         "koekoek": "Sous Chef / Chef",
         "koekoek-2": "Chef",
         "nieuwen-buiten": "Becario de cocina",
         "ordina": "Desarrollador front-end",
-        "phpro": "Desarrollador front-end de PHP",
-        "ravago": "Desarrollador angular senior",
+        "phpro": "Desarrollador front-end PHP",
+        "ravago": "Desarrollador Angular sénior",
         "residentie": "Becario de servicio",
         "zilte": "Chef de part / Pastelero"
       }
     },
     "feature-toggles": {
       "count": "{on}/{total} ACTIVADOS",
-      "hidden-notice": "La página características ya no aparece en el menú. Puedes abrirla en /showcase/feature-toggles haciendo clic en «Axel Pauwels» en el pie de página.",
+      "hidden-notice": "La página de feature toggles está oculta en el menú. Aún puedes abrirla en /showcase/feature-toggles haciendo clic en «Axel Pauwels» en el pie de página.",
       "linked": {
         "off": "{item} también desactivado.",
         "on": "{item} también activado."
@@ -320,7 +320,6 @@
         "material": "Iconos de interfaz (menú, cerrar, enviar, …) de Google Fonts. Un script de build encuentra los iconos que usa el código y solo pide esos: un subconjunto de pocos KiB en lugar de la fuente completa.",
         "sample": "Algunos glifos de Icomoon"
       },
-      "intro": "Las convenciones sobre las que se construye cada página: cómo se organizan en capas los estilos globales, de dónde vienen los iconos y cómo llegan los datos a los componentes.",
       "itcss": {
         "addition": "Añadido de SEM&BIO",
         "axis": {
@@ -369,8 +368,7 @@
       },
       "state": {
         "devtools": {
-          "alt": "Imagen provisional para una captura de la extensión de navegador Redux DevTools",
-          "caption": "La extensión de navegador Redux DevTools puede seguir un signal store mediante <code>withDevtools</code> de ngrx-toolkit. Captura próximamente."
+          "alt": "Imagen provisional para una captura de la extensión de navegador Redux DevTools"
         },
         "intro": "Cada biblioteca data-access tiene un <strong>NgRx Signal Store</strong>: la idea de Redux de una única fuente de verdad de solo lectura, construida sobre signals de Angular en lugar de actions y reducers. Los componentes nunca cargan datos por sí mismos.",
         "step": {
@@ -389,39 +387,42 @@
       "education": "Formación",
       "end-to-end-tests": "Pruebas de extremo a extremo",
       "experience": "Experiencia",
-      "feature-toggles": "Características",
+      "feature-toggles": "Feature toggles",
       "foundations": "Fundamentos del frontend",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
       "micro-frontends": "Micro-frontends",
       "personal": "personal",
       "project-graph": "Grafo de proyectos",
-      "references": "referencias",
+      "references": "Referencias",
       "skills": "Habilidades",
-      "versions": "versiones"
+      "versions": "Versiones"
     },
     "home": {
       "about-me": "Más sobre mí",
       "experience": "Mi experiencia",
       "portrait": "Retrato de {name}"
     },
-    "internship": "Pasantía",
+    "internship": "Prácticas",
     "language": {
-      "dutch": "Holandés",
+      "dutch": "Neerlandés",
       "english": "Inglés",
       "french": "Francés",
       "german": "Alemán",
+      "greek": "Griego",
+      "hindi": "Hindi",
       "italian": "Italiano",
       "native": "Lengua materna",
+      "norwegian": "Noruego",
       "proficiency": {
-        "basic": "básicos",
+        "basic": "Básico",
         "excellent": "Excelente",
         "fair": "Intermedio",
         "good": "Bueno",
         "very-good": "Muy bueno"
       },
       "spanish": "Español",
-      "switch": "Selecciona un idioma"
+      "switch": "Idioma"
     },
     "lighthouse": {
       "audit": {
@@ -483,16 +484,16 @@
       "education": "Formación",
       "end-to-end-tests": "Pruebas de extremo a extremo",
       "experience": "Experiencia",
-      "feature-toggles": "Características",
+      "feature-toggles": "Feature toggles",
       "foundations": "Fundamentos",
       "graphql-docs": "graphql docs",
-      "home": "Hogar",
+      "home": "Inicio",
       "light": "Claro",
       "lighthouse": "Lighthouse",
       "main-navigation": "Navegación principal",
       "menu": "Menú",
       "menu-loading": "Cargando el menú…",
-      "micro-frontends": "Microfrontends",
+      "micro-frontends": "Micro-frontends",
       "personal": "Personal",
       "project-graph": "Grafo de proyectos",
       "references": "Referencias",
@@ -532,7 +533,7 @@
         }
       },
       "hobby": {
-        "binge-watching": "Binche Watching",
+        "binge-watching": "Maratones de series",
         "board-games": "Juegos de mesa",
         "comment": {
           "vlaamse-schietsport-koepel": "Vlaamse SchietsportKoepel",
@@ -541,26 +542,40 @@
         "member-of-vsk": "Miembro de VSK",
         "member-of-wca": "Miembro de WCA",
         "mtg": "Magic The Gathering (TCG)",
-        "rubik-s-cube-competitions": "Rubik’s Cubo Competiciones"
+        "rubik-s-cube-competitions": "Competiciones de cubo de Rubik"
       },
       "profile": "Desarrollador front-end sénior con 8 años de experiencia creando aplicaciones web empresariales, de los cuales 5 años dedicados por completo a Angular. Diseño y evoluciono aplicaciones críticas para el negocio con un fuerte enfoque en una arquitectura mantenible, código limpio y escalabilidad a largo plazo. Pragmático, orientado a la calidad y con un marcado espíritu de equipo en entornos Agile. Utilizo activamente prácticas modernas y herramientas asistidas por IA para entregar más rápido sin comprometer la calidad."
     },
     "present": "presente",
+    "reference": {
+      "function": {
+        "business-unit-manager": "Responsable de unidad de negocio",
+        "chef": "Chef",
+        "digital-factory-lead": "Responsable de Digital Factory",
+        "lead-back-end-developer": "Desarrollador back-end principal",
+        "lead-front-end-developer": "Desarrollador front-end principal",
+        "lead-full-stack-developer": "Desarrollador full-stack principal",
+        "operations-project-manager": "Responsable de operaciones y proyectos",
+        "people-manager-lead-front-end-developer": "People manager y desarrollador front-end principal",
+        "qa-lead": "Responsable de QA",
+        "team-lead-lead-front-end-developer": "Jefe de equipo y desarrollador front-end principal"
+      }
+    },
     "skill": {
       "other": {
         "testing": "Testing unitario, de integración y E2E"
       }
     },
-    "spoken": "Hablado",
+    "spoken": "Expresión oral",
     "subheading": {
       "education": {
         "certificates": "Certificados",
-        "certificates.description": "Preuve de curiosité et de dévouement",
+        "certificates.description": "Prueba de curiosidad y dedicación",
         "training-and-conferences": "Formación & conferencias",
         "training-and-conferences.description": "Siempre aprendiendo, siempre curioso"
       },
       "feature-toggles": "Un gran poder conlleva una gran configuración",
-      "horeca": "Hospitalidad",
+      "horeca": "Hostelería",
       "it": "TI",
       "personal": {
         "about-me": "Sobre mí",
@@ -599,25 +614,25 @@
       }
     },
     "theme": {
-      "blackberry": "Pizarra",
+      "blackberry": "Mora",
       "bronze": "Bronce",
-      "earth": "Bosque",
+      "earth": "Tierra",
       "fire": "Fuego",
       "gold": "Oro",
-      "grape": "Lavanda",
-      "honey": "Carmesí",
+      "grape": "Uva",
+      "honey": "Miel",
       "kiwi": "Kiwi",
-      "peach": "Rosa",
-      "silver": "Ciruela",
-      "switch": "Selecciona un tema",
-      "tangerine": "Arena",
-      "water": "Océano",
+      "peach": "Melocotón",
+      "silver": "Plata",
+      "switch": "Tema",
+      "tangerine": "Mandarina",
+      "water": "Agua",
       "wind": "Viento"
     },
     "tour": {
       "back": "Atrás",
       "counter": "{current} / {total}",
-      "exit": "Detener",
+      "exit": "Salir del recorrido",
       "finish": "Terminar",
       "loading": "Cargando el recorrido…",
       "next": "Siguiente",
@@ -670,7 +685,7 @@
         },
         "languages": {
           "label": "Idiomas",
-          "text": "La web está disponible en inglés, neerlandés, francés y español. Elige tu idioma aquí.",
+          "text": "La web está disponible en inglés, neerlandés, francés, español, noruego, griego e hindi. Elige tu idioma aquí.",
           "title": "Idiomas"
         },
         "settings": {
@@ -727,6 +742,6 @@
       }
     },
     "website": "sitio web",
-    "written": "Escrito"
+    "written": "Expresión escrita"
   }
 }

@@ -250,6 +250,7 @@ export type Reference = {
    * Sopra Steria; empty when the reference worked at the employer itself
    */
   client?: Maybe<Scalars['String']['output']>;
+  /** Their role (translation key) */
   function: Scalars['String']['output'];
   name: Scalars['String']['output'];
   phoneNumber?: Maybe<Scalars['String']['output']>;

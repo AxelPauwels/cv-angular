@@ -320,7 +320,6 @@
         "material": "Icônes d’interface (menu, fermer, envoyer, …) de Google Fonts. Un script de build repère les icônes utilisées dans le code et ne demande que celles-ci : un sous-ensemble de quelques Kio au lieu de la police complète.",
         "sample": "Quelques glyphes Icomoon"
       },
-      "intro": "Les conventions sur lesquelles repose chaque page : comment les styles globaux sont organisés en couches, d’où viennent les icônes et comment les données arrivent aux composants.",
       "itcss": {
         "addition": "Ajout de SEM&BIO",
         "axis": {
@@ -369,8 +368,7 @@
       },
       "state": {
         "devtools": {
-          "alt": "Image provisoire pour une capture d’écran de l’extension de navigateur Redux DevTools",
-          "caption": "L’extension de navigateur Redux DevTools peut suivre un signal store grâce à <code>withDevtools</code> de ngrx-toolkit. Capture d’écran à venir."
+          "alt": "Image provisoire pour une capture d’écran de l’extension de navigateur Redux DevTools"
         },
         "intro": "Chaque bibliothèque data-access possède un <strong>NgRx Signal Store</strong> : l’idée de Redux d’une source de vérité unique en lecture seule, construite sur les signals d’Angular au lieu d’actions et de reducers. Les composants ne récupèrent jamais les données eux-mêmes.",
         "step": {
@@ -411,8 +409,11 @@
       "english": "Anglais",
       "french": "Français",
       "german": "Allemand",
+      "greek": "Grec",
+      "hindi": "Hindi",
       "italian": "Italien",
       "native": "Langue maternelle",
+      "norwegian": "Norvégien",
       "proficiency": {
         "basic": "bases",
         "excellent": "Excellent",
@@ -546,6 +547,20 @@
       "profile": "Développeur front-end senior avec 8 ans d’expérience dans la création d’applications web d’entreprise, dont 5 ans entièrement consacrés à Angular. Je conçois et fais évoluer des applications critiques en mettant l’accent sur une architecture maintenable, un code propre et l’évolutivité à long terme. Pragmatique, soucieux de la qualité et véritable esprit d’équipe au sein d’équipes Agile. J’utilise activement des pratiques modernes et des outils assistés par l’IA pour livrer plus vite sans compromettre la qualité."
     },
     "present": "présent",
+    "reference": {
+      "function": {
+        "business-unit-manager": "Responsable de business unit",
+        "chef": "Chef de cuisine",
+        "digital-factory-lead": "Responsable Digital Factory",
+        "lead-back-end-developer": "Développeur back-end principal",
+        "lead-front-end-developer": "Développeur front-end principal",
+        "lead-full-stack-developer": "Développeur full-stack principal",
+        "operations-project-manager": "Responsable des opérations et des projets",
+        "people-manager-lead-front-end-developer": "People manager et développeur front-end principal",
+        "qa-lead": "Responsable QA",
+        "team-lead-lead-front-end-developer": "Chef d’équipe et développeur front-end principal"
+      }
+    },
     "skill": {
       "other": {
         "testing": "Tests unitaires, d’intégration & E2E"

@@ -368,8 +368,7 @@
       },
       "state": {
         "devtools": {
-          "alt": "Placeholder for a screenshot of the Redux DevTools browser extension",
-          "caption": "The Redux DevTools browser extension can follow a signal store through <code>withDevtools</code> from ngrx-toolkit. Screenshot coming soon."
+          "alt": "Placeholder for a screenshot of the Redux DevTools browser extension"
         },
         "intro": "Every data-access library has an <strong>NgRx Signal Store</strong>: the Redux idea of one read-only source of truth, built on Angular signals instead of actions and reducers. Components never fetch data themselves.",
         "step": {
@@ -410,8 +409,11 @@
       "english": "English",
       "french": "French",
       "german": "German",
+      "greek": "Greek",
+      "hindi": "Hindi",
       "italian": "Italian",
       "native": "Native",
+      "norwegian": "Norwegian",
       "proficiency": {
         "basic": "Basic",
         "excellent": "Excellent",
@@ -545,6 +547,20 @@
       "profile": "Senior front-end developer with 8 years of experience building enterprise web applications, of which 5 years fully dedicated to Angular. I design and evolve business-critical applications with a strong focus on maintainable architecture, clean code and long-term scalability. Pragmatic, quality-driven and a natural team player in Agile teams. I actively use modern practices and AI-assisted tooling to deliver faster without compromising on quality."
     },
     "present": "present",
+    "reference": {
+      "function": {
+        "business-unit-manager": "Business Unit Manager",
+        "chef": "Chef",
+        "digital-factory-lead": "Digital Factory Lead",
+        "lead-back-end-developer": "Lead Back-End Developer",
+        "lead-front-end-developer": "Lead Front-End Developer",
+        "lead-full-stack-developer": "Lead Full-Stack Developer",
+        "operations-project-manager": "Operations & Project Manager",
+        "people-manager-lead-front-end-developer": "People Manager & Lead Front-End Developer",
+        "qa-lead": "QA Lead",
+        "team-lead-lead-front-end-developer": "Team Lead & Lead Front-End Developer"
+      }
+    },
     "skill": {
       "other": {
         "testing": "Unit, integration & E2E testing"

@@ -30,8 +30,8 @@ test.describe('ds-main-navbar', () => {
       'true'
     );
     await expect(tab(page, 'CV')).toHaveAttribute('href', '/cv');
-    await expect(tab(page, 'TECHNICAL')).toHaveAttribute('href', '/technical');
-    await expect(tab(page, 'SHOWCASE')).toHaveAttribute('href', '/showcase');
+    await expect(tab(page, 'Technical')).toHaveAttribute('href', '/technical');
+    await expect(tab(page, 'Showcase')).toHaveAttribute('href', '/showcase');
   });
 
   test('selects the tab of the current domain', async ({ page }) => {
@@ -39,7 +39,7 @@ test.describe('ds-main-navbar', () => {
     const cv = tab(page, 'CV');
 
     // Act
-    const showcase = tab(page, 'SHOWCASE');
+    const showcase = tab(page, 'Showcase');
 
     // Assert
     await expect(cv).toHaveAttribute('aria-selected', 'true');
@@ -59,7 +59,7 @@ test.describe('ds-main-navbar', () => {
 
   test('navigates to a domain and selects its tab', async ({ page }) => {
     // Arrange
-    const showcase = tab(page, 'SHOWCASE');
+    const showcase = tab(page, 'Showcase');
 
     // Act
     await showcase.click();
@@ -83,7 +83,7 @@ test.describe('ds-main-navbar', () => {
 
   test('follows a tab with the keyboard', async ({ page }) => {
     // Arrange
-    const technical = tab(page, 'TECHNICAL');
+    const technical = tab(page, 'Technical');
 
     // Act
     await technical.focus();

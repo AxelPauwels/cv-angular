@@ -12,5 +12,6 @@ export interface Reference {
   client?: string;
   workCategory: ExperienceCategory;
   workCategoryPeriod: Period;
+  /** Their role (translation key) */
   function: string;
 }
