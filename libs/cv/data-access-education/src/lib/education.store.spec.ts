@@ -45,7 +45,7 @@ describe('EducationStore', () => {
 
     // Assert
     // a page opened later gets the same store, already loaded
-    expect(TestBed.inject(EducationStore).isLoading()).toBe(true);
+    expect(TestBed.inject(EducationStore).isLoading()).toBe(false);
   });
 
   it('loads again on reload, keeping the data meanwhile', async () => {
