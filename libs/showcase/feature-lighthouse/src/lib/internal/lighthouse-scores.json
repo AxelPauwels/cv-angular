@@ -46,6 +46,12 @@
       "best-practices": 100,
       "seo": 100
     },
+    "/technical/foundations": {
+      "performance": 91,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
     "/technical/project-graph": {
       "performance": 98,
       "accessibility": 100,
