@@ -41,7 +41,11 @@ jobs:
       - run: npx nx format:check
       # Fails when an icon is missing from the subset Material Symbols font in index.html
       - run: npx nx run cv:material-symbols
-      - run: npx nx affected -t lint test build typecheck --configuration=ci
+      # Pushes to main and develop run every project (unchanged ones come from the
+      # cache) so Nx Cloud holds a result for each one and local runs after a pull
+      # get remote hits; local tokens are read-only, so only CI fills the cache.
+      # Pull requests and release branches only run what changed.
+      - run: npx nx ${{ github.event_name == 'push' && (github.ref_name == 'main' || github.ref_name == 'develop') && 'run-many' || 'affected' }} -t lint test build typecheck --configuration=ci
       # Without --configuration: the same task as `nx run cv-e2e:e2e` in
       # build-production.sh, so the release and deploy builds reuse this result
       # from Nx Cloud instead of running every test again
