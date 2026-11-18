@@ -195,7 +195,6 @@ const itExperiences: Experience[] = [
     project: 't.experience.project.ravago',
     jobDescriptions: [
       't.experience.job-description.ravago.wms',
-      't.experience.job-description.ravago.platform',
       't.experience.job-description.ravago.workflows',
       't.experience.job-description.ravago.projects',
     ],
@@ -264,7 +263,6 @@ const itExperiences: Experience[] = [
     jobDescriptions: [
       't.experience.job-description.innomedio.websites',
       't.experience.job-description.innomedio.support',
-      't.experience.job-description.innomedio.projects',
     ],
     stack: [
       'PHP',

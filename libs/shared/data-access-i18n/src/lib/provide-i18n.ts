@@ -20,6 +20,9 @@ const TRANSLATIONS: Record<LanguageCode, () => Promise<TreeTranslationsData>> =
     nl: () => import('../i18n/nl.json').then((m) => m.default),
     fr: () => import('../i18n/fr.json').then((m) => m.default),
     es: () => import('../i18n/es.json').then((m) => m.default),
+    nb: () => import('../i18n/nb.json').then((m) => m.default),
+    el: () => import('../i18n/el.json').then((m) => m.default),
+    hi: () => import('../i18n/hi.json').then((m) => m.default),
   };
 
 /** Tolgee credentials for in-context editing; only used in dev builds */

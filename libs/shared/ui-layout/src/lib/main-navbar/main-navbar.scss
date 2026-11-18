@@ -59,6 +59,13 @@
     @include tools.nav-label('.main-navbar__label');
   }
 
+  // Uppercased in CSS, not in code: the browser then follows the language's
+  // rules (Greek drops its accents in capitals) and screen readers get the
+  // normal text instead of spelling out capitals
+  &__label {
+    text-transform: uppercase;
+  }
+
   &__start {
     display: none;
 

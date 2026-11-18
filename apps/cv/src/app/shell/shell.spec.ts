@@ -45,7 +45,7 @@ describe('Shell', () => {
     await fixture.whenStable();
 
     // Assert
-    expect(mainMenu(element)).toEqual(['Home', 'CV', 'TECHNICAL']);
+    expect(mainMenu(element)).toEqual(['Home', 'CV', 'Technical']);
     expect(element.querySelector('ds-download-menu')).toBeNull();
     expect(element.querySelector('ds-language-switcher')).toBeNull();
     expect(element.querySelector('ds-theme-switcher')).toBeTruthy();
@@ -74,7 +74,7 @@ describe('Shell', () => {
     await fixture.whenStable();
 
     // Assert
-    expect(mainMenu(element)).toEqual(['Home', 'CV', 'SHOWCASE']);
+    expect(mainMenu(element)).toEqual(['Home', 'CV', 'Showcase']);
   });
 
   it('hides the cv main menu item once all cv pages are switched off, but keeps home', async () => {
@@ -98,7 +98,7 @@ describe('Shell', () => {
     await fixture.whenStable();
 
     // Assert
-    expect(mainMenu(element)).toEqual(['Home', 'TECHNICAL', 'SHOWCASE']);
+    expect(mainMenu(element)).toEqual(['Home', 'Technical', 'Showcase']);
   });
 
   it('shows home as an icon tab, named and linked to the home page', async () => {
@@ -211,7 +211,7 @@ describe('Shell', () => {
     for (const landmark of ['header', 'main', 'footer']) {
       expect(element.querySelector(landmark)).toBeTruthy();
     }
-    expect(mainMenu(element)).toEqual(['Home', 'CV', 'TECHNICAL', 'SHOWCASE']);
+    expect(mainMenu(element)).toEqual(['Home', 'CV', 'Technical', 'Showcase']);
     expect(element.querySelector('main router-outlet')).toBeTruthy();
   });
 

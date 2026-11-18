@@ -80,6 +80,7 @@ describe('FeatureToggleService', () => {
     service.change('showcase-feature-toggles', false);
     service.change('showcase-lighthouse', false);
     service.change('showcase-ai-assistant', false);
+    service.change('showcase-service-status', false);
 
     // Act
     service.change('showcase-micro-frontends', false);
@@ -95,6 +96,7 @@ describe('FeatureToggleService', () => {
     service.change('showcase-feature-toggles', false);
     service.change('showcase-lighthouse', false);
     service.change('showcase-ai-assistant', false);
+    service.change('showcase-service-status', false);
     service.change('showcase-micro-frontends', false);
 
     // Act
@@ -132,6 +134,7 @@ describe('FeatureToggleService', () => {
     service.change('showcase-micro-frontends', false);
     service.change('showcase-lighthouse', false);
     service.change('showcase-ai-assistant', false);
+    service.change('showcase-service-status', false);
     service.change('showcase-feature-toggles', false);
 
     // Act
@@ -166,6 +169,7 @@ describe('FeatureToggleService', () => {
         'showcase-micro-frontends': false,
         'showcase-lighthouse': false,
         'showcase-ai-assistant': false,
+        'showcase-service-status': false,
         'showcase-feature-toggles': false,
       })
     );

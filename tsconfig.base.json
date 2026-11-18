@@ -115,6 +115,12 @@
       ],
       "@cv/technical-feature-foundations": [
         "./libs/technical/feature-foundations/src/index.ts"
+      ],
+      "@cv/showcase-data-access-service-status": [
+        "./libs/showcase/data-access-service-status/src/index.ts"
+      ],
+      "@cv/showcase-feature-service-status": [
+        "./libs/showcase/feature-service-status/src/index.ts"
       ]
     }
   },

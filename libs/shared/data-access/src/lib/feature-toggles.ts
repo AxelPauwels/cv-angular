@@ -120,6 +120,12 @@ export const FEATURE_TOGGLES = [
     'main-menu-showcase'
   ),
   menuItem(
+    'showcase-service-status',
+    'showcase-menu',
+    't.nav.service-status',
+    'main-menu-showcase'
+  ),
+  menuItem(
     'showcase-ai-assistant',
     'showcase-menu',
     't.nav.ai-assistant',

@@ -1,0 +1,52 @@
+{
+  "t": {
+    "heading": {
+      "service-status": "Estado de servicios"
+    },
+    "nav": {
+      "service-status": "Estado de servicios"
+    },
+    "service-status": {
+      "category": {
+        "api": "API",
+        "cdn": "CDN",
+        "link": "Enlaces",
+        "micro-frontend": "Micro-frontends"
+      },
+      "check": {
+        "reachability": "Comprueba si responde",
+        "status": "Comprueba el estado HTTP"
+      },
+      "checked-at": "Última comprobación a las {time}",
+      "column": {
+        "response-time": "Tiempo de respuesta",
+        "service": "Servicio",
+        "status": "Estado"
+      },
+      "health": {
+        "checking": "Comprobando…",
+        "degraded": "Advertencia",
+        "down": "Error",
+        "up": "Accesible",
+        "up-status": "OK (HTTP {status})"
+      },
+      "intro": "Todo lo que este sitio carga de otros lugares o enlaza: micro-frontends, CDN, API y enlaces de perfil. Tu navegador comprueba cada uno ahora mismo.",
+      "issue": {
+        "http": "HTTP {status}",
+        "slow": "Lento",
+        "timeout": "Sin respuesta a tiempo",
+        "unreachable": "Inaccesible"
+      },
+      "legend": "Estado",
+      "links-error": "No se pudieron cargar los enlaces de perfil, así que no se comprueban.",
+      "no-response-time": "Sin tiempo de respuesta",
+      "note": "La mayoría de los sitios no dejan que otros sitios lean sus respuestas. De esos solo se sabe si responden, no el código de estado: una página que falta sigue contando como accesible. Más de 2 segundos cuenta como advertencia, sin respuesta en 8 segundos como error.",
+      "recheck": "Comprobar de nuevo",
+      "response-time": "{ms} ms",
+      "summary": {
+        "checking": "Comprobando los servicios…",
+        "done": "Accesibles: {up} · Advertencias: {degraded} · Errores: {down}"
+      }
+    }
+  }
+}

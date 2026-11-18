@@ -30,7 +30,7 @@ describe('FoundationsOverview', () => {
     const sections = Array.from(element.querySelectorAll('section'));
 
     // Assert
-    expect(texts(element, 'h1')).toEqual(['Frontend foundations']);
+    expect(texts(element, 'h1')).toEqual(['Foundations']);
     expect(sections.map((s) => s.getAttribute('aria-labelledby'))).toEqual([
       'foundations-itcss-title',
       'foundations-icons-title',

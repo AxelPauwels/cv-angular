@@ -1,0 +1,52 @@
+{
+  "t": {
+    "heading": {
+      "service-status": "État des services"
+    },
+    "nav": {
+      "service-status": "État des services"
+    },
+    "service-status": {
+      "category": {
+        "api": "API",
+        "cdn": "CDN",
+        "link": "Liens",
+        "micro-frontend": "Micro-frontends"
+      },
+      "check": {
+        "reachability": "Vérifie s’il répond",
+        "status": "Vérifie le statut HTTP"
+      },
+      "checked-at": "Dernière vérification à {time}",
+      "column": {
+        "response-time": "Temps de réponse",
+        "service": "Service",
+        "status": "État"
+      },
+      "health": {
+        "checking": "Vérification…",
+        "degraded": "Avertissement",
+        "down": "Erreur",
+        "up": "Accessible",
+        "up-status": "OK (HTTP {status})"
+      },
+      "intro": "Tout ce que ce site charge ailleurs ou vers quoi il renvoie : micro-frontends, CDN, API et liens de profil. Votre navigateur vérifie chacun maintenant.",
+      "issue": {
+        "http": "HTTP {status}",
+        "slow": "Lent",
+        "timeout": "Pas de réponse à temps",
+        "unreachable": "Inaccessible"
+      },
+      "legend": "État",
+      "links-error": "Les liens de profil n’ont pas pu être chargés, ils ne sont donc pas vérifiés.",
+      "no-response-time": "Pas de temps de réponse",
+      "note": "La plupart des sites ne laissent pas d’autres sites lire leurs réponses. Pour ceux-là, on sait seulement s’ils répondent, pas le code de statut : une page manquante compte encore comme accessible. Plus de 2 secondes compte comme un avertissement, aucune réponse en 8 secondes comme une erreur.",
+      "recheck": "Vérifier à nouveau",
+      "response-time": "{ms} ms",
+      "summary": {
+        "checking": "Vérification des services…",
+        "done": "Accessibles : {up} · Avertissements : {degraded} · Erreurs : {down}"
+      }
+    }
+  }
+}

@@ -1,0 +1,783 @@
+{
+  "t": {
+    "accessibility": {
+      "high-contrast": "Høyere kontrast",
+      "reduce-motion": "Reduser bevegelse",
+      "switch": "Tilgjengelighet",
+      "text-size": "Tekststørrelse",
+      "text-spacing": "Større tekstavstand",
+      "title": "Tilgjengelighet"
+    },
+    "ai-assistant": {
+      "assistant": "Assistent",
+      "error": "Noe gikk galt under svaret. Prøv igjen.",
+      "hint": "Enter for å sende, Shift+Enter for ny linje.",
+      "intro": "Spør om hva som helst om meg, arbeidet mitt, ferdighetene mine eller referansene mine.",
+      "limit-reached": "Du har nådd maksimalt antall spørsmål for dette besøket. Last inn siden på nytt for å begynne på nytt.",
+      "log-label": "Samtale",
+      "not-configured": "AI-assistenten er slått av i denne versjonen av nettstedet.",
+      "question": "Spørsmålet ditt",
+      "quota-reached": "Assistenten har nådd den gratis grensen for i dag. Prøv igjen i morgen.",
+      "retry": "Prøv igjen",
+      "send": "Send",
+      "stop": "Stopp",
+      "suggestion": {
+        "languages": "Hvilke språk snakker Axel?",
+        "reference": "Kan du gi meg en referanse fra hans siste jobb?",
+        "stack": "Hvilke teknologier bruker Axel?"
+      },
+      "suggestions": "Prøv et av disse",
+      "thinking": "Assistenten svarer …",
+      "tool": {
+        "getEducation": "Slo opp utdanningen",
+        "getExperiences": "Slo opp arbeidserfaringen",
+        "getProfile": "Slo opp profilen",
+        "getReferences": "Slo opp referansene",
+        "getSkills": "Slo opp ferdighetene"
+      },
+      "you": "Du"
+    },
+    "architecture": {
+      "dependencies": {
+        "count": "{count} biblioteker",
+        "imports": "importerer",
+        "none": "ingen andre prosjekter"
+      },
+      "domains": {
+        "intro": "Arbeidsområdet er delt vertikalt: hvert <strong>domene</strong> (en del av appen) eier sine egne biblioteker, delt inn i <strong>lag</strong> etter hva de gjør. Mappene følger <code>libs/<domain>/<layer>-<name></code>; <code>libs/shared</code> inneholder det flere domener bruker. Generert fra Nx-prosjektgrafen."
+      },
+      "layer": {
+        "api": {
+          "text": "GraphQL-skjemaet og resolverne (<code>@cv/api</code>), som foreløpig svarer i nettleseren."
+        },
+        "data-access": {
+          "text": "En rot-signal store (NgRx Signals) som lastes én gang og deles i hele appen. Internt kjører en tjeneste en typet GraphQL-spørring, og en mapper gjør de genererte API-typene om til håndskrevne frontend-typer."
+        },
+        "feature": {
+          "text": "En side med egen rute. Injiserer en store og viser signalene dens."
+        },
+        "ui-util": {
+          "text": "Presentasjonskomponenter og enkle funksjoner eller typer, delt uten kjennskap til data.",
+          "title": "ui og util"
+        }
+      },
+      "loading": "Laster arkitekturen",
+      "matrix": {
+        "domain": "Domene",
+        "label": "Biblioteker per domene og lag"
+      },
+      "not-available": {
+        "text": "Arkitekturen genereres ved bygging og er ikke tilgjengelig her. Kjør <code>npx nx run technical-data-access-build-info:build-info</code>.",
+        "title": "Arkitekturen er ikke tilgjengelig"
+      },
+      "public-api": {
+        "entry": {
+          "text": "Hvert bibliotek eksporterer sitt offentlige API fra <code>src/index.ts</code>, importert som <code>@cv/<project></code>. Dype importer inn i et bibliotek er ikke tillatt.",
+          "title": "Ett inngangspunkt"
+        },
+        "lazy": {
+          "text": "Feature-biblioteker eksporterer siden sin ved navn, slik at en rute laster den lazy med <code>loadComponent: () => import('@cv/…').then((m) => m.Page)</code>.",
+          "title": "Lazy sider"
+        },
+        "private": {
+          "text": "Det barrelen ikke eksporterer, ligger i <code>src/lib/internal/</code>. En lint-regel hindrer en barrel i å eksportere noe derfra.",
+          "title": "Privat som standard"
+        }
+      },
+      "rules": {
+        "from": "Moduler merket",
+        "intro": "sjekker hver import mot disse reglene fra <code>sheriff.config.ts</code>, i ESLint og med <code>sheriff verify</code>. En modul trenger klarering for begge taggene sine: domenet og laget.",
+        "label": "Avhengighetsregler",
+        "none": "ingenting: den er ikke avhengig av andre moduler",
+        "to": "kan importere"
+      },
+      "stat": {
+        "apps": "Apper",
+        "domains": "Domener",
+        "layers": "Lag",
+        "libraries": "Biblioteker"
+      },
+      "tag": {
+        "every-domain": "alle domener",
+        "everything": "alt",
+        "root": "selve appen",
+        "same-domain": "samme domene"
+      }
+    },
+    "at": "hos",
+    "city": {
+      "paris": "Paris"
+    },
+    "client": "Kunde",
+    "color-scheme": {
+      "dark": "Mørk modus",
+      "light": "Lys modus"
+    },
+    "common": {
+      "cv": "CV",
+      "download-cv": "Last ned CV",
+      "loading": "Laster",
+      "new-tab": "(ny fane)",
+      "new-tab-url": "({url}, ny fane)",
+      "ok": "OK",
+      "reset": "Tilbakestill",
+      "technologies": "Teknologier"
+    },
+    "competence": {
+      "ai-assisted-development": {
+        "description": "GitHub Copilot og Cursor for å levere raskere og heve kvaliteten. Lærer for tiden spesifikasjonsdrevet utvikling.",
+        "title": "Moderne og AI-assistert utvikling"
+      },
+      "angular-enterprise": {
+        "description": "Store applikasjoner som støtter komplekse forretningsprosesser.",
+        "title": "Angular-utvikling for bedrifter"
+      },
+      "clean-code": {
+        "description": "Klare standarder, gjenbrukbart design og kode som varer.",
+        "title": "Ren, vedlikeholdbar kode"
+      },
+      "collaboration": {
+        "description": "Kunnskapsdeling og kontinuerlig forbedring i tverrfaglige team.",
+        "title": "Samarbeid"
+      },
+      "front-end-architecture": {
+        "description": "Nx-monorepoer, gjenbrukbare biblioteker og skalerbar tilstand med RxJS og Signals.",
+        "title": "Front-end-arkitektur"
+      }
+    },
+    "contact": {
+      "ai-assistant": "Spør AI-assistenten min",
+      "count": "{count} av {max} tegn",
+      "error": {
+        "email": {
+          "invalid": "Skriv inn en gyldig e-postadresse, for eksempel navn@eksempel.no.",
+          "required": "Skriv inn e-postadressen din."
+        },
+        "message": {
+          "max-length": "Bruk maksimalt {messageMax} tegn.",
+          "min-length": "Skriv minst {messageMin} tegn.",
+          "required": "Skriv inn en melding."
+        },
+        "name": {
+          "max-length": "Bruk maksimalt {nameMax} tegn.",
+          "required": "Skriv inn navnet ditt."
+        },
+        "send": "Meldingen din kunne ikke sendes. Prøv igjen senere, eller kontakt meg på LinkedIn.",
+        "subject": {
+          "max-length": "Bruk maksimalt {subjectMax} tegn.",
+          "required": "Skriv inn et emne."
+        }
+      },
+      "field": {
+        "email": "E-post",
+        "message": "Melding",
+        "name": "Navn",
+        "subject": "Emne"
+      },
+      "send": "Send",
+      "sending": "Sender meldingen din …",
+      "sent": "Takk! Meldingen din er sendt. Jeg svarer deg snart.",
+      "title": "Kontakt"
+    },
+    "country": {
+      "belgium": "Belgia"
+    },
+    "education": {
+      "bellouet-conseil": {
+        "degree": "Diplom i trukket sukker | Diplom i støpt og blåst sukker",
+        "specialization": "Trukket sukker, støpt sukker, blåst sukker"
+      },
+      "hotelschool": "Hotellskole",
+      "level": {
+        "extra": "Tilleggskurs",
+        "high-school": "Høyskole",
+        "secondary": "Videregående skole"
+      },
+      "school": {
+        "ter-duinen": {
+          "degree": "Vitnemål fra videregående opplæring"
+        }
+      },
+      "sint-jozef": {
+        "specialization": "Hotell TSO"
+      },
+      "ter-duinen": {
+        "specialization": "Hotell TSO"
+      },
+      "thomas-more": {
+        "degree": "Profesjonsbachelor i anvendt informatikk",
+        "specialization": "IT Factory Applications"
+      },
+      "training": {
+        "status": {
+          "COMPLETED": "fullført",
+          "ONGOING": "pågående",
+          "RECURRING": "årlig"
+        }
+      }
+    },
+    "embedded-page": {
+      "loading": "Laster rapporten",
+      "not-available": "Denne rapporten er ikke tilgjengelig her. Den genereres av produksjonsbygget (<code>npm run build:production</code>).",
+      "open-new-tab": "Åpne i ny fane"
+    },
+    "error": {
+      "load": {
+        "education": "Kunne ikke laste utdanning: {error}",
+        "experience": "Kunne ikke laste erfaring: {error}",
+        "personal-details": "Kunne ikke laste personopplysninger: {error}",
+        "references": "Kunne ikke laste referanser: {error}",
+        "skills": "Kunne ikke laste ferdigheter: {error}"
+      }
+    },
+    "experience": {
+      "job-description": {
+        "innomedio": {
+          "support": "Håndterte feilretting, telefonstøtte og supportsaksystemet, og styrte min egen planlegging.",
+          "technologies": "Teknologi: Vedlikehold og videreutvikling av det egenutviklede CMS-systemet i Symfony med Scss. Telefonstøtte for kunder med problemer eller utvidelser, og håndtering av supportsaksystemet i Teamleader. I tillegg GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ...",
+          "websites": "Bygde nye nettsteder og nettbutikker og utvidet skreddersydde CMS-plattformer"
+        },
+        "ordina": {
+          "programme": "Intensivt program undervist av seniorkonsulenter, som kombinerer teori og praksis innen front-end, back-end og sky – blant annet Angular, React, RxJS, NestJS, TDD, testing, DevOps og CI, UX/UI, designsystemer, Git, Agile og mer.",
+          "projects": "Kurs- og e-læringsapplikasjon"
+        },
+        "phpro": {
+          "agile": "Leverte i Agile/Scrum-team, i tett kontakt med kundene.",
+          "front-end": "Bygde gjenbrukbare, skalerbare front-end-løsninger for nettbutikker med en ITCSS-arkitektur i Sass, i tillegg til arbeid med React og Sulu.",
+          "magento": "Utviklet og tilpasset Magento 2-plattformer for netthandel (B2C/B2B)",
+          "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,..."
+        },
+        "ravago": {
+          "projects": "Warehouse Management System (WMS), senere WMS2. Både som skrivebordsapp for kontoret og mobilapp for håndholdte skannere på lagrene.",
+          "technologies": "Teknologi: Angular (Typescript/Scss) med Nx og UI-rammeverket Kendo. Videre Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise...",
+          "wms": "Designe, bygge og videreutvikle WMS-et: en forretningskritisk applikasjon for lager, produksjon og ordrehåndtering – på skrivebordet for kontoransatte, på mobil for lagerarbeidere med skannere.",
+          "workflows": "Forenkle komplekse arbeidsflyter og automatisere repetitive oppgaver; innførte og fremmer effektiv bruk av AI-assistert utvikling i teamet."
+        }
+      },
+      "project": {
+        "ordina": "Profesjonelt program",
+        "ravago": "Warehouse Management System"
+      },
+      "work-position": {
+        "3-it": "Frontend-utvikler (praktikant)",
+        "bergerie": "Kokk kald kjøkken / konditor",
+        "bergerie-stage": "Kjøkkenpraktikant",
+        "bruneau": "Chef de partie / konditor",
+        "cardijn": "Souschef",
+        "domaine-des-hautes-fagnes": "Kjøkkenpraktikant",
+        "farmasie": "Souschef / konditor",
+        "innomedio": "PHP-support / front-end-utvikler",
+        "koekoek": "Souschef / kokk",
+        "koekoek-2": "Kokk",
+        "nieuwen-buiten": "Kjøkkenpraktikant",
+        "ordina": "Front-end-utvikler",
+        "phpro": "PHP-/front-end-utvikler",
+        "ravago": "Senior Angular-utvikler",
+        "residentie": "Servicepraktikant",
+        "zilte": "Chef de partie / konditor"
+      }
+    },
+    "feature-toggles": {
+      "count": "{on}/{total} PÅ",
+      "hidden-notice": "Siden for funksjonsbrytere er skjult i menyen. Du kan fortsatt åpne den på /showcase/feature-toggles ved å klikke på «Axel Pauwels» i bunnteksten.",
+      "linked": {
+        "off": "{item} er også slått av.",
+        "on": "{item} er også slått på."
+      },
+      "reset": "Tilbakestill til standard",
+      "section": {
+        "general": {
+          "title": "Generelt"
+        },
+        "main-menu": {
+          "title": "Hovedmeny"
+        },
+        "navbar": {
+          "title": "Ikoner i navigasjonslinjen"
+        },
+        "submenu": {
+          "title": "Undermeny"
+        }
+      },
+      "toggle": {
+        "color-scheme-switcher": {
+          "label": "Lys og mørk modus"
+        },
+        "tour-button": {
+          "label": "Omvisningsknapp på startsiden"
+        }
+      }
+    },
+    "font": {
+      "switch": "Skrift"
+    },
+    "foundations": {
+      "icons": {
+        "icomoon": "Merke- og teknologilogoer fra ulike ikonsett og mine egne SVG-er, slått sammen til én selvhostet skrift med IcoMoon-appen. Én fil, én forespørsel, og hver logo får størrelsen og fargen til teksten rundt: <code>cv-icon cv-icon-angular</code>.",
+        "lordicon": "Animerte ikoner: hvert ikon er en liten Lottie-animasjon som spilles av når du holder pekeren over det. JSON-filene serveres fra dette nettstedet, aldri fra Lordicons CDN, og spilleren lastes først når det første ikonet vises. Hold pekeren over et av ikonene nedenfor.",
+        "material": "Grensesnittikoner (meny, lukk, send, …) fra Google Fonts. Et byggeskript finner ikonene koden bruker og ber bare om dem: et utvalg på noen få KiB i stedet for hele skriften.",
+        "sample": "Noen Icomoon-glyfer"
+      },
+      "itcss": {
+        "addition": "Tillegg fra SEM&BIO",
+        "axis": {
+          "broad": "Bred rekkevidde, lav spesifisitet",
+          "specific": "Smal rekkevidde, høy spesifisitet"
+        },
+        "intro": "De globale stilene i <code>apps/cv/src/styles</code> følger <strong>ITCSS</strong> (Inverted Triangle CSS), slik jeg lærte det hos SEM&BIO. Hvert lag er en mappe, importert i rekkefølge: brede regler med lav spesifisitet først, smale og spesifikke til slutt, så et senere lag vinner uten kamp om spesifisitet. Komponentstiler forblir innkapslet i Angular; lagene inneholder bare det som virkelig er globalt.",
+        "layer": {
+          "components": {
+            "name": "Components",
+            "text": "Selvstendige deler av grensesnittet. Nesten tomt her: Angular-komponenter har sine egne innkapslede stiler."
+          },
+          "elements": {
+            "name": "Elements",
+            "text": "Rene HTML-elementer uten klasse: <code>html</code>, <code>body</code>, rullefeltet."
+          },
+          "objects": {
+            "name": "Objects",
+            "text": "Layoutmønstre som ordner i stedet for å dekorere, delt av alle sider."
+          },
+          "patterns": {
+            "name": "Patterns",
+            "text": "Komponenter som er for spesifikke til å gjenbrukes, som én bestemt topptekst."
+          },
+          "scopes": {
+            "name": "Scopes",
+            "text": "Ekstra spesifisitet for én kontekst, som <code>.c-accordion.s-homepage</code>. Holdes nesten tomt med vilje."
+          },
+          "settings": {
+            "name": "Settings",
+            "text": "Variabler og skriftdefinisjoner: typografi, avstander, bruddpunkter og Icomoon-skriften."
+          },
+          "tools": {
+            "name": "Tools",
+            "text": "Mixins og funksjoner. De gir ingen CSS før et annet lag bruker dem."
+          },
+          "utilities": {
+            "name": "Utilities",
+            "text": "Hjelpeklasser med ett formål som alltid vinner, det eneste laget der <code>!important</code> er tillatt, som tilgjengelighets- og skriftklassene."
+          },
+          "vendors": {
+            "name": "Vendors",
+            "text": "Stiler fra tredjeparter, høyt i stabelen slik at lagene under kan overstyre dem: Angular Material-temaet, paletter og overstyringer."
+          }
+        }
+      },
+      "state": {
+        "devtools": {
+          "alt": "Plassholder for et skjermbilde av nettleserutvidelsen Redux DevTools"
+        },
+        "intro": "Hvert data-access-bibliotek har en <strong>NgRx Signal Store</strong>: Redux-ideen om én skrivebeskyttet sannhetskilde, bygd på Angular-signaler i stedet for actions og reducers. Komponentene henter aldri data selv.",
+        "step": {
+          "component": "Siden leser signalene, og Angular oppdaterer bare det som er endret.",
+          "service": "En tjeneste laster dataene med <code>httpResource</code> og gjør API-typene om til frontend-typer.",
+          "store": "Storen holder dem som tilstand (<code>withLinkedState</code>), slik at de vises i Redux DevTools, og legger til noen metoder (<code>withMethods</code>)."
+        },
+        "stores": "Storene"
+      }
+    },
+    "heading": {
+      "ai-assistant": "AI-assistent",
+      "architecture": "Arkitektur",
+      "code-coverage": "kodedekning",
+      "contact": "Kontakt",
+      "education": "Utdanning",
+      "end-to-end-tests": "Ende-til-ende-tester",
+      "experience": "erfaring",
+      "feature-toggles": "Funksjonsbrytere",
+      "foundations": "Grunnlag",
+      "graphql-docs": "graphql-dokumentasjon",
+      "lighthouse": "Lighthouse",
+      "micro-frontends": "Mikro-frontends",
+      "personal": "personlig",
+      "project-graph": "Prosjektgraf",
+      "references": "Referanser",
+      "service-status": "Tjenestestatus",
+      "skills": "ferdigheter",
+      "versions": "Versjoner"
+    },
+    "home": {
+      "about-me": "Mer om meg",
+      "experience": "Min erfaring",
+      "portrait": "Portrett av {name}"
+    },
+    "internship": "Praksis",
+    "language": {
+      "dutch": "Nederlandsk",
+      "english": "Engelsk",
+      "french": "Fransk",
+      "german": "Tysk",
+      "greek": "Gresk",
+      "hindi": "Hindi",
+      "italian": "Italiensk",
+      "native": "Morsmål",
+      "norwegian": "Norsk",
+      "proficiency": {
+        "basic": "Grunnleggende",
+        "excellent": "Utmerket",
+        "fair": "Middels",
+        "good": "God",
+        "very-good": "Svært god"
+      },
+      "spanish": "Spansk",
+      "switch": "Språk"
+    },
+    "lighthouse": {
+      "audit": {
+        "message": "Revidert {date} med Lighthouse {version}"
+      },
+      "category": {
+        "accessibility": "Tilgjengelighet",
+        "best-practices": "Beste praksis",
+        "performance": "Ytelse",
+        "seo": "SEO"
+      },
+      "legend": {
+        "average": "Middels",
+        "fail": "Dårlig",
+        "pass": "Bra",
+        "title": "Poengintervaller"
+      },
+      "not-audited": "Ikke revidert ennå",
+      "page": "Side"
+    },
+    "micro-frontends": {
+      "lib": {
+        "angular-library": "Angular-bibliotek",
+        "demo": "Min npm-pakke fra www.npmjs.com",
+        "intro": "Den motsatte tilnærmingen, til sammenligning: komponenten leveres med denne appen i stedet for å lastes fra en annen utrulling.",
+        "step": {
+          "bundle": "Denne appen installerer den og pakker den ved bygging, så ingenting lastes under kjøring.",
+          "element": "Den leveres også som webkomponenten <code><mac-window></code> (<code>@axel-pauwels/mac-window/element</code>), for alle rammeverk.",
+          "publish": "Den er publisert på npm som <code>@axel-pauwels/mac-window</code>.",
+          "source": "<code>MacWindow</code> ligger i dette repositoriet, i <code>packages/mac-window</code>."
+        },
+        "subtitle": "Pakket ved bygging, fra dette repositoriet",
+        "title": "Komponentbibliotek: <lib-mac-window>",
+        "view-npm": "Se på npmjs",
+        "web-component": "Webkomponent"
+      },
+      "mfe": {
+        "intro": "En separat Angular-app med eget repositorium og egen utrulling. Denne appen inneholder ikke koden: den lastes i nettleseren når denne siden åpnes.",
+        "open-api-docs": "API-dokumentasjon for remote",
+        "open-remote": "Remote-app",
+        "separate-deployment": "Separat utrulling",
+        "step": {
+          "load": "Her kaller <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) <code>loadRemoteModule('cv-mfe', './web-components')</code>.",
+          "manifest": "Ved oppstart leser <code>initFederation()</code> <code>federation.manifest.json</code>, som kobler navnet <code>cv-mfe</code> til remotens <code>remoteEntry.json</code>.",
+          "register": "Den modulen registrerer det egendefinerte elementet <code><cv-mfe></code> (Angular Elements), og wrapperen legger det til på siden.",
+          "shared": "Angular og RxJS deles med denne appen som singletons (Native Federation), så de lastes ned bare én gang."
+        },
+        "subtitle": "Lastet under kjøring, fra sin egen utrulling",
+        "title": "Mikro-frontend: <cv-mfe>"
+      }
+    },
+    "nav": {
+      "ai-assistant": "AI-assistent",
+      "architecture": "Arkitektur",
+      "back-to-top": "Tilbake til toppen",
+      "code-coverage": "kodedekning",
+      "cv": "CV",
+      "cv-navigation": "CV-navigasjon",
+      "education": "Utdanning",
+      "end-to-end-tests": "Ende-til-ende-tester",
+      "experience": "Erfaring",
+      "feature-toggles": "Funksjonsbrytere",
+      "foundations": "Grunnlag",
+      "graphql-docs": "graphql-dokumentasjon",
+      "home": "Hjem",
+      "light": "Lys",
+      "lighthouse": "Lighthouse",
+      "main-navigation": "Hovednavigasjon",
+      "menu": "Meny",
+      "menu-loading": "Laster menyen …",
+      "micro-frontends": "Mikro-frontends",
+      "personal": "Personlig",
+      "project-graph": "Prosjektgraf",
+      "references": "Referanser",
+      "service-status": "Tjenestestatus",
+      "showcase": "Utstilling",
+      "showcase-navigation": "Utstillingsnavigasjon",
+      "skills": "Ferdigheter",
+      "technical": "Teknisk",
+      "technical-navigation": "Teknisk navigasjon",
+      "versions": "Versjoner"
+    },
+    "personal": {
+      "about-me": {
+        "card": {
+          "description": {
+            "driver-license": {
+              "B": "B"
+            },
+            "marital-status": {
+              "married": "Gift"
+            },
+            "nationality": {
+              "BE": "BE"
+            },
+            "personality-type": {
+              "INTJ": "INTJ"
+            }
+          },
+          "title": {
+            "children": "Barn",
+            "date-of-birth": "Fødselsdato",
+            "driver-license": "Førerkort",
+            "location": "Bosted",
+            "marital-status": "Sivilstand",
+            "nationality": "Nasjonalitet",
+            "personality-type": "Personlighetstype"
+          }
+        }
+      },
+      "hobby": {
+        "binge-watching": "Serietitting",
+        "board-games": "Brettspill",
+        "comment": {
+          "vlaamse-schietsport-koepel": "Vlaamse SchietsportKoepel",
+          "world-cube-association": "World Cube Association"
+        },
+        "member-of-vsk": "Medlem av VSK",
+        "member-of-wca": "Medlem av WCA",
+        "mtg": "Magic The Gathering (TCG)",
+        "rubik-s-cube-competitions": "Rubiks kube-konkurranser"
+      },
+      "profile": "Senior front-end-utvikler med 8 års erfaring med å bygge webapplikasjoner for bedrifter, hvorav 5 år helt viet til Angular. Jeg designer og videreutvikler forretningskritiske applikasjoner med sterkt fokus på vedlikeholdbar arkitektur, ren kode og langsiktig skalerbarhet. Pragmatisk, kvalitetsdrevet og en naturlig lagspiller i Agile-team. Jeg bruker aktivt moderne praksis og AI-assisterte verktøy for å levere raskere uten å gå på akkord med kvaliteten."
+    },
+    "present": "nå",
+    "reference": {
+      "function": {
+        "business-unit-manager": "Forretningsenhetsleder",
+        "chef": "Kjøkkensjef",
+        "digital-factory-lead": "Leder for Digital Factory",
+        "lead-back-end-developer": "Ledende back-end-utvikler",
+        "lead-front-end-developer": "Ledende front-end-utvikler",
+        "lead-full-stack-developer": "Ledende fullstack-utvikler",
+        "operations-project-manager": "Drifts- og prosjektleder",
+        "people-manager-lead-front-end-developer": "People manager og ledende front-end-utvikler",
+        "qa-lead": "QA-leder",
+        "team-lead-lead-front-end-developer": "Teamleder og ledende front-end-utvikler"
+      }
+    },
+    "service-status": {
+      "category": {
+        "api": "API-er",
+        "cdn": "CDN-er",
+        "link": "Lenker",
+        "micro-frontend": "Micro-frontends"
+      },
+      "checked-at": "Sist sjekket kl. {time}",
+      "column": {
+        "response-time": "Responstid",
+        "service": "Tjeneste",
+        "status": "Status"
+      },
+      "health": {
+        "checking": "Sjekker…",
+        "degraded": "Advarsel",
+        "down": "Feil",
+        "up": "Tilgjengelig",
+        "up-status": "OK (HTTP {status})"
+      },
+      "issue": {
+        "http": "HTTP {status}",
+        "slow": "Treg",
+        "timeout": "Ingen svar i tide",
+        "unreachable": "Utilgjengelig"
+      },
+      "legend": "Status",
+      "links-error": "Profillenkene kunne ikke lastes, så de blir ikke sjekket.",
+      "no-response-time": "Ingen responstid",
+      "recheck": "Sjekk igjen",
+      "response-time": "{ms} ms",
+      "summary": {
+        "checking": "Sjekker tjenestene…",
+        "done": "Tilgjengelig: {up} · Advarsler: {degraded} · Feil: {down}"
+      }
+    },
+    "skill": {
+      "other": {
+        "testing": "Enhets-, integrasjons- og E2E-testing"
+      }
+    },
+    "spoken": "Muntlig",
+    "subheading": {
+      "education": {
+        "certificates": "Sertifikater",
+        "certificates.description": "Bevis på nysgjerrighet og engasjement",
+        "training-and-conferences": "Kurs og konferanser",
+        "training-and-conferences.description": "Lærer alltid, fortsatt nysgjerrig"
+      },
+      "feature-toggles": "Med stor makt følger stor konfigurasjon",
+      "horeca": "Hotell og restaurant",
+      "it": "IT",
+      "personal": {
+        "about-me": "Om meg",
+        "about-me.description": "Mennesket bak koden",
+        "connect": "La oss snakke",
+        "hobbies-and-interests": "Hobbyer og interesser",
+        "hobbies-and-interests.description": "Livet utenfor terminalen",
+        "languages": "Språk",
+        "languages.description": "Bygger broer mellom kulturer"
+      },
+      "skills": {
+        "additional-technologies": "flere teknologier",
+        "ai": "AI og agentisk utvikling",
+        "core-stack": "kjernestakk for frontend",
+        "development-tools": "utviklingsverktøy",
+        "engineering-practices": "utviklingspraksis",
+        "testing-and-quality": "testing og kvalitet"
+      },
+      "technical": {
+        "dependencies": "Avhengigheter per prosjekt",
+        "dependencies.description": "Rett fra prosjektgrafen",
+        "dependency-rules": "Avhengighetsregler",
+        "dependency-rules.description": "Sjekket ved hver import",
+        "domains-and-layers": "Domener og lag",
+        "domains-and-layers.description": "Vertikale snitt, horisontale lag",
+        "icons": "Ikoner",
+        "icons.description": "Tre skrifter, ett uttrykk",
+        "itcss": "Stiler i lag",
+        "itcss.description": "Inverted triangle CSS",
+        "layers": "Lag innenfor et domene",
+        "layers.description": "Hvem gjør hva",
+        "public-api": "Offentlig API",
+        "public-api.description": "Barrels og interne mapper",
+        "state": "Tilstand",
+        "state.description": "NgRx signal stores"
+      }
+    },
+    "theme": {
+      "blackberry": "Bjørnebær",
+      "bronze": "Bronse",
+      "earth": "Jord",
+      "fire": "Ild",
+      "gold": "Gull",
+      "grape": "Drue",
+      "honey": "Honning",
+      "kiwi": "Kiwi",
+      "peach": "Fersken",
+      "silver": "Sølv",
+      "switch": "Tema",
+      "tangerine": "Mandarin",
+      "water": "Vann",
+      "wind": "Vind"
+    },
+    "tour": {
+      "back": "Tilbake",
+      "counter": "{current} / {total}",
+      "exit": "Avslutt omvisningen",
+      "finish": "Fullfør",
+      "loading": "Laster omvisningen …",
+      "next": "Neste",
+      "start": "Start omvisningen",
+      "step": {
+        "ai-assistant": {
+          "label": "AI-assistent",
+          "text": "Nysgjerrig på erfaringen, ferdighetene eller referansene mine? Klikk på roboten nederst til høyre, så svarer AI-assistenten min rett fra dataene på dette nettstedet.",
+          "title": "Spør AI-assistenten min"
+        },
+        "architecture": {
+          "label": "Arkitektur",
+          "text": "Nysgjerrig på hvordan dette nettstedet er bygd? Den tekniske delen forklarer arkitekturen, prosjektgrafen og versjonene som brukes.",
+          "title": "Arkitektur"
+        },
+        "color-scheme": {
+          "label": "Mørk modus",
+          "text": "Bytt mellom et lyst og et mørkt utseende. Som standard følger nettstedet innstillingen på enheten din.",
+          "title": "Lys og mørk modus"
+        },
+        "contact": {
+          "label": "Kontakt",
+          "text": "Vil du ta kontakt? Send meg en e-post eller finn meg på LinkedIn og GitHub med ikonene nederst til høyre.",
+          "title": "Kontakt"
+        },
+        "cv": {
+          "label": "CV",
+          "text": "Her finner du alt om meg: personopplysninger, utdanning, erfaring, ferdigheter og referanser.",
+          "title": "Min CV"
+        },
+        "download-cv": {
+          "label": "Last ned CV",
+          "text": "Vil du heller lese den frakoblet? Last ned CV-en min som PDF her.",
+          "title": "Last ned CV-en min"
+        },
+        "finish": {
+          "label": "Fullfør",
+          "text": "Takk for at du ble med på omvisningen.",
+          "title": "Det var det!"
+        },
+        "fonts": {
+          "label": "Skrifter",
+          "text": "Foretrekker du en annen stil? Bytt skrift for hele nettstedet her.",
+          "title": "Skrifter"
+        },
+        "home": {
+          "label": "Hjem",
+          "text": "Husikonet i menyen tar deg alltid tilbake til denne siden, uansett hvor du er på nettstedet.",
+          "title": "Hjem"
+        },
+        "languages": {
+          "label": "Språk",
+          "text": "Nettstedet er tilgjengelig på engelsk, nederlandsk, fransk, spansk, norsk, gresk og hindi. Velg språket ditt her.",
+          "title": "Språk"
+        },
+        "settings": {
+          "label": "Dine innstillinger",
+          "text": "Sett først opp nettstedet slik du vil ha det: fargetemaet, skriften, tilgjengelighetsinnstillingene, lys eller mørk modus og språket. Valgene dine huskes på denne enheten.",
+          "title": "Innstillinger"
+        },
+        "showcase": {
+          "label": "Utstilling",
+          "text": "Utstillingen viser teknikker i praksis, som mikro-frontends, GraphQL-dokumentasjon, kodedekning og ende-til-ende-tester.",
+          "title": "Utstilling"
+        },
+        "technical": {
+          "label": "Teknisk",
+          "text": "Nysgjerrig på hvordan dette nettstedet er bygd? Den tekniske delen viser prosjektgrafen, arkitekturen, GraphQL-dokumentasjonen, kodedekningen, ende-til-ende-testene og versjonene som brukes.",
+          "title": "Teknisk"
+        },
+        "themes": {
+          "label": "Temaer",
+          "text": "Velg et av fargetemaene her. Hvert tema gir matchende farger på hele nettstedet.",
+          "title": "Fargetemaer"
+        },
+        "welcome": {
+          "label": "Velkommen",
+          "text": "La meg vise deg rundt. Denne korte omvisningen tar deg gjennom nettstedet og funksjonene. Bruk knappene nedenfor eller piltastene, og trykk Escape for å stoppe når som helst.",
+          "title": "Velkommen!"
+        }
+      },
+      "step-of": "Trinn {current} av {total}"
+    },
+    "versions": {
+      "category": {
+        "api": "API",
+        "architecture": "Arkitektur",
+        "code-quality": "Kodekvalitet",
+        "framework": "Rammeverk",
+        "i18n": "i18n",
+        "micro-frontends": "Mikro-frontends",
+        "monorepo": "Monorepo",
+        "runtime": "Kjøremiljø",
+        "state": "Tilstand",
+        "testing": "Testing",
+        "ui": "UI"
+      },
+      "column": {
+        "installed": "Installert",
+        "name": "Navn",
+        "package": "Pakke"
+      },
+      "loading": "Laster versjonene",
+      "not-available": {
+        "text": "Versjonene genereres ved bygging og er ikke tilgjengelige her. Kjør <code>npx nx run technical-data-access-build-info:build-info</code>.",
+        "title": "Versjonene er ikke tilgjengelige"
+      }
+    },
+    "website": "nettsted",
+    "written": "Skriftlig"
+  }
+}

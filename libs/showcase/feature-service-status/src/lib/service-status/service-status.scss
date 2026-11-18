@@ -1,0 +1,174 @@
+:host {
+  display: block;
+  margin-inline: auto;
+  max-width: 56rem;
+  width: 100%;
+}
+
+.service-status {
+  &__intro,
+  &__note {
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-body-medium);
+    margin: 0 0 1.5rem;
+  }
+
+  &__note {
+    font: var(--mat-sys-body-small);
+    margin-block: 2rem 0;
+  }
+
+  &__toolbar {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    justify-content: space-between;
+    margin-block-end: 1rem;
+  }
+
+  &__summary {
+    font: var(--mat-sys-title-medium);
+    margin: 0;
+  }
+
+  &__checked-at {
+    color: var(--mat-sys-on-surface-variant);
+    display: block;
+    font: var(--mat-sys-body-small);
+  }
+
+  &__error {
+    color: var(--mat-sys-error);
+    font: var(--mat-sys-body-medium);
+  }
+
+  // The same shapes as the Lighthouse legend: the health is never told by color alone
+  &__legend {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    font: var(--mat-sys-body-small);
+    gap: 0.75rem;
+    margin-block-end: 2rem;
+  }
+
+  &__legend-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__health {
+    --health-color: var(--mat-sys-outline);
+    --health-text: var(--mat-sys-on-surface-variant);
+
+    align-items: center;
+    color: var(--health-text);
+    display: inline-flex;
+    gap: 0.5rem;
+  }
+
+  &__shape {
+    background-color: var(--health-color);
+    border-radius: 50%;
+    display: inline-block;
+    flex: none;
+    height: 0.75rem;
+    width: 0.75rem;
+  }
+
+  // checking: an empty ring, no animation
+  &__health--checking &__shape {
+    background-color: transparent;
+    border: 2px solid var(--health-color);
+  }
+
+  &__health--up {
+    --health-color: var(--ds-score-pass);
+    --health-text: var(--ds-score-pass-text);
+  }
+
+  &__health--degraded {
+    --health-color: var(--ds-score-average);
+    --health-text: var(--ds-score-average-text);
+
+    .service-status__shape {
+      border-radius: 0;
+    }
+  }
+
+  &__health--down {
+    --health-color: var(--ds-score-fail);
+    --health-text: var(--ds-score-fail-text);
+
+    .service-status__shape {
+      border-radius: 0;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+  }
+
+  &__section + &__section {
+    margin-block-start: 2rem;
+  }
+
+  &__section-title {
+    color: var(--mat-sys-primary);
+    font: var(--mat-sys-title-large);
+    margin: 0 0 1rem;
+  }
+
+  &__table {
+    border-collapse: collapse;
+    width: 100%;
+
+    th,
+    td {
+      padding: 0.5rem;
+      text-align: start;
+      vertical-align: top;
+    }
+
+    thead th {
+      color: var(--mat-sys-on-surface-variant);
+      font: var(--mat-sys-label-medium);
+    }
+
+    thead tr {
+      border-block-end: 1px solid var(--mat-sys-outline-variant);
+    }
+  }
+
+  &__service {
+    font-weight: normal;
+    width: 50%;
+  }
+
+  &__name {
+    color: var(--mat-sys-primary);
+    display: block;
+    font: var(--mat-sys-title-medium);
+    overflow-wrap: anywhere;
+  }
+
+  &__address,
+  &__check {
+    color: var(--mat-sys-on-surface-variant);
+    display: block;
+    font: var(--mat-sys-body-small);
+    overflow-wrap: anywhere;
+  }
+
+  &__table &__time-header,
+  &__table &__time {
+    text-align: end;
+    white-space: nowrap;
+  }
+
+  &__time {
+    font-variant-numeric: tabular-nums;
+  }
+}

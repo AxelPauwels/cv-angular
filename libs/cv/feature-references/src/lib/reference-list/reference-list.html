@@ -103,7 +103,9 @@
             [headingLevel]="3"
             [initials]="initials(reference.name)"
             [title]="reference.name">
-            <p class="reference-list__function">{{ reference.function }}</p>
+            <p class="reference-list__function">
+              {{ reference.function | translate }}
+            </p>
           </ds-card>
         </li>
         }

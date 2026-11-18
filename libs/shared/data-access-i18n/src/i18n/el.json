@@ -1,0 +1,783 @@
+{
+  "t": {
+    "accessibility": {
+      "high-contrast": "Υψηλότερη αντίθεση",
+      "reduce-motion": "Λιγότερη κίνηση",
+      "switch": "Προσβασιμότητα",
+      "text-size": "Μέγεθος κειμένου",
+      "text-spacing": "Μεγαλύτερη απόσταση κειμένου",
+      "title": "Προσβασιμότητα"
+    },
+    "ai-assistant": {
+      "assistant": "Βοηθός",
+      "error": "Κάτι πήγε στραβά κατά την απάντηση. Δοκιμάστε ξανά.",
+      "hint": "Enter για αποστολή, Shift+Enter για νέα γραμμή.",
+      "intro": "Ρωτήστε οτιδήποτε για μένα, τη δουλειά μου, τις δεξιότητές μου ή τις συστάσεις μου.",
+      "limit-reached": "Φτάσατε τον μέγιστο αριθμό ερωτήσεων για αυτή την επίσκεψη. Ανανεώστε τη σελίδα για να ξεκινήσετε από την αρχή.",
+      "log-label": "Συνομιλία",
+      "not-configured": "Ο βοηθός AI είναι απενεργοποιημένος σε αυτή την έκδοση του ιστότοπου.",
+      "question": "Η ερώτησή σας",
+      "quota-reached": "Ο βοηθός έφτασε το δωρεάν όριο για σήμερα. Δοκιμάστε ξανά αύριο.",
+      "retry": "Δοκιμάστε ξανά",
+      "send": "Αποστολή",
+      "stop": "Διακοπή",
+      "suggestion": {
+        "languages": "Ποιες γλώσσες μιλάει ο Axel;",
+        "reference": "Μπορείτε να μου δώσετε μια σύσταση από την πιο πρόσφατη δουλειά του;",
+        "stack": "Ποιες τεχνολογίες χρησιμοποιεί ο Axel;"
+      },
+      "suggestions": "Δοκιμάστε μία από αυτές",
+      "thinking": "Ο βοηθός απαντά…",
+      "tool": {
+        "getEducation": "Αναζήτηση εκπαίδευσης",
+        "getExperiences": "Αναζήτηση επαγγελματικής εμπειρίας",
+        "getProfile": "Αναζήτηση προφίλ",
+        "getReferences": "Αναζήτηση συστάσεων",
+        "getSkills": "Αναζήτηση δεξιοτήτων"
+      },
+      "you": "Εσείς"
+    },
+    "architecture": {
+      "dependencies": {
+        "count": "{count} βιβλιοθήκες",
+        "imports": "εισάγει",
+        "none": "κανένα άλλο έργο"
+      },
+      "domains": {
+        "intro": "Το workspace χωρίζεται κάθετα: κάθε <strong>τομέας</strong> (ένα μέρος της εφαρμογής) έχει τις δικές του βιβλιοθήκες, χωρισμένες σε <strong>επίπεδα</strong> ανάλογα με το τι κάνουν. Οι φάκελοι ακολουθούν το <code>libs/<domain>/<layer>-<name></code>· το <code>libs/shared</code> περιέχει ό,τι χρησιμοποιούν πολλοί τομείς. Παράγεται από το γράφημα έργων του Nx."
+      },
+      "layer": {
+        "api": {
+          "text": "Το σχήμα GraphQL και οι resolvers (<code>@cv/api</code>), που προς το παρόν απαντούν μέσα στον browser."
+        },
+        "data-access": {
+          "text": "Ένα root signal store (NgRx Signals) που φορτώνεται μία φορά και μοιράζεται σε όλη την εφαρμογή. Εσωτερικά, ένα service εκτελεί ένα typed GraphQL query και ένας mapper μετατρέπει τους παραγόμενους τύπους του API σε χειρόγραφους τύπους frontend."
+        },
+        "feature": {
+          "text": "Μια σελίδα με δική της διαδρομή. Κάνει inject ένα store και εμφανίζει τα signals του."
+        },
+        "ui-util": {
+          "text": "Παρουσιαστικά components και απλές συναρτήσεις ή τύποι, κοινόχρηστα χωρίς να γνωρίζουν τα δεδομένα.",
+          "title": "ui και util"
+        }
+      },
+      "loading": "Φόρτωση της αρχιτεκτονικής",
+      "matrix": {
+        "domain": "Τομέας",
+        "label": "Βιβλιοθήκες ανά τομέα και επίπεδο"
+      },
+      "not-available": {
+        "text": "Η αρχιτεκτονική παράγεται κατά το build και δεν είναι διαθέσιμη εδώ. Εκτελέστε <code>npx nx run technical-data-access-build-info:build-info</code>.",
+        "title": "Η αρχιτεκτονική δεν είναι διαθέσιμη"
+      },
+      "public-api": {
+        "entry": {
+          "text": "Κάθε βιβλιοθήκη εξάγει το δημόσιο API της από το <code>src/index.ts</code>, που εισάγεται ως <code>@cv/<project></code>. Δεν επιτρέπονται βαθιά imports μέσα σε μια βιβλιοθήκη.",
+          "title": "Ένα σημείο εισόδου"
+        },
+        "lazy": {
+          "text": "Οι βιβλιοθήκες feature εξάγουν τη σελίδα τους με όνομα, ώστε μια διαδρομή να τη φορτώνει lazy με <code>loadComponent: () => import('@cv/…').then((m) => m.Page)</code>.",
+          "title": "Lazy σελίδες"
+        },
+        "private": {
+          "text": "Ό,τι δεν εξάγει το barrel βρίσκεται στο <code>src/lib/internal/</code>. Ένας κανόνας lint εμποδίζει ένα barrel να εξάγει οτιδήποτε από εκεί.",
+          "title": "Ιδιωτικό από προεπιλογή"
+        }
+      },
+      "rules": {
+        "from": "Modules με tag",
+        "intro": "ελέγχει κάθε import με αυτούς τους κανόνες από το <code>sheriff.config.ts</code>, στο ESLint και με το <code>sheriff verify</code>. Ένα module χρειάζεται άδεια και για τα δύο tags του: τον τομέα και το επίπεδό του.",
+        "label": "Κανόνες εξαρτήσεων",
+        "none": "τίποτα: δεν εξαρτάται από κανένα άλλο module",
+        "to": "μπορούν να εισάγουν"
+      },
+      "stat": {
+        "apps": "Εφαρμογές",
+        "domains": "Τομείς",
+        "layers": "Επίπεδα",
+        "libraries": "Βιβλιοθήκες"
+      },
+      "tag": {
+        "every-domain": "κάθε τομέας",
+        "everything": "τα πάντα",
+        "root": "η ίδια η εφαρμογή",
+        "same-domain": "ίδιος τομέας"
+      }
+    },
+    "at": "στην",
+    "city": {
+      "paris": "Παρίσι"
+    },
+    "client": "Πελάτης",
+    "color-scheme": {
+      "dark": "Σκούρο θέμα",
+      "light": "Ανοιχτό θέμα"
+    },
+    "common": {
+      "cv": "Βιογραφικό",
+      "download-cv": "Λήψη βιογραφικού",
+      "loading": "Φόρτωση",
+      "new-tab": "(νέα καρτέλα)",
+      "new-tab-url": "({url}, νέα καρτέλα)",
+      "ok": "OK",
+      "reset": "Επαναφορά",
+      "technologies": "Τεχνολογίες"
+    },
+    "competence": {
+      "ai-assisted-development": {
+        "description": "GitHub Copilot και Cursor για ταχύτερη παράδοση και υψηλότερη ποιότητα. Αυτή την περίοδο μαθαίνω spec-driven development.",
+        "title": "Σύγχρονη ανάπτυξη με τη βοήθεια AI"
+      },
+      "angular-enterprise": {
+        "description": "Εφαρμογές μεγάλης κλίμακας που υποστηρίζουν σύνθετες επιχειρηματικές διαδικασίες.",
+        "title": "Επιχειρησιακή ανάπτυξη σε Angular"
+      },
+      "clean-code": {
+        "description": "Σαφή πρότυπα, επαναχρησιμοποιήσιμος σχεδιασμός και κώδικας που αντέχει στον χρόνο.",
+        "title": "Καθαρός, συντηρήσιμος κώδικας"
+      },
+      "collaboration": {
+        "description": "Ανταλλαγή γνώσεων και συνεχής βελτίωση σε διεπιστημονικές ομάδες.",
+        "title": "Συνεργασία"
+      },
+      "front-end-architecture": {
+        "description": "Nx monorepos, επαναχρησιμοποιήσιμες βιβλιοθήκες και κλιμακώσιμο state με RxJS και Signals.",
+        "title": "Αρχιτεκτονική front-end"
+      }
+    },
+    "contact": {
+      "ai-assistant": "Ρωτήστε τον βοηθό AI μου",
+      "count": "{count} από {max} χαρακτήρες",
+      "error": {
+        "email": {
+          "invalid": "Εισαγάγετε μια έγκυρη διεύθυνση email, όπως name@example.com.",
+          "required": "Εισαγάγετε τη διεύθυνση email σας."
+        },
+        "message": {
+          "max-length": "Χρησιμοποιήστε έως {messageMax} χαρακτήρες.",
+          "min-length": "Γράψτε τουλάχιστον {messageMin} χαρακτήρες.",
+          "required": "Εισαγάγετε ένα μήνυμα."
+        },
+        "name": {
+          "max-length": "Χρησιμοποιήστε έως {nameMax} χαρακτήρες.",
+          "required": "Εισαγάγετε το όνομά σας."
+        },
+        "send": "Δεν ήταν δυνατή η αποστολή του μηνύματός σας. Δοκιμάστε ξανά αργότερα ή βρείτε με στο LinkedIn.",
+        "subject": {
+          "max-length": "Χρησιμοποιήστε έως {subjectMax} χαρακτήρες.",
+          "required": "Εισαγάγετε ένα θέμα."
+        }
+      },
+      "field": {
+        "email": "Email",
+        "message": "Μήνυμα",
+        "name": "Όνομα",
+        "subject": "Θέμα"
+      },
+      "send": "Αποστολή",
+      "sending": "Αποστολή του μηνύματός σας…",
+      "sent": "Ευχαριστώ! Το μήνυμά σας στάλθηκε. Θα σας απαντήσω σύντομα.",
+      "title": "Επικοινωνία"
+    },
+    "country": {
+      "belgium": "Βέλγιο"
+    },
+    "education": {
+      "bellouet-conseil": {
+        "degree": "Δίπλωμα τραβηγμένης ζάχαρης | Δίπλωμα χυτής και φυσητής ζάχαρης",
+        "specialization": "Τραβηγμένη ζάχαρη, χυτή ζάχαρη, φυσητή ζάχαρη"
+      },
+      "hotelschool": "Σχολή ξενοδοχειακών",
+      "level": {
+        "extra": "Επιπλέον μαθήματα",
+        "high-school": "Ανώτατη εκπαίδευση",
+        "secondary": "Δευτεροβάθμια εκπαίδευση"
+      },
+      "school": {
+        "ter-duinen": {
+          "degree": "Απολυτήριο δευτεροβάθμιας εκπαίδευσης"
+        }
+      },
+      "sint-jozef": {
+        "specialization": "Ξενοδοχειακά TSO"
+      },
+      "ter-duinen": {
+        "specialization": "Ξενοδοχειακά TSO"
+      },
+      "thomas-more": {
+        "degree": "Επαγγελματικό πτυχίο (Bachelor) στην εφαρμοσμένη πληροφορική",
+        "specialization": "IT Factory Applications"
+      },
+      "training": {
+        "status": {
+          "COMPLETED": "ολοκληρώθηκε",
+          "ONGOING": "σε εξέλιξη",
+          "RECURRING": "ετήσια"
+        }
+      }
+    },
+    "embedded-page": {
+      "loading": "Φόρτωση της αναφοράς",
+      "not-available": "Αυτή η αναφορά δεν είναι διαθέσιμη εδώ. Παράγεται από το production build (<code>npm run build:production</code>).",
+      "open-new-tab": "Άνοιγμα σε νέα καρτέλα"
+    },
+    "error": {
+      "load": {
+        "education": "Δεν ήταν δυνατή η φόρτωση της εκπαίδευσης: {error}",
+        "experience": "Δεν ήταν δυνατή η φόρτωση της εμπειρίας: {error}",
+        "personal-details": "Δεν ήταν δυνατή η φόρτωση των προσωπικών στοιχείων: {error}",
+        "references": "Δεν ήταν δυνατή η φόρτωση των συστάσεων: {error}",
+        "skills": "Δεν ήταν δυνατή η φόρτωση των δεξιοτήτων: {error}"
+      }
+    },
+    "experience": {
+      "job-description": {
+        "innomedio": {
+          "support": "Διόρθωση σφαλμάτων, τηλεφωνική υποστήριξη και διαχείριση του συστήματος αιτημάτων υποστήριξης, οργανώνοντας τον δικό μου προγραμματισμό.",
+          "technologies": "Τεχνολογία: Συντήρηση και επέκταση του εσωτερικά αναπτυγμένου συστήματος CMS σε Symfony με Scss. Τηλεφωνική υποστήριξη πελατών με προβλήματα ή επεκτάσεις και διαχείριση του συστήματος αιτημάτων υποστήριξης στο Teamleader. Επίσης GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ...",
+          "websites": "Ανάπτυξη νέων ιστότοπων και ηλεκτρονικών καταστημάτων και επέκταση προσαρμοσμένων πλατφορμών CMS"
+        },
+        "ordina": {
+          "programme": "Εντατικό πρόγραμμα από senior συμβούλους, που συνδυάζει θεωρία και πράξη σε front-end, back-end και cloud – μεταξύ άλλων Angular, React, RxJS, NestJS, TDD, testing, DevOps και CI, UX/UI, design systems, Git, Agile και άλλα.",
+          "projects": "Εφαρμογή μαθημάτων και eLearning"
+        },
+        "phpro": {
+          "agile": "Παράδοση σε ομάδες Agile/Scrum, σε στενή επαφή με τους πελάτες.",
+          "front-end": "Ανάπτυξη επαναχρησιμοποιήσιμων, κλιμακώσιμων λύσεων front-end για ηλεκτρονικά καταστήματα με αρχιτεκτονική ITCSS σε Sass, καθώς και εργασία με React και Sulu.",
+          "magento": "Ανάπτυξη και προσαρμογή πλατφορμών ηλεκτρονικού εμπορίου Magento 2 (B2C/B2B)",
+          "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,..."
+        },
+        "ravago": {
+          "projects": "Warehouse Management System (WMS), αργότερα WMS2. Τόσο ως εφαρμογή υπολογιστή για το γραφείο όσο και ως εφαρμογή για φορητούς σαρωτές στις αποθήκες.",
+          "technologies": "Τεχνολογία: Angular (Typescript/Scss) με Nx και το UI framework Kendo. Επίσης Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise...",
+          "wms": "Σχεδιασμός, ανάπτυξη και εξέλιξη του WMS: μιας κρίσιμης για την επιχείρηση εφαρμογής για απόθεμα, παραγωγή και διαχείριση παραγγελιών – σε υπολογιστή για το προσωπικό γραφείου, σε κινητό για τους εργαζόμενους της αποθήκης με σαρωτές.",
+          "workflows": "Απλοποίηση σύνθετων ροών εργασίας και αυτοματοποίηση επαναλαμβανόμενων εργασιών· εισήγαγα και προωθώ την αποτελεσματική χρήση ανάπτυξης με τη βοήθεια AI στην ομάδα."
+        }
+      },
+      "project": {
+        "ordina": "Επαγγελματικό πρόγραμμα",
+        "ravago": "Warehouse Management System"
+      },
+      "work-position": {
+        "3-it": "Frontend developer (πρακτική άσκηση)",
+        "bergerie": "Μάγειρας κρύας κουζίνας / ζαχαροπλάστης",
+        "bergerie-stage": "Ασκούμενος μάγειρας",
+        "bruneau": "Chef de partie / ζαχαροπλάστης",
+        "cardijn": "Sous chef",
+        "domaine-des-hautes-fagnes": "Ασκούμενος μάγειρας",
+        "farmasie": "Sous chef / ζαχαροπλάστης",
+        "innomedio": "Υποστήριξη PHP / Front-end developer",
+        "koekoek": "Sous chef / σεφ",
+        "koekoek-2": "Σεφ",
+        "nieuwen-buiten": "Ασκούμενος μάγειρας",
+        "ordina": "Front-end developer",
+        "phpro": "PHP / Front-end developer",
+        "ravago": "Senior Angular developer",
+        "residentie": "Ασκούμενος σερβιτόρος",
+        "zilte": "Chef de partie / ζαχαροπλάστης"
+      }
+    },
+    "feature-toggles": {
+      "count": "{on}/{total} ΕΝΕΡΓΑ",
+      "hidden-notice": "Η σελίδα με τους διακόπτες λειτουργιών είναι κρυμμένη από το μενού. Μπορείτε ακόμα να την ανοίξετε στο /showcase/feature-toggles κάνοντας κλικ στο «Axel Pauwels» στο υποσέλιδο.",
+      "linked": {
+        "off": "Απενεργοποιήθηκε επίσης: {item}.",
+        "on": "Ενεργοποιήθηκε επίσης: {item}."
+      },
+      "reset": "Επαναφορά προεπιλογών",
+      "section": {
+        "general": {
+          "title": "Γενικά"
+        },
+        "main-menu": {
+          "title": "Κύριο μενού"
+        },
+        "navbar": {
+          "title": "Εικονίδια γραμμής πλοήγησης"
+        },
+        "submenu": {
+          "title": "Υπομενού"
+        }
+      },
+      "toggle": {
+        "color-scheme-switcher": {
+          "label": "Ανοιχτό και σκούρο θέμα"
+        },
+        "tour-button": {
+          "label": "Κουμπί ξενάγησης στην αρχική σελίδα"
+        }
+      }
+    },
+    "font": {
+      "switch": "Γραμματοσειρά"
+    },
+    "foundations": {
+      "icons": {
+        "icomoon": "Λογότυπα εταιρειών και τεχνολογιών από διάφορα σετ εικονιδίων και δικά μου SVG, ενωμένα σε μία γραμματοσειρά που φιλοξενώ ο ίδιος, με την εφαρμογή IcoMoon. Ένα αρχείο, ένα αίτημα, και κάθε λογότυπο παίρνει το μέγεθος και το χρώμα του κειμένου γύρω του: <code>cv-icon cv-icon-angular</code>.",
+        "lordicon": "Κινούμενα εικονίδια: το καθένα είναι ένα μικρό animation Lottie που παίζει όταν περνάτε το ποντίκι από πάνω του. Τα αρχεία JSON σερβίρονται από αυτόν τον ιστότοπο, ποτέ από το CDN της Lordicon, και ο player φορτώνεται μόνο όταν εμφανιστεί το πρώτο εικονίδιο. Περάστε το ποντίκι πάνω από ένα παρακάτω.",
+        "material": "Εικονίδια διεπαφής (μενού, κλείσιμο, αποστολή, …) από το Google Fonts. Ένα script του build βρίσκει τα εικονίδια που χρησιμοποιεί ο κώδικας και ζητά μόνο αυτά: ένα υποσύνολο λίγων KiB αντί για ολόκληρη τη γραμματοσειρά.",
+        "sample": "Μερικά glyphs του Icomoon"
+      },
+      "itcss": {
+        "addition": "Προσθήκη της SEM&BIO",
+        "axis": {
+          "broad": "Ευρεία εμβέλεια, χαμηλή εξειδίκευση",
+          "specific": "Στενή εμβέλεια, υψηλή εξειδίκευση"
+        },
+        "intro": "Τα global styles στο <code>apps/cv/src/styles</code> ακολουθούν το <strong>ITCSS</strong> (Inverted Triangle CSS), όπως το έμαθα στη SEM&BIO. Κάθε επίπεδο είναι ένας φάκελος, που εισάγεται με σειρά: πρώτα οι ευρείς κανόνες με χαμηλή εξειδίκευση, στο τέλος οι στενοί και συγκεκριμένοι, ώστε ένα μεταγενέστερο επίπεδο να υπερισχύει χωρίς μάχες εξειδίκευσης. Τα styles των components μένουν ενθυλακωμένα στο Angular· τα επίπεδα περιέχουν μόνο ό,τι είναι πραγματικά global.",
+        "layer": {
+          "components": {
+            "name": "Components",
+            "text": "Αυτόνομα κομμάτια διεπαφής. Σχεδόν άδειο εδώ: τα components του Angular έχουν τα δικά τους ενθυλακωμένα styles."
+          },
+          "elements": {
+            "name": "Elements",
+            "text": "Σκέτα στοιχεία HTML χωρίς class: <code>html</code>, <code>body</code>, η μπάρα κύλισης."
+          },
+          "objects": {
+            "name": "Objects",
+            "text": "Μοτίβα διάταξης που οργανώνουν αντί να διακοσμούν, κοινά σε όλες τις σελίδες."
+          },
+          "patterns": {
+            "name": "Patterns",
+            "text": "Components πολύ συγκεκριμένα για επαναχρησιμοποίηση, όπως μια συγκεκριμένη κεφαλίδα."
+          },
+          "scopes": {
+            "name": "Scopes",
+            "text": "Επιπλέον εξειδίκευση για ένα πλαίσιο, όπως <code>.c-accordion.s-homepage</code>. Σκόπιμα σχεδόν άδειο."
+          },
+          "settings": {
+            "name": "Settings",
+            "text": "Μεταβλητές και ορισμοί γραμματοσειρών: τυπογραφία, αποστάσεις, breakpoints και η γραμματοσειρά Icomoon."
+          },
+          "tools": {
+            "name": "Tools",
+            "text": "Mixins και συναρτήσεις. Δεν παράγουν CSS μέχρι να τα χρησιμοποιήσει άλλο επίπεδο."
+          },
+          "utilities": {
+            "name": "Utilities",
+            "text": "Βοηθητικές κλάσεις ενός σκοπού που πάντα υπερισχύουν, το μόνο επίπεδο όπου επιτρέπεται το <code>!important</code>, όπως οι κλάσεις προσβασιμότητας και γραμματοσειράς."
+          },
+          "vendors": {
+            "name": "Vendors",
+            "text": "Styles τρίτων, ψηλά στη στοίβα ώστε τα επόμενα επίπεδα να μπορούν να τα παρακάμψουν: το θέμα του Angular Material, οι παλέτες και οι παρακάμψεις του."
+          }
+        }
+      },
+      "state": {
+        "devtools": {
+          "alt": "Θέση για στιγμιότυπο οθόνης της επέκτασης browser Redux DevTools"
+        },
+        "intro": "Κάθε βιβλιοθήκη data-access έχει ένα <strong>NgRx Signal Store</strong>: την ιδέα του Redux για μία πηγή αλήθειας μόνο για ανάγνωση, χτισμένη πάνω στα signals του Angular αντί για actions και reducers. Τα components δεν φέρνουν ποτέ δεδομένα μόνα τους.",
+        "step": {
+          "component": "Η σελίδα διαβάζει τα signals και το Angular ενημερώνει μόνο ό,τι άλλαξε.",
+          "service": "Ένα service φορτώνει τα δεδομένα με <code>httpResource</code> και μετατρέπει τους τύπους του API σε τύπους frontend.",
+          "store": "Το store τα κρατά ως state (<code>withLinkedState</code>), ώστε να φαίνονται στα Redux DevTools, και προσθέτει μερικές μεθόδους (<code>withMethods</code>)."
+        },
+        "stores": "Τα stores"
+      }
+    },
+    "heading": {
+      "ai-assistant": "Βοηθός AI",
+      "architecture": "Αρχιτεκτονική",
+      "code-coverage": "κάλυψη κώδικα",
+      "contact": "Επικοινωνία",
+      "education": "Εκπαίδευση",
+      "end-to-end-tests": "Τεστ end-to-end",
+      "experience": "εμπειρία",
+      "feature-toggles": "Διακόπτες λειτουργιών",
+      "foundations": "Θεμέλια",
+      "graphql-docs": "graphql docs",
+      "lighthouse": "Lighthouse",
+      "micro-frontends": "Micro-frontends",
+      "personal": "προσωπικά",
+      "project-graph": "Γράφημα έργων",
+      "references": "Συστάσεις",
+      "service-status": "Κατάσταση υπηρεσιών",
+      "skills": "δεξιότητες",
+      "versions": "Εκδόσεις"
+    },
+    "home": {
+      "about-me": "Περισσότερα για μένα",
+      "experience": "Η εμπειρία μου",
+      "portrait": "Πορτρέτο του {name}"
+    },
+    "internship": "Πρακτική άσκηση",
+    "language": {
+      "dutch": "Ολλανδικά",
+      "english": "Αγγλικά",
+      "french": "Γαλλικά",
+      "german": "Γερμανικά",
+      "greek": "Ελληνικά",
+      "hindi": "Χίντι",
+      "italian": "Ιταλικά",
+      "native": "Μητρική",
+      "norwegian": "Νορβηγικά",
+      "proficiency": {
+        "basic": "Βασικό",
+        "excellent": "Άριστο",
+        "fair": "Μέτριο",
+        "good": "Καλό",
+        "very-good": "Πολύ καλό"
+      },
+      "spanish": "Ισπανικά",
+      "switch": "Γλώσσα"
+    },
+    "lighthouse": {
+      "audit": {
+        "message": "Έλεγχος στις {date} με Lighthouse {version}"
+      },
+      "category": {
+        "accessibility": "Προσβασιμότητα",
+        "best-practices": "Βέλτιστες πρακτικές",
+        "performance": "Απόδοση",
+        "seo": "SEO"
+      },
+      "legend": {
+        "average": "Μέτριο",
+        "fail": "Αποτυχία",
+        "pass": "Επιτυχία",
+        "title": "Εύρη βαθμολογίας"
+      },
+      "not-audited": "Δεν έχει ελεγχθεί ακόμα",
+      "page": "Σελίδα"
+    },
+    "micro-frontends": {
+      "lib": {
+        "angular-library": "Βιβλιοθήκη Angular",
+        "demo": "Το πακέτο npm μου από το www.npmjs.com",
+        "intro": "Η αντίθετη προσέγγιση, για σύγκριση: το component έρχεται μαζί με αυτή την εφαρμογή αντί να φορτώνεται από άλλο deployment.",
+        "step": {
+          "bundle": "Αυτή η εφαρμογή το εγκαθιστά και το πακετάρει κατά το build, οπότε τίποτα δεν φορτώνεται κατά την εκτέλεση.",
+          "element": "Διατίθεται επίσης ως web component <code><mac-window></code> (<code>@axel-pauwels/mac-window/element</code>), για οποιοδήποτε framework.",
+          "publish": "Δημοσιεύεται στο npm ως <code>@axel-pauwels/mac-window</code>.",
+          "source": "Το <code>MacWindow</code> βρίσκεται σε αυτό το repository, στο <code>packages/mac-window</code>."
+        },
+        "subtitle": "Πακεταρισμένο κατά το build, από αυτό το repository",
+        "title": "Βιβλιοθήκη components: <lib-mac-window>",
+        "view-npm": "Προβολή στο npmjs",
+        "web-component": "Web component"
+      },
+      "mfe": {
+        "intro": "Μια ξεχωριστή εφαρμογή Angular με δικό της repository και deployment. Αυτή η εφαρμογή δεν περιέχει τον κώδικά της: φορτώνεται στον browser όταν ανοίγει αυτή η σελίδα.",
+        "open-api-docs": "Τεκμηρίωση API του remote",
+        "open-remote": "Εφαρμογή remote",
+        "separate-deployment": "Ξεχωριστό deployment",
+        "step": {
+          "load": "Εδώ, το <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) καλεί το <code>loadRemoteModule('cv-mfe', './web-components')</code>.",
+          "manifest": "Κατά την εκκίνηση, το <code>initFederation()</code> διαβάζει το <code>federation.manifest.json</code>, που αντιστοιχίζει το όνομα <code>cv-mfe</code> στο <code>remoteEntry.json</code> του remote.",
+          "register": "Αυτό το module καταχωρεί το custom element <code><cv-mfe></code> (Angular Elements) και το wrapper το προσθέτει στη σελίδα.",
+          "shared": "Το Angular και το RxJS μοιράζονται με αυτή την εφαρμογή ως singletons (Native Federation), οπότε κατεβαίνουν μόνο μία φορά."
+        },
+        "subtitle": "Φορτώνεται κατά την εκτέλεση, από το δικό του deployment",
+        "title": "Micro-frontend: <cv-mfe>"
+      }
+    },
+    "nav": {
+      "ai-assistant": "Βοηθός AI",
+      "architecture": "Αρχιτεκτονική",
+      "back-to-top": "Επιστροφή στην κορυφή",
+      "code-coverage": "κάλυψη κώδικα",
+      "cv": "Βιογραφικό",
+      "cv-navigation": "Πλοήγηση βιογραφικού",
+      "education": "Εκπαίδευση",
+      "end-to-end-tests": "Τεστ end-to-end",
+      "experience": "Εμπειρία",
+      "feature-toggles": "Διακόπτες λειτουργιών",
+      "foundations": "Θεμέλια",
+      "graphql-docs": "graphql docs",
+      "home": "Αρχική",
+      "light": "Ανοιχτό",
+      "lighthouse": "Lighthouse",
+      "main-navigation": "Κύρια πλοήγηση",
+      "menu": "Μενού",
+      "menu-loading": "Φόρτωση του μενού…",
+      "micro-frontends": "Micro-frontends",
+      "personal": "Προσωπικά",
+      "project-graph": "Γράφημα έργων",
+      "references": "Συστάσεις",
+      "service-status": "Κατάσταση υπηρεσιών",
+      "showcase": "Βιτρίνα",
+      "showcase-navigation": "Πλοήγηση βιτρίνας",
+      "skills": "Δεξιότητες",
+      "technical": "Τεχνικά",
+      "technical-navigation": "Τεχνική πλοήγηση",
+      "versions": "Εκδόσεις"
+    },
+    "personal": {
+      "about-me": {
+        "card": {
+          "description": {
+            "driver-license": {
+              "B": "B"
+            },
+            "marital-status": {
+              "married": "Παντρεμένος"
+            },
+            "nationality": {
+              "BE": "BE"
+            },
+            "personality-type": {
+              "INTJ": "INTJ"
+            }
+          },
+          "title": {
+            "children": "Παιδιά",
+            "date-of-birth": "Ημερομηνία γέννησης",
+            "driver-license": "Δίπλωμα οδήγησης",
+            "location": "Τοποθεσία",
+            "marital-status": "Οικογενειακή κατάσταση",
+            "nationality": "Εθνικότητα",
+            "personality-type": "Τύπος προσωπικότητας"
+          }
+        }
+      },
+      "hobby": {
+        "binge-watching": "Μαραθώνιοι σειρών",
+        "board-games": "Επιτραπέζια παιχνίδια",
+        "comment": {
+          "vlaamse-schietsport-koepel": "Vlaamse SchietsportKoepel",
+          "world-cube-association": "World Cube Association"
+        },
+        "member-of-vsk": "Μέλος της VSK",
+        "member-of-wca": "Μέλος της WCA",
+        "mtg": "Magic The Gathering (TCG)",
+        "rubik-s-cube-competitions": "Διαγωνισμοί κύβου του Ρούμπικ"
+      },
+      "profile": "Senior front-end developer με 8 χρόνια εμπειρίας στην ανάπτυξη επιχειρησιακών web εφαρμογών, από τα οποία τα 5 αποκλειστικά με Angular. Σχεδιάζω και εξελίσσω κρίσιμες για την επιχείρηση εφαρμογές με έμφαση σε συντηρήσιμη αρχιτεκτονική, καθαρό κώδικα και μακροπρόθεσμη κλιμάκωση. Πρακτικός, προσανατολισμένος στην ποιότητα και φυσικός ομαδικός παίκτης σε ομάδες Agile. Χρησιμοποιώ ενεργά σύγχρονες πρακτικές και εργαλεία με τη βοήθεια AI για να παραδίδω ταχύτερα χωρίς συμβιβασμούς στην ποιότητα."
+    },
+    "present": "σήμερα",
+    "reference": {
+      "function": {
+        "business-unit-manager": "Διευθυντής επιχειρησιακής μονάδας",
+        "chef": "Σεφ",
+        "digital-factory-lead": "Επικεφαλής Digital Factory",
+        "lead-back-end-developer": "Επικεφαλής back-end developer",
+        "lead-front-end-developer": "Επικεφαλής front-end developer",
+        "lead-full-stack-developer": "Επικεφαλής full-stack developer",
+        "operations-project-manager": "Επικεφαλής λειτουργιών και έργων",
+        "people-manager-lead-front-end-developer": "People manager και επικεφαλής front-end developer",
+        "qa-lead": "Επικεφαλής QA",
+        "team-lead-lead-front-end-developer": "Επικεφαλής ομάδας και επικεφαλής front-end developer"
+      }
+    },
+    "service-status": {
+      "category": {
+        "api": "API",
+        "cdn": "CDN",
+        "link": "Σύνδεσμοι",
+        "micro-frontend": "Micro-frontends"
+      },
+      "checked-at": "Τελευταίος έλεγχος στις {time}",
+      "column": {
+        "response-time": "Χρόνος απόκρισης",
+        "service": "Υπηρεσία",
+        "status": "Κατάσταση"
+      },
+      "health": {
+        "checking": "Έλεγχος…",
+        "degraded": "Προειδοποίηση",
+        "down": "Σφάλμα",
+        "up": "Προσβάσιμο",
+        "up-status": "OK (HTTP {status})"
+      },
+      "issue": {
+        "http": "HTTP {status}",
+        "slow": "Αργό",
+        "timeout": "Καμία απόκριση εγκαίρως",
+        "unreachable": "Μη προσβάσιμο"
+      },
+      "legend": "Κατάσταση",
+      "links-error": "Δεν ήταν δυνατή η φόρτωση των συνδέσμων προφίλ, επομένως δεν ελέγχονται.",
+      "no-response-time": "Χωρίς χρόνο απόκρισης",
+      "recheck": "Έλεγχος ξανά",
+      "response-time": "{ms} ms",
+      "summary": {
+        "checking": "Έλεγχος των υπηρεσιών…",
+        "done": "Προσβάσιμα: {up} · Προειδοποιήσεις: {degraded} · Σφάλματα: {down}"
+      }
+    },
+    "skill": {
+      "other": {
+        "testing": "Unit, integration και E2E testing"
+      }
+    },
+    "spoken": "Προφορικά",
+    "subheading": {
+      "education": {
+        "certificates": "Πιστοποιητικά",
+        "certificates.description": "Απόδειξη περιέργειας και αφοσίωσης",
+        "training-and-conferences": "Εκπαιδεύσεις και συνέδρια",
+        "training-and-conferences.description": "Πάντα μαθαίνω, πάντα περίεργος"
+      },
+      "feature-toggles": "Η μεγάλη δύναμη φέρνει μεγάλη παραμετροποίηση",
+      "horeca": "Φιλοξενία και εστίαση",
+      "it": "Πληροφορική",
+      "personal": {
+        "about-me": "Σχετικά με μένα",
+        "about-me.description": "Ο άνθρωπος πίσω από τον κώδικα",
+        "connect": "Ας μιλήσουμε",
+        "hobbies-and-interests": "Χόμπι και ενδιαφέροντα",
+        "hobbies-and-interests.description": "Η ζωή πέρα από το τερματικό",
+        "languages": "Γλώσσες",
+        "languages.description": "Χτίζοντας γέφυρες ανάμεσα σε πολιτισμούς"
+      },
+      "skills": {
+        "additional-technologies": "επιπλέον τεχνολογίες",
+        "ai": "AI και agentic development",
+        "core-stack": "βασικό frontend stack",
+        "development-tools": "εργαλεία ανάπτυξης",
+        "engineering-practices": "πρακτικές μηχανικής λογισμικού",
+        "testing-and-quality": "testing και ποιότητα"
+      },
+      "technical": {
+        "dependencies": "Εξαρτήσεις ανά έργο",
+        "dependencies.description": "Κατευθείαν από το γράφημα έργων",
+        "dependency-rules": "Κανόνες εξαρτήσεων",
+        "dependency-rules.description": "Ελέγχονται σε κάθε import",
+        "domains-and-layers": "Τομείς και επίπεδα",
+        "domains-and-layers.description": "Κάθετες τομές, οριζόντια επίπεδα",
+        "icons": "Εικονίδια",
+        "icons.description": "Τρεις γραμματοσειρές, ένα ύφος",
+        "itcss": "Styles σε επίπεδα",
+        "itcss.description": "Inverted triangle CSS",
+        "layers": "Επίπεδα μέσα σε έναν τομέα",
+        "layers.description": "Ποιος κάνει τι",
+        "public-api": "Δημόσιο API",
+        "public-api.description": "Barrels και εσωτερικοί φάκελοι",
+        "state": "State",
+        "state.description": "NgRx signal stores"
+      }
+    },
+    "theme": {
+      "blackberry": "Βατόμουρο",
+      "bronze": "Χαλκός",
+      "earth": "Γη",
+      "fire": "Φωτιά",
+      "gold": "Χρυσός",
+      "grape": "Σταφύλι",
+      "honey": "Μέλι",
+      "kiwi": "Ακτινίδιο",
+      "peach": "Ροδάκινο",
+      "silver": "Ασήμι",
+      "switch": "Θέμα",
+      "tangerine": "Μανταρίνι",
+      "water": "Νερό",
+      "wind": "Άνεμος"
+    },
+    "tour": {
+      "back": "Πίσω",
+      "counter": "{current} / {total}",
+      "exit": "Έξοδος από την ξενάγηση",
+      "finish": "Τέλος",
+      "loading": "Φόρτωση της ξενάγησης…",
+      "next": "Επόμενο",
+      "start": "Έναρξη ξενάγησης",
+      "step": {
+        "ai-assistant": {
+          "label": "Βοηθός AI",
+          "text": "Σας ενδιαφέρουν η εμπειρία, οι δεξιότητες ή οι συστάσεις μου; Κάντε κλικ στο ρομπότ κάτω δεξιά και ο βοηθός AI μου απαντά απευθείας από τα δεδομένα αυτού του ιστότοπου.",
+          "title": "Ρωτήστε τον βοηθό AI μου"
+        },
+        "architecture": {
+          "label": "Αρχιτεκτονική",
+          "text": "Αναρωτιέστε πώς είναι φτιαγμένος αυτός ο ιστότοπος; Η τεχνική ενότητα εξηγεί την αρχιτεκτονική, το γράφημα έργων και τις εκδόσεις που χρησιμοποιούνται.",
+          "title": "Αρχιτεκτονική"
+        },
+        "color-scheme": {
+          "label": "Σκούρο θέμα",
+          "text": "Εναλλαγή ανάμεσα σε ανοιχτή και σκούρη εμφάνιση. Από προεπιλογή, ο ιστότοπος ακολουθεί τη ρύθμιση της συσκευής σας.",
+          "title": "Ανοιχτό και σκούρο θέμα"
+        },
+        "contact": {
+          "label": "Επικοινωνία",
+          "text": "Θέλετε να επικοινωνήσετε; Στείλτε μου email ή βρείτε με στο LinkedIn και στο GitHub με τα εικονίδια κάτω δεξιά.",
+          "title": "Επικοινωνία"
+        },
+        "cv": {
+          "label": "Βιογραφικό",
+          "text": "Εδώ θα βρείτε τα πάντα για μένα: προσωπικά στοιχεία, εκπαίδευση, εμπειρία, δεξιότητες και συστάσεις.",
+          "title": "Το βιογραφικό μου"
+        },
+        "download-cv": {
+          "label": "Λήψη βιογραφικού",
+          "text": "Προτιμάτε να το διαβάσετε εκτός σύνδεσης; Κατεβάστε εδώ το βιογραφικό μου σε PDF.",
+          "title": "Κατεβάστε το βιογραφικό μου"
+        },
+        "finish": {
+          "label": "Τέλος",
+          "text": "Ευχαριστώ που κάνατε την ξενάγηση.",
+          "title": "Αυτό ήταν!"
+        },
+        "fonts": {
+          "label": "Γραμματοσειρές",
+          "text": "Προτιμάτε άλλο στυλ; Αλλάξτε εδώ τη γραμματοσειρά όλου του ιστότοπου.",
+          "title": "Γραμματοσειρές"
+        },
+        "home": {
+          "label": "Αρχική",
+          "text": "Το εικονίδιο του σπιτιού στο μενού σας φέρνει πάντα πίσω σε αυτή τη σελίδα, όπου κι αν βρίσκεστε στον ιστότοπο.",
+          "title": "Αρχική"
+        },
+        "languages": {
+          "label": "Γλώσσες",
+          "text": "Ο ιστότοπος είναι διαθέσιμος στα αγγλικά, ολλανδικά, γαλλικά, ισπανικά, νορβηγικά, ελληνικά και χίντι. Επιλέξτε τη γλώσσα σας εδώ.",
+          "title": "Γλώσσες"
+        },
+        "settings": {
+          "label": "Οι προτιμήσεις σας",
+          "text": "Ρυθμίστε πρώτα τον ιστότοπο όπως σας αρέσει: το χρωματικό θέμα, τη γραμματοσειρά, τις ρυθμίσεις προσβασιμότητας, ανοιχτό ή σκούρο θέμα και τη γλώσσα. Οι επιλογές σας αποθηκεύονται σε αυτή τη συσκευή.",
+          "title": "Προτιμήσεις"
+        },
+        "showcase": {
+          "label": "Βιτρίνα",
+          "text": "Η βιτρίνα δείχνει τεχνικές στην πράξη, όπως micro-frontends, τεκμηρίωση GraphQL, κάλυψη κώδικα και τεστ end-to-end.",
+          "title": "Βιτρίνα"
+        },
+        "technical": {
+          "label": "Τεχνικά",
+          "text": "Αναρωτιέστε πώς είναι φτιαγμένος αυτός ο ιστότοπος; Η τεχνική ενότητα δείχνει το γράφημα έργων, την αρχιτεκτονική, την τεκμηρίωση GraphQL, την κάλυψη κώδικα, τα τεστ end-to-end και τις εκδόσεις που χρησιμοποιούνται.",
+          "title": "Τεχνικά"
+        },
+        "themes": {
+          "label": "Θέματα",
+          "text": "Επιλέξτε εδώ ένα από τα χρωματικά θέματα. Κάθε θέμα φέρνει ταιριαστά χρώματα σε όλο τον ιστότοπο.",
+          "title": "Χρωματικά θέματα"
+        },
+        "welcome": {
+          "label": "Καλώς ήρθατε",
+          "text": "Επιτρέψτε μου να σας ξεναγήσω. Αυτή η σύντομη ξενάγηση σας δείχνει τον ιστότοπο και τις λειτουργίες του. Χρησιμοποιήστε τα κουμπιά παρακάτω ή τα πλήκτρα βέλους και πατήστε Escape για να σταματήσετε οποιαδήποτε στιγμή.",
+          "title": "Καλώς ήρθατε!"
+        }
+      },
+      "step-of": "Βήμα {current} από {total}"
+    },
+    "versions": {
+      "category": {
+        "api": "API",
+        "architecture": "Αρχιτεκτονική",
+        "code-quality": "Ποιότητα κώδικα",
+        "framework": "Framework",
+        "i18n": "i18n",
+        "micro-frontends": "Micro-frontends",
+        "monorepo": "Monorepo",
+        "runtime": "Περιβάλλον εκτέλεσης",
+        "state": "State",
+        "testing": "Testing",
+        "ui": "UI"
+      },
+      "column": {
+        "installed": "Εγκατεστημένη",
+        "name": "Όνομα",
+        "package": "Πακέτο"
+      },
+      "loading": "Φόρτωση των εκδόσεων",
+      "not-available": {
+        "text": "Οι εκδόσεις παράγονται κατά το build και δεν είναι διαθέσιμες εδώ. Εκτελέστε <code>npx nx run technical-data-access-build-info:build-info</code>.",
+        "title": "Οι εκδόσεις δεν είναι διαθέσιμες"
+      }
+    },
+    "website": "ιστότοπος",
+    "written": "Γραπτά"
+  }
+}

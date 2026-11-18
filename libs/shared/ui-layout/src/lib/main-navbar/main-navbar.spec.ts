@@ -54,8 +54,8 @@ describe('MainNavbar', () => {
     const active = await activeLabelAt(url);
 
     // Assert
-    // labels are uppercased in the template
-    expect(active).toBe('SHOWCASE');
+    // the text itself is not uppercased: CSS does that
+    expect(active).toBe('Showcase');
   });
 
   it('falls back to the root item for urls no other item claims', async () => {

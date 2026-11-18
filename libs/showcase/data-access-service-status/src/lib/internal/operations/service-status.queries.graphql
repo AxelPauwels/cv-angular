@@ -1,0 +1,17 @@
+# The profile links the CV shows (contact page, footer, education): each is
+# checked for whether it can be reached.
+
+query ServiceStatusLinks {
+  person {
+    contact {
+      website
+      linkedIn
+      github
+    }
+  }
+  additionalLearnings {
+    uuid
+    name
+    url
+  }
+}

@@ -341,6 +341,10 @@ export const typeDefs = /* GraphQL */ `
     Sopra Steria; empty when the reference worked at the employer itself
     """
     client: String
+
+    """
+    Their role (translation key)
+    """
     function: String!
     name: String!
     phoneNumber: String

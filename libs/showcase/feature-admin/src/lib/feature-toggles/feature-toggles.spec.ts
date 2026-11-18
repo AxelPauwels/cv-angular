@@ -103,7 +103,7 @@ describe('FeatureToggles', () => {
       'Submenu Showcase',
     ]);
     expect(element.querySelectorAll('mat-card')).toHaveLength(6);
-    expect(element.querySelectorAll('mat-slide-toggle')).toHaveLength(26);
+    expect(element.querySelectorAll('mat-slide-toggle')).toHaveLength(27);
   });
 
   it('switches the main menu item off with its last sub menu item, and says so', async () => {
@@ -114,6 +114,10 @@ describe('FeatureToggles', () => {
       false
     );
     TestBed.inject(FeatureToggleService).change('showcase-lighthouse', false);
+    TestBed.inject(FeatureToggleService).change(
+      'showcase-service-status',
+      false
+    );
     TestBed.inject(FeatureToggleService).change('showcase-ai-assistant', false);
     TestBed.inject(MatSnackBar).dismiss();
     await harness.fixture.whenStable();
@@ -137,6 +141,7 @@ describe('FeatureToggles', () => {
     const service = TestBed.inject(FeatureToggleService);
     service.change('showcase-feature-toggles', false);
     service.change('showcase-lighthouse', false);
+    service.change('showcase-service-status', false);
     service.change('showcase-ai-assistant', false);
     service.change('showcase-micro-frontends', false);
     TestBed.inject(MatSnackBar).dismiss();
@@ -175,6 +180,7 @@ describe('FeatureToggles', () => {
     const service = TestBed.inject(FeatureToggleService);
     service.change('showcase-feature-toggles', false);
     service.change('showcase-lighthouse', false);
+    service.change('showcase-service-status', false);
     service.change('showcase-ai-assistant', false);
     TestBed.inject(MatSnackBar).dismiss();
     toggle('showcase-micro-frontends')?.click();

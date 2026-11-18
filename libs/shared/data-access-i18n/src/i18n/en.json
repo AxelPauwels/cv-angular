@@ -233,7 +233,6 @@
     "experience": {
       "job-description": {
         "innomedio": {
-          "projects": "Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...",
           "support": "Handled bug fixing, phone support and the support-ticket system while managing my own planning.",
           "technologies": "Technology: Maintaining and expanding the in-house developed CMS system in Symfony with Scss. Providing telephone support for customers with issues or expansions, and managing the support ticket system in Teamleader. Also GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ...",
           "websites": "Built new websites and webshops and extended custom CMS platforms"
@@ -249,7 +248,6 @@
           "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,..."
         },
         "ravago": {
-          "platform": "Drive the evolution of the front-end platform on Angular, Nx monorepos, GraphQL/Apollo and Kendo UI, improving maintainability, scalability and developer productivity.",
           "projects": "Warehouse Management System (WMS), later WMS2. Both as desktop app for office and mobile app for handheld scanners in warehouses.",
           "technologies": "Technology: Angular (Typescript/Scss) with Nx and the UI framework Kendo. Furthermore, Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise...",
           "wms": "Design, build and evolve the WMS: a business-critical application covering stock, production and order handling – desktop for office staff, mobile for warehouse operators with scanners.",
@@ -368,8 +366,7 @@
       },
       "state": {
         "devtools": {
-          "alt": "Placeholder for a screenshot of the Redux DevTools browser extension",
-          "caption": "The Redux DevTools browser extension can follow a signal store through <code>withDevtools</code> from ngrx-toolkit. Screenshot coming soon."
+          "alt": "Placeholder for a screenshot of the Redux DevTools browser extension"
         },
         "intro": "Every data-access library has an <strong>NgRx Signal Store</strong>: the Redux idea of one read-only source of truth, built on Angular signals instead of actions and reducers. Components never fetch data themselves.",
         "step": {
@@ -389,13 +386,14 @@
       "end-to-end-tests": "End-to-end tests",
       "experience": "experience",
       "feature-toggles": "Feature toggles",
-      "foundations": "Frontend foundations",
+      "foundations": "Foundations",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
       "micro-frontends": "Micro-frontends",
       "personal": "personal",
       "project-graph": "Project graph",
       "references": "References",
+      "service-status": "Service status",
       "skills": "skills",
       "versions": "Versions"
     },
@@ -410,8 +408,11 @@
       "english": "English",
       "french": "French",
       "german": "German",
+      "greek": "Greek",
+      "hindi": "Hindi",
       "italian": "Italian",
       "native": "Native",
+      "norwegian": "Norwegian",
       "proficiency": {
         "basic": "Basic",
         "excellent": "Excellent",
@@ -495,6 +496,7 @@
       "personal": "Personal",
       "project-graph": "Project graph",
       "references": "References",
+      "service-status": "Service status",
       "showcase": "Showcase",
       "showcase-navigation": "Showcase navigation",
       "skills": "Skills",
@@ -545,6 +547,57 @@
       "profile": "Senior front-end developer with 8 years of experience building enterprise web applications, of which 5 years fully dedicated to Angular. I design and evolve business-critical applications with a strong focus on maintainable architecture, clean code and long-term scalability. Pragmatic, quality-driven and a natural team player in Agile teams. I actively use modern practices and AI-assisted tooling to deliver faster without compromising on quality."
     },
     "present": "present",
+    "reference": {
+      "function": {
+        "business-unit-manager": "Business Unit Manager",
+        "chef": "Chef",
+        "digital-factory-lead": "Digital Factory Lead",
+        "lead-back-end-developer": "Lead Back-End Developer",
+        "lead-front-end-developer": "Lead Front-End Developer",
+        "lead-full-stack-developer": "Lead Full-Stack Developer",
+        "operations-project-manager": "Operations & Project Manager",
+        "people-manager-lead-front-end-developer": "People Manager & Lead Front-End Developer",
+        "qa-lead": "QA Lead",
+        "team-lead-lead-front-end-developer": "Team Lead & Lead Front-End Developer"
+      }
+    },
+    "service-status": {
+      "category": {
+        "api": "APIs",
+        "cdn": "CDNs",
+        "link": "Links",
+        "micro-frontend": "Micro-frontends"
+      },
+      "checked-at": "Last checked at {time}",
+      "column": {
+        "response-time": "Response time",
+        "service": "Service",
+        "status": "Status"
+      },
+      "health": {
+        "checking": "Checking…",
+        "degraded": "Warning",
+        "down": "Error",
+        "up": "Reachable",
+        "up-status": "OK (HTTP {status})"
+      },
+      "issue": {
+        "http": "HTTP {status}",
+        "slow": "Slow",
+        "timeout": "No answer in time",
+        "unreachable": "Unreachable"
+      },
+      "legend": "Status",
+      "links-error": "The profile links could not be loaded, so they are not checked.",
+      "no-response-time": "No response time",
+      "note": "Most websites don’t let other sites read their answers. For those, only whether they answer is known, not the status code: a missing page still counts as reachable. Slower than 2 seconds counts as a warning, no answer within 8 seconds as an error.",
+      "recheck": "Check again",
+      "response-time": "{ms} ms",
+      "summary": {
+        "checking": "Checking the services…",
+        "done": "Reachable: {up} · Warnings: {degraded} · Errors: {down}"
+      }
+    },
     "skill": {
       "other": {
         "testing": "Unit, integration & E2E testing"
@@ -586,7 +639,7 @@
         "domains-and-layers": "Domains & layers",
         "domains-and-layers.description": "Vertical slices, horizontal layers",
         "icons": "Icons",
-        "icons.description": "Two fonts and animated icons",
+        "icons.description": "Three fonts, one look",
         "itcss": "Styles in layers",
         "itcss.description": "Inverted triangle CSS",
         "layers": "Layers inside a domain",

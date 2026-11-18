@@ -96,6 +96,7 @@ export const LIGHTHOUSE_SECTIONS: readonly LighthouseSection[] = [
         ROUTES.SHOWCASE.MICRO_FRONTENDS_ROUTER_LINK
       ),
       page('t.nav.lighthouse', ROUTES.SHOWCASE.LIGHTHOUSE_ROUTER_LINK),
+      page('t.nav.service-status', ROUTES.SHOWCASE.SERVICE_STATUS_ROUTER_LINK),
       page('t.nav.ai-assistant', ROUTES.SHOWCASE.AI_ASSISTANT_ROUTER_LINK),
       page(
         't.nav.feature-toggles',

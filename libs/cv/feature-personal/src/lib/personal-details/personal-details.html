@@ -32,7 +32,7 @@
           </dt>
           <!-- one line: whitespace between the parts would show, e.g. a double space in "Leuven,  Belgium" -->
           <!-- prettier-ignore -->
-          <dd class="personal-details__fact-value">@for (part of fact.value; track $index) {@switch (part.kind) {@case ('key') {{{ part.text | translate }}} @case ('date') {{{ part.date | date: 'longDate' }}} @default {{{ part.text }}}}}</dd>
+          <dd class="personal-details__fact-value">@for (part of fact.value; track $index) {@switch (part.kind) {@case ('key') {{{ part.text | translate }}} @case ('date') {{{ part.date | localDate: language() }}} @default {{{ part.text }}}}}</dd>
         </div>
         }
       </dl>

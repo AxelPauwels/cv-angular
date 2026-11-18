@@ -341,6 +341,7 @@ type Reference {
   workCategory: ExperienceCategory!
   "When the reference worked in the given work category"
   workCategoryPeriod: Period!
+  "Their role (translation key)"
   function: String!
   phoneNumber: String
 }
