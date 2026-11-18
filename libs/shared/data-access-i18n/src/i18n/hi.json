@@ -233,7 +233,6 @@
     "experience": {
       "job-description": {
         "innomedio": {
-          "projects": "Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...",
           "support": "अपनी योजना खुद संभालते हुए बग फ़िक्सिंग, फ़ोन सपोर्ट और सपोर्ट-टिकट सिस्टम संभाला।",
           "technologies": "तकनीक: Symfony और Scss में इन-हाउस विकसित CMS सिस्टम का रखरखाव और विस्तार। समस्याओं या विस्तार वाले ग्राहकों को फ़ोन सपोर्ट देना, और Teamleader में सपोर्ट टिकट सिस्टम संभालना। साथ ही GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ...",
           "websites": "नई वेबसाइटें और वेबशॉप बनाईं और कस्टम CMS प्लैटफ़ॉर्म का विस्तार किया"
@@ -249,7 +248,6 @@
           "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,..."
         },
         "ravago": {
-          "platform": "Angular, Nx मोनोरिपो, GraphQL/Apollo और Kendo UI पर फ़्रंट-एंड प्लैटफ़ॉर्म के विकास को आगे बढ़ाना, जिससे मेंटेनेबिलिटी, स्केलेबिलिटी और डेवलपर उत्पादकता बेहतर हो।",
           "projects": "Warehouse Management System (WMS), बाद में WMS2। ऑफ़िस के लिए डेस्कटॉप ऐप और गोदामों में हैंडहेल्ड स्कैनर के लिए मोबाइल ऐप, दोनों रूपों में।",
           "technologies": "तकनीक: Nx और UI फ़्रेमवर्क Kendo के साथ Angular (Typescript/Scss)। इसके अलावा Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise...",
           "wms": "WMS को डिज़ाइन करना, बनाना और विकसित करना: स्टॉक, उत्पादन और ऑर्डर प्रबंधन को कवर करने वाला एक बिज़नेस-क्रिटिकल एप्लिकेशन – ऑफ़िस स्टाफ़ के लिए डेस्कटॉप पर, स्कैनर वाले गोदाम कर्मचारियों के लिए मोबाइल पर।",
@@ -388,13 +386,14 @@
       "end-to-end-tests": "एंड-टू-एंड टेस्ट",
       "experience": "अनुभव",
       "feature-toggles": "फ़ीचर टॉगल",
-      "foundations": "फ़्रंटएंड की बुनियाद",
+      "foundations": "बुनियाद",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
       "micro-frontends": "माइक्रो-फ़्रंटएंड",
       "personal": "व्यक्तिगत",
       "project-graph": "प्रोजेक्ट ग्राफ़",
       "references": "रेफ़रेंस",
+      "service-status": "सेवा स्थिति",
       "skills": "कौशल",
       "versions": "संस्करण"
     },
@@ -497,6 +496,7 @@
       "personal": "व्यक्तिगत",
       "project-graph": "प्रोजेक्ट ग्राफ़",
       "references": "रेफ़रेंस",
+      "service-status": "सेवा स्थिति",
       "showcase": "शोकेस",
       "showcase-navigation": "शोकेस नेविगेशन",
       "skills": "कौशल",
@@ -561,6 +561,42 @@
         "team-lead-lead-front-end-developer": "टीम लीड और लीड फ़्रंट-एंड डेवलपर"
       }
     },
+    "service-status": {
+      "category": {
+        "api": "API",
+        "cdn": "CDN",
+        "link": "लिंक",
+        "micro-frontend": "Micro-frontends"
+      },
+      "checked-at": "अंतिम जाँच: {time}",
+      "column": {
+        "response-time": "प्रतिक्रिया समय",
+        "service": "सेवा",
+        "status": "स्थिति"
+      },
+      "health": {
+        "checking": "जाँच हो रही है…",
+        "degraded": "चेतावनी",
+        "down": "त्रुटि",
+        "up": "पहुँच योग्य",
+        "up-status": "ठीक (HTTP {status})"
+      },
+      "issue": {
+        "http": "HTTP {status}",
+        "slow": "धीमा",
+        "timeout": "समय पर कोई जवाब नहीं",
+        "unreachable": "पहुँच से बाहर"
+      },
+      "legend": "स्थिति",
+      "links-error": "प्रोफ़ाइल लिंक लोड नहीं हो सके, इसलिए उनकी जाँच नहीं की गई।",
+      "no-response-time": "कोई प्रतिक्रिया समय नहीं",
+      "recheck": "फिर से जाँचें",
+      "response-time": "{ms} ms",
+      "summary": {
+        "checking": "सेवाओं की जाँच हो रही है…",
+        "done": "पहुँच योग्य: {up} · चेतावनियाँ: {degraded} · त्रुटियाँ: {down}"
+      }
+    },
     "skill": {
       "other": {
         "testing": "यूनिट, इंटीग्रेशन और E2E टेस्टिंग"
@@ -602,7 +638,7 @@
         "domains-and-layers": "डोमेन और लेयर",
         "domains-and-layers.description": "लंबवत हिस्से, क्षैतिज लेयर",
         "icons": "आइकन",
-        "icons.description": "दो फ़ॉन्ट और एनिमेटेड आइकन",
+        "icons.description": "तीन फ़ॉन्ट, एक लुक",
         "itcss": "लेयर में स्टाइल",
         "itcss.description": "Inverted triangle CSS",
         "layers": "डोमेन के अंदर लेयर",

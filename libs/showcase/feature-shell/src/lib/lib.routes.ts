@@ -29,6 +29,13 @@ export const showcaseFeatureShellRoutes: Route[] = [
           ),
       },
       {
+        path: ROUTES.SHOWCASE.SERVICE_STATUS,
+        loadComponent: () =>
+          import('@cv/showcase-feature-service-status').then(
+            (m) => m.ServiceStatusPage
+          ),
+      },
+      {
         path: ROUTES.SHOWCASE.AI_ASSISTANT,
         loadComponent: () =>
           import('@cv/showcase-feature-ai-assistant').then(

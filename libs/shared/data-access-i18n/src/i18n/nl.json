@@ -233,7 +233,6 @@
     "experience": {
       "job-description": {
         "innomedio": {
-          "projects": "Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...",
           "support": "Bugfixing, telefonische support en beheer van het ticketsysteem, met zelfstandige planning.",
           "technologies": "Technologie: Het eigen ontwikkeld CMS systeem in Symfony met Scss onderhouden en uitbreiden. Telefonische ondersteuning voor klanten met problemen of uitbreidingen, en het beheren van het support ticketsysteem in Teamleader. Verder ook GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ...",
           "websites": "Nieuwe websites en webshops gebouwd en custom CMS-platformen uitgebreid"
@@ -249,7 +248,6 @@
           "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,..."
         },
         "ravago": {
-          "platform": "Verdere uitbouw van het front-end platform met Angular, Nx-monorepos, GraphQL/Apollo en Kendo UI, met betere onderhoudbaarheid, schaalbaarheid en ontwikkelproductiviteit als resultaat.",
           "projects": "Warehouse Management System (WMS), later WMS2. Beide als desktop app voor in office en mobile app voor handscanners in magazijn.",
           "technologies": "Technologie: Angular (Typescript/Scss) met Nx en het UI framework Kendo. Verder Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise ...",
           "wms": "Ontwerpen, bouwen en uitbreiden van het WMS: een bedrijfskritische applicatie voor stock-, productie- en orderbeheer – desktop voor kantoor, mobiel voor magazijniers met scanners.",
@@ -388,13 +386,14 @@
       "end-to-end-tests": "End-to-end tests",
       "experience": "ervaring",
       "feature-toggles": "Feature toggles",
-      "foundations": "Frontend-fundamenten",
+      "foundations": "Fundamenten",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
       "micro-frontends": "Micro-frontends",
       "personal": "persoonlijk",
       "project-graph": "Projectgraaf",
       "references": "Referenties",
+      "service-status": "Servicestatus",
       "skills": "Vaardigheden",
       "versions": "versies"
     },
@@ -497,6 +496,7 @@
       "personal": "Persoonlijk",
       "project-graph": "Projectgraaf",
       "references": "Referenties",
+      "service-status": "Servicestatus",
       "showcase": "Showcase",
       "showcase-navigation": "Showcase-navigatie",
       "skills": "Vaardigheden",
@@ -561,6 +561,42 @@
         "team-lead-lead-front-end-developer": "Teamleader & lead front-end developer"
       }
     },
+    "service-status": {
+      "category": {
+        "api": "API’s",
+        "cdn": "CDN’s",
+        "link": "Links",
+        "micro-frontend": "Micro-frontends"
+      },
+      "checked-at": "Laatst gecontroleerd om {time}",
+      "column": {
+        "response-time": "Responstijd",
+        "service": "Service",
+        "status": "Status"
+      },
+      "health": {
+        "checking": "Bezig met controleren…",
+        "degraded": "Waarschuwing",
+        "down": "Fout",
+        "up": "Bereikbaar",
+        "up-status": "OK (HTTP {status})"
+      },
+      "issue": {
+        "http": "HTTP {status}",
+        "slow": "Traag",
+        "timeout": "Geen antwoord op tijd",
+        "unreachable": "Onbereikbaar"
+      },
+      "legend": "Status",
+      "links-error": "De profiellinks konden niet geladen worden, dus ze worden niet gecontroleerd.",
+      "no-response-time": "Geen responstijd",
+      "recheck": "Opnieuw controleren",
+      "response-time": "{ms} ms",
+      "summary": {
+        "checking": "De services worden gecontroleerd…",
+        "done": "Bereikbaar: {up} · Waarschuwingen: {degraded} · Fouten: {down}"
+      }
+    },
     "skill": {
       "other": {
         "testing": "Unit-, integratie- & E2E-testen"
@@ -602,7 +638,7 @@
         "domains-and-layers": "Domeinen & lagen",
         "domains-and-layers.description": "Verticale slices, horizontale lagen",
         "icons": "Iconen",
-        "icons.description": "Twee fonts en geanimeerde iconen",
+        "icons.description": "Drie fonts, één stijl",
         "itcss": "Stijlen in lagen",
         "itcss.description": "Inverted triangle CSS",
         "layers": "Lagen binnen een domein",

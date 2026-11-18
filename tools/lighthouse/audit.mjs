@@ -51,6 +51,7 @@ const PAGES = [
   '/technical/versions',
   '/showcase/micro-frontends',
   '/showcase/lighthouse',
+  '/showcase/service-status',
   '/showcase/ai-assistant',
   '/showcase/feature-toggles',
 ];

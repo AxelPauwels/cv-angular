@@ -1,0 +1,52 @@
+{
+  "t": {
+    "heading": {
+      "service-status": "Servicestatus"
+    },
+    "nav": {
+      "service-status": "Servicestatus"
+    },
+    "service-status": {
+      "category": {
+        "api": "API’s",
+        "cdn": "CDN’s",
+        "link": "Links",
+        "micro-frontend": "Micro-frontends"
+      },
+      "check": {
+        "reachability": "Controleert of hij antwoordt",
+        "status": "Controleert de HTTP-status"
+      },
+      "checked-at": "Laatst gecontroleerd om {time}",
+      "column": {
+        "response-time": "Responstijd",
+        "service": "Service",
+        "status": "Status"
+      },
+      "health": {
+        "checking": "Bezig met controleren…",
+        "degraded": "Waarschuwing",
+        "down": "Fout",
+        "up": "Bereikbaar",
+        "up-status": "OK (HTTP {status})"
+      },
+      "intro": "Alles wat deze site van elders laadt of waar ze naar linkt: micro-frontends, CDN’s, API’s en profiellinks. Je browser controleert ze nu allemaal.",
+      "issue": {
+        "http": "HTTP {status}",
+        "slow": "Traag",
+        "timeout": "Geen antwoord op tijd",
+        "unreachable": "Onbereikbaar"
+      },
+      "legend": "Status",
+      "links-error": "De profiellinks konden niet geladen worden, dus ze worden niet gecontroleerd.",
+      "no-response-time": "Geen responstijd",
+      "note": "De meeste websites laten andere sites hun antwoorden niet lezen. Daarvan is alleen bekend of ze antwoorden, niet de statuscode: een ontbrekende pagina telt nog als bereikbaar. Trager dan 2 seconden telt als waarschuwing, geen antwoord binnen 8 seconden als fout.",
+      "recheck": "Opnieuw controleren",
+      "response-time": "{ms} ms",
+      "summary": {
+        "checking": "De services worden gecontroleerd…",
+        "done": "Bereikbaar: {up} · Waarschuwingen: {degraded} · Fouten: {down}"
+      }
+    }
+  }
+}

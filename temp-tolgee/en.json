@@ -1,0 +1,52 @@
+{
+  "t": {
+    "heading": {
+      "service-status": "Service status"
+    },
+    "nav": {
+      "service-status": "Service status"
+    },
+    "service-status": {
+      "category": {
+        "api": "APIs",
+        "cdn": "CDNs",
+        "link": "Links",
+        "micro-frontend": "Micro-frontends"
+      },
+      "check": {
+        "reachability": "Checks whether it answers",
+        "status": "Checks the HTTP status"
+      },
+      "checked-at": "Last checked at {time}",
+      "column": {
+        "response-time": "Response time",
+        "service": "Service",
+        "status": "Status"
+      },
+      "health": {
+        "checking": "Checking…",
+        "degraded": "Warning",
+        "down": "Error",
+        "up": "Reachable",
+        "up-status": "OK (HTTP {status})"
+      },
+      "intro": "Everything this site loads from or links to elsewhere: micro-frontends, CDNs, APIs and profile links. Your browser checks each one right now.",
+      "issue": {
+        "http": "HTTP {status}",
+        "slow": "Slow",
+        "timeout": "No answer in time",
+        "unreachable": "Unreachable"
+      },
+      "legend": "Status",
+      "links-error": "The profile links could not be loaded, so they are not checked.",
+      "no-response-time": "No response time",
+      "note": "Most websites don’t let other sites read their answers. For those, only whether they answer is known, not the status code: a missing page still counts as reachable. Slower than 2 seconds counts as a warning, no answer within 8 seconds as an error.",
+      "recheck": "Check again",
+      "response-time": "{ms} ms",
+      "summary": {
+        "checking": "Checking the services…",
+        "done": "Reachable: {up} · Warnings: {degraded} · Errors: {down}"
+      }
+    }
+  }
+}

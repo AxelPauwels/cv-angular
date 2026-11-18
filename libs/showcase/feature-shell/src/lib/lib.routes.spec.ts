@@ -10,6 +10,7 @@ import { showcaseFeatureShellRoutes } from './lib.routes';
 const SHOWCASE_TOGGLES = [
   'showcase-micro-frontends',
   'showcase-lighthouse',
+  'showcase-service-status',
   'showcase-ai-assistant',
   'showcase-feature-toggles',
 ] as const;
@@ -30,6 +31,7 @@ describe('showcaseFeatureShellRoutes', () => {
     const toggles = TestBed.inject(FeatureToggleService);
     toggles.change('showcase-micro-frontends', true);
     toggles.change('showcase-lighthouse', true);
+    toggles.change('showcase-service-status', true);
     toggles.change('showcase-ai-assistant', true);
     toggles.change('showcase-feature-toggles', true);
 
@@ -46,6 +48,7 @@ describe('showcaseFeatureShellRoutes', () => {
     ).toEqual([
       'Micro-frontends',
       'Lighthouse',
+      'Service status',
       'AI assistant',
       'Feature toggles',
     ]);
@@ -62,6 +65,7 @@ describe('showcaseFeatureShellRoutes', () => {
     const toggles = TestBed.inject(FeatureToggleService);
     toggles.change('showcase-micro-frontends', true);
     toggles.change('showcase-lighthouse', false);
+    toggles.change('showcase-service-status', false);
     toggles.change('showcase-ai-assistant', false);
     toggles.change('showcase-feature-toggles', false);
 
@@ -108,6 +112,7 @@ describe('showcaseFeatureShellRoutes', () => {
       configure({
         'showcase-micro-frontends': false,
         'showcase-lighthouse': false,
+        'showcase-service-status': false,
         'showcase-ai-assistant': false,
         'showcase-feature-toggles': false,
       });
@@ -147,6 +152,7 @@ describe('showcaseFeatureShellRoutes', () => {
   it.each([
     [ROUTES.SHOWCASE.MICRO_FRONTENDS, 'showcase-micro-frontends'],
     [ROUTES.SHOWCASE.LIGHTHOUSE, 'showcase-lighthouse-report'],
+    [ROUTES.SHOWCASE.SERVICE_STATUS, 'showcase-service-status'],
     [ROUTES.SHOWCASE.AI_ASSISTANT, 'showcase-ai-assistant'],
     [ROUTES.SHOWCASE.FEATURE_TOGGLES, 'showcase-feature-toggles'],
   ])('lazy loads the "%s" page as <%s>', async (path, selector) => {

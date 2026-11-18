@@ -18,6 +18,11 @@ export const SHOWCASE_NAV_ITEMS: readonly (NavItem & {
     toggle: 'showcase-lighthouse',
   },
   {
+    labelKey: 't.nav.service-status',
+    path: ROUTES.SHOWCASE.SERVICE_STATUS,
+    toggle: 'showcase-service-status',
+  },
+  {
     labelKey: 't.nav.ai-assistant',
     path: ROUTES.SHOWCASE.AI_ASSISTANT,
     toggle: 'showcase-ai-assistant',

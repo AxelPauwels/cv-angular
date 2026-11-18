@@ -233,7 +233,6 @@
     "experience": {
       "job-description": {
         "innomedio": {
-          "projects": "Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...",
           "support": "Håndterte feilretting, telefonstøtte og supportsaksystemet, og styrte min egen planlegging.",
           "technologies": "Teknologi: Vedlikehold og videreutvikling av det egenutviklede CMS-systemet i Symfony med Scss. Telefonstøtte for kunder med problemer eller utvidelser, og håndtering av supportsaksystemet i Teamleader. I tillegg GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ...",
           "websites": "Bygde nye nettsteder og nettbutikker og utvidet skreddersydde CMS-plattformer"
@@ -249,7 +248,6 @@
           "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,..."
         },
         "ravago": {
-          "platform": "Drive utviklingen av front-end-plattformen med Angular, Nx-monorepoer, GraphQL/Apollo og Kendo UI, og forbedre vedlikeholdbarhet, skalerbarhet og utviklerproduktivitet.",
           "projects": "Warehouse Management System (WMS), senere WMS2. Både som skrivebordsapp for kontoret og mobilapp for håndholdte skannere på lagrene.",
           "technologies": "Teknologi: Angular (Typescript/Scss) med Nx og UI-rammeverket Kendo. Videre Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise...",
           "wms": "Designe, bygge og videreutvikle WMS-et: en forretningskritisk applikasjon for lager, produksjon og ordrehåndtering – på skrivebordet for kontoransatte, på mobil for lagerarbeidere med skannere.",
@@ -388,13 +386,14 @@
       "end-to-end-tests": "Ende-til-ende-tester",
       "experience": "erfaring",
       "feature-toggles": "Funksjonsbrytere",
-      "foundations": "Frontend-grunnlag",
+      "foundations": "Grunnlag",
       "graphql-docs": "graphql-dokumentasjon",
       "lighthouse": "Lighthouse",
       "micro-frontends": "Mikro-frontends",
       "personal": "personlig",
       "project-graph": "Prosjektgraf",
       "references": "Referanser",
+      "service-status": "Tjenestestatus",
       "skills": "ferdigheter",
       "versions": "Versjoner"
     },
@@ -497,6 +496,7 @@
       "personal": "Personlig",
       "project-graph": "Prosjektgraf",
       "references": "Referanser",
+      "service-status": "Tjenestestatus",
       "showcase": "Utstilling",
       "showcase-navigation": "Utstillingsnavigasjon",
       "skills": "Ferdigheter",
@@ -561,6 +561,42 @@
         "team-lead-lead-front-end-developer": "Teamleder og ledende front-end-utvikler"
       }
     },
+    "service-status": {
+      "category": {
+        "api": "API-er",
+        "cdn": "CDN-er",
+        "link": "Lenker",
+        "micro-frontend": "Micro-frontends"
+      },
+      "checked-at": "Sist sjekket kl. {time}",
+      "column": {
+        "response-time": "Responstid",
+        "service": "Tjeneste",
+        "status": "Status"
+      },
+      "health": {
+        "checking": "Sjekker…",
+        "degraded": "Advarsel",
+        "down": "Feil",
+        "up": "Tilgjengelig",
+        "up-status": "OK (HTTP {status})"
+      },
+      "issue": {
+        "http": "HTTP {status}",
+        "slow": "Treg",
+        "timeout": "Ingen svar i tide",
+        "unreachable": "Utilgjengelig"
+      },
+      "legend": "Status",
+      "links-error": "Profillenkene kunne ikke lastes, så de blir ikke sjekket.",
+      "no-response-time": "Ingen responstid",
+      "recheck": "Sjekk igjen",
+      "response-time": "{ms} ms",
+      "summary": {
+        "checking": "Sjekker tjenestene…",
+        "done": "Tilgjengelig: {up} · Advarsler: {degraded} · Feil: {down}"
+      }
+    },
     "skill": {
       "other": {
         "testing": "Enhets-, integrasjons- og E2E-testing"
@@ -602,7 +638,7 @@
         "domains-and-layers": "Domener og lag",
         "domains-and-layers.description": "Vertikale snitt, horisontale lag",
         "icons": "Ikoner",
-        "icons.description": "To skrifter og animerte ikoner",
+        "icons.description": "Tre skrifter, ett uttrykk",
         "itcss": "Stiler i lag",
         "itcss.description": "Inverted triangle CSS",
         "layers": "Lag innenfor et domene",

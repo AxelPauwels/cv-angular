@@ -94,6 +94,7 @@ describe('appRoutes', () => {
     expect(page.sub).toEqual([
       'Micro-frontends',
       'Lighthouse',
+      'Service status',
       'AI assistant',
       'Feature toggles',
     ]);
