@@ -80,7 +80,18 @@ Only after phase A is green (if it isn't, ask whether to open the PR anyway).
 
 Trigger: `gh pr list --state merged --base main` shows a `release/*` PR whose merge commit is not yet in local `develop` (`git rev-list --count develop..origin/main` > 0).
 
-1. Optionally confirm the release finished on GitHub: `gh run list --branch main --limit 5` / `gh release view x.y.z`. A failed Tag or Deploy job → report it, but the back-merge can still go ahead.
+1. Verify the release on GitHub (V = the version from the merged `release/V` branch name). All must agree:
+   ```bash
+   git fetch --tags origin
+   git rev-parse -q --verify "refs/tags/$V^{commit}"                           # tag V exists…
+   gh pr view <release PR number> --json mergeCommit -q .mergeCommit.oid      # …and points at this merge commit
+   gh release view "$V" --json tagName,isDraft -q '"\(.tagName) draft=\(.isDraft)"'   # GitHub release V, not a draft
+   for f in package.json package-lock.json; do
+     echo "$f: $(git show "origin/main:$f" | node -p "JSON.parse(require('fs').readFileSync(0)).version")"
+   done                                                                        # both say V on main
+   gh run list --branch main --limit 5 --json name,conclusion,headSha,url     # Release / Deploy live succeeded
+   ```
+   If the tag or GitHub release is missing, points elsewhere, or a version differs: **stop and report** (with the failing run's link). Don't create or move tags yourself; the tag ruleset forbids moving them, and the Tag job owns creating them. A failed **Deploy live** with a correct tag → report it (it can be redeployed via _Actions → Deploy live_); the back-merge can still go ahead once the user agrees.
 2. Update main with the default (merge) strategy, local `main` only — never push it:
    ```bash
    git switch main
@@ -147,8 +158,17 @@ git worktree add --quiet -b "release/$V" "$DIR" <green develop SHA>
 git -C "$DIR" add package.json package-lock.json
 git -C "$DIR" commit --quiet --no-verify -m "chore(release): $V"
 git worktree remove --force "$DIR"
+
+# Verify before pushing: both files say $V, and the version commit changes nothing else
+for f in package.json package-lock.json; do
+  echo "$f: $(git show "release/$V:$f" | node -p "JSON.parse(require('fs').readFileSync(0)).version")"
+done
+git diff --name-only "release/$V~1" "release/$V"   # exactly package.json and package-lock.json
+
 SKIP_VERSION_PROMPT=1 git push -u origin "release/$V"
 ```
+
+Push only when both versions print `$V` and the commit touches exactly those two files; otherwise don't push, clean up as below and report. The **Version** check on the release PR checks the same thing again on GitHub.
 
 Anything fails before the push → `git worktree remove --force "$DIR"` and `git branch -D "release/$V"` (it's your own unpushed branch), then report. Push fails → delete the local branch again and report. Your checked-out `develop` stays untouched.
 
