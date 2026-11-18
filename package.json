@@ -57,6 +57,7 @@
   "private": true,
   "dependencies": {
     "@ag-ui/core": "1.0.3",
+    "@angular-architects/ngrx-toolkit": "^22.0.0",
     "@angular/animations": "~22.2.0",
     "@angular/cdk": "~22.2.5",
     "@angular/common": "~22.2.0",
