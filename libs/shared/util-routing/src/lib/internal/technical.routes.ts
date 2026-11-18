@@ -3,6 +3,8 @@ export const TECHNICAL = {
   ROOT_ROUTER_LINK: '/technical',
   ARCHITECTURE: 'architecture',
   ARCHITECTURE_ROUTER_LINK: '/technical/architecture',
+  FOUNDATIONS: 'foundations',
+  FOUNDATIONS_ROUTER_LINK: '/technical/foundations',
   PROJECT_GRAPH: 'project-graph',
   PROJECT_GRAPH_ROUTER_LINK: '/technical/project-graph',
   GRAPHQL_DOCS: 'graphql-docs',

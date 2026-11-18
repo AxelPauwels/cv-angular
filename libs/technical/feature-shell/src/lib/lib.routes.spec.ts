@@ -12,6 +12,7 @@ import { technicalFeatureShellRoutes } from './lib.routes';
 // every technical page, so the tests don't depend on the toggle defaults
 const TECHNICAL_PAGES = [
   'technical-architecture',
+  'technical-foundations',
   'technical-project-graph',
   'technical-graphql-docs',
   'technical-code-coverage',
@@ -49,6 +50,7 @@ describe('technicalFeatureShellRoutes', () => {
       )
     ).toEqual([
       'Architecture',
+      'Foundations',
       'Project graph',
       'graphql docs',
       'code coverage',
@@ -68,6 +70,7 @@ describe('technicalFeatureShellRoutes', () => {
     const toggles = TestBed.inject(FeatureToggleService);
     switchOnAllPages(toggles);
     toggles.change('technical-architecture', false);
+    toggles.change('technical-foundations', false);
     toggles.change('technical-graphql-docs', false);
 
     // Act

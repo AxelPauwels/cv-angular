@@ -8,6 +8,7 @@ test.describe('ds-page-title', () => {
     ['/cv/education', 'Education'],
     ['/cv/skills', 'skills'],
     ['/showcase/micro-frontends', 'Micro-frontends'],
+    ['/technical/foundations', 'Frontend foundations'],
     ['/technical/versions', 'Versions'],
   ] as const) {
     test(`gives ${url} exactly one translated <h1>`, async ({ page }) => {

@@ -1,0 +1,227 @@
+<ds-page-layout>
+  <ds-page-title title="t.heading.foundations" />
+
+  <!-- texts with inline <code> or <strong>: translateParts renders them without innerHTML -->
+  <ng-template #parts let-key>
+    @for (part of key | translateParts; track $index) { @switch (part.tag) {
+    @case ('code') {<code class="foundations-overview__code"
+      >{{ part.text }}</code
+    >} @case ('strong') {<strong>{{ part.text }}</strong>} @default {{{
+    part.text }}} } }
+  </ng-template>
+
+  <!-- Styles: the ITCSS layers as an inverted triangle -->
+  <section
+    class="foundations-overview__section"
+    aria-labelledby="foundations-itcss-title">
+    <ds-section-heading
+      headingId="foundations-itcss-title"
+      title="t.subheading.technical.itcss"
+      tagline="t.subheading.technical.itcss.description" />
+
+    <p class="foundations-overview__text">
+      <ng-container
+        [ngTemplateOutlet]="parts"
+        [ngTemplateOutletContext]="{ $implicit: 't.foundations.itcss.intro' }" />
+    </p>
+
+    <p class="foundations-overview__axis" aria-hidden="true">
+      <span>{{ 't.foundations.itcss.axis.broad' | translate }}</span>
+      <mat-icon fontSet="material-symbols-outlined">arrow_downward</mat-icon>
+      <span>{{ 't.foundations.itcss.axis.specific' | translate }}</span>
+    </p>
+
+    <ol class="foundations-overview__layers">
+      @for (layer of layers; track layer.folder; let index = $index) {
+      <li class="foundations-overview__layer" [style.--layer]="index">
+        <div class="foundations-overview__bar">
+          <span class="foundations-overview__layer-name">
+            {{ layer.nameKey | translate }}
+          </span>
+          @if (layer.namespace) {
+          <code class="foundations-overview__namespace"
+            >.{{ layer.namespace }}*</code
+          >
+          }
+        </div>
+        <p class="foundations-overview__layer-text">
+          <ng-container
+            [ngTemplateOutlet]="parts"
+            [ngTemplateOutletContext]="{ $implicit: layer.textKey }" />
+        </p>
+      </li>
+      }
+    </ol>
+  </section>
+
+  <!-- Icons: two fonts, one for the UI and one for logos -->
+  <section
+    class="foundations-overview__section"
+    aria-labelledby="foundations-icons-title">
+    <ds-section-heading
+      headingId="foundations-icons-title"
+      title="t.subheading.technical.icons"
+      tagline="t.subheading.technical.icons.description" />
+
+    <dl class="foundations-overview__fonts">
+      <div class="foundations-overview__font">
+        <dt class="foundations-overview__font-name">
+          <!-- IcoMoon's logo, from the Icomoon font -->
+          <span
+            class="cv-icon cv-icon-icomoon foundations-overview__icon"
+            aria-hidden="true"></span>
+          Icomoon
+        </dt>
+        <dd class="foundations-overview__font-text">
+          <span class="foundations-overview__font-description">
+            <ng-container
+              [ngTemplateOutlet]="parts"
+              [ngTemplateOutletContext]="{ $implicit: 't.foundations.icons.icomoon' }" />
+          </span>
+          <!-- a decorative sample of the font -->
+          <span class="foundations-overview__glyphs" aria-hidden="true">
+            @for (icon of icons; track icon.name) {
+            <span
+              class="cv-icon foundations-overview__glyph"
+              [class]="'cv-icon-' + icon.name"></span>
+            }
+          </span>
+        </dd>
+      </div>
+      <div class="foundations-overview__font">
+        <dt class="foundations-overview__font-name">
+          <!-- Angular, from the Icomoon font -->
+          <span
+            class="cv-icon cv-icon-angular foundations-overview__icon"
+            aria-hidden="true"></span>
+          Material Symbols
+        </dt>
+        <dd class="foundations-overview__font-text">
+          <span class="foundations-overview__font-description">
+            <ng-container
+              [ngTemplateOutlet]="parts"
+              [ngTemplateOutletContext]="{ $implicit: 't.foundations.icons.material' }" />
+          </span>
+          <!-- a decorative sample of the font -->
+          <span class="foundations-overview__glyphs" aria-hidden="true">
+            @for (icon of materialIcons; track icon.icon) {
+            <mat-icon
+              class="foundations-overview__glyph"
+              fontSet="material-symbols-outlined"
+              >{{ icon.icon }}</mat-icon
+            >
+            }
+          </span>
+        </dd>
+      </div>
+      <div class="foundations-overview__font">
+        <dt class="foundations-overview__font-name">
+          <!-- Lordicon's logo, from the Icomoon font -->
+          <span
+            class="cv-icon cv-icon-lordicon foundations-overview__icon"
+            aria-hidden="true"></span>
+          Lordicon
+        </dt>
+        <dd class="foundations-overview__font-text">
+          <span class="foundations-overview__font-description">
+            <ng-container
+              [ngTemplateOutlet]="parts"
+              [ngTemplateOutletContext]="{ $implicit: 't.foundations.icons.lordicon' }" />
+          </span>
+          <!-- decorative: each icon plays once while it is hovered -->
+          <span class="foundations-overview__glyphs" aria-hidden="true">
+            @for (icon of lordicons; track icon) {
+            <ds-lordicon
+              class="foundations-overview__glyph foundations-overview__glyph--lordicon"
+              target="ds-lordicon"
+              stroke="bold"
+              thick
+              [icon]="icon" />
+            }
+          </span>
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- State: NgRx signal stores -->
+  <section
+    class="foundations-overview__section"
+    aria-labelledby="foundations-state-title">
+    <ds-section-heading
+      headingId="foundations-state-title"
+      title="t.subheading.technical.state"
+      tagline="t.subheading.technical.state.description" />
+
+    <p class="foundations-overview__text">
+      <ng-container
+        [ngTemplateOutlet]="parts"
+        [ngTemplateOutletContext]="{ $implicit: 't.foundations.state.intro' }" />
+    </p>
+
+    <ol class="foundations-overview__flow">
+      <li class="foundations-overview__step">
+        <mat-icon
+          class="foundations-overview__icon"
+          fontSet="material-symbols-outlined"
+          aria-hidden="true"
+          >cloud_download</mat-icon
+        >
+        <span>
+          <ng-container
+            [ngTemplateOutlet]="parts"
+            [ngTemplateOutletContext]="{ $implicit: 't.foundations.state.step.service' }" />
+        </span>
+      </li>
+      <li class="foundations-overview__step">
+        <mat-icon
+          class="foundations-overview__icon"
+          fontSet="material-symbols-outlined"
+          aria-hidden="true"
+          >database</mat-icon
+        >
+        <span>
+          <ng-container
+            [ngTemplateOutlet]="parts"
+            [ngTemplateOutletContext]="{ $implicit: 't.foundations.state.step.store' }" />
+        </span>
+      </li>
+      <li class="foundations-overview__step">
+        <mat-icon
+          class="foundations-overview__icon"
+          fontSet="material-symbols-outlined"
+          aria-hidden="true"
+          >web</mat-icon
+        >
+        <span>
+          <ng-container
+            [ngTemplateOutlet]="parts"
+            [ngTemplateOutletContext]="{ $implicit: 't.foundations.state.step.component' }" />
+        </span>
+      </li>
+    </ol>
+
+    <h3 class="foundations-overview__subtitle" id="foundations-stores">
+      {{ 't.foundations.state.stores' | translate }}
+    </h3>
+    <ul
+      class="foundations-overview__stores"
+      aria-labelledby="foundations-stores">
+      @for (store of stores; track store) {
+      <li><code class="foundations-overview__code">{{ store }}</code></li>
+      }
+    </ul>
+
+    <figure class="foundations-overview__figure">
+      <!-- a placeholder until there is a real Redux DevTools screenshot -->
+      <img
+        class="foundations-overview__image"
+        src="/assets/images/technical/redux-devtools.png"
+        width="960"
+        height="540"
+        loading="lazy"
+        decoding="async"
+        [alt]="'t.foundations.state.devtools.alt' | translate" />
+    </figure>
+  </section>
+</ds-page-layout>

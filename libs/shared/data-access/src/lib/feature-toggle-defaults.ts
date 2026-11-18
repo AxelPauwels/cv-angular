@@ -30,6 +30,7 @@ export const FEATURE_TOGGLE_DEFAULTS = {
   // Technical
   'main-menu-technical': true, // main
   'technical-architecture': true,
+  'technical-foundations': true,
   'technical-project-graph': true,
   'technical-graphql-docs': true,
   'technical-code-coverage': true,

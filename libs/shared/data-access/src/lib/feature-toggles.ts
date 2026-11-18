@@ -71,6 +71,12 @@ export const FEATURE_TOGGLES = [
     'main-menu-technical'
   ),
   menuItem(
+    'technical-foundations',
+    'technical-menu',
+    't.nav.foundations',
+    'main-menu-technical'
+  ),
+  menuItem(
     'technical-project-graph',
     'technical-menu',
     't.nav.project-graph',

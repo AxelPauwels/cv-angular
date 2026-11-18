@@ -28,6 +28,13 @@ export const technicalFeatureShellRoutes: Route[] = [
           ),
       },
       {
+        path: ROUTES.TECHNICAL.FOUNDATIONS,
+        loadComponent: () =>
+          import('@cv/technical-feature-foundations').then(
+            (m) => m.FoundationsOverview
+          ),
+      },
+      {
         path: ROUTES.TECHNICAL.PROJECT_GRAPH,
         component: EmbeddedPage,
         data: {

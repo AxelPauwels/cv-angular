@@ -41,6 +41,23 @@ describe('technical nav items', () => {
     expect(path).toBe(ROUTES.TECHNICAL.VERSIONS);
   });
 
+  it('lists Foundations second, switched by its own toggle', () => {
+    // Arrange
+    const items = TECHNICAL_NAV_ITEMS;
+
+    // Act
+    const foundations = items[1];
+    const path = onlyOn('technical-foundations');
+
+    // Assert
+    expect(foundations).toEqual({
+      labelKey: 't.nav.foundations',
+      path: ROUTES.TECHNICAL.FOUNDATIONS,
+      toggle: 'technical-foundations',
+    });
+    expect(path).toBe(ROUTES.TECHNICAL.FOUNDATIONS);
+  });
+
   it('falls back to the first page when every page is off', () => {
     // Arrange
     const none: string[] = [];

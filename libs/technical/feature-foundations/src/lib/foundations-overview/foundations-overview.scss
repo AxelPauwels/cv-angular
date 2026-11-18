@@ -1,0 +1,244 @@
+// Flat sections in the style of the Architecture page: a ds-section-heading per
+// section, round decorative icons, outlined containers. Colors only from the
+// Material system tokens of the active theme palette.
+:host {
+  display: block;
+}
+
+.foundations-overview {
+  &__section {
+    container-type: inline-size;
+    margin-top: 3rem;
+  }
+
+  &__text {
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-body-large);
+    margin: 0 0 1.5rem;
+    max-width: 48rem;
+  }
+
+  &__subtitle {
+    font: var(--mat-sys-title-medium);
+    margin: 2rem 0 1rem;
+  }
+
+  &__code {
+    background-color: var(--mat-sys-surface-container-high);
+    border-radius: var(--mat-sys-corner-extra-small);
+    color: var(--mat-sys-on-surface);
+    font-size: 0.875em;
+    padding: 0.0625rem 0.375rem;
+  }
+
+  // A small icon on a round background, like the Architecture page (decorative)
+  &__icon {
+    align-items: center;
+    background-color: var(--mat-sys-secondary-container);
+    border: 1px solid transparent; // an outline in forced colors
+    border-radius: 50%;
+    box-sizing: content-box;
+    color: var(--mat-sys-on-secondary-container);
+    display: flex;
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    height: 1.25rem;
+    justify-content: center;
+    line-height: 1;
+    padding: 0.625rem;
+    width: 1.25rem;
+  }
+
+  // --- ITCSS: every layer a bar, narrower the more specific it gets ---
+
+  &__axis {
+    align-items: center;
+    color: var(--mat-sys-on-surface-variant);
+    display: flex;
+    font: var(--mat-sys-label-large);
+    gap: 0.5rem;
+    margin: 0 0 1rem;
+  }
+
+  &__layers {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // the inverted triangle: each layer narrower than the one above it.
+  // Stacked (narrow screens), the whole layer narrows, so the text under a
+  // bar is as wide as the bar: 100% for settings down to 60% for utilities
+  &__layer {
+    display: grid;
+    gap: 0.375rem;
+    margin-inline: calc(var(--layer) * 2.5%);
+
+    @container (min-width: 48rem) {
+      align-items: center;
+      gap: 1.5rem;
+      grid-template-columns: 26rem minmax(0, 1fr);
+      margin-inline: 0;
+    }
+  }
+
+  // the name in the middle, the class prefix (if any) at the end
+  &__bar {
+    align-items: baseline;
+    background-color: var(--mat-sys-primary-container);
+    border: 1px solid transparent; // a visible edge in forced colors
+    border-radius: var(--mat-sys-corner-small);
+    box-sizing: border-box;
+    color: var(--mat-sys-on-primary-container);
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    padding: 0.625rem 1rem;
+
+    // next to their text only the bars narrow: down to 44%, the smallest
+    // width that still fits the centered name and the class prefix on one line
+    @container (min-width: 48rem) {
+      margin-inline: calc(var(--layer) * 3.5%);
+    }
+  }
+
+  &__layer-name {
+    font: var(--mat-sys-title-small);
+    grid-column: 2;
+    text-align: center;
+  }
+
+  &__namespace {
+    font-size: 0.875rem;
+    grid-column: 3;
+    justify-self: end;
+    white-space: nowrap;
+  }
+
+  &__layer-text {
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-body-medium);
+    margin: 0;
+  }
+
+  // --- Icons: two icon fonts and the animated Lordicons ---
+
+  // stacked, then three cards side by side (no two-plus-one in between)
+  &__fonts {
+    display: grid;
+    gap: 1.5rem;
+    margin: 0;
+
+    @container (min-width: 48rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  // a column, so the icon row can sit at the bottom: side by side, the cards
+  // are equally high and their rows start on the same line
+  &__font {
+    border: 1px solid var(--mat-sys-outline-variant);
+    border-radius: var(--mat-sys-corner-large);
+    container-type: inline-size;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
+  }
+
+  &__font-name {
+    align-items: center;
+    display: flex;
+    font: var(--mat-sys-title-medium);
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  &__font-text {
+    color: var(--mat-sys-on-surface-variant);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    font: var(--mat-sys-body-medium);
+    margin: 0;
+  }
+
+  // the sample icons at the bottom of the card, the same size in every card,
+  // spread evenly: two rows of three in a narrow card, one row of six
+  // (6 x 1.75rem + 5 x 1rem gap = 15.5rem) once it fits
+  &__glyphs {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, 1.75rem);
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 1.25rem;
+
+    // the card's inner width (inside its padding)
+    @container (min-width: 15.5rem) {
+      grid-template-columns: repeat(6, 1.75rem);
+    }
+  }
+
+  &__glyph {
+    color: var(--mat-sys-primary);
+    font-size: 1.75rem;
+    height: 1.75rem;
+    line-height: 1;
+    width: 1.75rem;
+
+    // one color, like the glyphs next to it: both Lordicon tones the same
+    // primary, so no gradient (only here; the footer keeps its two tones)
+    &--lordicon {
+      --lord-icon-primary: var(--mat-sys-primary);
+      --lord-icon-secondary: var(--mat-sys-primary);
+    }
+  }
+
+  // --- State: data flow, the stores, a DevTools screenshot ---
+
+  &__flow {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    max-width: 48rem;
+    padding: 0;
+  }
+
+  &__step {
+    align-items: center;
+    display: flex;
+    font: var(--mat-sys-body-large);
+    gap: 1rem;
+  }
+
+  &__stores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__figure {
+    margin: 2rem 0 0;
+    max-width: 48rem;
+  }
+
+  &__image {
+    border: 1px solid var(--mat-sys-outline-variant);
+    border-radius: var(--mat-sys-corner-large);
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+
+  &__caption {
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-body-small);
+    margin-top: 0.75rem;
+  }
+}
