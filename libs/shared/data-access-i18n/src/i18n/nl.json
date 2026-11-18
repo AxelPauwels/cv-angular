@@ -233,7 +233,6 @@
     "experience": {
       "job-description": {
         "innomedio": {
-          "projects": "Dobit, Lalys-astene, Allodium, Goetstouwers, Dego,...",
           "support": "Bugfixing, telefonische support en beheer van het ticketsysteem, met zelfstandige planning.",
           "technologies": "Technologie: Het eigen ontwikkeld CMS systeem in Symfony met Scss onderhouden en uitbreiden. Telefonische ondersteuning voor klanten met problemen of uitbreidingen, en het beheren van het support ticketsysteem in Teamleader. Verder ook GrumPhp, Docker, SequelPro, Git, GitLab, Confluence, ...",
           "websites": "Nieuwe websites en webshops gebouwd en custom CMS-platformen uitgebreid"
@@ -249,7 +248,6 @@
           "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,..."
         },
         "ravago": {
-          "platform": "Verdere uitbouw van het front-end platform met Angular, Nx-monorepos, GraphQL/Apollo en Kendo UI, met betere onderhoudbaarheid, schaalbaarheid en ontwikkelproductiviteit als resultaat.",
           "projects": "Warehouse Management System (WMS), later WMS2. Beide als desktop app voor in office en mobile app voor handscanners in magazijn.",
           "technologies": "Technologie: Angular (Typescript/Scss) met Nx en het UI framework Kendo. Verder Prettier, Eslint, stylelint, Jest, codegen, Graphql, Git, GitHub, Jira, Confluence, Jenkins, Figma, Localise ...",
           "wms": "Ontwerpen, bouwen en uitbreiden van het WMS: een bedrijfskritische applicatie voor stock-, productie- en orderbeheer – desktop voor kantoor, mobiel voor magazijniers met scanners.",
