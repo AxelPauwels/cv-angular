@@ -1,5 +1,6 @@
 import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { getState } from '@ngrx/signals';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { inBrowserGraphqlInterceptor } from '@cv/shared-data-access';
 import { ReferenceStore } from './reference.store';
@@ -51,5 +52,19 @@ describe('ReferenceStore', () => {
     expect(loadingDuringReload).toBe(true);
     expect(store.isLoading()).toBe(false);
     expect(store.references().length).toBeGreaterThan(0);
+  });
+
+  it('keeps the loaded data as state, so the Redux DevTools show it', async () => {
+    // Arrange
+    const store = TestBed.inject(ReferenceStore);
+
+    // Act
+    await TestBed.inject(ApplicationRef).whenStable();
+
+    // Assert
+    expect(getState(store)).toEqual({
+      references: store.references(),
+      isLoading: false,
+    });
   });
 });

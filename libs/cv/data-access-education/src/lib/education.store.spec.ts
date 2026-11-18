@@ -1,5 +1,6 @@
 import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { getState } from '@ngrx/signals';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   HttpTestingController,
@@ -63,6 +64,22 @@ describe('EducationStore', () => {
     expect(store.educations().length).toBeGreaterThan(0);
   });
 
+  it('keeps the loaded data as state, so the Redux DevTools show it', async () => {
+    // Arrange
+    const store = TestBed.inject(EducationStore);
+
+    // Act
+    await TestBed.inject(ApplicationRef).whenStable();
+
+    // Assert
+    expect(getState(store)).toEqual({
+      educations: store.educations(),
+      certificates: store.certificates(),
+      additionalLearnings: store.additionalLearnings(),
+      trainings: store.trainings(),
+      isLoading: false,
+    });
+  });
   describe('against a server', () => {
     beforeEach(() => {
       TestBed.resetTestingModule();

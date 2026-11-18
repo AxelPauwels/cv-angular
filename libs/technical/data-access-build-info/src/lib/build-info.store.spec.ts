@@ -1,5 +1,6 @@
 import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { getState } from '@ngrx/signals';
 import { provideHttpClient } from '@angular/common/http';
 import {
   HttpTestingController,
@@ -22,7 +23,7 @@ describe('build info stores', () => {
       .expectOne('federation.manifest.json')
       .flush({});
 
-  it('loads the installed versions', async () => {
+  it('loads the installed versions, as state', async () => {
     // Arrange
     const store = TestBed.inject(VersionStore);
 
@@ -46,9 +47,14 @@ describe('build info stores', () => {
     // Assert
     expect(store.packages().map((entry) => entry.label)).toEqual(['Angular']);
     expect(store.error()).toBeUndefined();
+    // kept as state, so the Redux DevTools show it
+    expect(getState(store)).toEqual({
+      packages: store.packages(),
+      isLoading: false,
+    });
   });
 
-  it('loads the projects and rules', async () => {
+  it('loads the projects and rules, as state', async () => {
     // Arrange
     const store = TestBed.inject(ArchitectureStore);
 
@@ -73,6 +79,11 @@ describe('build info stores', () => {
 
     // Assert
     expect(store.projects()[0].name).toBe('api');
+    expect(getState(store)).toEqual({
+      projects: store.projects(),
+      rules: store.rules(),
+      isLoading: false,
+    });
     expect(store.rules()[0].from).toBe('type:api');
   });
 
