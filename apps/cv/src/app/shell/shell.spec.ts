@@ -61,6 +61,7 @@ describe('Shell', () => {
     const toggles = TestBed.inject(FeatureToggleService);
     const technicalPages = [
       'technical-architecture',
+      'technical-foundations',
       'technical-project-graph',
       'technical-graphql-docs',
       'technical-code-coverage',

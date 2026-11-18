@@ -1,5 +1,6 @@
 import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { getState } from '@ngrx/signals';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { inBrowserGraphqlInterceptor } from '@cv/shared-data-access';
 import { PersonStore } from './person.store';
@@ -62,5 +63,19 @@ describe('PersonStore', () => {
     expect(loadingDuringReload).toBe(true);
     expect(store.isLoading()).toBe(false);
     expect(store.person()?.firstName).toBe('Axel');
+  });
+
+  it('keeps the loaded data as state, so the Redux DevTools show it', async () => {
+    // Arrange
+    const store = TestBed.inject(PersonStore);
+
+    // Act
+    await TestBed.inject(ApplicationRef).whenStable();
+
+    // Assert
+    expect(getState(store)).toEqual({
+      person: store.person(),
+      isLoading: false,
+    });
   });
 });

@@ -38,6 +38,46 @@ describe('Lordicon', () => {
     expect(icon.getAttribute('src')).toBe('assets/lordicon/icuxkywm.json');
   });
 
+  it.each([
+    ['layers', 'noncoqhc'],
+    ['code-branch', 'zkiskfnp'],
+    ['terminal', 'eeolefdw'],
+    ['mail', 'icuxkywm'],
+    ['linkedin', 'bnzbstbp'],
+    ['github', 'acgiczyg'],
+  ] as const)('loads the %s icon from its own file', async (name, file) => {
+    // Arrange
+    const fixture = TestBed.createComponent(Lordicon);
+    fixture.componentRef.setInput('icon', name);
+
+    // Act
+    await fixture.whenStable();
+
+    // Assert
+    const icon = (fixture.nativeElement as HTMLElement).querySelector(
+      'lord-icon'
+    );
+    expect(icon?.getAttribute('src')).toBe(`assets/lordicon/${file}.json`);
+  });
+
+  it('loads the thick copy of the icon only when asked to', async () => {
+    // Arrange
+    const fixture = TestBed.createComponent(Lordicon);
+    fixture.componentRef.setInput('icon', 'layers');
+    fixture.componentRef.setInput('thick', true);
+
+    // Act
+    await fixture.whenStable();
+
+    // Assert
+    const icon = (fixture.nativeElement as HTMLElement).querySelector(
+      'lord-icon'
+    );
+    expect(icon?.getAttribute('src')).toBe(
+      'assets/lordicon/noncoqhc.thick.json'
+    );
+  });
+
   it('is hidden from screen readers and keeps its placeholder until ready', async () => {
     // Arrange
     const fixture = TestBed.createComponent(Host);

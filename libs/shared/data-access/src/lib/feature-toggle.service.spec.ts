@@ -110,6 +110,7 @@ describe('FeatureToggleService', () => {
     const service = TestBed.inject(FeatureToggleService);
     const allButVersions = [
       'technical-architecture',
+      'technical-foundations',
       'technical-project-graph',
       'technical-graphql-docs',
       'technical-code-coverage',

@@ -2,15 +2,15 @@
 
 @font-face {
   font-family: '#{$icomoon-font-family}';
-  src: url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?6h7gdf');
+  src: url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?hdwxe');
   src:
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?6h7gdf#iefix')
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?hdwxe#iefix')
       format('embedded-opentype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?6h7gdf')
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?hdwxe')
       format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?6h7gdf')
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?hdwxe')
       format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?6h7gdf##{$icomoon-font-family}')
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?hdwxe##{$icomoon-font-family}')
       format('svg');
   font-weight: normal;
   font-style: normal;
@@ -32,6 +32,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.cv-icon-icomoon {
+  &:before {
+    content: $cv-icon-icomoon;
+  }
+}
+.cv-icon-lordicon {
+  &:before {
+    content: $cv-icon-lordicon;
+  }
+}
 .cv-icon-nestjs {
   &:before {
     content: $cv-icon-nestjs;

@@ -1,50 +1,15 @@
 {
   "t": {
     "accessibility": {
-      "close": "Fermer",
       "high-contrast": "Contraste renforcé",
       "reduce-motion": "Réduire les animations",
-      "reset": "Rétablir les valeurs par défaut",
       "switch": "Paramètres d'accessibilité",
       "text-size": "Taille du texte",
       "text-spacing": "Espacement du texte élargi",
       "title": "Accessibilité"
     },
-    "admin": {
-      "count": "{on} sur {total} activés",
-      "hidden-notice": "La page Admin n’apparaît plus dans le menu. Vous pouvez toujours l’ouvrir via /showcase/feature-toggles en cliquant sur « Axel Pauwels » dans le pied de page.",
-      "linked": {
-        "off": "{item} également désactivé.",
-        "on": "{item} également activé."
-      },
-      "reset": "Rétablir les valeurs par défaut",
-      "section": {
-        "general": {
-          "title": "Général"
-        },
-        "main-menu": {
-          "title": "Menu principal"
-        },
-        "navbar": {
-          "title": "Icônes de la barre de navigation"
-        },
-        "submenu": {
-          "title": "Sous-menu"
-        }
-      },
-      "title": "Administration",
-      "toggle": {
-        "color-scheme-switcher": {
-          "label": "Mode clair et sombre"
-        },
-        "tour-button": {
-          "label": "Bouton de visite sur la page d’accueil"
-        }
-      }
-    },
     "ai-assistant": {
       "assistant": "Assistant",
-      "disclaimer": "Les réponses sont générées par Google Gemini et peuvent contenir des erreurs. Vos questions sont envoyées à Google via Firebase.",
       "error": "Une erreur s'est produite pendant la réponse. Veuillez réessayer.",
       "hint": "Entrée pour envoyer, Maj+Entrée pour une nouvelle ligne.",
       "intro": "Posez n'importe quelle question sur moi, mon travail, ses compétences ou ses références.",
@@ -140,12 +105,6 @@
       }
     },
     "at": "à",
-    "carousel": {
-      "carousel": "carrousel",
-      "next": "Suivant",
-      "page": "Page {current} sur {total}",
-      "previous": "Précédent"
-    },
     "city": {
       "paris": "Paris"
     },
@@ -157,16 +116,12 @@
     "common": {
       "cv": "CV",
       "download-cv": "Télécharger le CV",
-      "email": "E-mail",
       "loading": "Chargement",
-      "load-report": "Charger le rapport",
       "new-tab": "(nouvel onglet)",
       "new-tab-url": "({url}, nouvel onglet)",
       "ok": "OK",
-      "pdf": "PDF",
       "reset": "Rétablir par défaut",
-      "technologies": "Technologies",
-      "under-construction": "Cette page est en construction. Revenez bientôt !"
+      "technologies": "Technologies"
     },
     "competence": {
       "ai-assisted-development": {
@@ -219,7 +174,6 @@
         "name": "Nom",
         "subject": "Objet"
       },
-      "required-hint": "Tous les champs sont obligatoires.",
       "send": "Envoyer",
       "sending": "Envoi de votre message…",
       "sent": "Merci ! Votre message a été envoyé. Je vous répondrai rapidement.",
@@ -228,7 +182,6 @@
     "country": {
       "belgium": "Belgique"
     },
-    "daughter": "fille",
     "education": {
       "bellouet-conseil": {
         "degree": "Diplôme de Sucre tiré | Diplôme de sucre coulé & sucre soufflé",
@@ -293,8 +246,7 @@
           "agile": "Livraison au sein d’équipes Agile/Scrum, en contact étroit avec les clients.",
           "front-end": "Développement de solutions front-end réutilisables et évolutives pour des boutiques en ligne, avec une architecture ITCSS en Sass, ainsi que du React et du Sulu.",
           "magento": "Développement et personnalisation de plateformes e-commerce Magento 2 (B2C/B2B)",
-          "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,...",
-          "technologies": "Technologies : J’ai principalement travaillé avec Magento 2 (PHP/Less), ainsi qu’avec React et Sulu. J’ai également exploré le CSS en triangle inversé (ITCSS) de SEM&BIO en Sass. J’ai aussi utilisé GrumPHP, Vagrant, SequelPro, Git, Figma, Bitbucket, Jira, Confluence, Jenkins, et d’autres outils."
+          "projects": "Pizzahut, Scouts en Gidsen Vlaanderen, Euroshop, Vinetiq, VAR,..."
         },
         "ravago": {
           "platform": "Faire évoluer la plateforme front-end basée sur Angular, les monorepos Nx, GraphQL/Apollo et Kendo UI, en améliorant la maintenabilité, l’évolutivité et la productivité des développeurs.",
@@ -349,7 +301,6 @@
           "title": "Sous-menu"
         }
       },
-      "title": "Administration",
       "toggle": {
         "color-scheme-switcher": {
           "label": "Mode clair et sombre"
@@ -362,8 +313,75 @@
     "font": {
       "switch": "Police"
     },
+    "foundations": {
+      "icons": {
+        "icomoon": "Logos de marques et de technologies issus de plusieurs jeux d’icônes et de mes propres SVG, réunis dans une seule police auto-hébergée avec l’application IcoMoon. Un fichier, une requête, et chaque logo prend la taille et la couleur du texte qui l’entoure : <code>cv-icon cv-icon-angular</code>.",
+        "lordicon": "Des icônes animées : chaque icône est une petite animation Lottie qui se joue au survol. Les fichiers JSON sont servis par ce site, jamais par le CDN de Lordicon, et le lecteur ne se charge qu’à l’apparition de la première icône. Survolez-en une ci-dessous.",
+        "material": "Icônes d’interface (menu, fermer, envoyer, …) de Google Fonts. Un script de build repère les icônes utilisées dans le code et ne demande que celles-ci : un sous-ensemble de quelques Kio au lieu de la police complète.",
+        "sample": "Quelques glyphes Icomoon"
+      },
+      "intro": "Les conventions sur lesquelles repose chaque page : comment les styles globaux sont organisés en couches, d’où viennent les icônes et comment les données arrivent aux composants.",
+      "itcss": {
+        "addition": "Ajout de SEM&BIO",
+        "axis": {
+          "broad": "Portée large, faible spécificité",
+          "specific": "Portée étroite, forte spécificité"
+        },
+        "intro": "Les styles globaux dans <code>apps/cv/src/styles</code> suivent <strong>ITCSS</strong> (Inverted Triangle CSS), tel que je l’ai appris chez SEM&BIO. Chaque couche est un dossier, importé dans l’ordre : d’abord les règles larges à faible spécificité, puis les règles étroites et spécifiques, pour qu’une couche suivante l’emporte sans guerre de spécificité. Les styles des composants restent encapsulés dans Angular ; les couches ne contiennent que ce qui est vraiment global.",
+        "layer": {
+          "components": {
+            "name": "Components",
+            "text": "Éléments d’interface autonomes. Presque vide ici : les composants Angular portent leurs propres styles encapsulés."
+          },
+          "elements": {
+            "name": "Elements",
+            "text": "Éléments HTML nus, sans classe : <code>html</code>, <code>body</code>, la barre de défilement."
+          },
+          "objects": {
+            "name": "Objects",
+            "text": "Motifs de mise en page qui disposent plutôt qu’ils ne décorent, partagés par toutes les pages."
+          },
+          "patterns": {
+            "name": "Patterns",
+            "text": "Composants trop spécifiques pour être réutilisés, comme un en-tête particulier."
+          },
+          "scopes": {
+            "name": "Scopes",
+            "text": "Une spécificité supplémentaire pour un seul contexte, comme <code>.c-accordion.s-homepage</code>. Volontairement presque vide."
+          },
+          "settings": {
+            "name": "Settings",
+            "text": "Variables et définitions de polices : typographie, espacements, breakpoints et la police Icomoon."
+          },
+          "tools": {
+            "name": "Tools",
+            "text": "Mixins et fonctions. Ils ne produisent aucun CSS tant qu’une autre couche ne les utilise pas."
+          },
+          "utilities": {
+            "name": "Utilities",
+            "text": "Classes utilitaires à usage unique qui l’emportent toujours, la seule couche où <code>!important</code> est permis, comme les classes d’accessibilité et de police."
+          },
+          "vendors": {
+            "name": "Vendors",
+            "text": "Styles tiers, placés haut dans la pile pour que les couches suivantes puissent les surcharger : le thème Angular Material, ses palettes et ses surcharges."
+          }
+        }
+      },
+      "state": {
+        "devtools": {
+          "alt": "Image provisoire pour une capture d’écran de l’extension de navigateur Redux DevTools",
+          "caption": "L’extension de navigateur Redux DevTools peut suivre un signal store grâce à <code>withDevtools</code> de ngrx-toolkit. Capture d’écran à venir."
+        },
+        "intro": "Chaque bibliothèque data-access possède un <strong>NgRx Signal Store</strong> : l’idée de Redux d’une source de vérité unique en lecture seule, construite sur les signals d’Angular au lieu d’actions et de reducers. Les composants ne récupèrent jamais les données eux-mêmes.",
+        "step": {
+          "component": "La page lit les signals, et Angular ne met à jour que ce qui a changé.",
+          "service": "Un service charge les données avec <code>httpResource</code> et convertit les types de l’API en types frontend.",
+          "store": "Le store les garde comme state (<code>withLinkedState</code>), visible dans les Redux DevTools, et ajoute quelques méthodes (<code>withMethods</code>)."
+        },
+        "stores": "Les stores"
+      }
+    },
     "heading": {
-      "administrator": "Administrateur",
       "ai-assistant": "Assistant IA",
       "architecture": "Architecture",
       "code-coverage": "couverture du code",
@@ -372,6 +390,7 @@
       "end-to-end-tests": "Tests de bout en bout",
       "experience": "Expérience",
       "feature-toggles": "Caractéristiques",
+      "foundations": "Fondations du frontend",
       "graphql-docs": "graphql docs",
       "lighthouse": "Lighthouse",
       "micro-frontends": "Micro-frontends",
@@ -455,24 +474,21 @@
       }
     },
     "nav": {
-      "admin": "Admin",
       "ai-assistant": "Assistant IA",
       "architecture": "Architecture",
       "back-to-top": "Retour en haut",
       "code-coverage": "couverture du code",
       "cv": "CV",
       "cv-navigation": "Navigation du CV",
-      "dark": "Sombre",
-      "dark-mode": "mode sombre ",
       "education": "Formation",
       "end-to-end-tests": "Tests de bout en bout",
       "experience": "Expérience",
       "feature-toggles": "Caractéristiques",
+      "foundations": "Fondations",
       "graphql-docs": "graphql docs",
       "home": "Maison",
       "light": "Clair",
       "lighthouse": "Lighthouse",
-      "light-mode": "mode clair",
       "main-navigation": "Navigation principale",
       "menu": "Menu",
       "menu-loading": "Chargement du menu…",
@@ -485,9 +501,6 @@
       "skills": "Compétences",
       "technical": "Technique",
       "technical-navigation": "Navigation technique",
-      "temp": {
-        "more": "Plus..."
-      },
       "versions": "Versions"
     },
     "personal": {
@@ -538,10 +551,8 @@
         "testing": "Tests unitaires, d’intégration & E2E"
       }
     },
-    "son": "Fils",
     "spoken": "Oral",
     "subheading": {
-      "administrator": "Un grand pouvoir implique une grande configuration",
       "education": {
         "certificates": "Certificats",
         "certificates.description": "Preuve de curiosité et de dévouement",
@@ -549,35 +560,24 @@
         "training-and-conferences.description": "Toujours en apprentissage, toujours curieux"
       },
       "feature-toggles": "Un grand pouvoir implique une grande configuration",
-      "frameworks": "cadres",
       "horeca": "Hospitalité",
       "it": "TI",
-      "libraries": "bibliothèques",
-      "operating-systems": "systèmes d'exploitation",
       "personal": {
         "about-me": "À propos de moi",
         "about-me.description": "L'humain derrière le code",
-        "about-me.prefix": "Identité",
         "connect": "Parlons-en",
-        "connect.description": "Prêt à créer quelque chose d'extraordinaire",
-        "connect.prefix": "Entrer en contact",
         "hobbies-and-interests": "Loisirs & centres d'intérêt",
         "hobbies-and-interests.description": "La vie au-delà du code",
-        "hobbies-and-interests.prefix": "Passions",
         "languages": "Langues",
-        "languages.description": "Créer des ponts entre les cultures",
-        "languages.prefix": "Communication"
+        "languages.description": "Créer des ponts entre les cultures"
       },
-      "programming-languages": "langages de programmation",
       "skills": {
         "additional-technologies": "technologies complémentaires",
         "ai": "IA & développement agentique",
         "core-stack": "stack frontend principale",
         "development-tools": "outils de développement",
         "engineering-practices": "pratiques d’ingénierie",
-        "other": "autres compétences",
-        "testing-and-quality": "tests & qualité",
-        "tools-and-methods": "outils & méthodes"
+        "testing-and-quality": "tests & qualité"
       },
       "technical": {
         "dependencies": "Dépendances par projet",
@@ -586,24 +586,17 @@
         "dependency-rules.description": "Vérifiées à chaque import",
         "domains-and-layers": "Domaines & couches",
         "domains-and-layers.description": "Tranches verticales, couches horizontales",
+        "icons": "Icônes",
+        "icons.description": "Deux polices et des icônes animées",
+        "itcss": "Styles en couches",
+        "itcss.description": "Inverted triangle CSS",
         "layers": "Couches d'un domaine",
         "layers.description": "Qui fait quoi",
         "public-api": "API publique",
-        "public-api.description": "Barrels et dossiers internes"
-      },
-      "tools-and-methods": "outils & méthodes",
-      "version-control": "contrôle des versions"
-    },
-    "temp": {
-      "under-construction": {
-        "content-1": "Bienvenue sur mon site CV !",
-        "content-2": "Pour le moment, toutes les informations de base sont disponibles, mais les choses les plus intéressantes sont encore en cours de développement.",
-        "content-3": "Je travaille actuellement sur la section « Architecture », qui regroupera toutes les informations concernant ce site web : les technologies utilisées, la structure, les approches de développement, les versions, le backend, et bien plus encore... tout ce qui fait le bonheur d’un développeur.",
-        "content-4": "En parallèle, je développe également des fonctionnalités interactives, telles qu’un sélecteur de thème clair/sombre, un changement de couleur, davantage de langues, une page CRUD simulée permettant d’activer ou de désactiver certaines fonctionnalités, et bien d’autres surprises.",
-        "content-5": "Enfin, je prévois également une démonstration d’interfaces modernes, même si j’ai choisi de donner à ce site une ambiance vintage et rétro.",
-        "title": "En construction"
-      },
-      "versions": "Versions"
+        "public-api.description": "Barrels et dossiers internes",
+        "state": "État",
+        "state.description": "Signal stores NgRx"
+      }
     },
     "theme": {
       "blackberry": "Ardoise",
@@ -631,6 +624,7 @@
       "start": "Commencer la visite",
       "step": {
         "ai-assistant": {
+          "label": "Assistant IA",
           "text": "Curieux de mon expérience, mes compétences ou mes références ? Cliquez sur le robot en bas à droite : mon assistant IA répond directement à partir des données de ce site.",
           "title": "Demandez à mon assistant IA"
         },

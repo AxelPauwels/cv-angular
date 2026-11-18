@@ -13,6 +13,11 @@ export const TECHNICAL_NAV_ITEMS: readonly (NavItem & {
     toggle: 'technical-architecture',
   },
   {
+    labelKey: 't.nav.foundations',
+    path: ROUTES.TECHNICAL.FOUNDATIONS,
+    toggle: 'technical-foundations',
+  },
+  {
     labelKey: 't.nav.project-graph',
     path: ROUTES.TECHNICAL.PROJECT_GRAPH,
     toggle: 'technical-project-graph',

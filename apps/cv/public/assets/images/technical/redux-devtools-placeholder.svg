@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" role="img">
+  <!-- Placeholder for a Redux DevTools screenshot: a browser panel with an action list and a state tree -->
+  <rect width="960" height="540" fill="#f1f3f4"/>
+  <rect width="960" height="44" fill="#dadce0"/>
+  <circle cx="26" cy="22" r="7" fill="#ea4335"/>
+  <circle cx="50" cy="22" r="7" fill="#fbbc04"/>
+  <circle cx="74" cy="22" r="7" fill="#34a853"/>
+  <rect x="110" y="12" width="420" height="20" rx="10" fill="#fff"/>
+  <rect x="0" y="44" width="320" height="496" fill="#e8eaed"/>
+  <g fill="#9aa0a6">
+    <rect x="24" y="72" width="200" height="14" rx="4"/>
+    <rect x="24" y="108" width="240" height="14" rx="4"/>
+    <rect x="24" y="144" width="180" height="14" rx="4"/>
+    <rect x="24" y="180" width="220" height="14" rx="4"/>
+    <rect x="24" y="216" width="160" height="14" rx="4"/>
+  </g>
+  <rect x="12" y="98" width="296" height="34" rx="6" fill="#764abc" opacity=".25"/>
+  <g fill="#bdc1c6">
+    <rect x="352" y="72" width="120" height="14" rx="4"/>
+    <rect x="352" y="112" width="260" height="12" rx="4"/>
+    <rect x="384" y="140" width="300" height="12" rx="4"/>
+    <rect x="384" y="168" width="220" height="12" rx="4"/>
+    <rect x="384" y="196" width="340" height="12" rx="4"/>
+    <rect x="352" y="224" width="200" height="12" rx="4"/>
+    <rect x="384" y="252" width="280" height="12" rx="4"/>
+    <rect x="384" y="280" width="180" height="12" rx="4"/>
+  </g>
+  <g fill="none" stroke="#764abc" stroke-width="6" opacity=".55">
+    <circle cx="760" cy="410" r="56"/>
+    <path d="M760 354v112M704 410h112"/>
+  </g>
+</svg>

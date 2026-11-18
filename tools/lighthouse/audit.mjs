@@ -43,6 +43,7 @@ const PAGES = [
   '/cv/skills',
   '/cv/references',
   '/technical/architecture',
+  '/technical/foundations',
   '/technical/project-graph',
   '/technical/graphql-docs',
   '/technical/code-coverage',

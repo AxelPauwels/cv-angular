@@ -103,7 +103,7 @@ describe('FeatureToggles', () => {
       'Submenu Showcase',
     ]);
     expect(element.querySelectorAll('mat-card')).toHaveLength(6);
-    expect(element.querySelectorAll('mat-slide-toggle')).toHaveLength(25);
+    expect(element.querySelectorAll('mat-slide-toggle')).toHaveLength(26);
   });
 
   it('switches the main menu item off with its last sub menu item, and says so', async () => {

@@ -11,3 +11,4 @@ export * from './lib/feature-toggles';
 export * from './lib/feature-toggle.service';
 export * from './lib/feature-toggle-testing';
 export * from './lib/federation-manifest.token';
+export * from './lib/with-dev-tools-for-debug-mode';

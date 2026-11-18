@@ -122,6 +122,7 @@ describe('appRoutes', () => {
     expect(page.activeMain).toBe('TECHNICAL');
     expect(page.sub).toEqual([
       'Architecture',
+      'Foundations',
       'Project graph',
       'graphql docs',
       'code coverage',

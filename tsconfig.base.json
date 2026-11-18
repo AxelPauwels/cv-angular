@@ -112,6 +112,9 @@
       ],
       "@cv/showcase-feature-ai-assistant": [
         "./libs/showcase/feature-ai-assistant/src/index.ts"
+      ],
+      "@cv/technical-feature-foundations": [
+        "./libs/technical/feature-foundations/src/index.ts"
       ]
     }
   },

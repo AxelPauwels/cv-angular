@@ -76,6 +76,7 @@ export const LIGHTHOUSE_SECTIONS: readonly LighthouseSection[] = [
     labelKey: 't.nav.technical',
     pages: [
       page('t.nav.architecture', ROUTES.TECHNICAL.ARCHITECTURE_ROUTER_LINK),
+      page('t.nav.foundations', ROUTES.TECHNICAL.FOUNDATIONS_ROUTER_LINK),
       page('t.nav.project-graph', ROUTES.TECHNICAL.PROJECT_GRAPH_ROUTER_LINK),
       page('t.nav.graphql-docs', ROUTES.TECHNICAL.GRAPHQL_DOCS_ROUTER_LINK),
       page('t.nav.code-coverage', ROUTES.TECHNICAL.CODE_COVERAGE_ROUTER_LINK),

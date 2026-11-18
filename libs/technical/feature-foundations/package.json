@@ -1,0 +1,16 @@
+{
+  "name": "@cv/technical-feature-foundations",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^22.2.0",
+    "@angular/core": "^22.2.0",
+    "@angular/material": "^22.2.5",
+    "@cv/shared-ui-lordicon": "0.0.1",
+    "@cv/shared-ui-page": "0.0.1",
+    "@cv/shared-ui-i18n": "0.0.1",
+    "@cv/shared-util-i18n": "0.0.1",
+    "@tolgee/ngx": "^7.3.0"
+  },
+  "sideEffects": false,
+  "private": true
+}

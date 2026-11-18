@@ -38,6 +38,15 @@ describe('LighthouseReport', () => {
       'Skills',
       'References',
     ]);
+    expect(pagesOf(2)).toEqual([
+      'Architecture',
+      'Foundations',
+      'Project graph',
+      'graphql docs',
+      'code coverage',
+      'End-to-end tests',
+      'Versions',
+    ]);
   });
 
   it('gives every row the four Lighthouse scores, in Lighthouse order', async () => {

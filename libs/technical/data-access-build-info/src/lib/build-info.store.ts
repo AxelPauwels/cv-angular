@@ -2,9 +2,11 @@ import { computed, inject } from '@angular/core';
 import {
   signalStore,
   withComputed,
+  withLinkedState,
   withMethods,
   withProps,
 } from '@ngrx/signals';
+import { withDevToolsForDebugMode } from '@cv/shared-data-access';
 import { BuildInfoService } from './internal/services/build-info.service';
 import type {
   DependencyRule,
@@ -23,16 +25,17 @@ export const VersionStore = signalStore(
     _versions: inject(BuildInfoService).versions(),
     _remotes: inject(BuildInfoService).remoteVersions(),
   })),
-  withComputed(({ _versions, _remotes }) => ({
-    packages: computed((): PackageVersion[] =>
+  withLinkedState(({ _versions, _remotes }) => ({
+    packages: (): PackageVersion[] =>
       _versions.hasValue()
         ? [
             ..._versions.value(),
             ...(_remotes.hasValue() ? _remotes.value() : []),
           ]
-        : []
-    ),
-    isLoading: computed(() => _versions.isLoading()),
+        : [],
+    isLoading: () => _versions.isLoading(),
+  })),
+  withComputed(({ _versions }) => ({
     error: computed(() => _versions.error()),
   })),
   withMethods(({ _versions, _remotes }) => ({
@@ -40,7 +43,8 @@ export const VersionStore = signalStore(
       _versions.reload();
       _remotes.reload();
     },
-  }))
+  })),
+  withDevToolsForDebugMode('versions')
 );
 
 /** Workspace projects and the sheriff dependency rules; loads once */
@@ -49,19 +53,20 @@ export const ArchitectureStore = signalStore(
   withProps(() => ({
     _architecture: inject(BuildInfoService).architecture(),
   })),
+  withLinkedState(({ _architecture }) => ({
+    projects: (): ProjectInfo[] =>
+      _architecture.hasValue() ? _architecture.value().projects : [],
+    rules: (): DependencyRule[] =>
+      _architecture.hasValue() ? _architecture.value().rules : [],
+    isLoading: () => _architecture.isLoading(),
+  })),
   withComputed(({ _architecture }) => ({
-    projects: computed((): ProjectInfo[] =>
-      _architecture.hasValue() ? _architecture.value().projects : []
-    ),
-    rules: computed((): DependencyRule[] =>
-      _architecture.hasValue() ? _architecture.value().rules : []
-    ),
-    isLoading: computed(() => _architecture.isLoading()),
     error: computed(() => _architecture.error()),
   })),
   withMethods(({ _architecture }) => ({
     reload(): void {
       _architecture.reload();
     },
-  }))
+  })),
+  withDevToolsForDebugMode('architecture')
 );

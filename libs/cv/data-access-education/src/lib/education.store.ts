@@ -2,9 +2,11 @@ import { computed, inject } from '@angular/core';
 import {
   signalStore,
   withComputed,
+  withLinkedState,
   withMethods,
   withProps,
 } from '@ngrx/signals';
+import { withDevToolsForDebugMode } from '@cv/shared-data-access';
 import { EducationService } from './internal/services/education.service';
 import type {
   AdditionalLearning,
@@ -24,27 +26,25 @@ export const EducationStore = signalStore(
       _trainings: service.trainings(),
     };
   }),
+  withLinkedState(
+    ({ _educations, _certificates, _additionalLearnings, _trainings }) => ({
+      educations: (): Education[] =>
+        _educations.hasValue() ? _educations.value() : [],
+      certificates: (): Certificate[] =>
+        _certificates.hasValue() ? _certificates.value() : [],
+      additionalLearnings: (): AdditionalLearning[] =>
+        _additionalLearnings.hasValue() ? _additionalLearnings.value() : [],
+      trainings: (): Training[] =>
+        _trainings.hasValue() ? _trainings.value() : [],
+      isLoading: () =>
+        _educations.isLoading() ||
+        _certificates.isLoading() ||
+        _additionalLearnings.isLoading() ||
+        _trainings.isLoading(),
+    })
+  ),
   withComputed(
     ({ _educations, _certificates, _additionalLearnings, _trainings }) => ({
-      educations: computed((): Education[] =>
-        _educations.hasValue() ? _educations.value() : []
-      ),
-      certificates: computed((): Certificate[] =>
-        _certificates.hasValue() ? _certificates.value() : []
-      ),
-      additionalLearnings: computed((): AdditionalLearning[] =>
-        _additionalLearnings.hasValue() ? _additionalLearnings.value() : []
-      ),
-      trainings: computed((): Training[] =>
-        _trainings.hasValue() ? _trainings.value() : []
-      ),
-      isLoading: computed(
-        () =>
-          _educations.isLoading() ||
-          _certificates.isLoading() ||
-          _additionalLearnings.isLoading() ||
-          _trainings.isLoading()
-      ),
       error: computed(
         () =>
           _educations.error() ??
@@ -63,5 +63,6 @@ export const EducationStore = signalStore(
         _trainings.reload();
       },
     })
-  )
+  ),
+  withDevToolsForDebugMode('education')
 );
