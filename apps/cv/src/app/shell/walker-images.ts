@@ -32,12 +32,13 @@ export const WALKER_IMAGES = {
 } as const satisfies Record<'left' | 'right', WalkerImage>;
 
 /**
- * The waits before each walk, in ms: once the page has loaded he carries the
+ * The waits before each walk, in ms: 5 seconds after the page has loaded (and
+ * the browser is idle, so it never weighs on the page load) he carries the
  * sign to the right, walks back to the left 1 second later, to the right again
  * after 2 minutes, and from then on turns around every 4 minutes
  */
 export const WALKER_PAUSES: readonly number[] = [
-  2_000, 1_000, 120_000, 240_000,
+  5_000, 1_000, 120_000, 240_000,
 ];
 
 /**
