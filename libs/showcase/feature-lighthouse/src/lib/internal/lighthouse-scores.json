@@ -64,6 +64,12 @@
       "best-practices": 100,
       "seo": 100
     },
+    "/technical/compodoc": {
+      "performance": 84,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
     "/technical/code-coverage": {
       "performance": 98,
       "accessibility": 100,
@@ -94,8 +100,20 @@
       "best-practices": 100,
       "seo": 100
     },
+    "/showcase/service-status": {
+      "performance": 82,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 100
+    },
     "/showcase/ai-assistant": {
       "performance": 96,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "/showcase/release-flow": {
+      "performance": 81,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
