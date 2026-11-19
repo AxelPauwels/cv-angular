@@ -209,4 +209,42 @@ describe('Walker', () => {
     expect(speedFactor(factors, 1440)).toBe(1.5);
     expect(speedFactor([], 1440)).toBe(1);
   });
+
+  it('uses the first image for the first walk only, then the normal figures', async () => {
+    // Arrange
+    @Component({
+      imports: [Walker],
+      template: `<ds-walker
+        [left]="left"
+        [right]="normalRight"
+        [firstImage]="carrying"
+        first="right"
+        [pauses]="pauses" />`,
+    })
+    class IntroHost {
+      readonly left = LEFT;
+      readonly normalRight = { ...LEFT, src: `${GIF}#normal-right` };
+      readonly carrying = RIGHT;
+      readonly pauses = [0, 0];
+    }
+    const fixture = TestBed.createComponent(IntroHost);
+    await fixture.whenStable();
+    const figure = (fixture.nativeElement as HTMLElement).querySelector(
+      'ds-walker img'
+    ) as HTMLImageElement;
+
+    // Act
+    const walks = [await nextWalk(figure)];
+    for (let i = 0; i < 2; i++) {
+      walks.push(await then(figure, walks[walks.length - 1]));
+    }
+
+    // Assert: carrying to the right, then left, then the normal walk to the right
+    expect(walks.map((walk) => walk.src)).toEqual([
+      RIGHT.src,
+      LEFT.src,
+      `${GIF}#normal-right`,
+    ]);
+    expect(walks[2].from).toBe('translateX(-100%)');
+  });
 });
