@@ -47,6 +47,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { MobileNav } from './mobile-nav/mobile-nav';
 import {
+  WALKER_FEET_BELOW_SCREEN_PX,
   WALKER_FEET_IN_FOOTER_PX,
   WALKER_IMAGES,
   WALKER_PAUSES,
@@ -255,12 +256,13 @@ export class Shell {
   /**
    * From md up the footer stays at the bottom of the screen: the walking
    * figure's feet go a little into it, so he walks on it. Below md the page
-   * scrolls past the footer, so he walks along the bottom of the screen.
+   * scrolls past the footer, so he walks along the bottom of the screen, his
+   * feet a little below it.
    */
   protected readonly walkerBottom = computed(() =>
     this.footerFixed()
       ? Math.max(0, this.footerHeight() - WALKER_FEET_IN_FOOTER_PX)
-      : 0
+      : -WALKER_FEET_BELOW_SCREEN_PX
   );
   protected readonly walkerPauses = WALKER_PAUSES;
   protected readonly walkerSpeedFactors = WALKER_SPEED_FACTORS;

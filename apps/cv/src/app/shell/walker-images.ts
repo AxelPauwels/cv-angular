@@ -64,3 +64,9 @@ export const WALKER_SPEED_FACTORS: readonly WalkerSpeedFactor[] = [
 
 /** How far the figure's feet sink into the footer, so he walks on it */
 export const WALKER_FEET_IN_FOOTER_PX = 8;
+
+/**
+ * Below md (no fixed footer) he walks along the bottom of the screen: this far
+ * below it, so his feet sink into the screen's edge
+ */
+export const WALKER_FEET_BELOW_SCREEN_PX = 7;
