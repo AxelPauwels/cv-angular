@@ -28,6 +28,11 @@ export const SHOWCASE_NAV_ITEMS: readonly (NavItem & {
     toggle: 'showcase-ai-assistant',
   },
   {
+    labelKey: 't.nav.release-flow',
+    path: ROUTES.SHOWCASE.RELEASE_FLOW,
+    toggle: 'showcase-release-flow',
+  },
+  {
     labelKey: 't.nav.feature-toggles',
     path: ROUTES.SHOWCASE.FEATURE_TOGGLES,
     toggle: 'showcase-feature-toggles',

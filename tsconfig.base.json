@@ -121,6 +121,9 @@
       ],
       "@cv/showcase-feature-service-status": [
         "./libs/showcase/feature-service-status/src/index.ts"
+      ],
+      "@cv/showcase-feature-release-flow": [
+        "./libs/showcase/feature-release-flow/src/index.ts"
       ]
     }
   },

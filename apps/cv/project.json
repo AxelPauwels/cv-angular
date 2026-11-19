@@ -127,6 +127,11 @@
             "glob": "**/*",
             "input": "dist/.project-graph",
             "output": "project-graph"
+          },
+          {
+            "glob": "**/*",
+            "input": "dist/.compodoc",
+            "output": "compodoc"
           }
         ],
         "styles": ["apps/cv/src/styles.scss"],

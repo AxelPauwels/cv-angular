@@ -26,6 +26,7 @@ export const FEATURE_TOGGLE_DEFAULTS = {
   'showcase-lighthouse': true,
   'showcase-service-status': true,
   'showcase-ai-assistant': true,
+  'showcase-release-flow': true,
   'showcase-feature-toggles': true,
 
   // Technical
@@ -34,6 +35,7 @@ export const FEATURE_TOGGLE_DEFAULTS = {
   'technical-foundations': true,
   'technical-project-graph': true,
   'technical-graphql-docs': true,
+  'technical-compodoc': true,
   'technical-code-coverage': true,
   'technical-end-to-end-tests': true,
   'technical-versions': true,

@@ -1,0 +1,15 @@
+{
+  "//": "Compodoc's view of the frontend: the app and every library, without tests and without the GraphQL server (libs/api). See `nx run @axel-pauwels/cv:compodoc`.",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["apps/cv/src/**/*.ts", "libs/**/src/**/*.ts"],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "**/test-setup.ts",
+    "libs/api/**",
+    "apps/cv/src/tokens/**"
+  ]
+}

@@ -20,6 +20,25 @@
         ],
         "parallel": false
       }
+    },
+    "compodoc": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "{workspaceRoot}/tsconfig.compodoc.json",
+        "{workspaceRoot}/tsconfig.base.json",
+        "{workspaceRoot}/README.md",
+        "{workspaceRoot}/apps/cv/src/**/*",
+        "{workspaceRoot}/libs/**/src/**/*"
+      ],
+      "outputs": ["{workspaceRoot}/dist/.compodoc"],
+      "options": {
+        "commands": [
+          "node -e \"require('fs').rmSync('dist/.compodoc',{recursive:true,force:true})\"",
+          "compodoc -p tsconfig.compodoc.json -d dist/.compodoc -n \"CV Angular\" --hideGenerator --disablePrivate --disableInternal --disableRoutesGraph --disableCoverage --silent"
+        ],
+        "parallel": false
+      }
     }
   }
 }

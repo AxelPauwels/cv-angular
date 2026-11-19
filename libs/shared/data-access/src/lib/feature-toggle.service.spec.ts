@@ -80,6 +80,7 @@ describe('FeatureToggleService', () => {
     service.change('showcase-feature-toggles', false);
     service.change('showcase-lighthouse', false);
     service.change('showcase-ai-assistant', false);
+    service.change('showcase-release-flow', false);
     service.change('showcase-service-status', false);
 
     // Act
@@ -96,6 +97,7 @@ describe('FeatureToggleService', () => {
     service.change('showcase-feature-toggles', false);
     service.change('showcase-lighthouse', false);
     service.change('showcase-ai-assistant', false);
+    service.change('showcase-release-flow', false);
     service.change('showcase-service-status', false);
     service.change('showcase-micro-frontends', false);
 
@@ -115,6 +117,7 @@ describe('FeatureToggleService', () => {
       'technical-foundations',
       'technical-project-graph',
       'technical-graphql-docs',
+      'technical-compodoc',
       'technical-code-coverage',
       'technical-end-to-end-tests',
     ] as const;
@@ -134,6 +137,7 @@ describe('FeatureToggleService', () => {
     service.change('showcase-micro-frontends', false);
     service.change('showcase-lighthouse', false);
     service.change('showcase-ai-assistant', false);
+    service.change('showcase-release-flow', false);
     service.change('showcase-service-status', false);
     service.change('showcase-feature-toggles', false);
 
@@ -169,6 +173,7 @@ describe('FeatureToggleService', () => {
         'showcase-micro-frontends': false,
         'showcase-lighthouse': false,
         'showcase-ai-assistant': false,
+        'showcase-release-flow': false,
         'showcase-service-status': false,
         'showcase-feature-toggles': false,
       })

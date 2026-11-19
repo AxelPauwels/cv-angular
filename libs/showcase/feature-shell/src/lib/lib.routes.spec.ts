@@ -12,6 +12,7 @@ const SHOWCASE_TOGGLES = [
   'showcase-lighthouse',
   'showcase-service-status',
   'showcase-ai-assistant',
+  'showcase-release-flow',
   'showcase-feature-toggles',
 ] as const;
 type ShowcaseToggle = (typeof SHOWCASE_TOGGLES)[number];
@@ -33,6 +34,7 @@ describe('showcaseFeatureShellRoutes', () => {
     toggles.change('showcase-lighthouse', true);
     toggles.change('showcase-service-status', true);
     toggles.change('showcase-ai-assistant', true);
+    toggles.change('showcase-release-flow', true);
     toggles.change('showcase-feature-toggles', true);
 
     // Act
@@ -50,6 +52,7 @@ describe('showcaseFeatureShellRoutes', () => {
       'Lighthouse',
       'Service status',
       'AI assistant',
+      'Release flow',
       'Feature toggles',
     ]);
   });
@@ -67,6 +70,7 @@ describe('showcaseFeatureShellRoutes', () => {
     toggles.change('showcase-lighthouse', false);
     toggles.change('showcase-service-status', false);
     toggles.change('showcase-ai-assistant', false);
+    toggles.change('showcase-release-flow', false);
     toggles.change('showcase-feature-toggles', false);
 
     // Act
@@ -114,6 +118,7 @@ describe('showcaseFeatureShellRoutes', () => {
         'showcase-lighthouse': false,
         'showcase-service-status': false,
         'showcase-ai-assistant': false,
+        'showcase-release-flow': false,
         'showcase-feature-toggles': false,
       });
 
@@ -154,6 +159,7 @@ describe('showcaseFeatureShellRoutes', () => {
     [ROUTES.SHOWCASE.LIGHTHOUSE, 'showcase-lighthouse-report'],
     [ROUTES.SHOWCASE.SERVICE_STATUS, 'showcase-service-status'],
     [ROUTES.SHOWCASE.AI_ASSISTANT, 'showcase-ai-assistant'],
+    [ROUTES.SHOWCASE.RELEASE_FLOW, 'showcase-release-flow'],
     [ROUTES.SHOWCASE.FEATURE_TOGGLES, 'showcase-feature-toggles'],
   ])('lazy loads the "%s" page as <%s>', async (path, selector) => {
     // Arrange

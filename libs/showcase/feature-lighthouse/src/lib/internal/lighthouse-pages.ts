@@ -5,7 +5,7 @@ import report from './lighthouse-scores.json';
 /** The four categories of a Lighthouse report, in Lighthouse's own order */
 export const LIGHTHOUSE_CATEGORIES = [
   { id: 'performance', labelKey: 't.lighthouse.category.performance' },
-  { id: 'accessibility', labelKey: 't.lighthouse.category.accessibility' },
+  { id: 'accessibility', labelKey: 't.accessibility.title' },
   { id: 'best-practices', labelKey: 't.lighthouse.category.best-practices' },
   { id: 'seo', labelKey: 't.lighthouse.category.seo' },
 ] as const satisfies readonly { id: string; labelKey: TranslationKey }[];
@@ -79,6 +79,7 @@ export const LIGHTHOUSE_SECTIONS: readonly LighthouseSection[] = [
       page('t.nav.foundations', ROUTES.TECHNICAL.FOUNDATIONS_ROUTER_LINK),
       page('t.nav.project-graph', ROUTES.TECHNICAL.PROJECT_GRAPH_ROUTER_LINK),
       page('t.nav.graphql-docs', ROUTES.TECHNICAL.GRAPHQL_DOCS_ROUTER_LINK),
+      page('t.nav.compodoc', ROUTES.TECHNICAL.COMPODOC_ROUTER_LINK),
       page('t.nav.code-coverage', ROUTES.TECHNICAL.CODE_COVERAGE_ROUTER_LINK),
       page(
         't.nav.end-to-end-tests',
@@ -98,6 +99,7 @@ export const LIGHTHOUSE_SECTIONS: readonly LighthouseSection[] = [
       page('t.nav.lighthouse', ROUTES.SHOWCASE.LIGHTHOUSE_ROUTER_LINK),
       page('t.nav.service-status', ROUTES.SHOWCASE.SERVICE_STATUS_ROUTER_LINK),
       page('t.nav.ai-assistant', ROUTES.SHOWCASE.AI_ASSISTANT_ROUTER_LINK),
+      page('t.nav.release-flow', ROUTES.SHOWCASE.RELEASE_FLOW_ROUTER_LINK),
       page(
         't.nav.feature-toggles',
         ROUTES.SHOWCASE.FEATURE_TOGGLES_ROUTER_LINK

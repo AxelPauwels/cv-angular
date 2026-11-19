@@ -46,6 +46,7 @@ const PAGES = [
   '/technical/foundations',
   '/technical/project-graph',
   '/technical/graphql-docs',
+  '/technical/compodoc',
   '/technical/code-coverage',
   '/technical/end-to-end-tests',
   '/technical/versions',
@@ -53,6 +54,7 @@ const PAGES = [
   '/showcase/lighthouse',
   '/showcase/service-status',
   '/showcase/ai-assistant',
+  '/showcase/release-flow',
   '/showcase/feature-toggles',
 ];
 

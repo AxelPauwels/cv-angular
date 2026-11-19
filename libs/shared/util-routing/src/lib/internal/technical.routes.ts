@@ -9,6 +9,8 @@ export const TECHNICAL = {
   PROJECT_GRAPH_ROUTER_LINK: '/technical/project-graph',
   GRAPHQL_DOCS: 'graphql-docs',
   GRAPHQL_DOCS_ROUTER_LINK: '/technical/graphql-docs',
+  COMPODOC: 'compodoc',
+  COMPODOC_ROUTER_LINK: '/technical/compodoc',
   CODE_COVERAGE: 'code-coverage',
   CODE_COVERAGE_ROUTER_LINK: '/technical/code-coverage',
   END_TO_END_TESTS: 'end-to-end-tests',

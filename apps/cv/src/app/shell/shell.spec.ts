@@ -64,6 +64,7 @@ describe('Shell', () => {
       'technical-foundations',
       'technical-project-graph',
       'technical-graphql-docs',
+      'technical-compodoc',
       'technical-code-coverage',
       'technical-end-to-end-tests',
       'technical-versions',

@@ -96,6 +96,7 @@ describe('appRoutes', () => {
       'Lighthouse',
       'Service status',
       'AI assistant',
+      'Release flow',
       'Feature toggles',
     ]);
   });
@@ -126,6 +127,7 @@ describe('appRoutes', () => {
       'Foundations',
       'Project graph',
       'graphql docs',
+      'Compodoc',
       'code coverage',
       'End-to-end tests',
       'Versions',
