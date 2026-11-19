@@ -1,17 +1,14 @@
 @use 'variables' as *;
 
+// Not IcoMoon's generated src: one WOFF2 from public/assets, preloaded in
+// index.html with the exact same URL (keep both in sync). After a new IcoMoon
+// export, convert fonts/cvIconFont.ttf to apps/cv/public/assets/fonts/cvIconFont/
+// cvIconFont.woff2 and change the ?v= in both places: /assets/fonts is cached
+// as immutable. `block` on purpose: with swap, icons flash as empty boxes; the
+// preload makes the block short instead.
 @font-face {
   font-family: '#{$icomoon-font-family}';
-  src: url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?hdwxe');
-  src:
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?hdwxe#iefix')
-      format('embedded-opentype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?hdwxe')
-      format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?hdwxe')
-      format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?hdwxe##{$icomoon-font-family}')
-      format('svg');
+  src: url('/assets/fonts/cvIconFont/cvIconFont.woff2?v=hdwxe') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: block;

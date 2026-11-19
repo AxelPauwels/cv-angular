@@ -63,3 +63,8 @@ jobs:
           # branches, main and pull requests into main (see playwright.config.mts)
           # (an empty value means every browser; `cond && '' || x` would always give x)
           E2E_BROWSERS: ${{ !(github.ref_name == 'main' || startsWith(github.ref_name, 'release/') || github.base_ref == 'main') && 'chromium' || '' }}
+      # Nx Cloud Self-Healing CI: when a task above failed, proposes an AI fix as a
+      # PR comment (applied only after approval); a no-op when everything passed.
+      # `always()` so it still runs after a failed step.
+      - run: npx nx fix-ci
+        if: always()

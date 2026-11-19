@@ -62,6 +62,12 @@
     z-index: -1;
   }
 
+  // The contact page has its own figure on the footer: he walks on unseen, so
+  // his schedule carries on (and nothing loads again) when the visitor leaves
+  &__walker--hidden {
+    visibility: hidden;
+  }
+
   // Off screen until it gets keyboard focus, then on top of the header
   &__skip-link {
     background-color: var(--mat-sys-primary);

@@ -112,12 +112,14 @@
   [style.--ds-back-to-top-footer-height.px]="footerHeight() || null" />
 
 <!-- The figure walking along the footer, on every page: decorative, clicks go
-     through it. On the home page he walks behind the page (hidden by it). Its own lazy chunk, loaded when the browser is idle; it loads
+     through it. On the home page he walks behind the page (hidden by it), on
+     the contact page (which has its own figure on the footer) he walks unseen. Its own lazy chunk, loaded when the browser is idle; it loads
      its images only once the page has fully loaded. -->
 @if (showWalker()) { @defer (on idle) {
 <ds-walker
   class="shell__walker"
   [class.shell__walker--behind]="onHome()"
+  [class.shell__walker--hidden]="onContact()"
   [style.--ds-walker-bottom.px]="walkerBottom()"
   [speedFactors]="walkerSpeedFactors"
   [left]="walkerImages.left"

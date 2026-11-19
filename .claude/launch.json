@@ -57,6 +57,19 @@
         "dist/dev/apps/cv/browser"
       ],
       "port": 4202
+    },
+    {
+      "name": "cv-public",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-I",
+        "-m",
+        "http.server",
+        "4330",
+        "--directory",
+        "apps/cv/public"
+      ],
+      "port": 4330
     }
   ]
 }
