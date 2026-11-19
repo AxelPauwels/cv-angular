@@ -13,7 +13,7 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { TranslatePipe } from '@tolgee/ngx';
-import { HeadingTranslationKey } from '@cv/shared-util-i18n';
+import { PageTitleTranslationKey } from '@cv/shared-util-i18n';
 import { PageTitle } from '@cv/shared-ui-page';
 import { TranslatePartsPipe } from '@cv/shared-ui-i18n';
 import { delayedLoading } from '@cv/shared-util-loading';
@@ -26,7 +26,7 @@ const isSameOriginPath = (src: string) =>
 /**
  * Shows a standalone page of this site (e.g. a test report) inside the layout,
  * in an iframe so its own scripts and styles can't clash with the app's.
- * `src`, `title` (a heading translation key, shown as the page title) and the
+ * `src`, `title` (a page title translation key, shown as the page title) and the
  * optional `styles` (CSS for this page only, see applyAppStyles) come from route data.
  *
  * Hosting answers unknown paths with the app's index.html, so the page is
@@ -51,7 +51,7 @@ const isSameOriginPath = (src: string) =>
 })
 export class EmbeddedPage {
   readonly src = input.required<string>();
-  readonly title = input.required<HeadingTranslationKey>();
+  readonly title = input.required<PageTitleTranslationKey>();
   /** Extra CSS for the embedded page, e.g. to hide a heading the page title repeats */
   readonly styles = input('');
 
