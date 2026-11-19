@@ -1,15 +1,17 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { TranslatePipe } from '@tolgee/ngx';
 import {
-  HeadingTranslationKey,
+  PageTitleTranslationKey,
   SubheadingTranslationKey,
 } from '@cv/shared-util-i18n';
 
 /**
- * The one `<h1>` on top of a content page; pass the heading's translation key,
- * and optionally a subtitle shown underneath it (grouped with the heading):
- * `<ds-page-title title="t.heading.references" />`
- * `<ds-page-title title="t.heading.feature-toggles" subtitle="t.subheading.feature-toggles" />`
+ * The one `<h1>` on top of a content page; pass the heading's translation key
+ * (the menu label's `t.nav.*` key when the heading says the same, so they share
+ * one Tolgee key), and optionally a subtitle shown underneath it (grouped with
+ * the heading):
+ * `<ds-page-title title="t.heading.contact" />`
+ * `<ds-page-title title="t.nav.feature-toggles" subtitle="t.subheading.feature-toggles" />`
  */
 @Component({
   selector: 'ds-page-title',
@@ -66,6 +68,6 @@ import {
   `,
 })
 export class PageTitle {
-  readonly title = input.required<HeadingTranslationKey>();
+  readonly title = input.required<PageTitleTranslationKey>();
   readonly subtitle = input<SubheadingTranslationKey>();
 }

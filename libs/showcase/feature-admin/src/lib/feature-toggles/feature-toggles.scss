@@ -24,13 +24,9 @@
   --mat-slide-toggle-touch-target-size: 32px;
 
   display: block;
-  padding: 0 1rem;
 }
 
 .feature-toggles {
-  margin-inline: auto;
-  max-width: 80rem;
-
   // below the page title, the reset button at the right
   &__toolbar {
     display: flex;
@@ -48,8 +44,9 @@
     flex-shrink: 0;
   }
 
-  // four columns: navbar icons and general on top, the menus below;
-  // two columns on medium screens, one on small ones
+  // Desktop: four columns. Navbar icons (two columns wide) and general on top,
+  // the last column left free; the main menu and the three submenus below.
+  // Two columns on medium screens, one on small ones, in the same order.
   &__sections {
     align-items: start;
     display: grid;
@@ -74,6 +71,19 @@
     @media (width >= 64rem) {
       &--new-row {
         grid-column-start: 1;
+      }
+
+      &--wide {
+        grid-column: span 2;
+
+        .feature-toggles__list {
+          column-gap: 2rem;
+          columns: 2;
+        }
+
+        .feature-toggles__item {
+          break-inside: avoid;
+        }
       }
     }
   }

@@ -7,7 +7,6 @@ export const LANGUAGES: LanguageCodeLabel[] = [
   { code: 'es', labelKey: 't.language.spanish' },
   { code: 'nb', labelKey: 't.language.norwegian' },
   { code: 'el', labelKey: 't.language.greek' },
-  { code: 'hi', labelKey: 't.language.hindi' },
 ] as const;
 
 export type Language = (typeof LANGUAGES)[number];

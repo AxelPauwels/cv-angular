@@ -1,19 +1,27 @@
 /**
  * CSS for each embedded report, on top of the app's font, scrollbar and transparent
  * background (see EmbeddedPage). The selectors belong to the generated reports, so
- * check them after updating spectaql, istanbul or Playwright. Theme colors are
- * written as `var(--mat-sys-…)`: EmbeddedPage resolves them from the app.
+ * check them after updating spectaql, istanbul, Playwright or Compodoc. Theme
+ * colors are written as `var(--mat-sys-…)`: EmbeddedPage resolves them from
+ * the app.
  */
 
 /**
- * SpectaQL: the page title already names the API, so its own <h1> goes. Below
- * SpectaQL's 48em breakpoint the sidebar ("All topics") is a drawer over the
- * docs: it gets the app's background and text colors instead of the transparent
- * one, so the docs don't show through it. The sticky bar with the drawer's
- * button gets the theme's brown secondary color instead of SpectaQL's white.
+ * SpectaQL: the page title already names the API, so its own <h1> goes. The
+ * sidebar with the navigation (`#nav`) gets a soft version of the theme's tag
+ * color (`.card__tag`'s, half mixed with the page surface), on wide screens
+ * and as the drawer over the docs below SpectaQL's 48em breakpoint, so the
+ * docs don't show through it there. The
+ * sticky bar with the drawer's button gets the theme's brown secondary color
+ * instead of SpectaQL's white.
  */
 export const GRAPHQL_DOCS_STYLES = `
 #content > h1.doc-heading:first-of-type { display: none !important; }
+#sidebar {
+  background: color-mix(in srgb, var(--mat-sys-primary-container) 50%, var(--mat-sys-surface)) !important;
+  color: var(--mat-sys-on-primary-container) !important;
+}
+#sidebar :is(a, button, h4, h5) { color: inherit !important; }
 @media (width < 48em) {
   #mobile-navbar {
     background: var(--mat-sys-secondary) !important;
@@ -25,12 +33,6 @@ export const GRAPHQL_DOCS_STYLES = `
     box-shadow: 0 5px 0 currentColor, 0 10px 0 currentColor !important;
   }
   #mobile-navbar .sidebar-open-button { color: inherit !important; }
-  #sidebar {
-    background: var(--mat-sys-surface) !important;
-    color: var(--mat-sys-on-surface) !important;
-  }
-  #sidebar :is(a, button, h5) { color: inherit !important; }
-  #sidebar h4 { color: var(--mat-sys-on-surface-variant) !important; }
 }
 `;
 
@@ -59,4 +61,36 @@ export const END_TO_END_TESTS_STYLES = `
   color: var(--mat-sys-on-primary-fixed) !important;
 }
 .input-contrast::placeholder { color: var(--mat-sys-on-primary-fixed-variant) !important; }
+`;
+
+/**
+ * Compodoc:
+ * - its dark mode switch is hidden from view, keyboard and screen readers
+ *   (`visibility: hidden` takes it out of the Tab order), but stays in the page:
+ *   Compodoc's own script still reads and sets it, so its dark mode keeps
+ *   following the stored choice and the system setting;
+ * - its menu (the side menu, and on phones the drop-down menu and the bar at
+ *   the top) gets a soft version of the theme's tag color (`.card__tag`'s, half
+ *   mixed with the page surface) instead of Compodoc's grey, also in its dark
+ *   mode; the current page's link is in the theme's primary color instead of
+ *   Compodoc's blue. The search field keeps its own look.
+ */
+export const COMPODOC_STYLES = `
+.dark-mode-switch {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  visibility: hidden !important;
+}
+.menu, .navbar-default {
+  background: color-mix(in srgb, var(--mat-sys-primary-container) 50%, var(--mat-sys-surface)) !important;
+  border-color: transparent !important;
+  color: var(--mat-sys-on-primary-container) !important;
+}
+:is(.menu, .navbar-default) :is(a, .chapter, .menu-toggler, .navbar-brand, .btn-menu):not(.active) {
+  color: inherit !important;
+}
+.menu a.active { color: var(--mat-sys-primary) !important; }
 `;

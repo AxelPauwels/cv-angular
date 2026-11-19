@@ -136,32 +136,32 @@
     }
   }
 
-  // a column, so the icon row can sit at the bottom: side by side, the cards
-  // are equally high and their rows start on the same line
+  // A card (ds-card) per icon font. A column down to its content, so the icon row
+  // can sit at the bottom: side by side, the cards are equally high and their rows
+  // start on the same line. The card icon in the page's secondary colors, like the
+  // other icons here.
   &__font {
-    border: 1px solid var(--mat-sys-outline-variant);
-    border-radius: var(--mat-sys-corner-large);
-    container-type: inline-size;
-    display: flex;
-    flex-direction: column;
-    padding: 1.25rem;
+    --ds-card-icon-background: var(--mat-sys-secondary-container);
+    --ds-card-icon-color: var(--mat-sys-on-secondary-container);
+
+    :host & ::ng-deep {
+      .mat-mdc-card,
+      .mat-mdc-card-content {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+      }
+    }
   }
 
-  &__font-name {
-    align-items: center;
-    display: flex;
-    font: var(--mat-sys-title-medium);
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-  }
-
+  // the container for the icon row's query: the card's inner width
   &__font-text {
     color: var(--mat-sys-on-surface-variant);
+    container-type: inline-size;
     display: flex;
     flex: 1;
     flex-direction: column;
     font: var(--mat-sys-body-medium);
-    margin: 0;
   }
 
   // the sample icons at the bottom of the card, the same size in every card,

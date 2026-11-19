@@ -1,0 +1,83 @@
+@use '3.vendors/mat';
+
+:host {
+  display: block;
+}
+
+.release-flow {
+  // Two cards side by side, stacked on narrow screens, like the micro-frontends
+  // page; the introduction spans the full width above the four phases
+  &__grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+  }
+
+  &__card {
+    // the card icons in the colors of the personal facts (CV > Personal), like the
+    // other showcase pages
+    --ds-card-icon-background: var(--mat-sys-secondary-container);
+    --ds-card-icon-color: var(--mat-sys-on-secondary-container);
+
+    min-width: 0;
+
+    &--wide {
+      grid-column: 1 / -1;
+    }
+
+    :host & ::ng-deep {
+      .card__header {
+        align-items: start;
+      }
+
+      mat-card-actions {
+        padding-top: 0.5rem;
+      }
+    }
+  }
+
+  // a label on one line: buttons that don't fit side by side wrap to a new row
+  &__action {
+    white-space: nowrap;
+  }
+
+  &__list {
+    margin-block: 0.75rem;
+    padding-inline-start: 1.25rem;
+
+    li + li {
+      margin-top: 0.25rem;
+    }
+  }
+
+  // Pills in the colors of the timeline's year pills, like the micro-frontends page
+  &__chips {
+    display: block;
+    margin-top: 0.75rem;
+
+    mat-chip {
+      background-color: var(--mat-sys-primary-container);
+      border-radius: var(--mat-sys-corner-small);
+      color: var(--mat-sys-on-primary-container);
+      display: inline-block;
+      font: var(--mat-sys-label-medium);
+      height: 1rem;
+      letter-spacing: normal;
+      padding: 0.125rem 0.25rem;
+      text-transform: none;
+    }
+
+    :host & ::ng-deep .mat-mdc-standard-chip .mdc-evolution-chip__text-label {
+      font: var(--mat-sys-label-medium);
+    }
+
+    @include mat.chips-overrides(
+      (
+        container-shape-radius: var(--mat-sys-corner-full),
+        elevated-container-color: var(--mat-sys-secondary-container),
+        label-text-color: var(--mat-sys-on-secondary-container),
+        outline-color: transparent,
+      )
+    );
+  }
+}

@@ -35,6 +35,10 @@
 
     background-color: var(--mat-sys-surface-container);
 
+    // a sideways swipe moves the tabs (see SubNavbar); vertical ones still scroll
+    // the page
+    touch-action: pan-y;
+
     // Below md: the mobile menu in the main navbar lists every page
     @include tools.screen-below(md) {
       display: none;

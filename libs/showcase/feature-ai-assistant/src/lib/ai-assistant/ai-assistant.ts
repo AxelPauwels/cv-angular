@@ -20,6 +20,7 @@ import {
 import { TranslatePipe } from '@tolgee/ngx';
 import { LanguageService } from '@cv/shared-data-access-i18n';
 import { PageLayout, PageTitle } from '@cv/shared-ui-page';
+import { TranslateListPipe, TranslationPart } from '@cv/shared-ui-i18n';
 import {
   ASSISTANT_CONFIG,
   ASSISTANT_QUOTA_EXCEEDED,
@@ -45,12 +46,6 @@ export function withoutInvisibleCharacters(text: string): string {
   return text.replace(/[\u200B-\u200D\u2060\uFEFF]/g, '');
 }
 
-const SUGGESTIONS = [
-  't.ai-assistant.suggestion.reference',
-  't.ai-assistant.suggestion.stack',
-  't.ai-assistant.suggestion.languages',
-] as const;
-
 /**
  * A chat about the CV (Hashbrown, chapter 13 of Modern Angular): Gemini
  * answers with components (text, person cards) and reads the CV through
@@ -66,6 +61,7 @@ const SUGGESTIONS = [
     PageTitle,
     RenderMessageComponent,
     TranslatePipe,
+    TranslateListPipe,
   ],
   // no collection of usage data by Hashbrown, not even in development
   providers: [provideHashbrown({ telemetry: false })],
@@ -80,7 +76,10 @@ export class AiAssistant {
 
   protected readonly configured = inject(ASSISTANT_CONFIG) !== null;
   protected readonly maxLength = MAX_QUESTION_LENGTH;
-  protected readonly suggestions = SUGGESTIONS;
+  /** A suggested question as the visitor sees it (plain text, no markup) */
+  protected suggestionText(parts: readonly TranslationPart[]): string {
+    return parts.map(({ text }) => text).join('');
+  }
 
   protected readonly chat = uiChatResource({
     debugName: 'ai-assistant',

@@ -45,7 +45,7 @@ export class ContactLinks {
         href: ROUTES.CONTACT.ROOT_ROUTER_LINK,
         routerLink: true,
         icon: 'mail',
-        label: 't.contact.title',
+        label: 't.heading.contact',
         translate: true,
       },
     ];

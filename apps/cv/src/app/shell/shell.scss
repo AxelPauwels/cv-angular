@@ -49,6 +49,41 @@
     flex: 1;
     flex-direction: column;
     min-height: 0;
+
+    // only focused from code (by the skip link), never with Tab
+    &:focus {
+      outline: none;
+    }
+  }
+
+  // On top of everything, except on the home page: there he walks on behind
+  // the page (its picture), so his walk carries on unseen
+  &__walker--behind {
+    z-index: -1;
+  }
+
+  // Off screen until it gets keyboard focus, then on top of the header
+  &__skip-link {
+    background-color: var(--mat-sys-primary);
+    border-radius: var(--mat-sys-corner-small);
+    color: var(--mat-sys-on-primary);
+    font: var(--mat-sys-label-large);
+    left: 0.5rem;
+    padding: 0.75rem 1rem;
+    position: fixed;
+    top: 0.5rem;
+    transform: translateY(-200%);
+    z-index: 1000;
+
+    &:focus-visible {
+      outline: 2px solid var(--mat-sys-on-primary);
+      outline-offset: -4px;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: transform 150ms ease-out;
+    }
   }
 
   &__footer {

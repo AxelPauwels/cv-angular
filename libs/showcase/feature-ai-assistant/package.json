@@ -10,7 +10,8 @@
     "@cv/shared-ui-page": "0.0.1",
     "@cv/showcase-data-access-assistant": "0.0.1",
     "@hashbrownai/core": "^0.8.3",
-    "@cv/showcase-ui-assistant": "0.0.1"
+    "@cv/showcase-ui-assistant": "0.0.1",
+    "@cv/shared-ui-i18n": "0.0.1"
   },
   "sideEffects": false,
   "private": true

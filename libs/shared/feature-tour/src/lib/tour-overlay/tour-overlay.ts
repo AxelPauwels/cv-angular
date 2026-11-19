@@ -54,8 +54,9 @@ const FOOTER_GAP_REM = 0.75;
   host: {
     '(document:keydown)': 'onKeydown($event)',
     '(window:resize)': 'scheduleMeasure()',
-    // capture, so scrolling inside any container moves the spotlight too
-    '(document:scroll.capture)': 'scheduleMeasure()',
+    // the visitor scrolls themselves: stop pulling the target back into view
+    '(document:wheel)': 'stopKeepingInView()',
+    '(document:touchmove)': 'stopKeepingInView()',
   },
 })
 export class TourOverlay {
@@ -114,6 +115,12 @@ export class TourOverlay {
       ? undefined
       : new ResizeObserver(() => this.scheduleMeasure());
   private frame = 0;
+  /**
+   * Scroll the target back into view when it moves out of it: a page that
+   * is still loading its data pushes a footer target down after the first
+   * scroll (on phones the whole page scrolls). Until the visitor scrolls.
+   */
+  private keepInView = false;
   /** Increased per step, so a slow page never overrides a later step */
   private run = 0;
 
@@ -123,7 +130,16 @@ export class TourOverlay {
       untracked(() => void this._show(step));
     });
     afterNextRender(() => this.scheduleMeasure());
+    // Scrolling the page or any container moves the spotlight along. In the
+    // capture phase, as scroll events don't bubble; added by hand because a
+    // host listener can't ask for that (`scroll.capture` never fires)
+    const onScroll = () => this.scheduleMeasure();
+    this.document.addEventListener('scroll', onScroll, {
+      capture: true,
+      passive: true,
+    });
     inject(DestroyRef).onDestroy(() => {
+      this.document.removeEventListener('scroll', onScroll, { capture: true });
       this.run++;
       this.resizeObserver?.disconnect();
       if (this.frame) {
@@ -154,6 +170,10 @@ export class TourOverlay {
     } else {
       this.exit();
     }
+  }
+
+  protected stopKeepingInView(): void {
+    this.keepInView = false;
   }
 
   protected exit(): void {
@@ -213,6 +233,7 @@ export class TourOverlay {
           : undefined;
       this.spotlightRadius.set(this.targetFrame?.radius ?? null);
       this._observe(targets);
+      this.keepInView = targets.length > 0;
       targets[0]?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       this._measure();
     } finally {
@@ -286,6 +307,10 @@ export class TourOverlay {
       bottom = 0,
       left = 0,
     } = this.targetFrame?.trim ?? {};
+    if (this.keepInView && this._outOfView(rects)) {
+      // the scroll fires a scroll event, which measures again
+      this.targets[0]?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    }
     const box = {
       top: Math.min(...rects.map((rect) => rect.top)) + top,
       left: Math.min(...rects.map((rect) => rect.left)) + left,
@@ -331,6 +356,12 @@ export class TourOverlay {
       top < footerBottom &&
       box.top + box.height > footerTop;
     return overlaps ? viewportHeight - top + FOOTER_GAP_REM * rem : null;
+  }
+
+  /** Whether a target sticks out above or below the viewport */
+  private _outOfView(rects: readonly DOMRect[]): boolean {
+    const viewportHeight = this.window?.innerHeight ?? 0;
+    return rects.some((rect) => rect.top < 0 || rect.bottom > viewportHeight);
   }
 
   private _centerBox(): Box {

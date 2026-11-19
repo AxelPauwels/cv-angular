@@ -1,6 +1,6 @@
 {
   "name": "@axel-pauwels/cv",
-  "version": "1.6.1",
+  "version": "2.0.0",
   "license": "MIT",
   "scripts": {
     "start:cv": "nx serve cv",
@@ -75,7 +75,6 @@
     "@hashbrownai/core": "0.8.3",
     "@lordicon/element": "^3.0.2",
     "@ngrx/signals": "^22.0.1",
-    "@softarc/detective": "^2.1.2",
     "@softarc/native-federation-node": "^2.0.10",
     "@tolgee/ngx": "^7.3.0",
     "es-module-shims": "^1.5.12",
@@ -95,6 +94,7 @@
     "@angular/material": "^22.2.5",
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
+    "@compodoc/compodoc": "^2.0.0",
     "@eslint/js": "^9.8.0",
     "@graphql-codegen/cli": "^7.4.6",
     "@graphql-codegen/typed-document-node": "^7.2.0",
@@ -112,6 +112,7 @@
     "@nx/workspace": "24.0.2",
     "@playwright/test": "^1.64.1",
     "@schematics/angular": "~22.2.0",
+    "@softarc/detective": "^2.1.2",
     "@softarc/eslint-plugin-sheriff": "^0.20.0",
     "@softarc/native-federation-orchestrator": "^4.8.0",
     "@softarc/sheriff-core": "^0.20.0",

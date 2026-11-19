@@ -1,0 +1,118 @@
+<ds-page-layout>
+  <ds-page-title title="t.nav.release-flow" />
+
+  <!-- texts hold inline <code> and <strong>: rendered as elements, without innerHTML -->
+  <ng-template #parts let-parts>
+    @for (part of parts; track $index) { @if (part.tag === 'code') {<code
+      >{{ part.text }}</code
+    >} @else if (part.tag === 'strong') {<strong>{{ part.text }}</strong>} @else
+    {{{ part.text }}} }
+  </ng-template>
+
+  <!-- one translation key per list: the items are separated by `||` -->
+  <ng-template #list let-key let-ordered="ordered">
+    @if (ordered) {
+    <ol class="release-flow__list">
+      @for (item of key | translateList; track $index) {
+      <li>
+        <ng-container
+          [ngTemplateOutlet]="parts"
+          [ngTemplateOutletContext]="{ $implicit: item }" />
+      </li>
+      }
+    </ol>
+    } @else {
+    <ul class="release-flow__list">
+      @for (item of key | translateList; track $index) {
+      <li>
+        <ng-container
+          [ngTemplateOutlet]="parts"
+          [ngTemplateOutletContext]="{ $implicit: item }" />
+      </li>
+      }
+    </ul>
+    }
+  </ng-template>
+
+  <div class="release-flow__grid">
+    <ds-card
+      class="release-flow__card release-flow__card--wide"
+      [title]="'t.release-flow.intro.title' | translate"
+      [subtitle]="'t.release-flow.intro.subtitle' | translate"
+      icon="psychology"
+      iconFont="material">
+      <p>
+        <ng-container
+          [ngTemplateOutlet]="parts"
+          [ngTemplateOutletContext]="{ $implicit: 't.release-flow.intro.text' | translateParts }" />
+      </p>
+      <ng-container
+        [ngTemplateOutlet]="list"
+        [ngTemplateOutletContext]="{ $implicit: 't.release-flow.intro.rules', ordered: false }" />
+
+      <mat-chip-set
+        class="release-flow__chips"
+        [attr.aria-label]="'t.common.technologies' | translate">
+        <mat-chip>Claude Code</mat-chip>
+        <mat-chip>GitHub CLI</mat-chip>
+        <mat-chip>GitHub Actions</mat-chip>
+        <mat-chip>Nx</mat-chip>
+        <mat-chip>{{ 't.release-flow.semver' | translate }}</mat-chip>
+      </mat-chip-set>
+
+      <a
+        dsCardActions
+        matButton="outlined"
+        class="release-flow__action"
+        [href]="skillUrl"
+        target="_blank"
+        rel="noopener">
+        {{ 't.release-flow.intro.view-skill' | translate }}
+        <mat-icon iconPositionEnd fontSet="material-symbols-outlined">
+          open_in_new
+        </mat-icon>
+        <span class="cdk-visually-hidden">
+          {{ 't.common.new-tab' | translate }}
+        </span>
+      </a>
+      <a
+        dsCardActions
+        matButton="outlined"
+        class="release-flow__action"
+        [href]="guideUrl"
+        target="_blank"
+        rel="noopener">
+        {{ 't.release-flow.intro.view-guide' | translate }}
+        <mat-icon iconPositionEnd fontSet="material-symbols-outlined">
+          open_in_new
+        </mat-icon>
+        <span class="cdk-visually-hidden">
+          {{ 't.common.new-tab' | translate }}
+        </span>
+      </a>
+    </ds-card>
+
+    @for (phase of phases; track phase.titleKey) {
+    <ds-card
+      class="release-flow__card"
+      [title]="phase.titleKey | translate"
+      [subtitle]="phase.subtitleKey | translate"
+      [icon]="phase.icon"
+      iconFont="material">
+      @if (phase.introKey; as introKey) {
+      <p>
+        <ng-container
+          [ngTemplateOutlet]="parts"
+          [ngTemplateOutletContext]="{ $implicit: introKey | translateParts }" />
+      </p>
+      }
+      <ng-container
+        [ngTemplateOutlet]="list"
+        [ngTemplateOutletContext]="{ $implicit: phase.listKey, ordered: phase.ordered }" />
+      @if (phase.noteKey; as noteKey) {
+      <p>{{ noteKey | translate }}</p>
+      }
+    </ds-card>
+    }
+  </div>
+</ds-page-layout>

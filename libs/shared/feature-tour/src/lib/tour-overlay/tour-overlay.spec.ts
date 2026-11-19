@@ -56,6 +56,24 @@ class SlowPage {
   }
 }
 
+/**
+ * A footer-like target below content that grows after the first render, like a
+ * page whose data arrives after the tour found the target
+ */
+@Component({
+  template: `
+    <div [style.height.px]="contentHeight()"></div>
+    <button data-tour="footer">footer</button>
+  `,
+})
+class GrowingPage {
+  protected readonly contentHeight = signal(100);
+
+  constructor() {
+    setTimeout(() => this.contentHeight.set(3000), 400);
+  }
+}
+
 /** A target that is in the page but takes no space, like a collapsed panel */
 @Component({ template: '<button data-tour="hidden" hidden>hidden</button>' })
 class HiddenPage {}
@@ -111,7 +129,14 @@ const steps = [
     'navbar-theme-switcher',
     'navbar-font-switcher',
   ]),
-  step('technical', '/second', '[data-tour="second"]', ['main-menu-technical']),
+  {
+    ...step('technical', '/second', '[data-tour="second"]', [
+      'main-menu-technical',
+    ]),
+    // like the real tour: the menu label says the same
+    labelKey: 't.nav.technical',
+    titleKey: 't.nav.technical',
+  },
   step('finish', '/second'),
 ];
 
@@ -132,6 +157,7 @@ describe('TourOverlay', () => {
           { path: 'slow', component: SlowPage },
           { path: 'hidden', component: HiddenPage },
           { path: 'empty', component: SecondPage },
+          { path: 'growing', component: GrowingPage },
         ]),
         provideI18nTesting(),
         { provide: TOUR_STEPS, useValue: tourSteps },
@@ -455,6 +481,47 @@ describe('TourOverlay', () => {
     expect(pointer.classList).toContain('tour__pointer--down');
   });
 
+  describe('a target pushed down by a page that is still loading', () => {
+    const footerSteps = [step('footer', '/growing', '[data-tour="footer"]')];
+    const footer = () =>
+      document.querySelector('[data-tour="footer"]')!.getBoundingClientRect();
+    const grown = () => new Promise((resolve) => setTimeout(resolve, 700));
+
+    afterEach(() => window.scrollTo(0, 0));
+
+    it('scrolls it back into view, and the spotlight follows', async () => {
+      // Arrange & Act
+      const { query } = await render(Host, footerSteps);
+      await grown();
+
+      // Assert
+      await vi.waitFor(() => {
+        expect(footer().bottom).toBeLessThanOrEqual(window.innerHeight);
+        expect(footer().top).toBeGreaterThanOrEqual(0);
+      });
+      await vi.waitFor(() =>
+        expect(
+          query('.tour__spotlight')!.getBoundingClientRect().top
+        ).toBeCloseTo(footer().top - 8, 0)
+      );
+    });
+
+    it('leaves the scrolling to the visitor once they scroll themselves', async () => {
+      // Arrange
+      await render(Host, footerSteps);
+      await vi.waitFor(() =>
+        expect(document.querySelector('[data-tour="footer"]')).not.toBeNull()
+      );
+
+      // Act
+      document.dispatchEvent(new WheelEvent('wheel', { deltaY: 10 }));
+      await grown();
+
+      // Assert
+      expect(footer().top).toBeGreaterThan(window.innerHeight);
+    });
+  });
+
   it('shows a loading status while the target is slow, and the spotlight after', async () => {
     // Arrange
     const slowSteps = [step('slow', '/slow', '[data-tour="slow"]')];
@@ -540,6 +607,8 @@ describe('TourOverlay', () => {
       step('settings', '/first', '[data-tour="first"]'),
       {
         ...step('technical', '/second', '[data-tour="second"]'),
+        labelKey: 't.nav.technical',
+        titleKey: 't.nav.technical',
         menuTarget: '[data-tour="menu-panel"] [data-tour="menu-second"]',
       },
       step('finish', '/second'),

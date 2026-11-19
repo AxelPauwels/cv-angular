@@ -1,5 +1,5 @@
 <ds-page-layout width="narrow">
-  <ds-page-title title="t.heading.references" />
+  <ds-page-title title="t.nav.references" />
 
   @if (loading.pending()) { @if (loading.indicator()) {
   <ds-loading-spinner />
@@ -8,7 +8,7 @@
     message="t.error.load.references"
     [error]="store.error()" />
   } @else {
-  <ds-timeline [label]="'t.heading.references' | translate">
+  <ds-timeline [label]="'t.nav.references' | translate">
     @for (group of groups(); track group.work; let g = $index) {
     <ds-timeline-item
       [start]="group.start"

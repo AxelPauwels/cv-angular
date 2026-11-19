@@ -1,58 +1,60 @@
-<ds-page-title title="t.heading.feature-toggles" />
+<ds-page-layout>
+  <ds-page-title title="t.nav.feature-toggles" />
 
-<div class="feature-toggles">
-  <div class="feature-toggles__toolbar">
-    <button
-      matButton="tonal"
-      type="button"
-      class="feature-toggles__reset"
-      (click)="reset()">
-      <mat-icon fontSet="material-symbols-outlined">restart_alt</mat-icon>
-      {{ 't.feature-toggles.reset' | translate }}
-    </button>
+  <div class="feature-toggles">
+    <div class="feature-toggles__toolbar">
+      <button
+        matButton="tonal"
+        type="button"
+        class="feature-toggles__reset"
+        (click)="reset()">
+        <mat-icon fontSet="material-symbols-outlined">restart_alt</mat-icon>
+        {{ 't.feature-toggles.reset' | translate }}
+      </button>
+    </div>
+
+    <div class="feature-toggles__sections">
+      @for (card of cards(); track card.section.id) { @let section =
+      card.section; @let title = section.titleKey | translate;
+      <ds-card
+        class="feature-toggles__section"
+        [class.feature-toggles__section--new-row]="section.newRow"
+        [class.feature-toggles__section--wide]="section.wide"
+        role="region"
+        [attr.aria-label]="title"
+        [title]="title">
+        <!-- its own line under the title, at the right above the switches -->
+        <p class="feature-toggles__count">
+          <span class="feature-toggles__tag"
+            >{{ 't.feature-toggles.count' | translate: card.count }}</span
+          >
+        </p>
+        <ul class="feature-toggles__list">
+          @for (toggle of section.toggles; track toggle.id) {
+          <li class="feature-toggles__item">
+            <mat-slide-toggle
+              class="feature-toggles__toggle"
+              labelPosition="before"
+              [attr.data-toggle]="toggle.id"
+              [checked]="service.states()[toggle.id]"
+              (change)="change(toggle.id, $event.checked)">
+              {{ toggle.labelKey | translate }}
+            </mat-slide-toggle>
+          </li>
+          }
+        </ul>
+      </ds-card>
+      }
+    </div>
+
+    <!-- toggles switched along with another one, e.g. a main menu item -->
+    <p class="cdk-visually-hidden" role="status">
+      @for (linked of linkedChanges(); track linked.id) {
+      <span
+        >{{ linked.messageKey | translate: { item: (linked.labelKey | translate)
+        } }}</span
+      >
+      }
+    </p>
   </div>
-
-  <div class="feature-toggles__sections">
-    @for (card of cards(); track card.section.id) { @let section = card.section;
-    @let title = section.prefixKey ? (section.prefixKey | translate) + ' ' +
-    (section.titleKey | translate) : (section.titleKey | translate);
-    <ds-card
-      class="feature-toggles__section"
-      [class.feature-toggles__section--new-row]="section.newRow"
-      role="region"
-      [attr.aria-label]="title"
-      [title]="title">
-      <!-- its own line under the title, at the right above the switches -->
-      <p class="feature-toggles__count">
-        <span class="feature-toggles__tag"
-          >{{ 't.feature-toggles.count' | translate: card.count }}</span
-        >
-      </p>
-      <ul class="feature-toggles__list">
-        @for (toggle of section.toggles; track toggle.id) {
-        <li class="feature-toggles__item">
-          <mat-slide-toggle
-            class="feature-toggles__toggle"
-            labelPosition="before"
-            [attr.data-toggle]="toggle.id"
-            [checked]="service.states()[toggle.id]"
-            (change)="change(toggle.id, $event.checked)">
-            {{ toggle.labelKey | translate }}
-          </mat-slide-toggle>
-        </li>
-        }
-      </ul>
-    </ds-card>
-    }
-  </div>
-
-  <!-- toggles switched along with another one, e.g. a main menu item -->
-  <p class="cdk-visually-hidden" role="status">
-    @for (linked of linkedChanges(); track linked.id) {
-    <span
-      >{{ linked.messageKey | translate: { item: (linked.labelKey | translate) }
-      }}</span
-    >
-    }
-  </p>
-</div>
+</ds-page-layout>

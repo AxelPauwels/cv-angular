@@ -1,9 +1,17 @@
+<!-- When the tabs don't fit, Material shows back/next arrows; a swipe (touch, pen)
+     or a sideways scroll (trackpad, shift + wheel) moves them too -->
 <nav
+  #nav
   mat-tab-nav-bar
   class="sub-navbar__tabs"
   mat-stretch-tabs="false"
   [tabPanel]="panel"
-  [attr.aria-label]="labelKey() | translate">
+  [attr.aria-label]="labelKey() | translate"
+  (pointerdown)="startSwipe($event)"
+  (pointermove)="swipe($event)"
+  (pointerup)="endSwipe()"
+  (pointercancel)="endSwipe()"
+  (wheel)="scrollSideways($event)">
   @for (item of items(); track item.path) {
   <!-- An icon tab keeps its label as accessible name and tooltip (on hover and focus) -->
   <a

@@ -6,10 +6,12 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   PreloadAllModules,
   provideRouter,
+  TitleStrategy,
   withComponentInputBinding,
   withPreloading,
 } from '@angular/router';
 import { appRoutes } from './app.routes';
+import { TranslatedTitleStrategy } from './title/translated-title-strategy';
 import {
   FEDERATION_MANIFEST_URL,
   inBrowserGraphqlInterceptor,
@@ -30,6 +32,8 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withPreloading(PreloadAllModules)
     ),
+    // every page its own, translated document title (see the strategy)
+    { provide: TitleStrategy, useClass: TranslatedTitleStrategy },
     // the same manifest main.ts started federation with
     {
       provide: FEDERATION_MANIFEST_URL,

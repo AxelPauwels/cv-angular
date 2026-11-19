@@ -15,6 +15,7 @@ const TECHNICAL_PAGES = [
   'technical-foundations',
   'technical-project-graph',
   'technical-graphql-docs',
+  'technical-compodoc',
   'technical-code-coverage',
   'technical-end-to-end-tests',
   'technical-versions',
@@ -53,6 +54,7 @@ describe('technicalFeatureShellRoutes', () => {
       'Foundations',
       'Project graph',
       'graphql docs',
+      'Compodoc',
       'code coverage',
       'End-to-end tests',
       'Versions',
@@ -85,6 +87,7 @@ describe('technicalFeatureShellRoutes', () => {
       )
     ).toEqual([
       'Project graph',
+      'Compodoc',
       'code coverage',
       'End-to-end tests',
       'Versions',

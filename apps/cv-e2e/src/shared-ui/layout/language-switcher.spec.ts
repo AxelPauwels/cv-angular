@@ -27,7 +27,7 @@ test.describe('ds-language-switcher', () => {
 
     // Assert
     await expect(button).toHaveAccessibleName('Language');
-    await expect(options).toHaveCount(7);
+    await expect(options).toHaveCount(6);
     for (const [index, [name, lang]] of [
       ['English', 'en'],
       ['Dutch', 'nl'],
@@ -35,7 +35,6 @@ test.describe('ds-language-switcher', () => {
       ['Spanish', 'es'],
       ['Norwegian', 'nb'],
       ['Greek', 'el'],
-      ['Hindi', 'hi'],
     ].entries()) {
       await expect(options.nth(index)).toHaveAccessibleName(name);
       await expect(options.nth(index)).toHaveAttribute('lang', lang);

@@ -1,10 +1,18 @@
 <ds-page-layout>
-  <ds-page-title title="t.heading.micro-frontends" />
+  <ds-page-title title="t.nav.micro-frontends" />
 
-  <!-- step texts hold inline <code>: translateParts renders it without innerHTML -->
-  <ng-template #parts let-key>
-    @for (part of key | translateParts; track $index) { @if (part.tag ===
-    'code') {<code>{{ part.text }}</code>} @else {{{ part.text }}} }
+  <!-- one key per list (items separated by `||`); the steps hold inline <code>,
+       rendered as elements without innerHTML -->
+  <ng-template #steps let-key>
+    <ol class="micro-frontends__steps">
+      @for (step of key | translateList; track $index) {
+      <li>
+        @for (part of step; track $index) { @if (part.tag === 'code') {<code
+          >{{ part.text }}</code
+        >} @else {{{ part.text }}} }
+      </li>
+      }
+    </ol>
   </ng-template>
 
   <div class="micro-frontends__grid">
@@ -19,15 +27,9 @@
       </div>
 
       <p>{{ 't.micro-frontends.mfe.intro' | translate }}</p>
-      <ol class="micro-frontends__steps">
-        @for (key of mfeSteps; track key) {
-        <li>
-          <ng-container
-            [ngTemplateOutlet]="parts"
-            [ngTemplateOutletContext]="{ $implicit: key }" />
-        </li>
-        }
-      </ol>
+      <ng-container
+        [ngTemplateOutlet]="steps"
+        [ngTemplateOutletContext]="{ $implicit: 't.micro-frontends.mfe.steps' }" />
 
       <mat-chip-set
         class="micro-frontends__chips"
@@ -86,15 +88,9 @@
       </div>
 
       <p>{{ 't.micro-frontends.lib.intro' | translate }}</p>
-      <ol class="micro-frontends__steps">
-        @for (key of librarySteps; track key) {
-        <li>
-          <ng-container
-            [ngTemplateOutlet]="parts"
-            [ngTemplateOutletContext]="{ $implicit: key }" />
-        </li>
-        }
-      </ol>
+      <ng-container
+        [ngTemplateOutlet]="steps"
+        [ngTemplateOutletContext]="{ $implicit: 't.micro-frontends.lib.steps' }" />
 
       <mat-chip-set
         class="micro-frontends__chips"

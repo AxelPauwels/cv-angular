@@ -24,7 +24,13 @@
     );
 
     height: 3rem;
-    inset-block-end: max(0.5rem, env(safe-area-inset-bottom));
+
+    // centered on the footer's height when the page passes it on, 0.5rem from
+    // the bottom otherwise (a 4rem strip)
+    inset-block-end: max(
+      calc((var(--ds-back-to-top-footer-height, 4rem) - 3rem) / 2),
+      env(safe-area-inset-bottom)
+    );
     inset-inline-end: max(0.5rem, env(safe-area-inset-right));
     opacity: 0;
     position: fixed;

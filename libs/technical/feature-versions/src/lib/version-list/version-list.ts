@@ -1,5 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
-import { PageTitle } from '@cv/shared-ui-page';
+import { PageLayout, PageTitle } from '@cv/shared-ui-page';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { Card } from '@cv/shared-ui-card';
@@ -16,17 +16,17 @@ const CATEGORIES: Record<string, { icon: string; labelKey: TranslationKey }> = {
   Runtime: { icon: 'terminal', labelKey: 't.versions.category.runtime' },
   Framework: { icon: 'code', labelKey: 't.versions.category.framework' },
   UI: { icon: 'palette', labelKey: 't.versions.category.ui' },
-  State: { icon: 'memory', labelKey: 't.versions.category.state' },
+  State: { icon: 'memory', labelKey: 't.subheading.technical.state' },
   'Micro-frontends': {
     icon: 'view_quilt',
-    labelKey: 't.versions.category.micro-frontends',
+    labelKey: 't.nav.micro-frontends',
   },
   API: { icon: 'api', labelKey: 't.versions.category.api' },
   i18n: { icon: 'translate', labelKey: 't.versions.category.i18n' },
   Monorepo: { icon: 'inventory_2', labelKey: 't.versions.category.monorepo' },
   Architecture: {
     icon: 'architecture',
-    labelKey: 't.versions.category.architecture',
+    labelKey: 't.nav.architecture',
   },
   Testing: { icon: 'science', labelKey: 't.versions.category.testing' },
   'Code quality': {
@@ -38,6 +38,7 @@ const CATEGORIES: Record<string, { icon: string; labelKey: TranslationKey }> = {
 @Component({
   selector: 'technical-version-list',
   imports: [
+    PageLayout,
     PageTitle,
     Card,
     MatProgressBar,

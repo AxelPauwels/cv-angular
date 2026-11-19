@@ -28,6 +28,11 @@ export const TECHNICAL_NAV_ITEMS: readonly (NavItem & {
     toggle: 'technical-graphql-docs',
   },
   {
+    labelKey: 't.nav.compodoc',
+    path: ROUTES.TECHNICAL.COMPODOC,
+    toggle: 'technical-compodoc',
+  },
+  {
     labelKey: 't.nav.code-coverage',
     path: ROUTES.TECHNICAL.CODE_COVERAGE,
     toggle: 'technical-code-coverage',

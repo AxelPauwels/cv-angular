@@ -9,6 +9,8 @@ export const SHOWCASE = {
   SERVICE_STATUS_ROUTER_LINK: '/showcase/service-status',
   AI_ASSISTANT: 'ai-assistant',
   AI_ASSISTANT_ROUTER_LINK: '/showcase/ai-assistant',
+  RELEASE_FLOW: 'release-flow',
+  RELEASE_FLOW_ROUTER_LINK: '/showcase/release-flow',
   FEATURE_TOGGLES: 'feature-toggles',
   FEATURE_TOGGLES_ROUTER_LINK: '/showcase/feature-toggles',
 } as const;

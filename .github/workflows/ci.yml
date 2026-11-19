@@ -33,7 +33,15 @@ jobs:
       - run: npm ci
       # The dev environment imports the gitignored Tolgee tokens; use the empty template
       - run: cp apps/cv/src/tokens/environment.tokens.example.ts apps/cv/src/tokens/environment.tokens.ts
-      - run: npx playwright install --with-deps
+      # Only the browsers the e2e step below runs (same E2E_BROWSERS expression):
+      # Chromium alone needs far fewer apt packages than all three browsers.
+      # The timeout stops a runner that got a slow Ubuntu mirror (seen at
+      # ~70 kB/s for 139 MB) from hanging for an hour; rerun the job instead.
+      - name: Install Playwright browsers
+        timeout-minutes: 10
+        env:
+          E2E_BROWSERS: ${{ !(github.ref_name == 'main' || startsWith(github.ref_name, 'release/') || github.base_ref == 'main') && 'chromium' || '' }}
+        run: npx playwright install --with-deps ${E2E_BROWSERS//,/ }
 
       # Sets NX_BASE and NX_HEAD so `nx affected` compares against the last successful run on main
       - uses: nrwl/nx-set-shas@v5

@@ -98,12 +98,12 @@ describe('FeatureToggles', () => {
       'Navbar icons',
       'General',
       'Main menu',
-      'Submenu CV',
-      'Submenu Technical',
-      'Submenu Showcase',
+      'CV',
+      'Technical',
+      'Showcase',
     ]);
     expect(element.querySelectorAll('mat-card')).toHaveLength(6);
-    expect(element.querySelectorAll('mat-slide-toggle')).toHaveLength(27);
+    expect(element.querySelectorAll('mat-slide-toggle')).toHaveLength(30);
   });
 
   it('switches the main menu item off with its last sub menu item, and says so', async () => {
@@ -119,6 +119,7 @@ describe('FeatureToggles', () => {
       false
     );
     TestBed.inject(FeatureToggleService).change('showcase-ai-assistant', false);
+    TestBed.inject(FeatureToggleService).change('showcase-release-flow', false);
     TestBed.inject(MatSnackBar).dismiss();
     await harness.fixture.whenStable();
 
@@ -143,6 +144,7 @@ describe('FeatureToggles', () => {
     service.change('showcase-lighthouse', false);
     service.change('showcase-service-status', false);
     service.change('showcase-ai-assistant', false);
+    service.change('showcase-release-flow', false);
     service.change('showcase-micro-frontends', false);
     TestBed.inject(MatSnackBar).dismiss();
     await harness.fixture.whenStable();
@@ -182,6 +184,7 @@ describe('FeatureToggles', () => {
     service.change('showcase-lighthouse', false);
     service.change('showcase-service-status', false);
     service.change('showcase-ai-assistant', false);
+    service.change('showcase-release-flow', false);
     TestBed.inject(MatSnackBar).dismiss();
     toggle('showcase-micro-frontends')?.click();
     await harness.fixture.whenStable();
@@ -234,9 +237,9 @@ describe('FeatureToggles', () => {
       'Navbar icons',
       'General',
       'Main menu',
-      'Submenu CV',
-      'Submenu Technical',
-      'Submenu Showcase',
+      'CV',
+      'Technical',
+      'Showcase',
     ]);
   });
 

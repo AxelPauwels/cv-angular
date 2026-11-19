@@ -1,0 +1,66 @@
+import {
+  WALK_SPEED_PX_PER_MS,
+  WalkerImage,
+  WalkerSpeedFactor,
+  walkSpeed,
+} from '@cv/shared-ui-walker';
+
+/**
+ * The walking loops of the figure on every page, see
+ * apps/cv/public/assets/walker/README.md for how they were made
+ */
+export const WALKER_IMAGES = {
+  /** A normal walk to the left */
+  left: {
+    src: '/assets/walker/walking-left.webp',
+    width: 98.5,
+    height: 131,
+    speed: WALK_SPEED_PX_PER_MS,
+  },
+  /** A normal walk to the right */
+  right: {
+    src: '/assets/walker/walking-right.webp',
+    width: 98.5,
+    height: 131,
+    speed: WALK_SPEED_PX_PER_MS,
+  },
+  /**
+   * The first walk only, to the right: carrying the ZoneJs sign, a slow, heavy
+   * walk whose planted foot moves 0.072 px/ms in the GIF frames (the speed of
+   * the preview page), played 1.2× faster (the WebP's frames are 1.2× shorter,
+   * see tools/walker-sign-walk.mjs), so he moves 1.2× faster too
+   */
+  first: {
+    src: '/assets/walker/carrying-zonejs-right.webp',
+    width: 78,
+    height: 114,
+    speed: walkSpeed(0.072 * 1.2),
+    // his feet sit a little low in this image
+    lift: 2,
+  },
+} as const satisfies Record<'left' | 'right' | 'first', WalkerImage>;
+
+/**
+ * The waits before each walk, in ms: 5 seconds after the page has loaded (and
+ * the browser is idle, so it never weighs on the page load) he carries the
+ * sign to the right, once; a quarter of a second later he walks back to the
+ * left, to the right again after 2 minutes, and from then on turns around every
+ * 4 minutes, always as the normal walk
+ */
+export const WALKER_PAUSES: readonly number[] = [5_000, 250, 120_000, 240_000];
+
+/**
+ * Speed per breakpoint (apps/cv/src/styles/1.settings/_breakpoints.scss), on
+ * top of each walk's own speed: both figures move the same pixels per second
+ * on every screen width, so a walk takes longer on a wider screen. 1 is the
+ * speed of the planted foot, where the feet don't slide; tune a breakpoint
+ * here to walk faster (above 1) or slower there.
+ */
+export const WALKER_SPEED_FACTORS: readonly WalkerSpeedFactor[] = [
+  { minWidth: 0, factor: 1 }, // phones
+  { minWidth: 768, factor: 1 }, // tablets (md)
+  { minWidth: 1200, factor: 1 }, // desktops (xl)
+];
+
+/** How far the figure's feet sink into the footer, so he walks on it */
+export const WALKER_FEET_IN_FOOTER_PX = 8;

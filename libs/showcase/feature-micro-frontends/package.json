@@ -10,7 +10,6 @@
     "@cv/shared-ui-page": "0.0.1",
     "@angular/common": "~22.2.0",
     "@tolgee/ngx": "^7.3.0",
-    "@cv/shared-util-i18n": "0.0.1",
     "@cv/shared-ui-i18n": "0.0.1"
   },
   "sideEffects": false,

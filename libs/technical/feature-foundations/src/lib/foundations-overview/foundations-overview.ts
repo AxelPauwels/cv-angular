@@ -3,15 +3,17 @@ import { NgTemplateOutlet } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { Lordicon, type LordiconName } from '@cv/shared-ui-lordicon';
 import { PageLayout, PageTitle, SectionHeading } from '@cv/shared-ui-page';
-import { TranslatePartsPipe } from '@cv/shared-ui-i18n';
-import { TranslationKey } from '@cv/shared-util-i18n';
+import { Card } from '@cv/shared-ui-card';
+import { TranslateListPipe, TranslatePartsPipe } from '@cv/shared-ui-i18n';
 import { TranslatePipe } from '@tolgee/ngx';
 
-/** A folder of `apps/cv/src/styles`, from the broadest to the most specific */
+/**
+ * A folder of `apps/cv/src/styles`, from the broadest to the most specific.
+ * Their names and texts are two list keys (`t.foundations.itcss.layer-names`,
+ * `t.foundations.itcss.layer-texts`, items separated by `||`), in this order.
+ */
 export interface StyleLayer {
   folder: string;
-  nameKey: TranslationKey;
-  textKey: TranslationKey;
   /** The class prefix the layer's classes start with */
   namespace?: string;
 }
@@ -19,52 +21,34 @@ export interface StyleLayer {
 export const STYLE_LAYERS: readonly StyleLayer[] = [
   {
     folder: '1.settings',
-    nameKey: 't.foundations.itcss.layer.settings.name',
-    textKey: 't.foundations.itcss.layer.settings.text',
   },
   {
     folder: '2.tools',
-    nameKey: 't.foundations.itcss.layer.tools.name',
-    textKey: 't.foundations.itcss.layer.tools.text',
   },
   {
     folder: '3.vendors',
-    nameKey: 't.foundations.itcss.layer.vendors.name',
-    textKey: 't.foundations.itcss.layer.vendors.text',
   },
   {
     folder: '4.elements',
-    nameKey: 't.foundations.itcss.layer.elements.name',
-    textKey: 't.foundations.itcss.layer.elements.text',
   },
   {
     folder: '5.objects',
-    nameKey: 't.foundations.itcss.layer.objects.name',
-    textKey: 't.foundations.itcss.layer.objects.text',
     namespace: 'o-',
   },
   {
     folder: '6.components',
-    nameKey: 't.foundations.itcss.layer.components.name',
-    textKey: 't.foundations.itcss.layer.components.text',
     namespace: 'c-',
   },
   {
     folder: '7.patterns',
-    nameKey: 't.foundations.itcss.layer.patterns.name',
-    textKey: 't.foundations.itcss.layer.patterns.text',
     namespace: 'p-',
   },
   {
     folder: '8.scopes',
-    nameKey: 't.foundations.itcss.layer.scopes.name',
-    textKey: 't.foundations.itcss.layer.scopes.text',
     namespace: 's-',
   },
   {
     folder: '9.utilities',
-    nameKey: 't.foundations.itcss.layer.utilities.name',
-    textKey: 't.foundations.itcss.layer.utilities.text',
     namespace: 'u-',
   },
 ];
@@ -119,6 +103,7 @@ export const STORES: readonly string[] = [
 @Component({
   selector: 'technical-foundations-overview',
   imports: [
+    Card,
     PageLayout,
     PageTitle,
     SectionHeading,
@@ -127,6 +112,7 @@ export const STORES: readonly string[] = [
     NgTemplateOutlet,
     TranslatePipe,
     TranslatePartsPipe,
+    TranslateListPipe,
   ],
   templateUrl: './foundations-overview.html',
   styleUrl: './foundations-overview.scss',

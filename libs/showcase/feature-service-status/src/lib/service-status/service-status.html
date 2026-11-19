@@ -1,114 +1,116 @@
-<ds-page-title title="t.heading.service-status" />
+<ds-page-layout width="narrow">
+  <ds-page-title title="t.nav.service-status" />
 
-<div class="service-status">
-  <div class="service-status__toolbar">
-    <p class="service-status__summary" role="status">
-      @if (store.isChecking()) { {{ 't.service-status.summary.checking' |
-      translate }} } @else { {{ 't.service-status.summary.done' | translate :
-      summary() }} @if (checkedAt(); as time) {
-      <span class="service-status__checked-at">
-        {{ 't.service-status.checked-at' | translate : { time } }}
-      </span>
-      } }
-    </p>
+  <div class="service-status">
+    <div class="service-status__toolbar">
+      <p class="service-status__summary" role="status">
+        @if (store.isChecking()) { {{ 't.service-status.summary.checking' |
+        translate }} } @else { {{ 't.service-status.summary.done' | translate :
+        summary() }} @if (checkedAt(); as time) {
+        <span class="service-status__checked-at">
+          {{ 't.service-status.checked-at' | translate : { time } }}
+        </span>
+        } }
+      </p>
 
-    <!-- disabledInteractive: the button keeps its focus while it checks -->
-    <button
-      type="button"
-      matButton="tonal"
-      disabledInteractive
-      [disabled]="store.isChecking()"
-      (click)="store.isChecking() || store.recheck()">
-      <mat-icon fontSet="material-symbols-outlined">restart_alt</mat-icon>
-      {{ 't.service-status.recheck' | translate }}
-    </button>
-  </div>
+      <!-- disabledInteractive: the button keeps its focus while it checks -->
+      <button
+        type="button"
+        matButton="tonal"
+        disabledInteractive
+        [disabled]="store.isChecking()"
+        (click)="store.isChecking() || store.recheck()">
+        <mat-icon fontSet="material-symbols-outlined">restart_alt</mat-icon>
+        {{ 't.service-status.recheck' | translate }}
+      </button>
+    </div>
 
-  <div class="service-status__legend">
-    <span>{{ 't.service-status.legend' | translate }}:</span>
-    <ul class="service-status__legend-list">
-      @for (health of legend; track health) {
-      <li
-        class="service-status__health"
-        [class]="'service-status__health--' + health">
-        <span class="service-status__shape" aria-hidden="true"></span>
-        {{ 't.service-status.health.' + health | translate }}
-      </li>
-      }
-    </ul>
-  </div>
-
-  @if (store.linksError()) {
-  <p class="service-status__error">
-    {{ 't.service-status.links-error' | translate }}
-  </p>
-  } @for (section of sections(); track section.id) {
-  <section
-    class="service-status__section"
-    [attr.aria-labelledby]="'service-status-' + section.id">
-    <h2
-      class="service-status__section-title"
-      [id]="'service-status-' + section.id">
-      {{ section.labelKey | translate }}
-    </h2>
-
-    <table
-      class="service-status__table"
-      [attr.aria-labelledby]="'service-status-' + section.id">
-      <thead>
-        <tr>
-          <th scope="col">
-            {{ 't.service-status.column.service' | translate }}
-          </th>
-          <th scope="col">
-            {{ 't.service-status.column.status' | translate }}
-          </th>
-          <th scope="col" class="service-status__time-header">
-            {{ 't.service-status.column.response-time' | translate }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (service of section.services; track service.id) {
-        <tr>
-          <th scope="row" class="service-status__service">
-            <a
-              class="service-status__name"
-              [href]="service.url"
-              target="_blank"
-              rel="noopener noreferrer">
-              {{ service.name }}
-              <span class="cdk-visually-hidden"
-                >{{ 't.common.new-tab' | translate }}</span
-              >
-            </a>
-            <span class="service-status__address"
-              >{{ address(service.url) }}</span
-            >
-          </th>
-          <td>
-            @let text = statusText(service);
-            <span
-              class="service-status__health"
-              [class]="'service-status__health--' + service.health">
-              <span class="service-status__shape" aria-hidden="true"></span>
-              {{ text.key | translate : text.params ?? {} }}
-            </span>
-          </td>
-          <td class="service-status__time">
-            @if (service.responseTimeMs !== undefined) { {{
-            't.service-status.response-time' | translate :
-            milliseconds(service.responseTimeMs) }} } @else {
-            <span aria-hidden="true">–</span>
-            <span class="cdk-visually-hidden"
-              >{{ 't.service-status.no-response-time' | translate }}</span
-            >
-            }
-          </td>
-        </tr>
+    <div class="service-status__legend">
+      <span>{{ 't.service-status.column.status' | translate }}:</span>
+      <ul class="service-status__legend-list">
+        @for (health of legend; track health) {
+        <li
+          class="service-status__health"
+          [class]="'service-status__health--' + health">
+          <span class="service-status__shape" aria-hidden="true"></span>
+          {{ 't.service-status.health.' + health | translate }}
+        </li>
         }
-      </tbody>
-    </table>
-  </section>
-  }
-</div>
+      </ul>
+    </div>
+
+    @if (store.linksError()) {
+    <p class="service-status__error">
+      {{ 't.service-status.links-error' | translate }}
+    </p>
+    } @for (section of sections(); track section.id) {
+    <section
+      class="service-status__section"
+      [attr.aria-labelledby]="'service-status-' + section.id">
+      <h2
+        class="service-status__section-title"
+        [id]="'service-status-' + section.id">
+        {{ section.labelKey | translate }}
+      </h2>
+
+      <table
+        class="service-status__table"
+        [attr.aria-labelledby]="'service-status-' + section.id">
+        <thead>
+          <tr>
+            <th scope="col">
+              {{ 't.service-status.column.service' | translate }}
+            </th>
+            <th scope="col">
+              {{ 't.service-status.column.status' | translate }}
+            </th>
+            <th scope="col" class="service-status__time-header">
+              {{ 't.service-status.column.response-time' | translate }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (service of section.services; track service.id) {
+          <tr>
+            <th scope="row" class="service-status__service">
+              <a
+                class="service-status__name"
+                [href]="service.url"
+                target="_blank"
+                rel="noopener noreferrer">
+                {{ service.name }}
+                <span class="cdk-visually-hidden"
+                  >{{ 't.common.new-tab' | translate }}</span
+                >
+              </a>
+              <span class="service-status__address"
+                >{{ address(service.url) }}</span
+              >
+            </th>
+            <td>
+              @let text = statusText(service);
+              <span
+                class="service-status__health"
+                [class]="'service-status__health--' + service.health">
+                <span class="service-status__shape" aria-hidden="true"></span>
+                {{ text.key | translate : text.params ?? {} }}
+              </span>
+            </td>
+            <td class="service-status__time">
+              @if (service.responseTimeMs !== undefined) { {{
+              't.service-status.response-time' | translate :
+              milliseconds(service.responseTimeMs) }} } @else {
+              <span aria-hidden="true">–</span>
+              <span class="cdk-visually-hidden"
+                >{{ 't.service-status.no-response-time' | translate }}</span
+              >
+              }
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </section>
+    }
+  </div>
+</ds-page-layout>

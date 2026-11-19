@@ -1,5 +1,5 @@
 <ds-page-layout class="ai-assistant" width="narrow">
-  <ds-page-title title="t.heading.ai-assistant" />
+  <ds-page-title title="t.nav.ai-assistant" />
 
   <p class="ai-assistant__intro">{{ 't.ai-assistant.intro' | translate }}</p>
 
@@ -77,8 +77,9 @@
         {{ 't.ai-assistant.suggestions' | translate }}
       </p>
       <ul aria-labelledby="ai-assistant-suggestions">
-        @for (suggestion of suggestions; track suggestion) { @let label =
-        suggestion | translate;
+        <!-- one translation key holds every question, separated by `||` -->
+        @for (suggestion of 't.ai-assistant.suggested-questions' |
+        translateList; track $index) { @let label = suggestionText(suggestion);
         <li>
           <button mat-stroked-button type="button" (click)="ask(label)">
             {{ label }}
@@ -137,7 +138,7 @@
             <mat-icon fontSet="material-symbols-outlined" aria-hidden="true"
               >send</mat-icon
             >
-            {{ 't.ai-assistant.send' | translate }}
+            {{ 't.contact.send' | translate }}
           </button>
         </div>
       </div>

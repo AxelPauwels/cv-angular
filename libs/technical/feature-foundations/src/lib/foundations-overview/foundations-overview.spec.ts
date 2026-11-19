@@ -85,11 +85,14 @@ describe('FoundationsOverview', () => {
     );
 
     // Assert
-    // the name after the decorative icon (whose ligature is its text)
+    // a ds-card each, its heading the source's name (h3, under the section's h2)
+    expect(cards.map((card) => card.tagName.toLowerCase())).toEqual([
+      'ds-card',
+      'ds-card',
+      'ds-card',
+    ]);
     expect(
-      cards.map((card) =>
-        card.querySelector('dt')?.lastChild?.textContent?.trim()
-      )
+      cards.map((card) => card.querySelector('h3')?.textContent?.trim())
     ).toEqual(['Icomoon', 'Material Symbols', 'Lordicon']);
     expect(
       samples.map((sample) => sample?.getAttribute('aria-hidden'))

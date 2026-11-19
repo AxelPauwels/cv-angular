@@ -9,7 +9,8 @@
 // Where it looks (outside spec and generated files):
 // - HTML: the text of <mat-icon fontSet="material-symbols-outlined"> (a bare name, or
 //   the quoted names in an expression such as `open() ? 'close' : 'menu'`), a static
-//   icon="…" on any element (ds-card, ds-timeline-detail, …), and the quoted names in
+//   icon="…" on any element (ds-card, ds-timeline-detail, …) unless it says
+//   iconFont="cv" (the cv icon font), and the quoted names in
 //   a bound [icon]="…" expression.
 // - TS: quoted names on an `icon:` line and the values of a `*_ICONS` map.
 // libs/api is skipped: its icons belong to the cv icon font. A few extra names (for
@@ -45,8 +46,10 @@ const fromHtml = (html) => {
     if (NAME.test(text)) names.push(text);
     names.push(...quoted(text));
   }
-  for (const [, icon] of html.matchAll(/\sicon="([a-z][a-z0-9_]*)"/g)) {
-    names.push(icon);
+  // a static icon="…", unless the element takes it from the cv icon font (iconFont="cv")
+  for (const [, attrs] of html.matchAll(/<[\w-]+\b((?:[^>"]|"[^"]*")*)>/g)) {
+    const icon = attrs.match(/\sicon="([a-z][a-z0-9_]*)"/);
+    if (icon && !/\siconFont="cv"/.test(attrs)) names.push(icon[1]);
   }
   // Bound inputs: [icon]="degree ? 'workspace_premium' : undefined"
   for (const [, expression] of html.matchAll(/\[\w*[iI]con\]="([^"]*)"/g)) {

@@ -43,6 +43,7 @@ describe('LighthouseReport', () => {
       'Foundations',
       'Project graph',
       'graphql docs',
+      'Compodoc',
       'code coverage',
       'End-to-end tests',
       'Versions',

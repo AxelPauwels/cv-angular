@@ -93,6 +93,8 @@ describe('DEFAULT_TOUR_STEPS', () => {
     );
     expect(aiAssistant?.target).toBe('[data-tour="ai-assistant"]');
     expect(aiAssistant?.toggles).toEqual(['showcase-ai-assistant']);
-    expect(aiAssistant?.centerOnPhones).toBe(true);
+    // on phones too: the tour scrolls down to the footer and spotlights them
+    expect(contact?.centerOnPhones).toBeUndefined();
+    expect(aiAssistant?.centerOnPhones).toBeUndefined();
   });
 });

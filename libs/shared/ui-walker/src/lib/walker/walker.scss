@@ -1,0 +1,29 @@
+// A strip along the bottom of the viewport (lifted by --ds-walker-bottom), as
+// high as the taller figure; the figure walks through it with its feet on the
+// strip's bottom edge and waits just off screen (clipped, so it never adds a
+// horizontal scrollbar). Above everything, and never in the way: clicks and
+// taps go straight through. The walks themselves are Web Animations, started by
+// the component.
+:host {
+  block-size: var(--ds-walker-height);
+
+  // nothing inside affects the page's layout or paint, and the other way round
+  contain: strict;
+  inset-block-end: var(--ds-walker-bottom, 0);
+  inset-inline: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  z-index: 99999;
+}
+
+// off screen on the right until the first walk starts; its own compositor
+// layer, so a walk only moves it and never repaints the page
+.walker__figure {
+  display: block;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  position: absolute;
+  transform: translateX(100vw);
+  will-change: transform;
+}

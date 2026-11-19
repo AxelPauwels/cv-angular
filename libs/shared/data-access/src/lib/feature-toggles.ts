@@ -53,6 +53,11 @@ export const FEATURE_TOGGLES = [
     group: 'general',
     labelKey: 't.feature-toggles.toggle.tour-button.label',
   },
+  {
+    id: 'walker',
+    group: 'general',
+    labelKey: 't.feature-toggles.toggle.walker.label',
+  },
 
   menuItem('main-menu-cv', 'main-menu', 't.nav.cv'),
   menuItem('main-menu-technical', 'main-menu', 't.nav.technical'),
@@ -86,6 +91,12 @@ export const FEATURE_TOGGLES = [
     'technical-graphql-docs',
     'technical-menu',
     't.nav.graphql-docs',
+    'main-menu-technical'
+  ),
+  menuItem(
+    'technical-compodoc',
+    'technical-menu',
+    't.nav.compodoc',
     'main-menu-technical'
   ),
   menuItem(
@@ -131,6 +142,12 @@ export const FEATURE_TOGGLES = [
     't.nav.ai-assistant',
     'main-menu-showcase'
   ),
+  menuItem(
+    'showcase-release-flow',
+    'showcase-menu',
+    't.nav.release-flow',
+    'main-menu-showcase'
+  ),
   // switched off, only its menu item goes: the name in the footer then links to it
   menuItem(
     'showcase-feature-toggles',
@@ -143,10 +160,7 @@ export const FEATURE_TOGGLES = [
   navbarIcon('navbar-theme-switcher', 't.theme.switch'),
   navbarIcon('navbar-font-switcher', 't.font.switch'),
   navbarIcon('navbar-accessibility-switcher', 't.accessibility.switch'),
-  navbarIcon(
-    'navbar-color-scheme-switcher',
-    't.feature-toggles.toggle.color-scheme-switcher.label'
-  ),
+  navbarIcon('navbar-color-scheme-switcher', 't.tour.step.color-scheme.title'),
   navbarIcon('navbar-language-switcher', 't.language.switch'),
 ] as const satisfies readonly FeatureToggleDefinition[];
 
