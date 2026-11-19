@@ -30,7 +30,10 @@
   &__avatar {
     align-self: end;
     bottom: -0.75rem;
-    display: block;
+
+    // hidden for now (the markup stays): `display: block` brings it back.
+    // Hidden, its lazy image isn't downloaded either
+    display: none;
     position: absolute;
     right: 0;
 

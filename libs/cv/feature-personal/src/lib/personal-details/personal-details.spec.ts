@@ -39,6 +39,12 @@ describe('PersonalDetails', () => {
       '.personal-details__about .personal-details__avatar-image'
     );
     expect(avatar?.getAttribute('alt')).toBe('');
+    // hidden for now; the markup stays so it can come back
+    expect(
+      getComputedStyle(
+        element.querySelector('.personal-details__avatar') as HTMLElement
+      ).display
+    ).toBe('none');
     const facts = Array.from(
       element.querySelectorAll('.personal-details__facts > div')
     );
