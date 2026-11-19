@@ -1,5 +1,5 @@
 :host {
-  // fills the main area, so the figure can stand at its bottom, on the footer
+  // fills the main area
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
@@ -183,32 +183,21 @@
   }
 }
 
-// On the footer, his feet 12px into it (4px lower than the walker), at the bottom of the
-// page whatever the form's height, so he stays put when the form collapses.
-// Phones: the last thing on the page, centred, painted over the footer's top.
+// Wide screens only (lg, 992px, up): fixed in the empty space right of the
+// form, where the walker walks (--shell-walker-bottom, from the shell), his
+// feet 12px into the footer (4px lower than the walker), so a tall form
+// scrolls without him and he stays put when the form collapses. That space is
+// wider than him, so he never covers a field. Smaller screens have no room for
+// him: the component leaves him out there (FIGURE_FROM), hidden here as well.
 .contact-form__figure {
-  align-self: center;
-  display: block;
-  height: auto;
-  margin-block: auto -12px;
-  max-width: 100%;
-  position: relative;
-  z-index: 1;
+  display: none;
 
-  // Tablets: the main area scrolls and would cut off his feet, so he stands
-  // on the footer's edge
-  @media screen and (width >= 768px) {
-    margin-block-end: 0;
-  }
-
-  // Wide screens: fixed in the empty space right of the form, where the walker
-  // walks (--shell-walker-bottom, from the shell), so a tall form scrolls
-  // without him; from lg (992px) up that space is wider than him, so he never
-  // covers a field
   @media screen and (width >= 992px) {
+    display: block;
+    height: auto;
     inset-block-end: calc(var(--shell-walker-bottom, 0px) - 4px);
     inset-inline-end: calc((100vw - 40rem) / 4 - 52px);
-    margin: 0;
     position: fixed;
+    z-index: 1;
   }
 }

@@ -29,27 +29,49 @@ const STATUSES: ServiceStatus[] = [
   },
 ];
 
-function render(isChecking = false) {
+/** Every other kind of status, each on its own row */
+const OTHER_STATUSES: ServiceStatus[] = [
+  ['slow', 'degraded', 200],
+  ['client-error', 'degraded', 404],
+  ['server-error', 'down', undefined],
+  ['timeout', 'down', undefined],
+  [undefined, 'up', undefined],
+  [undefined, 'checking', undefined],
+].map(([issue, health, httpStatus], index) => ({
+  id: `api:${index}`,
+  name: `API ${index}`,
+  category: 'api',
+  url: 'https://api.example/',
+  check: 'status',
+  health,
+  issue,
+  httpStatus,
+})) as ServiceStatus[];
+
+function render(
+  isChecking = false,
+  {
+    statuses = STATUSES,
+    checked = true,
+    linksError = undefined as unknown,
+  } = {}
+) {
+  const checkedAt = checked ? Date.UTC(2026, 10, 18, 10, 0, 0) : undefined;
   const recheck = vi.fn();
   TestBed.configureTestingModule({
     imports: [ServiceStatusPage],
     providers: [provideI18nTesting()],
   });
-  TestBed.overrideComponent(ServiceStatusPage, {
-    set: {
-      providers: [
-        {
-          provide: ServiceStatusStore,
-          useValue: {
-            statuses: signal(STATUSES),
-            counts: signal({ checking: 0, up: 1, degraded: 0, down: 1 }),
-            isChecking: signal(isChecking),
-            checkedAt: signal(Date.UTC(2026, 10, 18, 10, 0, 0)),
-            linksError: signal(undefined),
-            recheck,
-          },
-        },
-      ],
+  // overrideProvider, not overrideComponent: that one compiles the template
+  // again at runtime, which leaves it out of the code coverage
+  TestBed.overrideProvider(ServiceStatusStore, {
+    useValue: {
+      statuses: signal(statuses),
+      counts: signal({ checking: 0, up: 1, degraded: 0, down: 1 }),
+      isChecking: signal(isChecking),
+      checkedAt: signal(checkedAt),
+      linksError: signal(linksError),
+      recheck,
     },
   });
   const fixture = TestBed.createComponent(ServiceStatusPage);
@@ -120,5 +142,35 @@ describe('ServiceStatusPage', () => {
     const link = element.querySelector('tbody a');
     expect(link?.getAttribute('target')).toBe('_blank');
     expect(link?.getAttribute('rel')).toBe('noopener noreferrer');
+  });
+
+  it('names every issue in words, and shows a short address', () => {
+    // Act
+    const { element } = render(false, {
+      statuses: OTHER_STATUSES,
+      checked: false,
+      linksError: new Error('offline'),
+    });
+
+    // Assert
+    const statuses = [
+      ...element.querySelectorAll('tbody td:first-of-type'),
+    ].map((cell) => cell.textContent?.trim());
+    expect(statuses).toEqual([
+      'Slow',
+      'HTTP 404',
+      'HTTP',
+      'No answer in time',
+      'Reachable',
+      'Checking…',
+    ]);
+    expect(element.querySelector('.service-status__address')?.textContent).toBe(
+      'api.example'
+    );
+    expect(
+      element.querySelector('.service-status__time')?.textContent
+    ).toContain('–');
+    expect(element.querySelector('.service-status__checked-at')).toBeNull();
+    expect(element.querySelector('.service-status__error')).not.toBeNull();
   });
 });

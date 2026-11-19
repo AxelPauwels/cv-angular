@@ -55,6 +55,7 @@ function setModeClasses(target: Document): void {
   root.classList.toggle('light-mode', !dark);
   target.body?.classList.toggle('vscode-dark', dark);
   target.body?.classList.toggle('vscode-light', !dark);
+  target.body?.classList.toggle('dark', dark);
 }
 
 /**
@@ -63,9 +64,11 @@ function setModeClasses(target: Document): void {
  * gets the system's, not the app's), so on a phone in dark mode they'd turn dark
  * in a light app. Each report takes a class instead: Playwright `light-mode` /
  * `dark-mode` on <html>, the Nx project graph (theme "system") `vscode-light` /
- * `vscode-dark` on <body>, which it watches. Other pages ignore the classes.
- * Playwright sets its own class again after loading, so an observer puts ours
- * back; setting a class that is already there changes nothing, so it settles.
+ * `vscode-dark` on <body>, which it watches, Compodoc `dark` on <body>. Other
+ * pages ignore the classes. Playwright (on <html>) and Compodoc (on <body>,
+ * from the system setting or its stored choice) set their own class again after
+ * loading, so an observer puts ours back; setting a class that is already there
+ * changes nothing, so it settles.
  */
 function matchColorScheme(target: Document, source: Document): void {
   const dark = getComputedStyle(source.documentElement).colorScheme === 'dark';
@@ -77,9 +80,13 @@ function matchColorScheme(target: Document, source: Document): void {
 
   if (!watched.has(target) && target.defaultView) {
     watched.add(target);
-    new target.defaultView.MutationObserver(() =>
+    const observer = new target.defaultView.MutationObserver(() =>
       setModeClasses(target)
-    ).observe(root, { attributeFilter: ['class'] });
+    );
+    observer.observe(root, { attributeFilter: ['class'] });
+    if (target.body) {
+      observer.observe(target.body, { attributeFilter: ['class'] });
+    }
   }
 }
 

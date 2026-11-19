@@ -235,6 +235,7 @@ describe('applyAppStyles', () => {
 
       // Assert
       expect(doc.body.classList).toContain('vscode-dark');
+      expect(doc.body.classList).toContain('dark');
       await vi.waitFor(() =>
         expect(doc.documentElement.classList).toContain('dark-mode')
       );
@@ -258,6 +259,25 @@ describe('applyAppStyles', () => {
       const doc = frame.contentDocument as Document;
       expect(doc.documentElement.classList).toContain('light-mode');
       expect(doc.body.classList).toContain('vscode-light');
+    });
+
+    it("keeps Compodoc in the app's light mode when it follows a dark system setting", async () => {
+      // Arrange
+      root.style.setProperty(
+        '--mat-sys-body-medium-font',
+        'Goldman, sans-serif'
+      );
+      root.style.colorScheme = 'light';
+      const frame = await embed();
+      const doc = frame.contentDocument as Document;
+
+      // Act
+      applyAppStyles(frame, document);
+      // Compodoc's own script turning dark from prefers-color-scheme
+      doc.body.classList.add('dark');
+
+      // Assert
+      await vi.waitFor(() => expect(doc.body.classList).not.toContain('dark'));
     });
   });
 
