@@ -16,7 +16,10 @@ import {
   FormRoot,
   TreeValidationResult,
 } from '@angular/forms/signals';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatButton } from '@angular/material/button';
+import { map } from 'rxjs';
 import { TranslatePipe } from '@tolgee/ngx';
 import { PageLayout, PageTitle } from '@cv/shared-ui-page';
 import {
@@ -27,9 +30,15 @@ import {
   EMPTY_CONTACT_MESSAGE,
 } from '@cv/cv-data-access-contact';
 import { TranslationKey } from '@cv/shared-util-i18n';
-import { AccessibilityService } from '@cv/shared-data-access';
+import {
+  AccessibilityService,
+  FeatureToggleService,
+} from '@cv/shared-data-access';
 
 type ContactFieldName = Exclude<keyof ContactMessage, 'botcheck'>;
+
+/** From lg up there is room for the figure next to the form (see the styles) */
+const FIGURE_FROM = '(min-width: 992px)';
 
 /** The figure on the footer: idle by default, cheering once the message went out (tools/contact-figure.mjs) */
 const FIGURE = {
@@ -63,6 +72,22 @@ export class ContactForm {
   private readonly sender = inject(ContactSender);
   private readonly injector = inject(Injector);
   private readonly accessibility = inject(AccessibilityService);
+  private readonly walkerEnabled =
+    inject(FeatureToggleService).isEnabled('walker');
+  private readonly wideScreen = toSignal(
+    inject(BreakpointObserver)
+      .observe(FIGURE_FROM)
+      .pipe(map(({ matches }) => matches)),
+    { initialValue: false }
+  );
+  /**
+   * The figure follows the walker's feature toggle (off there, gone here too)
+   * and only shows on wide screens: left out of the page on smaller ones, so
+   * they never download it (a hidden lazy image still loads)
+   */
+  protected readonly showFigure = computed(
+    () => this.walkerEnabled() && this.wideScreen()
+  );
   private readonly status =
     viewChild.required<ElementRef<HTMLElement>>('status');
 

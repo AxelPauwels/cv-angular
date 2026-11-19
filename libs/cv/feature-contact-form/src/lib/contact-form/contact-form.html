@@ -38,7 +38,7 @@
           <textarea
             class="contact-form__control contact-form__control--message"
             id="contact-message"
-            rows="8"
+            rows="6"
             [formField]="contactForm.message"
             [attr.aria-invalid]="shownErrors('message').length > 0"
             [attr.aria-describedby]="shownErrors('message').length ? 'contact-message-count contact-message-errors' : 'contact-message-count'"></textarea>
@@ -89,7 +89,9 @@
 <!-- Decorative, standing on the footer like the walker (so he stays put when
 the form collapses): breathes once (~5s), then rests; once the message went out
 he cheers once. Reduce motion (the system setting or the accessibility menu):
-only the still. The walker is hidden on this page. -->
+only the still. Follows the walker's feature toggle, and only on wide screens,
+where there is room next to the form. The walker is hidden on this page. -->
+@if (showFigure()) {
 <img
   class="contact-form__figure"
   [src]="figureSrc()"
@@ -99,3 +101,4 @@ only the still. The walker is hidden on this page. -->
   loading="lazy"
   fetchpriority="low"
   decoding="async" />
+}

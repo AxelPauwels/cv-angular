@@ -1,4 +1,6 @@
 import { TestBed } from '@angular/core/testing';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { of } from 'rxjs';
 import { provideHttpClient } from '@angular/common/http';
 import {
   HttpTestingController,
@@ -7,7 +9,10 @@ import {
 import { provideSignalFormsConfig } from '@angular/forms/signals';
 import { NG_STATUS_CLASSES } from '@angular/forms/signals/compat';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
-import { AccessibilityService } from '@cv/shared-data-access';
+import {
+  AccessibilityService,
+  FeatureToggleService,
+} from '@cv/shared-data-access';
 import { provideContact, WEB3FORMS_ENDPOINT } from '@cv/cv-data-access-contact';
 import { ContactForm } from './contact-form';
 
@@ -17,9 +22,14 @@ async function settle(fixture: { whenStable(): Promise<unknown> }) {
   await fixture.whenStable();
 }
 
-async function setup() {
+/** `wide`: a screen from lg up, where the figure stands next to the form */
+async function setup({ wide = true } = {}) {
   TestBed.configureTestingModule({
     providers: [
+      {
+        provide: BreakpointObserver,
+        useValue: { observe: () => of({ matches: wide, breakpoints: {} }) },
+      },
       provideHttpClient(),
       provideHttpClientTesting(),
       provideI18nTesting(),
@@ -28,6 +38,8 @@ async function setup() {
     ],
   });
   const http = TestBed.inject(HttpTestingController);
+  // the figure follows the walker's toggle; switched on whatever the default
+  TestBed.inject(FeatureToggleService).change('walker', true);
   const fixture = TestBed.createComponent(ContactForm);
   await fixture.whenStable();
   const element: HTMLElement = fixture.nativeElement;
@@ -232,5 +244,25 @@ describe('ContactForm', () => {
     expect(
       element.querySelector('.contact-form__figure')?.getAttribute('src')
     ).toBe('/assets/contact/still.webp');
+  });
+
+  it('leaves the figure out while the walker is switched off on the feature toggles page', async () => {
+    // Arrange
+    const { fixture, element } = await setup();
+
+    // Act
+    TestBed.inject(FeatureToggleService).change('walker', false);
+    await fixture.whenStable();
+
+    // Assert
+    expect(element.querySelector('.contact-form__figure')).toBeNull();
+  });
+
+  it('leaves the figure out on smaller screens, so they never download it', async () => {
+    // Act
+    const { element } = await setup({ wide: false });
+
+    // Assert
+    expect(element.querySelector('.contact-form__figure')).toBeNull();
   });
 });
