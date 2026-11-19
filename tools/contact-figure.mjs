@@ -1,13 +1,15 @@
-// Builds the frames of the "drop in and cheer" animation shown once after the
-// contact form was sent (apps/cv/public/assets/contact/drop-in-cheer.webp):
-// he falls in from above the image, lands (Hard-Landing-Front frames 0-27),
-// cross-fades into Cheering (frames 0-75) and rests on its last frame, which
-// is the calm standing pose. Joined as in gif-preview-2.html: Cheering is
-// scaled and moved so that its frame 0 lines up with landing frame 27 (feet,
-// centre, height). Writes PNG frames and a frames.txt with their durations:
-//   node tools/contact-cheer.mjs apps/cv/public/assets/gifs <out-dir>
-//   img2webp -loop 1 -min_size -lossy -q 75 -m 6 $(cat <out-dir>/frames.txt) -o drop-in-cheer.webp
-//   cwebp -q 80 <out-dir>/frame-<last>.png -o drop-in-cheer-still.webp
+// Builds the frames of the figure that stands on the footer of the contact
+// page (apps/cv/public/assets/contact/): standing idle (Standing-Idle, played
+// once, every third frame) and, once the message went out, cheering
+// (Cheering frames 0-75, played once). Both end in the same standing pose and
+// share one crop, so the page can swap one for the other without a jump.
+// Cheering is scaled and moved so that its frame 0 lines up with Standing-Idle's
+// last frame (feet, centre, height), as in gif-preview-2.html. Writes PNG
+// frames and idle.txt / cheer.txt with their durations:
+//   node tools/contact-figure.mjs apps/cv/public/assets/gifs <out-dir>
+//   img2webp -loop 1 -min_size -lossy -q 70 -m 6 $(cat <out-dir>/idle.txt) -o idle.webp
+//   img2webp -loop 1 -min_size -lossy -q 75 -m 6 $(cat <out-dir>/cheer.txt) -o cheer.webp
+//   cwebp -q 80 <out-dir>/idle-000.png -o still.webp
 // (-loop 1: plays once and stays on the last frame.)
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -15,17 +17,15 @@ import { PNG } from 'pngjs';
 import { decodeGif } from './gif-decode.mjs';
 
 const [gifDir, outDir] = process.argv.slice(2);
-const LANDING_LAST = 27; // the closest landing frame to standing still
 const CHEER_LAST = 75; // the whole GIF; it ends in the standing pose again
-const FALL_FRAMES = 8; // ~0.27s from above the image down to landing frame 0
-const FADE_FRAMES = 6; // ~0.2s cross-fade from landing frame 27 into Cheering
+const IDLE_STEP = 3; // idle barely moves: every third frame, each shown three times as long
 // output pixels per GIF pixel: shown at half that size (2x for sharp screens)
 const SCALE = 0.9;
 mkdirSync(outDir, { recursive: true });
 
 const load = (name) =>
   decodeGif(readFileSync(join(gifDir, `${name}-512x512.gif`)));
-const landing = load('Hard-Landing-Front');
+const idle = load('Standing-Idle');
 const cheer = load('Cheering');
 const W = 512,
   H = 512;
@@ -47,12 +47,12 @@ function bounds(rgba) {
   return { top, feet, cx: sx / n };
 }
 
-// Cheering in the landing's coordinates: X = (x - cx) * k + cx'
-const a = bounds(landing.frames[LANDING_LAST].rgba);
+// Cheering in Standing-Idle's coordinates: X = (x - cx) * k + cx'
+const a = bounds(idle.frames.at(-1).rgba);
 const b = bounds(cheer.frames[0].rgba);
 const k = (a.feet - a.top) / (b.feet - b.top);
 
-/** A Cheering frame drawn into landing coordinates (bilinear, premultiplied) */
+/** A Cheering frame drawn into Standing-Idle's coordinates (bilinear, premultiplied) */
 function placeCheer(rgba) {
   const out = new Uint8ClampedArray(W * H * 4);
   for (let Y = 0; Y < H; Y++)
@@ -92,56 +92,22 @@ function placeCheer(rgba) {
   return out;
 }
 
-/** `top` over `bottom` at opacity t (premultiplied mix of both frames) */
-function mix(bottom, top, t) {
-  const out = new Uint8ClampedArray(W * H * 4);
-  for (let o = 0; o < out.length; o += 4) {
-    const ab = (bottom[o + 3] / 255) * (1 - t),
-      at = (top[o + 3] / 255) * t,
-      al = ab + at;
-    if (al > 0)
-      for (let c = 0; c < 3; c++)
-        out[o + c] = (bottom[o + c] * ab + top[o + c] * at) / al;
-    out[o + 3] = Math.round(al * 255);
-  }
-  return out;
+const idleFrames = [];
+for (let f = 0; f < idle.frames.length; f += IDLE_STEP) {
+  let delay = 0;
+  for (let i = f; i < Math.min(f + IDLE_STEP, idle.frames.length); i++)
+    delay += idle.frames[i].delay;
+  idleFrames.push({ rgba: idle.frames[f].rgba, delay });
 }
-
-/** A frame moved down by dy (negative: up, cut off at the top) */
-function shift(rgba, dy) {
-  const out = new Uint8ClampedArray(W * H * 4);
-  for (let y = 0; y < H; y++) {
-    const sy = y - dy;
-    if (sy < 0 || sy >= H) continue;
-    out.set(rgba.subarray(sy * W * 4, (sy + 1) * W * 4), y * W * 4);
-  }
-  return out;
-}
-
-const frames = [];
-// the fall: landing frame 0, from fully above the image down to its place,
-// accelerating (ease-in, like gravity)
-const first = landing.frames[0];
-const fallFrom = bounds(first.rgba).feet + 1;
-for (let i = 0; i < FALL_FRAMES; i++) {
-  const t = i / FALL_FRAMES;
-  frames.push({
-    rgba: shift(first.rgba, -Math.round(fallFrom * (1 - t * t))),
-    delay: first.delay,
-  });
-}
-for (let f = 0; f <= LANDING_LAST; f++) frames.push(landing.frames[f]);
-const settled = landing.frames[LANDING_LAST].rgba;
-for (let f = 0; f <= CHEER_LAST; f++) {
-  const placed = placeCheer(cheer.frames[f].rgba);
-  const t = (f + 1) / (FADE_FRAMES + 1);
-  frames.push({
-    rgba: f < FADE_FRAMES ? mix(settled, placed, t) : placed,
+const cheerFrames = [];
+for (let f = 0; f <= CHEER_LAST; f++)
+  cheerFrames.push({
+    rgba: placeCheer(cheer.frames[f].rgba),
     delay: cheer.frames[f].delay,
   });
-}
+const frames = [...idleFrames, ...cheerFrames];
 
-// crop: every opaque pixel of every frame (the fall starts above the image)
+// one crop for both: every opaque pixel of every frame
 let minX = W,
   minY = H,
   maxX = 0,
@@ -202,23 +168,32 @@ function resample(rgba) {
   return out;
 }
 
-const list = [];
-frames.forEach(({ rgba, delay }, i) => {
-  const png = new PNG({ width: ow, height: oh });
-  png.data = Buffer.from(resample(rgba));
-  const name = join(outDir, `frame-${String(i).padStart(3, '0')}.png`);
-  writeFileSync(name, PNG.sync.write(png));
-  list.push(`-d ${delay} ${name}`);
-});
-writeFileSync(join(outDir, 'frames.txt'), list.join('\n') + '\n');
+for (const [name, list] of [
+  ['idle', idleFrames],
+  ['cheer', cheerFrames],
+]) {
+  const lines = list.map(({ rgba, delay }, i) => {
+    const png = new PNG({ width: ow, height: oh });
+    png.data = Buffer.from(resample(rgba));
+    const file = join(outDir, `${name}-${String(i).padStart(3, '0')}.png`);
+    writeFileSync(file, PNG.sync.write(png));
+    return `-d ${delay} ${file}`;
+  });
+  writeFileSync(join(outDir, `${name}.txt`), lines.join('\n') + '\n');
+}
 console.log(
   JSON.stringify({
-    frames: frames.length,
-    ms: frames.reduce((s, { delay }) => s + delay, 0),
+    idle: {
+      frames: idleFrames.length,
+      ms: idleFrames.reduce((s, f) => s + f.delay, 0),
+    },
+    cheer: {
+      frames: cheerFrames.length,
+      ms: cheerFrames.reduce((s, f) => s + f.delay, 0),
+    },
     k: +k.toFixed(3),
     crop: { x: minX, y: minY, w: cw, h: ch },
     out: { w: ow, h: oh },
     onScreen: { w: ow / 2, h: oh / 2 },
-    last: `frame-${String(frames.length - 1).padStart(3, '0')}.png`,
   })
 );

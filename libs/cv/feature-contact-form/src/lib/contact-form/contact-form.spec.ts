@@ -7,6 +7,7 @@ import {
 import { provideSignalFormsConfig } from '@angular/forms/signals';
 import { NG_STATUS_CLASSES } from '@angular/forms/signals/compat';
 import { provideI18nTesting } from '@cv/shared-data-access-i18n';
+import { AccessibilityService } from '@cv/shared-data-access';
 import { provideContact, WEB3FORMS_ENDPOINT } from '@cv/cv-data-access-contact';
 import { ContactForm } from './contact-form';
 
@@ -141,8 +142,9 @@ describe('ContactForm', () => {
     const { fixture, element, fillIn, send, http, status, control } =
       await setup();
     await fillIn();
-    const cheer = () => element.querySelector('.contact-form__cheer img');
-    expect(cheer()).toBeNull();
+    const figure = () =>
+      element.querySelector('.contact-form__figure')?.getAttribute('src');
+    expect(figure()).toBe('/assets/contact/idle.webp');
 
     // Act
     await send();
@@ -174,16 +176,19 @@ describe('ContactForm', () => {
     expect(document.activeElement).toBe(
       element.querySelector('[role="status"]')
     );
-    // he drops in and cheers, decorative only; reduce motion gets the still
-    expect(cheer()?.getAttribute('src')).toBe(
-      '/assets/contact/drop-in-cheer.webp'
-    );
-    expect(cheer()?.getAttribute('alt')).toBe('');
+    // the figure on the footer cheers once the form finished collapsing,
+    // decorative only
+    expect(figure()).toBe('/assets/contact/idle.webp');
+    const collapsed = new Event('transitionend');
+    Object.defineProperty(collapsed, 'propertyName', {
+      value: 'grid-template-rows',
+    });
+    body?.dispatchEvent(collapsed);
+    await fixture.whenStable();
+    expect(figure()).toBe('/assets/contact/cheer.webp');
     expect(
-      element
-        .querySelector('.contact-form__cheer source')
-        ?.getAttribute('media')
-    ).toBe('(prefers-reduced-motion: reduce)');
+      element.querySelector('.contact-form__figure')?.getAttribute('alt')
+    ).toBe('');
     http.verify();
   });
 
@@ -210,6 +215,22 @@ describe('ContactForm', () => {
     const body = element.querySelector<HTMLElement>('.contact-form__body');
     expect(body?.classList).not.toContain('contact-form__body--collapsed');
     expect(body?.inert).toBe(false);
-    expect(element.querySelector('.contact-form__cheer')).toBeNull();
+    expect(
+      element.querySelector('.contact-form__figure')?.getAttribute('src')
+    ).toBe('/assets/contact/idle.webp');
+  });
+
+  it('shows the figure on the footer standing still for a visitor who wants reduced motion', async () => {
+    // Arrange
+    const { fixture, element } = await setup();
+
+    // Act
+    TestBed.inject(AccessibilityService).change({ reduceMotion: true });
+    await fixture.whenStable();
+
+    // Assert
+    expect(
+      element.querySelector('.contact-form__figure')?.getAttribute('src')
+    ).toBe('/assets/contact/still.webp');
   });
 });

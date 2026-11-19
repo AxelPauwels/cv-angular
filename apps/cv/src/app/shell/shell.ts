@@ -80,6 +80,11 @@ const FOOTER_FIXED_FROM = '(min-width: 768px)';
   ],
   templateUrl: './shell.html',
   styleUrl: './shell.scss',
+  host: {
+    // where the walker's feet are, for pages that put a figure on the footer
+    // too (the contact page)
+    '[style.--shell-walker-bottom.px]': 'walkerBottom()',
+  },
 })
 export class Shell {
   protected readonly languageService = inject(LanguageService);
@@ -143,6 +148,19 @@ export class Shell {
   /** The home page fills the screen on its own: no footer there */
   protected readonly onHome = isActive(
     ROUTES.HOME.ROOT_ROUTER_LINK,
+    inject(Router),
+    {
+      paths: 'exact',
+      queryParams: 'ignored',
+    }
+  );
+
+  /**
+   * The contact page has its own figure on the footer: the walker keeps
+   * walking there (his schedule runs on), only unseen
+   */
+  protected readonly onContact = isActive(
+    ROUTES.CONTACT.ROOT_ROUTER_LINK,
     inject(Router),
     {
       paths: 'exact',

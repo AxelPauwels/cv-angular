@@ -5,7 +5,8 @@
     <div
       class="contact-form__body"
       [class.contact-form__body--collapsed]="sent()"
-      [inert]="sent()">
+      [inert]="sent()"
+      (transitionend)="collapsed($event)">
       <div class="contact-form__body-inner">
         @for (item of fields; track item.name) { @let name = item.name;
         <div class="contact-form__field">
@@ -74,23 +75,6 @@
       </div>
     </div>
 
-    <!-- decorative: he drops in and cheers once (~3.7s), then rests on his
-    last frame; with reduce motion only that last frame shows. Loaded only
-    once the message went out -->
-    @if (sent()) {
-    <picture class="contact-form__cheer">
-      <source
-        media="(prefers-reduced-motion: reduce)"
-        srcset="/assets/contact/drop-in-cheer-still.webp" />
-      <img
-        src="/assets/contact/drop-in-cheer.webp"
-        alt=""
-        width="103"
-        height="177"
-        decoding="async" />
-    </picture>
-    }
-
     <p #status class="contact-form__status" role="status" tabindex="-1">
       @if (contactForm().submitting()) { {{ 't.contact.sending' | translate }} }
       @else if (sent()) { {{ 't.contact.sent' | translate }} }
@@ -101,3 +85,17 @@
     </p>
   </form>
 </ds-page-layout>
+
+<!-- Decorative, standing on the footer like the walker (so he stays put when
+the form collapses): breathes once (~5s), then rests; once the message went out
+he cheers once. Reduce motion (the system setting or the accessibility menu):
+only the still. The walker is hidden on this page. -->
+<img
+  class="contact-form__figure"
+  [src]="figureSrc()"
+  alt=""
+  width="104"
+  height="170"
+  loading="lazy"
+  fetchpriority="low"
+  decoding="async" />

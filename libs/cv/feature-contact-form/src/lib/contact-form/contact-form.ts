@@ -27,8 +27,16 @@ import {
   EMPTY_CONTACT_MESSAGE,
 } from '@cv/cv-data-access-contact';
 import { TranslationKey } from '@cv/shared-util-i18n';
+import { AccessibilityService } from '@cv/shared-data-access';
 
 type ContactFieldName = Exclude<keyof ContactMessage, 'botcheck'>;
+
+/** The figure on the footer: idle by default, cheering once the message went out (tools/contact-figure.mjs) */
+const FIGURE = {
+  idle: '/assets/contact/idle.webp',
+  cheer: '/assets/contact/cheer.webp',
+  still: '/assets/contact/still.webp',
+} as const;
 
 /**
  * The contact page: a Signal Form with validation, sent with Web3Forms. Once
@@ -54,6 +62,7 @@ type ContactFieldName = Exclude<keyof ContactMessage, 'botcheck'>;
 export class ContactForm {
   private readonly sender = inject(ContactSender);
   private readonly injector = inject(Injector);
+  private readonly accessibility = inject(AccessibilityService);
   private readonly status =
     viewChild.required<ElementRef<HTMLElement>>('status');
 
@@ -73,11 +82,23 @@ export class ContactForm {
     },
   });
 
+  /** The figure on the footer: idle, cheering once sent and collapsed, the still with reduce motion */
+  protected readonly figureSrc = computed(() =>
+    this.accessibility.settings().reduceMotion
+      ? FIGURE.still
+      : this.cheering()
+        ? FIGURE.cheer
+        : FIGURE.idle
+  );
+
   /** "12 of 2000 characters" under the message */
   protected readonly messageCount = computed(() => ({
     count: String(this.contactForm.message().value().length),
     max: String(CONTACT_LIMITS.messageMax),
   }));
+
+  /** He cheers once the form finished collapsing after sending (see collapsed()) */
+  private readonly cheering = signal(false);
 
   /** Announced once the message went out */
   protected readonly sent = signal(false);
@@ -104,6 +125,8 @@ export class ContactForm {
     field: FieldTree<ContactMessage>
   ): Promise<TreeValidationResult> {
     this.sent.set(false);
+    this.cheering.set(false);
+    this._preloadCheer();
     try {
       await this.sender.send(field().value());
     } catch {
@@ -118,6 +141,32 @@ export class ContactForm {
       injector: this.injector,
     });
     return null;
+  }
+
+  /** While the message is on its way, so he can cheer right after it went out */
+  /**
+   * The form finished collapsing after sending: only now he cheers, so the
+   * visitor sees him jump once the form is gone. Only the body's own row
+   * transition (not its opacity, nor a field's transition bubbling up)
+   */
+  protected collapsed(event: TransitionEvent): void {
+    if (
+      this.sent() &&
+      event.target === event.currentTarget &&
+      event.propertyName === 'grid-template-rows'
+    ) {
+      this.cheering.set(true);
+    }
+  }
+
+  private _preloadCheer(): void {
+    // reduce motion shows the still instead, so it would never be used
+    if (
+      typeof Image !== 'undefined' &&
+      !this.accessibility.settings().reduceMotion
+    ) {
+      new Image().src = FIGURE.cheer;
+    }
   }
 
   private _focusFirstInvalid(field: FieldTree<ContactMessage>): void {
