@@ -17,9 +17,9 @@ describe('LanguageService', () => {
     return { service: TestBed.inject(LanguageService), translate };
   }
 
-  it('offers en, nl, fr, es, nb, el and hi', async () => {
+  it('offers en, nl, fr, es, nb and el', async () => {
     // Arrange
-    const expected = ['en', 'nl', 'fr', 'es', 'nb', 'el', 'hi'];
+    const expected = ['en', 'nl', 'fr', 'es', 'nb', 'el'];
 
     // Act
     const { service } = await start();

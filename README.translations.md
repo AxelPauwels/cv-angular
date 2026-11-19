@@ -21,14 +21,14 @@ npm run i18n:check
 
 ## How it fits together
 
-| Where                                                               | What                                                                                                                        |
-| ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| Tolgee                                                              | The source of truth for every translation. Edit texts there, or in the app (see [In-context editing](#in-context-editing)). |
-| `libs/shared/data-access-i18n/src/i18n/{en,nl,fr,es,nb,el,hi}.json` | The language files: pulled from Tolgee and committed. The app ships these, one lazy chunk per language.                     |
-| `libs/shared/data-access-i18n/src/lib/provide-i18n.ts`              | `provideI18n()`: Tolgee for the app. Picks the saved language, else the browser language, else English.                     |
-| `libs/shared/data-access-i18n/src/lib/languages.ts`                 | `LANGUAGES`, `DEFAULT_LANGUAGE`, `isLanguageCode()`: the languages the app offers.                                          |
-| `libs/shared/util-i18n/src/lib/languages.ts`                        | The translation key types (see [Types](#types)).                                                                            |
-| `scripts/tolgee/`                                                   | The scripts behind `i18n:check`, `i18n:missing` and `i18n:push-missing`.                                                    |
+| Where                                                            | What                                                                                                                        |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Tolgee                                                           | The source of truth for every translation. Edit texts there, or in the app (see [In-context editing](#in-context-editing)). |
+| `libs/shared/data-access-i18n/src/i18n/{en,nl,fr,es,nb,el}.json` | The language files: pulled from Tolgee and committed. The app ships these, one lazy chunk per language.                     |
+| `libs/shared/data-access-i18n/src/lib/provide-i18n.ts`           | `provideI18n()`: Tolgee for the app. Picks the saved language, else the browser language, else English.                     |
+| `libs/shared/data-access-i18n/src/lib/languages.ts`              | `LANGUAGES`, `DEFAULT_LANGUAGE`, `isLanguageCode()`: the languages the app offers.                                          |
+| `libs/shared/util-i18n/src/lib/languages.ts`                     | The translation key types (see [Types](#types)).                                                                            |
+| `scripts/tolgee/`                                                | The scripts behind `i18n:check`, `i18n:missing` and `i18n:push-missing`.                                                    |
 
 Where the app gets its translations from:
 
