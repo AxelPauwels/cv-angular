@@ -19,6 +19,7 @@ export const appRoutes: Routes = [
   },
   {
     path: ROUTES.HOME.ROOT,
+    title: 't.nav.home',
     loadComponent: () => import('@cv/cv-feature-home').then((m) => m.Home),
   },
   {
@@ -42,6 +43,7 @@ export const appRoutes: Routes = [
   },
   {
     path: ROUTES.CONTACT.ROOT,
+    title: 't.heading.contact',
     loadComponent: () =>
       import('@cv/cv-feature-contact-form').then((m) => m.ContactForm),
   },

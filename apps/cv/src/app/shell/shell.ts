@@ -2,6 +2,7 @@ import {
   Component,
   computed,
   effect,
+  ElementRef,
   inject,
   signal,
   untracked,
@@ -192,4 +193,19 @@ export class Shell {
 
   // Todo i18n
   protected readonly year = new Date().getFullYear();
+
+  private readonly content =
+    viewChild.required<ElementRef<HTMLElement>>('content');
+
+  /**
+   * Moves focus (and so the next Tab and a screen reader) to the page content.
+   * By code instead of the fragment: the router would treat `#main-content` as
+   * a navigation.
+   */
+  protected skipToContent(event: MouseEvent): void {
+    event.preventDefault();
+    const content = this.content().nativeElement;
+    content.focus();
+    content.scrollIntoView({ block: 'start' });
+  }
 }
