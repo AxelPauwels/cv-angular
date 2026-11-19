@@ -42,6 +42,9 @@ import { TourOverlay } from '@cv/shared-feature-tour';
 import { ContactLinks } from '@cv/cv-feature-contact';
 import { TranslatePipe } from '@tolgee/ngx';
 import { Walker } from '@cv/shared-ui-walker';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 import { MobileNav } from './mobile-nav/mobile-nav';
 import {
   WALKER_FEET_IN_FOOTER_PX,
@@ -49,6 +52,9 @@ import {
   WALKER_PAUSES,
   WALKER_SPEED_FACTORS,
 } from './walker-images';
+
+/** The md breakpoint (apps/cv/src/styles/1.settings/_breakpoints.scss) */
+const FOOTER_FIXED_FROM = '(min-width: 768px)';
 
 @Component({
   selector: 'app-shell',
@@ -89,7 +95,14 @@ export class Shell {
   private readonly mobileMenu = viewChild(MobileMenu);
   private readonly footer = viewChild<ElementRef<HTMLElement>>('footer');
   /** The footer's height in px; 0 without a footer (the home page) */
-  private readonly footerHeight = signal(0);
+  protected readonly footerHeight = signal(0);
+  /** From md up the shell is the screen high, with the footer always at the bottom */
+  private readonly footerFixed = toSignal(
+    inject(BreakpointObserver)
+      .observe(FOOTER_FIXED_FROM)
+      .pipe(map(({ matches }) => matches)),
+    { initialValue: false }
+  );
 
   constructor() {
     // follow the footer's height (it wraps on narrow screens, and the home page
@@ -221,9 +234,15 @@ export class Shell {
   protected readonly year = new Date().getFullYear();
 
   protected readonly walkerImages = WALKER_IMAGES;
-  /** The walking figure's feet a little into the footer, so he walks on it */
+  /**
+   * From md up the footer stays at the bottom of the screen: the walking
+   * figure's feet go a little into it, so he walks on it. Below md the page
+   * scrolls past the footer, so he walks along the bottom of the screen.
+   */
   protected readonly walkerBottom = computed(() =>
-    Math.max(0, this.footerHeight() - WALKER_FEET_IN_FOOTER_PX)
+    this.footerFixed()
+      ? Math.max(0, this.footerHeight() - WALKER_FEET_IN_FOOTER_PX)
+      : 0
   );
   protected readonly walkerPauses = WALKER_PAUSES;
   protected readonly walkerSpeedFactors = WALKER_SPEED_FACTORS;

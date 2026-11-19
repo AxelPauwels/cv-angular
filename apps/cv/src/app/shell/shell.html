@@ -105,7 +105,11 @@
 
 <!-- Phones: back to the top once scrolled down half a screen; the focus goes to
      the header, so the next Tab lands on the menu -->
-<ds-back-to-top [focusTarget]="header" [inert]="tour.active()" />
+<!-- centered on the footer (phones only, where it shows) -->
+<ds-back-to-top
+  [focusTarget]="header"
+  [inert]="tour.active()"
+  [style.--ds-back-to-top-footer-height.px]="footerHeight() || null" />
 
 <!-- The figure walking along the footer, on every page: decorative, clicks go
      through it. On the home page he walks behind the page (hidden by it). Its own lazy chunk, loaded when the browser is idle; it loads
