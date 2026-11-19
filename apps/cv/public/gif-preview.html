@@ -1042,18 +1042,26 @@
         const SIGN_W = 128,
           SIGN_H = 56,
           GRIP = 25, // its top edge sits GRIP px above the hands
-          sx = hx - SIGN_W / 2,
-          sy = hy - GRIP;
+          TILT = (7 * Math.PI) / 180; // turned a little clockwise, not quite straight
+        ctx.save();
+        ctx.translate(hx, hy - GRIP + SIGN_H / 2);
+        ctx.rotate(TILT);
         ctx.fillStyle = '#f7df1e'; // JavaScript yellow
-        ctx.fillRect(sx, sy, SIGN_W, SIGN_H);
+        ctx.fillRect(-SIGN_W / 2, -SIGN_H / 2, SIGN_W, SIGN_H);
         ctx.strokeStyle = '#000';
         ctx.lineWidth = 3;
-        ctx.strokeRect(sx + 1.5, sy + 1.5, SIGN_W - 3, SIGN_H - 3);
+        ctx.strokeRect(
+          -SIGN_W / 2 + 1.5,
+          -SIGN_H / 2 + 1.5,
+          SIGN_W - 3,
+          SIGN_H - 3
+        );
         ctx.fillStyle = '#000';
         ctx.font = 'bold 30px system-ui, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('ZoneJs', hx, sy + SIGN_H / 2 + 1);
+        ctx.fillText('ZoneJs', 0, 1);
+        ctx.restore();
       };
       carryScene(document.querySelector('.stage--sign'), drawZoneJsSign);
     </script>
