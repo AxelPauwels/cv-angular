@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
+import { By } from '@angular/platform-browser';
+import { MatTabNav } from '@angular/material/tabs';
 import { provideTolgee, Tolgee } from '@tolgee/ngx';
 import { SubNavbar } from './sub-navbar';
 
@@ -225,6 +227,185 @@ describe('SubNavbar', () => {
 
       // Assert
       expect(event.defaultPrevented).toBe(false);
+    });
+  });
+
+  describe('tabs that do not fit', () => {
+    @Component({
+      imports: [SubNavbar],
+      // narrow, so the tabs overflow and Material shows its arrows
+      template: `<div style="width: 220px">
+        <ds-sub-navbar
+          [items]="[
+            { labelKey: 't.nav.first-long-tab', path: 'a' },
+            { labelKey: 't.nav.second-long-tab', path: 'b' },
+            { labelKey: 't.nav.third-long-tab', path: 'c' },
+            { labelKey: 't.nav.fourth-long-tab', path: 'd' },
+          ]"
+          labelKey="t.nav.domain-navigation" />
+      </div>`,
+    })
+    class NarrowShell {}
+
+    async function render(): Promise<{
+      nav: HTMLElement;
+      list: HTMLElement;
+      settle: () => Promise<void>;
+    }> {
+      TestBed.configureTestingModule({
+        providers: [
+          provideTolgee(() => Tolgee().init({ language: 'en' })),
+          provideRouter(
+            ['a', 'b', 'c', 'd'].map((path) => ({ path, component: Page }))
+          ),
+        ],
+      });
+      const fixture = TestBed.createComponent(NarrowShell);
+      await fixture.whenStable();
+      const nav: HTMLElement = fixture.nativeElement.querySelector('nav');
+      // shown from md up only; the test viewport may be narrower, so show it and
+      // let Material measure again (it shows its arrows when the tabs overflow)
+      nav.style.display = 'flex';
+      const tabs = fixture.debugElement
+        .query(By.directive(MatTabNav))
+        .injector.get(MatTabNav);
+      tabs.updatePagination();
+      fixture.detectChanges();
+      await fixture.whenStable();
+      // Material moves this element (translateX) to scroll the tabs
+      return {
+        nav,
+        list: nav.querySelector('.mat-mdc-tab-list')!,
+        // Material applies the new position on its next change detection
+        settle: async () => {
+          fixture.detectChanges();
+          await fixture.whenStable();
+        },
+      };
+    }
+
+    // the position Material set (the computed style would still be in its transition)
+    const offset = (list: HTMLElement) =>
+      new DOMMatrix(list.style.transform || 'none').m41;
+
+    /** Clicks the tab; true when the click got through to the page */
+    function click(tab: HTMLElement): boolean {
+      let reached = false;
+      const listener = () => (reached = true);
+      document.addEventListener('click', listener);
+      tab.dispatchEvent(
+        new MouseEvent('click', { bubbles: true, cancelable: true })
+      );
+      document.removeEventListener('click', listener);
+      return reached;
+    }
+
+    function pointer(
+      target: HTMLElement,
+      type: string,
+      clientX: number,
+      pointerType = 'touch'
+    ): void {
+      target.dispatchEvent(
+        new PointerEvent(type, { clientX, pointerType, bubbles: true })
+      );
+    }
+
+    it('moves the tabs with a sideways wheel or trackpad scroll', async () => {
+      // Arrange
+      const { nav, list, settle } = await render();
+
+      // Act
+      const event = new WheelEvent('wheel', {
+        deltaX: 60,
+        bubbles: true,
+        cancelable: true,
+      });
+      nav.dispatchEvent(event);
+
+      await settle();
+
+      // Assert
+      expect(offset(list)).toBe(-60);
+      expect(event.defaultPrevented).toBe(true);
+    });
+
+    it('moves the tabs with Shift + wheel, also when counted in lines (Firefox)', async () => {
+      // Arrange
+      const { nav, list, settle } = await render();
+
+      // Act: three lines down with Shift, as Firefox reports one wheel notch
+      nav.dispatchEvent(
+        new WheelEvent('wheel', {
+          deltaY: 3,
+          deltaMode: WheelEvent.DOM_DELTA_LINE,
+          shiftKey: true,
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+      await settle();
+
+      // Assert
+      expect(offset(list)).toBe(-120);
+    });
+
+    it('leaves a vertical scroll to the page', async () => {
+      // Arrange
+      const { nav, list, settle } = await render();
+
+      // Act
+      const event = new WheelEvent('wheel', {
+        deltaY: 60,
+        bubbles: true,
+        cancelable: true,
+      });
+      nav.dispatchEvent(event);
+
+      await settle();
+
+      // Assert
+      expect(offset(list)).toBe(0);
+      expect(event.defaultPrevented).toBe(false);
+    });
+
+    it('moves the tabs with a swipe, and the swipe does not open a tab', async () => {
+      // Arrange
+      const { nav, list, settle } = await render();
+      const tab = nav.querySelector<HTMLElement>('a')!;
+
+      // Act
+      pointer(tab, 'pointerdown', 200);
+      pointer(tab, 'pointermove', 170);
+      pointer(tab, 'pointermove', 150);
+      pointer(tab, 'pointerup', 150);
+      const clicked = click(tab);
+      await settle();
+
+      // Assert
+      expect(offset(list)).toBe(-50);
+      expect(clicked).toBe(false);
+    });
+
+    it('ignores mouse drags, and still opens a tab on a tap', async () => {
+      // Arrange
+      const { nav, list, settle } = await render();
+      const tab = nav.querySelector<HTMLElement>('a')!;
+
+      // Act
+      pointer(tab, 'pointerdown', 100, 'mouse');
+      pointer(tab, 'pointermove', 40, 'mouse');
+      pointer(tab, 'pointerup', 40, 'mouse');
+      await settle();
+      const afterMouseDrag = offset(list);
+      pointer(tab, 'pointerdown', 100);
+      pointer(tab, 'pointermove', 98);
+      pointer(tab, 'pointerup', 98);
+      const clicked = click(tab);
+
+      // Assert
+      expect(afterMouseDrag).toBe(0);
+      expect(clicked).toBe(true);
     });
   });
 });
