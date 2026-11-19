@@ -1,0 +1,510 @@
+<!doctype html>
+<!-- TEMP dev page: seamless loops and joined GIF sequences. Delete before release. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>GIF preview 2</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 16px;
+        font-family: system-ui, sans-serif;
+        background: #f4f4f5;
+        color: #18181b;
+      }
+      h1 {
+        font-size: 1.25rem;
+      }
+      h2 {
+        font-size: 1rem;
+        margin-top: 32px;
+      }
+      p {
+        max-width: 70ch;
+        font-size: 0.875rem;
+      }
+      .controls {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        font-size: 0.875rem;
+      }
+      .grid {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+      .grid canvas {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1;
+        background: #e4e4e7;
+        border-radius: 8px;
+      }
+      .grid small,
+      .seq small {
+        display: block;
+        margin-top: 4px;
+        font-size: 0.8125rem;
+        color: #52525b;
+      }
+      .seq {
+        margin: 0 0 24px;
+      }
+      .seq canvas {
+        display: block;
+        width: 100%;
+        height: 300px;
+        background: #e4e4e7;
+        border-radius: 8px;
+      }
+      .seq strong {
+        font-size: 0.875rem;
+      }
+      .seq output {
+        font-variant-numeric: tabular-nums;
+        font-size: 0.8125rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>GIF preview 2: seamless loops and joins (temporary)</h1>
+    <p>
+      Every GIF is drawn frame by frame (ImageDecoder) so only the part that
+      loops plays. The ranges were found by comparing every frame with every
+      other one (mean pixel difference at 48×48; for scale: one walking frame to
+      the next differs about 1.8, three frames 5.4).
+    </p>
+    <div class="controls">
+      <label
+        ><input type="checkbox" id="fade" checked /> Cross-fade the cuts (200
+        ms)</label
+      >
+      <label
+        ><input type="checkbox" id="slow" /> Slow motion (4× slower, to see the
+        cuts)</label
+      >
+    </div>
+
+    <h2>Joined sequences</h2>
+    <p>
+      The GIFs don't share one camera: the figure is 228 to 288 px tall and
+      stands at a different place in each one. So every GIF is scaled and moved
+      once, so that its first frame lines up (feet, centre, height) with the
+      frame it follows; after that it keeps that placement, so a sequence can
+      loop. Each cut is at the pair of frames that look most alike.
+    </p>
+    <div id="sequences"></div>
+
+    <h2>Seamless loops (single GIF)</h2>
+    <p>
+      "Whole GIF": its last frame flows back into the first. "Frames a–b": the
+      GIF has a lead-in or lead-out, so only that stretch repeats (frame b+1 ≈
+      frame a). Difference = last frame back to the first of the loop.
+    </p>
+    <ul class="grid" id="loops"></ul>
+
+    <script>
+      const FRAME_MS = 1000 / 30; // every GIF here alternates 30 and 40 ms frames: 30 fps on average
+      const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+      const fadeBox = document.getElementById('fade');
+      const slowBox = document.getElementById('slow');
+      const fadeMs = () => (fadeBox.checked ? 200 : 0);
+      const speed = () => (slowBox.checked ? 0.25 : 1);
+
+      // One ImageDecoder per GIF, shared by every player that uses it.
+      const decoders = new Map();
+      const gif = (name) => {
+        if (!decoders.has(name)) {
+          decoders.set(
+            name,
+            (async () => {
+              const res = await fetch(`assets/gifs/${name}-512x512.gif`);
+              const dec = new ImageDecoder({
+                data: await res.arrayBuffer(),
+                type: 'image/gif',
+              });
+              await dec.tracks.ready;
+              return {
+                dec,
+                count: dec.tracks.selectedTrack.frameCount,
+                boxes: new Map(),
+              };
+            })()
+          );
+        }
+        return decoders.get(name);
+      };
+
+      // The figure's bounds in a frame, in the GIF's 512px coordinates: the soles (lowest opaque row),
+      // the top of the head and the horizontal centre of mass (steadier than the box centre when an
+      // arm is out). Measured on a 128px copy, so to 4px.
+      const probe = new OffscreenCanvas(128, 128);
+      const probeCtx = probe.getContext('2d', { willReadFrequently: true });
+      const box = async (name, frame) => {
+        const g = await gif(name);
+        if (!g.boxes.has(frame)) {
+          const { image } = await g.dec.decode({ frameIndex: frame });
+          probeCtx.clearRect(0, 0, 128, 128);
+          probeCtx.drawImage(image, 0, 0, 128, 128);
+          image.close();
+          const { data } = probeCtx.getImageData(0, 0, 128, 128);
+          let top = 128,
+            feet = 0,
+            sx = 0,
+            n = 0;
+          for (let y = 0; y < 128; y++) {
+            for (let x = 0; x < 128; x++) {
+              if (data[(y * 128 + x) * 4 + 3] > 128) {
+                top = Math.min(top, y);
+                feet = Math.max(feet, y);
+                sx += x;
+                n++;
+              }
+            }
+          }
+          g.boxes.set(frame, {
+            top: top * 4,
+            feet: feet * 4 + 4,
+            cx: n ? (sx / n) * 4 + 2 : 256,
+          });
+        }
+        return g.boxes.get(frame);
+      };
+
+      // A segment plays frames from..to of one GIF; `times` repeats it.
+      const frames = (s) => {
+        const list = [];
+        for (let r = 0; r < (s.times ?? 1); r++) {
+          for (let f = s.from; f <= s.to; f++) list.push(f);
+        }
+        return list;
+      };
+
+      /**
+       * Plays `intro` segments once, then `loop` segments forever, cross-fading at every cut.
+       * Every GIF gets one placement (scale + offset), fitted the first time it appears so that its
+       * first frame matches the frame it follows; the very first GIF stands centred on the ground.
+       */
+      const player = async ({
+        canvas,
+        intro = [],
+        loop,
+        out,
+        figure = 250,
+      }) => {
+        const ctx = canvas.getContext('2d');
+        const all = [...intro, ...loop];
+        const placement = new Map();
+        let prev = null;
+        for (const s of all) {
+          if (placement.has(s.gif)) {
+            prev = s;
+            continue;
+          }
+          const inBox = await box(s.gif, s.from);
+          if (!prev) {
+            placement.set(s.gif, {
+              k: figure / (inBox.feet - inBox.top),
+              feet: inBox.feet,
+              cx: inBox.cx,
+              dx: 0,
+            });
+          } else {
+            const p = placement.get(prev.gif);
+            const outBox = await box(prev.gif, prev.to);
+            // the outgoing frame on screen, relative to the ground and the centre line
+            const h = (outBox.feet - outBox.top) * p.k;
+            const x = (outBox.cx - p.cx) * p.k + p.dx;
+            placement.set(s.gif, {
+              k: h / (inBox.feet - inBox.top),
+              feet: inBox.feet,
+              cx: inBox.cx,
+              dx: x,
+            });
+          }
+          prev = s;
+        }
+
+        // the timeline: [start ms, segment, frame list]
+        const timeline = (parts) => {
+          let t = 0;
+          return parts.map((s) => {
+            const list = frames(s);
+            const item = { start: t, s, list };
+            t += list.length * FRAME_MS;
+            item.end = t;
+            return item;
+          });
+        };
+        const introLine = timeline(intro);
+        const introMs = introLine.at(-1)?.end ?? 0;
+        const loopLine = timeline(loop);
+        const loopMs = loopLine.at(-1).end;
+
+        // what to draw at time t: the current frame and, during a fade, the previous segment's last frame
+        const at = (t) => {
+          let line, i, local;
+          if (t < introMs) {
+            line = introLine;
+            local = t;
+          } else {
+            line = loopLine;
+            local = (t - introMs) % loopMs;
+          }
+          i = line.findIndex((it) => local < it.end);
+          const it = line[i];
+          const into = local - it.start;
+          const f =
+            it.list[Math.min(it.list.length - 1, Math.floor(into / FRAME_MS))];
+          const cur = {
+            gif: it.s.gif,
+            frame: f,
+            label: it.s.label ?? it.s.gif,
+          };
+          let before = null;
+          if (into < fadeMs()) {
+            const sinceLoop = t - introMs;
+            const p =
+              i > 0
+                ? line[i - 1]
+                : line !== loopLine
+                  ? null
+                  : sinceLoop >= loopMs
+                    ? loopLine.at(-1) // the loop wraps around
+                    : (introLine.at(-1) ?? null); // out of the intro into the loop
+            if (p) {
+              before = {
+                gif: p.s.gif,
+                frame: p.list.at(-1),
+                alpha: 1 - into / fadeMs(),
+              };
+            }
+          }
+          return { cur, before };
+        };
+
+        let W = 0,
+          H = 0;
+        const layout = () => {
+          const dpr = devicePixelRatio || 1;
+          W = canvas.clientWidth;
+          H = canvas.clientHeight;
+          canvas.width = Math.round(W * dpr);
+          canvas.height = Math.round(H * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        };
+        const scale = () => Math.min(1, (H - 30) / (figure * 1.25));
+        const decode = async ({ gif: name, frame }) =>
+          (await (await gif(name)).dec.decode({ frameIndex: frame })).image;
+        const drawFrame = (name, image, alpha) => {
+          const p = placement.get(name);
+          const z = scale();
+          ctx.save();
+          ctx.globalAlpha = alpha;
+          ctx.translate(W / 2 + p.dx * z, H - 16);
+          ctx.scale(p.k * z, p.k * z);
+          ctx.translate(-p.cx, -p.feet);
+          ctx.drawImage(image, 0, 0);
+          ctx.restore();
+          image.close();
+        };
+        const render = async (t) => {
+          const { cur, before } = at(t);
+          // decode first, then clear and draw in one go, so nothing flickers
+          const [img, beforeImg] = await Promise.all([
+            decode(cur),
+            before ? decode(before) : null,
+          ]);
+          ctx.clearRect(0, 0, W, H);
+          ctx.fillStyle = '#a1a1aa';
+          ctx.fillRect(0, H - 16, W, 2);
+          if (before) {
+            drawFrame(before.gif, beforeImg, before.alpha);
+            drawFrame(cur.gif, img, 1 - before.alpha);
+          } else {
+            drawFrame(cur.gif, img, 1);
+          }
+          if (out) out.value = `${cur.label} · frame ${cur.frame}`;
+        };
+
+        layout();
+        if (reduceMotion.matches) {
+          await render(introMs);
+          return;
+        }
+        let visible = false,
+          busy = false,
+          lastKey = '',
+          clock = 0,
+          lastNow = performance.now();
+        new IntersectionObserver(([e]) => {
+          visible = e.isIntersecting;
+        }).observe(canvas);
+        new ResizeObserver(() => {
+          layout();
+          lastKey = '';
+        }).observe(canvas);
+        const tick = (now) => {
+          requestAnimationFrame(tick);
+          const dt = now - lastNow;
+          lastNow = now;
+          if (!visible) return;
+          clock += dt * speed();
+          if (busy) return;
+          const { cur, before } = at(clock);
+          const key = `${cur.gif}:${cur.frame}:${before ? Math.round(before.alpha * 8) : ''}`;
+          if (key === lastKey) return;
+          busy = true;
+          lastKey = key;
+          render(clock).finally(() => {
+            busy = false;
+          });
+        };
+        requestAnimationFrame(tick);
+      };
+
+      // ---- Joined sequences -------------------------------------------------------------------------
+      // Cut frames (difference to the frame on the other side of the cut, 48×48):
+      // - Hard-Landing-Front settles from frame 19; frame 27 is the closest to Standing-Idle (1.9).
+      // - Standing-Idle loops whole (last → first 0.84).
+      // - Cheering, Cast-Spell-Forward, Nod-Yes-Front, Waving-Man, Clapping and Point-Forward start and
+      //   end in (almost) the idle pose: 3.1-3.7 from Standing-Idle frame 0, about the gap between two
+      //   idle frames 3 apart once the different camera is corrected.
+      // - Waving-Man loops whole (silhouette difference 0.07); frame 110 is the closest to idle.
+      //   (Friendly-Arm-Wave-1- keeps the arm up nearly all the time: no clean way in or out.)
+      // - Hit-Reaction-Front is back on its feet at frame 100 (3.0).
+      // - Pick-Up-Object-From-Ground: frame 4 ≈ its own last frame 147 (4.5); frame 113 (crouched, holding it) ≈ Crouching-Idle frame 51 (4.97);
+      //   he stands up again from 113 to 147 (4.7 from idle).
+      // - Not joined: Point-Forward holds the pointing pose from frame 0 to the end (no way in from
+      //   idle), and Fighting-Stance-Idle-Right never matches a Spinning-Back-Kick or Side-Kick frame
+      //   closely enough (the best pairs still show the kicking leg or a turned body).
+      const IDLE = { gif: 'Standing-Idle', from: 0, to: 150 };
+      const SEQUENCES = [
+        {
+          title: 'Drop in, then idle and cheer',
+          note: 'Hard-Landing-Front 0–27 once → Standing-Idle ↔ Cheering',
+          intro: [{ gif: 'Hard-Landing-Front', from: 0, to: 27 }],
+          loop: [IDLE, { gif: 'Cheering', from: 0, to: 75 }],
+        },
+        {
+          title: 'Say hello',
+          note: 'Standing-Idle → Waving-Man 110–150, 0–109 → Standing-Idle → Nod-Yes-Front',
+          loop: [
+            IDLE,
+            { gif: 'Waving-Man', from: 110, to: 150 },
+            { gif: 'Waving-Man', from: 0, to: 109 },
+            IDLE,
+            { gif: 'Nod-Yes-Front', from: 0, to: 110 },
+          ],
+        },
+        {
+          title: 'Present something',
+          note: 'Standing-Idle → Clapping ×2 → Cast-Spell-Forward',
+          loop: [
+            IDLE,
+            { gif: 'Clapping', from: 0, to: 35, times: 2 },
+            { gif: 'Cast-Spell-Forward', from: 0, to: 86 },
+          ],
+        },
+        {
+          title: 'Get hit, shake it off',
+          note: 'Standing-Idle → Hit-Reaction-Front 0–100',
+          loop: [IDLE, { gif: 'Hit-Reaction-Front', from: 0, to: 100 }],
+        },
+        {
+          title: 'Pick something up and wait crouched',
+          note: 'Pick-Up 4–113 → Crouching-Idle 51–117, 0–51 → Pick-Up 113–147 → Standing-Idle',
+          loop: [
+            {
+              gif: 'Pick-Up-Object-From-Ground',
+              from: 4,
+              to: 113,
+              label: 'Pick-Up (down)',
+            },
+            { gif: 'Crouching-Idle', from: 51, to: 117 },
+            { gif: 'Crouching-Idle', from: 0, to: 51 },
+            {
+              gif: 'Pick-Up-Object-From-Ground',
+              from: 113,
+              to: 147,
+              label: 'Pick-Up (up)',
+            },
+            IDLE,
+          ],
+        },
+      ];
+
+      // ---- Single-GIF loops ---------------------------------------------------------------------------
+      // difference = last frame of the loop → its first frame (48×48)
+      const LOOPS = [
+        ['Standing-Idle', 0, 150, 'whole GIF, 0.84'],
+        ['Clapping', 0, 35, 'whole GIF, 0.07'],
+        ['Crouching-Idle', 0, 117, 'whole GIF, 0.28'],
+        ['Point-Forward', 0, 49, 'whole GIF, 0.5'],
+        ['Point-Left', 0, 49, 'whole GIF, 0.5'],
+        ['Point-Right', 0, 49, 'whole GIF, 0.5'],
+        ['Cheering', 0, 75, 'whole GIF, 0.72'],
+        ['Vault-Over-Obstacle', 0, 95, 'whole GIF, 0.54'],
+        ['Walking-Left', 76, 260, 'frames 76–260, exact'],
+        ['Walking-Right', 61, 245, 'frames 61–245, exact'],
+        ['Crawl-Left', 57, 129, 'frames 57–129, 0.64'],
+        ['Crawl-Right', 30, 97, 'frames 30–97, 0.58'],
+        ['Injured-Walk-Right', 59, 163, 'frames 59–163, 0.63'],
+        ['Spinning-Back-Kick', 39, 48, 'frames 39–48, 0.84 (the last bounce)'],
+        [
+          'Hard-Landing-Front',
+          30,
+          37,
+          'frames 30–37: breathing after the landing',
+        ],
+        ['Fighting-Stance-Idle-Right', 43, 127, 'frames 43–127, 1.39'],
+        ['Crouch-Walk', 108, 167, 'frames 108–167, 1.96'],
+        ['Friendly-Arm-Wave-1-', 56, 130, 'frames 56–130, 3.74 (wave only)'],
+      ];
+
+      if (!('ImageDecoder' in window)) {
+        document.body.append(
+          Object.assign(document.createElement('p'), {
+            textContent:
+              'This browser has no ImageDecoder (use Chrome or Edge).',
+          })
+        );
+      } else {
+        const seqRoot = document.getElementById('sequences');
+        for (const s of SEQUENCES) {
+          const fig = document.createElement('figure');
+          fig.className = 'seq';
+          fig.innerHTML =
+            '<strong></strong><canvas role="img"></canvas><small></small><output></output>';
+          fig.querySelector('strong').textContent = s.title;
+          fig.querySelector('small').textContent = s.note;
+          const canvas = fig.querySelector('canvas');
+          canvas.setAttribute('aria-label', `${s.title}: ${s.note}`);
+          seqRoot.append(fig);
+          player({
+            canvas,
+            intro: s.intro,
+            loop: s.loop,
+            out: fig.querySelector('output'),
+          });
+        }
+        const loopRoot = document.getElementById('loops');
+        for (const [name, from, to, note] of LOOPS) {
+          const li = document.createElement('li');
+          li.innerHTML = '<canvas role="img"></canvas><small></small>';
+          li.querySelector('small').textContent =
+            `${name.replace(/-1-$/, '')}: ${note}`;
+          const canvas = li.querySelector('canvas');
+          canvas.setAttribute('aria-label', `${name} looping, ${note}`);
+          loopRoot.append(li);
+          player({ canvas, loop: [{ gif: name, from, to }], figure: 200 });
+        }
+      }
+    </script>
+  </body>
+</html>

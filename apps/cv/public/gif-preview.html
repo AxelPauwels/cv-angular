@@ -97,6 +97,10 @@
         background: #e4e4e7;
         border-radius: 8px;
       }
+      /* tall, so he climbs a good stretch before he is out at the top */
+      .stage--climb {
+        height: 440px;
+      }
       .stage-label {
         margin: 16px 0 6px;
         font-size: 0.875rem;
@@ -1082,6 +1086,145 @@
         drawZoneJsSign,
         { firstFrame: 18 }
       );
+    </script>
+    <p class="stage-label">
+      Climbing up: Climb-Ladder-Up-right, from the bottom to the top of the
+      stage
+    </p>
+    <canvas
+      class="stage stage--climb"
+      role="img"
+      aria-label="Character climbs a ladder at the right of the stage, from the bottom up and out at the top"></canvas>
+    <script>
+      // Climb-Ladder-Up-right climbs up inside its own 512px frames (and out of them: from frame 60 on his
+      // head is cut off at the top). So only its first climbing step plays, frames 37-55, over and over:
+      // frame 56 is frame 37 again, 43px higher (the best match, by pixel difference), so after each loop
+      // the page draws him 43px higher and he climbs on. The ladder's rungs sit 43px apart, at his feet.
+      (async () => {
+        const canvas = document.querySelector('.stage--climb');
+        if (!('ImageDecoder' in window)) {
+          canvas.hidden = true;
+          canvas.previousElementSibling.hidden = true;
+          return;
+        }
+        const dec = new ImageDecoder({
+          data: await (
+            await fetch('assets/gifs/Climb-Ladder-Up-right-512x512.gif')
+          ).arrayBuffer(),
+          type: 'image/gif',
+        });
+        await dec.tracks.ready;
+
+        const FIRST = 37,
+          LAST = 55, // frame 56 = frame 37, STEP px higher
+          STEP = 43, // how far one climbing step lifts him, in frame px
+          FEET = 321, // the soles in frame 37 (frame px)
+          HEAD = 63, // the top of his head in frame 37
+          LADDER_X = 300, // where his hands and toes meet the ladder (frame px)
+          SIZE = 240,
+          K = SIZE / 512,
+          PAUSE = 800;
+
+        const durations = [];
+        for (let i = FIRST; i <= LAST; i++) {
+          const { image } = await dec.decode({ frameIndex: i });
+          durations.push(image.duration / 1000);
+          image.close();
+        }
+        const cycleMs = durations.reduce((a, b) => a + b, 0);
+        const frameAt = (ms) => {
+          let i = 0;
+          while (i + 1 < durations.length && ms >= durations[i]) {
+            ms -= durations[i];
+            i++;
+          }
+          return FIRST + i;
+        };
+
+        const ctx = canvas.getContext('2d');
+        let W = 0,
+          H = 0,
+          total = 0;
+        const layout = () => {
+          const dpr = devicePixelRatio || 1;
+          W = canvas.clientWidth;
+          H = canvas.clientHeight;
+          canvas.width = Math.round(W * dpr);
+          canvas.height = Math.round(H * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          // enough steps to climb from the ground until his head is out at the top
+          const steps =
+            Math.ceil((H - 24 - (FEET - HEAD) * K) / (STEP * K)) +
+            1 +
+            Math.ceil((FEET - HEAD) / STEP);
+          total = steps * cycleMs + PAUSE;
+        };
+
+        const render = async (t) => {
+          t %= total;
+          const climbing = t < total - PAUSE;
+          const ground = H - 24;
+          const k = Math.floor(t / cycleMs);
+          const f = frameAt(t - k * cycleMs);
+          const image = climbing
+            ? (await dec.decode({ frameIndex: f })).image
+            : null;
+          const ladderX = W - 70; // the ladder near the right edge
+          ctx.clearRect(0, 0, W, H);
+          // the ladder, from the ground to the top: two rails, rungs at his steps
+          ctx.fillStyle = '#a16207';
+          ctx.fillRect(ladderX - 7, 0, 4, ground);
+          ctx.fillRect(ladderX + 7, 0, 4, ground);
+          for (let y = ground; y > -STEP * K; y -= STEP * K) {
+            ctx.fillRect(ladderX - 7, Math.round(y - 3), 18, 3);
+          }
+          ctx.fillStyle = '#a1a1aa';
+          ctx.fillRect(0, ground, W, 2);
+          if (!image) return;
+          // in the GIF's own 512px coordinates, scaled into place, k steps up
+          ctx.save();
+          ctx.translate(
+            ladderX - LADDER_X * K,
+            ground - FEET * K - k * STEP * K
+          );
+          ctx.scale(K, K);
+          ctx.drawImage(image, 0, 0);
+          ctx.restore();
+          image.close();
+        };
+
+        layout();
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          render(cycleMs * 2);
+          return;
+        }
+        let visible = true,
+          busy = false,
+          lastKey = '';
+        new IntersectionObserver(([e]) => {
+          visible = e.isIntersecting;
+        }).observe(canvas);
+        new ResizeObserver(() => {
+          layout();
+          lastKey = '';
+        }).observe(canvas);
+        const t0 = performance.now();
+        const tick = (now) => {
+          requestAnimationFrame(tick);
+          if (!visible || busy) return;
+          const t = (now - t0) % total;
+          const k = Math.floor(t / cycleMs);
+          const key =
+            t < total - PAUSE ? `${k}:${frameAt(t - k * cycleMs)}` : 'pause';
+          if (key === lastKey) return;
+          busy = true;
+          lastKey = key;
+          render(now - t0).finally(() => {
+            busy = false;
+          });
+        };
+        requestAnimationFrame(tick);
+      })();
     </script>
     <ul id="list"></ul>
     <img
