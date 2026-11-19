@@ -1,5 +1,5 @@
 <ds-page-layout>
-  <ds-page-title title="t.heading.foundations" />
+  <ds-page-title title="t.nav.foundations" />
 
   <!-- texts with inline <code> or <strong>: translateParts renders them without innerHTML -->
   <ng-template #parts let-key>
@@ -8,6 +8,13 @@
       >{{ part.text }}</code
     >} @case ('strong') {<strong>{{ part.text }}</strong>} @default {{{
     part.text }}} } }
+  </ng-template>
+
+  <!-- the same for one item of a list key (items separated by `||`) -->
+  <ng-template #itemParts let-item>
+    @for (part of item; track $index) { @switch (part.tag) { @case ('code')
+    {<code class="foundations-overview__code">{{ part.text }}</code>} @case
+    ('strong') {<strong>{{ part.text }}</strong>} @default {{{ part.text }}} } }
   </ng-template>
 
   <!-- Styles: the ITCSS layers as an inverted triangle -->
@@ -31,12 +38,16 @@
       <span>{{ 't.foundations.itcss.axis.specific' | translate }}</span>
     </p>
 
+    @let layerNames = 't.foundations.itcss.layer-names' | translateList; @let
+    layerTexts = 't.foundations.itcss.layer-texts' | translateList;
     <ol class="foundations-overview__layers">
       @for (layer of layers; track layer.folder; let index = $index) {
       <li class="foundations-overview__layer" [style.--layer]="index">
         <div class="foundations-overview__bar">
           <span class="foundations-overview__layer-name">
-            {{ layer.nameKey | translate }}
+            <ng-container
+              [ngTemplateOutlet]="itemParts"
+              [ngTemplateOutletContext]="{ $implicit: layerNames[index] }" />
           </span>
           @if (layer.namespace) {
           <code class="foundations-overview__namespace"
@@ -46,8 +57,8 @@
         </div>
         <p class="foundations-overview__layer-text">
           <ng-container
-            [ngTemplateOutlet]="parts"
-            [ngTemplateOutletContext]="{ $implicit: layer.textKey }" />
+            [ngTemplateOutlet]="itemParts"
+            [ngTemplateOutletContext]="{ $implicit: layerTexts[index] }" />
         </p>
       </li>
       }
@@ -63,16 +74,15 @@
       title="t.subheading.technical.icons"
       tagline="t.subheading.technical.icons.description" />
 
-    <dl class="foundations-overview__fonts">
-      <div class="foundations-overview__font">
-        <dt class="foundations-overview__font-name">
-          <!-- IcoMoon's logo, from the Icomoon font -->
-          <span
-            class="cv-icon cv-icon-icomoon foundations-overview__icon"
-            aria-hidden="true"></span>
-          Icomoon
-        </dt>
-        <dd class="foundations-overview__font-text">
+    <div class="foundations-overview__fonts">
+      <!-- the card icon: IcoMoon's logo, from the Icomoon font -->
+      <ds-card
+        class="foundations-overview__font"
+        title="Icomoon"
+        icon="icomoon"
+        iconFont="cv"
+        [headingLevel]="3">
+        <div class="foundations-overview__font-text">
           <span class="foundations-overview__font-description">
             <ng-container
               [ngTemplateOutlet]="parts"
@@ -86,17 +96,16 @@
               [class]="'cv-icon-' + icon.name"></span>
             }
           </span>
-        </dd>
-      </div>
-      <div class="foundations-overview__font">
-        <dt class="foundations-overview__font-name">
-          <!-- Angular, from the Icomoon font -->
-          <span
-            class="cv-icon cv-icon-angular foundations-overview__icon"
-            aria-hidden="true"></span>
-          Material Symbols
-        </dt>
-        <dd class="foundations-overview__font-text">
+        </div>
+      </ds-card>
+      <!-- the card icon: Angular, from the Icomoon font -->
+      <ds-card
+        class="foundations-overview__font"
+        title="Material Symbols"
+        icon="angular"
+        iconFont="cv"
+        [headingLevel]="3">
+        <div class="foundations-overview__font-text">
           <span class="foundations-overview__font-description">
             <ng-container
               [ngTemplateOutlet]="parts"
@@ -112,17 +121,16 @@
             >
             }
           </span>
-        </dd>
-      </div>
-      <div class="foundations-overview__font">
-        <dt class="foundations-overview__font-name">
-          <!-- Lordicon's logo, from the Icomoon font -->
-          <span
-            class="cv-icon cv-icon-lordicon foundations-overview__icon"
-            aria-hidden="true"></span>
-          Lordicon
-        </dt>
-        <dd class="foundations-overview__font-text">
+        </div>
+      </ds-card>
+      <!-- the card icon: Lordicon's logo, from the Icomoon font -->
+      <ds-card
+        class="foundations-overview__font"
+        title="Lordicon"
+        icon="lordicon"
+        iconFont="cv"
+        [headingLevel]="3">
+        <div class="foundations-overview__font-text">
           <span class="foundations-overview__font-description">
             <ng-container
               [ngTemplateOutlet]="parts"
@@ -139,9 +147,9 @@
               [icon]="icon" />
             }
           </span>
-        </dd>
-      </div>
-    </dl>
+        </div>
+      </ds-card>
+    </div>
   </section>
 
   <!-- State: NgRx signal stores -->
@@ -159,6 +167,7 @@
         [ngTemplateOutletContext]="{ $implicit: 't.foundations.state.intro' }" />
     </p>
 
+    @let stateSteps = 't.foundations.state.steps' | translateList;
     <ol class="foundations-overview__flow">
       <li class="foundations-overview__step">
         <mat-icon
@@ -169,8 +178,8 @@
         >
         <span>
           <ng-container
-            [ngTemplateOutlet]="parts"
-            [ngTemplateOutletContext]="{ $implicit: 't.foundations.state.step.service' }" />
+            [ngTemplateOutlet]="itemParts"
+            [ngTemplateOutletContext]="{ $implicit: stateSteps[0] }" />
         </span>
       </li>
       <li class="foundations-overview__step">
@@ -182,8 +191,8 @@
         >
         <span>
           <ng-container
-            [ngTemplateOutlet]="parts"
-            [ngTemplateOutletContext]="{ $implicit: 't.foundations.state.step.store' }" />
+            [ngTemplateOutlet]="itemParts"
+            [ngTemplateOutletContext]="{ $implicit: stateSteps[1] }" />
         </span>
       </li>
       <li class="foundations-overview__step">
@@ -195,8 +204,8 @@
         >
         <span>
           <ng-container
-            [ngTemplateOutlet]="parts"
-            [ngTemplateOutletContext]="{ $implicit: 't.foundations.state.step.component' }" />
+            [ngTemplateOutlet]="itemParts"
+            [ngTemplateOutletContext]="{ $implicit: stateSteps[2] }" />
         </span>
       </li>
     </ol>

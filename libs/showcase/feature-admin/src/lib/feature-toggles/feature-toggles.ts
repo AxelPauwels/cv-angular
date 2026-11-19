@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Card } from '@cv/shared-ui-card';
-import { PageTitle } from '@cv/shared-ui-page';
+import { PageLayout, PageTitle } from '@cv/shared-ui-page';
 import { MatIcon } from '@angular/material/icon';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,11 +17,12 @@ import {
 
 interface ToggleSection {
   readonly id: string;
-  /** The heading, after the optional prefix, e.g. "Submenu" + "CV" */
+  /** The heading, e.g. the menu label "CV" for its submenu */
   readonly titleKey: string;
-  readonly prefixKey?: string;
-  /** Starts a new row of cards on larger screens */
+  /** Starts a new row of cards on desktop */
   readonly newRow?: boolean;
+  /** Two of the four columns on desktop, its switches in two columns */
+  readonly wide?: boolean;
   readonly toggles: readonly FeatureToggleInfo[];
 }
 
@@ -40,7 +41,6 @@ function submenu(
 ): ToggleSection {
   return {
     id,
-    prefixKey: 't.feature-toggles.section.submenu.title',
     titleKey,
     toggles: featureTogglesInGroup(group),
   };
@@ -49,7 +49,15 @@ function submenu(
 /** The feature toggles page: switches every feature toggle on or off */
 @Component({
   selector: 'showcase-feature-toggles',
-  imports: [Card, MatButton, MatIcon, MatSlideToggle, PageTitle, TranslatePipe],
+  imports: [
+    Card,
+    MatButton,
+    MatIcon,
+    MatSlideToggle,
+    PageLayout,
+    PageTitle,
+    TranslatePipe,
+  ],
   templateUrl: './feature-toggles.html',
   styleUrl: './feature-toggles.scss',
 })
@@ -58,11 +66,15 @@ export class FeatureToggles {
   private readonly snackBar = inject(MatSnackBar);
   private readonly translate = inject(TranslateService);
 
-  /** Navbar icons and general on top, the menus in four columns below */
+  /**
+   * On desktop, four columns: navbar icons (two columns wide) and general on
+   * top with the last column free, the main menu and the three submenus below
+   */
   protected readonly sections: readonly ToggleSection[] = [
     {
       id: 'navbar',
       titleKey: 't.feature-toggles.section.navbar.title',
+      wide: true,
       toggles: featureTogglesInGroup('navbar'),
     },
     {

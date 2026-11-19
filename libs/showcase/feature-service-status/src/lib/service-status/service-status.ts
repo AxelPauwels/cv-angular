@@ -9,7 +9,7 @@ import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@tolgee/ngx';
 import { LanguageService } from '@cv/shared-data-access-i18n';
 import { TranslationKey } from '@cv/shared-util-i18n';
-import { PageTitle } from '@cv/shared-ui-page';
+import { PageLayout, PageTitle } from '@cv/shared-ui-page';
 import {
   ExternalServiceCategory,
   ServiceHealth,
@@ -43,7 +43,7 @@ interface StatusText {
  */
 @Component({
   selector: 'showcase-service-status',
-  imports: [PageTitle, MatButton, MatIcon, TranslatePipe],
+  imports: [PageLayout, PageTitle, MatButton, MatIcon, TranslatePipe],
   providers: [ServiceStatusStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './service-status.html',

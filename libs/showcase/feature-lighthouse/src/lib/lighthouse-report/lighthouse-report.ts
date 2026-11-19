@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { TranslatePipe } from '@tolgee/ngx';
 import { LanguageService } from '@cv/shared-data-access-i18n';
-import { PageTitle } from '@cv/shared-ui-page';
+import { PageLayout, PageTitle } from '@cv/shared-ui-page';
 import {
   LIGHTHOUSE_CATEGORIES,
   LIGHTHOUSE_RUN,
@@ -20,7 +20,7 @@ import { ScoreGauge } from '../internal/score-gauge/score-gauge';
  */
 @Component({
   selector: 'showcase-lighthouse-report',
-  imports: [PageTitle, ScoreGauge, TranslatePipe],
+  imports: [PageLayout, PageTitle, ScoreGauge, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './lighthouse-report.html',
   styleUrl: './lighthouse-report.scss',
