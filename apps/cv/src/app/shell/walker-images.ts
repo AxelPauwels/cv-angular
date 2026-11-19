@@ -17,13 +17,20 @@ export const WALKER_IMAGES = {
     height: 131,
     speed: WALK_SPEED_PX_PER_MS,
   },
-  /**
-   * Carrying the ZoneJs sign to the right: a slow, heavy walk, whose planted
-   * foot moves 0.072 px/ms in the GIF frames (the speed of the preview page),
-   * played 1.2× faster (the WebP's frames are 1.2× shorter, see
-   * tools/walker-sign-walk.mjs), so he moves 1.2× faster too
-   */
+  /** A normal walk to the right */
   right: {
+    src: '/assets/walker/walking-right.webp',
+    width: 98.5,
+    height: 131,
+    speed: WALK_SPEED_PX_PER_MS,
+  },
+  /**
+   * The first walk only, to the right: carrying the ZoneJs sign, a slow, heavy
+   * walk whose planted foot moves 0.072 px/ms in the GIF frames (the speed of
+   * the preview page), played 1.2× faster (the WebP's frames are 1.2× shorter,
+   * see tools/walker-sign-walk.mjs), so he moves 1.2× faster too
+   */
+  first: {
     src: '/assets/walker/carrying-zonejs-right.webp',
     width: 78,
     height: 114,
@@ -31,17 +38,16 @@ export const WALKER_IMAGES = {
     // his feet sit a little low in this image
     lift: 2,
   },
-} as const satisfies Record<'left' | 'right', WalkerImage>;
+} as const satisfies Record<'left' | 'right' | 'first', WalkerImage>;
 
 /**
  * The waits before each walk, in ms: 5 seconds after the page has loaded (and
  * the browser is idle, so it never weighs on the page load) he carries the
- * sign to the right, walks back to the left 1 second later, to the right again
- * after 2 minutes, and from then on turns around every 4 minutes
+ * sign to the right, once; a quarter of a second later he walks back to the
+ * left, to the right again after 2 minutes, and from then on turns around every
+ * 4 minutes, always as the normal walk
  */
-export const WALKER_PAUSES: readonly number[] = [
-  5_000, 1_000, 120_000, 240_000,
-];
+export const WALKER_PAUSES: readonly number[] = [5_000, 250, 120_000, 240_000];
 
 /**
  * Speed per breakpoint (apps/cv/src/styles/1.settings/_breakpoints.scss), on

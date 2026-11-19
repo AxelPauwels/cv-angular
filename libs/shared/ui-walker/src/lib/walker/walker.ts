@@ -89,16 +89,22 @@ export class Walker {
   readonly right = input.required<WalkerImage>();
   /** The direction of the first walk */
   readonly first = input<WalkDirection>('left');
+  /**
+   * Another figure for the first walk only (e.g. carrying something), in the
+   * `first` direction; every walk after it uses `left` and `right`
+   */
+  readonly firstImage = input<WalkerImage>();
   /** The wait before each walk in ms; the last one repeats */
   readonly pauses = input<readonly number[]>([2_000, 6_000]);
   /** Speed factors per breakpoint, on top of each image's own speed */
   readonly speedFactors = input<readonly WalkerSpeedFactor[]>([]);
 
-  /** The strip is as high as the taller (lifted) figure */
+  /** The strip is as high as the tallest (lifted) figure */
   protected readonly height = computed(() =>
     Math.max(
-      this.left().height + (this.left().lift ?? 0),
-      this.right().height + (this.right().lift ?? 0)
+      ...[this.left(), this.right(), this.firstImage()]
+        .filter((image) => image !== undefined)
+        .map((image) => image.height + (image.lift ?? 0))
     )
   );
   private readonly figure =
@@ -137,7 +143,9 @@ export class Walker {
       // first the pause, then the image: so its download never competes with
       // the page's own (the first walk's starts a pause after the page is idle)
       await sleep(window, pause, stop);
-      const image = direction === 'left' ? this.left() : this.right();
+      const image =
+        (walks === 0 ? this.firstImage() : undefined) ??
+        (direction === 'left' ? this.left() : this.right());
       await preload(window.document, image.src);
       if (stop.aborted) {
         return;
