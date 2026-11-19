@@ -9,5 +9,6 @@ Disallow: /e2e-report/
 Disallow: /graphql-docs/
 Disallow: /project-graph/
 Disallow: /build-info/
+Disallow: /compodoc/
 
 Sitemap: https://axel-pauwels.web.app/sitemap.xml

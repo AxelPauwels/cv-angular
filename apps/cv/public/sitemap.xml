@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Keep in sync with libs/shared/util-routing (only the indexable pages). -->
+<!-- Keep in sync with libs/shared/util-routing (only the indexable pages, at their
+     current address: the old /personal, /education, ... only redirect). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://axel-pauwels.web.app/home</loc></url>
-  <url><loc>https://axel-pauwels.web.app/personal</loc></url>
-  <url><loc>https://axel-pauwels.web.app/education</loc></url>
-  <url><loc>https://axel-pauwels.web.app/experience</loc></url>
-  <url><loc>https://axel-pauwels.web.app/skills</loc></url>
-  <url><loc>https://axel-pauwels.web.app/references</loc></url>
+  <url><loc>https://axel-pauwels.web.app/cv/personal</loc></url>
+  <url><loc>https://axel-pauwels.web.app/cv/education</loc></url>
+  <url><loc>https://axel-pauwels.web.app/cv/experience</loc></url>
+  <url><loc>https://axel-pauwels.web.app/cv/skills</loc></url>
+  <url><loc>https://axel-pauwels.web.app/cv/references</loc></url>
+  <url><loc>https://axel-pauwels.web.app/contact</loc></url>
   <url><loc>https://axel-pauwels.web.app/showcase/micro-frontends</loc></url>
+  <url><loc>https://axel-pauwels.web.app/showcase/lighthouse</loc></url>
+  <url><loc>https://axel-pauwels.web.app/showcase/service-status</loc></url>
+  <url><loc>https://axel-pauwels.web.app/showcase/ai-assistant</loc></url>
+  <url><loc>https://axel-pauwels.web.app/showcase/release-flow</loc></url>
   <url><loc>https://axel-pauwels.web.app/showcase/feature-toggles</loc></url>
   <url><loc>https://axel-pauwels.web.app/technical/architecture</loc></url>
   <url><loc>https://axel-pauwels.web.app/technical/foundations</loc></url>
   <url><loc>https://axel-pauwels.web.app/technical/project-graph</loc></url>
   <url><loc>https://axel-pauwels.web.app/technical/graphql-docs</loc></url>
+  <url><loc>https://axel-pauwels.web.app/technical/compodoc</loc></url>
   <url><loc>https://axel-pauwels.web.app/technical/code-coverage</loc></url>
   <url><loc>https://axel-pauwels.web.app/technical/end-to-end-tests</loc></url>
   <url><loc>https://axel-pauwels.web.app/technical/versions</loc></url>
