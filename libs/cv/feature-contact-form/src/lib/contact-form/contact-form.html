@@ -74,6 +74,23 @@
       </div>
     </div>
 
+    <!-- decorative: he drops in and cheers once (~3.7s), then rests on his
+    last frame; with reduce motion only that last frame shows. Loaded only
+    once the message went out -->
+    @if (sent()) {
+    <picture class="contact-form__cheer">
+      <source
+        media="(prefers-reduced-motion: reduce)"
+        srcset="/assets/contact/drop-in-cheer-still.webp" />
+      <img
+        src="/assets/contact/drop-in-cheer.webp"
+        alt=""
+        width="103"
+        height="177"
+        decoding="async" />
+    </picture>
+    }
+
     <p #status class="contact-form__status" role="status" tabindex="-1">
       @if (contactForm().submitting()) { {{ 't.contact.sending' | translate }} }
       @else if (sent()) { {{ 't.contact.sent' | translate }} }

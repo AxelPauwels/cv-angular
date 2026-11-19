@@ -141,6 +141,8 @@ describe('ContactForm', () => {
     const { fixture, element, fillIn, send, http, status, control } =
       await setup();
     await fillIn();
+    const cheer = () => element.querySelector('.contact-form__cheer img');
+    expect(cheer()).toBeNull();
 
     // Act
     await send();
@@ -172,6 +174,16 @@ describe('ContactForm', () => {
     expect(document.activeElement).toBe(
       element.querySelector('[role="status"]')
     );
+    // he drops in and cheers, decorative only; reduce motion gets the still
+    expect(cheer()?.getAttribute('src')).toBe(
+      '/assets/contact/drop-in-cheer.webp'
+    );
+    expect(cheer()?.getAttribute('alt')).toBe('');
+    expect(
+      element
+        .querySelector('.contact-form__cheer source')
+        ?.getAttribute('media')
+    ).toBe('(prefers-reduced-motion: reduce)');
     http.verify();
   });
 
@@ -198,5 +210,6 @@ describe('ContactForm', () => {
     const body = element.querySelector<HTMLElement>('.contact-form__body');
     expect(body?.classList).not.toContain('contact-form__body--collapsed');
     expect(body?.inert).toBe(false);
+    expect(element.querySelector('.contact-form__cheer')).toBeNull();
   });
 });

@@ -149,6 +149,18 @@
     align-self: flex-start;
   }
 
+  // centred above the thank-you message, his feet on its line
+  &__cheer {
+    align-self: center;
+    display: block;
+    line-height: 0;
+
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+  }
+
   &__status {
     color: var(--mat-sys-on-surface);
     font: var(--mat-sys-body-large);
