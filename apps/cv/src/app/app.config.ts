@@ -4,7 +4,6 @@ import {
 } from '@angular/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
-  PreloadAllModules,
   provideRouter,
   TitleStrategy,
   withComponentInputBinding,
@@ -12,6 +11,7 @@ import {
 } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { TranslatedTitleStrategy } from './title/translated-title-strategy';
+import { IdlePreloadingStrategy } from './preloading/idle-preloading-strategy';
 import {
   FEDERATION_MANIFEST_URL,
   inBrowserGraphqlInterceptor,
@@ -30,7 +30,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       appRoutes,
       withComponentInputBinding(),
-      withPreloading(PreloadAllModules)
+      // every lazy page, but only once the first page has rendered (see the strategy)
+      withPreloading(IdlePreloadingStrategy)
     ),
     // every page its own, translated document title (see the strategy)
     { provide: TitleStrategy, useClass: TranslatedTitleStrategy },
