@@ -658,9 +658,14 @@
       aria-label="Character slowly carries a heavy crate across the stage with both hands"></canvas>
     <script>
       // Injured-Walk-Right walks in place, hunched with both hands at knee height. The page moves him across
-      // and draws a crate that follows his hands every frame; his hands are redrawn on top so they grip it.
-      (async () => {
-        const canvas = document.querySelector('.stage--carry');
+      // and draws what he carries (drawProp) following his hands every frame; his hands are redrawn on top so
+      // they grip it. Used twice: a crate here, a "ZoneJs" sign below.
+      // firstFrame: loop over frames firstFrame..last only, skipping the start of the GIF
+      const carryScene = async (
+        canvas,
+        drawProp,
+        { debug = false, firstFrame = 0 } = {}
+      ) => {
         if (!('ImageDecoder' in window)) {
           canvas.hidden = true;
           canvas.previousElementSibling.hidden = true;
@@ -683,9 +688,11 @@
           loopMs += image.duration / 1000;
           image.close();
         }
+        const begin = starts[firstFrame],
+          span = loopMs - begin;
         const frameAt = (ms) => {
-          ms %= loopMs;
-          let i = 0;
+          ms = begin + (ms % span);
+          let i = firstFrame;
           while (i + 1 < count && starts[i + 1] <= ms) i++;
           return i;
         };
@@ -886,9 +893,6 @@
           FOOT_Y = 355,
           CENTER_X = 270;
         const SPEED = 0.072 * K; // px/ms, matches the planted foot of this slow, heavy walk
-        const BOX_W = 78,
-          BOX_H = 44,
-          GRIP = 12; // crate in frame px; its top edge sits GRIP px above the hands
         const PAUSE = 800;
 
         // Hands-only overlay per frame: the skin pixels around the hands, so they can be drawn over the crate.
@@ -958,18 +962,8 @@
           ctx.translate(s.x - CENTER_X * K, ground - FOOT_Y * K);
           ctx.scale(K, K);
           ctx.drawImage(image, 0, 0);
-          const [hx, hy] = HANDS[s.f],
-            bx = hx - BOX_W / 2,
-            by = hy - GRIP;
-          ctx.fillStyle = '#b45309';
-          ctx.fillRect(bx, by, BOX_W, BOX_H);
-          ctx.strokeStyle = '#78350f';
-          ctx.lineWidth = 5;
-          ctx.strokeRect(bx + 2.5, by + 2.5, BOX_W - 5, BOX_H - 5);
-          ctx.beginPath();
-          ctx.moveTo(bx + 5, by + 5);
-          ctx.lineTo(bx + BOX_W - 5, by + BOX_H - 5);
-          ctx.stroke();
+          const [hx, hy] = HANDS[s.f];
+          drawProp(ctx, hx, hy);
           const hands = handsLayer(s.f, image);
           ctx.drawImage(hands.layer, hands.sx, hands.sy);
           ctx.restore();
@@ -977,7 +971,7 @@
         };
 
         layout();
-        if (new URLSearchParams(location.search).has('debug'))
+        if (debug && new URLSearchParams(location.search).has('debug'))
           Object.assign(window, {
             carryRender: render,
             carryTotal: () => total,
@@ -1012,7 +1006,74 @@
           });
         };
         requestAnimationFrame(tick);
-      })();
+      };
+
+      // A wooden crate, in the GIF's 512px frame: its top edge sits GRIP px above the hands
+      const drawCrate = (ctx, hx, hy) => {
+        const BOX_W = 78,
+          BOX_H = 44,
+          GRIP = 12,
+          bx = hx - BOX_W / 2,
+          by = hy - GRIP;
+        ctx.fillStyle = '#b45309';
+        ctx.fillRect(bx, by, BOX_W, BOX_H);
+        ctx.strokeStyle = '#78350f';
+        ctx.lineWidth = 5;
+        ctx.strokeRect(bx + 2.5, by + 2.5, BOX_W - 5, BOX_H - 5);
+        ctx.beginPath();
+        ctx.moveTo(bx + 5, by + 5);
+        ctx.lineTo(bx + BOX_W - 5, by + BOX_H - 5);
+        ctx.stroke();
+      };
+      carryScene(document.querySelector('.stage--carry'), drawCrate, {
+        debug: true,
+      });
+    </script>
+    <p class="stage-label">
+      Carrying a sign: Injured-Walk-Right, left to right, with a "ZoneJs" sign
+    </p>
+    <canvas
+      class="stage stage--sign"
+      role="img"
+      aria-label="Character slowly carries a yellow sign saying ZoneJs across the stage with both hands"></canvas>
+    <script>
+      // The same walk, carrying a sign board in JavaScript's yellow with a thin black border and black text.
+      const drawZoneJsSign = (ctx, hx, hy) => {
+        const SIGN_W = 128,
+          SIGN_H = 56,
+          GRIP = 25, // its top edge sits GRIP px above the hands
+          sx = hx - SIGN_W / 2,
+          sy = hy - GRIP;
+        ctx.fillStyle = '#f7df1e'; // JavaScript yellow
+        ctx.fillRect(sx, sy, SIGN_W, SIGN_H);
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(sx + 1.5, sy + 1.5, SIGN_W - 3, SIGN_H - 3);
+        ctx.fillStyle = '#000';
+        ctx.font = 'bold 30px system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('ZoneJs', hx, sy + SIGN_H / 2 + 1);
+      };
+      carryScene(document.querySelector('.stage--sign'), drawZoneJsSign);
+    </script>
+    <p class="stage-label">
+      Carrying a sign, smooth loop: the same walk without the GIF's first half
+      step
+    </p>
+    <canvas
+      class="stage stage--sign-smooth"
+      role="img"
+      aria-label="Character slowly carries a yellow sign saying ZoneJs across the stage with both hands, in a smooth loop"></canvas>
+    <script>
+      // The GIF starts with a shallower half step (frames 0-17, 600ms: the head dips to 137px instead of
+      // 143-147px), so going from its last frame (head at 135px, rising) back to frame 0 (123px) pops him up.
+      // Frame 18 (133px, rising) continues the last frame, so this loop skips frames 0-17.
+      carryScene(
+        document.querySelector('.stage--sign-smooth'),
+        drawZoneJsSign,
+        { firstFrame: 18 }
+      );
     </script>
     <ul id="list"></ul>
     <img
