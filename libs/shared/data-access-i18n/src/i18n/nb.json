@@ -292,6 +292,9 @@
       "toggle": {
         "tour-button": {
           "label": "Omvisningsknapp på startsiden"
+        },
+        "walker": {
+          "label": "Gående figur"
         }
       }
     },

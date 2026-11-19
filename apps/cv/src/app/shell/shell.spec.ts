@@ -29,6 +29,63 @@ describe('Shell', () => {
       (link) => link.getAttribute('aria-label') ?? link.textContent?.trim()
     );
 
+  describe('the walking figure', () => {
+    function render() {
+      TestBed.configureTestingModule({
+        providers: [provideRouter([]), provideI18nTesting()],
+      });
+      const fixture = TestBed.createComponent(Shell);
+      return { fixture, element: fixture.nativeElement as HTMLElement };
+    }
+
+    /** Gives the deferred walker (loaded when the browser is idle) time to show */
+    async function settle(fixture: { whenStable: () => Promise<unknown> }) {
+      await fixture.whenStable();
+      await new Promise((resolve) => setTimeout(resolve, 1_000));
+      await fixture.whenStable();
+    }
+
+    it('walks on every page, carrying the sign to the right first', async () => {
+      // Arrange
+      const { fixture, element } = render();
+
+      // Act
+      await settle(fixture);
+
+      // Assert
+      await vi.waitFor(() =>
+        expect(element.querySelector('ds-walker')).not.toBeNull()
+      );
+      expect(element.querySelector('ds-walker')?.getAttribute('first')).toBe(
+        'right'
+      );
+    });
+
+    it('stays away while it is switched off on the feature toggles page', async () => {
+      // Arrange
+      const { fixture, element } = render();
+
+      // Act
+      TestBed.inject(FeatureToggleService).change('walker', false);
+      await settle(fixture);
+
+      // Assert
+      expect(element.querySelector('ds-walker')).toBeNull();
+    });
+
+    it('stays away for a visitor who wants reduced motion', async () => {
+      // Arrange
+      const { fixture, element } = render();
+
+      // Act
+      TestBed.inject(AccessibilityService).change({ reduceMotion: true });
+      await settle(fixture);
+
+      // Assert
+      expect(element.querySelector('ds-walker')).toBeNull();
+    });
+  });
+
   it('hides the main menu items and navbar icons switched off on the admin page', async () => {
     // Arrange
     TestBed.configureTestingModule({

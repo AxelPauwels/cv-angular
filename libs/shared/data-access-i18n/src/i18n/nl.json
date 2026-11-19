@@ -292,6 +292,9 @@
       "toggle": {
         "tour-button": {
           "label": "Tour knop op de homepagina"
+        },
+        "walker": {
+          "label": "Wandelend figuurtje"
         }
       }
     },

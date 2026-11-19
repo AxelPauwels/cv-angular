@@ -53,6 +53,11 @@ export const FEATURE_TOGGLES = [
     group: 'general',
     labelKey: 't.feature-toggles.toggle.tour-button.label',
   },
+  {
+    id: 'walker',
+    group: 'general',
+    labelKey: 't.feature-toggles.toggle.walker.label',
+  },
 
   menuItem('main-menu-cv', 'main-menu', 't.nav.cv'),
   menuItem('main-menu-technical', 'main-menu', 't.nav.technical'),

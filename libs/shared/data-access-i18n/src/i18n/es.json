@@ -292,6 +292,9 @@
       "toggle": {
         "tour-button": {
           "label": "Botón del recorrido en la página de inicio"
+        },
+        "walker": {
+          "label": "Personaje que camina"
         }
       }
     },

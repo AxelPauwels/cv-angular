@@ -81,7 +81,7 @@
 </mat-tab-nav-panel>
 
 @if (!onHome()) {
-<footer class="shell__footer" [inert]="tour.active()">
+<footer #footer class="shell__footer" [inert]="tour.active()">
   <p class="shell__copyright">
     © {{ year }}
     <!-- the way back to the admin page, only while its menu item is switched off -->
@@ -106,6 +106,21 @@
 <!-- Phones: back to the top once scrolled down half a screen; the focus goes to
      the header, so the next Tab lands on the menu -->
 <ds-back-to-top [focusTarget]="header" [inert]="tour.active()" />
+
+<!-- The figure walking along the footer, on every page: decorative, clicks go
+     through it. On the home page he walks behind the page (hidden by it). Its own lazy chunk, loaded when the browser is idle; it loads
+     its images only once the page has fully loaded. -->
+@if (showWalker()) { @defer (on idle) {
+<ds-walker
+  class="shell__walker"
+  [class.shell__walker--behind]="onHome()"
+  [style.--ds-walker-bottom.px]="walkerBottom()"
+  [speedFactors]="walkerSpeedFactors"
+  [left]="walkerImages.left"
+  [right]="walkerImages.right"
+  first="right"
+  [pauses]="walkerPauses" />
+} }
 
 <!-- The tour loads only once a visitor starts it -->
 @defer (when tour.active()) { @if (tour.active()) {

@@ -292,6 +292,9 @@
       "toggle": {
         "tour-button": {
           "label": "Bouton de visite sur la page d’accueil"
+        },
+        "walker": {
+          "label": "Personnage qui marche"
         }
       }
     },

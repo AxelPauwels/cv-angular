@@ -41,7 +41,14 @@ import { ROUTES } from '@cv/shared-util-routing';
 import { TourOverlay } from '@cv/shared-feature-tour';
 import { ContactLinks } from '@cv/cv-feature-contact';
 import { TranslatePipe } from '@tolgee/ngx';
+import { Walker } from '@cv/shared-ui-walker';
 import { MobileNav } from './mobile-nav/mobile-nav';
+import {
+  WALKER_FEET_IN_FOOTER_PX,
+  WALKER_IMAGES,
+  WALKER_PAUSES,
+  WALKER_SPEED_FACTORS,
+} from './walker-images';
 
 @Component({
   selector: 'app-shell',
@@ -62,6 +69,7 @@ import { MobileNav } from './mobile-nav/mobile-nav';
     TourOverlay,
     ContactLinks,
     MobileNav,
+    Walker,
     TranslatePipe,
   ],
   templateUrl: './shell.html',
@@ -79,8 +87,26 @@ export class Shell {
   /** The hamburger menu that replaces the domain tabs below md (768px) */
   protected readonly mobileMenuOpen = signal(false);
   private readonly mobileMenu = viewChild(MobileMenu);
+  private readonly footer = viewChild<ElementRef<HTMLElement>>('footer');
+  /** The footer's height in px; 0 without a footer (the home page) */
+  private readonly footerHeight = signal(0);
 
   constructor() {
+    // follow the footer's height (it wraps on narrow screens, and the home page
+    // has none), so the walking figure keeps its feet on it
+    effect((onCleanup) => {
+      const footer = this.footer()?.nativeElement;
+      if (!footer || typeof ResizeObserver === 'undefined') {
+        this.footerHeight.set(0);
+        return;
+      }
+      const observer = new ResizeObserver(() =>
+        this.footerHeight.set(footer.getBoundingClientRect().height)
+      );
+      observer.observe(footer);
+      onCleanup(() => observer.disconnect());
+    });
+
     // the tour opens the menu for the steps on the domains, and closes it again.
     // Set on the menu itself: between two menu steps the navigation closes it
     // and the tour reopens it in the same tick, so the `[(open)]` binding would
@@ -193,6 +219,23 @@ export class Shell {
 
   // Todo i18n
   protected readonly year = new Date().getFullYear();
+
+  protected readonly walkerImages = WALKER_IMAGES;
+  /** The walking figure's feet a little into the footer, so he walks on it */
+  protected readonly walkerBottom = computed(() =>
+    Math.max(0, this.footerHeight() - WALKER_FEET_IN_FOOTER_PX)
+  );
+  protected readonly walkerPauses = WALKER_PAUSES;
+  protected readonly walkerSpeedFactors = WALKER_SPEED_FACTORS;
+  /**
+   * The walking figure: switched on the feature toggles page, and never for a
+   * visitor who wants reduced motion (the system setting or the accessibility menu)
+   */
+  protected readonly showWalker = computed(
+    () =>
+      this.toggles()['walker'] &&
+      !this.accessibilityService.settings().reduceMotion
+  );
 
   private readonly content =
     viewChild.required<ElementRef<HTMLElement>>('content');

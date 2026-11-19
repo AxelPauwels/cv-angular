@@ -11,6 +11,7 @@ import type { FeatureToggleId } from './feature-toggles';
 export const FEATURE_TOGGLE_DEFAULTS = {
   // General
   'tour-button': true,
+  walker: true,
 
   // CV
   'main-menu-cv': true, // main

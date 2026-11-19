@@ -292,6 +292,9 @@
       "toggle": {
         "tour-button": {
           "label": "Tour button on homepage"
+        },
+        "walker": {
+          "label": "Walking figure"
         }
       }
     },
