@@ -19,13 +19,15 @@ export const WALKER_IMAGES = {
   },
   /**
    * Carrying the ZoneJs sign to the right: a slow, heavy walk, whose planted
-   * foot moves 0.072 px/ms in the GIF frames (the speed of the preview page)
+   * foot moves 0.072 px/ms in the GIF frames (the speed of the preview page),
+   * played 1.2× faster (the WebP's frames are 1.2× shorter, see
+   * tools/walker-sign-walk.mjs), so he moves 1.2× faster too
    */
   right: {
     src: '/assets/walker/carrying-zonejs-right.webp',
     width: 78,
     height: 114,
-    speed: walkSpeed(0.072),
+    speed: walkSpeed(0.072 * 1.2),
     // his feet sit a little low in this image
     lift: 2,
   },

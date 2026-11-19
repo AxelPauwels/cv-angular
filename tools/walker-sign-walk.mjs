@@ -21,6 +21,9 @@ const LAST_FRAME = 155;
 const SCALE = 480 / 512; // twice the on-screen 240/512 of the other walker
 const SIGN_GRIP = 25; // the (straight) sign's top edge sits this far above the hands
 const SIGN_TILT_DEG = 7; // turned clockwise around its centre, so it isn't quite straight
+// played faster than the GIF (shorter frames); the walker's speed in
+// apps/cv/src/app/shell/walker-images.ts goes up by the same factor
+const SPEED_UP = 1.2;
 mkdirSync(outDir, { recursive: true });
 
 // ---------- GIF decoding (frames composited onto a 512x512 RGBA canvas) ----------
@@ -304,7 +307,11 @@ function compose(f) {
 
 const selected = [];
 for (let f = FIRST_FRAME; f <= LAST_FRAME; f++)
-  selected.push({ f, rgba: compose(f), delay: gif.frames[f].delay });
+  selected.push({
+    f,
+    rgba: compose(f),
+    delay: Math.round(gif.frames[f].delay / SPEED_UP),
+  });
 
 // crop: every opaque pixel of every frame; the bottom is the soles of the feet
 let minX = W,
