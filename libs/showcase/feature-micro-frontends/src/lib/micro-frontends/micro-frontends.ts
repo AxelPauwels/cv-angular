@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { TranslatePipe } from '@tolgee/ngx';
-import { TranslationKey } from '@cv/shared-util-i18n';
-import { TranslatePartsPipe } from '@cv/shared-ui-i18n';
+import { TranslateListPipe } from '@cv/shared-ui-i18n';
 import { PageLayout, PageTitle } from '@cv/shared-ui-page';
 import { MatButton } from '@angular/material/button';
 import { Card, CardActions } from '@cv/shared-ui-card';
@@ -31,7 +30,7 @@ import { CvMfe } from '@cv/shared-ui-federation';
     PageLayout,
     NgTemplateOutlet,
     TranslatePipe,
-    TranslatePartsPipe,
+    TranslateListPipe,
   ],
   templateUrl: './micro-frontends.html',
   styleUrl: './micro-frontends.scss',
@@ -41,18 +40,6 @@ export class MicroFrontends {
   protected readonly remoteApiDocsUrl = `${this.remoteUrl}/api/`;
   protected readonly npmUrl =
     'https://www.npmjs.com/package/@axel-pauwels/mac-window';
-  protected readonly mfeSteps: TranslationKey[] = [
-    't.micro-frontends.mfe.step.manifest',
-    't.micro-frontends.mfe.step.load',
-    't.micro-frontends.mfe.step.register',
-    't.micro-frontends.mfe.step.shared',
-  ];
-  protected readonly librarySteps: TranslationKey[] = [
-    't.micro-frontends.lib.step.source',
-    't.micro-frontends.lib.step.publish',
-    't.micro-frontends.lib.step.bundle',
-    't.micro-frontends.lib.step.element',
-  ];
   protected readonly cvMfeSnippet = `
     const me = signal({ role: 'Developer', coffee: 12 });
     const isHireable = computed(() => me().coffee > 5);
