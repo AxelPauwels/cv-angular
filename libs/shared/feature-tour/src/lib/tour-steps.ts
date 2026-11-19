@@ -60,15 +60,20 @@ type StepOptions = Pick<
   | 'menuSpotlight'
   | 'toggles'
   | 'someToggles'
->;
+> &
+  /**
+   * A key that already says the same (e.g. the menu label `t.nav.cv`), instead
+   * of the step's own `t.tour.step.<id>.label` / `.title`: one Tolgee key less
+   */
+  Partial<Pick<TourStep, 'labelKey' | 'titleKey'>>;
 
 function step(id: string, route: string, options: StepOptions = {}): TourStep {
   return {
     id,
     route,
     ...options,
-    labelKey: `t.tour.step.${id}.label`,
-    titleKey: `t.tour.step.${id}.title`,
+    labelKey: options.labelKey ?? `t.tour.step.${id}.label`,
+    titleKey: options.titleKey ?? `t.tour.step.${id}.title`,
     textKey: `t.tour.step.${id}.text`,
   };
 }
@@ -127,27 +132,34 @@ export const DEFAULT_TOUR_STEPS: readonly TourStep[] = [
   }),
   step('cv', ROUTES.CV.PERSONAL_ROUTER_LINK, {
     ...domainTargets('cv'),
+    labelKey: 't.nav.cv',
     toggles: ['main-menu-cv', 'cv-personal'],
   }),
   step('technical', ROUTES.TECHNICAL.PROJECT_GRAPH_ROUTER_LINK, {
     ...domainTargets('technical'),
+    labelKey: 't.nav.technical',
+    titleKey: 't.nav.technical',
     toggles: ['main-menu-technical', 'technical-project-graph'],
   }),
   // the admin page stays reachable when only its menu item is switched off
   step('showcase', ROUTES.SHOWCASE.FEATURE_TOGGLES_ROUTER_LINK, {
     ...domainTargets('showcase'),
+    labelKey: 't.nav.showcase',
+    titleKey: 't.nav.showcase',
     toggles: ['main-menu-showcase'],
   }),
   // on phones the contact links are at the very bottom of the page. Only the
   // mail, LinkedIn and GitHub icons: the AI assistant next to them has its own step
   step('contact', ROUTES.CV.PERSONAL_ROUTER_LINK, {
+    labelKey: 't.heading.contact',
+    titleKey: 't.heading.contact',
     target: '[data-tour="contact"] a:not([data-tour="ai-assistant"])',
-    centerOnPhones: true,
   }),
   // the round AI assistant link before the contact icons, in a round spotlight
   step('ai-assistant', ROUTES.CV.PERSONAL_ROUTER_LINK, {
+    labelKey: 't.nav.ai-assistant',
+    titleKey: 't.contact.ai-assistant',
     target: '[data-tour="ai-assistant"]',
-    centerOnPhones: true,
     spotlight: AI_ASSISTANT_SPOTLIGHT,
     toggles: ['showcase-ai-assistant'],
   }),

@@ -130,3 +130,39 @@ test.describe('tour: contact and AI assistant steps', () => {
     });
   });
 });
+
+/**
+ * On a phone the whole page scrolls and the footer sits below the page's
+ * content: the tour scrolls down to it (also once the page's data has pushed
+ * it further down) and lifts the back/next bar above the spotlight.
+ */
+const PHONE = { width: 375, height: 812 };
+
+test.describe('tour: contact and AI assistant steps on a phone', () => {
+  test.use({ viewport: PHONE, reducedMotion: 'reduce' });
+
+  for (const [step, links] of [
+    [6, ['Contact', 'LinkedIn', 'GitHub']],
+    [7, ['Ask my AI assistant']],
+  ] as const) {
+    test(`step ${step} scrolls down to the footer and keeps it clear of the bar`, async ({
+      page,
+    }) => {
+      // Arrange
+      await tourTo(page, step);
+
+      // Act
+      const spot = await boxOf(spotlight(page));
+      const bar = await boxOf(page.locator('.tour__footer'));
+
+      // Assert
+      for (const name of links) {
+        const link = await boxOf(footerLink(page, name));
+        expect(contains(spot, link), name).toBe(true);
+        expect(link.y + link.height, name).toBeLessThanOrEqual(PHONE.height);
+        expect(link.y, name).toBeGreaterThanOrEqual(0);
+      }
+      expect(overlaps(bar, spot)).toBe(false);
+    });
+  }
+});
