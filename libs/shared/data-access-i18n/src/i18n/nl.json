@@ -19,13 +19,8 @@
       "question": "Jouw vraag",
       "quota-reached": "De assistent heeft zijn gratis limiet voor vandaag bereikt. Probeer het morgen opnieuw.",
       "retry": "Opnieuw proberen",
-      "send": "Versturen",
       "stop": "Stoppen",
-      "suggestion": {
-        "languages": "Welke talen spreekt Axel?",
-        "reference": "Kan je me een referentie geven van zijn laatste werk?",
-        "stack": "Welke technologieën gebruikt Axel?"
-      },
+      "suggested-questions": "Kan je me een referentie geven van zijn laatste werk?||Welke technologieën gebruikt Axel?||Welke talen spreekt Axel?",
       "suggestions": "Probeer een van deze",
       "thinking": "De assistent is aan het antwoorden…",
       "tool": {
@@ -87,7 +82,6 @@
       "rules": {
         "from": "Modules met tag",
         "intro": "controleert elke import aan de hand van deze regels uit <code>sheriff.config.ts</code>, in ESLint en met <code>sheriff verify</code>. Een module heeft toestemming nodig voor beide tags: zijn domein en zijn laag.",
-        "label": "Afhankelijkheidsregels",
         "none": "niets: het hangt van geen andere module af",
         "to": "mogen importeren"
       },
@@ -176,8 +170,7 @@
       },
       "send": "Versturen",
       "sending": "Je bericht wordt verstuurd…",
-      "sent": "Bedankt! Je bericht is verstuurd. Ik neem snel contact met je op.",
-      "title": "Contact"
+      "sent": "Bedankt! Je bericht is verstuurd. Ik neem snel contact met je op."
     },
     "country": {
       "belgium": "België"
@@ -294,15 +287,9 @@
         },
         "navbar": {
           "title": "Iconen in de navigatiebalk"
-        },
-        "submenu": {
-          "title": "Submenu"
         }
       },
       "toggle": {
-        "color-scheme-switcher": {
-          "label": "Lichte en donkere modus"
-        },
         "tour-button": {
           "label": "Tour knop op de homepagina"
         }
@@ -325,77 +312,20 @@
           "specific": "Smal bereik, hoge specificiteit"
         },
         "intro": "De globale stijlen in <code>apps/cv/src/styles</code> volgen <strong>ITCSS</strong> (Inverted Triangle CSS), zoals ik het bij SEM&BIO leerde. Elke laag is een map, in volgorde geïmporteerd: brede regels met een lage specificiteit eerst, smalle en specifieke als laatste, zodat een latere laag wint zonder specificiteitsgevechten. Componentstijlen blijven ingekapseld in Angular; de lagen bevatten alleen wat echt globaal is.",
-        "layer": {
-          "components": {
-            "name": "Components",
-            "text": "Zelfstandige stukjes UI. Hier bijna leeg: Angular-componenten dragen hun eigen ingekapselde stijlen."
-          },
-          "elements": {
-            "name": "Elements",
-            "text": "Kale HTML-elementen zonder class: <code>html</code>, <code>body</code>, de scrollbalk."
-          },
-          "objects": {
-            "name": "Objects",
-            "text": "Layoutpatronen die schikken in plaats van versieren, gedeeld door elke pagina."
-          },
-          "patterns": {
-            "name": "Patterns",
-            "text": "Componenten die te specifiek zijn om te hergebruiken, zoals één bepaalde header."
-          },
-          "scopes": {
-            "name": "Scopes",
-            "text": "Extra specificiteit voor één context, zoals <code>.c-accordion.s-homepage</code>. Bewust bijna leeg gehouden."
-          },
-          "settings": {
-            "name": "Settings",
-            "text": "Variabelen en fontdefinities: typografie, witruimte, breakpoints en het Icomoon-font."
-          },
-          "tools": {
-            "name": "Tools",
-            "text": "Mixins en functies. Ze geven geen CSS tot een andere laag ze gebruikt."
-          },
-          "utilities": {
-            "name": "Utilities",
-            "text": "Hulpklassen met één doel die altijd winnen, de enige laag waar <code>!important</code> mag, zoals de toegankelijkheids- en fontklassen."
-          },
-          "vendors": {
-            "name": "Vendors",
-            "text": "Stijlen van derden, hoog in de stapel zodat de lagen eronder ze kunnen overschrijven: het Angular Material-thema, de paletten en overrides."
-          }
-        }
+        "layer-names": "Settings||Tools||Vendors||Elements||Objects||Components||Patterns||Scopes||Utilities",
+        "layer-texts": "Variabelen en fontdefinities: typografie, witruimte, breakpoints en het Icomoon-font.||Mixins en functies. Ze geven geen CSS tot een andere laag ze gebruikt.||Stijlen van derden, hoog in de stapel zodat de lagen eronder ze kunnen overschrijven: het Angular Material-thema, de paletten en overrides.||Kale HTML-elementen zonder class: <code>html</code>, <code>body</code>, de scrollbalk.||Layoutpatronen die schikken in plaats van versieren, gedeeld door elke pagina.||Zelfstandige stukjes UI. Hier bijna leeg: Angular-componenten dragen hun eigen ingekapselde stijlen.||Componenten die te specifiek zijn om te hergebruiken, zoals één bepaalde header.||Extra specificiteit voor één context, zoals <code>.c-accordion.s-homepage</code>. Bewust bijna leeg gehouden.||Hulpklassen met één doel die altijd winnen, de enige laag waar <code>!important</code> mag, zoals de toegankelijkheids- en fontklassen."
       },
       "state": {
         "devtools": {
           "alt": "Tijdelijke afbeelding voor een screenshot van de Redux DevTools-browserextensie"
         },
         "intro": "Elke data-access-library heeft een <strong>NgRx Signal Store</strong>: het Redux-idee van één alleen-lezen bron van waarheid, gebouwd op Angular-signals in plaats van actions en reducers. Componenten halen zelf nooit data op.",
-        "step": {
-          "component": "De pagina leest de signals, en Angular werkt alleen bij wat veranderd is.",
-          "service": "Een service laadt de data met <code>httpResource</code> en zet de API-types om naar frontend-types.",
-          "store": "De store bewaart ze als state (<code>withLinkedState</code>), zodat ze in de Redux DevTools verschijnen, en voegt enkele methodes toe (<code>withMethods</code>)."
-        },
+        "steps": "Een service laadt de data met <code>httpResource</code> en zet de API-types om naar frontend-types.||De store bewaart ze als state (<code>withLinkedState</code>), zodat ze in de Redux DevTools verschijnen, en voegt enkele methodes toe (<code>withMethods</code>).||De pagina leest de signals, en Angular werkt alleen bij wat veranderd is.",
         "stores": "De stores"
       }
     },
     "heading": {
-      "ai-assistant": "AI-assistent",
-      "architecture": "Architectuur",
-      "code-coverage": "code coverage",
-      "contact": "Contact",
-      "education": "Opleiding",
-      "end-to-end-tests": "End-to-end tests",
-      "experience": "ervaring",
-      "feature-toggles": "Feature toggles",
-      "foundations": "Fundamenten",
-      "graphql-docs": "graphql docs",
-      "lighthouse": "Lighthouse",
-      "micro-frontends": "Micro-frontends",
-      "personal": "persoonlijk",
-      "project-graph": "Projectgraaf",
-      "references": "Referenties",
-      "service-status": "Servicestatus",
-      "skills": "Vaardigheden",
-      "versions": "versies"
+      "contact": "Contact"
     },
     "home": {
       "about-me": "Meer over mij",
@@ -409,7 +339,6 @@
       "french": "Frans",
       "german": "Duits",
       "greek": "Grieks",
-      "hindi": "Hindi",
       "italian": "Italiaans",
       "native": "Moedertaal",
       "norwegian": "Noors",
@@ -428,7 +357,6 @@
         "message": "Getest op {date} met Lighthouse {version}"
       },
       "category": {
-        "accessibility": "Toegankelijkheid",
         "best-practices": "Praktische tips",
         "performance": "Prestaties",
         "seo": "SEO"
@@ -447,12 +375,7 @@
         "angular-library": "Angular-bibliotheek",
         "demo": "Mijn npm-package van www.npmjs.com",
         "intro": "De omgekeerde aanpak, ter vergelijking: de component zit in deze app in plaats van geladen te worden vanuit een andere deployment.",
-        "step": {
-          "bundle": "Deze app installeert het en bundelt het tijdens de build, dus tijdens runtime wordt niets geladen.",
-          "element": "Het is ook beschikbaar als webcomponent <code><mac-window></code> (<code>@axel-pauwels/mac-window/element</code>), voor elk framework.",
-          "publish": "Het wordt op npm gepubliceerd als <code>@axel-pauwels/mac-window</code>.",
-          "source": "<code>MacWindow</code> staat in deze repository, in <code>packages/mac-window</code>."
-        },
+        "steps": "<code>MacWindow</code> staat in deze repository, in <code>packages/mac-window</code>.||Het wordt op npm gepubliceerd als <code>@axel-pauwels/mac-window</code>.||Deze app installeert het en bundelt het tijdens de build, dus tijdens runtime wordt niets geladen.||Het is ook beschikbaar als webcomponent <code><mac-window></code> (<code>@axel-pauwels/mac-window/element</code>), voor elk framework.",
         "subtitle": "Gebundeld tijdens de build, vanuit deze repository",
         "title": "Componentenbibliotheek: <lib-mac-window>",
         "view-npm": "Bekijk op npmjs",
@@ -463,12 +386,7 @@
         "open-api-docs": "Remote API docs",
         "open-remote": "Remote app",
         "separate-deployment": "Aparte deployment",
-        "step": {
-          "load": "Hier roept <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) <code>loadRemoteModule('cv-mfe', './web-components')</code> aan.",
-          "manifest": "Bij het opstarten leest <code>initFederation()</code> het bestand <code>federation.manifest.json</code>, dat de naam <code>cv-mfe</code> koppelt aan de <code>remoteEntry.json</code> van de remote.",
-          "register": "Die module registreert het custom element <code><cv-mfe></code> (Angular Elements) en de wrapper voegt het toe aan de pagina.",
-          "shared": "Angular en RxJS worden als singletons gedeeld met deze app (Native Federation), dus ze worden maar één keer gedownload."
-        },
+        "steps": "Bij het opstarten leest <code>initFederation()</code> het bestand <code>federation.manifest.json</code>, dat de naam <code>cv-mfe</code> koppelt aan de <code>remoteEntry.json</code> van de remote.||Hier roept <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) <code>loadRemoteModule('cv-mfe', './web-components')</code> aan.||Die module registreert het custom element <code><cv-mfe></code> (Angular Elements) en de wrapper voegt het toe aan de pagina.||Angular en RxJS worden als singletons gedeeld met deze app (Native Federation), dus ze worden maar één keer gedownload.",
         "subtitle": "Geladen tijdens runtime, vanuit een eigen deployment",
         "title": "Micro-frontend: <cv-mfe>"
       }
@@ -478,6 +396,7 @@
       "architecture": "Architectuur",
       "back-to-top": "Terug naar boven",
       "code-coverage": "code coverage",
+      "compodoc": "Compodoc",
       "cv": "CV",
       "cv-navigation": "CV-navigatie",
       "education": "Opleiding",
@@ -496,10 +415,12 @@
       "personal": "Persoonlijk",
       "project-graph": "Projectgraaf",
       "references": "Referenties",
+      "release-flow": "Releaseflow",
       "service-status": "Servicestatus",
       "showcase": "Showcase",
       "showcase-navigation": "Showcase-navigatie",
       "skills": "Vaardigheden",
+      "skip-to-content": "Naar de inhoud",
       "technical": "Technisch",
       "technical-navigation": "Technische navigatie",
       "versions": "Versies"
@@ -561,6 +482,39 @@
         "team-lead-lead-front-end-developer": "Teamleader & lead front-end developer"
       }
     },
+    "release-flow": {
+      "branch": {
+        "steps": "Het maakt <code>release/x.y.z</code> van de groene commit, met één commit die de versie in <code>package.json</code> en <code>package-lock.json</code> zet.||Voor het pushen controleert het dat beide bestanden de nieuwe versie hebben en dat er niets anders veranderd is.||Het opent de pull request naar <code>main</code>, waar GitHub de branchnaam, de versie en CI controleert en een preview uitrolt.||Fixes die later opduiken gaan op <code>develop</code>; het opent een pull request van <code>develop</code> naar de releasebranch, zodat ik ze eerst kan nakijken.",
+        "subtitle": "Eén versie, overal",
+        "title": "Releasebranch en pull request"
+      },
+      "intro": {
+        "rules": "Als iets onduidelijk is, zoals een mergeconflict of een falende check zonder duidelijke oorzaak, stopt het en vraagt het in plaats van te gokken.||De beslissingen blijven bij mij: het kiest nooit de versie, merget nooit een pull request en pusht nooit naar <code>main</code>.||Het volgt dezelfde regels als mijn releasescript en de checks op GitHub, dus elke stap werkt ook nog met de hand.",
+        "subtitle": "Instructies in gewone taal, mee in de repository",
+        "text": "Mijn releaseproces staat beschreven als een <strong>Claude Code-skill</strong>: een bestand in deze repository (<code>.claude/skills/release-flow/SKILL.md</code>) dat Claude stap voor stap vertelt hoe deze site gereleaset wordt. Ik zeg \"push develop\", \"release\" of \"de release is gemerged\", en Claude doet het werk met git en de GitHub CLI.",
+        "title": "Een Claude Code-skill doet mijn releases",
+        "view-guide": "Lees de handleiding",
+        "view-skill": "Bekijk de skill"
+      },
+      "merge": {
+        "steps": "Ik merge de release-pull request zelf, met een mergecommit.||GitHub Actions tagt de mergecommit <code>x.y.z</code>, maakt de GitHub-release en zet de site live.||Claude controleert dat de tag, de GitHub-release en de versie op <code>main</code> overeenkomen.||Het haalt <code>main</code> lokaal binnen en merget die in <code>develop</code>, zodat de volgende release vertrekt van de gereleasete versie. Voor het pushen vraagt het eerst.",
+        "subtitle": "Weer gelijk, ook lokaal",
+        "title": "Mergen, taggen en bijwerken"
+      },
+      "push": {
+        "steps": "Het pusht <code>develop</code> zoals het is en slaat de releasevraag van de pre-push-hook over.||Het volgt de GitHub Actions-run: opmaak, lint, unittests, build, typecheck en end-to-endtests.||Faalt een check, dan leest het de log, reproduceert het de fout lokaal met Nx, herstelt het die op <code>develop</code>, commit het en pusht het opnieuw.||Na drie rondes die nog rood zijn, of bij problemen buiten de code (secrets, runners, storingen), stopt het en meldt het wat het geprobeerd heeft.",
+        "subtitle": "Tot elke check groen is",
+        "title": "Develop pushen en herstellen"
+      },
+      "semver": "Semantic versioning",
+      "version": {
+        "bumps": "<strong>Major</strong>: brekend voor bezoekers, zoals een nieuw ontwerp of verwijderde pagina's en links.||<strong>Minor</strong>: iets nieuws en zichtbaars, zoals een pagina, een sectie of een taal.||<strong>Patch</strong>: alleen fixes en verbeteringen die niemand ziet.",
+        "intro": "Het vergelijkt <code>develop</code> met de laatste releasetag, zowel de commitberichten als de echte wijzigingen, en raadt een versie aan:",
+        "nothing": "Het stelt alleen voor; ik kies. Is er niets zichtbaars veranderd, dan zegt het dat en vraagt het of een release de moeite waard is.",
+        "subtitle": "major.minor.patch",
+        "title": "De versie kiezen"
+      }
+    },
     "service-status": {
       "category": {
         "api": "API’s",
@@ -587,9 +541,9 @@
         "timeout": "Geen antwoord op tijd",
         "unreachable": "Onbereikbaar"
       },
-      "legend": "Status",
       "links-error": "De profiellinks konden niet geladen worden, dus ze worden niet gecontroleerd.",
       "no-response-time": "Geen responstijd",
+      "note": "De meeste websites laten andere sites hun antwoorden niet lezen. Voor die sites is alleen bekend of ze antwoorden, niet de statuscode: een ontbrekende pagina telt nog altijd als bereikbaar. Trager dan 2 seconden telt als waarschuwing, geen antwoord binnen 8 seconden als fout.",
       "recheck": "Opnieuw controleren",
       "response-time": "{ms} ms",
       "summary": {
@@ -675,27 +629,15 @@
       "start": "Start de rondleiding",
       "step": {
         "ai-assistant": {
-          "label": "AI-assistent",
-          "text": "Benieuwd naar mijn ervaring, vaardigheden of referenties? Klik op de robot rechtsonder en mijn AI-assistent antwoordt rechtstreeks met de gegevens van deze site.",
-          "title": "Vraag het mijn AI-assistent"
-        },
-        "architecture": {
-          "label": "Architectuur",
-          "text": "Benieuwd hoe deze website gebouwd is? Het technische gedeelte legt de architectuur, de projectgraaf en de gebruikte versies uit.",
-          "title": "Architectuur"
+          "text": "Benieuwd naar mijn ervaring, vaardigheden of referenties? Klik op de robot rechtsonder en mijn AI-assistent antwoordt rechtstreeks met de gegevens van deze site."
         },
         "color-scheme": {
-          "label": "Donkere modus",
-          "text": "Wissel tussen een lichte en een donkere weergave. Standaard volgt de website de instelling van je toestel.",
           "title": "Lichte en donkere modus"
         },
         "contact": {
-          "label": "Contact",
-          "text": "Wil je contact opnemen? Mail me of vind me op LinkedIn en GitHub via de iconen rechtsonder.",
-          "title": "Contact"
+          "text": "Wil je contact opnemen? Mail me of vind me op LinkedIn en GitHub via de iconen rechtsonder."
         },
         "cv": {
-          "label": "CV",
           "text": "Hier vind je alles over mij: persoonlijke gegevens, opleiding, ervaring, vaardigheden en referenties.",
           "title": "Mijn CV"
         },
@@ -709,39 +651,18 @@
           "text": "Bedankt voor het volgen van de rondleiding.",
           "title": "Dat was het!"
         },
-        "fonts": {
-          "label": "Lettertypes",
-          "text": "Liever een andere stijl? Wijzig hier het lettertype van de hele website.",
-          "title": "Lettertypes"
-        },
-        "home": {
-          "label": "Home",
-          "text": "Het huisje in het menu brengt je altijd terug naar deze pagina, waar je ook bent op de website.",
-          "title": "Home"
-        },
-        "languages": {
-          "label": "Talen",
-          "text": "De website is beschikbaar in het Engels, Nederlands, Frans en Spaans. Kies hier je taal.",
-          "title": "Talen"
-        },
         "settings": {
           "label": "Jouw voorkeuren",
           "text": "Stel de website eerst in zoals jij hem wilt: het kleurthema, het lettertype, toegankelijkheidsinstellingen, lichte of donkere modus en de taal. Je keuzes worden onthouden op dit toestel.",
           "title": "Voorkeuren"
         },
         "showcase": {
-          "label": "Showcase",
-          "text": "De showcase toont technieken in de praktijk, zoals micro-frontends, GraphQL-documentatie, code coverage en end-to-end tests.",
-          "title": "Showcase"
+          "text": "De showcase toont technieken in de praktijk, zoals micro-frontends, GraphQL-documentatie, code coverage en end-to-end tests."
         },
         "technical": {
-          "label": "Technisch",
-          "text": "Benieuwd hoe deze website gebouwd is? Het technische gedeelte toont de projectgraaf, de architectuur, de GraphQL-documentatie, code coverage, end-to-end tests en de gebruikte versies.",
-          "title": "Technisch"
+          "text": "Benieuwd hoe deze website gebouwd is? Het technische gedeelte toont de projectgraaf, de architectuur, de GraphQL-documentatie, code coverage, end-to-end tests en de gebruikte versies."
         },
         "themes": {
-          "label": "Thema's",
-          "text": "Kies hier een van de kleurthema's. Elk thema geeft de hele website bijpassende kleuren.",
           "title": "Kleurthema's"
         },
         "welcome": {
@@ -755,14 +676,11 @@
     "versions": {
       "category": {
         "api": "API",
-        "architecture": "Architectuur",
         "code-quality": "Codekwaliteit",
         "framework": "Framework",
         "i18n": "i18n",
-        "micro-frontends": "Micro-frontends",
         "monorepo": "Monorepo",
         "runtime": "Runtime",
-        "state": "State",
         "testing": "Testen",
         "ui": "UI"
       },

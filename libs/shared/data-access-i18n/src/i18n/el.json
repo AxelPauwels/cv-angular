@@ -19,13 +19,8 @@
       "question": "Η ερώτησή σας",
       "quota-reached": "Ο βοηθός έφτασε το δωρεάν όριο για σήμερα. Δοκιμάστε ξανά αύριο.",
       "retry": "Δοκιμάστε ξανά",
-      "send": "Αποστολή",
       "stop": "Διακοπή",
-      "suggestion": {
-        "languages": "Ποιες γλώσσες μιλάει ο Axel;",
-        "reference": "Μπορείτε να μου δώσετε μια σύσταση από την πιο πρόσφατη δουλειά του;",
-        "stack": "Ποιες τεχνολογίες χρησιμοποιεί ο Axel;"
-      },
+      "suggested-questions": "Μπορείτε να μου δώσετε μια σύσταση από την πιο πρόσφατη δουλειά του;||Ποιες τεχνολογίες χρησιμοποιεί ο Axel;||Ποιες γλώσσες μιλάει ο Axel;",
       "suggestions": "Δοκιμάστε μία από αυτές",
       "thinking": "Ο βοηθός απαντά…",
       "tool": {
@@ -87,7 +82,6 @@
       "rules": {
         "from": "Modules με tag",
         "intro": "ελέγχει κάθε import με αυτούς τους κανόνες από το <code>sheriff.config.ts</code>, στο ESLint και με το <code>sheriff verify</code>. Ένα module χρειάζεται άδεια και για τα δύο tags του: τον τομέα και το επίπεδό του.",
-        "label": "Κανόνες εξαρτήσεων",
         "none": "τίποτα: δεν εξαρτάται από κανένα άλλο module",
         "to": "μπορούν να εισάγουν"
       },
@@ -176,8 +170,7 @@
       },
       "send": "Αποστολή",
       "sending": "Αποστολή του μηνύματός σας…",
-      "sent": "Ευχαριστώ! Το μήνυμά σας στάλθηκε. Θα σας απαντήσω σύντομα.",
-      "title": "Επικοινωνία"
+      "sent": "Ευχαριστώ! Το μήνυμά σας στάλθηκε. Θα σας απαντήσω σύντομα."
     },
     "country": {
       "belgium": "Βέλγιο"
@@ -294,15 +287,9 @@
         },
         "navbar": {
           "title": "Εικονίδια γραμμής πλοήγησης"
-        },
-        "submenu": {
-          "title": "Υπομενού"
         }
       },
       "toggle": {
-        "color-scheme-switcher": {
-          "label": "Ανοιχτό και σκούρο θέμα"
-        },
         "tour-button": {
           "label": "Κουμπί ξενάγησης στην αρχική σελίδα"
         }
@@ -325,77 +312,20 @@
           "specific": "Στενή εμβέλεια, υψηλή εξειδίκευση"
         },
         "intro": "Τα global styles στο <code>apps/cv/src/styles</code> ακολουθούν το <strong>ITCSS</strong> (Inverted Triangle CSS), όπως το έμαθα στη SEM&BIO. Κάθε επίπεδο είναι ένας φάκελος, που εισάγεται με σειρά: πρώτα οι ευρείς κανόνες με χαμηλή εξειδίκευση, στο τέλος οι στενοί και συγκεκριμένοι, ώστε ένα μεταγενέστερο επίπεδο να υπερισχύει χωρίς μάχες εξειδίκευσης. Τα styles των components μένουν ενθυλακωμένα στο Angular· τα επίπεδα περιέχουν μόνο ό,τι είναι πραγματικά global.",
-        "layer": {
-          "components": {
-            "name": "Components",
-            "text": "Αυτόνομα κομμάτια διεπαφής. Σχεδόν άδειο εδώ: τα components του Angular έχουν τα δικά τους ενθυλακωμένα styles."
-          },
-          "elements": {
-            "name": "Elements",
-            "text": "Σκέτα στοιχεία HTML χωρίς class: <code>html</code>, <code>body</code>, η μπάρα κύλισης."
-          },
-          "objects": {
-            "name": "Objects",
-            "text": "Μοτίβα διάταξης που οργανώνουν αντί να διακοσμούν, κοινά σε όλες τις σελίδες."
-          },
-          "patterns": {
-            "name": "Patterns",
-            "text": "Components πολύ συγκεκριμένα για επαναχρησιμοποίηση, όπως μια συγκεκριμένη κεφαλίδα."
-          },
-          "scopes": {
-            "name": "Scopes",
-            "text": "Επιπλέον εξειδίκευση για ένα πλαίσιο, όπως <code>.c-accordion.s-homepage</code>. Σκόπιμα σχεδόν άδειο."
-          },
-          "settings": {
-            "name": "Settings",
-            "text": "Μεταβλητές και ορισμοί γραμματοσειρών: τυπογραφία, αποστάσεις, breakpoints και η γραμματοσειρά Icomoon."
-          },
-          "tools": {
-            "name": "Tools",
-            "text": "Mixins και συναρτήσεις. Δεν παράγουν CSS μέχρι να τα χρησιμοποιήσει άλλο επίπεδο."
-          },
-          "utilities": {
-            "name": "Utilities",
-            "text": "Βοηθητικές κλάσεις ενός σκοπού που πάντα υπερισχύουν, το μόνο επίπεδο όπου επιτρέπεται το <code>!important</code>, όπως οι κλάσεις προσβασιμότητας και γραμματοσειράς."
-          },
-          "vendors": {
-            "name": "Vendors",
-            "text": "Styles τρίτων, ψηλά στη στοίβα ώστε τα επόμενα επίπεδα να μπορούν να τα παρακάμψουν: το θέμα του Angular Material, οι παλέτες και οι παρακάμψεις του."
-          }
-        }
+        "layer-names": "Settings||Tools||Vendors||Elements||Objects||Components||Patterns||Scopes||Utilities",
+        "layer-texts": "Μεταβλητές και ορισμοί γραμματοσειρών: τυπογραφία, αποστάσεις, breakpoints και η γραμματοσειρά Icomoon.||Mixins και συναρτήσεις. Δεν παράγουν CSS μέχρι να τα χρησιμοποιήσει άλλο επίπεδο.||Styles τρίτων, ψηλά στη στοίβα ώστε τα επόμενα επίπεδα να μπορούν να τα παρακάμψουν: το θέμα του Angular Material, οι παλέτες και οι παρακάμψεις του.||Σκέτα στοιχεία HTML χωρίς class: <code>html</code>, <code>body</code>, η μπάρα κύλισης.||Μοτίβα διάταξης που οργανώνουν αντί να διακοσμούν, κοινά σε όλες τις σελίδες.||Αυτόνομα κομμάτια διεπαφής. Σχεδόν άδειο εδώ: τα components του Angular έχουν τα δικά τους ενθυλακωμένα styles.||Components πολύ συγκεκριμένα για επαναχρησιμοποίηση, όπως μια συγκεκριμένη κεφαλίδα.||Επιπλέον εξειδίκευση για ένα πλαίσιο, όπως <code>.c-accordion.s-homepage</code>. Σκόπιμα σχεδόν άδειο.||Βοηθητικές κλάσεις ενός σκοπού που πάντα υπερισχύουν, το μόνο επίπεδο όπου επιτρέπεται το <code>!important</code>, όπως οι κλάσεις προσβασιμότητας και γραμματοσειράς."
       },
       "state": {
         "devtools": {
           "alt": "Θέση για στιγμιότυπο οθόνης της επέκτασης browser Redux DevTools"
         },
         "intro": "Κάθε βιβλιοθήκη data-access έχει ένα <strong>NgRx Signal Store</strong>: την ιδέα του Redux για μία πηγή αλήθειας μόνο για ανάγνωση, χτισμένη πάνω στα signals του Angular αντί για actions και reducers. Τα components δεν φέρνουν ποτέ δεδομένα μόνα τους.",
-        "step": {
-          "component": "Η σελίδα διαβάζει τα signals και το Angular ενημερώνει μόνο ό,τι άλλαξε.",
-          "service": "Ένα service φορτώνει τα δεδομένα με <code>httpResource</code> και μετατρέπει τους τύπους του API σε τύπους frontend.",
-          "store": "Το store τα κρατά ως state (<code>withLinkedState</code>), ώστε να φαίνονται στα Redux DevTools, και προσθέτει μερικές μεθόδους (<code>withMethods</code>)."
-        },
+        "steps": "Ένα service φορτώνει τα δεδομένα με <code>httpResource</code> και μετατρέπει τους τύπους του API σε τύπους frontend.||Το store τα κρατά ως state (<code>withLinkedState</code>), ώστε να φαίνονται στα Redux DevTools, και προσθέτει μερικές μεθόδους (<code>withMethods</code>).||Η σελίδα διαβάζει τα signals και το Angular ενημερώνει μόνο ό,τι άλλαξε.",
         "stores": "Τα stores"
       }
     },
     "heading": {
-      "ai-assistant": "Βοηθός AI",
-      "architecture": "Αρχιτεκτονική",
-      "code-coverage": "κάλυψη κώδικα",
-      "contact": "Επικοινωνία",
-      "education": "Εκπαίδευση",
-      "end-to-end-tests": "Τεστ end-to-end",
-      "experience": "εμπειρία",
-      "feature-toggles": "Διακόπτες λειτουργιών",
-      "foundations": "Θεμέλια",
-      "graphql-docs": "graphql docs",
-      "lighthouse": "Lighthouse",
-      "micro-frontends": "Micro-frontends",
-      "personal": "προσωπικά",
-      "project-graph": "Γράφημα έργων",
-      "references": "Συστάσεις",
-      "service-status": "Κατάσταση υπηρεσιών",
-      "skills": "δεξιότητες",
-      "versions": "Εκδόσεις"
+      "contact": "Επικοινωνία"
     },
     "home": {
       "about-me": "Περισσότερα για μένα",
@@ -409,7 +339,6 @@
       "french": "Γαλλικά",
       "german": "Γερμανικά",
       "greek": "Ελληνικά",
-      "hindi": "Χίντι",
       "italian": "Ιταλικά",
       "native": "Μητρική",
       "norwegian": "Νορβηγικά",
@@ -428,7 +357,6 @@
         "message": "Έλεγχος στις {date} με Lighthouse {version}"
       },
       "category": {
-        "accessibility": "Προσβασιμότητα",
         "best-practices": "Βέλτιστες πρακτικές",
         "performance": "Απόδοση",
         "seo": "SEO"
@@ -447,12 +375,7 @@
         "angular-library": "Βιβλιοθήκη Angular",
         "demo": "Το πακέτο npm μου από το www.npmjs.com",
         "intro": "Η αντίθετη προσέγγιση, για σύγκριση: το component έρχεται μαζί με αυτή την εφαρμογή αντί να φορτώνεται από άλλο deployment.",
-        "step": {
-          "bundle": "Αυτή η εφαρμογή το εγκαθιστά και το πακετάρει κατά το build, οπότε τίποτα δεν φορτώνεται κατά την εκτέλεση.",
-          "element": "Διατίθεται επίσης ως web component <code><mac-window></code> (<code>@axel-pauwels/mac-window/element</code>), για οποιοδήποτε framework.",
-          "publish": "Δημοσιεύεται στο npm ως <code>@axel-pauwels/mac-window</code>.",
-          "source": "Το <code>MacWindow</code> βρίσκεται σε αυτό το repository, στο <code>packages/mac-window</code>."
-        },
+        "steps": "Το <code>MacWindow</code> βρίσκεται σε αυτό το repository, στο <code>packages/mac-window</code>.||Δημοσιεύεται στο npm ως <code>@axel-pauwels/mac-window</code>.||Αυτή η εφαρμογή το εγκαθιστά και το πακετάρει κατά το build, οπότε τίποτα δεν φορτώνεται κατά την εκτέλεση.||Διατίθεται επίσης ως web component <code><mac-window></code> (<code>@axel-pauwels/mac-window/element</code>), για οποιοδήποτε framework.",
         "subtitle": "Πακεταρισμένο κατά το build, από αυτό το repository",
         "title": "Βιβλιοθήκη components: <lib-mac-window>",
         "view-npm": "Προβολή στο npmjs",
@@ -463,12 +386,7 @@
         "open-api-docs": "Τεκμηρίωση API του remote",
         "open-remote": "Εφαρμογή remote",
         "separate-deployment": "Ξεχωριστό deployment",
-        "step": {
-          "load": "Εδώ, το <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) καλεί το <code>loadRemoteModule('cv-mfe', './web-components')</code>.",
-          "manifest": "Κατά την εκκίνηση, το <code>initFederation()</code> διαβάζει το <code>federation.manifest.json</code>, που αντιστοιχίζει το όνομα <code>cv-mfe</code> στο <code>remoteEntry.json</code> του remote.",
-          "register": "Αυτό το module καταχωρεί το custom element <code><cv-mfe></code> (Angular Elements) και το wrapper το προσθέτει στη σελίδα.",
-          "shared": "Το Angular και το RxJS μοιράζονται με αυτή την εφαρμογή ως singletons (Native Federation), οπότε κατεβαίνουν μόνο μία φορά."
-        },
+        "steps": "Κατά την εκκίνηση, το <code>initFederation()</code> διαβάζει το <code>federation.manifest.json</code>, που αντιστοιχίζει το όνομα <code>cv-mfe</code> στο <code>remoteEntry.json</code> του remote.||Εδώ, το <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) καλεί το <code>loadRemoteModule('cv-mfe', './web-components')</code>.||Αυτό το module καταχωρεί το custom element <code><cv-mfe></code> (Angular Elements) και το wrapper το προσθέτει στη σελίδα.||Το Angular και το RxJS μοιράζονται με αυτή την εφαρμογή ως singletons (Native Federation), οπότε κατεβαίνουν μόνο μία φορά.",
         "subtitle": "Φορτώνεται κατά την εκτέλεση, από το δικό του deployment",
         "title": "Micro-frontend: <cv-mfe>"
       }
@@ -478,6 +396,7 @@
       "architecture": "Αρχιτεκτονική",
       "back-to-top": "Επιστροφή στην κορυφή",
       "code-coverage": "κάλυψη κώδικα",
+      "compodoc": "Compodoc",
       "cv": "Βιογραφικό",
       "cv-navigation": "Πλοήγηση βιογραφικού",
       "education": "Εκπαίδευση",
@@ -496,10 +415,12 @@
       "personal": "Προσωπικά",
       "project-graph": "Γράφημα έργων",
       "references": "Συστάσεις",
+      "release-flow": "Ροή release",
       "service-status": "Κατάσταση υπηρεσιών",
       "showcase": "Βιτρίνα",
       "showcase-navigation": "Πλοήγηση βιτρίνας",
       "skills": "Δεξιότητες",
+      "skip-to-content": "Μετάβαση στο περιεχόμενο",
       "technical": "Τεχνικά",
       "technical-navigation": "Τεχνική πλοήγηση",
       "versions": "Εκδόσεις"
@@ -561,6 +482,39 @@
         "team-lead-lead-front-end-developer": "Επικεφαλής ομάδας και επικεφαλής front-end developer"
       }
     },
+    "release-flow": {
+      "branch": {
+        "steps": "Δημιουργεί το <code>release/x.y.z</code> από το commit που πέρασε τους ελέγχους, με ένα commit που ορίζει την έκδοση στα <code>package.json</code> και <code>package-lock.json</code>.||Πριν από το push, ελέγχει ότι και τα δύο αρχεία έχουν τη νέα έκδοση και ότι δεν άλλαξε τίποτε άλλο.||Ανοίγει το pull request προς το <code>main</code>, όπου το GitHub ελέγχει το όνομα του branch, την έκδοση και το CI, και ανεβάζει μια προεπισκόπηση.||Διορθώσεις που βρίσκονται αργότερα μπαίνουν στο <code>develop</code>· ανοίγει ένα pull request από το <code>develop</code> προς το branch release, ώστε να τις ελέγξω πρώτα.",
+        "subtitle": "Μία έκδοση, παντού",
+        "title": "Branch release και pull request"
+      },
+      "intro": {
+        "rules": "Όταν κάτι δεν είναι σαφές, όπως μια σύγκρουση merge ή ένας έλεγχος που αποτυγχάνει χωρίς προφανή αιτία, σταματά και ρωτά αντί να μαντεύει.||Οι αποφάσεις μένουν δικές μου: δεν επιλέγει ποτέ την έκδοση, δεν κάνει ποτέ merge ένα pull request και δεν κάνει ποτέ push στο <code>main</code>.||Ακολουθεί τους ίδιους κανόνες με το script release μου και τους ελέγχους στο GitHub, οπότε κάθε βήμα γίνεται και με το χέρι.",
+        "subtitle": "Οδηγίες σε απλή γλώσσα, μέσα στο αποθετήριο",
+        "text": "Η διαδικασία release μου είναι γραμμένη ως <strong>skill του Claude Code</strong>: ένα αρχείο σε αυτό το αποθετήριο (<code>.claude/skills/release-flow/SKILL.md</code>) που εξηγεί στο Claude, βήμα προς βήμα, πώς δημοσιεύεται αυτός ο ιστότοπος. Λέω «push develop», «release» ή «το release έγινε merge», και το Claude κάνει τη δουλειά με το git και το GitHub CLI.",
+        "title": "Ένα skill του Claude Code κάνει τα releases μου",
+        "view-guide": "Διαβάστε τον οδηγό",
+        "view-skill": "Δείτε το skill"
+      },
+      "merge": {
+        "steps": "Κάνω εγώ το merge του pull request release, με merge commit.||Το GitHub Actions βάζει το tag <code>x.y.z</code> στο merge commit, δημιουργεί το GitHub release και ανεβάζει τον ιστότοπο live.||Το Claude ελέγχει ότι το tag, το GitHub release και η έκδοση στο <code>main</code> ταιριάζουν.||Φέρνει το <code>main</code> τοπικά και το κάνει merge στο <code>develop</code>, ώστε το επόμενο release να ξεκινά από τη δημοσιευμένη έκδοση. Ρωτά πριν κάνει push.",
+        "subtitle": "Ξανά συγχρονισμένα, και τοπικά",
+        "title": "Merge, tag και συγχρονισμός"
+      },
+      "push": {
+        "steps": "Κάνει push το <code>develop</code> όπως είναι, παρακάμπτοντας την ερώτηση release του pre-push hook.||Παρακολουθεί την εκτέλεση του GitHub Actions: μορφοποίηση, lint, unit tests, build, έλεγχο τύπων και end-to-end tests.||Όταν ένας έλεγχος αποτυγχάνει, διαβάζει το log, αναπαράγει την αποτυχία τοπικά με το Nx, τη διορθώνει στο <code>develop</code>, κάνει commit και ξανά push.||Μετά από τρεις γύρους που αποτυγχάνουν ακόμα, ή για προβλήματα εκτός κώδικα (secrets, runners, διακοπές), σταματά και αναφέρει τι δοκίμασε.",
+        "subtitle": "Μέχρι να περάσουν όλοι οι έλεγχοι",
+        "title": "Push και διόρθωση του develop"
+      },
+      "semver": "Σημασιολογική αρίθμηση εκδόσεων",
+      "version": {
+        "bumps": "<strong>Major</strong>: κάτι που χαλάει για τους επισκέπτες, όπως ένας νέος σχεδιασμός ή σελίδες και σύνδεσμοι που αφαιρέθηκαν.||<strong>Minor</strong>: κάτι νέο και ορατό, όπως μια σελίδα, μια ενότητα ή μια γλώσσα.||<strong>Patch</strong>: μόνο διορθώσεις και βελτιώσεις που δεν βλέπει κανείς.",
+        "intro": "Συγκρίνει το <code>develop</code> με το τελευταίο tag release, τόσο τα μηνύματα των commits όσο και τις πραγματικές αλλαγές, και προτείνει μια έκδοση:",
+        "nothing": "Μόνο προτείνει· επιλέγω εγώ. Όταν δεν άλλαξε τίποτα ορατό, το λέει και ρωτά αν αξίζει ένα release.",
+        "subtitle": "major.minor.patch",
+        "title": "Επιλογή έκδοσης"
+      }
+    },
     "service-status": {
       "category": {
         "api": "API",
@@ -587,9 +541,9 @@
         "timeout": "Καμία απόκριση εγκαίρως",
         "unreachable": "Μη προσβάσιμο"
       },
-      "legend": "Κατάσταση",
       "links-error": "Δεν ήταν δυνατή η φόρτωση των συνδέσμων προφίλ, επομένως δεν ελέγχονται.",
       "no-response-time": "Χωρίς χρόνο απόκρισης",
+      "note": "Οι περισσότεροι ιστότοποι δεν επιτρέπουν σε άλλους ιστότοπους να διαβάζουν τις απαντήσεις τους. Για αυτούς ξέρουμε μόνο αν απαντούν, όχι τον κωδικό κατάστασης: μια σελίδα που λείπει μετρά ακόμα ως προσβάσιμη. Πάνω από 2 δευτερόλεπτα μετρά ως προειδοποίηση, καμία απάντηση μέσα σε 8 δευτερόλεπτα ως σφάλμα.",
       "recheck": "Έλεγχος ξανά",
       "response-time": "{ms} ms",
       "summary": {
@@ -675,27 +629,15 @@
       "start": "Έναρξη ξενάγησης",
       "step": {
         "ai-assistant": {
-          "label": "Βοηθός AI",
-          "text": "Σας ενδιαφέρουν η εμπειρία, οι δεξιότητες ή οι συστάσεις μου; Κάντε κλικ στο ρομπότ κάτω δεξιά και ο βοηθός AI μου απαντά απευθείας από τα δεδομένα αυτού του ιστότοπου.",
-          "title": "Ρωτήστε τον βοηθό AI μου"
-        },
-        "architecture": {
-          "label": "Αρχιτεκτονική",
-          "text": "Αναρωτιέστε πώς είναι φτιαγμένος αυτός ο ιστότοπος; Η τεχνική ενότητα εξηγεί την αρχιτεκτονική, το γράφημα έργων και τις εκδόσεις που χρησιμοποιούνται.",
-          "title": "Αρχιτεκτονική"
+          "text": "Σας ενδιαφέρουν η εμπειρία, οι δεξιότητες ή οι συστάσεις μου; Κάντε κλικ στο ρομπότ κάτω δεξιά και ο βοηθός AI μου απαντά απευθείας από τα δεδομένα αυτού του ιστότοπου."
         },
         "color-scheme": {
-          "label": "Σκούρο θέμα",
-          "text": "Εναλλαγή ανάμεσα σε ανοιχτή και σκούρη εμφάνιση. Από προεπιλογή, ο ιστότοπος ακολουθεί τη ρύθμιση της συσκευής σας.",
           "title": "Ανοιχτό και σκούρο θέμα"
         },
         "contact": {
-          "label": "Επικοινωνία",
-          "text": "Θέλετε να επικοινωνήσετε; Στείλτε μου email ή βρείτε με στο LinkedIn και στο GitHub με τα εικονίδια κάτω δεξιά.",
-          "title": "Επικοινωνία"
+          "text": "Θέλετε να επικοινωνήσετε; Στείλτε μου email ή βρείτε με στο LinkedIn και στο GitHub με τα εικονίδια κάτω δεξιά."
         },
         "cv": {
-          "label": "Βιογραφικό",
           "text": "Εδώ θα βρείτε τα πάντα για μένα: προσωπικά στοιχεία, εκπαίδευση, εμπειρία, δεξιότητες και συστάσεις.",
           "title": "Το βιογραφικό μου"
         },
@@ -709,39 +651,18 @@
           "text": "Ευχαριστώ που κάνατε την ξενάγηση.",
           "title": "Αυτό ήταν!"
         },
-        "fonts": {
-          "label": "Γραμματοσειρές",
-          "text": "Προτιμάτε άλλο στυλ; Αλλάξτε εδώ τη γραμματοσειρά όλου του ιστότοπου.",
-          "title": "Γραμματοσειρές"
-        },
-        "home": {
-          "label": "Αρχική",
-          "text": "Το εικονίδιο του σπιτιού στο μενού σας φέρνει πάντα πίσω σε αυτή τη σελίδα, όπου κι αν βρίσκεστε στον ιστότοπο.",
-          "title": "Αρχική"
-        },
-        "languages": {
-          "label": "Γλώσσες",
-          "text": "Ο ιστότοπος είναι διαθέσιμος στα αγγλικά, ολλανδικά, γαλλικά, ισπανικά, νορβηγικά, ελληνικά και χίντι. Επιλέξτε τη γλώσσα σας εδώ.",
-          "title": "Γλώσσες"
-        },
         "settings": {
           "label": "Οι προτιμήσεις σας",
           "text": "Ρυθμίστε πρώτα τον ιστότοπο όπως σας αρέσει: το χρωματικό θέμα, τη γραμματοσειρά, τις ρυθμίσεις προσβασιμότητας, ανοιχτό ή σκούρο θέμα και τη γλώσσα. Οι επιλογές σας αποθηκεύονται σε αυτή τη συσκευή.",
           "title": "Προτιμήσεις"
         },
         "showcase": {
-          "label": "Βιτρίνα",
-          "text": "Η βιτρίνα δείχνει τεχνικές στην πράξη, όπως micro-frontends, τεκμηρίωση GraphQL, κάλυψη κώδικα και τεστ end-to-end.",
-          "title": "Βιτρίνα"
+          "text": "Η βιτρίνα δείχνει τεχνικές στην πράξη, όπως micro-frontends, τεκμηρίωση GraphQL, κάλυψη κώδικα και τεστ end-to-end."
         },
         "technical": {
-          "label": "Τεχνικά",
-          "text": "Αναρωτιέστε πώς είναι φτιαγμένος αυτός ο ιστότοπος; Η τεχνική ενότητα δείχνει το γράφημα έργων, την αρχιτεκτονική, την τεκμηρίωση GraphQL, την κάλυψη κώδικα, τα τεστ end-to-end και τις εκδόσεις που χρησιμοποιούνται.",
-          "title": "Τεχνικά"
+          "text": "Αναρωτιέστε πώς είναι φτιαγμένος αυτός ο ιστότοπος; Η τεχνική ενότητα δείχνει το γράφημα έργων, την αρχιτεκτονική, την τεκμηρίωση GraphQL, την κάλυψη κώδικα, τα τεστ end-to-end και τις εκδόσεις που χρησιμοποιούνται."
         },
         "themes": {
-          "label": "Θέματα",
-          "text": "Επιλέξτε εδώ ένα από τα χρωματικά θέματα. Κάθε θέμα φέρνει ταιριαστά χρώματα σε όλο τον ιστότοπο.",
           "title": "Χρωματικά θέματα"
         },
         "welcome": {
@@ -755,14 +676,11 @@
     "versions": {
       "category": {
         "api": "API",
-        "architecture": "Αρχιτεκτονική",
         "code-quality": "Ποιότητα κώδικα",
         "framework": "Framework",
         "i18n": "i18n",
-        "micro-frontends": "Micro-frontends",
         "monorepo": "Monorepo",
         "runtime": "Περιβάλλον εκτέλεσης",
-        "state": "State",
         "testing": "Testing",
         "ui": "UI"
       },

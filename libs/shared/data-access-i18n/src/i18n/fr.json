@@ -19,13 +19,8 @@
       "question": "Votre question",
       "quota-reached": "L'assistant a atteint sa limite gratuite pour aujourd'hui. Veuillez réessayer demain.",
       "retry": "Réessayer",
-      "send": "Envoyer",
       "stop": "Arrêter",
-      "suggestion": {
-        "languages": "Quelles langues Axel parle-t-il ?",
-        "reference": "Pouvez-vous me donner une référence de son dernier emploi ?",
-        "stack": "Quelles technologies Axel utilise-t-il ?"
-      },
+      "suggested-questions": "Pouvez-vous me donner une référence de son dernier emploi ?||Quelles technologies Axel utilise-t-il ?||Quelles langues Axel parle-t-il ?",
       "suggestions": "Essayez l'une de ces questions",
       "thinking": "L'assistant répond…",
       "tool": {
@@ -87,7 +82,6 @@
       "rules": {
         "from": "Modules avec le tag",
         "intro": "vérifie chaque import selon ces règles de <code>sheriff.config.ts</code>, dans ESLint et avec <code>sheriff verify</code>. Un module doit être autorisé pour ses deux tags : son domaine et sa couche.",
-        "label": "Règles de dépendance",
         "none": "rien : il ne dépend d’aucun autre module",
         "to": "peuvent importer"
       },
@@ -176,8 +170,7 @@
       },
       "send": "Envoyer",
       "sending": "Envoi de votre message…",
-      "sent": "Merci ! Votre message a été envoyé. Je vous répondrai rapidement.",
-      "title": "Contact"
+      "sent": "Merci ! Votre message a été envoyé. Je vous répondrai rapidement."
     },
     "country": {
       "belgium": "Belgique"
@@ -294,15 +287,9 @@
         },
         "navbar": {
           "title": "Icônes de la barre de navigation"
-        },
-        "submenu": {
-          "title": "Sous-menu"
         }
       },
       "toggle": {
-        "color-scheme-switcher": {
-          "label": "Mode clair et sombre"
-        },
         "tour-button": {
           "label": "Bouton de visite sur la page d’accueil"
         }
@@ -325,77 +312,20 @@
           "specific": "Portée étroite, forte spécificité"
         },
         "intro": "Les styles globaux dans <code>apps/cv/src/styles</code> suivent <strong>ITCSS</strong> (Inverted Triangle CSS), tel que je l’ai appris chez SEM&BIO. Chaque couche est un dossier, importé dans l’ordre : d’abord les règles larges à faible spécificité, puis les règles étroites et spécifiques, pour qu’une couche suivante l’emporte sans guerre de spécificité. Les styles des composants restent encapsulés dans Angular ; les couches ne contiennent que ce qui est vraiment global.",
-        "layer": {
-          "components": {
-            "name": "Components",
-            "text": "Éléments d’interface autonomes. Presque vide ici : les composants Angular portent leurs propres styles encapsulés."
-          },
-          "elements": {
-            "name": "Elements",
-            "text": "Éléments HTML nus, sans classe : <code>html</code>, <code>body</code>, la barre de défilement."
-          },
-          "objects": {
-            "name": "Objects",
-            "text": "Motifs de mise en page qui disposent plutôt qu’ils ne décorent, partagés par toutes les pages."
-          },
-          "patterns": {
-            "name": "Patterns",
-            "text": "Composants trop spécifiques pour être réutilisés, comme un en-tête particulier."
-          },
-          "scopes": {
-            "name": "Scopes",
-            "text": "Une spécificité supplémentaire pour un seul contexte, comme <code>.c-accordion.s-homepage</code>. Volontairement presque vide."
-          },
-          "settings": {
-            "name": "Settings",
-            "text": "Variables et définitions de polices : typographie, espacements, breakpoints et la police Icomoon."
-          },
-          "tools": {
-            "name": "Tools",
-            "text": "Mixins et fonctions. Ils ne produisent aucun CSS tant qu’une autre couche ne les utilise pas."
-          },
-          "utilities": {
-            "name": "Utilities",
-            "text": "Classes utilitaires à usage unique qui l’emportent toujours, la seule couche où <code>!important</code> est permis, comme les classes d’accessibilité et de police."
-          },
-          "vendors": {
-            "name": "Vendors",
-            "text": "Styles tiers, placés haut dans la pile pour que les couches suivantes puissent les surcharger : le thème Angular Material, ses palettes et ses surcharges."
-          }
-        }
+        "layer-names": "Settings||Tools||Vendors||Elements||Objects||Components||Patterns||Scopes||Utilities",
+        "layer-texts": "Variables et définitions de polices : typographie, espacements, breakpoints et la police Icomoon.||Mixins et fonctions. Ils ne produisent aucun CSS tant qu’une autre couche ne les utilise pas.||Styles tiers, placés haut dans la pile pour que les couches suivantes puissent les surcharger : le thème Angular Material, ses palettes et ses surcharges.||Éléments HTML nus, sans classe : <code>html</code>, <code>body</code>, la barre de défilement.||Motifs de mise en page qui disposent plutôt qu’ils ne décorent, partagés par toutes les pages.||Éléments d’interface autonomes. Presque vide ici : les composants Angular portent leurs propres styles encapsulés.||Composants trop spécifiques pour être réutilisés, comme un en-tête particulier.||Une spécificité supplémentaire pour un seul contexte, comme <code>.c-accordion.s-homepage</code>. Volontairement presque vide.||Classes utilitaires à usage unique qui l’emportent toujours, la seule couche où <code>!important</code> est permis, comme les classes d’accessibilité et de police."
       },
       "state": {
         "devtools": {
           "alt": "Image provisoire pour une capture d’écran de l’extension de navigateur Redux DevTools"
         },
         "intro": "Chaque bibliothèque data-access possède un <strong>NgRx Signal Store</strong> : l’idée de Redux d’une source de vérité unique en lecture seule, construite sur les signals d’Angular au lieu d’actions et de reducers. Les composants ne récupèrent jamais les données eux-mêmes.",
-        "step": {
-          "component": "La page lit les signals, et Angular ne met à jour que ce qui a changé.",
-          "service": "Un service charge les données avec <code>httpResource</code> et convertit les types de l’API en types frontend.",
-          "store": "Le store les garde comme state (<code>withLinkedState</code>), visible dans les Redux DevTools, et ajoute quelques méthodes (<code>withMethods</code>)."
-        },
+        "steps": "Un service charge les données avec <code>httpResource</code> et convertit les types de l’API en types frontend.||Le store les garde comme state (<code>withLinkedState</code>), visible dans les Redux DevTools, et ajoute quelques méthodes (<code>withMethods</code>).||La page lit les signals, et Angular ne met à jour que ce qui a changé.",
         "stores": "Les stores"
       }
     },
     "heading": {
-      "ai-assistant": "Assistant IA",
-      "architecture": "Architecture",
-      "code-coverage": "couverture du code",
-      "contact": "Contact",
-      "education": "Formation",
-      "end-to-end-tests": "Tests de bout en bout",
-      "experience": "Expérience",
-      "feature-toggles": "Caractéristiques",
-      "foundations": "Fondations",
-      "graphql-docs": "graphql docs",
-      "lighthouse": "Lighthouse",
-      "micro-frontends": "Micro-frontends",
-      "personal": "personnel",
-      "project-graph": "Graphe des projets",
-      "references": "références",
-      "service-status": "État des services",
-      "skills": "Compétences",
-      "versions": "versions"
+      "contact": "Contact"
     },
     "home": {
       "about-me": "En savoir plus sur moi",
@@ -409,7 +339,6 @@
       "french": "Français",
       "german": "Allemand",
       "greek": "Grec",
-      "hindi": "Hindi",
       "italian": "Italien",
       "native": "Langue maternelle",
       "norwegian": "Norvégien",
@@ -428,7 +357,6 @@
         "message": "Audité le {date} avec Lighthouse {version}"
       },
       "category": {
-        "accessibility": "Accessibilité",
         "best-practices": "Bonnes pratiques",
         "performance": "Performances",
         "seo": "SEO"
@@ -447,12 +375,7 @@
         "angular-library": "Bibliothèque Angular",
         "demo": "Mon package npm sur www.npmjs.com",
         "intro": "L’approche inverse, pour comparer : le composant est livré avec cette application au lieu d’être chargé depuis un autre déploiement.",
-        "step": {
-          "bundle": "Cette application l’installe et l’intègre au build : rien n’est chargé à l’exécution.",
-          "element": "Il existe aussi en web component <code><mac-window></code> (<code>@axel-pauwels/mac-window/element</code>), pour n’importe quel framework.",
-          "publish": "Il est publié sur npm sous le nom <code>@axel-pauwels/mac-window</code>.",
-          "source": "<code>MacWindow</code> se trouve dans ce dépôt, dans <code>packages/mac-window</code>."
-        },
+        "steps": "<code>MacWindow</code> se trouve dans ce dépôt, dans <code>packages/mac-window</code>.||Il est publié sur npm sous le nom <code>@axel-pauwels/mac-window</code>.||Cette application l’installe et l’intègre au build : rien n’est chargé à l’exécution.||Il existe aussi en web component <code><mac-window></code> (<code>@axel-pauwels/mac-window/element</code>), pour n’importe quel framework.",
         "subtitle": "Intégrée au build, depuis ce dépôt",
         "title": "Bibliothèque de composants : <lib-mac-window>",
         "view-npm": "Voir sur npmjs",
@@ -463,12 +386,7 @@
         "open-api-docs": "Docs de l’API remote",
         "open-remote": "App remote",
         "separate-deployment": "Déploiement séparé",
-        "step": {
-          "load": "Ici, <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) appelle <code>loadRemoteModule('cv-mfe', './web-components')</code>.",
-          "manifest": "Au démarrage, <code>initFederation()</code> lit <code>federation.manifest.json</code>, qui associe le nom <code>cv-mfe</code> au <code>remoteEntry.json</code> du remote.",
-          "register": "Ce module enregistre l’élément personnalisé <code><cv-mfe></code> (Angular Elements), et le wrapper l’ajoute à la page.",
-          "shared": "Angular et RxJS sont partagés avec cette application comme singletons (Native Federation) : ils ne sont téléchargés qu’une fois."
-        },
+        "steps": "Au démarrage, <code>initFederation()</code> lit <code>federation.manifest.json</code>, qui associe le nom <code>cv-mfe</code> au <code>remoteEntry.json</code> du remote.||Ici, <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) appelle <code>loadRemoteModule('cv-mfe', './web-components')</code>.||Ce module enregistre l’élément personnalisé <code><cv-mfe></code> (Angular Elements), et le wrapper l’ajoute à la page.||Angular et RxJS sont partagés avec cette application comme singletons (Native Federation) : ils ne sont téléchargés qu’une fois.",
         "subtitle": "Chargé à l’exécution, depuis son propre déploiement",
         "title": "Micro-frontend : <cv-mfe>"
       }
@@ -478,6 +396,7 @@
       "architecture": "Architecture",
       "back-to-top": "Retour en haut",
       "code-coverage": "couverture du code",
+      "compodoc": "Compodoc",
       "cv": "CV",
       "cv-navigation": "Navigation du CV",
       "education": "Formation",
@@ -496,10 +415,12 @@
       "personal": "Personnelles",
       "project-graph": "Graphe des projets",
       "references": "Références",
+      "release-flow": "Flux de release",
       "service-status": "État des services",
       "showcase": "Vitrine",
       "showcase-navigation": "Navigation de la vitrine",
       "skills": "Compétences",
+      "skip-to-content": "Aller au contenu",
       "technical": "Technique",
       "technical-navigation": "Navigation technique",
       "versions": "Versions"
@@ -561,6 +482,39 @@
         "team-lead-lead-front-end-developer": "Chef d’équipe et développeur front-end principal"
       }
     },
+    "release-flow": {
+      "branch": {
+        "steps": "Elle crée <code>release/x.y.z</code> à partir du commit vert, avec un commit qui met la version dans <code>package.json</code> et <code>package-lock.json</code>.||Avant de pousser, elle vérifie que les deux fichiers portent la nouvelle version et que rien d'autre n'a changé.||Elle ouvre la pull request vers <code>main</code>, où GitHub vérifie le nom de la branche, la version et la CI, et déploie un aperçu.||Les corrections trouvées plus tard vont sur <code>develop</code> ; elle ouvre une pull request de <code>develop</code> vers la branche de release pour que je puisse les relire d'abord.",
+        "subtitle": "Une seule version, partout",
+        "title": "Branche de release et pull request"
+      },
+      "intro": {
+        "rules": "Quand quelque chose n'est pas clair, comme un conflit de merge ou une vérification qui échoue sans cause évidente, elle s'arrête et demande au lieu de deviner.||Les décisions restent les miennes : elle ne choisit jamais la version, ne merge jamais une pull request et ne pousse jamais sur <code>main</code>.||Elle suit les mêmes règles que mon script de release et les vérifications sur GitHub, donc chaque étape fonctionne aussi à la main.",
+        "subtitle": "Des instructions en langage courant, versionnées dans le dépôt",
+        "text": "Mon processus de release est décrit sous forme de <strong>skill Claude Code</strong> : un fichier de ce dépôt (<code>.claude/skills/release-flow/SKILL.md</code>) qui explique à Claude, étape par étape, comment ce site est publié. Je dis « push develop », « release » ou « la release est mergée », et Claude fait le travail avec git et la CLI GitHub.",
+        "title": "Une skill Claude Code gère mes releases",
+        "view-guide": "Lire le guide",
+        "view-skill": "Voir la skill"
+      },
+      "merge": {
+        "steps": "Je merge moi-même la pull request de release, avec un commit de merge.||GitHub Actions tague le commit de merge <code>x.y.z</code>, crée la release GitHub et met le site en ligne.||Claude vérifie que le tag, la release GitHub et la version sur <code>main</code> correspondent.||Elle récupère <code>main</code> en local et la merge dans <code>develop</code>, pour que la prochaine release parte de la version publiée. Elle demande avant de pousser.",
+        "subtitle": "De nouveau alignés, en local aussi",
+        "title": "Merger, taguer et synchroniser"
+      },
+      "push": {
+        "steps": "Elle pousse <code>develop</code> tel quel, sans la question de release du hook pre-push.||Elle suit l'exécution GitHub Actions : formatage, lint, tests unitaires, build, vérification des types et tests de bout en bout.||Si une vérification échoue, elle lit le log, reproduit l'échec en local avec Nx, le corrige sur <code>develop</code>, commite et pousse à nouveau.||Après trois tours toujours rouges, ou pour des problèmes hors du code (secrets, runners, pannes), elle s'arrête et rapporte ce qu'elle a essayé.",
+        "subtitle": "Jusqu'à ce que tout soit vert",
+        "title": "Pousser et réparer develop"
+      },
+      "semver": "Versionnage sémantique",
+      "version": {
+        "bumps": "<strong>Majeure</strong> : un changement cassant pour les visiteurs, comme une refonte ou des pages et liens supprimés.||<strong>Mineure</strong> : quelque chose de nouveau et visible, comme une page, une section ou une langue.||<strong>Correctif</strong> : uniquement des corrections et améliorations invisibles.",
+        "intro": "Elle compare <code>develop</code> au dernier tag de release, les messages de commit comme les changements réels, et recommande une version :",
+        "nothing": "Elle propose seulement ; c'est moi qui choisis. Si rien de visible n'a changé, elle le dit et demande si une release en vaut la peine.",
+        "subtitle": "majeure.mineure.correctif",
+        "title": "Choisir la version"
+      }
+    },
     "service-status": {
       "category": {
         "api": "API",
@@ -587,9 +541,9 @@
         "timeout": "Pas de réponse à temps",
         "unreachable": "Inaccessible"
       },
-      "legend": "État",
       "links-error": "Les liens de profil n’ont pas pu être chargés, ils ne sont donc pas vérifiés.",
       "no-response-time": "Pas de temps de réponse",
+      "note": "La plupart des sites ne laissent pas d’autres sites lire leurs réponses. Pour ceux-là, on sait seulement s’ils répondent, pas le code de statut : une page manquante compte donc comme accessible. Plus lent que 2 secondes compte comme un avertissement, aucune réponse en 8 secondes comme une erreur.",
       "recheck": "Vérifier à nouveau",
       "response-time": "{ms} ms",
       "summary": {
@@ -675,27 +629,15 @@
       "start": "Commencer la visite",
       "step": {
         "ai-assistant": {
-          "label": "Assistant IA",
-          "text": "Curieux de mon expérience, mes compétences ou mes références ? Cliquez sur le robot en bas à droite : mon assistant IA répond directement à partir des données de ce site.",
-          "title": "Demandez à mon assistant IA"
-        },
-        "architecture": {
-          "label": "Architecture",
-          "text": "Curieux de savoir comment ce site est construit ? La section technique explique l'architecture, le graphe du projet et les versions utilisées.",
-          "title": "Architecture"
+          "text": "Curieux de mon expérience, mes compétences ou mes références ? Cliquez sur le robot en bas à droite : mon assistant IA répond directement à partir des données de ce site."
         },
         "color-scheme": {
-          "label": "Mode sombre",
-          "text": "Basculez entre un affichage clair et sombre. Par défaut, le site suit le réglage de votre appareil.",
           "title": "Mode clair et sombre"
         },
         "contact": {
-          "label": "Contact",
-          "text": "Envie de me contacter ? Écrivez-moi ou retrouvez-moi sur LinkedIn et GitHub grâce aux icônes en bas à droite.",
-          "title": "Contact"
+          "text": "Envie de me contacter ? Écrivez-moi ou retrouvez-moi sur LinkedIn et GitHub grâce aux icônes en bas à droite."
         },
         "cv": {
-          "label": "CV",
           "text": "Vous trouverez ici tout sur moi : données personnelles, formation, expérience, compétences et références.",
           "title": "Mon CV"
         },
@@ -709,39 +651,18 @@
           "text": "Merci d'avoir suivi la visite.",
           "title": "C'est tout !"
         },
-        "fonts": {
-          "label": "Polices",
-          "text": "Vous préférez un autre style ? Changez ici la police de tout le site.",
-          "title": "Polices"
-        },
-        "home": {
-          "label": "Accueil",
-          "text": "L'icône de la maison dans le menu vous ramène toujours à cette page, où que vous soyez sur le site.",
-          "title": "Accueil"
-        },
-        "languages": {
-          "label": "Langues",
-          "text": "Le site est disponible en anglais, néerlandais, français et espagnol. Choisissez votre langue ici.",
-          "title": "Langues"
-        },
         "settings": {
           "label": "Vos préférences",
           "text": "Commencez par régler le site à votre goût : le thème de couleur, la police, les réglages d'accessibilité, le mode clair ou sombre et la langue. Vos choix sont mémorisés sur cet appareil.",
           "title": "Préférences"
         },
         "showcase": {
-          "label": "Vitrine",
-          "text": "La vitrine montre des techniques en pratique, comme les micro-frontends, la documentation GraphQL, la couverture de code et les tests de bout en bout.",
-          "title": "Vitrine"
+          "text": "La vitrine montre des techniques en pratique, comme les micro-frontends, la documentation GraphQL, la couverture de code et les tests de bout en bout."
         },
         "technical": {
-          "label": "Technique",
-          "text": "Curieux de savoir comment ce site est construit ? La section technique présente le graphe du projet, l'architecture, la documentation GraphQL, la couverture de code, les tests de bout en bout et les versions utilisées.",
-          "title": "Technique"
+          "text": "Curieux de savoir comment ce site est construit ? La section technique présente le graphe du projet, l'architecture, la documentation GraphQL, la couverture de code, les tests de bout en bout et les versions utilisées."
         },
         "themes": {
-          "label": "Thèmes",
-          "text": "Choisissez ici l'un des thèmes de couleur. Chaque thème applique des couleurs assorties à tout le site.",
           "title": "Thèmes de couleur"
         },
         "welcome": {
@@ -755,14 +676,11 @@
     "versions": {
       "category": {
         "api": "API",
-        "architecture": "Architecture",
         "code-quality": "Qualité du code",
         "framework": "Framework",
         "i18n": "i18n",
-        "micro-frontends": "Micro-frontends",
         "monorepo": "Monorepo",
         "runtime": "Exécution",
-        "state": "État",
         "testing": "Tests",
         "ui": "Interface"
       },

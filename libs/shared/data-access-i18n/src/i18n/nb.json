@@ -19,13 +19,8 @@
       "question": "Spørsmålet ditt",
       "quota-reached": "Assistenten har nådd den gratis grensen for i dag. Prøv igjen i morgen.",
       "retry": "Prøv igjen",
-      "send": "Send",
       "stop": "Stopp",
-      "suggestion": {
-        "languages": "Hvilke språk snakker Axel?",
-        "reference": "Kan du gi meg en referanse fra hans siste jobb?",
-        "stack": "Hvilke teknologier bruker Axel?"
-      },
+      "suggested-questions": "Kan du gi meg en referanse fra hans siste jobb?||Hvilke teknologier bruker Axel?||Hvilke språk snakker Axel?",
       "suggestions": "Prøv et av disse",
       "thinking": "Assistenten svarer …",
       "tool": {
@@ -87,7 +82,6 @@
       "rules": {
         "from": "Moduler merket",
         "intro": "sjekker hver import mot disse reglene fra <code>sheriff.config.ts</code>, i ESLint og med <code>sheriff verify</code>. En modul trenger klarering for begge taggene sine: domenet og laget.",
-        "label": "Avhengighetsregler",
         "none": "ingenting: den er ikke avhengig av andre moduler",
         "to": "kan importere"
       },
@@ -176,8 +170,7 @@
       },
       "send": "Send",
       "sending": "Sender meldingen din …",
-      "sent": "Takk! Meldingen din er sendt. Jeg svarer deg snart.",
-      "title": "Kontakt"
+      "sent": "Takk! Meldingen din er sendt. Jeg svarer deg snart."
     },
     "country": {
       "belgium": "Belgia"
@@ -294,15 +287,9 @@
         },
         "navbar": {
           "title": "Ikoner i navigasjonslinjen"
-        },
-        "submenu": {
-          "title": "Undermeny"
         }
       },
       "toggle": {
-        "color-scheme-switcher": {
-          "label": "Lys og mørk modus"
-        },
         "tour-button": {
           "label": "Omvisningsknapp på startsiden"
         }
@@ -325,77 +312,20 @@
           "specific": "Smal rekkevidde, høy spesifisitet"
         },
         "intro": "De globale stilene i <code>apps/cv/src/styles</code> følger <strong>ITCSS</strong> (Inverted Triangle CSS), slik jeg lærte det hos SEM&BIO. Hvert lag er en mappe, importert i rekkefølge: brede regler med lav spesifisitet først, smale og spesifikke til slutt, så et senere lag vinner uten kamp om spesifisitet. Komponentstiler forblir innkapslet i Angular; lagene inneholder bare det som virkelig er globalt.",
-        "layer": {
-          "components": {
-            "name": "Components",
-            "text": "Selvstendige deler av grensesnittet. Nesten tomt her: Angular-komponenter har sine egne innkapslede stiler."
-          },
-          "elements": {
-            "name": "Elements",
-            "text": "Rene HTML-elementer uten klasse: <code>html</code>, <code>body</code>, rullefeltet."
-          },
-          "objects": {
-            "name": "Objects",
-            "text": "Layoutmønstre som ordner i stedet for å dekorere, delt av alle sider."
-          },
-          "patterns": {
-            "name": "Patterns",
-            "text": "Komponenter som er for spesifikke til å gjenbrukes, som én bestemt topptekst."
-          },
-          "scopes": {
-            "name": "Scopes",
-            "text": "Ekstra spesifisitet for én kontekst, som <code>.c-accordion.s-homepage</code>. Holdes nesten tomt med vilje."
-          },
-          "settings": {
-            "name": "Settings",
-            "text": "Variabler og skriftdefinisjoner: typografi, avstander, bruddpunkter og Icomoon-skriften."
-          },
-          "tools": {
-            "name": "Tools",
-            "text": "Mixins og funksjoner. De gir ingen CSS før et annet lag bruker dem."
-          },
-          "utilities": {
-            "name": "Utilities",
-            "text": "Hjelpeklasser med ett formål som alltid vinner, det eneste laget der <code>!important</code> er tillatt, som tilgjengelighets- og skriftklassene."
-          },
-          "vendors": {
-            "name": "Vendors",
-            "text": "Stiler fra tredjeparter, høyt i stabelen slik at lagene under kan overstyre dem: Angular Material-temaet, paletter og overstyringer."
-          }
-        }
+        "layer-names": "Settings||Tools||Vendors||Elements||Objects||Components||Patterns||Scopes||Utilities",
+        "layer-texts": "Variabler og skriftdefinisjoner: typografi, avstander, bruddpunkter og Icomoon-skriften.||Mixins og funksjoner. De gir ingen CSS før et annet lag bruker dem.||Stiler fra tredjeparter, høyt i stabelen slik at lagene under kan overstyre dem: Angular Material-temaet, paletter og overstyringer.||Rene HTML-elementer uten klasse: <code>html</code>, <code>body</code>, rullefeltet.||Layoutmønstre som ordner i stedet for å dekorere, delt av alle sider.||Selvstendige deler av grensesnittet. Nesten tomt her: Angular-komponenter har sine egne innkapslede stiler.||Komponenter som er for spesifikke til å gjenbrukes, som én bestemt topptekst.||Ekstra spesifisitet for én kontekst, som <code>.c-accordion.s-homepage</code>. Holdes nesten tomt med vilje.||Hjelpeklasser med ett formål som alltid vinner, det eneste laget der <code>!important</code> er tillatt, som tilgjengelighets- og skriftklassene."
       },
       "state": {
         "devtools": {
           "alt": "Plassholder for et skjermbilde av nettleserutvidelsen Redux DevTools"
         },
         "intro": "Hvert data-access-bibliotek har en <strong>NgRx Signal Store</strong>: Redux-ideen om én skrivebeskyttet sannhetskilde, bygd på Angular-signaler i stedet for actions og reducers. Komponentene henter aldri data selv.",
-        "step": {
-          "component": "Siden leser signalene, og Angular oppdaterer bare det som er endret.",
-          "service": "En tjeneste laster dataene med <code>httpResource</code> og gjør API-typene om til frontend-typer.",
-          "store": "Storen holder dem som tilstand (<code>withLinkedState</code>), slik at de vises i Redux DevTools, og legger til noen metoder (<code>withMethods</code>)."
-        },
+        "steps": "En tjeneste laster dataene med <code>httpResource</code> og gjør API-typene om til frontend-typer.||Storen holder dem som tilstand (<code>withLinkedState</code>), slik at de vises i Redux DevTools, og legger til noen metoder (<code>withMethods</code>).||Siden leser signalene, og Angular oppdaterer bare det som er endret.",
         "stores": "Storene"
       }
     },
     "heading": {
-      "ai-assistant": "AI-assistent",
-      "architecture": "Arkitektur",
-      "code-coverage": "kodedekning",
-      "contact": "Kontakt",
-      "education": "Utdanning",
-      "end-to-end-tests": "Ende-til-ende-tester",
-      "experience": "erfaring",
-      "feature-toggles": "Funksjonsbrytere",
-      "foundations": "Grunnlag",
-      "graphql-docs": "graphql-dokumentasjon",
-      "lighthouse": "Lighthouse",
-      "micro-frontends": "Mikro-frontends",
-      "personal": "personlig",
-      "project-graph": "Prosjektgraf",
-      "references": "Referanser",
-      "service-status": "Tjenestestatus",
-      "skills": "ferdigheter",
-      "versions": "Versjoner"
+      "contact": "Kontakt"
     },
     "home": {
       "about-me": "Mer om meg",
@@ -409,7 +339,6 @@
       "french": "Fransk",
       "german": "Tysk",
       "greek": "Gresk",
-      "hindi": "Hindi",
       "italian": "Italiensk",
       "native": "Morsmål",
       "norwegian": "Norsk",
@@ -428,7 +357,6 @@
         "message": "Revidert {date} med Lighthouse {version}"
       },
       "category": {
-        "accessibility": "Tilgjengelighet",
         "best-practices": "Beste praksis",
         "performance": "Ytelse",
         "seo": "SEO"
@@ -447,12 +375,7 @@
         "angular-library": "Angular-bibliotek",
         "demo": "Min npm-pakke fra www.npmjs.com",
         "intro": "Den motsatte tilnærmingen, til sammenligning: komponenten leveres med denne appen i stedet for å lastes fra en annen utrulling.",
-        "step": {
-          "bundle": "Denne appen installerer den og pakker den ved bygging, så ingenting lastes under kjøring.",
-          "element": "Den leveres også som webkomponenten <code><mac-window></code> (<code>@axel-pauwels/mac-window/element</code>), for alle rammeverk.",
-          "publish": "Den er publisert på npm som <code>@axel-pauwels/mac-window</code>.",
-          "source": "<code>MacWindow</code> ligger i dette repositoriet, i <code>packages/mac-window</code>."
-        },
+        "steps": "<code>MacWindow</code> ligger i dette repositoriet, i <code>packages/mac-window</code>.||Den er publisert på npm som <code>@axel-pauwels/mac-window</code>.||Denne appen installerer den og pakker den ved bygging, så ingenting lastes under kjøring.||Den leveres også som webkomponenten <code><mac-window></code> (<code>@axel-pauwels/mac-window/element</code>), for alle rammeverk.",
         "subtitle": "Pakket ved bygging, fra dette repositoriet",
         "title": "Komponentbibliotek: <lib-mac-window>",
         "view-npm": "Se på npmjs",
@@ -463,12 +386,7 @@
         "open-api-docs": "API-dokumentasjon for remote",
         "open-remote": "Remote-app",
         "separate-deployment": "Separat utrulling",
-        "step": {
-          "load": "Her kaller <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) <code>loadRemoteModule('cv-mfe', './web-components')</code>.",
-          "manifest": "Ved oppstart leser <code>initFederation()</code> <code>federation.manifest.json</code>, som kobler navnet <code>cv-mfe</code> til remotens <code>remoteEntry.json</code>.",
-          "register": "Den modulen registrerer det egendefinerte elementet <code><cv-mfe></code> (Angular Elements), og wrapperen legger det til på siden.",
-          "shared": "Angular og RxJS deles med denne appen som singletons (Native Federation), så de lastes ned bare én gang."
-        },
+        "steps": "Ved oppstart leser <code>initFederation()</code> <code>federation.manifest.json</code>, som kobler navnet <code>cv-mfe</code> til remotens <code>remoteEntry.json</code>.||Her kaller <code>Wrapper</code> (<code>@cv/shared-ui-federation</code>) <code>loadRemoteModule('cv-mfe', './web-components')</code>.||Den modulen registrerer det egendefinerte elementet <code><cv-mfe></code> (Angular Elements), og wrapperen legger det til på siden.||Angular og RxJS deles med denne appen som singletons (Native Federation), så de lastes ned bare én gang.",
         "subtitle": "Lastet under kjøring, fra sin egen utrulling",
         "title": "Mikro-frontend: <cv-mfe>"
       }
@@ -478,6 +396,7 @@
       "architecture": "Arkitektur",
       "back-to-top": "Tilbake til toppen",
       "code-coverage": "kodedekning",
+      "compodoc": "Compodoc",
       "cv": "CV",
       "cv-navigation": "CV-navigasjon",
       "education": "Utdanning",
@@ -496,10 +415,12 @@
       "personal": "Personlig",
       "project-graph": "Prosjektgraf",
       "references": "Referanser",
+      "release-flow": "Releaseflyt",
       "service-status": "Tjenestestatus",
       "showcase": "Utstilling",
       "showcase-navigation": "Utstillingsnavigasjon",
       "skills": "Ferdigheter",
+      "skip-to-content": "Hopp til innholdet",
       "technical": "Teknisk",
       "technical-navigation": "Teknisk navigasjon",
       "versions": "Versjoner"
@@ -561,6 +482,39 @@
         "team-lead-lead-front-end-developer": "Teamleder og ledende front-end-utvikler"
       }
     },
+    "release-flow": {
+      "branch": {
+        "steps": "Den lager <code>release/x.y.z</code> fra den grønne commiten, med én commit som setter versjonen i <code>package.json</code> og <code>package-lock.json</code>.||Før den pusher, sjekker den at begge filene har den nye versjonen og at ingenting annet er endret.||Den åpner pull requesten inn i <code>main</code>, der GitHub sjekker branchnavnet, versjonen og CI, og publiserer en forhåndsvisning.||Rettelser som dukker opp senere, går på <code>develop</code>; den åpner en pull request fra <code>develop</code> inn i releasebranchen, så jeg kan se over dem først.",
+        "subtitle": "Én versjon, overalt",
+        "title": "Releasebranch og pull request"
+      },
+      "intro": {
+        "rules": "Når noe er uklart, som en mergekonflikt eller en sjekk som feiler uten åpenbar årsak, stopper den og spør i stedet for å gjette.||Beslutningene er mine: den velger aldri versjonen, merger aldri en pull request og pusher aldri til <code>main</code>.||Den følger de samme reglene som releaseskriptet mitt og sjekkene på GitHub, så hvert steg fungerer også for hånd.",
+        "subtitle": "Instruksjoner på vanlig språk, lagret i repositoriet",
+        "text": "Releaseprosessen min er skrevet ned som en <strong>Claude Code-skill</strong>: en fil i dette repositoriet (<code>.claude/skills/release-flow/SKILL.md</code>) som forteller Claude, steg for steg, hvordan dette nettstedet releases. Jeg sier «push develop», «release» eller «releasen er merget», og Claude gjør jobben med git og GitHub CLI.",
+        "title": "En Claude Code-skill tar seg av releasene mine",
+        "view-guide": "Les veiledningen",
+        "view-skill": "Se skillen"
+      },
+      "merge": {
+        "steps": "Jeg merger release-pull requesten selv, med en mergecommit.||GitHub Actions tagger mergecommiten <code>x.y.z</code>, lager GitHub-releasen og publiserer nettstedet.||Claude sjekker at taggen, GitHub-releasen og versjonen på <code>main</code> stemmer overens.||Den henter <code>main</code> lokalt og merger den inn i <code>develop</code>, så neste release starter fra den releasede versjonen. Den spør før den pusher.",
+        "subtitle": "I takt igjen, også lokalt",
+        "title": "Merge, tag og synkronisering"
+      },
+      "push": {
+        "steps": "Den pusher <code>develop</code> som den er, uten releasespørsmålet fra pre-push-hooken.||Den følger GitHub Actions-kjøringen: formatering, lint, enhetstester, build, typesjekk og ende-til-ende-tester.||Når en sjekk feiler, leser den loggen, gjenskaper feilen lokalt med Nx, fikser den på <code>develop</code>, committer og pusher på nytt.||Etter tre runder som fortsatt er røde, eller ved problemer utenfor koden (secrets, runners, driftsavbrudd), stopper den og forteller hva den har prøvd.",
+        "subtitle": "Til alle sjekker er grønne",
+        "title": "Pushe og fikse develop"
+      },
+      "semver": "Semantisk versjonering",
+      "version": {
+        "bumps": "<strong>Major</strong>: noe som brekker for besøkende, som et nytt design eller fjernede sider og lenker.||<strong>Minor</strong>: noe nytt og synlig, som en side, en seksjon eller et språk.||<strong>Patch</strong>: bare rettelser og forbedringer ingen ser.",
+        "intro": "Den sammenligner <code>develop</code> med den siste releasetaggen, både commitmeldingene og de faktiske endringene, og anbefaler en versjon:",
+        "nothing": "Den foreslår bare; jeg velger. Når ingenting synlig er endret, sier den det og spør om en release er verdt det.",
+        "subtitle": "major.minor.patch",
+        "title": "Velge versjonen"
+      }
+    },
     "service-status": {
       "category": {
         "api": "API-er",
@@ -587,9 +541,9 @@
         "timeout": "Ingen svar i tide",
         "unreachable": "Utilgjengelig"
       },
-      "legend": "Status",
       "links-error": "Profillenkene kunne ikke lastes, så de blir ikke sjekket.",
       "no-response-time": "Ingen responstid",
+      "note": "De fleste nettsteder lar ikke andre nettsteder lese svarene deres. For dem vet vi bare om de svarer, ikke statuskoden: en side som mangler, regnes fortsatt som tilgjengelig. Tregere enn 2 sekunder regnes som en advarsel, ikke noe svar innen 8 sekunder som en feil.",
       "recheck": "Sjekk igjen",
       "response-time": "{ms} ms",
       "summary": {
@@ -675,27 +629,15 @@
       "start": "Start omvisningen",
       "step": {
         "ai-assistant": {
-          "label": "AI-assistent",
-          "text": "Nysgjerrig på erfaringen, ferdighetene eller referansene mine? Klikk på roboten nederst til høyre, så svarer AI-assistenten min rett fra dataene på dette nettstedet.",
-          "title": "Spør AI-assistenten min"
-        },
-        "architecture": {
-          "label": "Arkitektur",
-          "text": "Nysgjerrig på hvordan dette nettstedet er bygd? Den tekniske delen forklarer arkitekturen, prosjektgrafen og versjonene som brukes.",
-          "title": "Arkitektur"
+          "text": "Nysgjerrig på erfaringen, ferdighetene eller referansene mine? Klikk på roboten nederst til høyre, så svarer AI-assistenten min rett fra dataene på dette nettstedet."
         },
         "color-scheme": {
-          "label": "Mørk modus",
-          "text": "Bytt mellom et lyst og et mørkt utseende. Som standard følger nettstedet innstillingen på enheten din.",
           "title": "Lys og mørk modus"
         },
         "contact": {
-          "label": "Kontakt",
-          "text": "Vil du ta kontakt? Send meg en e-post eller finn meg på LinkedIn og GitHub med ikonene nederst til høyre.",
-          "title": "Kontakt"
+          "text": "Vil du ta kontakt? Send meg en e-post eller finn meg på LinkedIn og GitHub med ikonene nederst til høyre."
         },
         "cv": {
-          "label": "CV",
           "text": "Her finner du alt om meg: personopplysninger, utdanning, erfaring, ferdigheter og referanser.",
           "title": "Min CV"
         },
@@ -709,39 +651,18 @@
           "text": "Takk for at du ble med på omvisningen.",
           "title": "Det var det!"
         },
-        "fonts": {
-          "label": "Skrifter",
-          "text": "Foretrekker du en annen stil? Bytt skrift for hele nettstedet her.",
-          "title": "Skrifter"
-        },
-        "home": {
-          "label": "Hjem",
-          "text": "Husikonet i menyen tar deg alltid tilbake til denne siden, uansett hvor du er på nettstedet.",
-          "title": "Hjem"
-        },
-        "languages": {
-          "label": "Språk",
-          "text": "Nettstedet er tilgjengelig på engelsk, nederlandsk, fransk, spansk, norsk, gresk og hindi. Velg språket ditt her.",
-          "title": "Språk"
-        },
         "settings": {
           "label": "Dine innstillinger",
           "text": "Sett først opp nettstedet slik du vil ha det: fargetemaet, skriften, tilgjengelighetsinnstillingene, lys eller mørk modus og språket. Valgene dine huskes på denne enheten.",
           "title": "Innstillinger"
         },
         "showcase": {
-          "label": "Utstilling",
-          "text": "Utstillingen viser teknikker i praksis, som mikro-frontends, GraphQL-dokumentasjon, kodedekning og ende-til-ende-tester.",
-          "title": "Utstilling"
+          "text": "Utstillingen viser teknikker i praksis, som mikro-frontends, GraphQL-dokumentasjon, kodedekning og ende-til-ende-tester."
         },
         "technical": {
-          "label": "Teknisk",
-          "text": "Nysgjerrig på hvordan dette nettstedet er bygd? Den tekniske delen viser prosjektgrafen, arkitekturen, GraphQL-dokumentasjonen, kodedekningen, ende-til-ende-testene og versjonene som brukes.",
-          "title": "Teknisk"
+          "text": "Nysgjerrig på hvordan dette nettstedet er bygd? Den tekniske delen viser prosjektgrafen, arkitekturen, GraphQL-dokumentasjonen, kodedekningen, ende-til-ende-testene og versjonene som brukes."
         },
         "themes": {
-          "label": "Temaer",
-          "text": "Velg et av fargetemaene her. Hvert tema gir matchende farger på hele nettstedet.",
           "title": "Fargetemaer"
         },
         "welcome": {
@@ -755,14 +676,11 @@
     "versions": {
       "category": {
         "api": "API",
-        "architecture": "Arkitektur",
         "code-quality": "Kodekvalitet",
         "framework": "Rammeverk",
         "i18n": "i18n",
-        "micro-frontends": "Mikro-frontends",
         "monorepo": "Monorepo",
         "runtime": "Kjøremiljø",
-        "state": "Tilstand",
         "testing": "Testing",
         "ui": "UI"
       },
