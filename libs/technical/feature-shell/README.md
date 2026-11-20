@@ -1,7 +1,12 @@
 # technical-feature-shell
 
-This library was generated with [Nx](https://nx.dev).
+The Technical section (`/technical/*`): its sub-navigation and the lazy routes to the technical pages.
 
-## Running unit tests
+- `technicalFeatureShellRoutes`: lazy-loaded by `app.routes.ts` under `ROUTES.TECHNICAL.ROOT`;
+  architecture, foundations and versions are lazy pages, the generated reports (project
+  graph, GraphQL docs, Compodoc, coverage, e2e report) are shown with `ds-embedded-page`
+- `TECHNICAL_NAV_ITEMS`: the menu items, also used by the main and mobile menus
 
-Run `nx test technical-feature-shell` to execute the unit tests.
+```sh
+npx nx run technical-feature-shell:test
+```

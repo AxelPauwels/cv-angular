@@ -484,7 +484,9 @@ describe('TourOverlay', () => {
   describe('a target pushed down by a page that is still loading', () => {
     const footerSteps = [step('footer', '/growing', '[data-tour="footer"]')];
     const footer = () =>
-      document.querySelector('[data-tour="footer"]')!.getBoundingClientRect();
+      (
+        document.querySelector('[data-tour="footer"]') as HTMLElement
+      ).getBoundingClientRect();
     const grown = () => new Promise((resolve) => setTimeout(resolve, 700));
 
     afterEach(() => window.scrollTo(0, 0));
@@ -501,7 +503,7 @@ describe('TourOverlay', () => {
       });
       await vi.waitFor(() =>
         expect(
-          query('.tour__spotlight')!.getBoundingClientRect().top
+          (query('.tour__spotlight') as HTMLElement).getBoundingClientRect().top
         ).toBeCloseTo(footer().top - 8, 0)
       );
     });

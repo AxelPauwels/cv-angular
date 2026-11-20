@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { TranslatePipe } from '@tolgee/ngx';
 import { Card } from '@cv/shared-ui-card';
 
@@ -31,7 +26,6 @@ const toYear = (month: string): string => /^\d{4}/.exec(month)?.[0] ?? month;
 @Component({
   selector: 'showcase-person-card',
   imports: [Card, TranslatePipe],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './person-card.html',
   styleUrl: './person-card.scss',
 })

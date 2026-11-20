@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { TranslatePipe } from '@tolgee/ngx';
 import { TranslationKey } from '@cv/shared-util-i18n';
@@ -46,7 +46,6 @@ interface Phase {
   ],
   templateUrl: './release-flow.html',
   styleUrl: './release-flow.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReleaseFlow {
   private readonly repoUrl = 'https://github.com/AxelPauwels/cv-angular';

@@ -212,7 +212,7 @@
     "embedded-page": {
       "loading": "Cargando el informe",
       "not-available": "Este informe no está disponible aquí. Lo genera el build de producción (<code>npm run build:production</code>).",
-      "open-new-tab": "Abrir en una nueva pestaña"
+      "open-new-tab": "Abrir"
     },
     "error": {
       "load": {

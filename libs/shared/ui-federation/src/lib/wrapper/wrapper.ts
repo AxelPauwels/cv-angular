@@ -34,7 +34,7 @@ export const initWrapperConfig: WrapperConfig = {
   selector: 'shared-wrapper',
   imports: [CommonModule],
   templateUrl: './wrapper.html',
-  styleUrls: ['./wrapper.css'],
+  styleUrl: './wrapper.scss',
 })
 export class Wrapper {
   private elm = inject(ElementRef);

@@ -212,7 +212,7 @@
     "embedded-page": {
       "loading": "Laster rapporten",
       "not-available": "Denne rapporten er ikke tilgjengelig her. Den genereres av produksjonsbygget (<code>npm run build:production</code>).",
-      "open-new-tab": "Åpne i ny fane"
+      "open-new-tab": "Åpne"
     },
     "error": {
       "load": {

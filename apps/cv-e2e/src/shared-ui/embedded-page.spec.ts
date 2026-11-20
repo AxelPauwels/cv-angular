@@ -49,7 +49,7 @@ test.describe('ds-embedded-page', () => {
       const actions = page.locator('ds-embedded-page');
 
       // Act
-      const link = actions.getByRole('link', { name: 'Open in a new tab' });
+      const link = actions.getByRole('link', { name: 'Open' });
 
       // Assert
       await expect(link).toHaveAttribute('href', REPORT);

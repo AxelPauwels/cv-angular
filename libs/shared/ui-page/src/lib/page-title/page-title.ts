@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { TranslatePipe } from '@tolgee/ngx';
 import {
   PageTitleTranslationKey,
@@ -16,7 +16,6 @@ import {
 @Component({
   selector: 'ds-page-title',
   imports: [TranslatePipe],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   // the `title` input would also land on the host as a native tooltip showing the raw key
   host: { '[attr.title]': 'null' },
   template: `

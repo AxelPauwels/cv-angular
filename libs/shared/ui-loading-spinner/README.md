@@ -1,7 +1,11 @@
 # shared-ui-loading-spinner
 
-This library was generated with [Nx](https://nx.dev).
+`LoadingSpinner` (`ds-loading-spinner`): the spinner shown while a store loads.
 
-## Running unit tests
+It waits `LOADING_DELAY_MS` before it appears and then stays at least
+`LOADING_MIN_DURATION_MS` (from [`@cv/shared-util-loading`](../util-loading)), so fast loads
+don't flash. Announced to screen readers with a translated label.
 
-Run `nx test shared-ui-loading-spinner` to execute the unit tests.
+```sh
+npx nx run shared-ui-loading-spinner:test
+```

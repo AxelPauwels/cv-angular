@@ -212,7 +212,7 @@
     "embedded-page": {
       "loading": "Φόρτωση της αναφοράς",
       "not-available": "Αυτή η αναφορά δεν είναι διαθέσιμη εδώ. Παράγεται από το production build (<code>npm run build:production</code>).",
-      "open-new-tab": "Άνοιγμα σε νέα καρτέλα"
+      "open-new-tab": "Άνοιγμα"
     },
     "error": {
       "load": {

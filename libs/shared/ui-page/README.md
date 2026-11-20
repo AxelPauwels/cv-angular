@@ -1,7 +1,11 @@
 # shared-ui-page
 
-This library was generated with [Nx](https://nx.dev).
+The building blocks every page uses, so all pages share one layout.
 
-## Running unit tests
+- `PageLayout` (`ds-page-layout`, `width="narrow" | "wide"`): the page's width and spacing
+- `PageTitle` (`ds-page-title`): the page's single `<h1>`, from a translation key
+- `SectionHeading` (`ds-section-heading`): an `<h2>` section heading, from a translation key
 
-Run `nx test shared-ui-page` to execute the unit tests.
+```sh
+npx nx run shared-ui-page:test
+```

@@ -1,4 +1,103 @@
-# CV Application
+# Axel Pauwels · CV
+
+The CV of Axel Pauwels as an Angular application, and at the same time a showcase of how
+he builds front-ends: an Nx monorepo with strict domain boundaries, a schema-first GraphQL
+API, signals everywhere, six languages, and performance, accessibility and security as the
+first priorities.
+
+**Live:** <https://axel-pauwels.web.app>
+
+## Tech stack
+
+| Area            | Choice                                                                                  |
+| --------------- | --------------------------------------------------------------------------------------- |
+| Framework       | Angular 22 (standalone, signals, zoneless, OnPush by default, Signal Forms), Material 3 |
+| Monorepo        | Nx 24 with Nx Cloud remote cache; boundaries enforced by Sheriff                        |
+| State           | NgRx Signal Store; `graphqlResource()` for queries                                      |
+| API             | Schema-first GraphQL (`libs/api`), executed in the browser, typed with GraphQL Codegen  |
+| Translations    | Tolgee: English, Dutch, French, Spanish, Norwegian and Greek                            |
+| Micro-frontends | Native Federation (`<cv-mfe>` from a separate repository)                               |
+| AI              | Firebase AI Logic (Gemini) with App Check, through Hashbrown                            |
+| Tests           | Vitest in the browser (unit), Playwright in Chromium, Firefox and WebKit (e2e)          |
+| Quality         | ESLint, Stylelint, Prettier, commitlint and Husky hooks                                 |
+| Hosting         | Firebase Hosting, deployed by GitHub Actions on release                                 |
+
+## Quick start
+
+Node version: see [`.nvmrc`](.nvmrc).
+
+```bash
+npm install
+cp apps/cv/src/tokens/environment.tokens.example.ts apps/cv/src/tokens/environment.tokens.ts
+npm run start:cv
+```
+
+The dev server runs on <http://localhost:4201>. The tokens file holds your local keys
+(Tolgee, Web3Forms, Firebase) and is gitignored; empty values work, the related features
+then say they are switched off.
+
+| Command                              | What                                           |
+| ------------------------------------ | ---------------------------------------------- |
+| `npm test`                           | every unit test                                |
+| `npm run e2e`                        | every end-to-end test, then opens the report   |
+| `npm run lint` / `npm run stylelint` | ESLint / Stylelint                             |
+| `npm run prettier`                   | formatting check (`prettier:fix` to fix)       |
+| `npm run sheriff:verify`             | the architecture rules                         |
+| `npm run i18n:check`                 | every translation key exists in every language |
+| `npm run codegen`                    | regenerate GraphQL types after a schema change |
+| `npm run build:production`           | the full release build                         |
+
+Run single projects through Nx: `npx nx run <project>:<target>`, for example
+`npx nx run cv-feature-skills:test`.
+
+## Architecture
+
+```
+apps/cv              the app: shell, routes, global styles          → apps/cv/README.md
+apps/cv-e2e          Playwright tests                               → apps/cv-e2e/README.md
+libs/api             GraphQL schema, resolvers, in-memory data      → libs/api/README.md
+libs/cv/*            the CV pages and their data
+libs/showcase/*      showcase pages (micro-frontends, Lighthouse, AI assistant, ...)
+libs/technical/*     technical pages (architecture, foundations, reports, versions)
+libs/shared/*        used by every domain: layout, UI kit, i18n, routing, services
+packages/mac-window  a published npm package                        → packages/mac-window/README.md
+```
+
+Libraries are named `libs/<domain>/<layer>-<name>`. A domain only depends on itself and
+`shared`; layers only depend downwards:
+
+| Layer         | Holds                                         | May use                                       |
+| ------------- | --------------------------------------------- | --------------------------------------------- |
+| `feature`     | pages, routes, smart components               | `feature`, `ui`, `data-access`, `api`, `util` |
+| `ui`          | presentational components (inputs/outputs)    | `ui`, `util`                                  |
+| `data-access` | stores, services, GraphQL operations, mappers | `data-access`, `api`, `util`                  |
+| `util`        | pure functions and types                      | `util`                                        |
+
+Each library's public API is its `src/index.ts`; anything in an `internal/` folder is private.
+[`sheriff.config.ts`](sheriff.config.ts) enforces all of this in ESLint and CI. Every library
+has its own README explaining what it exports.
+
+Data flows schema-first: [`type-defs.graphql`](libs/api/src/lib/schema/type-defs.graphql) →
+each data-access library's own operations and generated (private) types → a mapper → hand-written
+frontend types. Features never see API types.
+
+## Documentation
+
+| README                                                         | About                                                                |
+| -------------------------------------------------------------- | -------------------------------------------------------------------- |
+| [README.translations.md](README.translations.md)               | Tolgee, translation keys and the `i18n:*` commands                   |
+| [README.icons.md](README.icons.md)                             | Material Symbols (subset font) and the Icomoon icon font             |
+| [README.feature-toggles.md](README.feature-toggles.md)         | switching features and menu items on or off, and their defaults      |
+| [README.micro-frontends.md](README.micro-frontends.md)         | loading, typing and updating the `<cv-mfe>` remote                   |
+| [README.console-cloud.md](README.console-cloud.md)             | Firebase and Google Cloud setup of the AI assistant                  |
+| [README.release.md](README.release.md)                         | branches, versions, tags, checks and deploys in detail               |
+| [README.release-by-skills.md](README.release-by-skills.md)     | running the release flow with Claude Code                            |
+| [README.publish-npm-package.md](README.publish-npm-package.md) | versioning and publishing `packages/*` to npm                        |
+| [apps/cv/README.md](apps/cv/README.md)                         | the app: structure, performance, SEO, run and build                  |
+| [apps/cv-e2e/README.md](apps/cv-e2e/README.md)                 | the end-to-end tests                                                 |
+| [libs/api/README.md](libs/api/README.md)                       | the GraphQL server and codegen                                       |
+| `libs/<domain>/<lib>/README.md`                                | what each library exports and how to use it                          |
+| [AGENTS.md](AGENTS.md)                                         | priorities and rules for AI coding agents (also read by Claude Code) |
 
 ## Commit messages (commitlint)
 
@@ -34,37 +133,6 @@ More info:
 
 - commitlint docs: https://commitlint.js.org/
 - Conventional Commits spec: https://www.conventionalcommits.org/en/v1.0.0-beta.4/
-
-## Translations
-
-Tolgee, the `i18n:*` commands and how translation keys are used: see [README.translations.md](README.translations.md).
-
-## Micro-frontends
-
-The AI assistant's Firebase console and Google Cloud setup (AI Logic, App Check, reCAPTCHA, keys and secrets, debug tokens, troubleshooting): see [README.console-cloud.md](README.console-cloud.md).
-
-How the `<cv-mfe>` micro-frontend is loaded, used with typed inputs, developed against a local remote, and updated when the remote ships a new version: see [README.micro-frontends.md](README.micro-frontends.md).
-
-## Material Symbols icons
-
-The app loads the Material Symbols icon font from Google Fonts in [apps/cv/src/index.html](apps/cv/src/index.html), but only the icons it uses (`icon_names=…` in the font URL). The full font is ~290 KiB and hides every icon until it has loaded, which cost Lighthouse performance points on every page. The subset is a few KiB.
-
-The catch: an icon that is not in that list does not show up. You see the first letter of its name instead (for example a "W" for `workspace_premium`).
-
-**When to run it**: whenever you add, rename or remove a Material icon, for example in a `<mat-icon fontSet="material-symbols-outlined">`, an `icon="…"` or `[icon]="…"` input, or an `icon: '…'` value in TypeScript:
-
-```sh
-npm run material-symbols:extract
-```
-
-It scans the templates and TypeScript for icon names (see [tools/material-symbols/material-symbols.mjs](tools/material-symbols/material-symbols.mjs) for exactly where it looks) and rewrites the font URL in `index.html`. Commit the updated `index.html` with your change.
-
-CI checks this with `npx nx run cv:material-symbols` and fails with the missing names when you forget. If an icon still shows as a letter, its name is built in a way the script can't see (for example glued together from strings): write the full name as a quoted string, like `'workspace_premium'`, so the script finds it.
-
-## Micro Frontends
-
-npx nx g @nx/angular:application apps/cv-mfe1
-npx nx g @angular-architects/native-federation:init --project=cv-mfe1 --port=4201 --type=remote
 
 ## Releasing the app
 

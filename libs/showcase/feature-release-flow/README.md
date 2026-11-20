@@ -1,7 +1,11 @@
 # showcase-feature-release-flow
 
-This library was generated with [Nx](https://nx.dev).
+The Showcase > Release flow page: how code goes from `develop` through `release/x.y.z` to `main` and live.
 
-## Running unit tests
+Exports `ReleaseFlow` (`showcase-release-flow`) by name for the showcase shell's
+`loadComponent`. The texts are translations with inline `<code>` rendered by
+`translateParts`. The workflow itself: see [README.release.md](../../../README.release.md).
 
-Run `nx test showcase-feature-release-flow` to execute the unit tests.
+```sh
+npx nx run showcase-feature-release-flow:test
+```

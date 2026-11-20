@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@tolgee/ngx';
 import { TranslationKey } from '@cv/shared-util-i18n';
@@ -20,7 +20,6 @@ import { TranslationKey } from '@cv/shared-util-i18n';
 @Component({
   selector: 'ds-store-loading-error',
   imports: [MatIcon, TranslatePipe],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: { role: 'alert', class: 'ds-store-loading-error' },
   template: `
     <mat-icon

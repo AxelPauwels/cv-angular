@@ -13,6 +13,58 @@
     <link rel="icon" href="favicon.ico" sizes="32x32" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <!-- installable (name, icons, colors); no service worker, so no offline mode -->
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="author" content="Axel Pauwels" />
+    <!-- Link previews (LinkedIn, Slack, X, ...): their crawlers don't run the app,
+         so these are static and describe the site, not the page that was shared -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Axel Pauwels" />
+    <meta
+      property="og:title"
+      content="Axel Pauwels · Senior Angular Front-End Developer" />
+    <meta
+      property="og:description"
+      content="Experience, education, skills and references, built as an Angular and Nx showcase." />
+    <meta property="og:url" content="https://axel-pauwels.web.app/" />
+    <meta
+      property="og:image"
+      content="https://axel-pauwels.web.app/assets/images/hero/axel-landscape-1280x720.jpg" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="720" />
+    <meta property="og:image:alt" content="Portrait of Axel Pauwels" />
+    <meta property="profile:first_name" content="Axel" />
+    <meta property="profile:last_name" content="Pauwels" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Structured data for search engines (schema.org Person); keep in sync with
+         the personal data in libs/api -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Axel Pauwels",
+        "jobTitle": "Senior Angular Front-End Developer",
+        "url": "https://axel-pauwels.web.app/",
+        "image": "https://axel-pauwels.web.app/assets/images/hero/axel-landscape-1280x720.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Geel",
+          "addressCountry": "BE"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/axelpauwels/",
+          "https://github.com/AxelPauwels"
+        ],
+        "knowsAbout": [
+          "Angular",
+          "TypeScript",
+          "Nx",
+          "GraphQL",
+          "Accessibility"
+        ]
+      }
+    </script>
     <!-- The icon font is font-display: block, so start it before the CSS has
          loaded; same URL as the @font-face in styles/1.settings/icomoon/style.scss -->
     <link

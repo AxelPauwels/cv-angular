@@ -77,20 +77,10 @@ export const END_TO_END_TESTS_STYLES = `
  */
 export const COMPODOC_STYLES = `
 .dark-mode-switch {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  overflow: hidden !important;
-  clip-path: inset(50%) !important;
   visibility: hidden !important;
 }
-.menu, .navbar-default {
-  background: color-mix(in srgb, var(--mat-sys-primary-container) 50%, var(--mat-sys-surface)) !important;
-  border-color: transparent !important;
-  color: var(--mat-sys-on-primary-container) !important;
-}
-:is(.menu, .navbar-default) :is(a, .chapter, .menu-toggler, .navbar-brand, .btn-menu):not(.active) {
-  color: inherit !important;
-}
+
 .menu a.active { color: var(--mat-sys-primary) !important; }
+
+a.navbar-brand { pointer-events: none !important; }
 `;
