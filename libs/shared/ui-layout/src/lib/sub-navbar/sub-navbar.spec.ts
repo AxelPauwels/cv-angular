@@ -275,7 +275,7 @@ describe('SubNavbar', () => {
       // Material moves this element (translateX) to scroll the tabs
       return {
         nav,
-        list: nav.querySelector('.mat-mdc-tab-list')!,
+        list: nav.querySelector('.mat-mdc-tab-list') as HTMLElement,
         // Material applies the new position on its next change detection
         settle: async () => {
           fixture.detectChanges();
@@ -372,7 +372,7 @@ describe('SubNavbar', () => {
     it('moves the tabs with a swipe, and the swipe does not open a tab', async () => {
       // Arrange
       const { nav, list, settle } = await render();
-      const tab = nav.querySelector<HTMLElement>('a')!;
+      const tab = nav.querySelector('a') as HTMLElement;
 
       // Act
       pointer(tab, 'pointerdown', 200);
@@ -390,7 +390,7 @@ describe('SubNavbar', () => {
     it('ignores mouse drags, and still opens a tab on a tap', async () => {
       // Arrange
       const { nav, list, settle } = await render();
-      const tab = nav.querySelector<HTMLElement>('a')!;
+      const tab = nav.querySelector('a') as HTMLElement;
 
       // Act
       pointer(tab, 'pointerdown', 100, 'mouse');

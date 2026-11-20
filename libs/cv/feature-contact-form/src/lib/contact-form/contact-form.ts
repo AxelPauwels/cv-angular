@@ -1,6 +1,5 @@
 import {
   afterNextRender,
-  ChangeDetectionStrategy,
   Component,
   computed,
   ElementRef,
@@ -66,7 +65,6 @@ const FIGURE = {
   ],
   templateUrl: './contact-form.html',
   styleUrl: './contact-form.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactForm {
   private readonly sender = inject(ContactSender);

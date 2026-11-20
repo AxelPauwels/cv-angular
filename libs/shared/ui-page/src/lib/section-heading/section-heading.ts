@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { TranslatePipe } from '@tolgee/ngx';
 import { SubheadingTranslationKey } from '@cv/shared-util-i18n';
 
@@ -19,7 +19,6 @@ import { SubheadingTranslationKey } from '@cv/shared-util-i18n';
 @Component({
   selector: 'ds-section-heading',
   imports: [TranslatePipe],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   // the `title` input would also land on the host as a native tooltip showing the raw key
   host: { '[attr.title]': 'null' },
   template: `

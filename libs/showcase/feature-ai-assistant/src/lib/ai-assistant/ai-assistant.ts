@@ -1,6 +1,5 @@
 import {
   afterRenderEffect,
-  ChangeDetectionStrategy,
   Component,
   computed,
   ElementRef,
@@ -65,7 +64,6 @@ export function withoutInvisibleCharacters(text: string): string {
   ],
   // no collection of usage data by Hashbrown, not even in development
   providers: [provideHashbrown({ telemetry: false })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   // the showcase shell then passes the panel's height down (from md up)
   host: { class: 'showcase-fills-panel' },
   templateUrl: './ai-assistant.html',

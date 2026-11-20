@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-} from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@tolgee/ngx';
@@ -45,7 +40,6 @@ interface StatusText {
   selector: 'showcase-service-status',
   imports: [PageLayout, PageTitle, MatButton, MatIcon, TranslatePipe],
   providers: [ServiceStatusStore],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './service-status.html',
   styleUrl: './service-status.scss',
 })

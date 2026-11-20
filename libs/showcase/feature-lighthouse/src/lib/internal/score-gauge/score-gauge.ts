@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { scoreRating } from '../lighthouse-pages';
 
 /** The circumference of the gauge's circle (r = 56), as in Lighthouse's report */
@@ -15,7 +10,6 @@ const CIRCUMFERENCE = 2 * Math.PI * 56;
  */
 @Component({
   selector: 'showcase-score-gauge',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'score-gauge',
     '[class]': "'score-gauge--' + rating()",

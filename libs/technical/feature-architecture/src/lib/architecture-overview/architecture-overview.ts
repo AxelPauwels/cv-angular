@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-} from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { PageLayout, PageTitle, SectionHeading } from '@cv/shared-ui-page';
 import {
   MatAccordion,
@@ -89,7 +84,6 @@ export function describeTargets(tags: string[]): TagLabel[] {
     TranslatePipe,
     TranslatePartsPipe,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './architecture-overview.html',
   styleUrl: './architecture-overview.scss',
 })

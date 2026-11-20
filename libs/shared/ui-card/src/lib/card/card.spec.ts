@@ -114,7 +114,7 @@ describe('Card', () => {
 });
 
 @Component({
-  imports: [Card, CardActions],
+  imports: [Card],
   template: `
     <ds-card title="Roel Frison" initials="RF" />
     <ds-card title="Both" icon="angular" initials="BO" />

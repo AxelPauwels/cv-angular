@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 /** How wide a page's content gets: `narrow` for reading (e.g. timelines), `wide` for grids of cards */
 export type PageLayoutWidth = 'narrow' | 'wide';
@@ -10,7 +10,6 @@ export type PageLayoutWidth = 'narrow' | 'wide';
  */
 @Component({
   selector: 'ds-page-layout',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `<ng-content />`,
   host: {
     '[class.ds-page-layout--narrow]': `width() === 'narrow'`,

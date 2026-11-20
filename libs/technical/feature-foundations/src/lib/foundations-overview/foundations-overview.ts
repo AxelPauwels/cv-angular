@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { Lordicon, type LordiconName } from '@cv/shared-ui-lordicon';
@@ -116,7 +116,6 @@ export const STORES: readonly string[] = [
   ],
   templateUrl: './foundations-overview.html',
   styleUrl: './foundations-overview.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoundationsOverview {
   protected readonly layers = STYLE_LAYERS;
