@@ -212,7 +212,7 @@
     "embedded-page": {
       "loading": "Het rapport wordt geladen",
       "not-available": "Dit rapport is hier niet beschikbaar. Het wordt gemaakt door de productiebuild (<code>npm run build:production</code>).",
-      "open-new-tab": "Openen in een nieuw tabblad"
+      "open-new-tab": "Openen"
     },
     "error": {
       "load": {

@@ -212,7 +212,7 @@
     "embedded-page": {
       "loading": "Chargement du rapport",
       "not-available": "Ce rapport n’est pas disponible ici. Il est généré par le build de production (<code>npm run build:production</code>).",
-      "open-new-tab": "Ouvrir dans un nouvel onglet"
+      "open-new-tab": "Ouvrir"
     },
     "error": {
       "load": {
