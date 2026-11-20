@@ -25,14 +25,14 @@ import { CvMfe } from '@cv/shared-ui-federation';
 ```
 
 ```html
-<shared-cv-mfe [snippet]="code" language="typescript" [lineNumbers]="false" />
+<ds-cv-mfe [snippet]="code" language="typescript" [lineNumbers]="false" />
 ```
 
 - Inputs come from [`CvMfeInputs`](libs/shared/ui-federation/src/lib/internal/cv-mfe.ts) and are type-checked in templates.
 - Inputs left unset are not passed, so the remote's own defaults apply.
 - Angular Elements turns every `input()` of the remote's component into a property of the same (camelCase) name; `CvMfe` sets them through `Wrapper`'s `inputs`.
 
-`Wrapper` stays generic for other remotes: `<shared-wrapper [config]="config" [inputs]="{ ... }" />`. For a new remote, add its manifest entry and a small typed component like [`CvMfe`](libs/shared/ui-federation/src/lib/cv-mfe/cv-mfe.ts).
+`Wrapper` stays generic for other remotes: `<ds-wrapper [config]="config" [inputs]="{ ... }" />`. For a new remote, add its manifest entry and a small typed component like [`CvMfe`](libs/shared/ui-federation/src/lib/cv-mfe/cv-mfe.ts).
 
 ## Developing against the local remote
 
@@ -80,7 +80,7 @@ The remote deploys itself: a merge to `main` in `cv-angular-mfe` builds and depl
 
 1. Update [`CvMfeInputs`](libs/shared/ui-federation/src/lib/internal/cv-mfe.ts) to match the remote's API docs.
 2. Add, rename or remove the matching `input()` in [`CvMfe`](libs/shared/ui-federation/src/lib/cv-mfe/cv-mfe.ts) and in its `inputs` computed.
-3. Update the usages (`<shared-cv-mfe …>`) and [`cv-mfe.spec.ts`](libs/shared/ui-federation/src/lib/cv-mfe/cv-mfe.spec.ts).
+3. Update the usages (`<ds-cv-mfe …>`) and [`cv-mfe.spec.ts`](libs/shared/ui-federation/src/lib/cv-mfe/cv-mfe.spec.ts).
 4. Test against the local remote (above), then deploy this app.
 
 Removing or renaming an input is a breaking change for this app: until the host is deployed, the old host keeps setting the old property, which the new remote ignores. Prefer adding the new input first and removing the old one later, or deploy both at the same time.
@@ -88,3 +88,14 @@ Removing or renaming an input is a breaking change for this app: until the host 
 **The remote upgraded Angular or RxJS** (outside `~22.2.0` / `~7.8.0`): `strictVersion` makes the shared versions incompatible, so upgrade this app to the same range in the same release window.
 
 **Trying a remote preview first:** a pull request in `cv-angular-mfe` gets a Firebase preview channel URL. Point `federation.manifest.localhost.json` at that URL's `remoteEntry.json` temporarily, run the steps under [Developing against the local remote](#developing-against-the-local-remote), and don't commit that change.
+
+## Scaffolding a new remote
+
+A new remote is its own Nx app (in its own repository, like `cv-angular-mfe`), set up as a Native Federation remote:
+
+```bash
+npx nx g @nx/angular:application apps/cv-mfe1
+npx nx g @angular-architects/native-federation:init --project=cv-mfe1 --port=4201 --type=remote
+```
+
+Then add it to both manifests and give it a typed wrapper, as described under [Using `<cv-mfe>` in this app](#using-cv-mfe-in-this-app).

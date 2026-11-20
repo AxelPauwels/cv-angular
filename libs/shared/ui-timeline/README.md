@@ -1,7 +1,14 @@
 # shared-ui-timeline
 
-This library was generated with [Nx](https://nx.dev).
+The vertical timeline of the experience and education pages.
 
-## Running unit tests
+- `Timeline` (`ds-timeline`): the list
+- `TimelineItem` (`ds-timeline-item`): one entry with its period
+- `TimelineDetail` (`ds-timeline-detail`): a detail line inside an entry
+- `TimelineDivider` (`ds-timeline-divider`): separates groups of entries
 
-Run `nx test shared-ui-timeline` to execute the unit tests.
+An ordered list (`<ol>`), so screen readers announce the number of entries.
+
+```sh
+npx nx run shared-ui-timeline:test
+```

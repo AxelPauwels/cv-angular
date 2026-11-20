@@ -1,7 +1,10 @@
 # shared-ui-progress-bar
 
-This library was generated with [Nx](https://nx.dev).
+`ProgressBar` (`ds-progress-bar`): a labelled progress bar, for example a skill level.
 
-## Running unit tests
+With a `label` it is a `progressbar` (`aria-valuenow`, `aria-valuemin`, `aria-valuemax`) for
+screen readers; without one it is decorative and hidden from them.
 
-Run `nx test shared-ui-progress-bar` to execute the unit tests.
+```sh
+npx nx run shared-ui-progress-bar:test
+```

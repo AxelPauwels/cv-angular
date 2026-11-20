@@ -1,7 +1,12 @@
 # showcase-feature-service-status
 
-This library was generated with [Nx](https://nx.dev).
+The Showcase > Service status page: a live check of every external service the app uses.
 
-## Running unit tests
+Exports `ServiceStatusPage` (`showcase-service-status`) by name for the showcase shell's
+`loadComponent`. It provides its own `ServiceStatusStore` from
+[`@cv/showcase-data-access-service-status`](../data-access-service-status), so checks run only
+while the page is open.
 
-Run `nx test showcase-feature-service-status` to execute the unit tests.
+```sh
+npx nx run showcase-feature-service-status:test
+```

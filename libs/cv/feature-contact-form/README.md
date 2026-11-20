@@ -1,7 +1,14 @@
 # cv-feature-contact-form
 
-This library was generated with [Nx](https://nx.dev).
+The contact page (`/contact`): a Signal Forms form validated by `contactSchema` and sent through `ContactSender`, both from [`@cv/cv-data-access-contact`](../data-access-contact).
 
-## Running unit tests
+Exports `ContactForm` (`cv-contact-form`) by name, so `app.routes.ts` lazy-loads it with
+`loadComponent: () => import('@cv/cv-feature-contact-form').then((m) => m.ContactForm)`.
 
-Run `nx test cv-feature-contact-form` to execute the unit tests.
+Errors are announced to screen readers and focus moves to the first invalid field
+on submit. The walker figure beside the form follows the walker feature toggle
+(wide screens only).
+
+```sh
+npx nx run cv-feature-contact-form:test
+```

@@ -1,7 +1,10 @@
 # shared-ui-progress-dots
 
-This library was generated with [Nx](https://nx.dev).
+`ProgressDots` (`ds-progress-dots`): a level shown as filled dots, for example a language skill.
 
-## Running unit tests
+With a `label` it is a `meter` (`aria-valuenow`, `aria-valuemax`) for screen readers;
+without one it is decorative and hidden from them.
 
-Run `nx test shared-ui-progress-dots` to execute the unit tests.
+```sh
+npx nx run shared-ui-progress-dots:test
+```

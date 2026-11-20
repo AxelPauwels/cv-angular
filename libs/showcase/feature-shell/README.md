@@ -1,7 +1,12 @@
 # showcase-feature-shell
 
-This library was generated with [Nx](https://nx.dev).
+The Showcase section (`/showcase/*`): its sub-navigation and the lazy routes to the showcase pages.
 
-## Running unit tests
+- `showcaseFeatureShellRoutes`: lazy-loaded by `app.routes.ts` under `ROUTES.SHOWCASE.ROOT`;
+  micro-frontends, Lighthouse, service status, AI assistant, release flow and feature toggles
+  are each their own lazy chunk with a translated `title`
+- `SHOWCASE_NAV_ITEMS`: the menu items, also used by the main and mobile menus
 
-Run `nx test showcase-feature-shell` to execute the unit tests.
+```sh
+npx nx run showcase-feature-shell:test
+```

@@ -1,7 +1,12 @@
 # shared-ui-card
 
-This library was generated with [Nx](https://nx.dev).
+The card used for experience, education, references and the showcase pages.
 
-## Running unit tests
+- `Card` (`ds-card`): title, optional subtitle, icon or initials avatar, tag and content
+- `CardActions` (`[dsCardActions]`): marks links or buttons that go in the card's action row
 
-Run `nx test shared-ui-card` to execute the unit tests.
+Presentational only: inputs and content projection, no services.
+
+```sh
+npx nx run shared-ui-card:test
+```

@@ -1,7 +1,15 @@
 # shared-ui-store-loading-error
 
-This library was generated with [Nx](https://nx.dev).
+`StoreLoadingError` (`ds-store-loading-error`): the message shown when a store failed to load.
 
-## Running unit tests
+```html
+@if (store.error()) {
+<ds-store-loading-error message="t.error.load.experience" [error]="store.error()" />
+}
+```
 
-Run `nx test shared-ui-store-loading-error` to execute the unit tests.
+It is an alert, so screen readers announce it when it replaces the spinner.
+
+```sh
+npx nx run shared-ui-store-loading-error:test
+```

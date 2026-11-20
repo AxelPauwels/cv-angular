@@ -1,7 +1,17 @@
 # cv-data-access-contact
 
-This library was generated with [Nx](https://nx.dev).
+Everything the contact form needs to send a message, without the form itself.
 
-## Running unit tests
+- `ContactMessage` and `EMPTY_CONTACT_MESSAGE`: the frontend type of a message
+- `contactSchema` and `CONTACT_LIMITS`: the Signal Forms validation rules (required fields, e-mail, lengths)
+- `ContactSender`: posts the message to [Web3Forms](https://web3forms.com) (`WEB3FORMS_ENDPOINT`); the site is static, so there is no own mail backend
+- `provideContact({ web3formsAccessKey })` / `CONTACT_CONFIG`: the access key, provided once in `app.config.ts`
 
-Run `nx test cv-data-access-contact` to execute the unit tests.
+The access key comes from the environment: the gitignored tokens file locally, the
+`WEB3FORMS_ACCESS_KEY` secret in CI (see `scripts/build-production.sh`).
+
+> Sending is real: every submit, also from `localhost`, delivers an e-mail.
+
+```sh
+npx nx run cv-data-access-contact:test
+```
