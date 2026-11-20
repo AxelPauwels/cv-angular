@@ -155,6 +155,48 @@
             }
           ],
           "outputHashing": "all",
+          "assets": [
+            {
+              "glob": "**/*",
+              "input": "apps/cv/public",
+              "ignore": ["assets/gifs/**", "**/README.md", "gif-preview*.html"]
+            },
+            {
+              "glob": "*.json",
+              "input": "libs/shared/ui-lordicon/src/assets",
+              "output": "assets/lordicon"
+            },
+            {
+              "glob": "**/*",
+              "input": "dist/.playwright/apps/cv-e2e/playwright-report",
+              "output": "e2e-report"
+            },
+            {
+              "glob": "**/*",
+              "input": "coverage/all",
+              "output": "coverage"
+            },
+            {
+              "glob": "**/*",
+              "input": "dist/.graphql-docs/api",
+              "output": "graphql-docs"
+            },
+            {
+              "glob": "**/*",
+              "input": "dist/.build-info",
+              "output": "build-info"
+            },
+            {
+              "glob": "**/*",
+              "input": "dist/.project-graph",
+              "output": "project-graph"
+            },
+            {
+              "glob": "**/*",
+              "input": "dist/.compodoc",
+              "output": "compodoc"
+            }
+          ],
           "fileReplacements": [
             {
               "replace": "node_modules/@tolgee/web/dist/tolgee-web.development.esm.js",
